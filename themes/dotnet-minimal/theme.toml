@@ -1,0 +1,10 @@
+name = "dotnet-minimal"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "A minimal, techy theme for .NET blogs with multi-author support and event timeline"
+homepage = "https://github.com/thedotnetblog/blog"
+tags = ["minimal", "blog", "dotnet", "dark", "timeline"]
+features = ["blog", "authors", "events", "timeline", "tags"]
+
+[author]
+  name = "The .NET Blog"

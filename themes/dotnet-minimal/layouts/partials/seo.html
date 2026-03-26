@@ -1,0 +1,70 @@
+{{- $title := .Title -}}
+{{- $description := "" -}}
+{{- with .Description -}}
+  {{- $description = . -}}
+{{- else -}}
+  {{- with .Params.description -}}
+    {{- $description = . -}}
+  {{- else -}}
+    {{- if .IsPage -}}
+      {{- $description = .Summary | plainify | truncate 200 -}}
+    {{- else -}}
+      {{- $description = .Site.Params.description -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $url := .Permalink -}}
+{{- $image := "" -}}
+{{- with .Params.image -}}
+  {{- $image = . -}}
+{{- else -}}
+  {{- with .Site.Params.defaultImage -}}
+    {{- $image = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if and $image (not (strings.HasPrefix $image "http")) -}}
+  {{- $image = printf "%s%s" .Site.BaseURL (strings.TrimPrefix "/" $image) -}}
+{{- end -}}
+
+<!-- Canonical -->
+<link rel="canonical" href="{{ $url }}" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $description | plainify | truncate 200 }}" />
+<meta property="og:url" content="{{ $url }}" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+<meta property="og:locale" content="{{ replace (.Site.Language.Lang | default "en-us") "-" "_" }}" />
+{{- if .IsPage }}
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" />
+{{- with .Lastmod }}
+<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}" />
+{{- end }}
+{{- with .Params.author }}
+<meta property="article:author" content="{{ . }}" />
+{{- end }}
+{{- range .Params.tags }}
+<meta property="article:tag" content="{{ . }}" />
+{{- end }}
+{{- else }}
+<meta property="og:type" content="website" />
+{{- end }}
+{{- with $image }}
+<meta property="og:image" content="{{ . }}" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+{{- end }}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="{{ if $image }}summary_large_image{{ else }}summary{{ end }}" />
+{{- with .Site.Params.twitter }}
+<meta name="twitter:site" content="@{{ . }}" />
+{{- end }}
+<meta name="twitter:title" content="{{ $title }}" />
+<meta name="twitter:description" content="{{ $description | plainify | truncate 200 }}" />
+{{- with $image }}
+<meta name="twitter:image" content="{{ . }}" />
+{{- end }}

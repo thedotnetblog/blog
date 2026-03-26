@@ -1,0 +1,64 @@
+{{ define "main" }}
+<div class="container">
+
+  <div class="author-hero">
+    <div class="author-hero-inner">
+      {{ $avatarPath := .Params.avatar }}
+      {{ if $avatarPath }}
+      <img src="{{ $avatarPath }}" alt="{{ .Title }}" class="author-hero-avatar" />
+      {{ else }}
+      <div class="author-hero-avatar-placeholder">{{ substr .Title 0 1 }}</div>
+      {{ end }}
+      <div class="author-hero-content">
+        <h1 class="author-hero-name">{{ .Title }}</h1>
+        {{ with .Params.role }}<p class="author-hero-role">{{ . }}</p>{{ end }}
+        {{ with .Params.bio }}<p class="author-hero-bio">{{ . }}</p>{{ end }}
+        {{ with .Params.socials }}
+        <div class="author-hero-socials">
+          {{ range . }}
+          <a href="{{ .url }}" class="social-link" target="_blank" rel="noopener noreferrer">
+            {{ .platform }}
+          </a>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+
+  {{/* Author's posts */}}
+  {{ $authorPosts := where .Site.RegularPages "Params.author" .Title }}
+  {{ if $authorPosts }}
+  <div class="section-header">
+    <span class="section-title">// posts by {{ .Title }}</span>
+    <span class="text-muted font-mono" style="font-size:.8rem">{{ len $authorPosts }} post{{ if ne (len $authorPosts) 1 }}s{{ end }}</span>
+  </div>
+  <div class="posts-grid">
+    {{ range $authorPosts }}
+    <a href="{{ .RelPermalink }}" class="post-card">
+      <div class="post-card-main">
+        <div class="post-meta">
+          <span class="post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+        </div>
+        <h2 class="post-card-title">{{ .Title }}</h2>
+        <p class="post-card-excerpt">{{ .Summary | plainify | truncate 160 }}</p>
+        {{ with .Params.tags }}
+        <div class="post-card-tags">
+          {{ range first 4 . }}<span class="tag">{{ . }}</span>{{ end }}
+        </div>
+        {{ end }}
+      </div>
+      <span class="post-card-arrow">→</span>
+    </a>
+    {{ end }}
+  </div>
+  {{ else }}
+  <p class="text-muted font-mono" style="padding:2rem 0">// no posts published yet.</p>
+  {{ end }}
+
+  {{ with .Content }}
+  <div class="post-body" style="margin-top:3rem">{{ . }}</div>
+  {{ end }}
+
+</div>
+{{ end }}

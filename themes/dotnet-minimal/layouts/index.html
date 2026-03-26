@@ -1,0 +1,94 @@
+{{ define "main" }}
+<div class="container--wide">
+
+  {{/* ── Hero ─────────────────────────────────── */}}
+  <section class="hero">
+    <div class="container">
+      <p class="hero-eyebrow">{{ .Site.Params.eyebrow | default "The .NET Community Blog" }}</p>
+      <h1>
+        {{ with .Site.Params.hero_title }}
+          {{ . | safeHTML }}
+        {{ else }}
+          Where <span class="accent">.NET developers</span><br/>share what they build.
+        {{ end }}
+      </h1>
+      <p class="hero-desc">{{ .Site.Params.hero_desc | default "Articles, tutorials and insights from the .NET community. Written by developers, for developers." }}</p>
+      <div class="hero-actions">
+        <a href="{{ "/posts" | relURL }}" class="btn btn-primary">Read the blog →</a>
+        <a href="{{ "/authors" | relURL }}" class="btn btn-outline">Meet the authors</a>
+      </div>
+    </div>
+  </section>
+
+  {{/* ── Latest Posts ─────────────────────────── */}}
+  <section style="padding: 3.5rem 0 2rem;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-title">// latest posts</span>
+        <a href="{{ "/posts" | relURL }}" class="section-link">all posts →</a>
+      </div>
+
+      {{ $posts := where .Site.RegularPages "Section" "posts" }}
+      {{ $posts = $posts | first 6 }}
+      {{ if $posts }}
+      <div class="posts-grid">
+        {{ range $posts }}
+        <a href="{{ .RelPermalink }}" class="post-card">
+          <div class="post-card-main">
+            <div class="post-meta">
+              <span class="post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+              {{ with .Params.author }}
+              <span class="post-author-tag">{{ . }}</span>
+              {{ end }}
+            </div>
+            <h2 class="post-card-title">{{ .Title }}</h2>
+            <p class="post-card-excerpt">{{ .Summary | plainify | truncate 160 }}</p>
+            {{ with .Params.tags }}
+            <div class="post-card-tags">
+              {{ range first 4 . }}
+              <span class="tag">{{ . }}</span>
+              {{ end }}
+            </div>
+            {{ end }}
+          </div>
+          <span class="post-card-arrow">→</span>
+        </a>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </section>
+
+  {{/* ── Upcoming Events ──────────────────────── */}}
+  {{ $events := where .Site.RegularPages "Section" "events" }}
+  {{ $upcomingEvents := where $events ".Date" "ge" now }}
+  {{ if $upcomingEvents }}
+  <section style="padding: 2rem 0 3rem;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-title">// upcoming events</span>
+        <a href="{{ "/events" | relURL }}" class="section-link">all events →</a>
+      </div>
+      <div class="posts-grid">
+        {{ range first 3 ($upcomingEvents | sort "Date") }}
+        <a href="{{ .RelPermalink }}" class="post-card">
+          <div class="post-card-main">
+            <div class="post-meta">
+              <span class="post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+              {{ with .Params.event_type }}
+              <span class="tag tag--secondary">{{ . }}</span>
+              {{ end }}
+            </div>
+            <h2 class="post-card-title">{{ .Title }}</h2>
+            <p class="post-card-excerpt">{{ .Summary | plainify | truncate 140 }}</p>
+          </div>
+          <span class="post-card-arrow">→</span>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+  {{ end }}
+
+</div>
+{{ end }}

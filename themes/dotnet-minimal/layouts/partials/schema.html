@@ -1,0 +1,146 @@
+{{- if .IsHome }}
+{{/* ── WebSite + Blog schema for homepage ── */}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "{{ .Site.BaseURL }}#website",
+      "url": "{{ .Site.BaseURL }}",
+      "name": "{{ .Site.Title }}",
+      "description": "{{ .Site.Params.description }}",
+      "inLanguage": "{{ .Site.Language.Lang | default "en-US" }}"
+    },
+    {
+      "@type": "Blog",
+      "@id": "{{ .Site.BaseURL }}#blog",
+      "url": "{{ .Site.BaseURL }}",
+      "name": "{{ .Site.Title }}",
+      "description": "{{ .Site.Params.description }}",
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ .Site.Title }}",
+        "url": "{{ .Site.BaseURL }}"
+      }
+    }
+  ]
+}
+</script>
+
+{{- else if and .IsPage (eq .Section "posts") }}
+{{/* ── BlogPosting schema for articles ── */}}
+{{- $image := "" -}}
+{{- with .Params.image }}{{ $image = . }}{{ else }}{{ with .Site.Params.defaultImage }}{{ $image = . }}{{ end }}{{ end -}}
+{{- if and $image (not (strings.HasPrefix $image "http")) }}{{ $image = printf "%s%s" .Site.BaseURL (strings.TrimPrefix "/" $image) }}{{ end -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ .Title }}",
+  "description": "{{ with .Params.description }}{{ . | plainify }}{{ else }}{{ .Summary | plainify | truncate 200 }}{{ end }}",
+  "url": "{{ .Permalink }}",
+  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+  "wordCount": {{ .WordCount }},
+  "timeRequired": "PT{{ .ReadingTime }}M",
+  {{- with .Params.author }}
+  {{- $authorSlug := . | urlize }}
+  {{- $author := $.Site.GetPage (printf "/authors/%s" $authorSlug) }}
+  "author": {
+    "@type": "Person",
+    "name": "{{ . }}"{{ if $author }},
+    "url": "{{ $author.Permalink }}"{{ with $author.Params.role }},
+    "jobTitle": "{{ . }}"{{ end }}{{ end }}
+  },
+  {{- end }}
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ .Site.Title }}",
+    "url": "{{ .Site.BaseURL }}"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}"
+  },
+  "inLanguage": "{{ .Site.Language.Lang | default "en-US" }}"
+  {{- with $image }},
+  "image": "{{ . }}"
+  {{- end }}
+  {{- with .Params.tags }},
+  "keywords": "{{ delimit . ", " }}"
+  {{- end }}
+}
+</script>
+
+{{- else if and .IsPage (eq .Section "events") }}
+{{/* ── Event schema ── */}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "{{ .Title }}",
+  "description": "{{ with .Params.description }}{{ . | plainify }}{{ else }}{{ .Summary | plainify | truncate 200 }}{{ end }}",
+  "url": "{{ .Permalink }}",
+  "startDate": "{{ .Date.Format "2006-01-02" }}",
+  {{- with .Params.location }}
+  "location": {
+    "@type": "{{ if eq . "Virtual" }}VirtualLocation{{ else }}Place{{ end }}",
+    {{- if eq . "Virtual" }}
+    "url": "{{ $.Permalink }}"
+    {{- else }}
+    "name": "{{ . }}"
+    {{- end }}
+  },
+  {{- end }}
+  {{- with .Params.event_type }}
+  "eventAttendanceMode": "{{ if eq $.Params.location "Virtual" }}https://schema.org/OnlineEventAttendanceMode{{ else }}https://schema.org/OfflineEventAttendanceMode{{ end }}",
+  {{- end }}
+  "organizer": {
+    "@type": "Organization",
+    "name": "{{ .Site.Title }}",
+    "url": "{{ .Site.BaseURL }}"
+  }
+}
+</script>
+
+{{- else if and .IsPage (eq .Section "authors") }}
+{{/* ── Person schema for author profiles ── */}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "{{ .Title }}",
+  "url": "{{ .Permalink }}"
+  {{- with .Params.role }},
+  "jobTitle": "{{ . }}"
+  {{- end }}
+  {{- with .Params.bio }},
+  "description": "{{ . | plainify }}"
+  {{- end }}
+  {{- with .Params.avatar }},
+  "image": "{{ . }}"
+  {{- end }}
+  {{- with .Params.socials }},
+  "sameAs": [{{ range $i, $s := . }}{{ if $i }}, {{ end }}"{{ $s.url }}"{{ end }}]
+  {{- end }}
+}
+</script>
+
+{{- else if and (not .IsPage) (not .IsHome) }}
+{{/* ── CollectionPage schema for list pages ── */}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "{{ .Title }} · {{ .Site.Title }}",
+  "url": "{{ .Permalink }}",
+  "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "{{ .Site.Title }}",
+    "url": "{{ .Site.BaseURL }}"
+  }
+}
+</script>
+{{- end }}

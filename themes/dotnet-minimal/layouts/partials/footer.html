@@ -1,0 +1,13 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-copy">
+      &copy; {{ now.Year }} <a href="{{ "/" | relURL }}">{{ .Site.Title }}</a>
+    </p>
+    <ul class="footer-links">
+      {{ range .Site.Menus.footer }}
+      <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+      {{ end }}
+      <li><a href="https://github.com/thedotnetblog/blog" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+  </div>
+</footer>

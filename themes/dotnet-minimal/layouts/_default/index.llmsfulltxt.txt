@@ -1,0 +1,51 @@
+# {{ .Site.Title }} — Full Content
+
+> {{ .Site.Params.description }}
+
+The .NET Blog is a community-driven publication featuring articles, tutorials, and deep dives on .NET, ASP.NET Core, C#, cloud architecture, and software engineering. Written by developers, for developers.
+
+---
+{{ range (where .Site.RegularPages "Section" "posts") }}
+## {{ .Title }}
+
+- **URL**: {{ .Permalink }}
+- **Date**: {{ .Date.Format "January 02, 2006" }}
+- **Author**: {{ .Params.author }}
+- **Tags**: {{ delimit .Params.tags ", " }}
+- **Reading time**: {{ .ReadingTime }} min
+{{ with .Params.description }}
+> {{ . }}
+{{ end }}
+
+{{ .Plain }}
+
+---
+{{ end }}
+
+## Events
+{{ range (where .Site.RegularPages "Section" "events") }}
+### {{ .Title }}
+
+- **URL**: {{ .Permalink }}
+- **Date**: {{ .Date.Format "January 02, 2006" }}
+- **Type**: {{ .Params.event_type }}
+- **Location**: {{ .Params.location }}
+{{ with .Params.description }}
+> {{ . }}
+{{ end }}
+
+{{ .Plain }}
+
+---
+{{ end }}
+
+## Authors
+{{ range (where .Site.RegularPages "Section" "authors") }}
+### {{ .Title }}
+
+- **URL**: {{ .Permalink }}
+{{ with .Params.role }}- **Role**: {{ . }}{{ end }}
+{{ with .Params.bio }}- **Bio**: {{ . }}{{ end }}
+
+---
+{{ end }}

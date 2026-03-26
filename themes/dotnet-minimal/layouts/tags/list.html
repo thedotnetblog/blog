@@ -1,0 +1,23 @@
+{{ define "main" }}
+<div class="container">
+
+  <div class="page-header">
+    <p class="eyebrow">// tags</p>
+    <h1>All Tags</h1>
+  </div>
+
+  {{ $tags := .Site.Taxonomies.tags }}
+  {{ if $tags }}
+  <div class="tags-cloud">
+    {{ range $name, $pages := $tags }}
+    {{ $count := len $pages }}
+    <a href="{{ "/tags/" | relURL }}{{ $name | urlize }}"
+       class="tag{{ if ge $count 5 }} tag--xl{{ else if ge $count 3 }} tag--lg{{ end }}">
+      {{ $name }} <span style="opacity:.6">({{ $count }})</span>
+    </a>
+    {{ end }}
+  </div>
+  {{ end }}
+
+</div>
+{{ end }}
