@@ -136,7 +136,7 @@ hr {
 /* ── Layout ─────────────────────────────────── */
 .site-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
 .container     { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
-.container--wide { max-width: var(--max-width-wide); }
+.container--wide { width: 100%; max-width: var(--max-width-wide); margin: 0 auto; padding: 0 1.5rem; }
 .main-content  { flex: 1; padding: 3rem 0 5rem; }
 
 /* ── Navigation ─────────────────────────────── */
