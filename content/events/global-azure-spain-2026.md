@@ -17,10 +17,6 @@ Global Azure Spain 2026 takes place on **April 18, 2026** at **Kinépolis Divers
 
 The event runs from **08:30 to 18:30** and includes keynote, coffee breaks, lunch, and a closing Q&A session.
 
-## Emiliano's session
-
-I'll be presenting **"Aspire + Azure, the secret sauce!"** together with **Unai Zorrilla Castro** at **15:25 – 16:10** in Sala 1. If you're curious about how .NET Aspire and Azure work together to simplify cloud-native development, this one's for you.
-
 ## Highlights from the agenda
 
 - **Domando Agentes de IA**: governance, tools, and APIs with Azure AI Foundry and Azure API Management
