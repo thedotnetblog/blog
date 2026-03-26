@@ -52,6 +52,18 @@
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
     });
+
+    (function() {
+      var burger = document.getElementById('nav-burger');
+      var navLinks = document.getElementById('nav-links');
+      if (burger && navLinks) {
+        burger.addEventListener('click', function() {
+          var isOpen = navLinks.classList.toggle('open');
+          burger.classList.toggle('open', isOpen);
+          burger.setAttribute('aria-expanded', String(isOpen));
+        });
+      }
+    })();
   </script>
 
 </body>

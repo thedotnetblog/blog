@@ -3,7 +3,12 @@
     <a href="{{ "/" | relURL }}" class="site-logo">
       the<span class="logo-dot">.NET</span> blog
     </a>
-    <ul class="nav-links">
+    <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
       {{ range .Site.Menus.main }}
       <li>
         <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} class="active"{{ end }}>{{ .Name }}</a>

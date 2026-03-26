@@ -8,7 +8,7 @@
   --font-mono:    'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
   --radius:       6px;
   --radius-lg:    12px;
-  --max-width:    780px;
+  --max-width:    790px;
   --max-width-wide: 1100px;
 }
 
@@ -228,6 +228,37 @@ hr {
 [data-theme="dark"] .theme-toggle .icon-sun  { display: block; }
 [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
+/* ── Hamburger / Burger Button ───────────────── */
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.45rem 0.6rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: border-color .2s, background .2s;
+}
+.nav-burger:hover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+.nav-burger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform .25s, opacity .25s;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
 /* ── Hero / Home Page ───────────────────────── */
 .hero {
   padding: 6rem 0 4rem;
@@ -242,7 +273,7 @@ hr {
   right: -10%;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(124,108,250,0.07) 0%, transparent 70%);
+  /* background: radial-gradient(circle, rgba(124,108,250,0.07) 0%, transparent 70%); */
   pointer-events: none;
 }
 .hero-eyebrow {
@@ -897,9 +928,7 @@ hr {
 .footer-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
+  justify-content: center;
   max-width: var(--max-width-wide);
   margin: 0 auto;
   padding: 0 1.5rem;
@@ -1092,6 +1121,51 @@ hr {
 [data-theme="dark"] .chroma .gt { color:#bf616a }
 
 /* ── Responsive ───────────────────────────────── */
+@media (max-width: 768px) {
+  /* Header: logo centered, burger on the right */
+  .nav-inner {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 60px;
+    padding: 0 1rem;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+  }
+  .site-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .nav-burger {
+    display: flex;
+  }
+  /* Nav links hidden by default — revealed when .open is toggled */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    order: 10;
+    padding: 0.5rem 0 0.75rem;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    margin-top: 0.5rem;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-links li {
+    width: 100%;
+  }
+  .nav-links a {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.85rem;
+    border-radius: var(--radius);
+  }
+}
+
 @media (max-width: 640px) {
   .hero { padding: 3.5rem 0 2.5rem; }
   .post-card { grid-template-columns: 1fr; }
@@ -1102,5 +1176,4 @@ hr {
   .timeline::before { left: 5px; }
   .timeline-item::before { left: -1.55rem; }
   .timeline-item--featured::before { left: -1.75rem; }
-  .nav-links a { padding: 0.4rem 0.5rem; font-size: 0.76rem; }
 }
