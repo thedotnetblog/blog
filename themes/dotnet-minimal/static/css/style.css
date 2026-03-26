@@ -202,7 +202,7 @@ hr {
   width: 100%;
   max-width: var(--max-width-wide);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  /* padding: 0 1.5rem; */
 }
 
 .main-content {
@@ -366,7 +366,7 @@ hr {
 /* ── Hero / Home Page ───────────────────────── */
 .hero {
   padding: 6rem 0 4rem;
-  border-bottom: 1px solid var(--border);
+  /* border-bottom: 1px solid var(--border); */
   position: relative;
   overflow: hidden;
 }
@@ -639,7 +639,7 @@ hr {
 
 /* ── Single Post Page ────────────────────────── */
 .post-header {
-  padding: 3rem 0 2.5rem;
+  padding: 0rem 0 2.5rem;
   border-bottom: 1px solid var(--border);
   margin-bottom: 3rem;
 }
