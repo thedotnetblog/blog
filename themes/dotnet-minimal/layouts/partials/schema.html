@@ -1,9 +1,24 @@
 {{- if .IsHome }}
 {{/* ── WebSite + Blog schema for homepage ── */}}
+{{- $logo := .Site.Params.logo -}}
+{{- if and $logo (not (strings.HasPrefix $logo "http")) -}}
+  {{- $logo = printf "%s%s" .Site.BaseURL (strings.TrimPrefix "/" $logo) -}}
+{{- end -}}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ .Site.BaseURL }}#organization",
+      "name": "{{ .Site.Title }}",
+      "url": "{{ .Site.BaseURL }}"{{ with $logo }},
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ . }}"
+      }{{ end }}{{ with .Site.Params.socialProfiles }},
+      "sameAs": [{{ range $i, $s := . }}{{ if $i }}, {{ end }}"{{ $s }}"{{ end }}]{{ end }}
+    },
     {
       "@type": "WebSite",
       "@id": "{{ .Site.BaseURL }}#website",
@@ -19,9 +34,7 @@
       "name": "{{ .Site.Title }}",
       "description": "{{ .Site.Params.description }}",
       "publisher": {
-        "@type": "Organization",
-        "name": "{{ .Site.Title }}",
-        "url": "{{ .Site.BaseURL }}"
+        "@id": "{{ .Site.BaseURL }}#organization"
       }
     }
   ]

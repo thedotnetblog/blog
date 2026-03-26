@@ -4,8 +4,15 @@
 
 The .NET Blog is a community-driven publication featuring articles, tutorials, and deep dives on .NET, ASP.NET Core, C#, cloud architecture, and software engineering. Written by developers, for developers.
 
+## Metadata
+
+- **URL**: {{ .Site.BaseURL }}
+- **Language**: {{ .Site.Language.Lang | default "en-us" }}
+- **Last Updated**: {{ now.Format "2006-01-02" }}
+
 ---
-{{ range (where .Site.RegularPages "Section" "posts") }}
+{{- $posts := (where .Site.RegularPages "Section" "posts") -}}
+{{- range (sort $posts "Date" "desc") }}
 ## {{ .Title }}
 
 - **URL**: {{ .Permalink }}
@@ -17,13 +24,15 @@ The .NET Blog is a community-driven publication featuring articles, tutorials, a
 > {{ . }}
 {{ end }}
 
-{{ .Plain }}
+{{ .RawContent }}
 
 ---
-{{ end }}
+{{- end }}
 
 ## Events
-{{ range (where .Site.RegularPages "Section" "events") }}
+{{- $events := (where .Site.RegularPages "Section" "events") -}}
+{{- if gt (len $events) 0 }}
+{{- range (sort $events "Date" "desc") }}
 ### {{ .Title }}
 
 - **URL**: {{ .Permalink }}
@@ -34,13 +43,18 @@ The .NET Blog is a community-driven publication featuring articles, tutorials, a
 > {{ . }}
 {{ end }}
 
-{{ .Plain }}
+{{ .RawContent }}
 
 ---
-{{ end }}
+{{- end }}
+{{- else }}
+- No events published yet.
+
+---
+{{- end }}
 
 ## Authors
-{{ range (where .Site.RegularPages "Section" "authors") }}
+{{- range (sort (where .Site.RegularPages "Section" "authors") "Title" "asc") }}
 ### {{ .Title }}
 
 - **URL**: {{ .Permalink }}
@@ -48,4 +62,4 @@ The .NET Blog is a community-driven publication featuring articles, tutorials, a
 {{ with .Params.bio }}- **Bio**: {{ . }}{{ end }}
 
 ---
-{{ end }}
+{{- end }}

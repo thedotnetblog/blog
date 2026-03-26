@@ -4,24 +4,45 @@
 
 The .NET Blog is a community-driven publication featuring articles, tutorials, and deep dives on .NET, ASP.NET Core, C#, cloud architecture, and software engineering. Written by developers, for developers.
 
+## Metadata
+
+- URL: {{ .Site.BaseURL }}
+- Language: {{ .Site.Language.Lang | default "en-us" }}
+- Last Updated: {{ now.Format "2006-01-02" }}
+
 ## Blog Posts
 
-{{ range (where .Site.RegularPages "Section" "posts") }}- [{{ .Title }}]({{ .Permalink }}): {{ with .Params.description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 160 }}{{ end }}
-{{ end }}
+{{- $posts := (where .Site.RegularPages "Section" "posts") -}}
+{{- range (sort $posts "Date" "desc") }}
+- [{{ .Title }}]({{ .Permalink }}): {{ with .Params.description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 160 }}{{ end }}
+{{- end }}
 
 ## Events
 
-{{ range (where .Site.RegularPages "Section" "events") }}- [{{ .Title }}]({{ .Permalink }}): {{ with .Params.description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 160 }}{{ end }}
-{{ end }}
+{{- $events := (where .Site.RegularPages "Section" "events") -}}
+{{- if gt (len $events) 0 }}
+{{- range (sort $events "Date" "desc") }}
+- [{{ .Title }}]({{ .Permalink }}): {{ with .Params.description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 160 }}{{ end }}
+{{- end }}
+{{- else }}
+- No events published yet.
+{{- end }}
 
 ## Authors
 
-{{ range (where .Site.RegularPages "Section" "authors") }}- [{{ .Title }}]({{ .Permalink }}): {{ with .Params.role }}{{ . }}{{ end }}{{ with .Params.bio }} — {{ . }}{{ end }}
-{{ end }}
+{{- range (sort (where .Site.RegularPages "Section" "authors") "Title" "asc") }}
+- [{{ .Title }}]({{ .Permalink }}): {{ with .Params.role }}{{ . }}{{ end }}{{ with .Params.bio }} — {{ . }}{{ end }}
+{{- end }}
 
 ## Topics
 
-This blog covers: {{ $tags := slice }}{{ range $name, $_ := .Site.Taxonomies.tags }}{{ $tags = $tags | append $name }}{{ end }}{{ delimit $tags ", " }}.
+{{- $tags := slice }}{{ range $name, $_ := .Site.Taxonomies.tags }}{{ $tags = $tags | append $name }}{{ end }}
+{{- $tags = sort $tags }}
+{{- if gt (len $tags) 0 }}
+This blog covers: {{ delimit $tags ", " }}.
+{{- else }}
+This blog currently has no tagged topics.
+{{- end }}
 
 ## Optional
 

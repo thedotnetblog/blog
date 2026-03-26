@@ -42,13 +42,19 @@ summaryLength = 70
 
 [params]
   description = "Articles, tutorials and insights from the .NET community."
+  homeTitle = "The .NET Blog · .NET, Azure, AI, and Cloud-Native Tutorials"
   eyebrow = "The .NET Community Blog"
   hero_title = "Where <span class=\"accent\">.NET developers</span><br/>share what they build."
   hero_desc = "Deep dives, tutorials and community stories — written by developers, for developers."
 
   # SEO & Social
   defaultImage = "/img/og-default.png"
+  logo = "/img/og-default.png"
   twitter = "thedotnetblog"
+  socialProfiles = [
+    "https://github.com/thedotnetblog/blog",
+    "https://x.com/thedotnetblog"
+  ]
 
 [menus]
   [[menus.main]]
