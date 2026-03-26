@@ -9,7 +9,7 @@
         {{ with .Site.Params.hero_title }}
           {{ . | safeHTML }}
         {{ else }}
-          Where <span class="accent">.NET developers</span><br/>share what they build.
+          Where <span class="accent">.NET developers</span><br/><span class="typewriter-line"><span id="typewriter"></span><span class="typewriter-cursor">|</span></span>
         {{ end }}
       </h1>
       <p class="hero-desc">{{ .Site.Params.hero_desc | default "Articles, tutorials and insights from the .NET community. Written by developers, for developers." }}</p>
@@ -91,4 +91,63 @@
   {{ end }}
 
 </div>
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+(function () {
+  var el = document.getElementById('typewriter');
+  if (!el) return;
+
+  var phrases = [
+    'share what they build.',
+    'learn from each other.',
+    'ship faster with .NET 9.',
+    'love open source.',
+    'build cloud-native apps.',
+    'explore AI.',
+    'master Blazor and SignalR.',
+    'level up together.',
+    'write less boilerplate.',
+    'push the platform forward.',
+  ];
+
+  var phraseIndex = 0;
+  var charIndex   = 0;
+  var isDeleting  = false;
+
+  var TYPE_SPEED   = 65;
+  var DELETE_SPEED = 35;
+  var PAUSE_AFTER  = 2200;
+  var PAUSE_BEFORE = 380;
+
+  function tick() {
+    var current = phrases[phraseIndex];
+
+    if (!isDeleting) {
+      charIndex++;
+      el.textContent = current.substring(0, charIndex);
+
+      if (charIndex === current.length) {
+        setTimeout(function () { isDeleting = true; tick(); }, PAUSE_AFTER);
+        return;
+      }
+      setTimeout(tick, TYPE_SPEED);
+    } else {
+      charIndex--;
+      el.textContent = current.substring(0, charIndex);
+
+      if (charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        setTimeout(tick, PAUSE_BEFORE);
+        return;
+      }
+      setTimeout(tick, DELETE_SPEED);
+    }
+  }
+
+  setTimeout(tick, 600);
+})();
+</script>
 {{ end }}

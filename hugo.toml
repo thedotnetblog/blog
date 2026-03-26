@@ -44,7 +44,7 @@ summaryLength = 70
   description = "Articles, tutorials and insights from the .NET community."
   homeTitle = "The .NET Blog · .NET, Azure, AI, and Cloud-Native Tutorials"
   eyebrow = "The .NET Community Blog"
-  hero_title = "Where <span class=\"accent\">.NET developers</span><br/>share what they build."
+  hero_title = "Where <span class=\"accent\">.NET developers</span><br/><span class=\"typewriter-line\"><span id=\"typewriter\"></span><span class=\"typewriter-cursor\">|</span></span>"
   hero_desc = "Deep dives, tutorials and community stories — written by developers, for developers."
 
   # SEO & Social
