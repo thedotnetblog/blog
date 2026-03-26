@@ -2022,6 +2022,11 @@ hr {
 /* ── Responsive ───────────────────────────────── */
 @media (max-width: 768px) {
 
+  .container,
+  .container--wide {
+    padding: 0 1rem;
+  }
+
   /* Header: logo centered, burger on the right */
   .nav-inner {
     flex-wrap: wrap;
