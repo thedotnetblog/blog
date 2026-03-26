@@ -6,6 +6,7 @@ paginate = 10
 enableRobotsTXT = true
 enableGitInfo = false
 summaryLength = 70
+buildFuture = true
 
 [markup]
   [markup.highlight]

@@ -20,75 +20,83 @@
     </div>
   </section>
 
-  {{/* ── Latest Posts ─────────────────────────── */}}
-  <section style="padding: 3.5rem 0 2rem;">
+  {{/* ── Posts + Events Split ─────────────────── */}}
+  {{ $posts := where .Site.RegularPages "Section" "posts" }}
+  {{ $posts = $posts | first 6 }}
+  {{ $upcomingEvents := where .Site.RegularPages "Section" "events" }}
+  {{ $upcomingEvents = sort $upcomingEvents "Date" }}
+  <section style="padding: 3.5rem 0 3.5rem;">
     <div class="container">
-      <div class="section-header">
-        <span class="section-title">// latest posts</span>
-        <a href="{{ "/posts" | relURL }}" class="section-link">all posts →</a>
-      </div>
+      <div class="home-split">
 
-      {{ $posts := where .Site.RegularPages "Section" "posts" }}
-      {{ $posts = $posts | first 6 }}
-      {{ if $posts }}
-      <div class="posts-grid">
-        {{ range $posts }}
-        <a href="{{ .RelPermalink }}" class="post-card">
-          <div class="post-card-main">
-            <div class="post-meta">
-              <span class="post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
-              {{ with .Params.author }}
-              <span class="post-author-tag">{{ . }}</span>
-              {{ end }}
-            </div>
-            <h2 class="post-card-title">{{ .Title }}</h2>
-            <p class="post-card-excerpt">{{ .Summary | plainify | truncate 160 }}</p>
-            {{ with .Params.tags }}
-            <div class="post-card-tags">
-              {{ range first 4 . }}
-              <span class="tag">{{ . }}</span>
-              {{ end }}
+        {{/* ── 70% — Latest Posts ─────────────── */}}
+        <div class="home-posts-col">
+          <div class="section-header">
+            <span class="section-title">// latest posts</span>
+            <a href="{{ "/posts" | relURL }}" class="section-link">all posts →</a>
+          </div>
+          {{ if $posts }}
+          <div class="posts-grid">
+            {{ range $posts }}
+            <a href="{{ .RelPermalink }}" class="post-card">
+              <div class="post-card-main">
+                <div class="post-meta">
+                  <span class="post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+                  {{ with .Params.author }}
+                  <span class="post-author-tag">{{ . }}</span>
+                  {{ end }}
+                </div>
+                <h2 class="post-card-title">{{ .Title }}</h2>
+                <p class="post-card-excerpt">{{ .Summary | plainify | truncate 160 }}</p>
+                {{ with .Params.tags }}
+                <div class="post-card-tags">
+                  {{ range first 4 . }}
+                  <span class="tag">{{ . }}</span>
+                  {{ end }}
+                </div>
+                {{ end }}
+              </div>
+              <span class="post-card-arrow">→</span>
+            </a>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+
+        {{/* ── 30% — Events Timeline ───────────── */}}
+        <div class="home-events-col">
+          <div class="section-header">
+            <span class="section-title">// upcoming events</span>
+            <a href="{{ "/events" | relURL }}" class="section-link">all events →</a>
+          </div>
+          {{ if $upcomingEvents }}
+          <div class="home-timeline">
+            {{ range $upcomingEvents }}
+            {{ $featured := .Params.featured | default false }}
+            <div class="home-timeline-item{{ if $featured }} home-timeline-item--featured{{ end }}">
+              <a href="{{ .RelPermalink }}" class="home-timeline-card">
+                <div>
+                  {{ with .Params.event_type }}
+                  <span class="event-type-badge event-type-{{ . | lower | replaceRE "[^a-z]" "-" }}">{{ . }}</span>
+                  {{ end }}
+                </div>
+                <p class="home-timeline-date">{{ .Date.Format "Jan 02, 2006" }}</p>
+                <p class="home-timeline-title">{{ .Title }}</p>
+                {{ with .Params.location }}
+                <p class="home-timeline-location">📍 {{ . }}</p>
+                {{ end }}
+              </a>
             </div>
             {{ end }}
           </div>
-          <span class="post-card-arrow">→</span>
-        </a>
-        {{ end }}
-      </div>
-      {{ end }}
-    </div>
-  </section>
+          {{ else }}
+          <p class="text-muted font-mono" style="font-size:.85rem">// no upcoming events.</p>
+          {{ end }}
+        </div>
 
-  {{/* ── Upcoming Events ──────────────────────── */}}
-  {{ $events := where .Site.RegularPages "Section" "events" }}
-  {{ $upcomingEvents := where $events ".Date" "ge" now }}
-  {{ if $upcomingEvents }}
-  <section style="padding: 2rem 0 3rem;">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-title">// upcoming events</span>
-        <a href="{{ "/events" | relURL }}" class="section-link">all events →</a>
-      </div>
-      <div class="posts-grid">
-        {{ range first 3 ($upcomingEvents | sort "Date") }}
-        <a href="{{ .RelPermalink }}" class="post-card">
-          <div class="post-card-main">
-            <div class="post-meta">
-              <span class="post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
-              {{ with .Params.event_type }}
-              <span class="tag tag--secondary">{{ . }}</span>
-              {{ end }}
-            </div>
-            <h2 class="post-card-title">{{ .Title }}</h2>
-            <p class="post-card-excerpt">{{ .Summary | plainify | truncate 140 }}</p>
-          </div>
-          <span class="post-card-arrow">→</span>
-        </a>
-        {{ end }}
       </div>
     </div>
   </section>
-  {{ end }}
 
 </div>
 {{ end }}
@@ -102,7 +110,7 @@
   var phrases = [
     'share what they build.',
     'learn from each other.',
-    'ship faster with .NET 9.',
+    'ship faster with .NET 10.',
     'love open source.',
     'build cloud-native apps.',
     'explore AI.',
