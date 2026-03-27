@@ -33,6 +33,27 @@
     {{ .Content }}
   </div>
 
+  {{ $shareURL := .Permalink | urlquery }}
+  {{ $shareTitle := .Title | urlquery }}
+  {{ $shareText := printf "%s %s" .Title .Permalink | urlquery }}
+  <div class="post-actions-row">
+    <div class="post-share" aria-label="Share this post">
+      <span class="post-share-label">Share:</span>
+      <a href="https://x.com/intent/tweet?url={{ $shareURL }}&text={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer">X ↗</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+      <a href="https://bsky.app/intent/compose?text={{ $shareText }}" class="share-link" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
+      <a href="https://www.reddit.com/submit?url={{ $shareURL }}&title={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer">Reddit ↗</a>
+    </div>
+
+    {{ with .File }}
+    {{ $sourcePath := printf "content/%s" (replaceRE "\\\\" "/" .Path) }}
+    <div class="post-source-link-wrap">
+      <a href="https://github.com/thedotnetblog/blog/blob/main/{{ $sourcePath }}" class="post-source-link" target="_blank" rel="noopener noreferrer">View source code for this post on GitHub ↗</a>
+    </div>
+    {{ end }}
+  </div>
+
   {{/* ── Author card ───────────────────────── */}}
   {{ with .Params.author }}
   {{ $authorSlug := . | urlize }}
@@ -46,9 +67,19 @@
     <div class="author-avatar-placeholder">{{ substr $author.Title 0 1 }}</div>
     {{ end }}
     <div class="post-author-info">
-      <div class="author-name">{{ $author.Title }}</div>
-      {{ with $author.Params.role }}<p class="author-bio">{{ . }}</p>{{ end }}
-      <a href="{{ $author.RelPermalink }}" class="author-link">View profile →</a>
+      <div class="author-name-row">
+        <div class="author-name">{{ $author.Title }}</div>
+        <a href="{{ $author.RelPermalink }}" class="author-name-link" aria-label="Go to author page">↗</a>
+      </div>
+      {{ with $author.Params.role }}<p class="author-role">{{ . }}</p>{{ end }}
+      {{ with $author.Params.bio }}<p class="author-bio">{{ . }}</p>{{ end }}
+      {{ with $author.Params.socials }}
+      <div class="post-author-socials">
+        {{ range . }}
+        <a href="{{ .url }}" class="social-link" target="_blank" rel="noopener noreferrer">{{ .platform }} ↗</a>
+        {{ end }}
+      </div>
+      {{ end }}
     </div>
   </div>
   {{ end }}

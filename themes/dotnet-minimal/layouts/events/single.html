@@ -26,6 +26,27 @@
   <div class="post-body">{{ .Content }}</div>
   {{ end }}
 
+  {{ $shareURL := .Permalink | urlquery }}
+  {{ $shareTitle := .Title | urlquery }}
+  {{ $shareText := printf "%s %s" .Title .Permalink | urlquery }}
+  <div class="post-actions-row">
+    <div class="post-share" aria-label="Share this event">
+      <span class="post-share-label">Share:</span>
+      <a href="https://x.com/intent/tweet?url={{ $shareURL }}&text={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer">X ↗</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+      <a href="https://bsky.app/intent/compose?text={{ $shareText }}" class="share-link" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
+      <a href="https://www.reddit.com/submit?url={{ $shareURL }}&title={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer">Reddit ↗</a>
+    </div>
+
+    {{ with .File }}
+    {{ $sourcePath := printf "content/%s" (replaceRE "\\\\" "/" .Path) }}
+    <div class="post-source-link-wrap">
+      <a href="https://github.com/thedotnetblog/blog/blob/main/{{ $sourcePath }}" class="post-source-link" target="_blank" rel="noopener noreferrer">View source code for this event on GitHub ↗</a>
+    </div>
+    {{ end }}
+  </div>
+
   <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
     <a href="{{ "/events" | relURL }}" class="btn btn-outline">← All events</a>
   </div>

@@ -19,7 +19,9 @@
           {{ with .Params.author }}<span class="post-author-tag">{{ . }}</span>{{ end }}
         </div>
         <h2 class="post-card-title">{{ .Title }}</h2>
-        <p class="post-card-excerpt">{{ .Summary | plainify | truncate 160 }}</p>
+        {{ $excerpt := .Summary | plainify }}
+        {{ with .Params.description }}{{ $excerpt = . | plainify }}{{ end }}
+        <p class="post-card-excerpt">{{ $excerpt | truncate 280 }}</p>
       </div>
       <span class="post-card-arrow">→</span>
     </a>
