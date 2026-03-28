@@ -639,7 +639,7 @@ hr {
 
 /* ── Single Post Page ────────────────────────── */
 .post-header {
-  padding: 0rem 0 2.5rem;
+  padding: 0rem 0 2rem;
   border-bottom: 1px solid var(--border);
   margin-bottom: 3rem;
 }
@@ -668,6 +668,26 @@ hr {
   flex-wrap: wrap;
   gap: 0.4rem;
   margin-top: 1.2rem;
+}
+
+.post-translations {
+  margin-top: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.post-translations-label {
+  margin-right: 0.3rem;
+}
+
+.translation-link {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.translation-link:hover {
+  text-decoration: underline;
 }
 
 .post-actions-row {

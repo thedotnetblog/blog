@@ -1,0 +1,65 @@
+---
+title: "SQL MCP Server、SSMS 中的 Copilot 以及带 AI 代理的 Database Hub：SQLCon 2026 真正重要的内容"
+date: 2026-03-28
+author: "Emiliano Montesdeoca"
+description: "Microsoft 在 SQLCon 2026 上发布了一系列数据库公告。如果你在 Azure SQL 上构建 AI 应用，这些才是真正重要的内容。"
+tags:
+  - azure
+  - ai
+  - sql
+  - databases
+  - mcp
+---
+
+Microsoft 刚刚在[亚特兰大与 FabCon 同期举办了 SQLCon 2026](https://www.microsoft.com/en-us/sql-server/blog/2026/03/18/advancing-agentic-ai-with-microsoft-databases-across-a-unified-data-estate/)，内容非常多。原始公告涵盖了从节省计划到企业合规功能的方方面面。我打算跳过企业定价的幻灯片，专注于对使用 Azure SQL 和 AI 进行开发的人来说真正重要的部分。
+
+## SQL MCP Server   
+
+这是我眼中的头条新闻。Azure SQL Database Hyperscale 现在有了一个 **SQL MCP Server** 公共预览版，让你可以使用 [Model Context Protocol](https://modelcontextprotocol.io/) 将 SQL 数据安全地连接到 AI 代理和 Copilot。
+
+如果你一直在关注 MCP 的浪潮——说实话，现在想不注意到都难——这是一个大事件。你不再需要构建自定义数据管道来为 AI 代理提供来自数据库的上下文，而是获得了一个标准化协议来直接公开 SQL 数据。你的代理可以查询、推理并基于实时数据库信息采取行动。
+
+对于我们这些用 Semantic Kernel 或 Microsoft Agent Framework 构建 AI 代理的人来说，这打开了一条干净的集成路径。你的代理需要检查库存？查找客户记录？验证订单？MCP 提供了一种结构化的方式来做这些事情，而不需要你为每个场景编写定制的数据获取代码。
+
+## SSMS 22 中的 GitHub Copilot 现已正式发布
+
+如果你在 SQL Server Management Studio 中花过任何时间——说实话，我们大多数人还在用——GitHub Copilot 现在已在 SSMS 22 中正式发布。和你在 VS Code 和 Visual Studio 中使用的 Copilot 体验一样，但用于 T-SQL。
+
+实际价值很直接：基于聊天的辅助来编写查询、重构存储过程、排查性能问题和处理管理任务。概念上没什么革命性的，但直接在 SSMS 中使用意味着你不需要为了获得数据库工作的 AI 帮助而切换到另一个编辑器。
+
+## 向量索引获得了重大升级
+
+Azure SQL Database 现在拥有更快、更强大的向量索引，完全支持插入、更新和删除操作。这意味着你的向量数据可以实时保持最新——不需要批量重建索引。
+
+新功能如下：
+- **量化** 在不损失太多精度的情况下缩小索引大小
+- **迭代过滤** 获得更精确的结果
+- **与查询优化器更紧密的集成** 实现可预测的性能
+
+如果你正在使用 Azure SQL 作为向量存储进行 Retrieval-Augmented Generation (RAG)，这些改进直接有用。你可以将向量和关系数据放在同一个数据库中，相比运行单独的向量数据库，这大大简化了你的架构。
+
+同样的向量增强功能在 Fabric 中的 SQL Database 也可用，因为两者底层运行的是同一个 SQL 引擎。
+
+## Fabric 中的 Database Hub：代理式管理
+
+这个更偏向未来，但很有意思。Microsoft 宣布了 **Microsoft Fabric 中的 Database Hub**（抢先体验），为你提供跨 Azure SQL、Cosmos DB、PostgreSQL、MySQL 和 SQL Server via Arc 的统一视图。
+
+有意思的不仅仅是统一视图——而是代理式的管理方法。AI 代理持续监控你的数据库群，展示发生了什么变化，解释为什么重要，并建议下一步该做什么。这是一个人机协作（human-in-the-loop）模型，代理做前期工作，你来做决策。
+
+对于管理多个数据库的团队来说，这可能真正减少运维噪音。代理把信号带给你，而不是让你在各个门户之间跳来跳去手动检查指标。
+
+## 这对 .NET 开发者意味着什么
+
+贯穿所有这些公告的主线很清晰：Microsoft 正在将 AI 代理嵌入数据库技术栈的每一层。不是作为噱头，而是作为实用的工具层。
+
+如果你正在构建基于 Azure SQL 的 .NET 应用，以下是我实际会做的事情：
+
+1. **试试 SQL MCP Server**，如果你在构建 AI 代理的话。这是给代理提供数据库访问最干净的方式，不需要自定义的管道代码。
+2. **在 SSMS 中启用 Copilot**，如果还没有的话——对日常 SQL 工作来说是免费的生产力提升。
+3. **了解一下向量索引**，如果你在做 RAG 且目前运行着单独的向量存储。整合到 Azure SQL 意味着少管理一个服务。
+
+## 总结
+
+完整公告还有更多内容——节省计划、迁移助手、合规功能——但对开发者来说，重点在 MCP Server、向量改进和代理式管理层。这些才是改变你构建方式的东西，而不仅仅是改变你做预算的方式。
+
+查看 [Shireesh Thota 的完整公告](https://www.microsoft.com/en-us/sql-server/blog/2026/03/18/advancing-agentic-ai-with-microsoft-databases-across-a-unified-data-estate/) 获取全貌，如果你想试试新的管理体验，可以[注册 Database Hub 抢先体验](https://aka.ms/database-hub)。
