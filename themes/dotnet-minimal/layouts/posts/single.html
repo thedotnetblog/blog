@@ -6,7 +6,7 @@
       <span class="post-date font-mono" style="font-size:.8rem;color:var(--text-muted)">{{ .Date | time.Format ":date_long" }}</span>
       {{ with .Params.author }}
       <span style="color:var(--text-muted);font-size:.8rem">·</span>
-      <span class="post-author-tag">{{ . }}</span>
+      <a href="{{ "/authors/" | relLangURL }}{{ . | urlize }}" class="post-author-tag">{{ . }}</a>
       {{ end }}
       {{ with .Params.reading_time }}
       <span style="color:var(--text-muted);font-size:.8rem">·</span>

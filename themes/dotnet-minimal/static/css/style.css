@@ -568,7 +568,11 @@ hr {
 .post-author-tag {
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  color: var(--accent-2);
+  color: var(--accent);
+  text-decoration: none;
+}
+.post-author-tag:hover {
+  text-decoration: underline;
 }
 
 .post-card-title {
