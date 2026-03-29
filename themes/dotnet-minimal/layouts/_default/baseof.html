@@ -66,6 +66,44 @@
         });
       }
     })();
+
+    /* ── Language selector ────────────────── */
+    (function() {
+      var toggle = document.getElementById('lang-toggle');
+      var dropdown = document.getElementById('lang-dropdown');
+      if (!toggle || !dropdown) return;
+
+      toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var open = dropdown.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
+          dropdown.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      /* Save preferred language on click */
+      dropdown.querySelectorAll('a[data-lang]').forEach(function(a) {
+        a.addEventListener('click', function() {
+          localStorage.setItem('preferred-lang', a.getAttribute('data-lang'));
+        });
+      });
+
+      /* Auto-redirect to preferred language on first visit */
+      var preferred = localStorage.getItem('preferred-lang');
+      var currentLang = document.documentElement.lang || 'en';
+      if (preferred && preferred !== currentLang && !sessionStorage.getItem('lang-redirected')) {
+        var langLink = dropdown.querySelector('a[data-lang="' + preferred + '"]');
+        if (langLink && langLink.href) {
+          sessionStorage.setItem('lang-redirected', '1');
+          window.location.href = langLink.href;
+        }
+      }
+    })();
   </script>
 
 </body>

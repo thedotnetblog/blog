@@ -7,7 +7,7 @@
       <span class="event-type-badge event-type-{{ . | lower | replaceRE "[^a-z]" "-" }}">{{ . }}</span>
       {{ end }}
       <span class="post-date font-mono" style="font-size:.8rem;color:var(--text-muted)">
-        {{ .Date.Format "January 02, 2006" }}
+        {{ .Date | time.Format ":date_long" }}
       </span>
       {{ with .Params.location }}
       <span style="font-family:var(--font-mono);font-size:.8rem;color:var(--text-muted)">📍 {{ . }}</span>
@@ -17,9 +17,11 @@
     {{ with .Params.description }}<p class="post-header-desc">{{ . }}</p>{{ end }}
     {{ with .Params.tags }}
     <div class="post-header-tags">
-      {{ range . }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag">{{ . }}</a>{{ end }}
+      {{ range . }}<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag">{{ . }}</a>{{ end }}
     </div>
     {{ end }}
+
+    {{ partial "translations.html" . }}
   </div>
 
   {{ if .Content }}
@@ -31,7 +33,7 @@
   {{ $shareText := printf "%s %s" .Title .Permalink | urlquery }}
   <div class="post-actions-row">
     <div class="post-share" aria-label="Share this event">
-      <span class="post-share-label">Share:</span>
+      <span class="post-share-label">{{ i18n "share_label" }}</span>
       <a href="https://x.com/intent/tweet?url={{ $shareURL }}&text={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer">X ↗</a>
       <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
       <a href="https://bsky.app/intent/compose?text={{ $shareText }}" class="share-link" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
@@ -42,13 +44,13 @@
     {{ with .File }}
     {{ $sourcePath := printf "content/%s" (replaceRE "\\\\" "/" .Path) }}
     <div class="post-source-link-wrap">
-      <a href="https://github.com/thedotnetblog/blog/blob/main/{{ $sourcePath }}" class="post-source-link" target="_blank" rel="noopener noreferrer">View source code for this event on GitHub ↗</a>
+      <a href="https://github.com/thedotnetblog/blog/blob/main/{{ $sourcePath }}" class="post-source-link" target="_blank" rel="noopener noreferrer">{{ i18n "view_event_source" }}</a>
     </div>
     {{ end }}
   </div>
 
   <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
-    <a href="{{ "/events" | relURL }}" class="btn btn-outline">← All events</a>
+    <a href="{{ "/events" | relLangURL }}" class="btn btn-outline">{{ i18n "all_events_link" }}</a>
   </div>
 
 </div>

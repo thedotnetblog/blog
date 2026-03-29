@@ -1,0 +1,131 @@
+[nav_posts]
+other = "記事"
+
+[nav_events]
+other = "イベント"
+
+[nav_authors]
+other = "著者"
+
+[nav_tags]
+other = "タグ"
+
+[hero_eyebrow]
+other = ".NET コミュニティブログ"
+
+[hero_title]
+other = "<span class=\"accent\">.NET</span> 開発者が"
+
+[hero_desc]
+other = "ディープダイブ、チュートリアル、コミュニティストーリー — 開発者による、開発者のための。"
+
+[typewriter_phrases]
+other = "作ったものを共有する。|お互いから学ぶ。|.NET 10 でより速くリリースする。|オープンソースを愛する。|クラウドネイティブアプリを構築する。|AIを探求する。|Blazor と SignalR をマスターする。|一緒に成長する。|ボイラープレートを減らす。|プラットフォームを前進させる。"
+
+[hero_cta_blog]
+other = "ブログを読む →"
+
+[hero_cta_authors]
+other = "著者を知る"
+
+[section_latest_posts]
+other = "// 最新記事"
+
+[section_all_posts]
+other = "すべての記事 →"
+
+[section_upcoming_events]
+other = "// 今後のイベント"
+
+[section_all_events]
+other = "すべてのイベント →"
+
+[no_events]
+other = "// 今後のイベントはありません。"
+
+[posts_page_eyebrow]
+other = "// 記事"
+
+[posts_page_title]
+other = "ブログ"
+
+[no_posts]
+other = "// まだ記事がありません — もうすぐ公開します。"
+
+[min_read]
+other = "分で読めます"
+
+[share_label]
+other = "共有："
+
+[view_source]
+other = "この記事のソースコードをGitHubで見る ↗"
+
+[authors_page_eyebrow]
+other = "// 著者"
+
+[authors_page_title]
+other = "著者一覧"
+
+[authors_page_desc]
+other = "The .NET Blog を支える人々。"
+
+[posts_by]
+other = "// {{ .Name }}の記事"
+
+[posts_count]
+other = "{{ .Count }}件の記事"
+
+[posts_published]
+other = "公開済み"
+
+[no_author_posts]
+other = "// まだ記事が公開されていません。"
+
+[view_author_source]
+other = "この著者ページのソースコードをGitHubで見る ↗"
+
+[events_page_eyebrow]
+other = "// イベント"
+
+[events_page_title]
+other = "コミュニティイベント"
+
+[events_page_desc]
+other = "カンファレンス、ミートアップ、ウェビナー、リリース — ひとつのタイムラインで。"
+
+[no_events_scheduled]
+other = "// イベントの予定はありません。"
+
+[all_events_link]
+other = "← すべてのイベント"
+
+[view_event_source]
+other = "このイベントのソースコードをGitHubで見る ↗"
+
+[tags_page_eyebrow]
+other = "// タグ"
+
+[tags_page_title]
+other = "すべてのタグ"
+
+[tag_eyebrow]
+other = "// タグ"
+
+[all_tags_link]
+other = "← すべてのタグ"
+
+[footer_copy]
+other = "開発者から開発者へ"
+
+[translation_available]
+other = "この記事は他の言語でも読めます："
+
+[translation_notice]
+other = "この記事は自動翻訳されました。"
+
+[translation_original]
+other = "原文を読む"
+
+[language_label]
+other = "言語"

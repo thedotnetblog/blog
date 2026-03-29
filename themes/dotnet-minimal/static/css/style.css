@@ -287,6 +287,7 @@ hr {
   color: var(--text-muted);
   transition: color .2s, border-color .2s, background .2s;
   line-height: 1;
+  margin-top: 2px;
 }
 
 .theme-toggle:hover {
@@ -500,6 +501,10 @@ hr {
   border-bottom: 1px solid var(--border);
 }
 
+.section-header--author-posts {
+  margin-top: 40px;
+}
+
 .section-title {
   font-family: var(--font-mono);
   font-size: 0.8rem;
@@ -641,7 +646,7 @@ hr {
 .post-header {
   padding: 0rem 0 2rem;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .post-header-meta {
@@ -2223,4 +2228,95 @@ hr {
   .timeline-item--featured::before {
     left: -1.75rem;
   }
+}
+
+/* ── Language Selector ──────────────────────── */
+.lang-selector-wrap {
+  position: relative;
+  margin-top: 5px;
+}
+
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .3rem .6rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+
+.lang-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.lang-toggle .icon-lang {
+  flex-shrink: 0;
+}
+
+.lang-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + .4rem);
+  right: 0;
+  min-width: 150px;
+  max-height: 320px;
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  list-style: none;
+  padding: .3rem 0;
+  z-index: 200;
+}
+
+.lang-dropdown.open {
+  display: block;
+}
+
+.lang-dropdown li a {
+  display: block;
+  padding: .4rem .8rem;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: background .15s;
+}
+
+.lang-dropdown li a:hover {
+  background: var(--bg-hover);
+  color: var(--accent);
+}
+
+.lang-dropdown li.lang-active a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── Post Translations (updated) ─────────── */
+.post-translations {
+  margin-top: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.post-translations-label {
+  margin-right: .3rem;
+}
+
+.translation-link {
+  color: var(--accent);
+}
+
+.translation-link:hover {
+  color: var(--accent-2);
 }

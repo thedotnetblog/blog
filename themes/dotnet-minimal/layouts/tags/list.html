@@ -2,8 +2,8 @@
 <div class="container">
 
   <div class="page-header">
-    <p class="eyebrow">// tags</p>
-    <h1>All Tags</h1>
+    <p class="eyebrow">{{ i18n "tags_page_eyebrow" }}</p>
+    <h1>{{ i18n "tags_page_title" }}</h1>
   </div>
 
   {{ $tags := .Site.Taxonomies.tags }}
@@ -11,7 +11,7 @@
   <div class="tags-cloud">
     {{ range $name, $pages := $tags }}
     {{ $count := len $pages }}
-    <a href="{{ "/tags/" | relURL }}{{ $name | urlize }}"
+    <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}"
        class="tag{{ if ge $count 5 }} tag--xl{{ else if ge $count 3 }} tag--lg{{ end }}">
       {{ $name }} <span style="opacity:.6">({{ $count }})</span>
     </a>

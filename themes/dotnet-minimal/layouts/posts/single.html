@@ -3,17 +3,17 @@
 
   <div class="post-header">
     <div class="post-header-meta">
-      <span class="post-date font-mono" style="font-size:.8rem;color:var(--text-muted)">{{ .Date.Format "January 02, 2006" }}</span>
+      <span class="post-date font-mono" style="font-size:.8rem;color:var(--text-muted)">{{ .Date | time.Format ":date_long" }}</span>
       {{ with .Params.author }}
       <span style="color:var(--text-muted);font-size:.8rem">·</span>
       <span class="post-author-tag">{{ . }}</span>
       {{ end }}
       {{ with .Params.reading_time }}
       <span style="color:var(--text-muted);font-size:.8rem">·</span>
-      <span class="font-mono" style="font-size:.78rem;color:var(--text-muted)">{{ . }} min read</span>
+      <span class="font-mono" style="font-size:.78rem;color:var(--text-muted)">{{ . }} {{ i18n "min_read" }}</span>
       {{ else }}
       <span style="color:var(--text-muted);font-size:.8rem">·</span>
-      <span class="font-mono" style="font-size:.78rem;color:var(--text-muted)">{{ .ReadingTime }} min read</span>
+      <span class="font-mono" style="font-size:.78rem;color:var(--text-muted)">{{ .ReadingTime }} {{ i18n "min_read" }}</span>
       {{ end }}
     </div>
     <h1>{{ .Title }}</h1>
@@ -23,7 +23,7 @@
     {{ with .Params.tags }}
     <div class="post-header-tags">
       {{ range . }}
-      <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag">{{ . }}</a>
+      <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag">{{ . }}</a>
       {{ end }}
     </div>
     {{ end }}
@@ -40,7 +40,7 @@
   {{ $shareText := printf "%s %s" .Title .Permalink | urlquery }}
   <div class="post-actions-row">
     <div class="post-share" aria-label="Share this post">
-      <span class="post-share-label">Share:</span>
+      <span class="post-share-label">{{ i18n "share_label" }}</span>
       <a href="https://x.com/intent/tweet?url={{ $shareURL }}&text={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer">X ↗</a>
       <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
       <a href="https://bsky.app/intent/compose?text={{ $shareText }}" class="share-link" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
@@ -51,15 +51,19 @@
     {{ with .File }}
     {{ $sourcePath := printf "content/%s" (replaceRE "\\\\" "/" .Path) }}
     <div class="post-source-link-wrap">
-      <a href="https://github.com/thedotnetblog/blog/blob/main/{{ $sourcePath }}" class="post-source-link" target="_blank" rel="noopener noreferrer">View source code for this post on GitHub ↗</a>
+      <a href="https://github.com/thedotnetblog/blog/blob/main/{{ $sourcePath }}" class="post-source-link" target="_blank" rel="noopener noreferrer">{{ i18n "view_source" }}</a>
     </div>
     {{ end }}
   </div>
 
-  {{/* ── Author card ───────────────────────── */}}
+  {{/* ── Author card (cross-language) ──────── */}}
   {{ with .Params.author }}
   {{ $authorSlug := . | urlize }}
+  {{/* Try current language first, then fall back to default language */}}
   {{ $author := $.Site.GetPage (printf "/authors/%s" $authorSlug) }}
+  {{ if not $author }}
+    {{ $author = (index $.Sites 0).GetPage (printf "/authors/%s" $authorSlug) }}
+  {{ end }}
   {{ if $author }}
   <div class="post-author-card">
     {{ $avatarPath := $author.Params.avatar }}

@@ -3,6 +3,12 @@ title = "The .NET Blog"
 theme = "dotnet-minimal"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
+enableMissingTranslationPlaceholders = false
+paginate = 10
+enableRobotsTXT = true
+enableGitInfo = false
+summaryLength = 70
+buildFuture = true
 
 [languages]
   [languages.en]
@@ -41,11 +47,10 @@ defaultContentLanguageInSubdir = false
     languageCode = "ko"
     languageName = "한국어"
     weight = 9
-paginate = 10
-enableRobotsTXT = true
-enableGitInfo = false
-summaryLength = 70
-buildFuture = true
+  [languages.ru]
+    languageCode = "ru"
+    languageName = "Русский"
+    weight = 10
 
 [markup]
   [markup.highlight]
@@ -98,31 +103,38 @@ buildFuture = true
 
 [menus]
   [[menus.main]]
+    identifier = "posts"
     name = "posts"
     url = "/posts"
     weight = 1
   [[menus.main]]
+    identifier = "events"
     name = "events"
     url = "/events"
     weight = 2
   [[menus.main]]
+    identifier = "authors"
     name = "authors"
     url = "/authors"
     weight = 3
   [[menus.main]]
+    identifier = "tags"
     name = "tags"
     url = "/tags"
     weight = 4
 
   [[menus.footer]]
+    identifier = "posts"
     name = "posts"
     url = "/posts"
     weight = 1
   [[menus.footer]]
+    identifier = "events"
     name = "events"
     url = "/events"
     weight = 2
   [[menus.footer]]
+    identifier = "authors"
     name = "authors"
     url = "/authors"
     weight = 3

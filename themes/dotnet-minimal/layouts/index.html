@@ -4,18 +4,14 @@
   {{/* ── Hero ─────────────────────────────────── */}}
   <section class="hero">
     <div class="container">
-      <p class="hero-eyebrow">{{ .Site.Params.eyebrow | default "The .NET Community Blog" }}</p>
+      <p class="hero-eyebrow">{{ i18n "hero_eyebrow" | default (.Site.Params.eyebrow | default "The .NET Community Blog") }}</p>
       <h1>
-        {{ with .Site.Params.hero_title }}
-          {{ . | safeHTML }}
-        {{ else }}
-          Where <span class="accent">.NET developers</span><br/><span class="typewriter-line"><span id="typewriter"></span><span class="typewriter-cursor">|</span></span>
-        {{ end }}
+        {{ i18n "hero_title" | safeHTML }}<br/><span class="typewriter-line"><span id="typewriter" data-phrases="{{ i18n "typewriter_phrases" }}"></span><span class="typewriter-cursor">|</span></span>
       </h1>
-      <p class="hero-desc">{{ .Site.Params.hero_desc | default "Articles, tutorials and insights from the .NET community. Written by developers, for developers." }}</p>
+      <p class="hero-desc">{{ i18n "hero_desc" | default (.Site.Params.hero_desc | default "Articles, tutorials and insights from the .NET community. Written by developers, for developers.") }}</p>
       <div class="hero-actions">
-        <a href="{{ "/posts" | relURL }}" class="btn btn-primary">Read the blog →</a>
-        <a href="{{ "/authors" | relURL }}" class="btn btn-outline">Meet the authors</a>
+        <a href="{{ "/posts" | relLangURL }}" class="btn btn-primary">{{ i18n "hero_cta_blog" }}</a>
+        <a href="{{ "/authors" | relLangURL }}" class="btn btn-outline">{{ i18n "hero_cta_authors" }}</a>
       </div>
     </div>
   </section>
@@ -32,8 +28,8 @@
         {{/* ── 70% — Latest Posts ─────────────── */}}
         <div class="home-posts-col">
           <div class="section-header">
-            <span class="section-title">// latest posts</span>
-            <a href="{{ "/posts" | relURL }}" class="section-link">all posts →</a>
+            <span class="section-title">{{ i18n "section_latest_posts" }}</span>
+            <a href="{{ "/posts" | relLangURL }}" class="section-link">{{ i18n "section_all_posts" }}</a>
           </div>
           {{ if $posts }}
           <div class="posts-grid">
@@ -41,7 +37,7 @@
             <a href="{{ .RelPermalink }}" class="post-card">
               <div class="post-card-main">
                 <div class="post-meta">
-                  <span class="post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+                  <span class="post-date">{{ .Date | time.Format ":date_medium" }}</span>
                   {{ with .Params.author }}
                   <span class="post-author-tag">{{ . }}</span>
                   {{ end }}
@@ -68,8 +64,8 @@
         {{/* ── 30% — Events Timeline ───────────── */}}
         <div class="home-events-col">
           <div class="section-header">
-            <span class="section-title">// upcoming events</span>
-            <a href="{{ "/events" | relURL }}" class="section-link">all events →</a>
+            <span class="section-title">{{ i18n "section_upcoming_events" }}</span>
+            <a href="{{ "/events" | relLangURL }}" class="section-link">{{ i18n "section_all_events" }}</a>
           </div>
           {{ if $upcomingEvents }}
           <div class="home-timeline">
@@ -82,7 +78,7 @@
                   <span class="event-type-badge event-type-{{ . | lower | replaceRE "[^a-z]" "-" }}">{{ . }}</span>
                   {{ end }}
                 </div>
-                <p class="home-timeline-date">{{ .Date.Format "Jan 02, 2006" }}</p>
+                <p class="home-timeline-date">{{ .Date | time.Format ":date_medium" }}</p>
                 <p class="home-timeline-title">{{ .Title }}</p>
                 {{ with .Params.location }}
                 <p class="home-timeline-location">📍 {{ . }}</p>
@@ -92,7 +88,7 @@
             {{ end }}
           </div>
           {{ else }}
-          <p class="text-muted font-mono" style="font-size:.85rem">// no upcoming events.</p>
+          <p class="text-muted font-mono" style="font-size:.85rem">{{ i18n "no_events" }}</p>
           {{ end }}
         </div>
 
@@ -109,18 +105,8 @@
   var el = document.getElementById('typewriter');
   if (!el) return;
 
-  var phrases = [
-    'share what they build.',
-    'learn from each other.',
-    'ship faster with .NET 10.',
-    'love open source.',
-    'build cloud-native apps.',
-    'explore AI.',
-    'master Blazor and SignalR.',
-    'level up together.',
-    'write less boilerplate.',
-    'push the platform forward.',
-  ];
+  var phrasesAttr = el.getAttribute('data-phrases');
+  var phrases = phrasesAttr ? phrasesAttr.split('|') : ['share what they build.'];
 
   var phraseIndex = 0;
   var charIndex   = 0;

@@ -1,5 +1,6 @@
 ---
 title: "Emiliano Montesdeoca"
+id: "emiliano-montesdeoca"
 role: "Microsoft MVP & Team Lead Cloud Solutions"
 bio: |
   Emiliano is an Uruguayan-Spanish software developer, Microsoft MVP in Developer Technologies, and community advocate based in Tenerife, Canary Islands.

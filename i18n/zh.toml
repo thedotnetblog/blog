@@ -1,0 +1,131 @@
+[nav_posts]
+other = "文章"
+
+[nav_events]
+other = "活动"
+
+[nav_authors]
+other = "作者"
+
+[nav_tags]
+other = "标签"
+
+[hero_eyebrow]
+other = ".NET 社区博客"
+
+[hero_title]
+other = "<span class=\"accent\">.NET</span> 开发者在这里"
+
+[hero_desc]
+other = "深度分析、教程和社区故事 — 由开发者撰写，为开发者服务。"
+
+[typewriter_phrases]
+other = "分享他们的成果。|互相学习。|用 .NET 10 更快交付。|热爱开源。|构建云原生应用。|探索人工智能。|精通 Blazor 和 SignalR。|共同成长。|减少样板代码。|推动平台发展。"
+
+[hero_cta_blog]
+other = "阅读博客 →"
+
+[hero_cta_authors]
+other = "认识作者"
+
+[section_latest_posts]
+other = "// 最新文章"
+
+[section_all_posts]
+other = "查看全部 →"
+
+[section_upcoming_events]
+other = "// 即将到来的活动"
+
+[section_all_events]
+other = "查看全部活动 →"
+
+[no_events]
+other = "// 暂无即将到来的活动。"
+
+[posts_page_eyebrow]
+other = "// 文章"
+
+[posts_page_title]
+other = "博客"
+
+[no_posts]
+other = "// 还没有文章 — 请稍后再来。"
+
+[min_read]
+other = "分钟阅读"
+
+[share_label]
+other = "分享："
+
+[view_source]
+other = "在GitHub上查看此文章的源代码 ↗"
+
+[authors_page_eyebrow]
+other = "// 作者"
+
+[authors_page_title]
+other = "作者列表"
+
+[authors_page_desc]
+other = "The .NET Blog 背后的人们。"
+
+[posts_by]
+other = "// {{ .Name }}的文章"
+
+[posts_count]
+other = "{{ .Count }}篇文章"
+
+[posts_published]
+other = "已发布"
+
+[no_author_posts]
+other = "// 还没有发布的文章。"
+
+[view_author_source]
+other = "在GitHub上查看此作者页面的源代码 ↗"
+
+[events_page_eyebrow]
+other = "// 活动"
+
+[events_page_title]
+other = "社区活动"
+
+[events_page_desc]
+other = "会议、聚会、网络研讨会和发布 — 在一条时间线上。"
+
+[no_events_scheduled]
+other = "// 暂无计划活动。"
+
+[all_events_link]
+other = "← 所有活动"
+
+[view_event_source]
+other = "在GitHub上查看此活动的源代码 ↗"
+
+[tags_page_eyebrow]
+other = "// 标签"
+
+[tags_page_title]
+other = "所有标签"
+
+[tag_eyebrow]
+other = "// 标签"
+
+[all_tags_link]
+other = "← 所有标签"
+
+[footer_copy]
+other = "由开发者，为开发者"
+
+[translation_available]
+other = "这篇文章也有其他语言版本："
+
+[translation_notice]
+other = "这篇文章是自动翻译的。"
+
+[translation_original]
+other = "阅读原文"
+
+[language_label]
+other = "语言"

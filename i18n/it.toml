@@ -1,0 +1,132 @@
+[nav_posts]
+other = "articoli"
+
+[nav_events]
+other = "eventi"
+
+[nav_authors]
+other = "autori"
+
+[nav_tags]
+other = "tag"
+
+[hero_eyebrow]
+other = "Il Blog della Community .NET"
+
+[hero_title]
+other = "Dove gli sviluppatori <span class=\"accent\">.NET</span>"
+
+[hero_desc]
+other = "Approfondimenti, tutorial e storie dalla community — scritti da sviluppatori, per sviluppatori."
+
+[typewriter_phrases]
+other = "condividono ciò che costruiscono.|imparano gli uni dagli altri.|rilasciano più velocemente con .NET 10.|amano l'open source.|creano app cloud-native.|esplorano l'IA.|padroneggiano Blazor e SignalR.|crescono insieme.|scrivono meno codice ripetitivo.|fanno progredire la piattaforma."
+
+[hero_cta_blog]
+other = "Leggi il blog →"
+
+[hero_cta_authors]
+other = "Conosci gli autori"
+
+[section_latest_posts]
+other = "// ultimi articoli"
+
+[section_all_posts]
+other = "tutti gli articoli →"
+
+[section_upcoming_events]
+other = "// prossimi eventi"
+
+[section_all_events]
+other = "tutti gli eventi →"
+
+[no_events]
+other = "// nessun evento in programma."
+
+[posts_page_eyebrow]
+other = "// articoli"
+
+[posts_page_title]
+other = "Blog"
+
+[no_posts]
+other = "// nessun articolo ancora — torna presto."
+
+[min_read]
+other = "minuti di lettura"
+
+[share_label]
+other = "Condividi:"
+
+[view_source]
+other = "Vedi il codice sorgente di questo articolo su GitHub ↗"
+
+[authors_page_eyebrow]
+other = "// autori"
+
+[authors_page_title]
+other = "Gli Autori"
+
+[authors_page_desc]
+other = "Le persone dietro The .NET Blog."
+
+[posts_by]
+other = "// articoli di {{ .Name }}"
+
+[posts_count]
+one = "{{ .Count }} articolo"
+other = "{{ .Count }} articoli"
+
+[posts_published]
+other = "pubblicati"
+
+[no_author_posts]
+other = "// nessun articolo pubblicato ancora."
+
+[view_author_source]
+other = "Vedi il codice sorgente di questa pagina autore su GitHub ↗"
+
+[events_page_eyebrow]
+other = "// eventi"
+
+[events_page_title]
+other = "Eventi della Community"
+
+[events_page_desc]
+other = "Conferenze, meetup, webinar e rilasci — in un'unica timeline."
+
+[no_events_scheduled]
+other = "// nessun evento programmato."
+
+[all_events_link]
+other = "← Tutti gli eventi"
+
+[view_event_source]
+other = "Vedi il codice sorgente di questo evento su GitHub ↗"
+
+[tags_page_eyebrow]
+other = "// tag"
+
+[tags_page_title]
+other = "Tutti i Tag"
+
+[tag_eyebrow]
+other = "// tag"
+
+[all_tags_link]
+other = "← Tutti i tag"
+
+[footer_copy]
+other = "Da sviluppatori per sviluppatori"
+
+[translation_available]
+other = "Questo articolo è disponibile anche in:"
+
+[translation_notice]
+other = "Questo articolo è stato tradotto automaticamente."
+
+[translation_original]
+other = "Leggi l'originale"
+
+[language_label]
+other = "Lingua"

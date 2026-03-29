@@ -1,6 +1,6 @@
 {{- if .Translations -}}
 <div class="post-translations">
-  <span class="post-translations-label">This post is also available in:</span>
+  <span class="post-translations-label">{{ i18n "translation_available" }}</span>
   {{- $last := sub (len .Translations) 1 -}}
   {{- range $i, $t := .Translations -}}
   <a href="{{ $t.RelPermalink }}" class="translation-link">{{ $t.Language.LanguageName }}</a>

@@ -1,0 +1,141 @@
+# ── Navigation ──
+[nav_posts]
+other = "posts"
+
+[nav_events]
+other = "events"
+
+[nav_authors]
+other = "authors"
+
+[nav_tags]
+other = "tags"
+
+# ── Homepage ──
+[hero_eyebrow]
+other = "The .NET Community Blog"
+
+[hero_title]
+other = "Where <span class=\"accent\">.NET developers</span>"
+
+[hero_desc]
+other = "Deep dives, tutorials and community stories — written by developers, for developers."
+
+[typewriter_phrases]
+other = "share what they build.|learn from each other.|ship faster with .NET 10.|love open source.|build cloud-native apps.|explore AI.|master Blazor and SignalR.|level up together.|write less boilerplate.|push the platform forward."
+
+[hero_cta_blog]
+other = "Read the blog →"
+
+[hero_cta_authors]
+other = "Meet the authors"
+
+[section_latest_posts]
+other = "// latest posts"
+
+[section_all_posts]
+other = "all posts →"
+
+[section_upcoming_events]
+other = "// upcoming events"
+
+[section_all_events]
+other = "all events →"
+
+[no_events]
+other = "// no upcoming events."
+
+# ── Posts ──
+[posts_page_eyebrow]
+other = "// posts"
+
+[posts_page_title]
+other = "Blog"
+
+[no_posts]
+other = "// no posts yet — check back soon."
+
+[min_read]
+other = "minutes read"
+
+[share_label]
+other = "Share:"
+
+[view_source]
+other = "View source code for this post on GitHub ↗"
+
+# ── Authors ──
+[authors_page_eyebrow]
+other = "// authors"
+
+[authors_page_title]
+other = "Meet the Authors"
+
+[authors_page_desc]
+other = "The people behind The .NET Blog."
+
+[posts_by]
+other = "// posts by {{ .Name }}"
+
+[posts_count]
+one = "{{ .Count }} post"
+other = "{{ .Count }} posts"
+
+[posts_published]
+other = "published"
+
+[no_author_posts]
+other = "// no posts published yet."
+
+[view_author_source]
+other = "View source code for this author page on GitHub ↗"
+
+# ── Events ──
+[events_page_eyebrow]
+other = "// events"
+
+[events_page_title]
+other = "Community Events"
+
+[events_page_desc]
+other = "Conferences, meetups, webinars and releases — on one timeline."
+
+[no_events_scheduled]
+other = "// no events scheduled yet."
+
+[all_events_link]
+other = "← All events"
+
+[view_event_source]
+other = "View source code for this event on GitHub ↗"
+
+# ── Tags ──
+[tags_page_eyebrow]
+other = "// tags"
+
+[tags_page_title]
+other = "All Tags"
+
+[tag_eyebrow]
+other = "// tag"
+
+[all_tags_link]
+other = "← All tags"
+
+# ── Footer ──
+[footer_copy]
+other = "From developers to developers"
+
+# ── Translations ──
+[translation_available]
+other = "This post is also available in:"
+
+[translation_notice]
+other = "This post was automatically translated."
+
+[translation_original]
+other = "Read the original"
+
+# ── Language Selector ──
+[language_label]
+other = "Language"

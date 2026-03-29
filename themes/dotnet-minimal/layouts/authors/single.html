@@ -26,19 +26,28 @@
     </div>
   </div>
 
+  {{ partial "translations.html" . }}
+
   {{/* Author's posts */}}
   {{ $authorPosts := where .Site.RegularPages "Params.author" .Title }}
+  {{/* Fallback: also match against the default-language author title */}}
+  {{ if and (not $authorPosts) .Translations }}
+    {{ range .Translations }}
+      {{ $authorPosts = where $.Site.RegularPages "Params.author" .Title }}
+      {{ if $authorPosts }}{{ break }}{{ end }}
+    {{ end }}
+  {{ end }}
   {{ if $authorPosts }}
-  <div class="section-header">
-    <span class="section-title">// posts by {{ .Title }}</span>
-    <span class="text-muted font-mono" style="font-size:.8rem">{{ len $authorPosts }} post{{ if ne (len $authorPosts) 1 }}s{{ end }}</span>
+  <div class="section-header section-header--author-posts">
+    <span class="section-title">{{ i18n "posts_by" (dict "Name" .Title) }}</span>
+    <span class="text-muted font-mono" style="font-size:.8rem">{{ i18n "posts_count" (len $authorPosts) }}</span>
   </div>
   <div class="posts-grid">
     {{ range $authorPosts }}
     <a href="{{ .RelPermalink }}" class="post-card">
       <div class="post-card-main">
         <div class="post-meta">
-          <span class="post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+          <span class="post-date">{{ .Date | time.Format ":date_medium" }}</span>
         </div>
         <h2 class="post-card-title">{{ .Title }}</h2>
         {{ $excerpt := .Summary | plainify }}
@@ -55,7 +64,7 @@
     {{ end }}
   </div>
   {{ else }}
-  <p class="text-muted font-mono" style="padding:2rem 0">// no posts published yet.</p>
+  <p class="text-muted font-mono" style="padding:2rem 0">{{ i18n "no_author_posts" }}</p>
   {{ end }}
 
   {{ with .Content }}
@@ -67,7 +76,7 @@
   {{ $shareText := printf "%s %s" .Title .Permalink | urlquery }}
   <div class="post-actions-row">
     <div class="post-share" aria-label="Share this author page">
-      <span class="post-share-label">Share:</span>
+      <span class="post-share-label">{{ i18n "share_label" }}</span>
       <a href="https://x.com/intent/tweet?url={{ $shareURL }}&text={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer">X ↗</a>
       <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
       <a href="https://bsky.app/intent/compose?text={{ $shareText }}" class="share-link" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
@@ -78,7 +87,7 @@
     {{ with .File }}
     {{ $sourcePath := printf "content/%s" (replaceRE "\\\\" "/" .Path) }}
     <div class="post-source-link-wrap">
-      <a href="https://github.com/thedotnetblog/blog/blob/main/{{ $sourcePath }}" class="post-source-link" target="_blank" rel="noopener noreferrer">View source code for this author page on GitHub ↗</a>
+      <a href="https://github.com/thedotnetblog/blog/blob/main/{{ $sourcePath }}" class="post-source-link" target="_blank" rel="noopener noreferrer">{{ i18n "view_author_source" }}</a>
     </div>
     {{ end }}
   </div>

@@ -2,8 +2,8 @@
 <div class="container">
 
   <div class="page-header">
-    <p class="eyebrow">// posts</p>
-    <h1>Blog</h1>
+    <p class="eyebrow">{{ i18n "posts_page_eyebrow" }}</p>
+    <h1>{{ i18n "posts_page_title" }}</h1>
     {{ with .Description }}<p style="color:var(--text-dim);margin-top:.6rem">{{ . }}</p>{{ end }}
   </div>
 
@@ -14,7 +14,7 @@
     <a href="{{ .RelPermalink }}" class="post-card">
       <div class="post-card-main">
         <div class="post-meta">
-          <span class="post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+          <span class="post-date">{{ .Date | time.Format ":date_medium" }}</span>
           {{ with .Params.author }}
           <span class="post-author-tag">{{ . }}</span>
           {{ end }}
@@ -39,7 +39,7 @@
   {{- partial "pagination.html" . -}}
 
   {{ else }}
-  <p class="text-muted font-mono">// no posts yet — check back soon.</p>
+  <p class="text-muted font-mono">{{ i18n "no_posts" }}</p>
   {{ end }}
 
 </div>

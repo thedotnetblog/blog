@@ -1,0 +1,132 @@
+[nav_posts]
+other = "статьи"
+
+[nav_events]
+other = "события"
+
+[nav_authors]
+other = "авторы"
+
+[nav_tags]
+other = "теги"
+
+[hero_eyebrow]
+other = "Блог сообщества .NET"
+
+[hero_title]
+other = "Где разработчики <span class=\"accent\">.NET</span>"
+
+[hero_desc]
+other = "Глубокий анализ, руководства и истории сообщества — написано разработчиками для разработчиков."
+
+[typewriter_phrases]
+other = "делятся тем, что создают.|учатся друг у друга.|выпускают быстрее с .NET 10.|любят открытый код.|создают облачные приложения.|исследуют ИИ.|осваивают Blazor и SignalR.|растут вместе.|пишут меньше шаблонного кода.|продвигают платформу вперёд."
+
+[hero_cta_blog]
+other = "Читать блог →"
+
+[hero_cta_authors]
+other = "Познакомиться с авторами"
+
+[section_latest_posts]
+other = "// последние статьи"
+
+[section_all_posts]
+other = "все статьи →"
+
+[section_upcoming_events]
+other = "// предстоящие события"
+
+[section_all_events]
+other = "все события →"
+
+[no_events]
+other = "// предстоящих событий нет."
+
+[posts_page_eyebrow]
+other = "// статьи"
+
+[posts_page_title]
+other = "Блог"
+
+[no_posts]
+other = "// пока нет статей — загляните позже."
+
+[min_read]
+other = "минут чтения"
+
+[share_label]
+other = "Поделиться:"
+
+[view_source]
+other = "Просмотреть исходный код этой статьи на GitHub ↗"
+
+[authors_page_eyebrow]
+other = "// авторы"
+
+[authors_page_title]
+other = "Авторы"
+
+[authors_page_desc]
+other = "Люди, стоящие за The .NET Blog."
+
+[posts_by]
+other = "// статьи {{ .Name }}"
+
+[posts_count]
+one = "{{ .Count }} статья"
+other = "{{ .Count }} статей"
+
+[posts_published]
+other = "опубликовано"
+
+[no_author_posts]
+other = "// пока нет опубликованных статей."
+
+[view_author_source]
+other = "Просмотреть исходный код страницы автора на GitHub ↗"
+
+[events_page_eyebrow]
+other = "// события"
+
+[events_page_title]
+other = "События сообщества"
+
+[events_page_desc]
+other = "Конференции, митапы, вебинары и релизы — на одной временной шкале."
+
+[no_events_scheduled]
+other = "// запланированных событий нет."
+
+[all_events_link]
+other = "← Все события"
+
+[view_event_source]
+other = "Просмотреть исходный код этого события на GitHub ↗"
+
+[tags_page_eyebrow]
+other = "// теги"
+
+[tags_page_title]
+other = "Все теги"
+
+[tag_eyebrow]
+other = "// тег"
+
+[all_tags_link]
+other = "← Все теги"
+
+[footer_copy]
+other = "От разработчиков для разработчиков"
+
+[translation_available]
+other = "Эта статья также доступна на:"
+
+[translation_notice]
+other = "Эта статья была переведена автоматически."
+
+[translation_original]
+other = "Читать оригинал"
+
+[language_label]
+other = "Язык"

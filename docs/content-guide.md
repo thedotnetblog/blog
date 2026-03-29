@@ -4,13 +4,67 @@ Hugo archetypes scaffold new content files with the correct front matter. Always
 
 ---
 
-## Writing a Blog Post
+## Content Structure
 
-```bash
-hugo new posts/my-post.md
+The blog uses Hugo page bundles organized by author:
+
+```
+content/
+  posts/
+    emiliano-montesdeoca/
+      my-post-slug/
+        index.md          # English (default)
+        index.es.md       # Spanish translation
+        index.de.md       # German translation
+        index.fr.md       # French
+        index.pt.md       # Portuguese
+        index.it.md       # Italian
+        index.ja.md       # Japanese
+        index.zh.md       # Chinese (Simplified)
+        index.ko.md       # Korean
+        index.ru.md       # Russian
+  authors/
+    emiliano-montesdeoca/
+      index.md          # English (default)
+      index.es.md       # Spanish translation
+      index.de.md       # German translation
+      index.fr.md       # French
+      ...
+  events/
+    my-event.md
 ```
 
-Creates `content/posts/my-post.md` with this front matter:
+Posts live in **leaf bundles** under `content/posts/{author-id}/{post-slug}/`. The URL becomes `/posts/{author-id}/{post-slug}/`.
+
+---
+
+## Supported Languages
+
+| Code | Language | Hugo weight |
+|------|----------|-------------|
+| en | English (default) | 1 |
+| es | Spanish | 2 |
+| de | German | 3 |
+| fr | French | 4 |
+| pt | Portuguese | 5 |
+| it | Italian | 6 |
+| ja | Japanese | 7 |
+| zh | Chinese (Simplified) | 8 |
+| ko | Korean | 9 |
+| ru | Russian | 10 |
+
+---
+
+## Writing a Blog Post
+
+Create a post directory and English file:
+
+```bash
+mkdir -p content/posts/emiliano-montesdeoca/my-post
+hugo new posts/emiliano-montesdeoca/my-post/index.md
+```
+
+Creates `content/posts/emiliano-montesdeoca/my-post/index.md` with this front matter:
 
 ```yaml
 ---
@@ -25,6 +79,20 @@ draft: true
 
 <!-- Write your post here -->
 ```
+
+### Translation Files
+
+After writing the English post, create translations by copying `index.md` and renaming:
+
+```
+index.es.md   index.de.md   index.fr.md   index.pt.md
+index.it.md   index.ja.md   index.zh.md   index.ko.md   index.ru.md
+```
+
+Translation rules:
+- **Translate**: title, description, body text, section headings
+- **Preserve unchanged**: code blocks, URLs, image paths, `date`, `author`, `tags`
+- **Adapt tone**: maintain the author's voice naturally in each language
 
 ### Front Matter Reference
 
@@ -77,6 +145,7 @@ Creates `content/authors/jane-doe.md`:
 ```yaml
 ---
 title: "Jane Doe"
+id: "jane-doe"
 role: ""
 bio: ""
 avatar: ""
@@ -93,10 +162,26 @@ socials:
 | Field | Required | Description |
 |-------|----------|-------------|
 | `title` | ✅ | Display name — posts reference this value in their `author` field |
+| `id` | ✅ | Unique identifier — matches the author directory name under `content/posts/` |
 | `role` | Recommended | Role/title shown under the name (e.g., `"Senior .NET Engineer"`) |
 | `bio` | Recommended | Short biography shown on the author profile page and in author cards |
 | `avatar` | Recommended | Path to the avatar image (e.g., `"/img/authors/jane.png"`) |
 | `socials` | Optional | List of social links, each with `platform` and `url` |
+
+### Localizing an Author
+
+Authors use page bundles just like posts. Translation files go inside the author's directory:
+
+```
+content/authors/jane-doe/
+  index.md        # English
+  index.es.md     # Spanish
+  index.de.md     # German
+  index.fr.md     # French
+  ...
+```
+
+Translate `role` and `bio`. Keep `title`, `id`, `avatar`, and `socials` unchanged.
 
 ### Avatar Images
 
@@ -207,6 +292,7 @@ draft: false
 ```yaml
 ---
 title: "Emiliano Montesdeoca"
+id: "emiliano-montesdeoca"
 role: "Senior .NET Engineer"
 bio: "Emiliano is a..."
 avatar: "/img/authors/emiliano.png"

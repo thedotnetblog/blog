@@ -1,0 +1,131 @@
+[nav_posts]
+other = "글"
+
+[nav_events]
+other = "이벤트"
+
+[nav_authors]
+other = "저자"
+
+[nav_tags]
+other = "태그"
+
+[hero_eyebrow]
+other = ".NET 커뮤니티 블로그"
+
+[hero_title]
+other = "<span class=\"accent\">.NET</span> 개발자들이"
+
+[hero_desc]
+other = "심층 분석, 튜토리얼, 커뮤니티 이야기 — 개발자가 쓰고, 개발자를 위해."
+
+[typewriter_phrases]
+other = "만든 것을 공유합니다.|서로에게 배웁니다.|.NET 10으로 더 빠르게 배포합니다.|오픈 소스를 사랑합니다.|클라우드 네이티브 앱을 만듭니다.|AI를 탐구합니다.|Blazor와 SignalR을 마스터합니다.|함께 성장합니다.|반복 코드를 줄입니다.|플랫폼을 발전시킵니다."
+
+[hero_cta_blog]
+other = "블로그 읽기 →"
+
+[hero_cta_authors]
+other = "저자 소개"
+
+[section_latest_posts]
+other = "// 최신 글"
+
+[section_all_posts]
+other = "모든 글 →"
+
+[section_upcoming_events]
+other = "// 다가오는 이벤트"
+
+[section_all_events]
+other = "모든 이벤트 →"
+
+[no_events]
+other = "// 예정된 이벤트가 없습니다."
+
+[posts_page_eyebrow]
+other = "// 글"
+
+[posts_page_title]
+other = "블로그"
+
+[no_posts]
+other = "// 아직 글이 없습니다 — 곧 돌아와 주세요."
+
+[min_read]
+other = "분 소요"
+
+[share_label]
+other = "공유:"
+
+[view_source]
+other = "이 글의 소스 코드를 GitHub에서 보기 ↗"
+
+[authors_page_eyebrow]
+other = "// 저자"
+
+[authors_page_title]
+other = "저자 소개"
+
+[authors_page_desc]
+other = "The .NET Blog를 만드는 사람들."
+
+[posts_by]
+other = "// {{ .Name }}의 글"
+
+[posts_count]
+other = "{{ .Count }}개의 글"
+
+[posts_published]
+other = "게시됨"
+
+[no_author_posts]
+other = "// 아직 게시된 글이 없습니다."
+
+[view_author_source]
+other = "이 저자 페이지의 소스 코드를 GitHub에서 보기 ↗"
+
+[events_page_eyebrow]
+other = "// 이벤트"
+
+[events_page_title]
+other = "커뮤니티 이벤트"
+
+[events_page_desc]
+other = "컨퍼런스, 밋업, 웨비나, 출시 — 하나의 타임라인에서."
+
+[no_events_scheduled]
+other = "// 예정된 이벤트가 없습니다."
+
+[all_events_link]
+other = "← 모든 이벤트"
+
+[view_event_source]
+other = "이 이벤트의 소스 코드를 GitHub에서 보기 ↗"
+
+[tags_page_eyebrow]
+other = "// 태그"
+
+[tags_page_title]
+other = "모든 태그"
+
+[tag_eyebrow]
+other = "// 태그"
+
+[all_tags_link]
+other = "← 모든 태그"
+
+[footer_copy]
+other = "개발자에서 개발자로"
+
+[translation_available]
+other = "이 글은 다른 언어로도 제공됩니다:"
+
+[translation_notice]
+other = "이 글은 자동 번역되었습니다."
+
+[translation_original]
+other = "원문 읽기"
+
+[language_label]
+other = "언어"
