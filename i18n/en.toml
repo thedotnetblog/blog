@@ -45,6 +45,9 @@ other = "all events →"
 [no_events]
 other = "// no upcoming events."
 
+[load_more_posts]
+other = "Load more posts ↓"
+
 # ── Posts ──
 [posts_page_eyebrow]
 other = "// posts"

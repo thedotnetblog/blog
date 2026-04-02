@@ -58,6 +58,9 @@ other = "Minuten Lesezeit"
 [share_label]
 other = "Teilen:"
 
+[load_more_posts]
+other = "Mehr Beiträge laden ↓"
+
 [view_source]
 other = "Quellcode dieses Beitrags auf GitHub ansehen ↗"
 

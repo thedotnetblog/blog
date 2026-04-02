@@ -58,6 +58,9 @@ other = "분 소요"
 [share_label]
 other = "공유:"
 
+[load_more_posts]
+other = "더 많은 글 보기 ↓"
+
 [view_source]
 other = "이 글의 소스 코드를 GitHub에서 보기 ↗"
 

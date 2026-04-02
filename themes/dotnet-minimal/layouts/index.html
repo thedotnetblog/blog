@@ -18,7 +18,7 @@
 
   {{/* ── Posts + Events Split ─────────────────── */}}
   {{ $posts := where .Site.RegularPages "Section" "posts" }}
-  {{ $posts = $posts | first 6 }}
+  {{ $allPosts := $posts | first 30 }}
   {{ $upcomingEvents := where .Site.RegularPages "Section" "events" }}
   {{ $upcomingEvents = sort $upcomingEvents "Date" }}
   <section style="padding: 3.5rem 0 3.5rem;">
@@ -31,22 +31,22 @@
             <span class="section-title">{{ i18n "section_latest_posts" }}</span>
             <a href="{{ "/posts" | relLangURL }}" class="section-link">{{ i18n "section_all_posts" }}</a>
           </div>
-          {{ if $posts }}
-          <div class="posts-grid">
-            {{ range $posts }}
-            <a href="{{ .RelPermalink }}" class="post-card">
+          {{ if $allPosts }}
+          <div class="posts-grid" id="home-posts-grid">
+            {{ range $i, $p := $allPosts }}
+            <a href="{{ $p.RelPermalink }}" class="post-card{{ if ge $i 6 }} post-card--hidden{{ end }}">
               <div class="post-card-main">
                 <div class="post-meta">
-                  <span class="post-date">{{ .Date | time.Format ":date_medium" }}</span>
-                  {{ with .Params.author }}
+                  <span class="post-date">{{ $p.Date | time.Format ":date_medium" }}</span>
+                  {{ with $p.Params.author }}
                   <span class="post-author-tag">{{ . }}</span>
                   {{ end }}
                 </div>
-                <h2 class="post-card-title">{{ .Title }}</h2>
-                {{ $excerpt := .Summary | plainify }}
-                {{ with .Params.description }}{{ $excerpt = . | plainify }}{{ end }}
+                <h2 class="post-card-title">{{ $p.Title }}</h2>
+                {{ $excerpt := $p.Summary | plainify }}
+                {{ with $p.Params.description }}{{ $excerpt = . | plainify }}{{ end }}
                 <p class="post-card-excerpt">{{ $excerpt | truncate 280 }}</p>
-                {{ with .Params.tags }}
+                {{ with $p.Params.tags }}
                 <div class="post-card-tags">
                   {{ range first 4 . }}
                   <span class="tag">{{ . }}</span>
@@ -58,6 +58,11 @@
             </a>
             {{ end }}
           </div>
+          {{ if gt (len $allPosts) 6 }}
+          <div class="load-more-wrap" id="load-more-wrap">
+            <button class="btn btn-outline load-more-btn" id="load-more-btn">{{ i18n "load_more_posts" | default "Load more posts ↓" }}</button>
+          </div>
+          {{ end }}
           {{ end }}
         </div>
 
@@ -144,6 +149,26 @@
   }
 
   setTimeout(tick, 600);
+})();
+
+/* ── Load More Posts ─────────────────────────── */
+(function () {
+  var btn = document.getElementById('load-more-btn');
+  var wrap = document.getElementById('load-more-wrap');
+  if (!btn || !wrap) return;
+
+  var BATCH = 6;
+
+  btn.addEventListener('click', function () {
+    var hidden = document.querySelectorAll('#home-posts-grid .post-card--hidden');
+    var count = Math.min(BATCH, hidden.length);
+    for (var i = 0; i < count; i++) {
+      hidden[i].classList.remove('post-card--hidden');
+    }
+    if (hidden.length <= BATCH) {
+      wrap.style.display = 'none';
+    }
+  });
 })();
 </script>
 {{ end }}

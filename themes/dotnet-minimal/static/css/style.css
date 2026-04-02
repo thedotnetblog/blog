@@ -646,6 +646,20 @@ hr {
   transform: translateX(3px);
 }
 
+/* ── Load More ───────────────────────────────── */
+.post-card--hidden {
+  display: none;
+}
+
+.load-more-wrap {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.load-more-btn {
+  min-width: 200px;
+}
+
 /* ── Single Post Page ────────────────────────── */
 .post-header {
   padding: 0rem 0 2rem;

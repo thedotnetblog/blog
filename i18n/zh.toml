@@ -58,6 +58,9 @@ other = "分钟阅读"
 [share_label]
 other = "分享："
 
+[load_more_posts]
+other = "加载更多文章 ↓"
+
 [view_source]
 other = "在GitHub上查看此文章的源代码 ↗"
 

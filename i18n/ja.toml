@@ -58,6 +58,9 @@ other = "分で読めます"
 [share_label]
 other = "共有："
 
+[load_more_posts]
+other = "もっと記事を読む ↓"
+
 [view_source]
 other = "この記事のソースコードをGitHubで見る ↗"
 
