@@ -11,7 +11,7 @@
   {{ if $posts }}
   <div class="posts-grid">
     {{ range $posts }}
-    <a href="{{ .RelPermalink }}" class="post-card">
+    <a href="{{ .RelPermalink }}" class="post-card" data-umami-event="post-card-click" data-umami-event-title="{{ .Title }}">
       <div class="post-card-main">
         <div class="post-meta">
           <span class="post-date">{{ .Date | time.Format ":date_medium" }}</span>

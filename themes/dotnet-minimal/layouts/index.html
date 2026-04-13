@@ -10,8 +10,8 @@
       </h1>
       <p class="hero-desc">{{ i18n "hero_desc" | default (.Site.Params.hero_desc | default "Articles, tutorials and insights from the .NET community. Written by developers, for developers.") }}</p>
       <div class="hero-actions">
-        <a href="{{ "/posts" | relLangURL }}" class="btn btn-primary">{{ i18n "hero_cta_blog" }}</a>
-        <a href="{{ "/authors" | relLangURL }}" class="btn btn-outline">{{ i18n "hero_cta_authors" }}</a>
+        <a href="{{ "/posts" | relLangURL }}" class="btn btn-primary" data-umami-event="hero-cta-blog">{{ i18n "hero_cta_blog" }}</a>
+        <a href="{{ "/authors" | relLangURL }}" class="btn btn-outline" data-umami-event="hero-cta-authors">{{ i18n "hero_cta_authors" }}</a>
       </div>
     </div>
   </section>
@@ -29,12 +29,12 @@
         <div class="home-posts-col">
           <div class="section-header">
             <span class="section-title">{{ i18n "section_latest_posts" }}</span>
-            <a href="{{ "/posts" | relLangURL }}" class="section-link">{{ i18n "section_all_posts" }}</a>
+            <a href="{{ "/posts" | relLangURL }}" class="section-link" data-umami-event="home-all-posts">{{ i18n "section_all_posts" }}</a>
           </div>
           {{ if $allPosts }}
           <div class="posts-grid" id="home-posts-grid">
             {{ range $i, $p := $allPosts }}
-            <a href="{{ $p.RelPermalink }}" class="post-card{{ if ge $i 6 }} post-card--hidden{{ end }}">
+            <a href="{{ $p.RelPermalink }}" class="post-card{{ if ge $i 6 }} post-card--hidden{{ end }}" data-umami-event="home-post-click" data-umami-event-title="{{ $p.Title }}">
               <div class="post-card-main">
                 <div class="post-meta">
                   <span class="post-date">{{ $p.Date | time.Format ":date_medium" }}</span>
@@ -60,7 +60,7 @@
           </div>
           {{ if gt (len $allPosts) 6 }}
           <div class="load-more-wrap" id="load-more-wrap">
-            <button class="btn btn-outline load-more-btn" id="load-more-btn">{{ i18n "load_more_posts" | default "Load more posts ↓" }}</button>
+            <button class="btn btn-outline load-more-btn" id="load-more-btn" data-umami-event="home-load-more">{{ i18n "load_more_posts" | default "Load more posts ↓" }}</button>
           </div>
           {{ end }}
           {{ end }}
@@ -70,14 +70,14 @@
         <div class="home-events-col">
           <div class="section-header">
             <span class="section-title">{{ i18n "section_upcoming_events" }}</span>
-            <a href="{{ "/events" | relLangURL }}" class="section-link">{{ i18n "section_all_events" }}</a>
+            <a href="{{ "/events" | relLangURL }}" class="section-link" data-umami-event="home-all-events">{{ i18n "section_all_events" }}</a>
           </div>
           {{ if $upcomingEvents }}
           <div class="home-timeline">
             {{ range $upcomingEvents }}
             {{ $featured := .Params.featured | default false }}
             <div class="home-timeline-item{{ if $featured }} home-timeline-item--featured{{ end }}">
-              <a href="{{ .RelPermalink }}" class="home-timeline-card">
+              <a href="{{ .RelPermalink }}" class="home-timeline-card" data-umami-event="home-event-click" data-umami-event-title="{{ .Title }}">
                 <div>
                   {{ with .Params.event_type }}
                   <span class="event-type-badge event-type-{{ . | lower | replaceRE "[^a-z]" "-" }}">{{ . }}</span>

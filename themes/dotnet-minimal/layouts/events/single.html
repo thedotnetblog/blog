@@ -17,7 +17,7 @@
     {{ with .Params.description }}<p class="post-header-desc">{{ . }}</p>{{ end }}
     {{ with .Params.tags }}
     <div class="post-header-tags">
-      {{ range . }}<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag">{{ . }}</a>{{ end }}
+      {{ range . }}<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag" data-umami-event="event-tag-click" data-umami-event-tag="{{ . }}">{{ . }}</a>{{ end }}
     </div>
     {{ end }}
 
@@ -34,23 +34,23 @@
   <div class="post-actions-row">
     <div class="post-share" aria-label="Share this event">
       <span class="post-share-label">{{ i18n "share_label" }}</span>
-      <a href="https://x.com/intent/tweet?url={{ $shareURL }}&text={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer">X ↗</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-      <a href="https://bsky.app/intent/compose?text={{ $shareText }}" class="share-link" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
-      <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
-      <a href="https://www.reddit.com/submit?url={{ $shareURL }}&title={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer">Reddit ↗</a>
+      <a href="https://x.com/intent/tweet?url={{ $shareURL }}&text={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer" data-umami-event="event-share" data-umami-event-platform="x">X ↗</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer" data-umami-event="event-share" data-umami-event-platform="linkedin">LinkedIn ↗</a>
+      <a href="https://bsky.app/intent/compose?text={{ $shareText }}" class="share-link" target="_blank" rel="noopener noreferrer" data-umami-event="event-share" data-umami-event-platform="bluesky">Bluesky ↗</a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer" data-umami-event="event-share" data-umami-event-platform="facebook">Facebook ↗</a>
+      <a href="https://www.reddit.com/submit?url={{ $shareURL }}&title={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer" data-umami-event="event-share" data-umami-event-platform="reddit">Reddit ↗</a>
     </div>
 
     {{ with .File }}
     {{ $sourcePath := printf "content/%s" (replaceRE "\\\\" "/" .Path) }}
     <div class="post-source-link-wrap">
-      <a href="https://github.com/thedotnetblog/blog/blob/main/{{ $sourcePath }}" class="post-source-link" target="_blank" rel="noopener noreferrer">{{ i18n "view_event_source" }}</a>
+      <a href="https://github.com/thedotnetblog/blog/blob/main/{{ $sourcePath }}" class="post-source-link" target="_blank" rel="noopener noreferrer" data-umami-event="event-view-source">{{ i18n "view_event_source" }}</a>
     </div>
     {{ end }}
   </div>
 
   <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
-    <a href="{{ "/events" | relLangURL }}" class="btn btn-outline">{{ i18n "all_events_link" }}</a>
+    <a href="{{ "/events" | relLangURL }}" class="btn btn-outline" data-umami-event="event-all-events">{{ i18n "all_events_link" }}</a>
   </div>
 
 </div>
