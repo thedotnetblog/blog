@@ -92,6 +92,12 @@ buildFuture = true
   hero_title = "Where <span class=\"accent\">.NET developers</span><br/><span class=\"typewriter-line\"><span id=\"typewriter\"></span><span class=\"typewriter-cursor\">|</span></span>"
   hero_desc = "Deep dives, tutorials and community stories — written by developers, for developers."
 
+  # Analytics (Umami)
+  [params.umami]
+    enabled = true
+    websiteId = "0834ea36-1ac0-457f-9953-04b28fe8df8f"
+    src = "https://analytics.emilianomontesdeoca.com/script.js"
+
   # SEO & Social
   defaultImage = "/img/og-default.png"
   logo = "/img/og-default.png"

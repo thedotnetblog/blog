@@ -1,17 +1,17 @@
 {{ if gt .Paginator.TotalPages 1 }}
 <nav class="pagination">
   {{ if .Paginator.HasPrev }}
-  <a href="{{ .Paginator.Prev.URL }}">← prev</a>
+  <a href="{{ .Paginator.Prev.URL }}" data-umami-event="pagination-prev">← prev</a>
   {{ end }}
   {{ range .Paginator.Pagers }}
   {{ if eq . $.Paginator }}
   <span class="active">{{ .PageNumber }}</span>
   {{ else }}
-  <a href="{{ .URL }}">{{ .PageNumber }}</a>
+  <a href="{{ .URL }}" data-umami-event="pagination-page" data-umami-event-page="{{ .PageNumber }}">{{ .PageNumber }}</a>
   {{ end }}
   {{ end }}
   {{ if .Paginator.HasNext }}
-  <a href="{{ .Paginator.Next.URL }}">next →</a>
+  <a href="{{ .Paginator.Next.URL }}" data-umami-event="pagination-next">next →</a>
   {{ end }}
 </nav>
 {{ end }}

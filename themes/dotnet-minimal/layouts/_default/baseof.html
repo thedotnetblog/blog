@@ -33,6 +33,8 @@
   <!-- LLM discoverability -->
   <link rel="alternate" type="text/plain" href="{{ "llms.txt" | absURL }}" title="LLM-readable summary" />
 
+  {{- partial "umami.html" . -}}
+
   {{ hugo.Generator }}
 </head>
 <body class="site-wrapper">
