@@ -12,7 +12,7 @@
   <div class="authors-grid">
     {{ range $authors }}
     {{ $authorPosts := where $.Site.RegularPages "Params.author" .Title }}
-    <a href="{{ .RelPermalink }}" style="text-decoration:none">
+    <a href="{{ .RelPermalink }}" style="text-decoration:none" data-umami-event="author-card-click" data-umami-event-author="{{ .Title }}">
       <div class="author-card">
         <div class="author-card-top">
           {{ $avatarPath := .Params.avatar }}

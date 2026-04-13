@@ -12,7 +12,7 @@
   {{ if .Pages }}
   <div class="posts-grid">
     {{ range .Pages }}
-    <a href="{{ .RelPermalink }}" class="post-card">
+    <a href="{{ .RelPermalink }}" class="post-card" data-umami-event="tagged-post-click" data-umami-event-title="{{ .Title }}">
       <div class="post-card-main">
         <div class="post-meta">
           <span class="post-date">{{ .Date | time.Format ":date_medium" }}</span>
@@ -30,7 +30,7 @@
   {{ end }}
 
   <div style="margin-top:2.5rem">
-    <a href="{{ "/tags" | relLangURL }}" class="btn btn-outline">{{ i18n "all_tags_link" }}</a>
+    <a href="{{ "/tags" | relLangURL }}" class="btn btn-outline" data-umami-event="all-tags-link">{{ i18n "all_tags_link" }}</a>
   </div>
 
 </div>

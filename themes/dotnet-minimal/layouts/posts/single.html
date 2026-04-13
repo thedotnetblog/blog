@@ -6,7 +6,7 @@
       <span class="post-date font-mono" style="font-size:.8rem;color:var(--text-muted)">{{ .Date | time.Format ":date_long" }}</span>
       {{ with .Params.author }}
       <span style="color:var(--text-muted);font-size:.8rem">·</span>
-      <a href="{{ "/authors/" | relLangURL }}{{ . | urlize }}" class="post-author-tag">{{ . }}</a>
+      <a href="{{ "/authors/" | relLangURL }}{{ . | urlize }}" class="post-author-tag" data-umami-event="post-author-click">{{ . }}</a>
       {{ end }}
       {{ with .Params.reading_time }}
       <span style="color:var(--text-muted);font-size:.8rem">·</span>
@@ -23,7 +23,7 @@
     {{ with .Params.tags }}
     <div class="post-header-tags">
       {{ range . }}
-      <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag">{{ . }}</a>
+      <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag" data-umami-event="post-tag-click" data-umami-event-tag="{{ . }}">{{ . }}</a>
       {{ end }}
     </div>
     {{ end }}
@@ -41,17 +41,17 @@
   <div class="post-actions-row">
     <div class="post-share" aria-label="Share this post">
       <span class="post-share-label">{{ i18n "share_label" }}</span>
-      <a href="https://x.com/intent/tweet?url={{ $shareURL }}&text={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer">X ↗</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-      <a href="https://bsky.app/intent/compose?text={{ $shareText }}" class="share-link" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
-      <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
-      <a href="https://www.reddit.com/submit?url={{ $shareURL }}&title={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer">Reddit ↗</a>
+      <a href="https://x.com/intent/tweet?url={{ $shareURL }}&text={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer" data-umami-event="post-share" data-umami-event-platform="x">X ↗</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer" data-umami-event="post-share" data-umami-event-platform="linkedin">LinkedIn ↗</a>
+      <a href="https://bsky.app/intent/compose?text={{ $shareText }}" class="share-link" target="_blank" rel="noopener noreferrer" data-umami-event="post-share" data-umami-event-platform="bluesky">Bluesky ↗</a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer" data-umami-event="post-share" data-umami-event-platform="facebook">Facebook ↗</a>
+      <a href="https://www.reddit.com/submit?url={{ $shareURL }}&title={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer" data-umami-event="post-share" data-umami-event-platform="reddit">Reddit ↗</a>
     </div>
 
     {{ with .File }}
     {{ $sourcePath := printf "content/%s" (replaceRE "\\\\" "/" .Path) }}
     <div class="post-source-link-wrap">
-      <a href="https://github.com/thedotnetblog/blog/blob/main/{{ $sourcePath }}" class="post-source-link" target="_blank" rel="noopener noreferrer">{{ i18n "view_source" }}</a>
+      <a href="https://github.com/thedotnetblog/blog/blob/main/{{ $sourcePath }}" class="post-source-link" target="_blank" rel="noopener noreferrer" data-umami-event="post-view-source">{{ i18n "view_source" }}</a>
     </div>
     {{ end }}
   </div>
@@ -75,14 +75,14 @@
     <div class="post-author-info">
       <div class="author-name-row">
         <div class="author-name">{{ $author.Title }}</div>
-        <a href="{{ $author.RelPermalink }}" class="author-name-link" aria-label="Go to author page">↗</a>
+        <a href="{{ $author.RelPermalink }}" class="author-name-link" aria-label="Go to author page" data-umami-event="post-author-card-click">↗</a>
       </div>
       {{ with $author.Params.role }}<p class="author-role">{{ . }}</p>{{ end }}
       {{ with $author.Params.bio }}<p class="author-bio">{{ . }}</p>{{ end }}
       {{ with $author.Params.socials }}
       <div class="post-author-socials">
         {{ range . }}
-        <a href="{{ .url }}" class="social-link" target="_blank" rel="noopener noreferrer">{{ .platform }} ↗</a>
+        <a href="{{ .url }}" class="social-link" target="_blank" rel="noopener noreferrer" data-umami-event="post-author-social" data-umami-event-platform="{{ .platform }}">{{ .platform }} ↗</a>
         {{ end }}
       </div>
       {{ end }}
@@ -94,11 +94,11 @@
   {{/* ── Navigation ───────────────────────── */}}
   <div style="display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
     {{ with .PrevInSection }}
-    <a href="{{ .RelPermalink }}" class="btn btn-outline">← {{ .Title }}</a>
+    <a href="{{ .RelPermalink }}" class="btn btn-outline" data-umami-event="post-nav-prev">← {{ .Title }}</a>
     {{ end }}
     <div style="flex:1"></div>
     {{ with .NextInSection }}
-    <a href="{{ .RelPermalink }}" class="btn btn-outline">{{ .Title }} →</a>
+    <a href="{{ .RelPermalink }}" class="btn btn-outline" data-umami-event="post-nav-next">{{ .Title }} →</a>
     {{ end }}
   </div>
 

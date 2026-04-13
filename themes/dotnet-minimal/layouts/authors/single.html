@@ -16,7 +16,7 @@
         {{ with .Params.socials }}
         <div class="author-hero-socials">
           {{ range . }}
-          <a href="{{ .url }}" class="social-link" target="_blank" rel="noopener noreferrer">
+          <a href="{{ .url }}" class="social-link" target="_blank" rel="noopener noreferrer" data-umami-event="author-social" data-umami-event-platform="{{ .platform }}">
             {{ .platform }}
           </a>
           {{ end }}
@@ -44,7 +44,7 @@
   </div>
   <div class="posts-grid">
     {{ range $authorPosts }}
-    <a href="{{ .RelPermalink }}" class="post-card">
+    <a href="{{ .RelPermalink }}" class="post-card" data-umami-event="author-post-click" data-umami-event-title="{{ .Title }}">
       <div class="post-card-main">
         <div class="post-meta">
           <span class="post-date">{{ .Date | time.Format ":date_medium" }}</span>
@@ -77,17 +77,17 @@
   <div class="post-actions-row">
     <div class="post-share" aria-label="Share this author page">
       <span class="post-share-label">{{ i18n "share_label" }}</span>
-      <a href="https://x.com/intent/tweet?url={{ $shareURL }}&text={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer">X ↗</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-      <a href="https://bsky.app/intent/compose?text={{ $shareText }}" class="share-link" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
-      <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
-      <a href="https://www.reddit.com/submit?url={{ $shareURL }}&title={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer">Reddit ↗</a>
+      <a href="https://x.com/intent/tweet?url={{ $shareURL }}&text={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer" data-umami-event="author-share" data-umami-event-platform="x">X ↗</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer" data-umami-event="author-share" data-umami-event-platform="linkedin">LinkedIn ↗</a>
+      <a href="https://bsky.app/intent/compose?text={{ $shareText }}" class="share-link" target="_blank" rel="noopener noreferrer" data-umami-event="author-share" data-umami-event-platform="bluesky">Bluesky ↗</a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareURL }}" class="share-link" target="_blank" rel="noopener noreferrer" data-umami-event="author-share" data-umami-event-platform="facebook">Facebook ↗</a>
+      <a href="https://www.reddit.com/submit?url={{ $shareURL }}&title={{ $shareTitle }}" class="share-link" target="_blank" rel="noopener noreferrer" data-umami-event="author-share" data-umami-event-platform="reddit">Reddit ↗</a>
     </div>
 
     {{ with .File }}
     {{ $sourcePath := printf "content/%s" (replaceRE "\\\\" "/" .Path) }}
     <div class="post-source-link-wrap">
-      <a href="https://github.com/thedotnetblog/blog/blob/main/{{ $sourcePath }}" class="post-source-link" target="_blank" rel="noopener noreferrer">{{ i18n "view_author_source" }}</a>
+      <a href="https://github.com/thedotnetblog/blog/blob/main/{{ $sourcePath }}" class="post-source-link" target="_blank" rel="noopener noreferrer" data-umami-event="author-view-source">{{ i18n "view_author_source" }}</a>
     </div>
     {{ end }}
   </div>

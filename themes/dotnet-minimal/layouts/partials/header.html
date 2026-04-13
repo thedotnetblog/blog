@@ -1,6 +1,6 @@
 <header class="site-header">
   <nav class="nav-inner">
-    <a href="{{ "/" | relLangURL }}" class="site-logo">
+    <a href="{{ "/" | relLangURL }}" class="site-logo" data-umami-event="nav-logo">
       the<span class="logo-dot">.NET</span> blog
     </a>
     <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
@@ -11,11 +11,11 @@
     <ul class="nav-links" id="nav-links">
       {{ range .Site.Menus.main }}
       <li>
-        <a href="{{ .URL | relLangURL }}"{{ if $.IsMenuCurrent "main" . }} class="active"{{ end }}>{{ i18n (printf "nav_%s" .Identifier) | default .Name }}</a>
+        <a href="{{ .URL | relLangURL }}"{{ if $.IsMenuCurrent "main" . }} class="active"{{ end }} data-umami-event="nav-link" data-umami-event-name="{{ .Identifier }}">{{ i18n (printf "nav_%s" .Identifier) | default .Name }}</a>
       </li>
       {{ end }}
       <li class="lang-selector-wrap">
-        <button class="lang-toggle" id="lang-toggle" aria-label="{{ i18n "language_label" }}" aria-expanded="false">
+        <button class="lang-toggle" id="lang-toggle" aria-label="{{ i18n "language_label" }}" aria-expanded="false" data-umami-event="lang-toggle">
           <svg class="icon-lang" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           <span class="lang-current">{{ .Site.Language.LanguageName }}</span>
         </button>
@@ -34,16 +34,16 @@
           {{ end }}
           <li{{ if eq $lang.Lang $.Site.Language.Lang }} class="lang-active"{{ end }}>
             {{ if $langURL }}
-            <a href="{{ $langURL }}" data-lang="{{ $lang.Lang }}">{{ $lang.LanguageName }}</a>
+            <a href="{{ $langURL }}" data-lang="{{ $lang.Lang }}" data-umami-event="lang-switch" data-umami-event-lang="{{ $lang.Lang }}">{{ $lang.LanguageName }}</a>
             {{ else }}
-            <a href="{{ printf "/%s/" $lang.Lang | relLangURL }}" data-lang="{{ $lang.Lang }}">{{ $lang.LanguageName }}</a>
+            <a href="{{ printf "/%s/" $lang.Lang | relLangURL }}" data-lang="{{ $lang.Lang }}" data-umami-event="lang-switch" data-umami-event-lang="{{ $lang.Lang }}">{{ $lang.LanguageName }}</a>
             {{ end }}
           </li>
           {{ end }}
         </ul>
       </li>
       <li>
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" data-umami-event="theme-toggle">
           <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
           <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>

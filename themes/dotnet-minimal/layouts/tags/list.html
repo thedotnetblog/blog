@@ -12,7 +12,8 @@
     {{ range $name, $pages := $tags }}
     {{ $count := len $pages }}
     <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}"
-       class="tag{{ if ge $count 5 }} tag--xl{{ else if ge $count 3 }} tag--lg{{ end }}">
+       class="tag{{ if ge $count 5 }} tag--xl{{ else if ge $count 3 }} tag--lg{{ end }}"
+       data-umami-event="tag-click" data-umami-event-tag="{{ $name }}">
       {{ $name }} <span style="opacity:.6">({{ $count }})</span>
     </a>
     {{ end }}
