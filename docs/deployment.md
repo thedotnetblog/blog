@@ -4,17 +4,9 @@ The `hugo --gc --minify` command generates a static site in `public/`. Deploy th
 
 ---
 
-## GitHub Pages (current setup)
+## Static branch deploy (current setup)
 
-The repository includes a ready-made workflow at `.github/workflows/github-pages.yml` that builds and deploys the site automatically on every push to `main`.
-
-**One-time setup in your GitHub repository:**
-
-1. Go to **Settings → Pages**
-2. Under **Source**, select **GitHub Actions**
-3. Push to `main` — the workflow handles the rest
-
-The workflow uses Hugo `0.159.0` extended and uploads the built `public/` directory as a Pages artifact.
+The repository includes a workflow at `.github/workflows/github-pages.yml` that builds Hugo on every push to `main` and force-pushes the static output to the `public` branch. This makes it easy to serve from any platform that can pull a branch (e.g. Dokploy, Coolify, or a plain Nginx container).
 
 ```yaml
 # .github/workflows/github-pages.yml (summary)
@@ -24,25 +16,30 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 jobs:
-  build:
+  build-and-deploy:
     steps:
       - uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: "0.159.0"
           extended: true
-      - run: hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
-      - uses: actions/upload-pages-artifact@v3
-
-  deploy:
-    needs: build
-    steps:
-      - uses: actions/deploy-pages@v4
+      - run: hugo --gc --minify
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          publish_dir: ./public
+          publish_branch: public
+          force_orphan: true
 ```
+
+### Dokploy
+
+1. Create a new **Application** and connect the GitHub repository
+2. Set the **Branch** to `public`
+3. Set **Build Type** to **Static** (Nixpacks will detect it automatically)
+4. Set the **Publish Directory** to `/` (the branch root already contains the built site)
+5. Add your domain and deploy
 
 ---
 
