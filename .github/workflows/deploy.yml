@@ -3,7 +3,7 @@ name: Build and deploy Hugo site
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:
 
 permissions:
