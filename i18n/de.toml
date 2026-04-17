@@ -1,5 +1,7 @@
-[nav_posts]
-other = "Beiträge"
+[nav_contribute]
+other = "mitmachen"
+
+
 
 [nav_events]
 other = "Events"
@@ -133,3 +135,13 @@ other = "Original lesen"
 
 [language_label]
 other = "Sprache"
+
+# ── Contribute ──
+[contribute_page_eyebrow]
+other = "// mitmachen"
+
+[contribute_page_title]
+other = "Schreibe für The .NET Blog"
+
+[contribute_page_desc]
+other = "Teile dein Wissen mit der .NET-Community."
