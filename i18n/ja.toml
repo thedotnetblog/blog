@@ -1,3 +1,6 @@
+[nav_contribute]
+other = "貢献する"
+
 [nav_posts]
 other = "記事"
 
@@ -132,3 +135,13 @@ other = "原文を読む"
 
 [language_label]
 other = "言語"
+
+# ── Contribute ──
+[contribute_page_eyebrow]
+other = "// 貢献"
+
+[contribute_page_title]
+other = "The .NET Blog に投稿する"
+
+[contribute_page_desc]
+other = ".NET コミュニティにあなたの知識を共有しよう。"

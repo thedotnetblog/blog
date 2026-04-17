@@ -1,3 +1,6 @@
+[nav_contribute]
+other = "기여하기"
+
 [nav_posts]
 other = "글"
 
@@ -132,3 +135,13 @@ other = "원문 읽기"
 
 [language_label]
 other = "언어"
+
+# ── Contribute ──
+[contribute_page_eyebrow]
+other = "// 기여"
+
+[contribute_page_title]
+other = "The .NET Blog에 기고하기"
+
+[contribute_page_desc]
+other = ".NET 커뮤니티와 당신의 지식을 나눠보세요."
