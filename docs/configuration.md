@@ -133,7 +133,7 @@ Footer menu items follow the same pattern under `[[menus.footer]]`.
 
 ## Languages
 
-The site supports 10 languages using Hugo's filename-based translation matching:
+The site supports 11 languages using Hugo's filename-based translation matching:
 
 ```toml
 defaultContentLanguage = "en"
@@ -148,6 +148,10 @@ enableMissingTranslationPlaceholders = false
     languageCode = "es"
     languageName = "Español"
     weight = 2
+  [languages.ca]
+    languageCode = "ca-es"
+    languageName = "Català"
+    weight = 2.5
   [languages.de]
     languageCode = "de"
     languageName = "Deutsch"
@@ -188,7 +192,7 @@ UI strings are translated via TOML files in `i18n/`:
 
 ```
 i18n/
-  en.toml   es.toml   de.toml   fr.toml   pt.toml
+  en.toml   es.toml   ca.toml   de.toml   fr.toml   pt.toml
   it.toml   ja.toml   zh.toml   ko.toml   ru.toml
 ```
 

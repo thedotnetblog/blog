@@ -19,6 +19,10 @@ buildFuture = true
     languageCode = "es"
     languageName = "Español"
     weight = 2
+  [languages.ca]
+    languageCode = "ca-es"
+    languageName = "Català"
+    weight = 2.5
   [languages.de]
     languageCode = "de"
     languageName = "Deutsch"

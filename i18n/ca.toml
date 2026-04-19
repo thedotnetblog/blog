@@ -1,0 +1,155 @@
+[nav_contribute]
+other = "contribuir"
+
+
+
+[nav_events]
+other = "esdeveniments"
+
+[nav_authors]
+other = "autors"
+
+[nav_tags]
+other = "etiquetes"
+
+# ── Homepage ──
+[hero_eyebrow]
+other = "El Blog de la Comunitat .NET"
+
+[hero_title]
+other = "On els <span class=\"accent\">desenvolupadors .NET</span>"
+
+[hero_desc]
+other = "Anàlisis en profunditat, tutorials i històries de la comunitat — escrits per desenvolupadors, per a desenvolupadors."
+
+[typewriter_phrases]
+other = "comparteixen el que construeixen.|aprenen els uns dels altres.|lliuren més ràpid amb .NET 10.|estimen el codi obert.|construeixen aplicacions cloud-native.|exploren la IA.|dominen Blazor i SignalR.|pugen de nivell plegats.|escriuen menys codi repetitiu.|impulsen la plataforma endavant."
+
+[hero_cta_blog]
+other = "Llegeix el blog →"
+
+[hero_cta_authors]
+other = "Coneix els autors"
+
+[section_latest_posts]
+other = "// darreres publicacions"
+
+[section_all_posts]
+other = "totes les publicacions →"
+
+[section_upcoming_events]
+other = "// pròxims esdeveniments"
+
+[section_all_events]
+other = "tots els esdeveniments →"
+
+[no_events]
+other = "// no hi ha esdeveniments pròxims."
+
+[load_more_posts]
+other = "Carrega més publicacions ↓"
+
+# ── Posts ──
+[posts_page_eyebrow]
+other = "// publicacions"
+
+[posts_page_title]
+other = "Blog"
+
+[no_posts]
+other = "// encara no hi ha publicacions — torna aviat."
+
+[min_read]
+other = "minuts de lectura"
+
+[share_label]
+other = "Comparteix:"
+
+[view_source]
+other = "Mostra el codi font d'aquesta publicació a GitHub ↗"
+
+# ── Authors ──
+[authors_page_eyebrow]
+other = "// autors"
+
+[authors_page_title]
+other = "Coneix els autors"
+
+[authors_page_desc]
+other = "Les persones darrere de The .NET Blog."
+
+[posts_by]
+other = "// publicacions de {{ .Name }}"
+
+[posts_count]
+one = "{{ .Count }} publicació"
+other = "{{ .Count }} publicacions"
+
+[posts_published]
+other = "publicades"
+
+[no_author_posts]
+other = "// encara no hi ha publicacions."
+
+[view_author_source]
+other = "Mostra el codi font d'aquesta pàgina d'autor a GitHub ↗"
+
+# ── Events ──
+[events_page_eyebrow]
+other = "// esdeveniments"
+
+[events_page_title]
+other = "Esdeveniments de la Comunitat"
+
+[events_page_desc]
+other = "Conferències, trobades, webinars i llançaments — en una sola línia temporal."
+
+[no_events_scheduled]
+other = "// encara no hi ha esdeveniments programats."
+
+[all_events_link]
+other = "← Tots els esdeveniments"
+
+[view_event_source]
+other = "Mostra el codi font d'aquest esdeveniment a GitHub ↗"
+
+# ── Tags ──
+[tags_page_eyebrow]
+other = "// etiquetes"
+
+[tags_page_title]
+other = "Totes les etiquetes"
+
+[tag_eyebrow]
+other = "// etiqueta"
+
+[all_tags_link]
+other = "← Totes les etiquetes"
+
+# ── Footer ──
+[footer_copy]
+other = "De desenvolupadors per a desenvolupadors"
+
+# ── Translations ──
+[translation_available]
+other = "Aquesta publicació també està disponible en:"
+
+[translation_notice]
+other = "Aquesta publicació ha estat traduïda automàticament."
+
+[translation_original]
+other = "Llegeix l'original"
+
+# ── Language Selector ──
+[language_label]
+other = "Idioma"
+
+# ── Contribute ──
+[contribute_page_eyebrow]
+other = "// contribuir"
+
+[contribute_page_title]
+other = "Escriu per a The .NET Blog"
+
+[contribute_page_desc]
+other = "Comparteix el teu coneixement amb la comunitat .NET."
