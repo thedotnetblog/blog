@@ -1,3 +1,6 @@
+[nav_contribute]
+other = "участвовать"
+
 [nav_posts]
 other = "статьи"
 
@@ -133,3 +136,13 @@ other = "Читать оригинал"
 
 [language_label]
 other = "Язык"
+
+# ── Contribute ──
+[contribute_page_eyebrow]
+other = "// участвовать"
+
+[contribute_page_title]
+other = "Пишите для The .NET Blog"
+
+[contribute_page_desc]
+other = "Делитесь своими знаниями с .NET-сообществом."

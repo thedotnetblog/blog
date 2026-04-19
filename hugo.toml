@@ -128,6 +128,11 @@ buildFuture = true
     name = "tags"
     url = "/tags"
     weight = 4
+  [[menus.main]]
+    identifier = "contribute"
+    name = "contribute"
+    url = "/contribute"
+    weight = 5
 
   [[menus.footer]]
     identifier = "posts"
