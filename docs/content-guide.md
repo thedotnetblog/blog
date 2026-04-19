@@ -85,7 +85,7 @@ draft: true
 After writing the English post, create translations by copying `index.md` and renaming:
 
 ```
-index.es.md   index.de.md   index.fr.md   index.pt.md
+index.es.md   index.ca.md   index.de.md   index.fr.md   index.pt.md
 index.it.md   index.ja.md   index.zh.md   index.ko.md   index.ru.md
 ```
 
