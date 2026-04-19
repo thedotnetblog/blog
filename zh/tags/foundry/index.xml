@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Foundry on The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/foundry/</link><description>Recent content in Foundry on The .NET Blog</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/foundry/index.xml" rel="self" type="application/rss+xml"/><item><title>Foundry的RFT更便宜、更智能了 — 看看有什么变化</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原文请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果你正在开发依赖微调模型的.NET应用，这个月的Foundry更新值得关注。Reinforcement Fine-Tuning变得更易获取，价格也大幅降低。&lt;/p&gt;
+&lt;p&gt;完整详情请参阅&lt;a href="https://devblogs.microsoft.com/foundry/whats-new-in-foundry-finetune-april-2026/"&gt;官方公告&lt;/a&gt;，这里是实用要点总结。&lt;/p&gt;
+&lt;h2 id="o4-mini的全球训练"&gt;o4-mini的全球训练&lt;/h2&gt;
+&lt;p&gt;o4-mini是推理密集型和智能体工作负载的首选模型。重大消息：你现在可以从13+个Azure区域启动微调任务，与Standard训练相比，每token的训练费率更低。相同的基础设施，相同的质量，更广的覆盖范围。&lt;/p&gt;
+&lt;p&gt;如果你的团队分布在不同地区，这很重要。你不再局限于少数几个区域来进行训练。&lt;/p&gt;
+&lt;p&gt;以下是启动全球训练任务的REST API调用：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://&amp;lt;your-resource&amp;gt;.openai.azure.com/openai/fine_tuning/jobs?api-version=2025-04-01-preview&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;api-key: &lt;/span&gt;&lt;span class="nv"&gt;$AZURE_OPENAI_API_KEY&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s1"&gt;&amp;#39;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;model&amp;#34;: &amp;#34;o4-mini&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;training_file&amp;#34;: &amp;#34;&amp;lt;your-training-file-id&amp;gt;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;method&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;reinforcement&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reinforcement&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;grader&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;string_check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;name&amp;#34;: &amp;#34;answer-check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;input&amp;#34;: &amp;#34;{{sample.output_text}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reference&amp;#34;: &amp;#34;{{item.reference_answer}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;operation&amp;#34;: &amp;#34;eq&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;hyperparameters&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;n_epochs&amp;#34;: 2,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;compute_multiplier&amp;#34;: 1.0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;trainingType&amp;#34;: &amp;#34;globalstandard&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;那个&lt;code&gt;trainingType: globalstandard&lt;/code&gt;标志就是关键区别。&lt;/p&gt;</description></item><item><title>Microsoft Foundry 2026年3月 — GPT-5.4、Agent Service GA，以及改变一切的SDK刷新</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/microsoft-foundry-march-2026-whats-new/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/microsoft-foundry-march-2026-whats-new/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原文请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/microsoft-foundry-march-2026-whats-new/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;每月的&amp;quot;Microsoft Foundry新动态&amp;quot;文章通常是增量改进和偶尔亮点功能的混合。&lt;a href="https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-mar-2026/"&gt;2026年3月版&lt;/a&gt;呢？基本上全是亮点功能。Foundry Agent Service正式GA，GPT-5.4投入生产，SDK获得重要的稳定版本发布，Fireworks AI将开放模型推理引入Azure。让我来解析对.NET开发者来说什么最重要。&lt;/p&gt;
+&lt;h2 id="foundry-agent-service已准备好投入生产"&gt;Foundry Agent Service已准备好投入生产&lt;/h2&gt;
+&lt;p&gt;这是最大的新闻。新一代代理运行时已正式发布 — 构建在OpenAI Responses API之上，与OpenAI代理协议兼容，并向多个提供商的模型开放。如果您今天正在使用Responses API构建，迁移到Foundry将在您现有的代理逻辑之上添加企业级安全性、私有网络、Entra RBAC、完整追踪和评估功能。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;azure.ai.projects&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;AIProjectClient&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;azure.ai.projects.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;PromptAgentDefinition&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;project_client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;AIProjectClient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;endpoint&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;AZURE_AI_PROJECT_ENDPOINT&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;credential&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;DefaultAzureCredential&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;agent&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;project_client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;agents&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create_version&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;agent_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;my-enterprise-agent&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;definition&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;PromptAgentDefinition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;AZURE_AI_MODEL_DEPLOYMENT_NAME&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;instructions&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;You are a helpful assistant.&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;关键新增功能：端到端私有网络、MCP认证扩展（包括OAuth透传）、语音对语音代理的Voice Live预览，以及在6个新区域托管代理。&lt;/p&gt;
+&lt;h2 id="gpt-54--可靠性优于纯粹的智能"&gt;GPT-5.4 — 可靠性优于纯粹的智能&lt;/h2&gt;
+&lt;p&gt;GPT-5.4不是为了变得更聪明，而是为了变得更可靠。在长时间交互中更强的推理能力、更好的指令遵循性、更少的工作流中途故障，以及集成的计算机使用功能。对于生产环境的代理来说，这种可靠性比基准测试分数重要得多。&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;模型&lt;/th&gt;
+ &lt;th&gt;价格（每百万token）&lt;/th&gt;
+ &lt;th&gt;最佳用途&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;GPT-5.4 (≤272K)&lt;/td&gt;
+ &lt;td&gt;$2.50 / $15 输出&lt;/td&gt;
+ &lt;td&gt;生产代理、编码、文档工作流&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;GPT-5.4 Pro&lt;/td&gt;
+ &lt;td&gt;$30 / $180 输出&lt;/td&gt;
+ &lt;td&gt;深度分析、科学推理&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;GPT-5.4 Mini&lt;/td&gt;
+ &lt;td&gt;经济实惠&lt;/td&gt;
+ &lt;td&gt;分类、提取、轻量级工具调用&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;聪明的策略是路由：GPT-5.4 Mini处理高吞吐量、低延迟的工作，而GPT-5.4负责推理密集型的请求。&lt;/p&gt;
+&lt;h2 id="sdk终于稳定了"&gt;SDK终于稳定了&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;azure-ai-projects&lt;/code&gt; SDK在所有语言中发布了稳定版 — Python 2.0.0、JS/TS 2.0.0、Java 2.0.0和.NET 2.0.0（4月1日）。&lt;code&gt;azure-ai-agents&lt;/code&gt;依赖已经消失 — 一切都在&lt;code&gt;AIProjectClient&lt;/code&gt;下。使用&lt;code&gt;pip install azure-ai-projects&lt;/code&gt;安装，包中直接捆绑了&lt;code&gt;openai&lt;/code&gt;和&lt;code&gt;azure-identity&lt;/code&gt;作为依赖项。&lt;/p&gt;</description></item><item><title>将 Azure Functions 上的 MCP 服务器连接到 Foundry 代理 — 方法在这里</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/foundry-agents-mcp-servers-azure-functions/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/foundry-agents-mcp-servers-azure-functions/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原文请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/foundry-agents-mcp-servers-azure-functions/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这是我喜欢 MCP 生态系统的一点：你只需构建一次服务器，它就能在任何地方运行。VS Code、Visual Studio、Cursor、ChatGPT — 每个 MCP 客户端都能发现并使用你的工具。现在，微软正在向这个列表中添加另一个消费者：Foundry 代理。&lt;/p&gt;
+&lt;p&gt;Azure SDK 团队的 Lily Ma &lt;a href="https://devblogs.microsoft.com/azure-sdk/give-your-foundry-agent-custom-tools-with-mcp-servers-on-azure-functions/"&gt;发布了一份实用指南&lt;/a&gt;，介绍如何将部署在 Azure Functions 上的 MCP 服务器与 Microsoft Foundry 代理连接。如果你已经有了 MCP 服务器，这纯粹是增值 — 无需重新构建。&lt;/p&gt;
+&lt;h2 id="为什么这种组合有意义"&gt;为什么这种组合有意义&lt;/h2&gt;
+&lt;p&gt;Azure Functions 为托管 MCP 服务器提供了可扩展的基础设施、内置身份验证和无服务器计费。Microsoft Foundry 为你提供能够推理、规划和行动的 AI 代理。连接两者意味着你的自定义工具 — 查询数据库、调用业务 API、运行验证逻辑 — 成为企业 AI 代理可以自主发现和使用的能力。&lt;/p&gt;
+&lt;p&gt;关键点：你的 MCP 服务器保持不变。你只是将 Foundry 添加为另一个消费者。在 VS Code 设置中运行的相同工具现在为你的团队或客户交互的 AI 代理提供动力。&lt;/p&gt;
+&lt;h2 id="身份验证选项"&gt;身份验证选项&lt;/h2&gt;
+&lt;p&gt;这是文章真正增值的地方。根据你的场景提供四种身份验证方法：&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;方法&lt;/th&gt;
+ &lt;th&gt;使用场景&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;基于密钥&lt;/strong&gt;（默认）&lt;/td&gt;
+ &lt;td&gt;开发或没有 Entra 身份验证的服务器&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;Microsoft Entra&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;使用托管标识的生产环境&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;OAuth 身份透传&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;每个用户单独认证的生产环境&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;无身份验证&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;开发/测试或仅公开数据&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;对于生产环境，使用代理身份的 Microsoft Entra 是推荐路径。OAuth 身份透传适用于用户上下文重要的场景 — 代理提示用户登录，每个请求携带用户自己的令牌。&lt;/p&gt;</description></item><item><title>Azure DevOps MCP Server 登陆 Microsoft Foundry：这对你的 AI 代理意味着什么</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/</link><pubDate>Thu, 26 Mar 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/</guid><description>&lt;p&gt;MCP（Model Context Protocol）正在迎来它的高光时刻。如果你一直在关注 AI 代理生态系统，你可能已经注意到 MCP 服务器到处涌现 — 通过标准化协议赋予代理与外部工具和服务交互的能力。&lt;/p&gt;
+&lt;p&gt;现在 &lt;a href="https://devblogs.microsoft.com/devops/remote-mcp-server-preview-in-microsoft-foundry/"&gt;Azure DevOps MCP Server 已在 Microsoft Foundry 中可用&lt;/a&gt;，这是那种让你思考实际可能性的集成之一。&lt;/p&gt;
+&lt;h2 id="这里到底发生了什么"&gt;这里到底发生了什么&lt;/h2&gt;
+&lt;p&gt;Microsoft 已经发布了 Azure DevOps MCP Server 的&lt;a href="https://devblogs.microsoft.com/devops/azure-devops-remote-mcp-server-public-preview"&gt;公开预览版&lt;/a&gt; — 那是 MCP 服务器本身。新的是 Foundry 集成。你现在可以直接从工具目录将 Azure DevOps MCP Server 添加到 Foundry 代理中。&lt;/p&gt;
+&lt;p&gt;对于还不熟悉 Foundry 的人：它是 Microsoft 用于大规模构建和管理 AI 驱动应用程序和代理的统一平台。模型访问、编排、评估、部署 — 全部在一个地方。&lt;/p&gt;
+&lt;h2 id="配置"&gt;配置&lt;/h2&gt;
+&lt;p&gt;配置出奇地简单：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在你的 Foundry 代理中，进入 &lt;strong&gt;Add Tools&lt;/strong&gt; &amp;gt; &lt;strong&gt;Catalog&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;搜索 &amp;ldquo;Azure DevOps&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;选择 Azure DevOps MCP Server（preview）并点击 &lt;strong&gt;Create&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;输入你的组织名称并连接&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;就这样。你的代理现在可以访问 Azure DevOps 工具了。&lt;/p&gt;</description></item><item><title>Foundry Agent Service 正式发布：对 .NET 代理开发者真正重要的是什么</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/foundry-agent-service-ga-what-matters/</link><pubDate>Thu, 26 Mar 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/foundry-agent-service-ga-what-matters/</guid><description>&lt;p&gt;说实话 — 构建一个 AI 代理原型是简单的部分。困难的是之后的一切：用适当的网络隔离投入生产、运行真正有意义的评估、处理合规要求，以及不在凌晨 2 点搞崩东西。&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/foundry/foundry-agent-service-ga/"&gt;Foundry Agent Service 刚刚正式发布&lt;/a&gt;，这个版本像激光一样聚焦在&amp;quot;之后一切&amp;quot;的鸿沟上。&lt;/p&gt;
+&lt;h2 id="构建在-responses-api-之上"&gt;构建在 Responses API 之上&lt;/h2&gt;
+&lt;p&gt;标题新闻：新一代 Foundry Agent Service 构建在 OpenAI Responses API 之上。如果你已经在用这个 wire protocol 构建，迁移到 Foundry 只需最少的代码改动。你获得的：企业安全、私有网络、Entra RBAC、完整追踪和评估 — 在你现有的代理逻辑之上。&lt;/p&gt;
+&lt;p&gt;架构是有意开放的。你不被锁定在一个模型提供商或一个编排框架上。用 DeepSeek 做规划、OpenAI 做生成、LangGraph 做编排 — 运行时处理一致性层。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;azure.ai.projects&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;AIProjectClient&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;azure.ai.projects.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;PromptAgentDefinition&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;DefaultAzureCredential&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;credential&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;AIProjectClient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;endpoint&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;AZURE_AI_PROJECT_ENDPOINT&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;credential&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;credential&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;project_client&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;project_client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_openai_client&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;openai_client&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;agent&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;project_client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;agents&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create_version&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;agent_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;my-enterprise-agent&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;definition&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;PromptAgentDefinition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;AZURE_AI_MODEL_DEPLOYMENT_NAME&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;instructions&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;You are a helpful assistant.&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;conversation&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;openai_client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conversations&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;openai_client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;responses&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;conversation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;conversation&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;What are best practices for building AI agents?&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;extra_body&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;agent_reference&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;name&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;agent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;agent_reference&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;output_text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;如果你从 &lt;code&gt;azure-ai-agents&lt;/code&gt; 包迁移过来，代理现在是 &lt;code&gt;azure-ai-projects&lt;/code&gt; 中 &lt;code&gt;AIProjectClient&lt;/code&gt; 的一等操作。移除独立依赖，使用 &lt;code&gt;get_openai_client()&lt;/code&gt; 来驱动响应。&lt;/p&gt;</description></item><item><title>从笔记本到生产：用两个命令将 AI 代理部署到 Microsoft Foundry</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/deploy-ai-agents-foundry-azd-two-commands/</link><pubDate>Thu, 26 Mar 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/deploy-ai-agents-foundry-azd-two-commands/</guid><description>&lt;p&gt;你知道&amp;quot;在我的机器上能跑&amp;quot;和&amp;quot;已部署并正在处理流量&amp;quot;之间的鸿沟吗？对于 AI 代理来说，这个鸿沟一直痛苦地大。你需要配置资源、部署模型、配置身份、设置监控 — 这些都是在任何人能实际调用你的代理之前要做的。&lt;/p&gt;
+&lt;p&gt;Azure Developer CLI 刚刚把这变成了&lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-ai-agent-end-to-end/"&gt;两个命令的事&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id="新的-azd-ai-agent-工作流"&gt;新的 &lt;code&gt;azd ai agent&lt;/code&gt; 工作流&lt;/h2&gt;
+&lt;p&gt;让我带你看看这实际是什么样子。你有一个 AI 代理项目 — 比如说一个酒店礼宾代理。它在本地运行正常。你想让它在 Microsoft Foundry 上运行。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd ai agent init
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd up
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;就这样。两个命令。&lt;code&gt;azd ai agent init&lt;/code&gt; 在你的仓库中生成基础设施即代码，&lt;code&gt;azd up&lt;/code&gt; 在 Azure 上配置一切并发布你的代理。你会得到一个直接指向 Foundry 门户中你的代理的链接。&lt;/p&gt;
+&lt;h2 id="底层发生了什么"&gt;底层发生了什么&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;init&lt;/code&gt; 命令在你的仓库中生成真实的、可检查的 Bicep 模板：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一个 &lt;strong&gt;Foundry Resource&lt;/strong&gt;（顶层容器）&lt;/li&gt;
+&lt;li&gt;一个 &lt;strong&gt;Foundry Project&lt;/strong&gt;（你的代理所在的地方）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模型部署&lt;/strong&gt;配置（GPT-4o 等）&lt;/li&gt;
+&lt;li&gt;带有适当 RBAC 角色分配的&lt;strong&gt;托管身份&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;服务映射用的 &lt;code&gt;azure.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;带有代理元数据和环境变量的 &lt;code&gt;agent.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;关键是：这一切都是你的。它是仓库中的版本化 Bicep。你可以检查它、自定义它，并与你的代理代码一起提交。没有魔法黑盒。&lt;/p&gt;
+&lt;h2 id="开发内循环"&gt;开发内循环&lt;/h2&gt;
+&lt;p&gt;我真正喜欢的是本地开发体验。当你在迭代代理逻辑时，不想每次改变提示词都重新部署：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd ai agent run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这会在本地启动你的代理。配合 &lt;code&gt;azd ai agent invoke&lt;/code&gt; 发送测试提示，你就有了一个紧密的反馈循环。编辑代码、重启、调用、重复。&lt;/p&gt;</description></item></channel></rss>

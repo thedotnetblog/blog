@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Semantic-Kernel on The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/semantic-kernel/</link><description>Recent content in Semantic-Kernel on The .NET Blog</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Tue, 14 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/semantic-kernel/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET的Agent Skills变得真正灵活了</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/</link><pubDate>Tue, 14 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原文请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果你一直在用Microsoft Agent Framework构建代理，那你已经熟悉流程了：定义技能，连接到provider，让代理决定调用哪个。新的是你&lt;em&gt;如何&lt;/em&gt;创建这些技能——灵活性的提升非常显著。&lt;/p&gt;
+&lt;p&gt;最新更新引入了三种agent skill编写模式：&lt;strong&gt;基于文件的&lt;/strong&gt;、&lt;strong&gt;基于类的&lt;/strong&gt;和&lt;strong&gt;内联代码定义的&lt;/strong&gt;。三种都连接到单一的 &lt;code&gt;AgentSkillsProviderBuilder&lt;/code&gt;，意味着你可以自由混搭，无需路由逻辑或特殊粘合代码。让我带你了解每种模式以及何时使用。&lt;/p&gt;
+&lt;h2 id="基于文件的技能起点"&gt;基于文件的技能：起点&lt;/h2&gt;
+&lt;p&gt;基于文件的技能顾名思义——磁盘上的一个目录，包含 &lt;code&gt;SKILL.md&lt;/code&gt; 文件、可选脚本和参考文档。给代理添加新能力最直接的方式：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;skills/
+└── onboarding-guide/
+ ├── SKILL.md
+ ├── scripts/
+ │ └── check-provisioning.py
+ └── references/
+ └── onboarding-checklist.md
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;SKILL.md&lt;/code&gt; 的frontmatter声明技能名称和描述，指令部分告诉代理如何使用脚本和参考：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;---
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;name: onboarding-guide
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;description: &amp;gt;-
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Walk new hires through their first-week setup checklist.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;---
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gu"&gt;## Instructions
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;1.&lt;/span&gt; Ask for the employee&amp;#39;s name and start date.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;2.&lt;/span&gt; Run &lt;span class="sb"&gt;`scripts/check-provisioning.py`&lt;/span&gt; to verify accounts.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;3.&lt;/span&gt; Walk through &lt;span class="sb"&gt;`references/onboarding-checklist.md`&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;4.&lt;/span&gt; Follow up on incomplete items.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后用 &lt;code&gt;SubprocessScriptRunner.RunAsync&lt;/code&gt; 连接脚本执行：&lt;/p&gt;</description></item><item><title>Microsoft Agent Framework 正式发布 1.0 — 这些才是 .NET 开发者真正需要关注的</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agent-framework-1-0-production-ready/</link><pubDate>Fri, 03 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agent-framework-1-0-production-ready/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。如需查看原文，请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agent-framework-1-0-production-ready/"&gt;点击此处&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果你一直在关注 Agent Framework 从早期 Semantic Kernel 和 AutoGen 时代走来的历程，这次的消息意义重大。Microsoft Agent Framework 刚刚&lt;a href="https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/"&gt;发布了 1.0 版本&lt;/a&gt; — 生产就绪、API 稳定、长期支持承诺。它同时支持 .NET 和 Python，并且真正可以承载实际工作负载。&lt;/p&gt;
+&lt;p&gt;让我跳过公告的噪音，专注于你用 .NET 构建 AI 驱动应用时真正重要的内容。&lt;/p&gt;
+&lt;h2 id="简短版本"&gt;简短版本&lt;/h2&gt;
+&lt;p&gt;Agent Framework 1.0 将之前的 Semantic Kernel 和 AutoGen 统一为一个开源 SDK。一个代理抽象。一个编排引擎。多个 AI 提供商。如果你之前一直在 Semantic Kernel（企业模式）和 AutoGen（研究级多代理工作流）之间来回切换，现在可以停了。这就是那个唯一的 SDK。&lt;/p&gt;
+&lt;h2 id="入门简单得几乎不公平"&gt;入门简单得几乎不公平&lt;/h2&gt;
+&lt;p&gt;这是一个在 .NET 中运行的代理：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// dotnet add package Microsoft.Agents.AI.OpenAI --prerelease&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;using&lt;/span&gt; &lt;span class="nn"&gt;Microsoft.Agents.AI&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;using&lt;/span&gt; &lt;span class="nn"&gt;Microsoft.Agents.AI.Foundry&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;using&lt;/span&gt; &lt;span class="nn"&gt;Azure.Identity&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;var&lt;/span&gt; &lt;span class="n"&gt;agent&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;AIProjectClient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;endpoint&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;https://your-project.services.ai.azure.com&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;GetResponsesClient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;gpt-5.3&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AsAIAgent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;HaikuBot&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;instructions&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;You are an upbeat assistant that writes beautifully.&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;Console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;WriteLine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="n"&gt;agent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RunAsync&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Write a haiku about shipping 1.0.&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;就这些。几行代码，你就有了一个在 Azure Foundry 上运行的 AI 代理。Python 的等效代码同样简洁。随着需求增长，逐步添加函数工具、多轮对话和流式输出 — API 表面会平稳地扩展，不会变得奇怪。&lt;/p&gt;</description></item></channel></rss>

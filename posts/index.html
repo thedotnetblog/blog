@@ -1,0 +1,256 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Posts · The .NET Blog</title><meta name=description content="Articles, tutorials and insights from the .NET community."><link rel=canonical href=https://thedotnetblog.com/posts/><meta name=robots content="index, follow"><meta property="og:title" content="Posts"><meta property="og:description" content="Articles, tutorials and insights from the .NET community."><meta property="og:url" content="https://thedotnetblog.com/posts/"><meta property="og:site_name" content="The .NET Blog"><meta property="og:locale" content="en"><meta property="og:type" content="website"><meta name=twitter:card content="summary"><meta name=twitter:title content="Posts"><meta name=twitter:description content="Articles, tutorials and insights from the .NET community."><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=/css/style.css><script>(function(){var e=localStorage.getItem("theme"),t=e||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t)})()</script><link rel=icon href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☁️</text></svg>"><script type=application/ld+json>{"@context":"https://schema.org","@type":"CollectionPage","name":"Posts · The .NET Blog","url":"https:\/\/thedotnetblog.com\/posts\/","description":"Articles, tutorials and insights from the .NET community.","isPartOf":{"@type":"WebSite","name":"The .NET Blog","url":"https:\/\/thedotnetblog.com\/"}}</script><link rel=alternate type=text/plain href=https://thedotnetblog.com/llms.txt title="LLM-readable summary"><script defer src=https://analytics.emilianomontesdeoca.com/script.js data-website-id=0834ea36-1ac0-457f-9953-04b28fe8df8f></script><meta name=generator content="Hugo 0.159.0"></head><body class=site-wrapper><header class=site-header><nav class=nav-inner><a href=/ class=site-logo data-umami-event=nav-logo>the<span class=logo-dot>.NET</span> blog
+</a><button class=nav-burger id=nav-burger aria-label="Open menu" aria-expanded=false>
+<span></span>
+<span></span>
+<span></span></button><ul class=nav-links id=nav-links><li><a href=/posts data-umami-event=nav-link data-umami-event-name=posts>posts</a></li><li><a href=/events data-umami-event=nav-link data-umami-event-name=events>events</a></li><li><a href=/authors data-umami-event=nav-link data-umami-event-name=authors>authors</a></li><li><a href=/tags data-umami-event=nav-link data-umami-event-name=tags>tags</a></li><li><a href=/contribute data-umami-event=nav-link data-umami-event-name=contribute>contribute</a></li><li class=lang-selector-wrap><button class=lang-toggle id=lang-toggle aria-label=Language aria-expanded=false data-umami-event=lang-toggle>
+<svg class="icon-lang" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3.0 014 10 15.3 15.3.0 01-4 10A15.3 15.3.0 018 12a15.3 15.3.0 014-10z"/></svg>
+<span class=lang-current>English</span></button><ul class=lang-dropdown id=lang-dropdown><li class=lang-active><a href=/posts/ data-lang=en data-umami-event=lang-switch data-umami-event-lang=en>English</a></li><li><a href=/ca/posts/ data-lang=ca data-umami-event=lang-switch data-umami-event-lang=ca>Català</a></li><li><a href=/es/posts/ data-lang=es data-umami-event=lang-switch data-umami-event-lang=es>Español</a></li><li><a href=/de/posts/ data-lang=de data-umami-event=lang-switch data-umami-event-lang=de>Deutsch</a></li><li><a href=/fr/posts/ data-lang=fr data-umami-event=lang-switch data-umami-event-lang=fr>Français</a></li><li><a href=/pt/posts/ data-lang=pt data-umami-event=lang-switch data-umami-event-lang=pt>Português</a></li><li><a href=/it/posts/ data-lang=it data-umami-event=lang-switch data-umami-event-lang=it>Italiano</a></li><li><a href=/ja/posts/ data-lang=ja data-umami-event=lang-switch data-umami-event-lang=ja>日本語</a></li><li><a href=/zh/posts/ data-lang=zh data-umami-event=lang-switch data-umami-event-lang=zh>中文</a></li><li><a href=/ko/posts/ data-lang=ko data-umami-event=lang-switch data-umami-event-lang=ko>한국어</a></li><li><a href=/ru/posts/ data-lang=ru data-umami-event=lang-switch data-umami-event-lang=ru>Русский</a></li></ul></li><li><button class=theme-toggle id=theme-toggle aria-label="Toggle theme" data-umami-event=theme-toggle>
+<svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+<svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button></li></ul></nav></header><main class=main-content><div class=container><div class=page-header><p class=eyebrow>// posts</p><h1>Blog</h1></div><div class=posts-grid><a href=/posts/emiliano-montesdeoca/vscode-1-117-agents-autopilot-worktrees/ class=post-card data-umami-event=post-card-click data-umami-event-title="VS Code 1.117: Agents Are Getting Their Own Git Branches and I'm Here For It"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 19, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>VS Code 1.117: Agents Are Getting Their Own Git Branches and I'm Here For It</h2><p class=post-card-excerpt>VS Code 1.117 ships worktree isolation for agent sessions, persistent Autopilot mode, and subagent support. The agentic coding workflow just got way more real.</p><div class=post-card-tags><span class=tag>vscode</span>
+<span class=tag>developer-tools</span>
+<span class=tag>ai</span>
+<span class=tag>github-copilot</span>
+<span class=tag>agents</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/ class=post-card data-umami-event=post-card-click data-umami-event-title="Foundry's RFT Just Got Cheaper and Smarter — Here's What Changed"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 18, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Foundry's RFT Just Got Cheaper and Smarter — Here's What Changed</h2><p class=post-card-excerpt>Microsoft Foundry shipped three RFT updates this month: global training for o4-mini, new GPT-4.1 model graders, and a best practices guide that'll save you hours of debugging.</p><div class=post-card-tags><span class=tag>ai</span>
+<span class=tag>azure</span>
+<span class=tag>foundry</span>
+<span class=tag>fine-tuning</span>
+<span class=tag>machine-learning</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/ class=post-card data-umami-event=post-card-click data-umami-event-title="Your AI Experiments on Azure Are Burning Money — Here's How to Fix That"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 18, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Your AI Experiments on Azure Are Burning Money — Here's How to Fix That</h2><p class=post-card-excerpt>AI workloads on Azure can get expensive fast. Let's talk about what actually works for keeping costs under control without slowing down your development.</p><div class=post-card-tags><span class=tag>azure</span>
+<span class=tag>cloud</span>
+<span class=tag>cost-optimization</span>
+<span class=tag>ai</span>
+<span class=tag>finops</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/ class=post-card data-umami-event=post-card-click data-umami-event-title="Docker Sandbox Lets Copilot Agents Refactor Your Code Without Risking Your Machine"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 17, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Docker Sandbox Lets Copilot Agents Refactor Your Code Without Risking Your Machine</h2><p class=post-card-excerpt>Docker Sandbox gives GitHub Copilot agents a secure microVM to run wild with refactoring — no permission prompts, no risk to your host. Here's why that changes everything for large-scale .NET modernization.</p><div class=post-card-tags><span class=tag>github-copilot</span>
+<span class=tag>docker</span>
+<span class=tag>modernization</span>
+<span class=tag>developer-tools</span>
+<span class=tag>ai</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/ class=post-card data-umami-event=post-card-click data-umami-event-title="Stop Babysitting Your Terminal: Aspire's Detached Mode Changes the Workflow"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 17, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Stop Babysitting Your Terminal: Aspire's Detached Mode Changes the Workflow</h2><p class=post-card-excerpt>Aspire 13.2 lets you run your AppHost in the background and take your terminal back. Combined with new CLI commands and agent support, this is a bigger deal than it sounds.</p><div class=post-card-tags><span class=tag>aspire</span>
+<span class=tag>dotnet</span>
+<span class=tag>cli</span>
+<span class=tag>developer-tools</span>
+<span class=tag>coding-agents</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/azure-mcp-tools-built-into-visual-studio-2022/ class=post-card data-umami-event=post-card-click data-umami-event-title="Azure MCP Tools Are Now Baked Into Visual Studio 2022 — No Extension Required"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 16, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Azure MCP Tools Are Now Baked Into Visual Studio 2022 — No Extension Required</h2><p class=post-card-excerpt>Azure MCP tools ship as part of the Azure development workload in Visual Studio 2022. Over 230 tools, 45 Azure services, zero extensions to install.</p><div class=post-card-tags><span class=tag>visual-studio</span>
+<span class=tag>azure</span>
+<span class=tag>mcp</span>
+<span class=tag>copilot</span>
+<span class=tag>developer-tools</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/maui-maps-pin-clustering-finally/ class=post-card data-umami-event=post-card-click data-umami-event-title="Pin Clustering Finally Lands in .NET MAUI Maps — One Property, Zero Pain"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 16, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Pin Clustering Finally Lands in .NET MAUI Maps — One Property, Zero Pain</h2><p class=post-card-excerpt>.NET MAUI 11 Preview 3 adds native pin clustering to the Map control. One property, separate clustering groups, and tap handling — all built in.</p><div class=post-card-tags><span class=tag>dotnet</span>
+<span class=tag>maui</span>
+<span class=tag>mobile</span>
+<span class=tag>maps</span>
+<span class=tag>dotnet-11</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/dotnet-april-2026-servicing-security-patches/ class=post-card data-umami-event=post-card-click data-umami-event-title=".NET April 2026 Servicing — Security Patches You Should Apply Today"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 15, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>.NET April 2026 Servicing — Security Patches You Should Apply Today</h2><p class=post-card-excerpt>The April 2026 servicing release patches 6 CVEs across .NET 10, .NET 9, .NET 8, and .NET Framework — including two remote code execution vulnerabilities.</p><div class=post-card-tags><span class=tag>dotnet</span>
+<span class=tag>security</span>
+<span class=tag>servicing</span>
+<span class=tag>dotnet-framework</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/aspire-132-mongodb-efcore-data-lake/ class=post-card data-umami-event=post-card-click data-umami-event-title="Aspire 13.2 Gets MongoDB EF Core and Azure Data Lake — Two Integrations Worth Trying"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 15, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Aspire 13.2 Gets MongoDB EF Core and Azure Data Lake — Two Integrations Worth Trying</h2><p class=post-card-excerpt>Aspire 13.2 adds MongoDB Entity Framework Core and Azure Data Lake Storage integrations with zero-config health checks and service discovery. Here's what they look like in practice.</p><div class=post-card-tags><span class=tag>dotnet-aspire</span>
+<span class=tag>efcore</span>
+<span class=tag>mongodb</span>
+<span class=tag>azure</span>
+<span class=tag>data-lake</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/ class=post-card data-umami-event=post-card-click data-umami-event-title="azd update — One Command to Rule All Your Package Managers"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 15, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>azd update — One Command to Rule All Your Package Managers</h2><p class=post-card-excerpt>The Azure Developer CLI now has a universal update command that works regardless of how you installed it — winget, Homebrew, Chocolatey, or install script.</p><div class=post-card-tags><span class=tag>azure</span>
+<span class=tag>azd</span>
+<span class=tag>developer-tools</span>
+<span class=tag>cli</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/ class=post-card data-umami-event=post-card-click data-umami-event-title="Azure DevOps Server April 2026 Patch — PR Completion Fix and Security Updates"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 15, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Azure DevOps Server April 2026 Patch — PR Completion Fix and Security Updates</h2><p class=post-card-excerpt>Azure DevOps Server gets Patch 3 with a fix for PR completion failures, improved sign-out validation, and restored GitHub Enterprise Server PAT connections.</p><div class=post-card-tags><span class=tag>azure-devops</span>
+<span class=tag>devops</span>
+<span class=tag>patches</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/ class=post-card data-umami-event=post-card-click data-umami-event-title="Azure Smart Tier Is GA — Automatic Blob Storage Cost Optimization Without Lifecycle Rules"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 15, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Azure Smart Tier Is GA — Automatic Blob Storage Cost Optimization Without Lifecycle Rules</h2><p class=post-card-excerpt>Azure Blob Storage smart tier is now generally available, automatically moving objects between hot, cool, and cold tiers based on actual access patterns — no lifecycle rules needed.</p><div class=post-card-tags><span class=tag>azure</span>
+<span class=tag>storage</span>
+<span class=tag>blob-storage</span>
+<span class=tag>cost-optimization</span>
+<span class=tag>cloud-native</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/azure-ai-agent-hosting-options-guide/ class=post-card data-umami-event=post-card-click data-umami-event-title="Where Should You Host Your AI Agents on Azure? A Practical Decision Guide"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 15, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Where Should You Host Your AI Agents on Azure? A Practical Decision Guide</h2><p class=post-card-excerpt>Azure offers six ways to host AI agents — from raw containers to fully managed Foundry Hosted Agents. Here's how to pick the right one for your .NET workload.</p><div class=post-card-tags><span class=tag>azure</span>
+<span class=tag>ai</span>
+<span class=tag>agents</span>
+<span class=tag>containers</span>
+<span class=tag>microsoft-foundry</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/ class=post-card data-umami-event=post-card-click data-umami-event-title="Agent Skills in .NET Just Got Seriously Flexible"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 14, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Agent Skills in .NET Just Got Seriously Flexible</h2><p class=post-card-excerpt>The Microsoft Agent Framework now supports three ways to author skills — files, classes, and inline code — all composed through a single provider. Here's why that matters and how to use each one.</p><div class=post-card-tags><span class=tag>.NET</span>
+<span class=tag>Agent Framework</span>
+<span class=tag>AI</span>
+<span class=tag>Semantic Kernel</span>
+<span class=tag>Azure</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/azure-mcp-server-2-self-hosted-agentic-cloud/ class=post-card data-umami-event=post-card-click data-umami-event-title="Azure MCP Server 2.0 Just Dropped — Self-Hosted Agentic Cloud Automation Is Here"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 11, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Azure MCP Server 2.0 Just Dropped — Self-Hosted Agentic Cloud Automation Is Here</h2><p class=post-card-excerpt>Azure MCP Server 2.0 goes stable with self-hosted remote deployments, 276 tools across 57 Azure services, and enterprise-grade security — here's what matters for .NET developers building agentic workflows.</p><div class=post-card-tags><span class=tag>mcp</span>
+<span class=tag>azure</span>
+<span class=tag>ai</span>
+<span class=tag>agents</span>
+<span class=tag>azure-sdk</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/ class=post-card data-umami-event=post-card-click data-umami-event-title=".NET Aspire 13.2 Wants to Be Your AI Agent's Best Friend"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 10, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>.NET Aspire 13.2 Wants to Be Your AI Agent's Best Friend</h2><p class=post-card-excerpt>Aspire 13.2 goes all-in on agentic development — structured CLI output, isolated runs, auto-healing environments, and full OpenTelemetry data so your AI agents can actually build, run, and observe your apps.</p><div class=post-card-tags><span class=tag>aspire</span>
+<span class=tag>dotnet</span>
+<span class=tag>ai</span>
+<span class=tag>cli</span>
+<span class=tag>telemetry</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/ class=post-card data-umami-event=post-card-click data-umami-event-title="Agentic Platform Engineering Is Getting Real — Git-APE Shows How"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 10, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Agentic Platform Engineering Is Getting Real — Git-APE Shows How</h2><p class=post-card-excerpt>Microsoft's Git-APE project puts agentic platform engineering into practice — using GitHub Copilot agents and Azure MCP to turn natural-language requests into validated cloud infrastructure.</p><div class=post-card-tags><span class=tag>azure</span>
+<span class=tag>github-copilot</span>
+<span class=tag>platform-engineering</span>
+<span class=tag>agents</span>
+<span class=tag>mcp</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/ class=post-card data-umami-event=post-card-click data-umami-event-title="Aspire's Isolated Mode Fixes the Port Conflict Nightmare for Parallel Development"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 10, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Aspire's Isolated Mode Fixes the Port Conflict Nightmare for Parallel Development</h2><p class=post-card-excerpt>Aspire 13.2 introduces --isolated mode: random ports, separate secrets, and zero collisions when running multiple instances of the same AppHost. Perfect for AI agents, worktrees, and parallel workflows.</p><div class=post-card-tags><span class=tag>aspire</span>
+<span class=tag>dotnet</span>
+<span class=tag>cli</span>
+<span class=tag>developer-tools</span>
+<span class=tag>parallel-development</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/ag-ui-real-time-multi-agent-ui-maf/ class=post-card data-umami-event=post-card-click data-umami-event-title="Building Real-Time Multi-Agent UIs That Don't Feel Like a Black Box"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 10, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Building Real-Time Multi-Agent UIs That Don't Feel Like a Black Box</h2><p class=post-card-excerpt>AG-UI and Microsoft Agent Framework team up to give multi-agent workflows a proper frontend — with real-time streaming, human approvals, and full visibility into what your agents are doing.</p><div class=post-card-tags><span class=tag>agent-framework</span>
+<span class=tag>ai</span>
+<span class=tag>ag-ui</span>
+<span class=tag>multi-agent</span>
+<span class=tag>azure</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/foundry-agents-mcp-servers-azure-functions/ class=post-card data-umami-event=post-card-click data-umami-event-title="Connect Your MCP Servers on Azure Functions to Foundry Agents — Here's How"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 10, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Connect Your MCP Servers on Azure Functions to Foundry Agents — Here's How</h2><p class=post-card-excerpt>Build your MCP server once, deploy it to Azure Functions, and connect it to Microsoft Foundry agents with proper auth. Your tools work everywhere — VS Code, Cursor, and now enterprise AI agents.</p><div class=post-card-tags><span class=tag>mcp</span>
+<span class=tag>azure-functions</span>
+<span class=tag>foundry</span>
+<span class=tag>ai</span>
+<span class=tag>azure</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/ class=post-card data-umami-event=post-card-click data-umami-event-title="GitHub Copilot's Modernization Assessment Is the Best Migration Tool You're Not Using Yet"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 10, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>GitHub Copilot's Modernization Assessment Is the Best Migration Tool You're Not Using Yet</h2><p class=post-card-excerpt>GitHub Copilot's modernization extension doesn't just suggest code changes — it produces a full migration assessment with actionable issues, Azure target comparisons, and a collaborative workflow. Here's why the assessment document is the key to everything.</p><div class=post-card-tags><span class=tag>dotnet</span>
+<span class=tag>azure</span>
+<span class=tag>github-copilot</span>
+<span class=tag>modernization</span>
+<span class=tag>migration</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/mcp-fluent-api-azure-functions-dotnet/ class=post-card data-umami-event=post-card-click data-umami-event-title="MCP Apps Get a Fluent API — Build Rich AI Tool UIs in .NET with Three Steps"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 10, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>MCP Apps Get a Fluent API — Build Rich AI Tool UIs in .NET with Three Steps</h2><p class=post-card-excerpt>The new fluent configuration API for MCP Apps on Azure Functions lets you turn any .NET MCP tool into a full app with views, permissions, and CSP policies in just a few lines of code.</p><div class=post-card-tags><span class=tag>mcp</span>
+<span class=tag>dotnet</span>
+<span class=tag>azure-functions</span>
+<span class=tag>ai</span>
+<span class=tag>azure-sdk</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/microsoft-foundry-march-2026-whats-new/ class=post-card data-umami-event=post-card-click data-umami-event-title="Microsoft Foundry March 2026 — GPT-5.4, Agent Service GA, and the SDK Refresh That Changes Everything"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 10, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Microsoft Foundry March 2026 — GPT-5.4, Agent Service GA, and the SDK Refresh That Changes Everything</h2><p class=post-card-excerpt>Microsoft Foundry's March 2026 update is massive: Agent Service hits GA, GPT-5.4 brings reliable reasoning, the azure-ai-projects SDK goes stable across all languages, and Fireworks AI brings open models to Azure.</p><div class=post-card-tags><span class=tag>foundry</span>
+<span class=tag>ai</span>
+<span class=tag>azure</span>
+<span class=tag>gpt-5-4</span>
+<span class=tag>agents</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/ class=post-card data-umami-event=post-card-click data-umami-event-title="SQL MCP Server — The Right Way to Give AI Agents Database Access"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 10, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>SQL MCP Server — The Right Way to Give AI Agents Database Access</h2><p class=post-card-excerpt>SQL MCP Server from Data API builder gives AI agents secure, deterministic database access without exposing schemas or relying on NL2SQL. RBAC, caching, multi-database support — all built in.</p><div class=post-card-tags><span class=tag>azure-sql</span>
+<span class=tag>mcp</span>
+<span class=tag>data-api-builder</span>
+<span class=tag>ai</span>
+<span class=tag>azure</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/ class=post-card data-umami-event=post-card-click data-umami-event-title="That Visual Studio Floating Windows Setting You Didn't Know About (But Should)"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 10, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>That Visual Studio Floating Windows Setting You Didn't Know About (But Should)</h2><p class=post-card-excerpt>A hidden Visual Studio setting gives you full control over floating windows — independent taskbar entries, proper multi-monitor behavior, and perfect FancyZones integration. One dropdown changes everything.</p><div class=post-card-tags><span class=tag>visual-studio</span>
+<span class=tag>developer-tools</span>
+<span class=tag>productivity</span>
+<span class=tag>powertoys</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/ class=post-card data-umami-event=post-card-click data-umami-event-title="VS Code 1.116 — Agents App Gets Keyboard Navigation and File Context Completions"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 10, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>VS Code 1.116 — Agents App Gets Keyboard Navigation and File Context Completions</h2><p class=post-card-excerpt>VS Code 1.116 focuses on Agents app polish — dedicated keybindings, accessibility improvements, file-context completions, and CSS @import link resolution.</p><div class=post-card-tags><span class=tag>vscode</span>
+<span class=tag>developer-tools</span>
+<span class=tag>agents</span>
+<span class=tag>accessibility</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/ class=post-card data-umami-event=post-card-click data-umami-event-title="VS Code 1.115 — Background Terminal Notifications, SSH Agent Mode, and More"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 6, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>VS Code 1.115 — Background Terminal Notifications, SSH Agent Mode, and More</h2><p class=post-card-excerpt>VS Code 1.115 brings background terminal notifications for agents, SSH remote agent hosting, file paste in terminals, and session-aware edit tracking. Here's what matters for .NET developers.</p><div class=post-card-tags><span class=tag>vscode</span>
+<span class=tag>developer-tools</span>
+<span class=tag>copilot</span>
+<span class=tag>ai</span>
+<span class=tag>remote-development</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/csharp-15-union-types-exhaustive-matching/ class=post-card data-umami-event=post-card-click data-umami-event-title="C# 15 Gets Union Types — and They're Exactly What We've Been Asking For"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 5, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>C# 15 Gets Union Types — and They're Exactly What We've Been Asking For</h2><p class=post-card-excerpt>C# 15 introduces the union keyword — compiler-enforced discriminated unions with exhaustive pattern matching. Here's what they look like, why they matter, and how to try them today.</p><div class=post-card-tags><span class=tag>csharp</span>
+<span class=tag>dotnet</span>
+<span class=tag>union-types</span>
+<span class=tag>pattern-matching</span>
+<span class=tag>dotnet-11</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/ class=post-card data-umami-event=post-card-click data-umami-event-title="Aspire 13.2 Ships a Docs CLI — and Your AI Agent Can Use It Too"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 4, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Aspire 13.2 Ships a Docs CLI — and Your AI Agent Can Use It Too</h2><p class=post-card-excerpt>.NET Aspire 13.2 adds aspire docs — a CLI for searching, browsing, and reading official documentation without leaving your terminal. It also works as a tool for AI agents. Here's why this matters.</p><div class=post-card-tags><span class=tag>aspire</span>
+<span class=tag>dotnet</span>
+<span class=tag>cli</span>
+<span class=tag>ai</span>
+<span class=tag>developer-tools</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/agent-framework-1-0-production-ready/ class=post-card data-umami-event=post-card-click data-umami-event-title="Microsoft Agent Framework Hits 1.0 — Here's What Actually Matters for .NET Developers"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 3, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Microsoft Agent Framework Hits 1.0 — Here's What Actually Matters for .NET Developers</h2><p class=post-card-excerpt>Microsoft Agent Framework 1.0 is production-ready with stable APIs, multi-agent orchestration, and connectors for every major AI provider. Here's what you need to know as a .NET developer.</p><div class=post-card-tags><span class=tag>agent-framework</span>
+<span class=tag>dotnet</span>
+<span class=tag>ai</span>
+<span class=tag>semantic-kernel</span>
+<span class=tag>azure-openai</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/ class=post-card data-umami-event=post-card-click data-umami-event-title="Aspire 13.2's Dashboard Just Got a Telemetry API — and It Changes Everything"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 2, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Aspire 13.2's Dashboard Just Got a Telemetry API — and It Changes Everything</h2><p class=post-card-excerpt>.NET Aspire 13.2 ships smarter telemetry export, a programmable API for traces and logs, and GenAI visualization improvements. Here's why this matters for your debugging workflow.</p><div class=post-card-tags><span class=tag>aspire</span>
+<span class=tag>dotnet</span>
+<span class=tag>opentelemetry</span>
+<span class=tag>dashboard</span>
+<span class=tag>observability</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/ class=post-card data-umami-event=post-card-click data-umami-event-title="azd Now Lets You Run and Debug AI Agents Locally — Here's What Changed in March 2026"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 2, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>azd Now Lets You Run and Debug AI Agents Locally — Here's What Changed in March 2026</h2><p class=post-card-excerpt>The Azure Developer CLI shipped seven releases in March 2026. The highlights: a local run-and-debug loop for AI agents, GitHub Copilot integration in project setup, and Container App Jobs support.</p><div class=post-card-tags><span class=tag>azure</span>
+<span class=tag>azd</span>
+<span class=tag>ai</span>
+<span class=tag>agents</span>
+<span class=tag>dotnet</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/ class=post-card data-umami-event=post-card-click data-umami-event-title="Azure DevOps Finally Fixes the Markdown Editor UX Everyone Complained About"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 2, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Azure DevOps Finally Fixes the Markdown Editor UX Everyone Complained About</h2><p class=post-card-excerpt>The Azure DevOps Markdown editor for work items gets a clearer preview-vs-edit mode distinction. It's a small change that fixes a genuinely annoying workflow issue.</p><div class=post-card-tags><span class=tag>azure-devops</span>
+<span class=tag>devops</span>
+<span class=tag>productivity</span>
+<span class=tag>developer-tools</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/ class=post-card data-umami-event=post-card-click data-umami-event-title="Bookmark Studio Brings Slot-Based Navigation and Sharing to Visual Studio Bookmarks"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 2, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Bookmark Studio Brings Slot-Based Navigation and Sharing to Visual Studio Bookmarks</h2><p class=post-card-excerpt>Mads Kristensen's new Bookmark Studio extension adds keyboard-driven slot navigation, a bookmark manager, colors, labels, and export/share capabilities to Visual Studio bookmarks.</p><div class=post-card-tags><span class=tag>visual-studio</span>
+<span class=tag>extensions</span>
+<span class=tag>productivity</span>
+<span class=tag>developer-tools</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/ class=post-card data-umami-event=post-card-click data-umami-event-title="Visual Studio's March Update Lets You Build Custom Copilot Agents — and the find_symbol Tool Is a Big Deal"><div class=post-card-main><div class=post-meta><span class=post-date>Apr 2, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Visual Studio's March Update Lets You Build Custom Copilot Agents — and the find_symbol Tool Is a Big Deal</h2><p class=post-card-excerpt>Visual Studio's March 2026 update ships custom Copilot agents, reusable agent skills, a language-aware find_symbol tool, and Copilot-powered profiling from Test Explorer. Here's what matters.</p><div class=post-card-tags><span class=tag>visual-studio</span>
+<span class=tag>github-copilot</span>
+<span class=tag>dotnet</span>
+<span class=tag>ai</span>
+<span class=tag>developer-tools</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/kubecon-2026-aks-updates-dotnet-developers/ class=post-card data-umami-event=post-card-click data-umami-event-title="KubeCon Europe 2026: What .NET Developers Should Actually Care About"><div class=post-card-main><div class=post-meta><span class=post-date>Mar 29, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>KubeCon Europe 2026: What .NET Developers Should Actually Care About</h2><p class=post-card-excerpt>Microsoft dropped a wall of Kubernetes announcements at KubeCon Europe 2026. Here's the filtered version — only the AKS and cloud-native updates that matter if you're shipping .NET apps.</p><div class=post-card-tags><span class=tag>kubernetes</span>
+<span class=tag>aks</span>
+<span class=tag>azure</span>
+<span class=tag>dotnet</span>
+<span class=tag>cloud-native</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/agentic-ai-microsoft-databases-what-matters/ class=post-card data-umami-event=post-card-click data-umami-event-title="SQL MCP Server, Copilot in SSMS, and a Database Hub with AI Agents: What Actually Matters from SQLCon 2026"><div class=post-card-main><div class=post-meta><span class=post-date>Mar 28, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>SQL MCP Server, Copilot in SSMS, and a Database Hub with AI Agents: What Actually Matters from SQLCon 2026</h2><p class=post-card-excerpt>Microsoft dropped a stack of database announcements at SQLCon 2026. Here's the stuff that actually matters if you're building AI-powered apps on Azure SQL.</p><div class=post-card-tags><span class=tag>azure</span>
+<span class=tag>ai</span>
+<span class=tag>sql</span>
+<span class=tag>databases</span>
+<span class=tag>mcp</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/ class=post-card data-umami-event=post-card-click data-umami-event-title="Azure DevOps MCP Server Lands in Microsoft Foundry: What This Means for Your AI Agents"><div class=post-card-main><div class=post-meta><span class=post-date>Mar 26, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Azure DevOps MCP Server Lands in Microsoft Foundry: What This Means for Your AI Agents</h2><p class=post-card-excerpt>The Azure DevOps MCP Server is now available in Microsoft Foundry. Connect your AI agents directly to DevOps workflows — work items, repos, pipelines — with a few clicks.</p><div class=post-card-tags><span class=tag>azure</span>
+<span class=tag>devops</span>
+<span class=tag>ai</span>
+<span class=tag>mcp</span>
+<span class=tag>foundry</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/background-responses-agent-framework-long-running-tasks/ class=post-card data-umami-event=post-card-click data-umami-event-title="Background Responses in Microsoft Agent Framework: No More Timeout Anxiety"><div class=post-card-main><div class=post-meta><span class=post-date>Mar 26, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Background Responses in Microsoft Agent Framework: No More Timeout Anxiety</h2><p class=post-card-excerpt>Microsoft Agent Framework now lets you offload long-running AI tasks with continuation tokens. Here's how background responses work and why they matter for your .NET agents.</p><div class=post-card-tags><span class=tag>dotnet</span>
+<span class=tag>ai</span>
+<span class=tag>agent-framework</span>
+<span class=tag>azure</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/foundry-agent-service-ga-what-matters/ class=post-card data-umami-event=post-card-click data-umami-event-title="Foundry Agent Service is GA: What Actually Matters for .NET Agent Builders"><div class=post-card-main><div class=post-meta><span class=post-date>Mar 26, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>Foundry Agent Service is GA: What Actually Matters for .NET Agent Builders</h2><p class=post-card-excerpt>Microsoft's Foundry Agent Service just hit GA with private networking, Voice Live, production evaluations, and an open multi-model runtime. Here's what you need to know.</p><div class=post-card-tags><span class=tag>azure</span>
+<span class=tag>ai</span>
+<span class=tag>foundry</span>
+<span class=tag>agents</span>
+<span class=tag>dotnet</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/deploy-ai-agents-foundry-azd-two-commands/ class=post-card data-umami-event=post-card-click data-umami-event-title="From Laptop to Production: Deploying AI Agents to Microsoft Foundry with Two Commands"><div class=post-card-main><div class=post-meta><span class=post-date>Mar 26, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>From Laptop to Production: Deploying AI Agents to Microsoft Foundry with Two Commands</h2><p class=post-card-excerpt>The Azure Developer CLI now has 'azd ai agent' commands that take your AI agent from local dev to a live Foundry endpoint in minutes. Here's the full workflow.</p><div class=post-card-tags><span class=tag>azure</span>
+<span class=tag>ai</span>
+<span class=tag>foundry</span>
+<span class=tag>developer-tools</span>
+<span class=tag>azd</span></div></div><span class=post-card-arrow>→</span>
+</a><a href=/posts/emiliano-montesdeoca/vscode-1-112-dotnet-developers/ class=post-card data-umami-event=post-card-click data-umami-event-title="VS Code 1.112: What .NET Developers Should Actually Care About"><div class=post-card-main><div class=post-meta><span class=post-date>Mar 26, 2026</span>
+<span class=post-author-tag>Emiliano Montesdeoca</span></div><h2 class=post-card-title>VS Code 1.112: What .NET Developers Should Actually Care About</h2><p class=post-card-excerpt>VS Code 1.112 just dropped and it's packed with agent upgrades, an integrated browser debugger, MCP sandboxing, and monorepo support. Here's what actually matters if you're building with .NET.</p><div class=post-card-tags><span class=tag>dotnet</span>
+<span class=tag>visual-studio</span>
+<span class=tag>tooling</span>
+<span class=tag>productivity</span>
+<span class=tag>ai</span></div></div><span class=post-card-arrow>→</span></a></div><nav class=pagination><span class=active>1</span>
+<a href=/posts/page/2/ data-umami-event=pagination-page data-umami-event-page=2>2</a>
+<a href=/posts/page/3/ data-umami-event=pagination-page data-umami-event-page=3>3</a>
+<a href=/posts/page/4/ data-umami-event=pagination-page data-umami-event-page=4>4</a>
+<a href=/posts/page/5/ data-umami-event=pagination-page data-umami-event-page=5>5</a>
+<a href=/posts/page/2/ data-umami-event=pagination-next>next →</a></nav></div></main><footer class=site-footer><div class=footer-inner><p class=footer-copy>&copy; 2026 The .NET Blog &mdash; From developers to developers &mdash; <a href=https://github.com/thedotnetblog/blog target=_blank rel="noopener noreferrer" data-umami-event=footer-github>GitHub</a></p></div></footer><script>document.getElementById("theme-toggle").addEventListener("click",function(){var t=document.documentElement.getAttribute("data-theme"),e=t==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",e),localStorage.setItem("theme",e)}),function(){var e=document.getElementById("nav-burger"),t=document.getElementById("nav-links");e&&t&&e.addEventListener("click",function(){var n=t.classList.toggle("open");e.classList.toggle("open",n),e.setAttribute("aria-expanded",String(n))})}(),function(){var n,s,o,t=document.getElementById("lang-toggle"),e=document.getElementById("lang-dropdown");if(!t||!e)return;t.addEventListener("click",function(n){n.stopPropagation();var s=e.classList.toggle("open");t.setAttribute("aria-expanded",String(s))}),document.addEventListener("click",function(n){!t.contains(n.target)&&!e.contains(n.target)&&(e.classList.remove("open"),t.setAttribute("aria-expanded","false"))}),e.querySelectorAll("a[data-lang]").forEach(function(e){e.addEventListener("click",function(){localStorage.setItem("preferred-lang",e.getAttribute("data-lang"))})}),n=localStorage.getItem("preferred-lang"),o=document.documentElement.lang||"en",n&&n!==o&&!sessionStorage.getItem("lang-redirected")&&(s=e.querySelector('a[data-lang="'+n+'"]'),s&&s.href&&(sessionStorage.setItem("lang-redirected","1"),window.location.href=s.href))}()</script></body></html>

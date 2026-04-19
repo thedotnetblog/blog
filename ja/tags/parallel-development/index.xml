@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Parallel-Development on The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/parallel-development/</link><description>Recent content in Parallel-Development on The .NET Blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/parallel-development/index.xml" rel="self" type="application/rss+xml"/><item><title>Aspireの分離モードが並列開発のポート競合の悪夢を解決する</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されました。原文は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;同じプロジェクトの2つのインスタンスを同時に実行しようとしたことがあるなら、あの苦痛を知っているでしょう。ポート8080は既に使用中。ポート17370は取られている。何かをkillして、再起動して、環境変数をジャグリングする — 生産性のキラーです。&lt;/p&gt;
+&lt;p&gt;この問題は改善ではなく悪化しています。AIエージェントは独立して作業するためにgit worktreeを作成します。バックグラウンドエージェントは別々の環境を立ち上げます。開発者はフィーチャーブランチのために同じリポジトリを2回チェックアウトします。これらのシナリオはすべて同じ壁にぶつかります：同じアプリの2つのインスタンスが同じポートを奪い合うのです。&lt;/p&gt;
+&lt;p&gt;Aspire 13.2はたった一つのフラグでこれを解決します。AspireチームのJames Newton-Kingが&lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;詳細を書いています&lt;/a&gt;。「なぜこれがもっと早くなかったの？」という機能の一つです。&lt;/p&gt;
+&lt;h2 id="解決策--isolated"&gt;解決策：&lt;code&gt;--isolated&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;これだけです。各実行は以下を取得します：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ランダムポート&lt;/strong&gt; — インスタンス間のコリジョンなし&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;分離されたユーザーシークレット&lt;/strong&gt; — 接続文字列とAPIキーがインスタンスごとに分離&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;手動のポート再割り当ては不要。環境変数のジャグリングも不要。各実行は自動的にクリーンでコリジョンフリーの環境を取得します。&lt;/p&gt;
+&lt;h2 id="これが輝く実際のシナリオ"&gt;これが輝く実際のシナリオ&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;複数チェックアウト。&lt;/strong&gt; あるディレクトリにフィーチャーブランチ、別のディレクトリにバグフィックスがある場合：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-feature
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-bugfix
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;両方とも競合なしで実行されます。ダッシュボードで何がどこで実行されているか確認できます。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;VS Codeのバックグラウンドエージェント。&lt;/strong&gt; Copilot Chatのバックグラウンドエージェントがコードに独立して作業するためにgit worktreeを作成する場合、Aspire AppHostを実行する必要があるかもしれません。&lt;code&gt;--isolated&lt;/code&gt;なしでは、プライマリworktreeとのポート競合が発生します。これがあれば、両方のインスタンスが問題なく動作します。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;aspire agent init&lt;/code&gt;に付属するAspireスキルは、worktreeで作業する際に&lt;code&gt;--isolated&lt;/code&gt;を使うようエージェントに自動的に指示します。そのため、Copilotのバックグラウンドエージェントはこれをネイティブに処理するはずです。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;開発と並行した統合テスト。&lt;/strong&gt; 機能の構築を続けながらライブのAppHostに対してテストを実行する必要がありますか？分離モードは各コンテキストに独自のポートと設定を提供します。&lt;/p&gt;
+&lt;h2 id="内部の仕組み"&gt;内部の仕組み&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;--isolated&lt;/code&gt;を渡すと、CLIはその実行のためにユニークなインスタンスIDを生成します。これにより2つの動作が駆動されます：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;ポートのランダム化&lt;/strong&gt; — AppHost設定で定義された予測可能なポートにバインドする代わりに、分離モードはすべてに対して利用可能なランダムポートを選択します — ダッシュボード、サービスエンドポイント、すべて。サービスディスカバリが自動的に調整されるため、どのポートに割り当てられても、サービスは互いを見つけることができます。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;シークレットの分離&lt;/strong&gt; — 各分離実行はインスタンスIDでキー付けされた独自のユーザーシークレットストアを取得します。ある実行の接続文字列やAPIキーが別の実行に漏れることはありません。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;コードの変更は不要です。Aspireのサービスディスカバリがランタイムでエンドポイントを解決するため、ポートの割り当てに関係なくすべてが正しく接続されます。&lt;/p&gt;
+&lt;h2 id="いつ使うべきか"&gt;いつ使うべきか&lt;/h2&gt;
+&lt;p&gt;同じAppHostの複数インスタンスを同時に実行する場合に&lt;code&gt;--isolated&lt;/code&gt;を使用してください — 並列開発、自動テスト、AIエージェント、git worktreeのいずれの場合でも。予測可能なポートを好む単一インスタンス開発では、通常の&lt;code&gt;aspire run&lt;/code&gt;で問題ありません。&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coding-Agents on The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/coding-agents/</link><description>Recent content in Coding-Agents on The .NET Blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Fri, 17 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/coding-agents/index.xml" rel="self" type="application/rss+xml"/><item><title>ターミナルの見張り番はもう終わり：Aspireのデタッチモードがワークフローを変える</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</link><pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されています。原文は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;AspireのAppHostを実行するたびに、ターミナルが奪われます。ロックされて、Ctrl+Cを押すまで占有されたまま。ちょっとしたコマンドを実行したい？別のタブを開く。ログを確認したい？もう一つタブを開く。小さなストレスですが、積み重なると大きくなります。&lt;/p&gt;
+&lt;p&gt;Aspire 13.2がこれを解決します。James Newton-Kingが&lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;詳細を書いています&lt;/a&gt;が、正直なところ、これは使い始めた瞬間にワークフローが変わる機能の一つです。&lt;/p&gt;
+&lt;h2 id="デタッチモードコマンド一つでターミナルが戻る"&gt;デタッチモード：コマンド一つでターミナルが戻る&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;これは&lt;code&gt;aspire run --detach&lt;/code&gt;のショートカットです。AppHostがバックグラウンドで起動し、ターミナルがすぐに戻ってきます。余計なタブは不要。ターミナルマルチプレクサも不要。プロンプトがそのまま使える状態です。&lt;/p&gt;
+&lt;h2 id="実行中のプロセスを管理する"&gt;実行中のプロセスを管理する&lt;/h2&gt;
+&lt;p&gt;ポイントはこうです — バックグラウンド実行は、実行中のものを管理できて初めて意味があります。Aspire 13.2はまさにそのためのCLIコマンド一式を提供します：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# List all running AppHosts&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire ps
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Inspect the state of a specific AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire describe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stream logs from a running AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire logs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stop a specific AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire stop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;これによりAspire CLIが本格的なプロセスマネージャーになります。複数のAppHostを起動し、ステータスを確認し、ログを追跡し、シャットダウンできます — すべて一つのターミナルセッションから。&lt;/p&gt;
+&lt;h2 id="分離モードと組み合わせる"&gt;分離モードと組み合わせる&lt;/h2&gt;
+&lt;p&gt;デタッチモードは分離モードと自然に組み合わせられます。同じプロジェクトの2つのインスタンスをポート競合なしにバックグラウンドで実行したい場合は？&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;それぞれがランダムなポート、個別のシークレット、独自のライフサイクルを持ちます。&lt;code&gt;aspire ps&lt;/code&gt;で両方を確認し、&lt;code&gt;aspire stop&lt;/code&gt;で不要な方を停止できます。&lt;/p&gt;
+&lt;h2 id="コーディングエージェントにとってなぜこれが重要か"&gt;コーディングエージェントにとってなぜこれが重要か&lt;/h2&gt;
+&lt;p&gt;ここからが本当に面白いところです。ターミナルで作業するコーディングエージェントが以下のことをできるようになります：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;aspire start&lt;/code&gt;でアプリを起動&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aspire describe&lt;/code&gt;で状態を確認&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aspire logs&lt;/code&gt;でログをチェックして問題を診断&lt;/li&gt;
+&lt;li&gt;完了したら&lt;code&gt;aspire stop&lt;/code&gt;で停止&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;すべてターミナルセッションを失うことなく実行できます。デタッチモード以前は、AppHostを実行したエージェントは自分自身のターミナルをロックしてしまいました。今では起動、観察、反復、クリーンアップが可能です — 自律エージェントに期待する動作そのものです。&lt;/p&gt;</description></item></channel></rss>

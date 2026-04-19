@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tooling on The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/tooling/</link><description>Recent content in Tooling on The .NET Blog</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Thu, 26 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/tooling/index.xml" rel="self" type="application/rss+xml"/><item><title>VS Code 1.112：.NET 开发者真正应该关注的内容</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/vscode-1-112-dotnet-developers/</link><pubDate>Thu, 26 Mar 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/vscode-1-112-dotnet-developers/</guid><description>&lt;p&gt;VS Code 1.112 刚落地，说实话？如果你每天都在 .NET 的世界里，这个版本感觉不一样。&lt;a href="https://code.visualstudio.com/updates/v1_112"&gt;官方发布说明&lt;/a&gt; 里有很多内容，但让我帮你省点滚动，专注于对我们真正重要的东西。&lt;/p&gt;
+&lt;h2 id="copilot-cli-变得更有用了"&gt;Copilot CLI 变得更有用了&lt;/h2&gt;
+&lt;p&gt;这个版本的大主题是&lt;strong&gt;代理自主性&lt;/strong&gt; — 给 Copilot 更多空间做它的事，不需要你看管每一步。&lt;/p&gt;
+&lt;h3 id="消息引导和排队"&gt;消息引导和排队&lt;/h3&gt;
+&lt;p&gt;你知道 Copilot CLI 在任务进行到一半时，你突然想起忘了提什么东西的那个时刻吗？以前你只能等。现在你可以在请求还在运行时发送消息 — 要么引导当前响应，要么排队后续指令。&lt;/p&gt;
+&lt;p&gt;这对那些较长的 &lt;code&gt;dotnet&lt;/code&gt; 脚手架任务来说太棒了，你看着 Copilot 设置项目然后想&amp;quot;哦等等，我还需要 MassTransit&amp;quot;。&lt;/p&gt;
+&lt;h3 id="权限级别"&gt;权限级别&lt;/h3&gt;
+&lt;p&gt;这是我最兴奋的。Copilot CLI 会话现在支持三个权限级别：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;默认权限&lt;/strong&gt; — 工具在运行前请求确认的常规流程&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;跳过审批&lt;/strong&gt; — 自动批准一切并在出错时重试&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自动驾驶&lt;/strong&gt; — 完全自主：批准工具、回答自己的问题、持续到任务完成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果你在做类似用 Entity Framework、migrations 和 Docker 设置创建新的 ASP.NET Core API 这样的事 — 自动驾驶模式意味着你描述想要什么然后去拿杯咖啡。它会搞定的。&lt;/p&gt;
+&lt;p&gt;你可以用 &lt;code&gt;chat.autopilot.enabled&lt;/code&gt; 设置启用自动驾驶。&lt;/p&gt;
+&lt;h3 id="委托前预览更改"&gt;委托前预览更改&lt;/h3&gt;
+&lt;p&gt;当你把任务委托给 Copilot CLI 时，它会创建一个 worktree。以前如果你有未提交的更改，你得检查源代码管理来看什么会受影响。现在聊天视图会在你决定复制、移动或忽略之前直接显示待处理的更改。&lt;/p&gt;
+&lt;p&gt;小事情，但省去了&amp;quot;等等，我 staging 了什么？&amp;ldquo;的时刻。&lt;/p&gt;
+&lt;h2 id="不离开-vs-code-就能调试-web-应用"&gt;不离开 VS Code 就能调试 Web 应用&lt;/h2&gt;
+&lt;p&gt;集成浏览器现在支持&lt;strong&gt;完整调试&lt;/strong&gt;。你可以设断点、单步执行代码、检查变量 — 全在 VS Code 内。不用再切换到 Edge DevTools 了。&lt;/p&gt;</description></item></channel></rss>

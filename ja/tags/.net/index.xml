@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>.NET on The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/.net/</link><description>Recent content in .NET on The .NET Blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Tue, 14 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/.net/index.xml" rel="self" type="application/rss+xml"/><item><title>.NETのAgent Skillsが本気で柔軟になった</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/</link><pubDate>Tue, 14 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されました。原文は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Microsoft Agent Frameworkでエージェントを構築しているなら、流れは分かっているはずです：スキルを定義し、プロバイダーに接続し、エージェントにどれを呼び出すか判断させる。新しいのはスキルの&lt;em&gt;作り方&lt;/em&gt;であり、柔軟性の向上は大きなものです。&lt;/p&gt;
+&lt;p&gt;最新のアップデートでは、エージェントスキルの3つのオーサリングパターンが導入されました：&lt;strong&gt;ファイルベース&lt;/strong&gt;、&lt;strong&gt;クラスベース&lt;/strong&gt;、&lt;strong&gt;インラインコード定義&lt;/strong&gt;。3つすべてが単一の &lt;code&gt;AgentSkillsProviderBuilder&lt;/code&gt; に接続されるため、ルーティングロジックや特別なグルーコードなしで自由に組み合わせることができます。それぞれのパターンと、いつ使うべきかを説明します。&lt;/p&gt;
+&lt;h2 id="ファイルベースのスキル出発点"&gt;ファイルベースのスキル：出発点&lt;/h2&gt;
+&lt;p&gt;ファイルベースのスキルはそのままの意味です — &lt;code&gt;SKILL.md&lt;/code&gt;ファイル、オプションのスクリプト、参照ドキュメントを含むディスク上のディレクトリです。エージェントに新しい能力を与える最もシンプルな方法です：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;skills/
+└── onboarding-guide/
+ ├── SKILL.md
+ ├── scripts/
+ │ └── check-provisioning.py
+ └── references/
+ └── onboarding-checklist.md
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;SKILL.md&lt;/code&gt;のフロントマターでスキル名と説明を宣言し、指示セクションでスクリプトと参照の使い方をエージェントに伝えます：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;---
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;name: onboarding-guide
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;description: &amp;gt;-
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Walk new hires through their first-week setup checklist.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;---
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gu"&gt;## Instructions
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;1.&lt;/span&gt; Ask for the employee&amp;#39;s name and start date.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;2.&lt;/span&gt; Run &lt;span class="sb"&gt;`scripts/check-provisioning.py`&lt;/span&gt; to verify accounts.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;3.&lt;/span&gt; Walk through &lt;span class="sb"&gt;`references/onboarding-checklist.md`&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;4.&lt;/span&gt; Follow up on incomplete items.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;そして &lt;code&gt;SubprocessScriptRunner.RunAsync&lt;/code&gt; でスクリプト実行を接続します：&lt;/p&gt;</description></item></channel></rss>

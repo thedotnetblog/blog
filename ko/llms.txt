@@ -1,0 +1,78 @@
+# The .NET Blog
+
+> Articles, tutorials and insights from the .NET community.
+
+The .NET Blog is a community-driven publication featuring articles, tutorials, and deep dives on .NET, ASP.NET Core, C#, cloud architecture, and software engineering. Written by developers, for developers.
+
+## Metadata
+
+- URL: https://thedotnetblog.com/
+- Language: ko
+- Last Updated: 2026-04-19
+
+## Blog Posts
+- [VS Code 1.117: 에이전트가 전용 Git 브랜치를 갖게 됐다, 완전 찬성이다](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/vscode-1-117-agents-autopilot-worktrees/): VS Code 1.117이 에이전트 세션을 위한 worktree 격리, 영구 Autopilot 모드, 서브에이전트 지원을 제공합니다. 에이전트 코딩 워크플로가 훨씬 더 현실적이 됐습니다.
+- [Azure에서의 AI 실험이 돈을 태우고 있다 — 해결 방법은 이것이다](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/): Azure의 AI 워크로드는 빠르게 비용이 증가할 수 있습니다. 개발 속도를 늦추지 않으면서 비용을 통제하는 데 실제로 효과가 있는 방법에 대해 이야기해 봅시다.
+- [Foundry의 RFT가 더 저렴하고 스마트해졌습니다 — 변경된 내용 정리](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/): Microsoft Foundry가 이번 달 세 가지 RFT 업데이트를 출시했습니다: o4-mini 글로벌 트레이닝, 새로운 GPT-4.1 모델 그레이더, 그리고 디버깅 시간을 크게 줄여줄 모범 사례 가이드.
+- [Docker Sandbox로 Copilot 에이전트가 머신 위험 없이 코드를 리팩터링할 수 있게 되었다](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/): Docker Sandbox는 GitHub Copilot 에이전트에게 안전한 마이크로VM을 제공하여 권한 프롬프트 없이, 호스트 위험 없이 자유롭게 리팩터링할 수 있게 합니다. 대규모 .NET 현대화에 왜 이것이 모든 것을 바꾸는지 알아보세요.
+- [터미널 감시는 그만: Aspire의 분리 모드가 워크플로를 바꾼다](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/): Aspire 13.2에서는 AppHost를 백그라운드에서 실행하고 터미널을 되찾을 수 있습니다. 새로운 CLI 명령과 에이전트 지원과 결합하면, 생각보다 훨씬 큰 변화입니다.
+- [Azure MCP 도구가 Visual Studio 2022에 기본 탑재 — 확장 프로그램 설치 불필요](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-mcp-tools-built-into-visual-studio-2022/): Azure MCP 도구가 Visual Studio 2022의 Azure 개발 워크로드의 일부로 제공됩니다. 230개 이상의 도구, 45개 Azure 서비스, 설치할 확장 프로그램 제로.
+- [핀 클러스터링이 드디어 .NET MAUI Maps에 도착 — 프로퍼티 하나, 고통 제로](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/maui-maps-pin-clustering-finally/): .NET MAUI 11 Preview 3에서 Map 컨트롤에 네이티브 핀 클러스터링이 추가되었습니다. 프로퍼티 하나, 독립적인 클러스터링 그룹, 탭 처리 — 모두 내장.
+- [.NET 2026년 4월 서비싱 — 오늘 바로 적용해야 할 보안 패치](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/dotnet-april-2026-servicing-security-patches/): 2026년 4월 서비싱 릴리스는 .NET 10, .NET 9, .NET 8, .NET Framework에 걸쳐 6개의 CVE를 패치합니다 — 원격 코드 실행 취약점 2건을 포함합니다.
+- [Aspire 13.2에 MongoDB EF Core와 Azure Data Lake 추가 — 꼭 써봐야 할 두 가지 통합](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-132-mongodb-efcore-data-lake/): Aspire 13.2에 제로 설정 헬스 체크와 서비스 디스커버리를 갖춘 MongoDB Entity Framework Core 및 Azure Data Lake Storage 통합이 추가되었습니다. 실제로 어떻게 사용하는지 살펴봅니다.
+- [azd update — 모든 패키지 매니저를 지배하는 하나의 명령어](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/): Azure Developer CLI에 설치 방법에 관계없이 작동하는 범용 업데이트 명령어가 추가되었습니다 — winget, Homebrew, Chocolatey, 설치 스크립트 모두 지원.
+- [Azure DevOps Server 2026년 4월 패치 — PR 완료 수정 및 보안 업데이트](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/): Azure DevOps Server가 패치 3을 받았습니다. PR 완료 실패 수정, 로그아웃 유효성 검사 개선, GitHub Enterprise Server PAT 연결 복원이 포함됩니다.
+- [Azure Smart Tier GA 출시 — 수명 주기 규칙 없이 Blob Storage 비용 자동 최적화](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/): Azure Blob Storage smart tier가 정식 출시되었습니다. 실제 액세스 패턴을 기반으로 hot, cool, cold 티어 간에 객체를 자동으로 이동합니다 — 수명 주기 규칙이 필요 없습니다.
+- [Azure에서 AI 에이전트를 어디에 호스팅해야 할까? 실용적인 의사결정 가이드](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-ai-agent-hosting-options-guide/): Azure는 원시 컨테이너부터 완전 관리형 Foundry Hosted Agents까지 AI 에이전트를 호스팅하는 6가지 방법을 제공합니다. .NET 워크로드에 적합한 것을 선택하는 방법을 알아보세요.
+- [.NET의 Agent Skills가 정말 유연해졌다](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/): Microsoft Agent Framework가 이제 스킬을 만드는 세 가지 방법을 지원합니다 — 파일, 클래스, 인라인 코드 — 모두 단일 provider를 통해 조합 가능합니다. 왜 중요한지, 각각 어떻게 사용하는지 설명합니다.
+- [Azure MCP Server 2.0 출시 — 자체 호스팅 에이전트형 클라우드 자동화가 이제 시작됩니다](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-mcp-server-2-self-hosted-agentic-cloud/): Azure MCP Server 2.0이 자체 호스팅 원격 배포, 57개 Azure 서비스에 걸친 276개 도구, 엔터프라이즈급 보안과 함께 안정화되었습니다. .NET 개발자들이 에이전트형 워크플로우를 구축할 때 알아야 할 내용을 정리했습니다.
+- [.NET Aspire 13.2는 AI 에이전트의 가장 친한 친구가 되고 싶어한다](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/): Aspire 13.2가 에이전틱 개발에 올인합니다 — 구조화된 CLI 출력, 격리된 실행, 자동 복구 환경, 그리고 완전한 OpenTelemetry 데이터로 AI 에이전트가 실제로 앱을 빌드, 실행, 관찰할 수 있게 합니다.
+- [Aspire의 격리 모드가 병렬 개발의 포트 충돌 악몽을 해결한다](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/): Aspire 13.2가 --isolated 모드를 도입합니다: 랜덤 포트, 분리된 시크릿, 동일한 AppHost의 여러 인스턴스를 실행할 때 충돌 제로. AI 에이전트, worktree, 병렬 워크플로우에 완벽합니다.
+- [Azure Functions의 MCP 서버를 Foundry 에이전트에 연결하는 방법](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/foundry-agents-mcp-servers-azure-functions/): MCP 서버를 한 번 구축하고 Azure Functions에 배포한 다음, 적절한 인증으로 Microsoft Foundry 에이전트에 연결하세요. 도구는 어디서나 작동합니다 — VS Code, Cursor, 그리고 이제 엔터프라이즈 AI 에이전트에서도.
+- [GitHub Copilot의 모더나이제이션 평가는 아직 사용하지 않고 있는 최고의 마이그레이션 도구](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/): GitHub Copilot의 모더나이제이션 확장은 단순히 코드 변경을 제안하는 것이 아니라, 실행 가능한 이슈, Azure 대상 비교, 협업 워크플로가 포함된 완전한 마이그레이션 평가를 생성합니다. 평가 문서가 모든 것의 핵심인 이유를 설명합니다.
+- [MCP Apps에 Fluent API 도입 — .NET에서 3단계로 풍부한 AI 도구 UI 구축](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/mcp-fluent-api-azure-functions-dotnet/): Azure Functions의 MCP Apps용 새로운 Fluent 구성 API를 사용하면 몇 줄의 코드만으로 모든 .NET MCP 도구를 뷰, 권한, CSP 정책이 포함된 완전한 앱으로 변환할 수 있습니다.
+- [Microsoft Foundry 2026년 3월 — GPT-5.4, Agent Service GA, 그리고 모든 것을 바꾸는 SDK 리프레시](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/microsoft-foundry-march-2026-whats-new/): Microsoft Foundry의 2026년 3월 업데이트는 대규모입니다: Agent Service가 GA에 도달, GPT-5.4가 안정적인 추론을 제공, azure-ai-projects SDK가 모든 언어에서 안정화, Fireworks AI가 오픈 모델을 Azure에 제공합니다.
+- [SQL MCP Server — AI 에이전트에게 데이터베이스 접근을 제공하는 올바른 방법](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/): Data API builder의 SQL MCP Server는 스키마를 노출하거나 NL2SQL에 의존하지 않고 AI 에이전트에게 안전하고 결정론적인 데이터베이스 접근을 제공합니다. RBAC, 캐싱, 다중 데이터베이스 지원 — 모두 기본 제공.
+- [VS Code 1.116 — Agents 앱에 키보드 내비게이션과 파일 컨텍스트 자동완성 추가](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/): VS Code 1.116은 Agents 앱 개선에 집중합니다 — 전용 키바인딩, 접근성 개선, 파일 컨텍스트 자동완성, CSS @import 링크 해석.
+- [몰랐던 Visual Studio 플로팅 윈도우 설정 (하지만 알아야 할)](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/): Visual Studio의 숨겨진 설정으로 플로팅 윈도우를 완벽하게 제어하세요 — 독립적인 작업 표시줄 항목, 적절한 멀티 모니터 동작, 그리고 완벽한 FancyZones 통합. 드롭다운 하나로 모든 것이 바뀝니다.
+- [블랙박스처럼 느껴지지 않는 실시간 멀티 에이전트 UI 구축하기](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/ag-ui-real-time-multi-agent-ui-maf/): AG-UI와 Microsoft Agent Framework가 멀티 에이전트 워크플로우에 진정한 프론트엔드를 제공합니다 — 실시간 스트리밍, 인간 승인, 에이전트 동작의 완전한 가시성을 갖추고 있습니다.
+- [에이전틱 플랫폼 엔지니어링이 현실이 되고 있다 — Git-APE가 방법을 보여준다](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/): Microsoft의 Git-APE 프로젝트가 에이전틱 플랫폼 엔지니어링을 실전에 적용합니다 — GitHub Copilot 에이전트와 Azure MCP를 사용하여 자연어 요청을 검증된 클라우드 인프라로 전환합니다.
+- [VS Code 1.115 — 백그라운드 터미널 알림, SSH 에이전트 모드 등](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/): VS Code 1.115에서는 에이전트를 위한 백그라운드 터미널 알림, SSH 원격 에이전트 호스팅, 터미널 파일 붙여넣기, 세션 인식 편집 추적이 도입되었습니다. .NET 개발자에게 중요한 내용을 정리했습니다.
+- [C# 15에 유니온 타입 도입 — 우리가 원하던 바로 그것](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/csharp-15-union-types-exhaustive-matching/): C# 15가 union 키워드를 도입합니다 — 컴파일러가 강제하는 판별 공용체와 완전한 패턴 매칭. 어떤 모습인지, 왜 중요한지, 그리고 오늘 바로 시도하는 방법을 알아봅니다.
+- [Aspire 13.2에 문서 CLI가 탑재 — AI 에이전트도 사용할 수 있습니다](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/): .NET Aspire 13.2에 aspire docs가 추가되었습니다. 터미널을 떠나지 않고 공식 문서를 검색, 탐색, 읽을 수 있는 CLI입니다. AI 에이전트의 도구로도 작동합니다. 이것이 왜 중요한지 알려드립니다.
+- [Microsoft Agent Framework 1.0 출시 — .NET 개발자에게 정말 중요한 것들](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/agent-framework-1-0-production-ready/): Microsoft Agent Framework 1.0이 안정적인 API, 멀티 에이전트 오케스트레이션, 모든 주요 AI 제공업체용 커넥터를 갖추고 프로덕션 준비가 완료되었습니다. .NET 개발자로서 알아야 할 내용을 정리했습니다.
+- [Aspire 13.2 대시보드에 텔레메트리 API가 추가됐다 — 그리고 모든 것이 바뀐다](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/): .NET Aspire 13.2가 스마트한 텔레메트리 내보내기, 트레이스와 로그를 위한 프로그래밍 가능한 API, GenAI 시각화 개선을 제공합니다. 디버깅 워크플로에 왜 중요한지 알아보세요.
+- [azd로 AI 에이전트를 로컬에서 실행하고 디버깅할 수 있게 됐다 — 2026년 3월 변경사항 정리](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/): Azure Developer CLI가 2026년 3월에 7개 릴리스를 발행했습니다. 하이라이트: AI 에이전트의 로컬 실행 및 디버그 루프, GitHub Copilot 프로젝트 설정 통합, Container App Jobs 지원.
+- [Azure DevOps가 드디어 모두가 불평하던 Markdown 편집기를 고쳤다](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/): Azure DevOps 작업 항목의 Markdown 편집기가 미리보기와 편집 모드의 명확한 구분을 얻었습니다. 작은 변경이지만 정말 성가신 워크플로 문제를 해결합니다.
+- [Bookmark Studio가 Visual Studio 북마크에 슬롯 기반 내비게이션과 공유 기능을 추가](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/): Mads Kristensen의 새로운 Bookmark Studio 확장이 키보드 기반 슬롯 내비게이션, 북마크 관리자, 색상, 라벨 및 내보내기 기능을 Visual Studio 북마크에 추가합니다.
+- [Visual Studio 3월 업데이트로 커스텀 Copilot 에이전트 제작 가능 — find_symbol이 큰 변화](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/): Visual Studio 2026년 3월 업데이트가 커스텀 Copilot 에이전트, 재사용 가능한 스킬, 언어 인식 find_symbol 도구, Test Explorer에서의 Copilot 프로파일링을 제공합니다.
+- [KubeCon Europe 2026: .NET 개발자가 실제로 알아야 할 것](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/kubecon-2026-aks-updates-dotnet-developers/): Microsoft가 KubeCon Europe 2026에서 대량의 Kubernetes 발표를 쏟아냈습니다. .NET 앱을 배포하고 있다면 실제로 중요한 AKS와 클라우드 네이티브 업데이트만 필터링해서 정리했습니다.
+- [SQL MCP Server, SSMS의 Copilot, AI 에이전트가 포함된 Database Hub: SQLCon 2026에서 실제로 중요한 것](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/agentic-ai-microsoft-databases-what-matters/): Microsoft가 SQLCon 2026에서 데이터베이스 관련 발표를 쏟아냈습니다. Azure SQL에서 AI 기반 앱을 구축하고 있다면 실제로 중요한 내용을 정리했습니다.
+- [Azure DevOps MCP Server가 Microsoft Foundry에 등장: AI 에이전트에 어떤 의미인가](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/): Azure DevOps MCP Server가 이제 Microsoft Foundry에서 사용 가능합니다. 몇 번의 클릭으로 AI 에이전트를 DevOps 워크플로 — 작업 항목, 저장소, 파이프라인 — 에 직접 연결하세요.
+- [Foundry Agent Service GA: .NET 에이전트 개발자에게 정말 중요한 것](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/foundry-agent-service-ga-what-matters/): Microsoft의 Foundry Agent Service가 프라이빗 네트워킹, Voice Live, 프로덕션 평가, 오픈 멀티모델 런타임으로 GA에 도달했습니다. 알아야 할 것들을 정리합니다.
+- [Microsoft Agent Framework의 백그라운드 응답: 더 이상 타임아웃 걱정 없이](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/background-responses-agent-framework-long-running-tasks/): Microsoft Agent Framework가 이제 연속 토큰으로 장시간 실행 AI 작업을 오프로드할 수 있습니다. 백그라운드 응답의 작동 방식과 .NET 에이전트에 중요한 이유를 알아보세요.
+- [VS Code 1.112: .NET 개발자가 정말 주목해야 할 것들](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/vscode-1-112-dotnet-developers/): VS Code 1.112가 에이전트 업그레이드, 통합 브라우저 디버거, MCP 샌드박싱, 모노레포 지원으로 출시되었습니다. .NET으로 개발한다면 정말 중요한 것들을 정리합니다.
+- [노트북에서 프로덕션까지: 두 개의 명령으로 AI 에이전트를 Microsoft Foundry에 배포](https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/deploy-ai-agents-foundry-azd-two-commands/): Azure Developer CLI에 'azd ai agent' 명령이 추가되어 AI 에이전트를 로컬 개발에서 몇 분 만에 Foundry 프로덕션 엔드포인트로 가져갑니다. 전체 워크플로를 소개합니다.
+
+## Events
+- [NDC Oslo 2026](https://thedotnetblog.com/ko/events/ndc-oslo-2026/): 유럽 최대의 개발자 컨퍼런스 중 하나 — Oslo Spektrum에서 5일간의 워크숍, 세션, 네트워킹. 150명 이상의 발표자와 160개 세션.
+- [.NET Day Switzerland 2026](https://thedotnetblog.com/ko/events/dotnet-day-switzerland-2026/): .NET 개발자, 아키텍트, 전문가를 위한 비영리 커뮤니티 컨퍼런스 — .NET, C#, ASP.NET Core, Azure 등을 다루며 — 취리히에서 개최됩니다.
+- [SDD Conference 2026](https://thedotnetblog.com/ko/events/sdd-conference-2026/): 런던 Barbican Centre에서 열리는 5일간의 소프트웨어 개발 컨퍼런스 — 78개 세션과 14개 워크숍으로 아키텍처, .NET, AI, Azure, DevOps 등을 다룹니다.
+- [Global Azure Spain 2026](https://thedotnetblog.com/ko/events/global-azure-spain-2026/): 스페인 최대의 Azure 커뮤니티 이벤트 — Azure, AI, 데이터, 보안, 클라우드 네이티브 개발에 관한 하루 종일 세션, 38명의 발표자, 3개 트랙.
+
+## Authors
+- [Emiliano Montesdeoca](https://thedotnetblog.com/ko/authors/emiliano-montesdeoca/): Microsoft MVP & 클라우드 솔루션 팀 리드 — Emiliano는 우루과이계 스페인 소프트웨어 개발자이자 Microsoft MVP(Developer Technologies)이며, 카나리아 제도 테네리페에 기반을 둔 커뮤니티 옹호자입니다.
+
+Microsoft 기술을 사용한 확장 가능한 클라우드 솔루션 설계를 전문으로 하며, 현재 Intelequia Technologies에서 클라우드 솔루션 팀을 이끌고 있습니다.
+
+빈번한 국제 컨퍼런스 연사이자 열정적인 지식 공유자로서, 실제 문제 해결을 개발자를 위한 실용적인 인사이트로 변환합니다.
+
+
+## Topics
+This blog covers: .net, accessibility, ag-ui, agent-framework, agents, ai, aks, architecture, aspire, aspnet-core, azd, azure, azure-devops, azure-functions, azure-openai, azure-sdk, azure-sql, blob-storage, cli, cloud, cloud-native, coding-agents, community, containers, copilot, cost-optimization, csharp, dashboard, data-api-builder, data-lake, databases, developer-tools, devops, docker, documentation, dotnet, dotnet-11, dotnet-aspire, dotnet-framework, efcore, extensions, fine-tuning, finops, foundry, github-copilot, gpt-5-4, kubernetes, language-features, machine-learning, maps, maui, mcp, microsoft-foundry, migration, mobile, modernization, mongodb, multi-agent, observability, opentelemetry, parallel-development, patches, pattern-matching, platform-engineering, powertoys, productivity, profiling, remote-development, sdk, security, semantic kernel, servicing, sql, sse, storage, telemetry, tooling, union-types, visual-studio, vscode.
+
+## Optional
+
+- [Full content version](https://thedotnetblog.com/llms-full.txt)
+- [Sitemap](https://thedotnetblog.com/sitemap.xml)
+- [RSS Feed](https://thedotnetblog.com/index.xml)

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Storage on The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/storage/</link><description>Recent content in Storage on The .NET Blog</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Wed, 15 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/storage/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure Smart Tier 正式发布 — 无需生命周期规则即可自动优化 Blob Storage 成本</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/</link><pubDate>Wed, 15 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原文请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果你曾经花时间调整 Azure Blob Storage 的生命周期策略，然后看着它们在访问模式变化时土崩瓦解，那这篇文章就是为你准备的。微软刚刚宣布了 Azure Blob 和 Data Lake Storage 的 &lt;a href="https://azure.microsoft.com/en-us/blog/optimize-object-storage-costs-automatically-with-smart-tier-now-generally-available/"&gt;smart tier 正式发布&lt;/a&gt; — 这是一项完全托管的分层功能，根据实际使用情况自动在 hot、cool 和 cold 层之间移动对象。&lt;/p&gt;
+&lt;h2 id="smart-tier-实际做了什么"&gt;Smart tier 实际做了什么&lt;/h2&gt;
+&lt;p&gt;概念很简单：smart tier 持续评估存储账户中每个对象的最后访问时间。频繁访问的数据保持在 hot 层，不活跃的数据在 30 天后移到 cool 层，再过 60 天移到 cold 层。当数据被再次访问时，立即提升回 hot 层。循环重新开始。&lt;/p&gt;
+&lt;p&gt;无需配置生命周期规则。无需预测访问模式。无需手动调优。&lt;/p&gt;
+&lt;p&gt;在预览期间，微软报告称 &lt;strong&gt;超过 50% 的 smart tier 管理容量根据实际访问模式自动转移到了更冷的层级&lt;/strong&gt;。对于大型存储账户来说，这是一笔可观的成本节省。&lt;/p&gt;
+&lt;h2 id="为什么这对-net-开发者很重要"&gt;为什么这对 .NET 开发者很重要&lt;/h2&gt;
+&lt;p&gt;如果你正在构建生成日志、遥测数据、分析数据或任何类型的不断增长的数据资产的应用 — 说实话，谁不是呢 — 存储成本会很快累积起来。传统的做法是编写生命周期管理策略，测试它们，然后在应用的访问模式变化时重新调整。Smart tier 完全消除了这个工作流。&lt;/p&gt;
+&lt;p&gt;一些实用的场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;应用遥测和日志&lt;/strong&gt; — 调试时是 hot，几周后几乎不再访问&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据管道和 ETL 输出&lt;/strong&gt; — 处理期间频繁访问，之后大多处于 cold 状态&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;用户生成内容&lt;/strong&gt; — 最近上传的是 hot，较老的内容逐渐变冷&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;备份和归档数据&lt;/strong&gt; — 偶尔因合规需要访问，大部分时间处于闲置状态&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="如何设置"&gt;如何设置&lt;/h2&gt;
+&lt;p&gt;启用 smart tier 是一次性配置：&lt;/p&gt;</description></item></channel></rss>

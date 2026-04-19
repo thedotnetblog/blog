@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Extensions on The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/extensions/</link><description>Recent content in Extensions on The .NET Blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Thu, 02 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/extensions/index.xml" rel="self" type="application/rss+xml"/><item><title>Bookmark Studioがスロットベースのナビゲーションと共有をVisual Studioのブックマークに追加</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されました。オリジナル版は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Visual Studioのブックマークはずっと&amp;hellip;まあまあでした。ひとつ設定して、次に移動して、どれがどれか忘れる。機能するけど、パワフルと呼べるものではありませんでした。&lt;/p&gt;
+&lt;p&gt;Mads Kristensenが&lt;a href="https://devblogs.microsoft.com/visualstudio/bookmark-studio-evolving-bookmarks-in-visual-studio/"&gt;Bookmark Studioをリリース&lt;/a&gt;しました。定期的にブックマークを使っているなら感じていたギャップを正確に埋める実験的な拡張機能です。&lt;/p&gt;
+&lt;h2 id="スロットベースのナビゲーション"&gt;スロットベースのナビゲーション&lt;/h2&gt;
+&lt;p&gt;ブックマークをスロット1〜9に割り当て、&lt;code&gt;Alt+Shift+1&lt;/code&gt;から&lt;code&gt;Alt+Shift+9&lt;/code&gt;で直接ジャンプできます。新しいブックマークは自動的に次の利用可能なスロットを取得します。&lt;/p&gt;
+&lt;h2 id="ブックマークマネージャー"&gt;ブックマークマネージャー&lt;/h2&gt;
+&lt;p&gt;新しいツールウィンドウですべてのブックマークを表示し、名前、ファイル、場所、色、スロットでフィルタリングできます。&lt;/p&gt;
+&lt;h2 id="ラベル色フォルダーで整理"&gt;ラベル、色、フォルダーで整理&lt;/h2&gt;
+&lt;p&gt;ブックマークにラベル、色を付けてフォルダーにグループ化できます。メタデータはソリューションごとに保存されます。&lt;/p&gt;
+&lt;h2 id="エクスポートと共有"&gt;エクスポートと共有&lt;/h2&gt;
+&lt;p&gt;Bookmark Studioはプレーンテキスト、Markdown、CSVとしてブックマークをエクスポートできます。&lt;/p&gt;
+&lt;h2 id="コードの移動に追従するブックマーク"&gt;コードの移動に追従するブックマーク&lt;/h2&gt;
+&lt;p&gt;Bookmark Studioはアンカーされたテキストに対してブックマークを追跡するので、編集中に間違った行にずれることがありません。&lt;/p&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;Bookmark Studioは何も再発明しません。何年も「十分」だった機能を本当に便利にします。&lt;a href="https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BookmarkStudio"&gt;Visual Studio Marketplace&lt;/a&gt;からダウンロードしてください。&lt;/p&gt;</description></item></channel></rss>

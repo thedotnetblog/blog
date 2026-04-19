@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>.NET on The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/.net/</link><description>Recent content in .NET on The .NET Blog</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Tue, 14 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/.net/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET的Agent Skills变得真正灵活了</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/</link><pubDate>Tue, 14 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原文请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果你一直在用Microsoft Agent Framework构建代理，那你已经熟悉流程了：定义技能，连接到provider，让代理决定调用哪个。新的是你&lt;em&gt;如何&lt;/em&gt;创建这些技能——灵活性的提升非常显著。&lt;/p&gt;
+&lt;p&gt;最新更新引入了三种agent skill编写模式：&lt;strong&gt;基于文件的&lt;/strong&gt;、&lt;strong&gt;基于类的&lt;/strong&gt;和&lt;strong&gt;内联代码定义的&lt;/strong&gt;。三种都连接到单一的 &lt;code&gt;AgentSkillsProviderBuilder&lt;/code&gt;，意味着你可以自由混搭，无需路由逻辑或特殊粘合代码。让我带你了解每种模式以及何时使用。&lt;/p&gt;
+&lt;h2 id="基于文件的技能起点"&gt;基于文件的技能：起点&lt;/h2&gt;
+&lt;p&gt;基于文件的技能顾名思义——磁盘上的一个目录，包含 &lt;code&gt;SKILL.md&lt;/code&gt; 文件、可选脚本和参考文档。给代理添加新能力最直接的方式：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;skills/
+└── onboarding-guide/
+ ├── SKILL.md
+ ├── scripts/
+ │ └── check-provisioning.py
+ └── references/
+ └── onboarding-checklist.md
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;SKILL.md&lt;/code&gt; 的frontmatter声明技能名称和描述，指令部分告诉代理如何使用脚本和参考：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;---
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;name: onboarding-guide
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;description: &amp;gt;-
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Walk new hires through their first-week setup checklist.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;---
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gu"&gt;## Instructions
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;1.&lt;/span&gt; Ask for the employee&amp;#39;s name and start date.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;2.&lt;/span&gt; Run &lt;span class="sb"&gt;`scripts/check-provisioning.py`&lt;/span&gt; to verify accounts.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;3.&lt;/span&gt; Walk through &lt;span class="sb"&gt;`references/onboarding-checklist.md`&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;4.&lt;/span&gt; Follow up on incomplete items.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后用 &lt;code&gt;SubprocessScriptRunner.RunAsync&lt;/code&gt; 连接脚本执行：&lt;/p&gt;</description></item></channel></rss>

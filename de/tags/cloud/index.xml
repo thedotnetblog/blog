@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloud on The .NET Blog</title><link>https://thedotnetblog.com/de/tags/cloud/</link><description>Recent content in Cloud on The .NET Blog</description><generator>Hugo</generator><language>de</language><lastBuildDate>Mon, 14 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/de/tags/cloud/index.xml" rel="self" type="application/rss+xml"/><item><title>NDC Oslo 2026</title><link>https://thedotnetblog.com/de/events/ndc-oslo-2026/</link><pubDate>Mon, 14 Sep 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/de/events/ndc-oslo-2026/</guid><description>&lt;p&gt;&lt;strong&gt;NDC Oslo 2026&lt;/strong&gt; findet vom &lt;strong&gt;14. bis 18. September 2026&lt;/strong&gt; im &lt;strong&gt;Oslo Spektrum&lt;/strong&gt; in Oslo, Norwegen statt.&lt;/p&gt;
+&lt;p&gt;NDC Oslo ist eine der größten und angesehensten Entwicklerkonferenzen Europas, die alles abdeckt — von .NET und Cloud über Sicherheit, Architektur und KI bis darüber hinaus. Die Ausgabe 2026 befindet sich derzeit in der Buchungsphase, mit einem massiven Programm im Aufbau.&lt;/p&gt;
+&lt;h2 id="in-zahlen"&gt;In Zahlen&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;160 Sessions&lt;/strong&gt; (in Buchung)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;150 Speaker&lt;/strong&gt; (in Buchung)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;15 Workshops&lt;/strong&gt; (in Buchung)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;5 Tage&lt;/strong&gt; — Workshops + Konferenz&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="bestätigte-speaker"&gt;Bestätigte Speaker&lt;/h2&gt;
+&lt;p&gt;Die Speaker-Liste wird aufgebaut, mit bestätigten Namen wie:&lt;/p&gt;</description></item><item><title>Deine KI-Experimente auf Azure verbrennen Geld — So behebst du das</title><link>https://thedotnetblog.com/de/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/de/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dieser Beitrag wurde automatisch übersetzt. Die Originalversion finden Sie &lt;a href="https://thedotnetblog.com/de/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/"&gt;hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Wenn du gerade KI-gestützte Apps auf Azure baust, ist dir wahrscheinlich etwas aufgefallen: Deine Cloud-Rechnung sieht anders aus als früher. Nicht nur höher — seltsamer. Sprunghaft. Schwer vorhersagbar.&lt;/p&gt;
+&lt;p&gt;Microsoft hat gerade einen großartigen Beitrag über &lt;a href="https://azure.microsoft.com/en-us/blog/cloud-cost-optimization-principles-that-still-matter/"&gt;Cloud-Kostenoptimierungsprinzipien, die immer noch wichtig sind&lt;/a&gt; veröffentlicht, und ehrlich gesagt könnte das Timing nicht besser sein. Denn KI-Workloads haben die Spielregeln bei den Kosten verändert.&lt;/p&gt;
+&lt;h2 id="warum-ki-workloads-anders-zuschlagen"&gt;Warum KI-Workloads anders zuschlagen&lt;/h2&gt;
+&lt;p&gt;Hier ist die Sache. Traditionelle .NET-Workloads sind relativ vorhersagbar. Du kennst deinen App-Service-Tier, du kennst deine SQL-DTUs, du kannst die monatlichen Ausgaben ziemlich genau abschätzen. KI-Workloads? Nicht so sehr.&lt;/p&gt;</description></item></channel></rss>

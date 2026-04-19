@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Azure-Devops on The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/azure-devops/</link><description>Recent content in Azure-Devops on The .NET Blog</description><generator>Hugo</generator><language>ko</language><lastBuildDate>Wed, 15 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/azure-devops/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure DevOps Server 2026년 4월 패치 — PR 완료 수정 및 보안 업데이트</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/</link><pubDate>Wed, 15 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;이 글은 자동 번역되었습니다. 원문은 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/"&gt;여기&lt;/a&gt;를 참조하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;셀프 호스팅 Azure DevOps Server를 운영하는 팀들에게 빠른 안내입니다. Microsoft가 세 가지 수정 사항을 포함한 &lt;a href="https://devblogs.microsoft.com/devops/april-patches-for-azure-devops-server/"&gt;2026년 4월 패치 3&lt;/a&gt;을 릴리스했습니다.&lt;/p&gt;
+&lt;h2 id="수정된-내용"&gt;수정된 내용&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Pull Request 완료 실패&lt;/strong&gt; — 작업 항목 자동 완료 중 null 참조 예외로 인해 PR 병합이 실패할 수 있었습니다. 무작위 PR 완료 오류를 겪었다면, 이것이 원인일 가능성이 높습니다&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;로그아웃 리디렉션 유효성 검사&lt;/strong&gt; — 잠재적인 악성 리디렉션을 방지하기 위해 로그아웃 시 유효성 검사가 개선되었습니다. 빠르게 적용할 가치가 있는 보안 수정입니다&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub Enterprise Server PAT 연결&lt;/strong&gt; — GitHub Enterprise Server에 대한 Personal Access Token 연결 생성이 작동하지 않았는데, 이제 복원되었습니다&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="업데이트-방법"&gt;업데이트 방법&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://aka.ms/devopsserverpatch3"&gt;패치 3&lt;/a&gt;을 다운로드하고 설치 프로그램을 실행하세요. 패치가 적용되었는지 확인하려면:&lt;/p&gt;</description></item><item><title>Azure DevOps가 드디어 모두가 불평하던 Markdown 편집기를 고쳤다</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;이 글은 자동 번역되었습니다. 원본은 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/"&gt;여기&lt;/a&gt;에서 확인하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Azure Boards를 사용한다면 아마 이런 경험이 있을 겁니다: 작업 항목 설명을 읽고 있는데, 인수 기준을 확인하는 중에 실수로 더블클릭을 합니다. 쾅 — 편집 모드에 들어갔습니다. 아무것도 편집하고 싶지 않았는데. 그냥 읽고 있었을 뿐인데.&lt;/p&gt;
+&lt;p&gt;Dan Hellem이 &lt;a href="https://devblogs.microsoft.com/devops/improving-the-markdown-editor-for-work-items/"&gt;수정을 발표&lt;/a&gt;했는데, 작아 보이지만 일상 워크플로에서 진짜 마찰을 제거하는 변경입니다.&lt;/p&gt;
+&lt;h2 id="무엇이-바뀌었나"&gt;무엇이 바뀌었나&lt;/h2&gt;
+&lt;p&gt;작업 항목 텍스트 필드의 Markdown 편집기가 이제 &lt;strong&gt;기본적으로 미리보기 모드&lt;/strong&gt;로 열립니다. 콘텐츠를 읽고 상호작용할 수 있습니다 — 링크 따라가기, 포맷 확인 — 실수로 편집 모드에 들어갈 걱정 없이.&lt;/p&gt;</description></item></channel></rss>

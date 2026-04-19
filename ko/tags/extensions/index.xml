@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Extensions on The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/extensions/</link><description>Recent content in Extensions on The .NET Blog</description><generator>Hugo</generator><language>ko</language><lastBuildDate>Thu, 02 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/extensions/index.xml" rel="self" type="application/rss+xml"/><item><title>Bookmark Studio가 Visual Studio 북마크에 슬롯 기반 내비게이션과 공유 기능을 추가</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;이 글은 자동 번역되었습니다. 원본은 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/"&gt;여기&lt;/a&gt;에서 확인하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Visual Studio의 북마크는 항상&amp;hellip;그럭저럭이었습니다. 하나 설정하고, 다음으로 이동하고, 어떤 게 어떤 건지 잊어버립니다. 작동하지만 강력하다고 부를 수 있는 기능은 아니었습니다.&lt;/p&gt;
+&lt;p&gt;Mads Kristensen이 &lt;a href="https://devblogs.microsoft.com/visualstudio/bookmark-studio-evolving-bookmarks-in-visual-studio/"&gt;Bookmark Studio를 출시&lt;/a&gt;했습니다. 정기적으로 북마크를 사용한다면 느꼈을 빈틈을 정확히 채우는 실험적 확장입니다.&lt;/p&gt;
+&lt;h2 id="슬롯-기반-내비게이션"&gt;슬롯 기반 내비게이션&lt;/h2&gt;
+&lt;p&gt;북마크를 1-9번 슬롯에 할당하고 &lt;code&gt;Alt+Shift+1&lt;/code&gt;부터 &lt;code&gt;Alt+Shift+9&lt;/code&gt;로 직접 이동할 수 있습니다. 새 북마크는 자동으로 다음 사용 가능한 슬롯을 받습니다.&lt;/p&gt;
+&lt;h2 id="북마크-관리자"&gt;북마크 관리자&lt;/h2&gt;
+&lt;p&gt;새 도구 창에서 모든 북마크를 표시하고 이름, 파일, 위치, 색상, 슬롯으로 필터링할 수 있습니다.&lt;/p&gt;</description></item></channel></rss>

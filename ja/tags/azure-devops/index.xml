@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Azure-Devops on The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/azure-devops/</link><description>Recent content in Azure-Devops on The .NET Blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Wed, 15 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/azure-devops/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure DevOps Server 2026年4月パッチ — PRの完了修正とセキュリティアップデート</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/</link><pubDate>Wed, 15 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されています。オリジナル版は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;セルフホストでAzure DevOps Serverを運用しているチームへの簡単なお知らせです。Microsoftが&lt;a href="https://devblogs.microsoft.com/devops/april-patches-for-azure-devops-server/"&gt;2026年4月のパッチ3&lt;/a&gt;をリリースしました。3つの修正が含まれています。&lt;/p&gt;
+&lt;h2 id="修正内容"&gt;修正内容&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Pull Requestの完了失敗&lt;/strong&gt; — ワークアイテムの自動完了時にnull参照例外が発生し、PRのマージが失敗することがありました。ランダムなPR完了エラーに遭遇した方は、これが原因の可能性が高いです&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;サインアウト時のリダイレクト検証&lt;/strong&gt; — 悪意のあるリダイレクトを防止するため、サインアウト時の検証が改善されました。早めに適用すべきセキュリティ修正です&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub Enterprise Server PATの接続&lt;/strong&gt; — GitHub Enterprise ServerへのPersonal Access Tokenの接続作成が壊れていましたが、復元されました&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="アップデート方法"&gt;アップデート方法&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://aka.ms/devopsserverpatch3"&gt;パッチ3&lt;/a&gt;をダウンロードしてインストーラーを実行してください。パッチが適用されたことを確認するには：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;patch-installer&amp;gt;.exe CheckInstall
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Azure DevOps Serverをオンプレミスで運用している場合、Microsoftはセキュリティと信頼性の両面から、最新のパッチを維持することを強く推奨しています。詳細は&lt;a href="https://learn.microsoft.com/azure/devops/server/release-notes/azuredevopsserver?view=azure-devops#azure-devops-server-patch-3-release-date-april-14-2026"&gt;リリースノート&lt;/a&gt;をご確認ください。&lt;/p&gt;</description></item><item><title>Azure DevOpsがついに全員が不満だったMarkdownエディタを修正</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されました。オリジナル版は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Azure Boardsを使っているなら、きっとこの経験があるでしょう：ワークアイテムの説明を読んでいて、受け入れ条件を確認している最中に、うっかりダブルクリックしてしまう。ドカン — 編集モードに入ってしまった。何も編集したくなかった。ただ読んでいただけなのに。&lt;/p&gt;
+&lt;p&gt;Dan Hellemが&lt;a href="https://devblogs.microsoft.com/devops/improving-the-markdown-editor-for-work-items/"&gt;修正を発表&lt;/a&gt;しました。小さく聞こえる変更ですが、日常のワークフローから本当の摩擦を取り除くものです。&lt;/p&gt;
+&lt;h2 id="何が変わったか"&gt;何が変わったか&lt;/h2&gt;
+&lt;p&gt;ワークアイテムのテキストフィールド用Markdownエディタが&lt;strong&gt;デフォルトでプレビューモード&lt;/strong&gt;で開くようになりました。コンテンツを読んだり操作したり — リンクをたどったり、フォーマットを確認したり — 誤って編集モードに入る心配なく行えます。&lt;/p&gt;
+&lt;p&gt;実際に編集したい時は、フィールド上部の編集アイコンをクリックします。終わったら、明示的にプレビューモードに戻ります。シンプル、意図的、予測可能。&lt;/p&gt;
+&lt;h2 id="なぜ見た目以上に重要か"&gt;なぜ見た目以上に重要か&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://developercommunity.visualstudio.com/t/Markdown-editor-for-work-item-multi-line/10935496"&gt;コミュニティフィードバックスレッド&lt;/a&gt;は長いものでした。ダブルクリックで編集の動作は2025年7月のMarkdownエディタで導入され、苦情はほぼ即座に始まりました。&lt;/p&gt;
+&lt;p&gt;Azure Boardsでスプリント計画、バックログリファインメント、コードレビューを行うチームにとって、この種のマイクロ摩擦は積み重なります。&lt;/p&gt;
+&lt;h2 id="ロールアウト状況"&gt;ロールアウト状況&lt;/h2&gt;
+&lt;p&gt;すでに一部の顧客に展開中で、今後2〜3週間で全員に拡大されます。&lt;/p&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;すべての改善がヘッドライン機能である必要はありません。時に最高のアップデートは、単に迷惑なものを取り除くことです。これはまさにそれ — ワークアイテムを静かに読みたい人にとってAzure Boardsをより親切にする小さなUX修正です。&lt;/p&gt;</description></item></channel></rss>

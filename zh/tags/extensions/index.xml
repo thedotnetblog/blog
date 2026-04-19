@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Extensions on The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/extensions/</link><description>Recent content in Extensions on The .NET Blog</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Thu, 02 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/extensions/index.xml" rel="self" type="application/rss+xml"/><item><title>Bookmark Studio为Visual Studio书签带来基于槽位的导航和分享功能</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原始版本，请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Visual Studio中的书签一直&amp;hellip;还行。你设置一个，导航到下一个，然后忘记哪个是哪个。它们能用，但从来不是你会称之为强大的功能。&lt;/p&gt;
+&lt;p&gt;Mads Kristensen刚刚&lt;a href="https://devblogs.microsoft.com/visualstudio/bookmark-studio-evolving-bookmarks-in-visual-studio/"&gt;发布了Bookmark Studio&lt;/a&gt;，一个实验性扩展，精确填补了你可能遇到的空缺。&lt;/p&gt;
+&lt;h2 id="基于槽位的导航"&gt;基于槽位的导航&lt;/h2&gt;
+&lt;p&gt;书签可以分配到1-9号槽位，通过&lt;code&gt;Alt+Shift+1&lt;/code&gt;到&lt;code&gt;Alt+Shift+9&lt;/code&gt;直接跳转。新书签自动获得下一个可用槽位。&lt;/p&gt;
+&lt;h2 id="书签管理器"&gt;书签管理器&lt;/h2&gt;
+&lt;p&gt;新的工具窗口在一个地方显示所有书签，支持按名称、文件、位置、颜色或槽位过滤。&lt;/p&gt;
+&lt;h2 id="用标签颜色和文件夹组织"&gt;用标签、颜色和文件夹组织&lt;/h2&gt;
+&lt;p&gt;书签可以有标签、颜色，并分组到文件夹中。元数据按解决方案存储。&lt;/p&gt;
+&lt;h2 id="导出和分享"&gt;导出和分享&lt;/h2&gt;
+&lt;p&gt;Bookmark Studio允许将书签导出为纯文本、Markdown或CSV。&lt;/p&gt;
+&lt;h2 id="跟随代码移动的书签"&gt;跟随代码移动的书签&lt;/h2&gt;
+&lt;p&gt;Bookmark Studio相对于锚定的文本跟踪书签，所以编辑时不会漂移到错误的行。&lt;/p&gt;
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;p&gt;Bookmark Studio没有重新发明任何东西。它把一个多年来&amp;quot;够用&amp;quot;的功能变得真正有用。从&lt;a href="https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BookmarkStudio"&gt;Visual Studio Marketplace&lt;/a&gt;下载吧。&lt;/p&gt;</description></item></channel></rss>

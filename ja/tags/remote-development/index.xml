@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Remote-Development on The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/remote-development/</link><description>Recent content in Remote-Development on The .NET Blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Mon, 06 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/remote-development/index.xml" rel="self" type="application/rss+xml"/><item><title>VS Code 1.115 — バックグラウンドターミナル通知、SSHエージェントモードなど</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/</link><pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されています。原文は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;VS Code 1.115が&lt;a href="https://code.visualstudio.com/updates/v1_115"&gt;リリース&lt;/a&gt;されました。目玉機能という点では軽めのリリースですが、AIコーディングアシスタントを日常的に使っている方にとって、エージェント関連の改善は本当に役立つものです。&lt;/p&gt;
+&lt;p&gt;実際に知っておく価値のあるポイントを紹介します。&lt;/p&gt;
+&lt;h2 id="バックグラウンドターミナルがエージェントに通知するように"&gt;バックグラウンドターミナルがエージェントに通知するように&lt;/h2&gt;
+&lt;p&gt;これが今回の目玉機能です。バックグラウンドターミナルが、コマンド完了時に終了コードとターミナル出力を含めて、エージェントに自動通知するようになりました。バックグラウンドターミナルでの入力プロンプトも検出されてユーザーに表示されます。&lt;/p&gt;
+&lt;p&gt;なぜこれが重要なのか？Copilotのエージェントモードでビルドコマンドやテストスイートをバックグラウンドで実行したことがあるなら、「あれ、もう終わった？」という苦痛を知っているはずです。バックグラウンドターミナルは基本的に撃ちっぱなしでした。今ではエージェントが&lt;code&gt;dotnet build&lt;/code&gt;や&lt;code&gt;dotnet test&lt;/code&gt;の完了時に通知を受け取り、出力を確認して適切に対応できます。小さな変更ですが、エージェント駆動のワークフローの信頼性が大幅に向上します。&lt;/p&gt;
+&lt;p&gt;また、新しい&lt;code&gt;send_to_terminal&lt;/code&gt;ツールにより、エージェントがユーザーの確認付きでバックグラウンドターミナルにコマンドを送信できるようになりました。これにより、&lt;code&gt;run_in_terminal&lt;/code&gt;でタイムアウトを設定するとターミナルがバックグラウンドに移動して読み取り専用になってしまう問題が解決されました。&lt;/p&gt;
+&lt;h2 id="sshリモートエージェントホスティング"&gt;SSHリモートエージェントホスティング&lt;/h2&gt;
+&lt;p&gt;VS Codeが SSH経由でリモートマシンに接続し、CLIを自動インストールしてエージェントホストモードで起動できるようになりました。これにより、AIエージェントセッションがリモート環境を直接ターゲットにできます。LinuxサーバーやクラウドVMでビルド・テストを行う.NET開発者にとって便利です。&lt;/p&gt;
+&lt;h2 id="エージェントセッションでの編集追跡"&gt;エージェントセッションでの編集追跡&lt;/h2&gt;
+&lt;p&gt;エージェントセッション中に行われたファイル編集が、diff、元に戻す/やり直し、状態復元とともに追跡・復元されるようになりました。エージェントがコードを変更して何か問題が起きた場合、何が変わったかを正確に確認してロールバックできます。エージェントにコードベースを変更させる際の安心感が得られます。&lt;/p&gt;
+&lt;h2 id="ブラウザタブの認識とその他の改善"&gt;ブラウザタブの認識とその他の改善&lt;/h2&gt;
+&lt;p&gt;その他のクオリティ・オブ・ライフの向上：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ブラウザタブの追跡&lt;/strong&gt; — チャットがセッション中に開いたブラウザタブを追跡・リンクできるようになり、エージェントが閲覧中のWebページを参照できます&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ターミナルへのファイル貼り付け&lt;/strong&gt; — Ctrl+V、ドラッグ&amp;amp;ドロップ、右クリックでターミナルにファイル（画像含む）を貼り付け可能&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ミニマップでのテストカバレッジ&lt;/strong&gt; — テストカバレッジインジケーターがミニマップに表示され、視覚的な概要を素早く確認できます&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Macでのピンチズーム&lt;/strong&gt; — 統合ブラウザがピンチズームジェスチャーをサポート&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;セッションでのCopilot使用権限&lt;/strong&gt; — ステータスバーのセッションビューに使用状況が表示されます&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ファイルに移動でのファビコン&lt;/strong&gt; — 開いているWebページがクイックピックリストにファビコンを表示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;VS Code 1.115はインクリメンタルなリリースですが、エージェントの改善 — バックグラウンドターミナル通知、SSHエージェントホスティング、編集追跡 — が合わさって、AI支援開発の体験が目に見えてスムーズになりました。.NETプロジェクトでCopilotのエージェントモードを使っているなら、日々の摩擦を減らすクオリティ・オブ・ライフの改善そのものです。&lt;/p&gt;
+&lt;p&gt;すべての詳細は&lt;a href="https://code.visualstudio.com/updates/v1_115"&gt;完全なリリースノート&lt;/a&gt;をご覧ください。&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloud on The .NET Blog</title><link>https://thedotnetblog.com/es/tags/cloud/</link><description>Recent content in Cloud on The .NET Blog</description><generator>Hugo</generator><language>es</language><lastBuildDate>Mon, 14 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/es/tags/cloud/index.xml" rel="self" type="application/rss+xml"/><item><title>NDC Oslo 2026</title><link>https://thedotnetblog.com/es/events/ndc-oslo-2026/</link><pubDate>Mon, 14 Sep 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/es/events/ndc-oslo-2026/</guid><description>&lt;p&gt;&lt;strong&gt;NDC Oslo 2026&lt;/strong&gt; se celebra del &lt;strong&gt;14 al 18 de septiembre de 2026&lt;/strong&gt; en &lt;strong&gt;Oslo Spektrum&lt;/strong&gt;, Oslo, Noruega.&lt;/p&gt;
+&lt;p&gt;NDC Oslo es una de las conferencias de desarrolladores más grandes y respetadas de Europa, cubriendo todo, desde .NET y cloud hasta seguridad, arquitectura, IA y más. La edición 2026 está actualmente en fase de reservas, con una programación masiva en preparación.&lt;/p&gt;
+&lt;h2 id="en-números"&gt;En números&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;160 sesiones&lt;/strong&gt; (en reserva)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;150 ponentes&lt;/strong&gt; (en reserva)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;15 talleres&lt;/strong&gt; (en reserva)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;5 días&lt;/strong&gt; — talleres + conferencia&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="ponentes-confirmados"&gt;Ponentes confirmados&lt;/h2&gt;
+&lt;p&gt;La lista de ponentes se está completando, con nombres confirmados como:&lt;/p&gt;</description></item><item><title>Tus experimentos de IA en Azure están quemando dinero — Así es como solucionarlo</title><link>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Este post fue traducido automáticamente. Para la versión original, &lt;a href="https://thedotnetblog.com/es/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/"&gt;haz clic aquí&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Si estás construyendo aplicaciones con IA en Azure ahora mismo, probablemente hayas notado algo: tu factura de la nube se ve diferente a como solía ser. No solo más alta — más rara. Con picos. Difícil de predecir.&lt;/p&gt;
+&lt;p&gt;Microsoft acaba de publicar un excelente artículo sobre &lt;a href="https://azure.microsoft.com/en-us/blog/cloud-cost-optimization-principles-that-still-matter/"&gt;principios de optimización de costos en la nube que siguen importando&lt;/a&gt;, y honestamente, el momento no podría ser mejor. Porque las cargas de trabajo de IA han cambiado las reglas del juego en cuanto a costos.&lt;/p&gt;</description></item></channel></rss>

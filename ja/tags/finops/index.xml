@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Finops on The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/finops/</link><description>Recent content in Finops on The .NET Blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/finops/index.xml" rel="self" type="application/rss+xml"/><item><title>AzureでのAI実験がお金を燃やしている — その解決方法はこちら</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されています。原文は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;今AzureでAI搭載アプリを構築しているなら、おそらく気づいていることがあるでしょう：クラウドの請求書が以前と違って見えるということです。単に高くなっただけではなく、不思議な感じです。スパイクがあり、予測が難しい。&lt;/p&gt;
+&lt;p&gt;Microsoftが&lt;a href="https://azure.microsoft.com/en-us/blog/cloud-cost-optimization-principles-that-still-matter/"&gt;今でも重要なクラウドコスト最適化の原則&lt;/a&gt;に関する素晴らしい記事を公開しました。正直なところ、これ以上ないタイミングです。なぜなら、AIワークロードがコストに関するゲームのルールを変えてしまったからです。&lt;/p&gt;
+&lt;h2 id="aiワークロードが違う理由"&gt;AIワークロードが違う理由&lt;/h2&gt;
+&lt;p&gt;ポイントはこうです。従来の.NETワークロードは比較的予測可能です。App Serviceのティアを把握し、SQLのDTUを把握し、月々の支出をかなり正確に見積もることができます。AIワークロードは？そうはいきません。&lt;/p&gt;
+&lt;p&gt;どのモデルが合うか、複数のモデルをテストしています。ファインチューニングのためにGPUバックのインフラを立ち上げています。Azure OpenAIへのAPI呼び出しでは、プロンプトの長さやユーザーの行動によってトークン消費量が大きく変動します。すべての実験に実際のコストがかかり、正しいアプローチにたどり着くまでに何十回も実行することになるかもしれません。&lt;/p&gt;
+&lt;p&gt;この予測不可能性こそが、コスト最適化を重要にする理由です — 後から考えるのではなく、初日から。&lt;/p&gt;
+&lt;h2 id="管理と最適化--違いを知る"&gt;管理と最適化 — 違いを知る&lt;/h2&gt;
+&lt;p&gt;記事の中で開発者が見落としがちだと思う区別があります：コスト&lt;em&gt;管理&lt;/em&gt;とコスト&lt;em&gt;最適化&lt;/em&gt;には違いがあるということです。&lt;/p&gt;
+&lt;p&gt;管理はトラッキングとレポーティングです。Azure Cost Managementで予算を設定し、アラートを受け取り、ダッシュボードを見ます。これは基本中の基本です。&lt;/p&gt;
+&lt;p&gt;最適化は実際に意思決定を行うところです。本当にそのS3ティアが必要ですか、それともS1で負荷に対応できますか？常時稼働のコンピューティングインスタンスが週末に何もしていませんか？トレーニングジョブにスポットインスタンスを使えませんか？&lt;/p&gt;
+&lt;p&gt;.NET開発者として、私たちはコードに集中し、インフラの決定を「運用チーム」に任せがちです。しかし、Azureにデプロイしているなら、それらの決定はあなたの決定でもあるのです。&lt;/p&gt;
+&lt;h2 id="実際に効果があること"&gt;実際に効果があること&lt;/h2&gt;
+&lt;p&gt;記事と自分自身の経験に基づいて、これが実際に効果を生むことです：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;何にいくら使っているか把握する。&lt;/strong&gt; リソースにタグを付けてください。本当に。どのプロジェクトや実験が予算を食っているかわからなければ、何も最適化できません。適切なタグ付けを行ったAzure Cost Managementが最強の味方です。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;実験する前にガードレールを設置する。&lt;/strong&gt; Azure Policyを使って、dev/test環境で高価なSKUを制限しましょう。Azure OpenAIデプロイメントに支出上限を設定しましょう。誰かが週末にGPUクラスターを動かしっぱなしにしていたことに請求書が届いてから気づく、なんてことは避けましょう。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;継続的にライトサイジングする。&lt;/strong&gt; プロトタイピング中に選んだVM？本番環境にはおそらく合っていません。Azure Advisorが推奨事項を提示してくれます — 実際に確認してください。年に一度ではなく、月に一度レビューしましょう。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ライフサイクルを考える。&lt;/strong&gt; 開発リソースはシャットダウンすべきです。テスト環境は24時間365日稼働する必要はありません。自動シャットダウンポリシーを使いましょう。AIワークロードについては特に、コンピューティングを常時稼働させる代わりに実行ごとに課金されるサーバーレスオプションを検討しましょう。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;コストだけでなく価値を測定する。&lt;/strong&gt; これは忘れがちです。コストは高いけれど大幅に優れた結果を出すモデルが正しい選択かもしれません。目標は最小限の支出ではなく、賢い支出です。&lt;/p&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;クラウドコスト最適化は一度きりのクリーンアップではありません。習慣です。AIワークロードによって支出がかつてないほど予測しにくくなっている今、この習慣を早くから身につけることで、後の痛い驚きを避けることができます。&lt;/p&gt;
+&lt;p&gt;Azureで構築している.NET開発者なら、クラウドの請求書をコードと同じように扱い始めましょう — 定期的にレビューし、散らかってきたらリファクタリングし、コストを理解せずにデプロイしないようにしましょう。&lt;/p&gt;</description></item></channel></rss>

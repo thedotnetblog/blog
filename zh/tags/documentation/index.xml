@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Documentation on The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/documentation/</link><description>Recent content in Documentation on The .NET Blog</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Sat, 04 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/documentation/index.xml" rel="self" type="application/rss+xml"/><item><title>Aspire 13.2 自带文档 CLI — 你的 AI 代理也能用</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/</link><pubDate>Sat, 04 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原文请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/"&gt;点击此处&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;你知道那种时刻吗——你正深入一个 Aspire AppHost，接入各种集成，然后需要确认 Redis 集成到底需要哪些参数？你 Alt-Tab 切到浏览器，在 aspire.dev 上翻来翻去，眯着眼看 API 文档，然后切回编辑器。上下文没了，心流断了。&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 刚刚&lt;a href="https://devblogs.microsoft.com/aspire/aspire-docs-in-your-terminal/"&gt;发布了解决方案&lt;/a&gt;。&lt;code&gt;aspire docs&lt;/code&gt; CLI 让你直接从终端搜索、浏览和阅读 Aspire 官方文档。而且因为它由可复用的服务支撑，AI 代理和技能可以使用同样的命令来查找文档，而不是幻想出不存在的 API。&lt;/p&gt;
+&lt;h2 id="这到底解决了什么问题"&gt;这到底解决了什么问题&lt;/h2&gt;
+&lt;p&gt;David Pine 在原文中说得很到位：AI 代理在帮助开发者构建 Aspire 应用方面&lt;em&gt;糟糕透了&lt;/em&gt;。它们推荐 &lt;code&gt;dotnet run&lt;/code&gt; 而不是 &lt;code&gt;aspire run&lt;/code&gt;，引用 learn.microsoft.com 来查找实际在 aspire.dev 上的文档，建议过时的 NuGet 包，还有——我个人最喜欢的——幻想出根本不存在的 API。&lt;/p&gt;
+&lt;p&gt;为什么？因为 Aspire 作为 .NET 专属工具的时间远比它成为多语言工具的时间长，而且 LLM 使用的训练数据早于最新功能。当你给 AI 代理真正查找当前文档的能力时，它就不再猜测，开始变得有用了。&lt;/p&gt;
+&lt;h2 id="三个命令零个浏览器标签页"&gt;三个命令，零个浏览器标签页&lt;/h2&gt;
+&lt;p&gt;CLI 简洁得令人耳目一新：&lt;/p&gt;
+&lt;h3 id="列出所有文档"&gt;列出所有文档&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;返回 aspire.dev 上所有可用的文档页面。需要机器可读的输出？加上 &lt;code&gt;--format Json&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id="搜索主题"&gt;搜索主题&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs search &lt;span class="s2"&gt;&amp;#34;redis&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;同时搜索标题和内容，使用加权相关性评分。与内部驱动文档工具的搜索引擎完全一样。你会得到带有标题、slug 和相关性分数的排名结果。&lt;/p&gt;
+&lt;h3 id="阅读完整页面或仅一个章节"&gt;阅读完整页面（或仅一个章节）&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs get redis-integration
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将完整页面以 markdown 格式流式传输到你的终端。只需要一个章节？&lt;/p&gt;</description></item></channel></rss>

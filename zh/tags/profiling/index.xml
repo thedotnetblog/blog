@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Profiling on The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/profiling/</link><description>Recent content in Profiling on The .NET Blog</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Thu, 02 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/profiling/index.xml" rel="self" type="application/rss+xml"/><item><title>Visual Studio 3月更新允许构建自定义Copilot代理 — find_symbol是一大亮点</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原始版本，请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Visual Studio刚刚获得了最重要的Copilot更新。Mark Downie &lt;a href="https://devblogs.microsoft.com/visualstudio/visual-studio-march-update-build-your-own-custom-agents/"&gt;发布了3月版本&lt;/a&gt;，标题是自定义代理——但说实话，&lt;code&gt;find_symbol&lt;/code&gt;工具可能才是最能改变你工作流的功能。&lt;/p&gt;
+&lt;h2 id="仓库中的自定义copilot代理"&gt;仓库中的自定义Copilot代理&lt;/h2&gt;
+&lt;p&gt;想让Copilot遵循你团队的编码标准？自定义代理定义为&lt;code&gt;.github/agents/&lt;/code&gt;中的&lt;code&gt;.agent.md&lt;/code&gt;文件。每个代理都有完整的工作区感知、代码理解、工具、首选模型和MCP连接访问权限。&lt;/p&gt;
+&lt;h2 id="代理技能可复用的指令包"&gt;代理技能：可复用的指令包&lt;/h2&gt;
+&lt;p&gt;技能从仓库的&lt;code&gt;.github/skills/&lt;/code&gt;或个人资料的&lt;code&gt;~/.copilot/skills/&lt;/code&gt;自动加载。&lt;/p&gt;
+&lt;h2 id="find_symbol语言感知导航"&gt;find_symbol：语言感知导航&lt;/h2&gt;
+&lt;p&gt;新的&lt;code&gt;find_symbol&lt;/code&gt;工具为Copilot的代理模式提供了基于语言服务的符号导航。代理不再搜索文本，而是可以找到符号的所有引用并访问类型信息和作用域。&lt;/p&gt;
+&lt;p&gt;对于.NET开发者来说这是巨大改进——拥有深层类型层次结构的C#代码库受益匪浅。&lt;/p&gt;
+&lt;h2 id="用copilot分析测试性能"&gt;用Copilot分析测试性能&lt;/h2&gt;
+&lt;p&gt;Test Explorer上下文菜单中新增了&lt;strong&gt;Profile with Copilot&lt;/strong&gt;。Profiling Agent自动运行测试并分析性能。&lt;/p&gt;
+&lt;h2 id="实时调试中的perf-tips"&gt;实时调试中的Perf Tips&lt;/h2&gt;
+&lt;p&gt;性能优化现在在调试过程中进行。Visual Studio内联显示执行时间。看到慢的行？点击Perf Tip向Copilot请求优化建议。&lt;/p&gt;
+&lt;h2 id="从solution-explorer修复nuget漏洞"&gt;从Solution Explorer修复NuGet漏洞&lt;/h2&gt;
+&lt;p&gt;当检测到NuGet包漏洞时，Solution Explorer中直接显示&lt;strong&gt;Fix with GitHub Copilot&lt;/strong&gt;链接。&lt;/p&gt;
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;p&gt;自定义代理和技能是标题，但&lt;code&gt;find_symbol&lt;/code&gt;是隐藏的亮点——它从根本上改变了Copilot重构.NET代码时的准确性。下载&lt;a href="https://visualstudio.microsoft.com/downloads/"&gt;Visual Studio 2026 Insiders&lt;/a&gt;来体验所有新功能。&lt;/p&gt;</description></item></channel></rss>

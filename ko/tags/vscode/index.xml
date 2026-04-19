@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vscode on The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/vscode/</link><description>Recent content in Vscode on The .NET Blog</description><generator>Hugo</generator><language>ko</language><lastBuildDate>Sun, 19 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/vscode/index.xml" rel="self" type="application/rss+xml"/><item><title>VS Code 1.117: 에이전트가 전용 Git 브랜치를 갖게 됐다, 완전 찬성이다</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/vscode-1-117-agents-autopilot-worktrees/</link><pubDate>Sun, 19 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/vscode-1-117-agents-autopilot-worktrees/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;이 글은 자동 번역되었습니다. 원문은 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/vscode-1-117-agents-autopilot-worktrees/"&gt;여기&lt;/a&gt;에서 확인하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&amp;ldquo;AI 어시스턴트&amp;quot;와 &amp;ldquo;AI 팀원&amp;rdquo; 사이의 경계가 계속 얇아지고 있다. VS Code 1.117이 출시됐고 &lt;a href="https://code.visualstudio.com/updates/v1_117"&gt;전체 릴리스 노트&lt;/a&gt;는 내용이 가득하지만, 이야기는 분명하다: 에이전트가 개발 워크플로의 일등 시민이 되고 있다.&lt;/p&gt;
+&lt;p&gt;진짜 중요한 것들을 정리했다.&lt;/p&gt;
+&lt;h2 id="autopilot-모드가-드디어-설정을-기억한다"&gt;Autopilot 모드가 드디어 설정을 기억한다&lt;/h2&gt;
+&lt;p&gt;이전에는 새 세션을 시작할 때마다 Autopilot을 다시 활성화해야 했다. 짜증났다. 이제 권한 모드가 세션 간에 유지되고, 기본값도 설정할 수 있다.&lt;/p&gt;
+&lt;p&gt;Agent Host는 세 가지 세션 설정을 지원한다:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Default&lt;/strong&gt; — 도구가 실행 전에 확인을 요청&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bypass&lt;/strong&gt; — 모든 것을 자동 승인&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Autopilot&lt;/strong&gt; — 완전 자율, 스스로 질문에 답하고 계속 진행&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;마이그레이션, Docker, CI와 함께 새 .NET 프로젝트를 스캐폴딩하고 있다면 — Autopilot으로 한 번 설정하고 잊어버리면 된다. 그 설정이 유지된다.&lt;/p&gt;</description></item><item><title>VS Code 1.116 — Agents 앱에 키보드 내비게이션과 파일 컨텍스트 자동완성 추가</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;이 글은 자동 번역되었습니다. 원문은 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/"&gt;여기&lt;/a&gt;에서 확인하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;VS Code 1.116은 2026년 4월 릴리스입니다. 최근 몇몇 업데이트보다 가벼운 편이지만, 변경 사항은 집중적이고 의미 있습니다 — 특히 Agents 앱을 매일 사용하고 있다면요.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://code.visualstudio.com/updates/v1_116"&gt;공식 릴리스 노트&lt;/a&gt;를 바탕으로 무엇이 추가되었는지 살펴보겠습니다.&lt;/p&gt;
+&lt;h2 id="agents-앱-개선-사항"&gt;Agents 앱 개선 사항&lt;/h2&gt;
+&lt;p&gt;Agents 앱은 일상 워크플로에 진정한 차이를 만드는 사용성 개선으로 계속 성숙해지고 있습니다:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;전용 키바인딩&lt;/strong&gt; — 이제 변경 사항 뷰, 변경 사항 내의 파일 트리, 그리고 채팅 커스터마이제이션 뷰에 전용 명령과 키보드 단축키로 포커스를 맞출 수 있습니다. Agents 앱에서 여기저기 클릭하며 탐색하고 있었다면, 이제 완전한 키보드 기반 워크플로가 가능합니다.&lt;/p&gt;</description></item><item><title>VS Code 1.115 — 백그라운드 터미널 알림, SSH 에이전트 모드 등</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/</link><pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;이 글은 자동 번역되었습니다. 원문은 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/"&gt;여기&lt;/a&gt;에서 확인하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;VS Code 1.115가 &lt;a href="https://code.visualstudio.com/updates/v1_115"&gt;출시&lt;/a&gt;되었습니다. 주요 기능 면에서는 가벼운 릴리스이지만, AI 코딩 어시스턴트를 매일 사용하고 있다면 에이전트 관련 개선사항들이 정말 유용합니다.&lt;/p&gt;
+&lt;p&gt;실제로 알아둘 가치가 있는 것들을 짚어보겠습니다.&lt;/p&gt;
+&lt;h2 id="백그라운드-터미널이-에이전트에게-알림을-보냅니다"&gt;백그라운드 터미널이 에이전트에게 알림을 보냅니다&lt;/h2&gt;
+&lt;p&gt;이번 릴리스의 핵심 기능입니다. 백그라운드 터미널이 이제 명령이 완료되면 종료 코드와 터미널 출력을 포함하여 에이전트에게 자동으로 알림을 보냅니다. 백그라운드 터미널의 입력 프롬프트도 감지되어 사용자에게 표시됩니다.&lt;/p&gt;
+&lt;p&gt;왜 중요할까요? Copilot의 에이전트 모드로 빌드 명령이나 테스트 스위트를 백그라운드에서 실행해 본 적이 있다면, &amp;ldquo;그거 끝났나?&amp;ldquo;라는 고통을 알 것입니다. 백그라운드 터미널은 기본적으로 실행 후 잊어버리는 방식이었습니다. 이제 에이전트가 &lt;code&gt;dotnet build&lt;/code&gt;나 &lt;code&gt;dotnet test&lt;/code&gt;가 완료되면 알림을 받고, 출력을 확인하고, 그에 따라 대응할 수 있습니다. 작은 변화지만 에이전트 기반 워크플로우의 신뢰성을 크게 향상시킵니다.&lt;/p&gt;</description></item></channel></rss>

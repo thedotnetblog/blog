@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Platform-Engineering on The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/platform-engineering/</link><description>Recent content in Platform-Engineering on The .NET Blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/platform-engineering/index.xml" rel="self" type="application/rss+xml"/><item><title>エージェンティックなプラットフォームエンジニアリングが現実になりつつある — Git-APEがその方法を示す</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されました。原文は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;プラットフォームエンジニアリングは、カンファレンスでは素晴らしく聞こえるけど、実際には「内部ポータルとTerraformラッパーを作りました」という意味になりがちな用語の一つです。本当の約束 — 安全で、ガバナンスが効いていて、高速なセルフサービスインフラ — はいつもあと数歩先にありました。&lt;/p&gt;
+&lt;p&gt;Azureチームが&lt;a href="https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/"&gt;エージェンティックなプラットフォームエンジニアリングシリーズのパート2&lt;/a&gt;を公開しました。今回はハンズオンの実装がテーマです。彼らはこれを&lt;strong&gt;Git-APE&lt;/strong&gt;と呼んでいます（はい、頭字語は意図的です）。これはGitHub CopilotエージェントとAzure MCPサーバーを使って、自然言語のリクエストを検証済みでデプロイされたインフラに変換するオープンソースプロジェクトです。&lt;/p&gt;
+&lt;h2 id="git-apeが実際にやること"&gt;Git-APEが実際にやること&lt;/h2&gt;
+&lt;p&gt;コアアイデア：開発者がTerraformモジュールを学んだり、ポータルUIをナビゲートしたり、プラットフォームチームにチケットを切る代わりに、Copilotエージェントに話しかけます。エージェントが意図を解釈し、Infrastructure-as-Codeを生成し、ポリシーに対して検証し、デプロイします — すべてVS Code内で。&lt;/p&gt;
+&lt;p&gt;セットアップはこちら：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/Azure/git-ape
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; git-ape
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;VS Codeでワークスペースを開くと、エージェント設定ファイルがGitHub Copilotによって自動検出されます。エージェントと直接やり取りします：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;@git-ape deploy a function app with storage in West Europe
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;エージェントは内部でAzure MCPサーバーを使ってAzureサービスとやり取りします。VS Code設定のMCP構成で特定の機能を有効にします：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;azureMcp.serverMode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;namespace&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;azureMcp.enabledServices&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;deploy&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;bestpractices&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;group&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;subscription&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;functionapp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;storage&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;sql&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;monitor&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;azureMcp.readOnly&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="なぜこれが重要か"&gt;なぜこれが重要か&lt;/h2&gt;
+&lt;p&gt;Azureで構築している私たちにとって、これはプラットフォームエンジニアリングの議論を「ポータルをどう構築するか」から「ガードレールをどうAPIとして記述するか」にシフトさせます。プラットフォームのインターフェースがAIエージェントになると、制約とポリシーの品質がプロダクトになります。&lt;/p&gt;
+&lt;p&gt;パート1のブログは理論を提示しました：よく記述されたAPI、コントロールスキーマ、明示的なガードレールがプラットフォームをエージェント対応にします。パート2は実際のツールを提供することでそれが機能することを証明しています。エージェントはリソースを盲目的に生成するのではなく、ベストプラクティスに対して検証し、命名規則を尊重し、組織のポリシーを適用します。&lt;/p&gt;
+&lt;p&gt;クリーンアップも同様に簡単です：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;@git-ape destroy my-resource-group
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="私の見解"&gt;私の見解&lt;/h2&gt;
+&lt;p&gt;正直に言うと、これは特定のツールよりもパターンについてです。Git-APE自体はデモ/リファレンスアーキテクチャです。しかし根底にあるアイデア — プラットフォームへのインターフェースとしてのエージェント、プロトコルとしてのMCP、ホストとしてのGitHub Copilot — これがエンタープライズの開発者体験が向かう方向です。&lt;/p&gt;
+&lt;p&gt;内部ツールをエージェントフレンドリーにする方法を探しているプラットフォームチームなら、これ以上の出発点はありません。そして.NET開発者として自分の世界とどう繋がるか気になるなら：Azure MCPサーバーとGitHub Copilotエージェントはどんなのワークロードでも動作します。ASP.NET Core API、.NET Aspireスタック、コンテナ化されたマイクロサービス — すべてがエージェンティックなデプロイフローのターゲットになり得ます。&lt;/p&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;Git-APEは、エージェンティックなプラットフォームエンジニアリングの実践における初期だが具体的な姿です。&lt;a href="https://github.com/Azure/git-ape"&gt;リポジトリ&lt;/a&gt;をクローンし、デモを試し、プラットフォームのAPIとポリシーがエージェントに安全に使われるためにどうあるべきか考え始めてください。&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/"&gt;完全な記事&lt;/a&gt;でウォークスルーとデモ動画をご覧ください。&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloud on The .NET Blog</title><link>https://thedotnetblog.com/ru/tags/cloud/</link><description>Recent content in Cloud on The .NET Blog</description><generator>Hugo</generator><language>ru</language><lastBuildDate>Mon, 14 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ru/tags/cloud/index.xml" rel="self" type="application/rss+xml"/><item><title>NDC Oslo 2026</title><link>https://thedotnetblog.com/ru/events/ndc-oslo-2026/</link><pubDate>Mon, 14 Sep 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ru/events/ndc-oslo-2026/</guid><description>&lt;p&gt;&lt;strong&gt;NDC Oslo 2026&lt;/strong&gt; проходит с &lt;strong&gt;14 по 18 сентября 2026 года&lt;/strong&gt; в &lt;strong&gt;Oslo Spektrum&lt;/strong&gt;, Осло, Норвегия.&lt;/p&gt;
+&lt;p&gt;NDC Oslo — одна из крупнейших и наиболее уважаемых конференций для разработчиков в Европе, охватывающая всё: от .NET и облачных технологий до безопасности, архитектуры, ИИ и другого. Выпуск 2026 года сейчас на этапе бронирования, с масштабной программой в процессе формирования.&lt;/p&gt;
+&lt;h2 id="в-цифрах"&gt;В цифрах&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;160 сессий&lt;/strong&gt; (бронирование)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;150 спикеров&lt;/strong&gt; (бронирование)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;15 воркшопов&lt;/strong&gt; (бронирование)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;5 дней&lt;/strong&gt; — воркшопы + конференция&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="подтверждённые-спикеры"&gt;Подтверждённые спикеры&lt;/h2&gt;
+&lt;p&gt;Список спикеров формируется, среди подтверждённых имён:&lt;/p&gt;</description></item><item><title>Ваши AI-эксперименты в Azure сжигают деньги — Вот как это исправить</title><link>https://thedotnetblog.com/ru/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ru/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Этот пост был переведён автоматически. Оригинал можно прочитать &lt;a href="https://thedotnetblog.com/ru/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/"&gt;здесь&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Если вы сейчас создаёте приложения на базе ИИ в Azure, вы, вероятно, заметили кое-что: ваш счёт за облако выглядит иначе, чем раньше. Не просто выше — странно. Скачкообразно. Трудно предсказать.&lt;/p&gt;
+&lt;p&gt;Microsoft только что опубликовал отличную статью о &lt;a href="https://azure.microsoft.com/en-us/blog/cloud-cost-optimization-principles-that-still-matter/"&gt;принципах оптимизации облачных затрат, которые по-прежнему актуальны&lt;/a&gt;, и, честно говоря, момент не мог быть лучше. Потому что AI-нагрузки изменили правила игры, когда речь идёт о затратах.&lt;/p&gt;</description></item></channel></rss>

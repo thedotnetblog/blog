@@ -1,0 +1,3578 @@
+# The .NET Blog — Full Content
+
+> Articles, tutorials and insights from the .NET community.
+
+The .NET Blog is a community-driven publication featuring articles, tutorials, and deep dives on .NET, ASP.NET Core, C#, cloud architecture, and software engineering. Written by developers, for developers.
+
+## Metadata
+
+- **URL**: https://thedotnetblog.com/
+- **Language**: zh
+- **Last Updated**: 2026-04-19
+
+---
+## VS Code 1.117：Agent 拥有了自己的 Git 分支，我举双手赞成
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/vscode-1-117-agents-autopilot-worktrees/
+- **Date**: April 19, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: vscode, developer-tools, ai, github-copilot, agents
+- **Reading time**: 1 min
+
+> VS Code 1.117 为 Agent 会话带来了 worktree 隔离、持久化 Autopilot 模式和子 Agent 支持。Agent 编码工作流变得更加真实了。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "vscode-1-117-agents-autopilot-worktrees" >}})。*
+
+"AI 助手"和"AI 队友"之间的界限越来越模糊。VS Code 1.117 刚刚发布，[完整的发行说明](https://code.visualstudio.com/updates/v1_117)内容丰富，但核心很明确：Agent 正在成为你开发工作流中的一等公民。
+
+以下是真正重要的内容。
+
+## Autopilot 模式终于能记住你的偏好了
+
+以前，你每次开始新会话都得重新启用 Autopilot。很烦。现在你的权限模式会在会话之间持久化，你还可以配置默认值。
+
+Agent Host 支持三种会话配置：
+
+- **Default** — 工具在运行前会请求确认
+- **Bypass** — 自动批准一切
+- **Autopilot** — 完全自主，自己回答问题并继续执行
+
+如果你正在搭建一个带有迁移、Docker 和 CI 的新 .NET 项目——设置一次 Autopilot 就行了。这个偏好会一直保持。
+
+## Agent 会话的 worktree 和 git 隔离
+
+这是重头戏。Agent 会话现在支持完整的 worktree 和 git 隔离。这意味着当一个 Agent 处理任务时，它会获得自己的分支和工作目录。你的主分支完全不受影响。
+
+更好的是——Copilot CLI 会为这些 worktree 会话生成有意义的分支名称。不再是 `agent-session-abc123`。你会得到一个真正描述 Agent 正在做什么的名称。
+
+对于管理多个功能分支或在长时间脚手架任务运行期间修复 bug 的 .NET 开发者来说，这是一个游戏规则的改变。你可以让一个 Agent 在一个 worktree 中构建 API 控制器，同时你在另一个 worktree 中调试服务层问题。没有冲突。没有 stash。没有混乱。
+
+## 子 Agent 和 Agent 团队
+
+Agent Host Protocol 现在支持子 Agent。一个 Agent 可以启动其他 Agent 来处理任务的各个部分。把它想象成委派——你的主 Agent 负责协调，专门的 Agent 处理各个部分。
+
+这还处于早期阶段，但对 .NET 工作流的潜力显而易见。想象一下，一个 Agent 处理你的 EF Core 迁移，另一个设置你的集成测试。我们还没有完全到达那里，但协议支持现在落地意味着工具很快就会跟上。
+
+## Agent 发送输入时终端输出自动包含
+
+虽小但有意义。当 Agent 向终端发送输入时，终端输出现在会自动包含在上下文中。以前，Agent 需要额外的一个回合才能读取发生了什么。
+
+如果你曾经看到一个 Agent 运行 `dotnet build`，失败了，然后又需要一次往返才能看到错误——这种摩擦消失了。它立即看到输出并做出反应。
+
+## macOS 上的 Agents 应用自动更新
+
+macOS 上的独立 Agents 应用现在可以自动更新了。不再需要手动下载新版本。它会自动保持最新。
+
+## 值得了解的小改进
+
+- **package.json 悬停提示**现在同时显示已安装版本和最新可用版本。如果你在 .NET 项目旁边管理 npm 工具，这很有用。
+- **JSDoc 注释中的图片**在悬停和补全中正确渲染。
+- **Copilot CLI 会话**现在会显示是由 VS Code 还是外部创建的——当你在终端之间切换时很方便。
+- **Copilot CLI、Claude Code 和 Gemini CLI** 被识别为 shell 类型。编辑器知道你在运行什么。
+
+## 总结
+
+VS Code 1.117 不是一个花哨的功能堆砌。它是基础设施。Worktree 隔离、持久化权限、子 Agent 协议——这些是构建一个工作流的基石，在这个工作流中，Agent 可以处理真实的并行任务而不会干扰你的代码。
+
+如果你正在用 .NET 开发，还没有尝试 Agent 工作流，说实话，现在就是开始的时候。
+
+
+---
+## Foundry的RFT更便宜、更智能了 — 看看有什么变化
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/
+- **Date**: April 18, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: ai, azure, foundry, fine-tuning, machine-learning
+- **Reading time**: 1 min
+
+> Microsoft Foundry本月发布了三项RFT更新：o4-mini的全球训练、新的GPT-4.1模型评分器，以及一份能为你节省数小时调试时间的最佳实践指南。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "foundry-fine-tuning-april-2026-rft-graders" >}})。*
+
+如果你正在开发依赖微调模型的.NET应用，这个月的Foundry更新值得关注。Reinforcement Fine-Tuning变得更易获取，价格也大幅降低。
+
+完整详情请参阅[官方公告](https://devblogs.microsoft.com/foundry/whats-new-in-foundry-finetune-april-2026/)，这里是实用要点总结。
+
+## o4-mini的全球训练
+
+o4-mini是推理密集型和智能体工作负载的首选模型。重大消息：你现在可以从13+个Azure区域启动微调任务，与Standard训练相比，每token的训练费率更低。相同的基础设施，相同的质量，更广的覆盖范围。
+
+如果你的团队分布在不同地区，这很重要。你不再局限于少数几个区域来进行训练。
+
+以下是启动全球训练任务的REST API调用：
+
+```bash
+curl -X POST "https://<your-resource>.openai.azure.com/openai/fine_tuning/jobs?api-version=2025-04-01-preview" \
+  -H "Content-Type: application/json" \
+  -H "api-key: $AZURE_OPENAI_API_KEY" \
+  -d '{
+    "model": "o4-mini",
+    "training_file": "<your-training-file-id>",
+    "method": {
+      "type": "reinforcement",
+      "reinforcement": {
+        "grader": {
+          "type": "string_check",
+          "name": "answer-check",
+          "input": "{{sample.output_text}}",
+          "reference": "{{item.reference_answer}}",
+          "operation": "eq"
+        }
+      }
+    },
+    "hyperparameters": {
+      "n_epochs": 2,
+      "compute_multiplier": 1.0
+    },
+    "trainingType": "globalstandard"
+  }'
+```
+
+那个`trainingType: globalstandard`标志就是关键区别。
+
+## 新模型评分器：GPT-4.1系列
+
+评分器定义了模型优化所针对的奖励信号。此前，基于模型的评分器仅限于较少的模型集合。现在你有三个新选项：GPT-4.1、GPT-4.1-mini和GPT-4.1-nano。
+
+什么时候应该使用模型评分器而不是确定性评分器？当你的任务输出是开放式的，当你需要在多个维度上进行部分评分，或者当你在构建智能体工作流且工具调用的正确性取决于语义上下文时。
+
+关键在于，分层策略很实用：
+
+- **GPT-4.1-nano** 用于初始迭代。低成本，快速反馈循环。
+- **GPT-4.1-mini** 当你的评分标准稳定并需要更高保真度时使用。
+- **GPT-4.1** 用于生产环境评分或每个评分决策都至关重要的复杂标准。
+
+你甚至可以在单个RFT任务中混合使用评分器类型。用string-match来评判"正确答案"维度，用模型评分器来评估推理质量。说实话，这种灵活性才是它对实际工作负载真正有用的地方。
+
+## RFT数据格式的陷阱
+
+这是很多人会踩的坑。RFT的数据格式与SFT不同。每行的最后一条消息必须是User或Developer角色——不是Assistant。期望的答案放在顶层键中，如`reference_answer`，评分器会直接引用它。
+
+如果你之前一直在做监督微调并想切换到RFT，你需要重新组织训练数据。不要跳过这一步，否则你的任务会静默失败。
+
+## 为什么这对.NET开发者很重要
+
+如果你通过Azure OpenAI SDK从.NET应用中调用微调模型，更便宜的训练意味着你可以更积极地迭代。模型评分器选项意味着你可以针对细微的任务进行微调——不仅仅是精确匹配场景。[GitHub](https://github.com/microsoft-foundry/fine-tuning/blob/main/Demos/Agentic_RFT_PrivatePreview/RFT_Best_Practice.md)上的最佳实践指南将为你节省真正的调试时间。
+
+从小处开始。十到一百个样本。简单的评分器。验证循环。然后扩展。
+
+
+---
+## 你在Azure上的AI实验正在烧钱——这样解决
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/
+- **Date**: April 18, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, cloud, cost-optimization, ai, finops
+- **Reading time**: 1 min
+
+> Azure上的AI工作负载很容易变得昂贵。让我们聊聊在不拖慢开发进度的情况下，什么方法真正有效地控制成本。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "cloud-cost-optimization-ai-workloads-azure" >}})。*
+
+如果你现在正在Azure上构建AI驱动的应用，你可能已经注意到一件事：你的云账单看起来和以前不一样了。不只是更高了——更奇怪了。波动很大，难以预测。
+
+Microsoft刚刚发布了一篇关于[仍然重要的云成本优化原则](https://azure.microsoft.com/en-us/blog/cloud-cost-optimization-principles-that-still-matter/)的优秀文章，说实话，时机再好不过了。因为AI工作负载在成本方面已经改变了游戏规则。
+
+## 为什么AI工作负载不一样
+
+事情是这样的。传统的.NET工作负载相对可预测。你了解你的App Service层级，了解你的SQL DTU，可以相当准确地估算每月开支。AI工作负载呢？完全不是这么回事。
+
+你在测试多个模型看哪个合适。你在启动GPU支持的基础设施进行微调。你在调用Azure OpenAI的API，而token消耗量会因prompt长度和用户行为的不同而产生巨大差异。每个实验都要花真金白银，你可能需要运行几十次才能找到正确的方法。
+
+这种不可预测性正是成本优化至关重要的原因——不是事后才想到，而是从第一天开始。
+
+## 管理与优化——了解区别
+
+文章中有一个我认为开发者容易忽视的区别：成本*管理*和成本*优化*是不同的。
+
+管理是跟踪和报告。你在Azure Cost Management中设置预算，收到警报，查看仪表板。这是基本功。
+
+优化是你真正做决策的地方。你真的需要S3层级，还是S1就能处理你的负载？那个始终运行的计算实例周末是不是闲着？你能否用竞价实例来跑训练任务？
+
+作为.NET开发者，我们往往专注于代码，把基础设施决策留给"运维团队"。但如果你在Azure上部署，这些决策也是你的决策。
+
+## 真正有效的方法
+
+根据这篇文章和我自己的经验，以下是真正能产生效果的做法：
+
+**了解你在花什么钱、花在哪里。** 给你的资源打标签。我是认真的。如果你无法分辨哪个项目或实验在消耗你的预算，你就无法优化任何东西。配合适当标签的Azure Cost Management是你最好的朋友。
+
+**实验之前设好护栏。** 使用Azure Policy限制dev/test环境中昂贵的SKU。为你的Azure OpenAI部署设置消费上限。不要等到账单到了才发现有人让GPU集群在周末一直运行。
+
+**持续进行合理配置。** 原型阶段选的那个VM？可能不适合生产环境。Azure Advisor会给你建议——真的去看看。每月审查，而不是每年。
+
+**考虑生命周期。** 开发资源应该关闭。测试环境不需要7×24小时运行。使用自动关机策略。特别是对于AI工作负载，考虑使用按执行付费的无服务器选项，而不是让计算资源一直保持运行。
+
+**衡量价值，而不仅仅是成本。** 这一点容易忘记。一个成本更高但能产出显著更好结果的模型可能才是正确的选择。目标不是花最少的钱——而是花得聪明。
+
+## 总结
+
+云成本优化不是一次性的清理工作。它是一个习惯。随着AI工作负载让开支比以往任何时候都更难预测，尽早养成这个习惯可以帮你避免日后的痛苦惊喜。
+
+如果你是一名在Azure上构建的.NET开发者，开始像对待代码一样对待你的云账单吧——定期审查，混乱时重构，永远不要在不了解成本的情况下部署。
+
+
+---
+## Docker Sandbox 让 Copilot 代理重构你的代码而不危及你的机器
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/
+- **Date**: April 17, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: github-copilot, docker, modernization, developer-tools, ai
+- **Reading time**: 1 min
+
+> Docker Sandbox 为 GitHub Copilot 代理提供安全的微型虚拟机，让它们可以自由重构——无需权限提示，不会对主机造成风险。这就是它为什么会改变大规模 .NET 现代化的一切。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "copilot-docker-sandbox-agentic-refactoring" >}})。*
+
+如果你用过 Copilot 的代理模式做一些超出小修改范围的事情，你一定知道那种痛苦。每次写文件，每个终端命令——又一个权限提示。现在想象一下在 50 个项目上这样操作。一点都不好玩。
+
+Azure 团队刚发布了一篇关于 [GitHub Copilot 代理的 Docker Sandbox](https://devblogs.microsoft.com/all-things-azure/best-of-both-worlds-for-agentic-refactoring-github-copilot-microvms-via-docker-sandbox/) 的文章，说实话，这是我见过的最实用的代理工具改进之一。它使用微型虚拟机为 Copilot 提供一个完全隔离的环境，让它可以随意操作——安装包、运行构建、执行测试——而不会触及你的主机系统。
+
+## Docker Sandbox 实际给你带来什么
+
+核心思路很简单：启动一个带有完整 Linux 环境的轻量级微型虚拟机，将你的工作区同步进去，然后让 Copilot 代理在里面自由操作。完成后，更改会同步回来。
+
+以下是让它不仅仅是"在容器里运行东西"的特点：
+
+- **双向工作区同步**，保留绝对路径。你的项目结构在沙箱内看起来完全一样。不会有路径相关的构建失败。
+- **私有 Docker 守护进程**在微型虚拟机内运行。代理可以构建和运行容器，而无需挂载你主机的 Docker socket。这对安全性来说意义重大。
+- **HTTP/HTTPS 过滤代理**控制代理在网络上可以访问什么。你来决定允许哪些注册表和端点。沙箱内恶意 `npm install` 带来的供应链攻击？已封锁。
+- **YOLO 模式**——是的，他们就是这么叫的。代理运行时无需权限提示，因为它根本无法损坏你的主机。每一个破坏性操作都被隔离了。
+
+## 为什么 .NET 开发者应该关注
+
+想想现在有多少团队正在面对现代化工作。你有一个包含 30 个项目的 .NET Framework 解决方案，需要迁移到 .NET 9。那是数百个文件的更改——项目文件、命名空间更新、API 替换、NuGet 迁移。
+
+使用 Docker Sandbox，你可以将 Copilot 代理指向一个项目，让它在微型虚拟机内自由重构，运行 `dotnet build` 和 `dotnet test` 进行验证，然后只接受那些真正有效的更改。不用担心它在实验过程中意外破坏你的本地开发环境。
+
+文章还描述了运行**并行代理舰队**的场景——每个代理在自己的沙箱中——同时处理不同的项目。对于大型 .NET 解决方案或微服务架构来说，这是一个巨大的时间节省。每个服务一个代理，全部隔离运行，全部独立验证。
+
+## 安全角度很重要
+
+大多数人忽略的一点是：当你让 AI 代理执行任意命令时，你是在把整台机器都托付给它。Docker Sandbox 翻转了这个模型。代理在一次性环境中获得完全自主权。网络代理确保它只能从已批准的来源下载。你的主机文件系统、Docker 守护进程和凭据完好无损。
+
+对于有合规要求的团队——这是大多数企业级 .NET 公司的情况——这就是"我们不能使用代理式 AI"和"我们可以安全地采用它"之间的区别。
+
+## 总结
+
+Docker Sandbox 解决了代理式编程的根本矛盾：代理需要自由才能发挥作用，但在你的主机上拥有自由是危险的。微型虚拟机两者兼得。如果你正在规划任何大规模的 .NET 重构或现代化，现在就值得设置起来。Copilot 的代码智能与安全执行环境的结合，正是生产团队一直在等待的。
+
+
+---
+## 别再盯着终端了：Aspire 的分离模式改变了工作流程
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/
+- **Date**: April 17, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: aspire, dotnet, cli, developer-tools, coding-agents
+- **Reading time**: 1 min
+
+> Aspire 13.2 让你在后台运行 AppHost 并释放终端。结合新的 CLI 命令和代理支持，这比听起来重要得多。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "aspire-detached-mode-free-your-terminal" >}})。*
+
+每次运行 Aspire AppHost，你的终端就没了。被锁住了。一直占用到你按 Ctrl+C 为止。需要快速运行个命令？打开另一个标签页。想查看日志？再开一个标签页。这是一种小摩擦，但积少成多。
+
+Aspire 13.2 解决了这个问题。James Newton-King [写了完整的详情](https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/)，说实话，这是那种一用就立刻改变工作方式的功能。
+
+## 分离模式：一条命令，终端回来了
+
+```bash
+aspire start
+```
+
+这是 `aspire run --detach` 的简写。你的 AppHost 在后台启动，终端立即回到你手中。不需要额外的标签页。不需要终端多路复用器。就是你的提示符，随时可用。
+
+## 管理正在运行的进程
+
+关键在于——在后台运行只有在你能管理那些进程时才有用。Aspire 13.2 为此提供了一整套 CLI 命令：
+
+```bash
+# List all running AppHosts
+aspire ps
+
+# Inspect the state of a specific AppHost
+aspire describe
+
+# Stream logs from a running AppHost
+aspire logs
+
+# Stop a specific AppHost
+aspire stop
+```
+
+这让 Aspire CLI 变成了一个真正的进程管理器。你可以启动多个 AppHost，检查它们的状态，跟踪日志，然后关闭它们——全部在一个终端会话中完成。
+
+## 与隔离模式结合使用
+
+分离模式与隔离模式天然搭配。想在后台运行同一个项目的两个实例而不产生端口冲突？
+
+```bash
+aspire start --isolated
+aspire start --isolated
+```
+
+每个实例都会获得随机端口、独立的密钥和自己的生命周期。用 `aspire ps` 查看两者，用 `aspire stop` 停掉不需要的那个。
+
+## 为什么这对编码代理意义重大
+
+这才是真正有趣的地方。在你的终端中工作的编码代理现在可以：
+
+1. 用 `aspire start` 启动应用
+2. 用 `aspire describe` 查询状态
+3. 用 `aspire logs` 检查日志来诊断问题
+4. 完成后用 `aspire stop` 停止应用
+
+所有操作都不会失去终端会话。在分离模式之前，运行你的 AppHost 的代理会把自己锁在终端里。现在它可以启动、观察、迭代和清理——这正是你期望自主代理的工作方式。
+
+Aspire 团队在这方面下了功夫。运行 `aspire agent init` 会设置一个 Aspire 技能文件，教会代理这些命令。这样，像 Copilot 的编码代理这样的工具就能直接管理你的 Aspire 工作负载。
+
+## 总结
+
+分离模式是一个伪装成简单标志的工作流升级。你不再需要在终端之间切换上下文，代理不再阻塞自己，新的 CLI 命令让你真正看到正在运行的内容。它实用、干净，让日常开发循环明显更顺畅。
+
+阅读[完整文章](https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/)了解所有详情，并通过 `aspire update --self` 获取 Aspire 13.2。
+
+
+---
+## Azure MCP 工具现已内置于 Visual Studio 2022 — 无需安装扩展
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-mcp-tools-built-into-visual-studio-2022/
+- **Date**: April 16, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: visual-studio, azure, mcp, copilot, developer-tools
+- **Reading time**: 1 min
+
+> Azure MCP 工具作为 Visual Studio 2022 Azure 开发工作负载的一部分随附发布。超过 230 个工具、45 项 Azure 服务，零扩展安装。
+
+
+
+> *本文为自动翻译。如需查看原文，请[点击此处]({{< ref "azure-mcp-tools-built-into-visual-studio-2022.md" >}})。*
+
+如果你一直通过单独的扩展在 Visual Studio 中使用 Azure MCP 工具，那你一定很熟悉这套流程——安装 VSIX、重启、祈祷别出问题、处理版本不匹配。这种摩擦现在消失了。
+
+Yun Jung Choi [宣布](https://devblogs.microsoft.com/visualstudio/azure-mcp-tools-now-ship-built-into-visual-studio-2022-no-extension-required/)，Azure MCP 工具现在直接作为 Visual Studio 2022 中 Azure 开发工作负载的一部分发布。无需扩展，无需 VSIX，无需重启。
+
+## 这实际意味着什么
+
+从 Visual Studio 2022 版本 17.14.30 开始，Azure MCP Server 捆绑在 Azure 开发工作负载中。如果你已经安装了该工作负载，只需在 GitHub Copilot Chat 中启用它即可。
+
+超过 230 个工具，覆盖 45 项 Azure 服务——直接从聊天窗口即可访问。列出你的存储账户、部署 ASP.NET Core 应用、诊断 App Service 问题、查询 Log Analytics——全程无需打开浏览器标签页。
+
+## 为什么这比听起来更重要
+
+开发工具有个道理：每多一个步骤就是摩擦，摩擦会扼杀采用率。MCP 作为单独的扩展意味着版本不匹配、安装失败，以及又多了一个需要保持更新的东西。将它内置到工作负载中意味着：
+
+- **单一的更新路径**——通过 Visual Studio Installer
+- **无版本偏差**——扩展和 IDE 之间不会出现版本不一致
+- **始终保持最新**——MCP Server 随 VS 常规发布一起更新
+
+对于标准化使用 Azure 的团队来说，这意义重大。安装一次工作负载，启用工具，每次会话都能使用。
+
+## 你能用它做什么
+
+这些工具通过 Copilot Chat 覆盖完整的开发生命周期：
+
+- **学习**——询问 Azure 服务、最佳实践、架构模式
+- **设计与开发**——获取服务推荐，配置应用代码
+- **部署**——预配资源并直接从 IDE 进行部署
+- **排查问题**——查询日志、检查资源健康状况、诊断生产环境问题
+
+一个简单的例子——在 Copilot Chat 中输入：
+
+```
+List my storage accounts in my current subscription.
+```
+
+Copilot 在后台调用 Azure MCP 工具，查询你的订阅，返回一个包含名称、位置和 SKU 的格式化列表。无需打开门户。
+
+## 如何启用
+
+1. 更新到 Visual Studio 2022 **17.14.30** 或更高版本
+2. 确保已安装 **Azure development** 工作负载
+3. 打开 GitHub Copilot Chat
+4. 点击 **Select tools** 按钮（双扳手图标）
+5. 开启 **Azure MCP Server**
+
+就这样。跨会话保持启用状态。
+
+## 一个注意事项
+
+这些工具默认是禁用的——你需要手动启用。而且 VS 2026 特有的工具在 VS 2022 中不可用。工具的可用性还取决于你的 Azure 订阅权限，与门户中一样。
+
+## 更大的图景
+
+这是一个清晰趋势的一部分：MCP 正在成为在开发者 IDE 中呈现云工具的标准方式。我们已经看到了 [Azure MCP Server 2.0 稳定版发布](https://devblogs.microsoft.com/azure-sdk/announcing-azure-mcp-server-2-0-stable-release/)以及在 VS Code 和其他编辑器中的 MCP 集成。将其内置到 Visual Studio 的工作负载系统中是自然而然的演进。
+
+对于我们这些常年在 Visual Studio 中工作的 .NET 开发者来说，这又少了一个需要切换到 Azure 门户的理由。说实话，标签页切换越少越好。
+
+
+---
+## Pin 聚类终于登陆 .NET MAUI Maps — 一个属性，零痛苦
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/maui-maps-pin-clustering-finally/
+- **Date**: April 16, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet, maui, mobile, maps, dotnet-11
+- **Reading time**: 1 min
+
+> .NET MAUI 11 Preview 3 为 Map 控件添加了原生 Pin 聚类功能。一个属性、独立的聚类分组和点击处理 — 全部内置。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "maui-maps-pin-clustering-finally.md" >}})。*
+
+你知道那种感觉吗？在地图上加载一百个 Pin，然后整个地图变成一团看不清的东西？对，这就是 .NET MAUI Maps 一直以来的体验。现在不会了。
+
+David Ortinau [刚刚宣布](https://devblogs.microsoft.com/dotnet/pin-clustering-in-dotnet-maui-maps/) .NET MAUI 11 Preview 3 在 Android 和 iOS/Mac Catalyst 上内置了 Pin 聚类功能。而且最棒的是 — 启用它简单得不可思议。
+
+## 一个属性统治一切
+
+```xml
+<maps:Map IsClusteringEnabled="True" />
+```
+
+就这样。相邻的 Pin 会被分组到带有计数徽章的聚类中。放大时展开，缩小时折叠。这是用户对任何现代地图都期望的行为 — 现在你只需一个属性就能获得。
+
+## 独立的聚类分组
+
+这才是有趣的地方。不是所有 Pin 都应该聚在一起。咖啡店和公园是不同的东西，你的地图应该知道这一点。
+
+`ClusteringIdentifier` 属性让你可以将 Pin 分成独立的组：
+
+```csharp
+map.Pins.Add(new Pin
+{
+    Label = "Pike Place Coffee",
+    Location = new Location(47.6097, -122.3331),
+    ClusteringIdentifier = "coffee"
+});
+
+map.Pins.Add(new Pin
+{
+    Label = "Occidental Square",
+    Location = new Location(47.6064, -122.3325),
+    ClusteringIdentifier = "parks"
+});
+```
+
+具有相同标识符的 Pin 会聚在一起。不同的标识符即使在地理位置很近的情况下也会形成独立的聚类。没有标识符？默认分组。干净且可预测。
+
+## 处理聚类点击
+
+当用户点击一个聚类时，你会收到一个 `ClusterClicked` 事件，包含你需要的一切：
+
+```csharp
+map.ClusterClicked += async (sender, e) =>
+{
+    string names = string.Join("\n", e.Pins.Select(p => p.Label));
+    await DisplayAlert(
+        $"Cluster ({e.Pins.Count} pins)",
+        names,
+        "OK");
+
+    // Suppress default zoom-to-cluster behavior:
+    // e.Handled = true;
+};
+```
+
+事件参数提供 `Pins`（聚类中的 Pin）、`Location`（地理中心）和 `Handled`（如果你想覆盖默认缩放行为，设置为 `true`）。简单、实用，完全符合预期。
+
+## 值得了解的平台细节
+
+在 Android 上，聚类使用自定义的基于网格的算法，在缩放变化时重新计算 — 没有外部依赖。在 iOS 和 Mac Catalyst 上，它利用了 MapKit 原生的 `MKClusterAnnotation` 支持，这意味着流畅的平台原生动画。
+
+这是 MAUI 团队做出正确决策的案例之一 — 在有意义的地方依靠平台能力。
+
+## 为什么这很重要
+
+Pin 聚类一直是 .NET MAUI 中最受期待的功能之一（[issue #11811](https://github.com/dotnet/maui/issues/11811)），这是有充分理由的。每个在地图上显示位置的应用 — 配送追踪、门店定位、房地产 — 都需要它。以前你必须自己构建或引入第三方库。现在它是内置的。
+
+对于我们构建跨平台移动应用的 .NET 开发者来说，这正是那种让 MAUI 成为地图密集型场景中真正实用选择的生活质量改善。
+
+## 开始使用
+
+安装 [.NET 11 Preview 3](https://dotnet.microsoft.com/download/dotnet/11.0) 并更新 .NET MAUI 工作负载。[Maps 示例](https://github.com/dotnet/maui-samples/tree/main/10.0/UserInterface/Views/Map/MapDemo/WorkingWithMaps)包含一个新的聚类页面，你可以立即上手体验。
+
+去用它构建点什么吧 — 让你的地图终于能喘口气。
+
+
+---
+## .NET 2026年4月服务更新 — 你今天就该应用的安全补丁
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/dotnet-april-2026-servicing-security-patches/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet, security, servicing, dotnet-framework
+- **Reading time**: 1 min
+
+> 2026年4月的服务更新修补了 .NET 10、.NET 9、.NET 8 和 .NET Framework 中的6个CVE — 其中包括两个远程代码执行漏洞。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "dotnet-april-2026-servicing-security-patches.md" >}})。*
+
+.NET 和 .NET Framework 的 [2026年4月服务更新](https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-april-2026-servicing-updates/) 已发布，这次包含了你需要尽快应用的安全修复。共修补了六个CVE，其中包括两个远程代码执行（RCE）漏洞。
+
+## 修补内容
+
+快速总结如下：
+
+| CVE | 类型 | 影响范围 |
+|-----|------|----------|
+| CVE-2026-26171 | 安全功能绕过 | .NET 10, 9, 8 + .NET Framework |
+| CVE-2026-32178 | **远程代码执行** | .NET 10, 9, 8 + .NET Framework |
+| CVE-2026-33116 | **远程代码执行** | .NET 10, 9, 8 |
+| CVE-2026-32203 | 拒绝服务 | .NET 10, 9, 8 + .NET Framework |
+| CVE-2026-23666 | 拒绝服务 | .NET Framework 3.0–4.8.1 |
+| CVE-2026-32226 | 拒绝服务 | .NET Framework 2.0–4.8.1 |
+
+两个RCE CVE（CVE-2026-32178 和 CVE-2026-33116）影响范围最广，应当优先处理。
+
+## 更新版本
+
+- **.NET 10**：10.0.6
+- **.NET 9**：9.0.15
+- **.NET 8**：8.0.26
+
+均可通过常规渠道获取 — [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/10.0)、MCR上的容器镜像以及Linux包管理器。
+
+## 应该怎么做
+
+将你的项目和CI/CD管道更新到最新的补丁版本。如果你在运行容器，拉取最新的镜像。如果你在使用 .NET Framework，请查看 [.NET Framework 发行说明](https://learn.microsoft.com/dotnet/framework/release-notes/release-notes) 获取对应的补丁。
+
+对于在生产环境运行 .NET 10 的用户（这是当前版本），10.0.6 是必须更新的。.NET 9.0.15 和 .NET 8.0.26 也是如此，如果你在使用这些LTS版本的话。两个RCE漏洞可不是你能拖延的事情。
+
+
+---
+## Aspire 13.2 新增 MongoDB EF Core 和 Azure Data Lake — 两个值得尝试的集成
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/aspire-132-mongodb-efcore-data-lake/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet-aspire, efcore, mongodb, azure, data-lake, cloud-native
+- **Reading time**: 1 min
+
+> Aspire 13.2 新增了 MongoDB Entity Framework Core 和 Azure Data Lake Storage 集成，支持零配置健康检查和服务发现。来看看它们在实践中是什么样的。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "aspire-132-mongodb-efcore-data-lake.md" >}})。*
+
+Aspire 13.2 刚刚发布，带来了[两个新的数据库集成](https://devblogs.microsoft.com/aspire/aspire-new-database-integrations/)，值得关注：MongoDB Entity Framework Core 和 Azure Data Lake Storage。如果你一直想在 Aspire 应用中使用 EF Core 操作 MongoDB，或者需要将 Data Lake 工作负载与服务发现连接起来，这个版本同时满足了这两个需求。
+
+## MongoDB 在 Aspire 中遇见 EF Core
+
+这是让我最兴奋的一个。Aspire 支持 MongoDB 已经有一段时间了，但一直是原始驱动程序——没有 EF Core，没有 `DbContext`，没有对文档的 LINQ 查询。现在你可以获得完整的 EF Core 体验配合 MongoDB，加上 Aspire 的自动健康检查和服务发现。
+
+配置遵循典型的 Aspire 模式。在你的 AppHost 中：
+
+```csharp
+var mongodb = builder.AddMongoDB("mongodb")
+    .WithDataVolume()
+    .WithLifetime(ContainerLifetime.Persistent);
+
+var apiService = builder.AddProject<Projects.ApiService>("api")
+    .WithReference(mongodb);
+```
+
+然后在消费项目中，添加 EF Core 集成：
+
+```bash
+dotnet add package Aspire.MongoDB.EntityFrameworkCore
+```
+
+注册你的 `DbContext`：
+
+```csharp
+builder.AddMongoDbContext<MyDbContext>("mongodb", "mydb");
+```
+
+接下来就是标准的 EF Core 了。定义你的实体，像使用其他任何提供程序一样使用 `DbContext`。集成会在后台处理连接池、OpenTelemetry 跟踪和健康检查。
+
+对于那些一直使用原始驱动程序操作 MongoDB 并手动配置连接字符串的 .NET 开发者来说，这是一个很好的体验提升。你可以获得完整的 EF Core 抽象，同时不会失去 Aspire 的服务发现。
+
+## Azure Data Lake Storage 加入阵营
+
+第二个重大新增是 [Azure Data Lake Storage (ADLS) 集成](https://aspire.dev/integrations/cloud/azure/azure-storage-datalake/)。如果你正在构建数据管道、ETL 流程或分析平台，现在可以像连接其他 Aspire 依赖项一样连接 Data Lake 资源。
+
+在 AppHost 中：
+
+```csharp
+var storage = builder.AddAzureStorage("azure-storage");
+var dataLake = storage.AddDataLake("data-lake");
+var fileSystem = storage.AddDataLakeFileSystem("data-lake-file-system");
+
+var analyticsService = builder.AddProject<Projects.AnalyticsService>("analytics")
+    .WithReference(dataLake)
+    .WithReference(fileSystem);
+```
+
+在消费项目中：
+
+```csharp
+builder.AddAzureDataLakeServiceClient("data-lake");
+builder.AddAzureDataLakeFileSystemClient("data-lake-file-system");
+```
+
+不需要手动管理连接字符串，不需要四处寻找凭据。Aspire 负责资源的预配和注入。对于我们这些构建同时涉及运营数据和分析工作负载的云原生 .NET 应用的人来说，这让 Data Lake 在 Aspire 模型中真正成为了一等公民。
+
+## 值得关注的小修复
+
+除了主要功能之外，还有一些值得一提的改进：
+
+- **MongoDB 连接字符串修复** — 数据库名称前的斜杠现在可以正确处理了。如果你之前有临时解决方案，现在可以移除了
+- **SQL Server 导出** — `Aspire.Hosting.SqlServer` 现在导出额外的服务器配置选项，提供更精细的控制
+- **模拟器更新** — ServiceBus 模拟器 2.0.0、App Configuration 模拟器 1.0.2，CosmosDB 的预览模拟器现在包含就绪检查
+- **Azure Managed Redis** — 现在默认使用 `rediss://`（Redis Secure），连接开箱即加密
+
+最后一点虽然不起眼但很重要——默认加密的 Redis 意味着生产环境中少了一项需要配置的东西。
+
+## 总结
+
+Aspire 13.2 是一个增量版本，但 MongoDB EF Core 和 Data Lake 集成填补了真实的空白。如果你一直在等待 Aspire 中 MongoDB 的正式 EF Core 支持，或者需要 Data Lake 成为一等依赖项，[升级到 13.2](https://get.aspire.dev) 试试看吧。`aspire add` 命令会为你生成所需的一切。
+
+阅读[完整的发行说明](https://aspire.dev/whats-new/aspire-13-2/#-integrations-updates)了解更多详情，查看[集成库](https://aspire.dev/integrations/gallery/)获取完整列表。
+
+
+---
+## azd update — 一个命令搞定所有包管理器
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, azd, developer-tools, cli
+- **Reading time**: 1 min
+
+> Azure Developer CLI 现在有了一个通用的更新命令，无论你是通过 winget、Homebrew、Chocolatey 还是安装脚本安装的，都能正常工作。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "azd-update-universal-upgrade-command.md" >}})。*
+
+你知道那个每隔几周就会弹出来的"azd 有新版本可用"提示吗？就是那个你总是忽略掉的，因为你根本想不起来当初是用 winget、Homebrew 还是半年前跑的那个 curl 脚本安装的 `azd`。好了，这个问题终于解决了。
+
+Microsoft 刚刚发布了 [`azd update`](https://devblogs.microsoft.com/azure-sdk/azd-update/) — 一个命令就能将 Azure Developer CLI 更新到最新版本，不管你最初是怎么安装的。Windows、macOS、Linux — 都一样。就一个命令。
+
+## 工作原理
+
+```bash
+azd update
+```
+
+就这么简单。如果你想提前体验新功能，可以切换到每日 Insiders 构建：
+
+```bash
+azd update --channel daily
+azd update --channel stable
+```
+
+这个命令会自动检测你当前的安装方式，并在后台使用对应的更新机制。再也不用纠结"等等，这台机器上我用的是 winget 还是 choco 来着？"
+
+## 一个小前提
+
+`azd update` 从版本 1.23.x 开始提供。如果你用的是更早的版本，需要用原来的安装方式做最后一次手动更新。之后，`azd update` 就能接管一切了。
+
+用 `azd version` 查看你当前的版本。如果需要全新安装，[安装文档](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) 可以帮到你。
+
+## 为什么这很重要
+
+这是一个小小的生活质量改善，但对于我们这些每天都在用 `azd` 把 AI Agent 和 Aspire 应用部署到 Azure 的人来说，保持最新意味着更少的"这个 bug 在最新版本里已经修复了"的尴尬时刻。少操心一件事。
+
+阅读 [完整公告](https://devblogs.microsoft.com/azure-sdk/azd-update/) 和 Jon Gallant 的 [深入分析](https://blog.jongallant.com/2026/04/azd-update) 了解更多。
+
+
+---
+## Azure DevOps Server 2026年4月补丁 — PR完成修复和安全更新
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure-devops, devops, patches
+- **Reading time**: 1 min
+
+> Azure DevOps Server 发布补丁3，修复了PR完成失败问题，改进了注销验证，并恢复了GitHub Enterprise Server PAT连接。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "azure-devops-server-april-2026-patch.md" >}})。*
+
+给运行自托管Azure DevOps Server的团队快速提个醒：Microsoft发布了[2026年4月补丁3](https://devblogs.microsoft.com/devops/april-patches-for-azure-devops-server/)，包含三个针对性修复。
+
+## 修复内容
+
+- **Pull Request完成失败** — 工作项自动完成期间的空引用异常可能导致PR合并失败。如果你遇到过随机的PR完成错误，这很可能就是原因
+- **注销重定向验证** — 改进了注销期间的验证，以防止潜在的恶意重定向。这是一个值得尽快应用的安全修复
+- **GitHub Enterprise Server PAT连接** — 创建到GitHub Enterprise Server的Personal Access Token连接之前无法正常工作，现在已恢复
+
+## 如何更新
+
+下载[补丁3](https://aka.ms/devopsserverpatch3)并运行安装程序。要验证补丁是否已应用：
+
+```bash
+<patch-installer>.exe CheckInstall
+```
+
+如果你在本地运行Azure DevOps Server，Microsoft强烈建议保持最新补丁，以确保安全性和可靠性。查看[发行说明](https://learn.microsoft.com/azure/devops/server/release-notes/azuredevopsserver?view=azure-devops#azure-devops-server-patch-3-release-date-april-14-2026)了解完整详情。
+
+
+---
+## Azure Smart Tier 正式发布 — 无需生命周期规则即可自动优化 Blob Storage 成本
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, storage, blob-storage, cost-optimization, cloud-native
+- **Reading time**: 1 min
+
+> Azure Blob Storage smart tier 现已正式发布，根据实际访问模式自动在 hot、cool 和 cold 层之间移动对象 — 无需生命周期规则。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "azure-smart-tier-blob-storage-ga.md" >}})。*
+
+如果你曾经花时间调整 Azure Blob Storage 的生命周期策略，然后看着它们在访问模式变化时土崩瓦解，那这篇文章就是为你准备的。微软刚刚宣布了 Azure Blob 和 Data Lake Storage 的 [smart tier 正式发布](https://azure.microsoft.com/en-us/blog/optimize-object-storage-costs-automatically-with-smart-tier-now-generally-available/) — 这是一项完全托管的分层功能，根据实际使用情况自动在 hot、cool 和 cold 层之间移动对象。
+
+## Smart tier 实际做了什么
+
+概念很简单：smart tier 持续评估存储账户中每个对象的最后访问时间。频繁访问的数据保持在 hot 层，不活跃的数据在 30 天后移到 cool 层，再过 60 天移到 cold 层。当数据被再次访问时，立即提升回 hot 层。循环重新开始。
+
+无需配置生命周期规则。无需预测访问模式。无需手动调优。
+
+在预览期间，微软报告称 **超过 50% 的 smart tier 管理容量根据实际访问模式自动转移到了更冷的层级**。对于大型存储账户来说，这是一笔可观的成本节省。
+
+## 为什么这对 .NET 开发者很重要
+
+如果你正在构建生成日志、遥测数据、分析数据或任何类型的不断增长的数据资产的应用 — 说实话，谁不是呢 — 存储成本会很快累积起来。传统的做法是编写生命周期管理策略，测试它们，然后在应用的访问模式变化时重新调整。Smart tier 完全消除了这个工作流。
+
+一些实用的场景：
+
+- **应用遥测和日志** — 调试时是 hot，几周后几乎不再访问
+- **数据管道和 ETL 输出** — 处理期间频繁访问，之后大多处于 cold 状态
+- **用户生成内容** — 最近上传的是 hot，较老的内容逐渐变冷
+- **备份和归档数据** — 偶尔因合规需要访问，大部分时间处于闲置状态
+
+## 如何设置
+
+启用 smart tier 是一次性配置：
+
+- **新账户**：在创建存储账户时选择 smart tier 作为默认访问层（需要区域冗余）
+- **现有账户**：将 blob 访问层从当前默认值切换到 smart tier
+
+小于 128 KiB 的对象保持在 hot 层，不产生监控费用。其他所有对象按照标准 hot/cool/cold 容量费率计费，没有层级转换费用，没有提前删除罚金，没有数据检索成本。每个对象的月度监控费用涵盖编排服务。
+
+## 需要了解的权衡
+
+Smart tier 的分层规则是固定的（30 天 → cool，90 天 → cold）。如果你需要自定义阈值 — 比如某个特定工作负载在 7 天后移到 cool — 生命周期规则仍然是正确的选择。而且不要混用：避免对 smart tier 管理的对象使用生命周期规则，因为它们可能会产生冲突。
+
+## 总结
+
+这算不上革命性的改变，但它解决了一个实实在在的运维痛点。如果你管理着不断增长的 blob storage 账户，并且厌倦了维护生命周期策略，[启用 smart tier](https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-smart) 让 Azure 来处理吧。目前在几乎所有区域公有云区域都可以使用。
+
+
+---
+## Azure上のAIエージェントはどこにホストすべき？実践的な判断ガイド
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-ai-agent-hosting-options-guide/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, ai, agents, containers, microsoft-foundry, cloud-native, aks
+- **Reading time**: 1 min
+
+> Azure提供六种托管AI代理的方式——从原始容器到完全托管的Foundry Hosted Agents。以下是如何为你的.NET工作负载选择合适方案。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "azure-ai-agent-hosting-options-guide.md" >}})。*
+
+如果你现在正在用.NET构建AI代理，你可能已经注意到一件事：在Azure上托管它们的方式*太多了*。Container Apps、AKS、Functions、App Service、Foundry Agents、Foundry Hosted Agents——在你真正需要选择之前，每个都听起来合理。Microsoft刚刚发布了一份[Azure AI代理托管综合指南](https://devblogs.microsoft.com/all-things-azure/hostedagent/)来澄清这个问题，我想从.NET开发者的实践角度来拆解它。
+
+## 六种选项速览
+
+以下是我对这个版图的总结：
+
+| 选项 | 最适合 | 你需要管理 |
+|------|--------|-----------|
+| **Container Apps** | 无需K8s复杂性的完整容器控制 | 可观测性、状态、生命周期 |
+| **AKS** | 企业合规、多集群、自定义网络 | 所有东西（这就是重点） |
+| **Azure Functions** | 事件驱动的短时代理任务 | 几乎不需要——真正的无服务器 |
+| **App Service** | 简单的HTTP代理、可预测的流量 | 部署、扩展配置 |
+| **Foundry Agents** | 通过门户/SDK的无代码代理 | 几乎不需要 |
+| **Foundry Hosted Agents** | 托管基础设施上的自定义框架代理 | 仅你的代理代码 |
+
+前四个是通用计算——你*可以*在上面运行代理，但它们不是为此设计的。最后两个是代理原生的：它们将对话、工具调用和代理生命周期理解为一等概念。
+
+## Foundry Hosted Agents——.NET代理开发者的最佳选择
+
+这是引起我注意的地方。Foundry Hosted Agents正好处于中间位置：你获得运行自己代码的灵活性（Semantic Kernel、Agent Framework、LangGraph——随便什么），但平台处理基础设施、可观测性和对话管理。
+
+关键部分是**Hosting Adapter**——一个将你的代理框架连接到Foundry平台的薄抽象层。对于Microsoft Agent Framework，看起来是这样的：
+
+```python
+from azure.ai.agentserver.agentframework import from_agent_framework
+
+agent = ChatAgent(
+    chat_client=AzureAIAgentClient(...),
+    instructions="You are a helpful assistant.",
+    tools=[get_local_time],
+)
+
+if __name__ == "__main__":
+    from_agent_framework(agent).run()
+```
+
+这就是你的整个托管方案。适配器自动处理协议转换、通过server-sent events的流式传输、对话历史和OpenTelemetry追踪。不需要自定义中间件，不需要手动配置。
+
+## 部署真的很简单
+
+我以前在Container Apps上部署过代理，虽然可以工作，但最后你会写很多胶水代码来处理状态管理和可观测性。使用Hosted Agents和`azd`，部署是：
+
+```bash
+# 安装AI代理扩展
+azd ext install azure.ai.agents
+
+# 从模板初始化
+azd ai agent init
+
+# 构建、推送、部署——完成
+azd up
+```
+
+这个单独的`azd up`会构建你的容器、推送到ACR、配置Foundry项目、部署模型端点并启动你的代理。五个步骤压缩成一个命令。
+
+## 内置对话管理
+
+这是在生产中节省最多时间的部分。不需要构建自己的对话状态存储，Hosted Agents原生处理：
+
+```python
+# 创建持久对话
+conversation = openai_client.conversations.create()
+
+# 第一轮
+response1 = openai_client.responses.create(
+    conversation=conversation.id,
+    extra_body={"agent_reference": {"name": "MyAgent", "type": "agent_reference"}},
+    input="Remember: my favorite number is 42.",
+)
+
+# 第二轮——上下文被保留
+response2 = openai_client.responses.create(
+    conversation=conversation.id,
+    extra_body={"agent_reference": {"name": "MyAgent", "type": "agent_reference"}},
+    input="Multiply my favorite number by 10.",
+)
+```
+
+不需要Redis。不需要Cosmos DB会话存储。不需要自定义中间件来序列化消息。平台直接处理了。
+
+## 我的决策框架
+
+在审查了所有六个选项之后，这是我的快速心智模型：
+
+1. **需要零基础设施？** → Foundry Agents（门户/SDK，无容器）
+2. **有自定义代理代码但想要托管主机？** → Foundry Hosted Agents
+3. **需要事件驱动的短期代理任务？** → Azure Functions
+4. **需要不用K8s的最大容器控制？** → Container Apps
+5. **需要严格合规和多集群？** → AKS
+6. **有流量可预测的简单HTTP代理？** → App Service
+
+对于大多数使用Semantic Kernel或Microsoft Agent Framework构建的.NET开发者来说，Hosted Agents可能是正确的起点。你能获得scale-to-zero、内置OpenTelemetry、对话管理和框架灵活性——无需管理Kubernetes或搭建自己的可观测性栈。
+
+## 总结
+
+Azure上的代理托管格局正在快速成熟。如果你今天要开始一个新的AI代理项目，我会在习惯性地使用Container Apps或AKS之前认真考虑Foundry Hosted Agents。托管基础设施节省实际时间，而hosting adapter模式让你保留框架选择。
+
+查看[Microsoft的完整指南](https://devblogs.microsoft.com/all-things-azure/hostedagent/)和[Foundry Samples仓库](https://github.com/microsoft-foundry/foundry-samples/tree/main/samples/python/hosted-agents)获取可运行的示例。
+
+
+---
+## .NET的Agent Skills变得真正灵活了
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/
+- **Date**: April 14, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: .NET, Agent Framework, AI, Semantic Kernel, Azure
+- **Reading time**: 2 min
+
+> Microsoft Agent Framework现在支持三种创建技能的方式——文件、类和内联代码——全部通过单一provider组合。这篇文章解释为什么这很重要以及如何使用每种方式。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "agent-skills-dotnet-three-authoring-patterns.md" >}})。*
+
+如果你一直在用Microsoft Agent Framework构建代理，那你已经熟悉流程了：定义技能，连接到provider，让代理决定调用哪个。新的是你*如何*创建这些技能——灵活性的提升非常显著。
+
+最新更新引入了三种agent skill编写模式：**基于文件的**、**基于类的**和**内联代码定义的**。三种都连接到单一的 `AgentSkillsProviderBuilder`，意味着你可以自由混搭，无需路由逻辑或特殊粘合代码。让我带你了解每种模式以及何时使用。
+
+## 基于文件的技能：起点
+
+基于文件的技能顾名思义——磁盘上的一个目录，包含 `SKILL.md` 文件、可选脚本和参考文档。给代理添加新能力最直接的方式：
+
+```
+skills/
+└── onboarding-guide/
+    ├── SKILL.md
+    ├── scripts/
+    │   └── check-provisioning.py
+    └── references/
+        └── onboarding-checklist.md
+```
+
+`SKILL.md` 的frontmatter声明技能名称和描述，指令部分告诉代理如何使用脚本和参考：
+
+```markdown
+---
+name: onboarding-guide
+description: >-
+  Walk new hires through their first-week setup checklist.
+---
+
+## Instructions
+
+1. Ask for the employee's name and start date.
+2. Run `scripts/check-provisioning.py` to verify accounts.
+3. Walk through `references/onboarding-checklist.md`.
+4. Follow up on incomplete items.
+```
+
+然后用 `SubprocessScriptRunner.RunAsync` 连接脚本执行：
+
+```csharp
+var skillsProvider = new AgentSkillsProvider(
+    Path.Combine(AppContext.BaseDirectory, "skills"),
+    SubprocessScriptRunner.RunAsync);
+
+AIAgent agent = new AzureOpenAIClient(new Uri(endpoint), new DefaultAzureCredential())
+    .GetResponsesClient()
+    .AsAIAgent(new ChatClientAgentOptions
+    {
+        Name = "HRAgent",
+        ChatOptions = new() { Instructions = "You are a helpful HR assistant." },
+        AIContextProviders = [skillsProvider],
+    },
+    model: deploymentName);
+```
+
+代理自动发现技能并在需要检查账户状态时调用配置脚本。干净简单。
+
+## 基于类的技能：通过NuGet分发
+
+这里对团队来说变得有趣了。基于类的技能继承自 `AgentClassSkill<T>` 并使用 `[AgentSkillResource]` 和 `[AgentSkillScript]` 等属性，让框架通过反射发现一切：
+
+```csharp
+public sealed class BenefitsEnrollmentSkill : AgentClassSkill<BenefitsEnrollmentSkill>
+{
+    public override AgentSkillFrontmatter Frontmatter { get; } = new(
+        "benefits-enrollment",
+        "Enroll an employee in health, dental, or vision plans.");
+
+    protected override string Instructions => """
+        1. Read the available-plans resource.
+        2. Confirm the plan the employee wants.
+        3. Use the enroll script to complete enrollment.
+        """;
+
+    [AgentSkillResource("available-plans")]
+    [Description("Plan options with monthly pricing.")]
+    public string AvailablePlans => """
+        ## Available Plans (2026)
+        - Health: Basic HMO ($0/month), Premium PPO ($45/month)
+        - Dental: Standard ($12/month), Enhanced ($25/month)
+        - Vision: Basic ($8/month)
+        """;
+
+    [AgentSkillScript("enroll")]
+    [Description("Enrolls employee in the specified benefit plan.")]
+    private static string Enroll(string employeeId, string planCode)
+    {
+        bool success = HrClient.EnrollInPlan(employeeId, planCode);
+        return JsonSerializer.Serialize(new { success, employeeId, planCode });
+    }
+}
+```
+
+妙处在于团队可以将其打包为NuGet包。你添加到项目中，放入builder，它就能和基于文件的技能一起工作，无需协调：
+
+```csharp
+var skillsProvider = new AgentSkillsProviderBuilder()
+    .UseFileSkill(Path.Combine(AppContext.BaseDirectory, "skills"))
+    .UseSkill(new BenefitsEnrollmentSkill())
+    .UseFileScriptRunner(SubprocessScriptRunner.RunAsync)
+    .Build();
+```
+
+两个技能都出现在代理的系统提示中。代理根据对话决定使用哪个——不需要路由代码。
+
+## 内联技能：快速桥接
+
+你知道那个时刻吗，另一个团队正在构建你需要的技能，但要到下个sprint才能完成？`AgentInlineSkill` 就是你的桥梁：
+
+```csharp
+var timeOffSkill = new AgentInlineSkill(
+    name: "time-off-balance",
+    description: "Calculate remaining vacation and sick days.",
+    instructions: """
+        1. Ask for the employee ID if not provided.
+        2. Use calculate-balance to get the remaining balance.
+        3. Present used and remaining days clearly.
+        """)
+    .AddScript("calculate-balance", (string employeeId, string leaveType) =>
+    {
+        int totalDays = HrDatabase.GetAnnualAllowance(employeeId, leaveType);
+        int daysUsed = HrDatabase.GetDaysUsed(employeeId, leaveType);
+        int remaining = totalDays - daysUsed;
+        return JsonSerializer.Serialize(new { employeeId, leaveType, totalDays, daysUsed, remaining });
+    });
+```
+
+和其他技能一样添加到builder：
+
+```csharp
+var skillsProvider = new AgentSkillsProviderBuilder()
+    .UseFileSkill(Path.Combine(AppContext.BaseDirectory, "skills"))
+    .UseSkill(new BenefitsEnrollmentSkill())
+    .UseSkill(timeOffSkill)
+    .UseFileScriptRunner(SubprocessScriptRunner.RunAsync)
+    .Build();
+```
+
+当NuGet包最终发布时，你只需将内联技能替换为基于类的版本。代理不会注意到区别。
+
+但内联技能不仅仅用于桥接。当你需要在运行时动态生成技能——想想从配置加载的每个业务单元一个技能——或者当脚本需要捕获不属于DI容器的本地状态时，它们也是正确的选择。
+
+## 脚本审批：人在回路中
+
+对我们构建生产代理的.NET开发者来说，这是真正打开部署讨论的部分。有些脚本有实际后果——给某人注册福利、查询生产基础设施。开启 `UseScriptApproval`，代理在执行任何脚本前会暂停：
+
+```csharp
+var skillsProvider = new AgentSkillsProviderBuilder()
+    .UseFileSkill(Path.Combine(AppContext.BaseDirectory, "skills"))
+    .UseSkill(new BenefitsEnrollmentSkill())
+    .UseSkill(timeOffSkill)
+    .UseFileScriptRunner(SubprocessScriptRunner.RunAsync)
+    .UseScriptApproval(true)
+    .Build();
+```
+
+当代理想执行脚本时，它会返回一个审批请求。你的应用收集决定——批准或拒绝——代理相应继续。在受监管的环境中，这就是"我们可以部署这个"和"法务说不行"之间的区别。
+
+## 为什么这种组合很重要
+
+真正的力量不在于任何单一模式——而在于组合。你可以：
+
+- 用基于文件的技能**从小处开始**，迭代指令，不写C#就能发布
+- 将**可复用的技能**作为NuGet包分发，其他团队一行代码就能添加
+- 当*现在*需要某样东西时，用内联技能**填补空白**
+- 用谓词**过滤共享目录**，让代理只加载应该加载的
+- 为触及生产系统的脚本**添加人工监督**
+
+这一切都通过 `AgentSkillsProviderBuilder` 组合。没有特殊路由，没有条件逻辑，没有技能类型检查。
+
+## 总结
+
+.NET中的agent skills现在拥有了真正灵活的编写模型。无论你是用基于文件的技能做原型的独立开发者，还是通过NuGet分发打包能力的企业团队，这些模式都能适配。脚本审批机制使其在需要人工检查点的环境中也能投入生产。
+
+查看[原始公告](https://devblogs.microsoft.com/agent-framework/agent-skills-in-net-three-ways-to-author-one-provider-to-run-them/)、Microsoft Learn上的[Agent Skills文档](https://learn.microsoft.com/en-us/agent-framework/agents/skills)和GitHub上的[.NET示例](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/02-agents/AgentSkills)开始动手吧。
+
+
+---
+## Azure MCP Server 2.0 正式发布——自托管智能云自动化来了
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-mcp-server-2-self-hosted-agentic-cloud/
+- **Date**: April 11, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: mcp, azure, ai, agents, azure-sdk, dotnet
+- **Reading time**: 1 min
+
+> Azure MCP Server 2.0 稳定版发布，支持自托管远程部署、57 个 Azure 服务中的 276 个工具，以及企业级安全性——这是 .NET 开发者构建智能工作流需要了解的内容。
+
+
+
+*本文为自动翻译。如需查看原文，请[点击这里]({{< ref "azure-mcp-server-2-self-hosted-agentic-cloud.md" >}})。*
+
+如果你最近一直在用 MCP 和 Azure 构建东西，你可能已经知道本地体验非常好。接入一个 MCP 服务器，让你的 AI 智能体与 Azure 资源对话，然后继续工作。但一旦你需要在团队中共享这个设置？那就会变得复杂。
+
+不再是这样了。Azure MCP Server [刚刚发布 2.0 稳定版](https://devblogs.microsoft.com/azure-sdk/announcing-azure-mcp-server-2-0-stable-release/)，而主打功能正是企业团队一直在要求的：**自托管远程 MCP 服务器支持**。
+
+## 什么是 Azure MCP Server？
+
+快速回顾一下。Azure MCP Server 实现了 [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) 规范，并将 Azure 功能暴露为结构化、可发现的工具，AI 智能体可以调用。把它看作是你的智能体和 Azure 之间的标准化桥梁——配置、部署、监控、诊断，都通过一个统一的接口。
+
+这些数字说明一切：**跨越 57 个 Azure 服务的 276 个 MCP 工具**。这是真正的覆盖范围。
+
+## 重大突破：自托管远程部署
+
+关键是这样的。在你的本地机器上运行 MCP 对于开发和实验来说没问题。但在真实的团队场景中，你需要：
+
+- 开发者和内部智能体系统的共享访问
+- 集中化配置（租户上下文、订阅默认值、遥测）
+- 企业网络和策略边界
+- 与 CI/CD 流程的集成
+
+Azure MCP Server 2.0 解决了所有这些问题。你可以将其部署为一个集中管理的内部服务，具有基于 HTTP 的传输、适当的身份验证和一致的治理。
+
+对于身份验证，你有两个不错的选择：
+
+1. **托管标识**——在 [Microsoft Foundry](https://aka.ms/azmcp/self-host/foundry) 旁边运行时
+2. **代表流 (OBO 流)**——OpenID Connect 委托，使用已登录用户的上下文调用 Azure API
+
+对于我们 .NET 开发者来说，OBO 流特别有趣。这意味着你的智能工作流可以使用用户的实际权限运行，而不是某个过度特权的服务账户。最小权限原则，内置其中。
+
+## 安全加固
+
+这不仅仅是一个功能发布——它也是一个安全发布。2.0 版本添加了：
+
+- 更强的端点验证
+- 针对面向查询工具中注入模式的保护
+- 更严格的开发环境隔离控制
+
+如果你要将 MCP 暴露为共享服务，这些保障措施很重要。非常重要。
+
+## 你可以在哪里使用它？
+
+客户端兼容性范围很广。Azure MCP Server 2.0 可与以下配合使用：
+
+- **IDE**：VS Code、Visual Studio、IntelliJ、Eclipse、Cursor
+- **CLI 智能体**：GitHub Copilot CLI、Claude Code
+- **独立版**：用于简单设置的本地服务器
+- **自托管远程**：2.0 的新星
+
+此外，还有针对 Azure 美国政府版和由 21Vianet 运营的 Azure 的主权云支持，这对于受管制的部署至关重要。
+
+## 为什么这对 .NET 开发者很重要
+
+如果你使用 .NET 构建智能应用——无论是使用 Semantic Kernel、Microsoft Agent Framework，还是你自己的编排——Azure MCP Server 2.0 让你能够以生产级的方式让你的智能体与 Azure 基础设施交互。没有自定义 REST 包装。没有服务特定的集成模式。只是 MCP。
+
+结合几天前发布的 [MCP 应用流畅 API](https://devblogs.microsoft.com/azure-sdk/mcp-as-easy-as-1-2-3-introducing-the-fluent-api-for-mcp-apps/)，.NET MCP 生态系统正在快速成熟。
+
+## 开始使用
+
+选择你的路径：
+
+- **[GitHub 仓库](https://aka.ms/azmcp)**——源代码、文档，一切
+- **[Docker 镜像](https://aka.ms/azmcp/download/docker)**——容器化部署
+- **[VS Code 扩展](https://aka.ms/azmcp/download/vscode)**——IDE 集成
+- **[自托管指南](https://aka.ms/azmcp/self-host)**——2.0 的旗舰功能
+
+## 总结
+
+Azure MCP Server 2.0 正是那种在演示中看起来不起眼但在实践中改变一切的基础设施升级。具有适当身份验证、安全加固和主权云支持的自托管远程 MCP 意味着 MCP 已为在 Azure 上构建真实智能工作流的真实团队做好准备。如果你一直在等待"企业就绪"的信号——就是现在。
+
+
+---
+## .NET Aspire 13.2想成为你AI智能体的好朋友
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: aspire, dotnet, ai, cli, telemetry, developer-tools
+- **Reading time**: 1 min
+
+> Aspire 13.2全力投入智能体开发 — 结构化CLI输出、隔离运行、自愈环境以及完整的OpenTelemetry数据，让你的AI智能体能够真正构建、运行和观察你的应用。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "aspire-agentic-development-build-run-observe" >}})。*
+
+你知道那种感觉吗？你的AI编码智能体写出了不错的代码，你很兴奋，然后当它试图*运行*这个东西时一切都崩溃了？端口冲突、幽灵进程、错误的环境变量 — 突然你的智能体在排查启动问题上烧掉了大量token，而不是构建功能。
+
+Aspire团队刚刚发布了一篇关于这个问题的[深思熟虑的文章](https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/)，他们的答案很有说服力：Aspire 13.2的设计不仅面向人类，更面向AI智能体。
+
+## 问题是真实存在的
+
+AI智能体在写代码方面令人难以置信。但交付一个可工作的全栈应用涉及的远不止生成文件。你需要按正确的顺序启动服务、管理端口、设置环境变量、连接数据库，以及在出问题时获得反馈。目前，大多数智能体通过试错来处理所有这些 — 运行命令、读取错误输出、再试一次。
+
+我们叠加Markdown指令、自定义技能和提示来引导它们，但这些是不可预测的，无法编译，而且仅仅解析就要消耗token。Aspire团队抓住了核心洞察：智能体需要**编译器和结构化API**，而不是更多的Markdown。
+
+## Aspire作为智能体基础设施
+
+以下是Aspire 13.2为智能体开发带来的内容：
+
+**整个技术栈用类型化代码描述。** AppHost用可编译的TypeScript或C#定义你的完整拓扑 — API、前端、数据库、缓存：
+
+```typescript
+import { createBuilder } from './.modules/aspire.js';
+
+const builder = await createBuilder();
+
+const postgres = await builder.addPostgres("pg").addDatabase("catalog");
+const cache = await builder.addRedis("cache");
+
+const api = await builder
+  .addNodeApp("api", "./api", "src/index.ts")
+  .withHttpEndpoint({ env: "PORT" })
+  .withReference(postgres)
+  .withReference(cache);
+
+await builder
+  .addViteApp("frontend", "./frontend")
+  .withReference(api)
+  .waitFor(api);
+
+await builder.build().run();
+```
+
+智能体可以读取这些来理解应用拓扑、添加资源、连接组件，并*通过构建来验证*。编译器会立即告诉它哪里出了问题。不需要猜测，不需要在配置文件上反复试错。
+
+**一个命令统治所有。** 智能体不再需要在`docker compose up`、`npm run dev`和数据库启动脚本之间来回切换，一切只需`aspire start`。所有资源按正确顺序、在正确的端口、用正确的配置启动。长时间运行的进程也不会挂起智能体 — Aspire负责管理它们。
+
+**并行智能体的隔离模式。** 使用`--isolated`，每次Aspire运行都会获得自己的随机端口和独立的用户密钥。多个智能体在git worktree中工作？它们不会冲突。这对于VS Code的后台智能体等创建并行环境的工具来说意义重大。
+
+**通过遥测赋予智能体视野。** 这是真正强大的地方。Aspire CLI在开发期间暴露完整的OpenTelemetry数据 — 追踪、指标、结构化日志。你的智能体不是只读控制台输出然后祈祷一切顺利。它可以跨服务追踪失败的请求、分析慢端点，并精确定位问题所在。这是开发循环中的生产级可观察性。
+
+## 保龄球护栏类比
+
+Aspire团队用了一个很棒的类比：把Aspire想象成AI智能体的保龄球道护栏。如果智能体不够完美（它确实不会完美），护栏会防止它打出沟球。技术栈定义防止配置错误，编译器捕获错误，CLI处理进程管理，遥测提供反馈循环。
+
+将此与Playwright CLI之类的工具结合，你的智能体就可以真正*使用*你的应用 — 点击流程、检查DOM、在遥测中发现问题、修复代码、重启并重新测试。构建、运行、观察、修复。这就是我们一直追求的自主开发循环。
+
+## 入门
+
+Aspire新手？从[get.aspire.dev](https://get.aspire.dev)安装CLI并遵循[入门指南](https://aspire.dev/get-started/first-app)。
+
+已经在使用Aspire？运行`aspire update --self`获取13.2，然后将你最喜欢的编码智能体指向你的仓库。有了Aspire的护栏，你可能会惊讶于它能走多远。
+
+## 总结
+
+Aspire 13.2不再仅仅是一个分布式应用框架 — 它正在成为必不可少的智能体基础设施。结构化的技术栈定义、一键启动、隔离的并行运行和实时遥测，为AI智能体提供了从编写代码到交付应用所需的一切。
+
+阅读Aspire团队的[完整文章](https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/)获取所有细节和演示视频。
+
+
+---
+## Aspire的隔离模式解决了并行开发中端口冲突的噩梦
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: aspire, dotnet, cli, developer-tools, parallel-development
+- **Reading time**: 1 min
+
+> Aspire 13.2引入--isolated模式：随机端口、独立密钥，运行同一AppHost的多个实例时零冲突。完美适用于AI智能体、worktree和并行工作流。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "aspire-isolated-mode-parallel-instances" >}})。*
+
+如果你曾试过同时运行同一个项目的两个实例，你就知道那种痛苦。端口8080已被占用。端口17370已被使用。杀掉进程、重启、摆弄环境变量 — 这是生产力杀手。
+
+这个问题在变得更严重，而不是更好。AI智能体创建git worktree来独立工作。后台智能体启动独立环境。开发者为了功能分支两次checkout同一个仓库。每一个场景都撞上了同一堵墙：同一个应用的两个实例在争夺相同的端口。
+
+Aspire 13.2用一个flag就解决了这个问题。Aspire团队的James Newton-King[写了完整的细节](https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/)，这是那种"我们怎么之前没有这个"的功能。
+
+## 解决方案：`--isolated`
+
+```bash
+aspire run --isolated
+```
+
+就这样。每次运行获得：
+
+- **随机端口** — 实例间不再冲突
+- **隔离的用户密钥** — 连接字符串和API密钥在每个实例间保持独立
+
+不需要手动重新分配端口。不需要摆弄环境变量。每次运行自动获得一个干净的、无冲突的环境。
+
+## 这个功能发光的真实场景
+
+**多次checkout。** 你有一个功能分支在一个目录，一个bugfix在另一个：
+
+```bash
+# Terminal 1
+cd ~/projects/my-app-feature
+aspire run --isolated
+
+# Terminal 2
+cd ~/projects/my-app-bugfix
+aspire run --isolated
+```
+
+两个都无冲突运行。仪表盘显示什么在运行以及在哪里运行。
+
+**VS Code中的后台智能体。** 当Copilot Chat的后台智能体创建git worktree来独立处理你的代码时，它可能需要运行你的Aspire AppHost。没有`--isolated`，这就会和你的主worktree产生端口冲突。有了它，两个实例就能正常运行。
+
+`aspire agent init`附带的Aspire技能会自动指导智能体在worktree中工作时使用`--isolated`。所以Copilot的后台智能体应该能原生处理这个问题。
+
+**开发同时运行集成测试。** 需要在继续开发功能的同时对活跃的AppHost运行测试？隔离模式给每个上下文提供独立的端口和配置。
+
+## 底层工作原理
+
+当你传递`--isolated`时，CLI会为该运行生成一个唯一的实例ID。这驱动两个行为：
+
+1. **端口随机化** — 不再绑定到AppHost配置中定义的可预测端口，隔离模式为所有内容选择随机可用端口 — 仪表盘、服务端点，全部。服务发现自动调整，所以服务能找到彼此，不管它们落在哪个端口上。
+
+2. **密钥隔离** — 每个隔离运行获得自己的用户密钥存储，以实例ID为键。一次运行的连接字符串和API密钥不会泄露到另一次运行中。
+
+你的代码不需要任何改动。Aspire的服务发现在运行时解析端点，所以不管端口分配如何，一切都能正确连接。
+
+## 何时使用
+
+当同时运行同一AppHost的多个实例时使用`--isolated` — 无论是并行开发、自动化测试、AI智能体还是git worktree。对于偏好可预测端口的单实例开发，常规的`aspire run`仍然可以正常使用。
+
+## 总结
+
+隔离模式是一个解决真实且越来越常见问题的小功能。随着AI辅助开发推动我们走向更多并行工作流 — 多个智能体、多个worktree、多个上下文 — 能够简单地启动另一个实例而不必争夺端口是必不可少的。
+
+阅读[完整文章](https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/)获取所有技术细节，并用`aspire update --self`获取13.2来试用。
+
+
+---
+## GitHub Copilot 的现代化评估是你还没用上的最好迁移工具
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet, azure, github-copilot, modernization, migration, aspnet-core
+- **Reading time**: 1 min
+
+> GitHub Copilot 的现代化扩展不仅仅建议代码更改 — 它生成完整的迁移评估，包含可操作的问题、Azure 目标比较和协作工作流。以下是评估文档为何是一切关键的原因。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "dotnet-modernization-assessment-github-copilot.md" >}})。*
+
+将传统 .NET Framework 应用迁移到现代 .NET 是那种每个人都知道应该做但没人想开始的任务。它从来不是简单的"更改目标框架"。而是消失的 API、不再存在的包、工作方式完全不同的托管模型，以及关于什么要容器化、什么要重写、什么要保持不变的无数小决策。
+
+Jeffrey Fritz 刚刚发布了一篇 [GitHub Copilot 现代化评估的深入解析](https://devblogs.microsoft.com/dotnet/your-migrations-source-of-truth-the-modernization-assessment/)，说实话？这是我见过的 .NET 最好的迁移工具。不是因为代码生成 — 那现在已经是标配了。而是因为它生成的评估文档。
+
+## 它不仅仅是代码建议引擎
+
+VS Code 扩展遵循**评估 → 计划 → 执行**模型。评估阶段分析你的整个代码库，生成一份结构化文档，捕获一切：什么需要更改、需要配置哪些 Azure 资源、使用什么部署模型。下游的一切 — 基础设施即代码、容器化、部署清单 — 都源自评估发现的内容。
+
+评估存储在项目的 `.github/modernize/assessment/` 下。每次运行产生一份独立的报告，因此你可以积累历史记录，并在修复问题时跟踪迁移态势的演变。
+
+## 两种开始方式
+
+**推荐评估** — 快捷路径。从策划好的领域（Java/.NET 升级、云就绪、安全）中选择，无需配置即可获得有意义的结果。非常适合初次了解应用的状态。
+
+**自定义评估** — 定向路径。精确配置要分析的内容：目标计算（App Service、AKS、Container Apps）、目标操作系统、容器化分析。选择多个 Azure 目标来并排比较迁移方法。
+
+那个比较视图真的很有用。一个应用在 App Service 上可能有 3 个必须解决的问题，在 AKS 上可能有 7 个。看到两者有助于在确定迁移路径之前做出托管决策。
+
+## 问题分解是可操作的
+
+每个问题都带有严重程度级别：
+
+- **必须** — 必须修复，否则迁移失败
+- **潜在** — 可能影响迁移，需要人工判断
+- **可选** — 推荐的改进，不会阻止迁移
+
+每个问题都链接到受影响的文件和行号，提供详细描述说明什么地方有问题以及为什么对目标平台重要，给出具体的修复步骤（不仅仅是"修复这个"），并包含官方文档链接。
+
+你可以将单个问题分配给开发者，他们拥有行动所需的一切。这就是告诉你"有个问题"的工具和告诉你如何解决的工具之间的区别。
+
+## 涵盖的升级路径
+
+针对 .NET 具体来说：
+- .NET Framework → .NET 10
+- ASP.NET → ASP.NET Core
+
+每条升级路径都有检测规则，知道哪些 API 被移除、哪些模式没有直接等价物、哪些安全问题需要关注。
+
+对于管理多个应用的团队，还有一个 CLI 支持多仓库批量评估 — 克隆所有仓库，全部评估，获取每个应用的报告加上汇总的组合视图。
+
+## 我的看法
+
+如果你坐拥传统 .NET Framework 应用（说实话，大多数企业团队都是这样），这就是*那个*应该开始使用的工具。仅评估文档就值得投入时间 — 它将模糊的"我们应该现代化"变成了一个具体的、有优先级的工作项列表，指明了前进的方向。
+
+协作工作流也很聪明：导出评估、与团队分享、无需重新运行即可导入。决策者不是运行工具的人的架构评审？涵盖了。
+
+## 总结
+
+GitHub Copilot 的现代化评估将 .NET 迁移从一个可怕的、不明确的项目转变为一个结构化的、可跟踪的过程。从推荐评估开始了解你的现状，然后使用自定义评估来比较 Azure 目标并制定迁移计划。
+
+阅读[完整演练](https://devblogs.microsoft.com/dotnet/your-migrations-source-of-truth-the-modernization-assessment/)并获取 [VS Code 扩展](https://aka.ms/ghcp-appmod/vscode-ext)在你自己的代码库上试试。
+
+
+---
+## MCP Apps 迎来 Fluent API — 三步在 .NET 中构建丰富的 AI 工具界面
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/mcp-fluent-api-azure-functions-dotnet/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: mcp, dotnet, azure-functions, ai, azure-sdk
+- **Reading time**: 1 min
+
+> Azure Functions 上 MCP Apps 的全新 Fluent 配置 API 让你只需几行代码就能将任何 .NET MCP 工具转变为带有视图、权限和 CSP 策略的完整应用。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "mcp-fluent-api-azure-functions-dotnet.md" >}})。*
+
+MCP 工具非常适合赋予 AI 代理各种能力。但如果你的工具需要向用户展示某些东西呢？比如仪表板、表单或交互式可视化？这就是 MCP Apps 的用武之地，而且现在构建它们变得简单多了。
+
+Azure SDK 团队的 Lilian Kasem [发布了全新的 Fluent 配置 API](https://devblogs.microsoft.com/azure-sdk/mcp-as-easy-as-1-2-3-introducing-the-fluent-api-for-mcp-apps/)，用于 .NET Azure Functions 上的 MCP Apps。这种开发者体验的改进会让你想，为什么以前不一直这么简单呢。
+
+## 什么是 MCP Apps？
+
+MCP Apps 扩展了 Model Context Protocol，让工具可以携带自己的 UI 视图、静态资源和安全控制。你的 MCP 工具不再只是返回文本，而是可以渲染完整的 HTML 体验 — 交互式仪表板、数据可视化、配置表单 — 全部可由 AI 代理调用，并通过 MCP 客户端呈现给用户。
+
+问题在于，手动连接这一切需要深入了解 MCP 规范：`ui://` URI、特殊 MIME 类型、工具和资源之间的元数据协调。不难，但很繁琐。
+
+## Fluent API 三步走
+
+**第一步：定义你的函数。** 标准的 Azure Functions MCP 工具：
+
+```csharp
+[Function(nameof(HelloApp))]
+public string HelloApp(
+    [McpToolTrigger("HelloApp", "A simple MCP App that says hello.")]
+    ToolInvocationContext context)
+{
+    return "Hello from app";
+}
+```
+
+**第二步：将其提升为 MCP App。** 在程序启动中：
+
+```csharp
+builder.ConfigureMcpTool("HelloApp")
+    .AsMcpApp(app => app
+        .WithView("assets/hello-app.html")
+        .WithTitle("Hello App")
+        .WithPermissions(McpAppPermissions.ClipboardWrite | McpAppPermissions.ClipboardRead)
+        .WithCsp(csp =>
+        {
+            csp.AllowBaseUri("https://www.microsoft.com")
+               .ConnectTo("https://www.microsoft.com");
+        }));
+```
+
+**第三步：添加你的 HTML 视图。** 创建 `assets/hello-app.html`，放入你需要的界面。
+
+就这样。Fluent API 处理了所有 MCP 协议的管道工作 — 生成合成资源函数、设置正确的 MIME 类型、注入将工具与其视图连接起来的元数据。
+
+## API 设计精良
+
+几个我特别喜欢的地方：
+
+**视图源灵活。** 你可以从磁盘文件提供 HTML，也可以将资源直接嵌入程序集中以实现自包含部署：
+
+```csharp
+app.WithView(McpViewSource.FromFile("assets/my-view.html"))
+app.WithView(McpViewSource.FromEmbeddedResource("MyApp.Resources.view.html"))
+```
+
+**CSP 可组合。** 你明确允许应用所需的来源，遵循最小权限原则。多次调用 `WithCsp`，来源会累积：
+
+```csharp
+.WithCsp(csp =>
+{
+    csp.ConnectTo("https://api.example.com")
+       .LoadResourcesFrom("https://cdn.example.com")
+       .AllowFrame("https://youtube.com");
+})
+```
+
+**可见性控制。** 你可以让工具仅对 LLM 可见、仅对宿主 UI 可见，或两者兼具。想要一个只渲染 UI 而不应被模型调用的工具？简单：
+
+```csharp
+.WithVisibility(McpVisibility.App) // UI-only, hidden from the model
+```
+
+## 开始使用
+
+添加预览包：
+
+```bash
+dotnet add package Microsoft.Azure.Functions.Worker.Extensions.Mcp --version 1.5.0-preview.1
+```
+
+如果你已经在用 Azure Functions 构建 MCP 工具，这只是一个包更新。如果你是新手，[MCP Apps 快速入门](https://learn.microsoft.com/azure/azure-functions/scenario-mcp-apps?tabs=bash%2Clinux&pivots=programming-language-csharp)是最好的起点。
+
+## 总结
+
+MCP Apps 是 AI 工具领域最令人兴奋的发展之一 — 不仅能*做事*，还能向用户*展示事物*的工具。Fluent API 消除了协议复杂性，让你专注于真正重要的事：工具的逻辑和界面。
+
+阅读[完整文章](https://devblogs.microsoft.com/azure-sdk/mcp-as-easy-as-1-2-3-introducing-the-fluent-api-for-mcp-apps/)获取完整的 API 参考和示例。
+
+
+---
+## Microsoft Foundry 2026年3月 — GPT-5.4、Agent Service GA，以及改变一切的SDK刷新
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/microsoft-foundry-march-2026-whats-new/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: foundry, ai, azure, gpt-5-4, agents, sdk
+- **Reading time**: 1 min
+
+> Microsoft Foundry 2026年3月更新非常重大：Agent Service正式GA，GPT-5.4带来可靠推理，azure-ai-projects SDK在所有语言中稳定发布，Fireworks AI将开放模型引入Azure。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "microsoft-foundry-march-2026-whats-new.md" >}})。*
+
+每月的"Microsoft Foundry新动态"文章通常是增量改进和偶尔亮点功能的混合。[2026年3月版](https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-mar-2026/)呢？基本上全是亮点功能。Foundry Agent Service正式GA，GPT-5.4投入生产，SDK获得重要的稳定版本发布，Fireworks AI将开放模型推理引入Azure。让我来解析对.NET开发者来说什么最重要。
+
+## Foundry Agent Service已准备好投入生产
+
+这是最大的新闻。新一代代理运行时已正式发布 — 构建在OpenAI Responses API之上，与OpenAI代理协议兼容，并向多个提供商的模型开放。如果您今天正在使用Responses API构建，迁移到Foundry将在您现有的代理逻辑之上添加企业级安全性、私有网络、Entra RBAC、完整追踪和评估功能。
+
+```python
+from azure.ai.projects import AIProjectClient
+from azure.ai.projects.models import PromptAgentDefinition
+
+project_client = AIProjectClient(
+    endpoint=os.environ["AZURE_AI_PROJECT_ENDPOINT"],
+    credential=DefaultAzureCredential()
+)
+
+agent = project_client.agents.create_version(
+    agent_name="my-enterprise-agent",
+    definition=PromptAgentDefinition(
+        model=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
+        instructions="You are a helpful assistant.",
+    ),
+)
+```
+
+关键新增功能：端到端私有网络、MCP认证扩展（包括OAuth透传）、语音对语音代理的Voice Live预览，以及在6个新区域托管代理。
+
+## GPT-5.4 — 可靠性优于纯粹的智能
+
+GPT-5.4不是为了变得更聪明，而是为了变得更可靠。在长时间交互中更强的推理能力、更好的指令遵循性、更少的工作流中途故障，以及集成的计算机使用功能。对于生产环境的代理来说，这种可靠性比基准测试分数重要得多。
+
+| 模型 | 价格（每百万token） | 最佳用途 |
+|------|-------------------|---------|
+| GPT-5.4 (≤272K) | $2.50 / $15 输出 | 生产代理、编码、文档工作流 |
+| GPT-5.4 Pro | $30 / $180 输出 | 深度分析、科学推理 |
+| GPT-5.4 Mini | 经济实惠 | 分类、提取、轻量级工具调用 |
+
+聪明的策略是路由：GPT-5.4 Mini处理高吞吐量、低延迟的工作，而GPT-5.4负责推理密集型的请求。
+
+## SDK终于稳定了
+
+`azure-ai-projects` SDK在所有语言中发布了稳定版 — Python 2.0.0、JS/TS 2.0.0、Java 2.0.0和.NET 2.0.0（4月1日）。`azure-ai-agents`依赖已经消失 — 一切都在`AIProjectClient`下。使用`pip install azure-ai-projects`安装，包中直接捆绑了`openai`和`azure-identity`作为依赖项。
+
+对于.NET开发者来说，这意味着一个NuGet包就能覆盖Foundry的全部功能。不再需要在多个代理SDK之间来回切换。
+
+## Fireworks AI将开放模型引入Azure
+
+也许是架构上最有趣的新增：Fireworks AI每天处理超过13万亿token，速度达到~180K请求/秒，现在可以通过Foundry使用。DeepSeek V3.2、gpt-oss-120b、Kimi K2.5和MiniMax M2.5在发布时可用。
+
+真正的故事是**自带权重** — 从任何地方上传量化或微调的权重，无需更改服务栈。通过无服务器按token付费或预配置吞吐量进行部署。
+
+## 其他亮点
+
+- **Phi-4 Reasoning Vision 15B** — 针对图表、图形和文档布局的多模态推理
+- **Evaluations GA** — 开箱即用的评估器，配合持续生产监控，直接接入Azure Monitor
+- **Priority Processing**（预览）— 面向延迟敏感型工作负载的专用计算通道
+- **Voice Live** — 直接连接到Foundry代理的语音对语音运行时
+- **Tracing GA** — 具有排序和过滤功能的端到端代理追踪检查
+- **PromptFlow弃用** — 在2027年1月前迁移到Microsoft Framework Workflows
+
+## 总结
+
+2026年3月是Foundry的转折点。Agent Service GA、所有语言的稳定SDK、用于可靠生产代理的GPT-5.4，以及通过Fireworks AI实现的开放模型推理 — 该平台已准备好应对严肃的工作负载。
+
+阅读[完整汇总](https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-mar-2026/)并[构建您的第一个代理](https://learn.microsoft.com/azure/foundry/quickstarts/get-started-code)来开始吧。
+
+
+---
+## SQL MCP Server — 给 AI 代理数据库访问的正确方式
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure-sql, mcp, data-api-builder, ai, azure, databases
+- **Reading time**: 1 min
+
+> Data API builder 的 SQL MCP Server 为 AI 代理提供安全、确定性的数据库访问，无需暴露架构或依赖 NL2SQL。RBAC、缓存、多数据库支持 — 全部内置。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "sql-mcp-server-data-api-builder.md" >}})。*
+
+说实话：今天市面上大多数数据库 MCP 服务器都很可怕。它们接受自然语言查询，即时生成 SQL，然后在你的生产数据上执行。有什么可能出错的？（一切。一切都可能出错。）
+
+Azure SQL 团队刚刚[发布了 SQL MCP Server](https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/)，它采用了一种根本不同的方法。作为 Data API builder（DAB）2.0 的功能构建，它为 AI 代理提供结构化、确定性的数据库操作访问 — 没有 NL2SQL，不暴露你的架构，每一步都有完整的 RBAC。
+
+## 为什么不用 NL2SQL？
+
+这是最有趣的设计决策。模型不是确定性的，复杂查询最容易产生微妙的错误。用户希望 AI 能生成的那些查询，恰恰也是在非确定性生成时最需要审查的查询。
+
+相反，SQL MCP Server 使用 **NL2DAB** 方法。代理使用 Data API builder 的实体抽象层和内置查询构建器来确定性地生成准确、格式良好的 T-SQL。对用户来说结果相同，但没有幻觉 JOIN 或意外数据泄露的风险。
+
+## 七个工具，不是七百个
+
+SQL MCP Server 精确暴露七个 DML 工具，与数据库大小无关：
+
+- `describe_entities` — 发现可用实体和操作
+- `create_record` — 插入行
+- `read_records` — 查询表和视图
+- `update_record` — 修改行
+- `delete_record` — 删除行
+- `execute_entity` — 运行存储过程
+- `aggregate_records` — 聚合查询
+
+这很聪明，因为上下文窗口是代理的思考空间。用数百个工具定义淹没它们会减少推理空间。七个固定工具让代理专注于*思考*而不是*导航*。
+
+每个工具可以单独启用或禁用：
+
+```json
+"runtime": {
+  "mcp": {
+    "enabled": true,
+    "path": "/mcp",
+    "dml-tools": {
+      "describe-entities": true,
+      "create-record": true,
+      "read-records": true,
+      "update-record": true,
+      "delete-record": true,
+      "execute-entity": true,
+      "aggregate-records": true
+    }
+  }
+}
+```
+
+## 三条命令开始
+
+```bash
+dab init \
+  --database-type mssql \
+  --connection-string "@env('sql_connection_string')"
+
+dab add Customers \
+  --source dbo.Customers \
+  --permissions "anonymous:*"
+
+dab start
+```
+
+这就是一个运行中的 SQL MCP Server，暴露你的 Customers 表。实体抽象层意味着你可以为名称和列创建别名、按角色限制字段，并精确控制代理看到的内容 — 而不暴露内部架构细节。
+
+## 安全故事很扎实
+
+这是 Data API builder 成熟度发挥价值的地方：
+
+- **每一层都有 RBAC** — 每个实体定义哪些角色可以读取、创建、更新或删除，以及哪些字段可见
+- **Azure Key Vault 集成** — 安全管理连接字符串和密钥
+- **Microsoft Entra + 自定义 OAuth** — 生产级认证
+- **内容安全策略** — 代理通过受控契约交互，而不是原始 SQL
+
+架构抽象特别重要。你的内部表名和列名永远不会暴露给代理。你定义对 AI 交互有意义的实体、别名和描述 — 而不是你的数据库 ERD 图。
+
+## 多数据库和多协议
+
+SQL MCP Server 支持 Microsoft SQL、PostgreSQL、Azure Cosmos DB 和 MySQL。由于它是 DAB 的功能，你可以从同一配置同时获取 REST、GraphQL 和 MCP 端点。相同的实体定义、相同的 RBAC 规则、相同的安全性 — 跨所有三种协议。
+
+DAB 2.0 的自动配置甚至可以检查你的数据库并动态构建配置，如果你愿意为快速原型设计减少抽象的话。
+
+## 我的看法
+
+这就是 AI 代理的企业级数据库访问应该如何工作。不是"嘿 LLM，给我写点 SQL 然后对生产环境 YOLO"。而是：定义良好的实体层、确定性查询生成、每一步的 RBAC、缓存、监控和遥测。以最好的方式无聊着。
+
+对于 .NET 开发者，集成故事很清晰 — DAB 是 .NET 工具，MCP Server 作为容器运行，与大多数人已经在用的 Azure SQL 配合工作。如果你正在构建需要数据访问的 AI 代理，从这里开始。
+
+## 总结
+
+SQL MCP Server 是免费、开源的，可在任何地方运行。这是微软为给 AI 代理提供安全数据库访问的规范性方法。查看[完整文章](https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/)和[文档](https://aka.ms/sql/mcp)开始使用。
+
+
+---
+## VS Code 1.116 — Agents应用获得键盘导航和文件上下文补全
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: vscode, developer-tools, agents, accessibility
+- **Reading time**: 1 min
+
+> VS Code 1.116专注于Agents应用的优化 — 专属快捷键、辅助功能改进、文件上下文补全，以及CSS @import链接解析。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "vscode-1-116-agents-app-updates.md" >}})。*
+
+VS Code 1.116是2026年4月的版本，虽然比最近的一些更新更轻量，但变化是有针对性且有意义的 — 尤其是如果你每天都在使用Agents应用。
+
+以下是基于[官方发行说明](https://code.visualstudio.com/updates/v1_116)的更新内容。
+
+## Agents应用改进
+
+Agents应用继续通过可用性优化不断成熟，这些改进在日常工作流中产生了真正的影响：
+
+**专属快捷键** — 现在你可以用专属命令和键盘快捷键来聚焦更改视图、更改中的文件树，以及聊天自定义视图。如果你之前一直在Agents应用中到处点击来导航，这带来了完全由键盘驱动的工作流。
+
+**辅助功能帮助对话框** — 在聊天输入框中按`Alt+F1`现在会打开一个辅助功能帮助对话框，显示可用的命令和快捷键。屏幕阅读器用户还可以控制播报的详细程度。良好的辅助功能让每个人受益。
+
+**文件上下文补全** — 在Agents应用聊天中输入`#`来触发限定在当前工作区范围内的文件上下文补全。这是那些加速每次交互的小型生活质量改进之一 — 不再需要在引用代码时输入完整的文件路径。
+
+## CSS `@import`链接解析
+
+前端开发者的好消息：VS Code现在可以解析使用node_modules路径的CSS `@import`引用。当使用打包工具时，你可以通过`Ctrl+点击`跳转到像`@import "some-module/style.css"`这样的导入。虽小但消除了CSS工作流中的一个摩擦点。
+
+## 总结
+
+VS Code 1.116是关于改进的 — 让Agents应用更易导航、更易访问、更友好的键盘操作。如果你在Agents应用中花费大量时间（我猜很多人都是如此），这些变化会累积起来。
+
+查看[完整发行说明](https://code.visualstudio.com/updates/v1_116)获取完整列表。
+
+
+---
+## 构建不像黑盒的实时多智能体UI
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/ag-ui-real-time-multi-agent-ui-maf/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: agent-framework, ai, ag-ui, multi-agent, azure, sse
+- **Reading time**: 1 min
+
+> AG-UI和Microsoft Agent Framework联手为多智能体工作流提供真正的前端——实时流式传输、人工审批，以及对智能体行为的完整可视化。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "ag-ui-real-time-multi-agent-ui-maf" >}})。*
+
+多智能体系统的问题在于：它们在演示中看起来令人难以置信。三个智能体互相传递工作、解决问题、做出决策。然后你试图把它展示给真实用户，得到的却是……沉默。一个旋转的加载指示器。完全不知道哪个智能体在做什么，或者系统为什么暂停了。这不是产品——这是信任问题。
+
+Microsoft Agent Framework团队刚刚发布了一篇[精彩的教程](https://devblogs.microsoft.com/agent-framework/ag-ui-multi-agent-workflow-demo/)，介绍如何将MAF工作流与[AG-UI](https://github.com/ag-ui-protocol/ag-ui)配合使用。AG-UI是一个开放协议，通过Server-Sent Events将智能体执行事件流式传输到前端。说实话，这正是我们一直缺少的桥梁。
+
+## 为什么这对.NET开发者很重要
+
+如果你在构建AI驱动的应用，可能已经遇到过这堵墙。你的后端编排工作得很好——智能体之间传递任务、工具触发、决策做出。但前端完全不知道幕后发生了什么。AG-UI通过定义一个标准协议来解决这个问题，将智能体事件（想想`RUN_STARTED`、`STEP_STARTED`、`TOOL_CALL_*`、`TEXT_MESSAGE_*`）通过SSE直接传输到你的UI层。
+
+他们构建的演示是一个包含三个智能体的客户支持工作流：一个路由请求的分诊智能体、一个处理退款事务的退款智能体，以及一个管理换货的订单智能体。每个智能体都有自己的工具，交接拓扑是明确定义的——没有"从提示词中猜测"的感觉。
+
+## 交接拓扑才是真正的主角
+
+让我眼前一亮的是`HandoffBuilder`如何让你声明智能体之间的有向路由图：
+
+```python
+builder = HandoffBuilder(
+    name="ag_ui_handoff_workflow_demo",
+    participants=[triage, refund, order],
+    termination_condition=termination_condition,
+)
+
+(
+    builder
+    .add_handoff(triage, [refund], description="Refunds, damaged-item claims...")
+    .add_handoff(triage, [order], description="Replacement, exchange...")
+    .add_handoff(refund, [order], description="Replacement logistics needed after refund.")
+    .add_handoff(order, [triage], description="After replacement/shipping tasks complete.")
+)
+```
+
+每个`add_handoff`创建一条带有自然语言描述的有向边。框架基于这个拓扑为每个智能体生成交接工具。因此路由决策是基于你的编排结构，而不是LLM随意决定的。这对生产环境的可靠性意义重大。
+
+## 真正有效的人机协作
+
+演示展示了任何真实世界智能体应用都需要的两种中断模式：
+
+**工具审批中断** ——当智能体调用标记为`approval_mode="always_require"`的工具时，工作流暂停并发出事件。前端渲染一个包含工具名称和参数的审批模态框。没有烧掉token的重试循环——只是一个干净的暂停-审批-恢复流程。
+
+**信息请求中断** ——当智能体需要用户提供更多上下文（比如订单ID）时，它会暂停并询问。前端显示问题，用户回答，执行从停止的地方精确恢复。
+
+两种模式都作为标准AG-UI事件进行流式传输，所以你的前端不需要针对每个智能体的自定义逻辑——只需渲染通过SSE连接传来的任何事件。
+
+## 接入出奇地简单
+
+MAF和AG-UI之间的集成就是一个函数调用：
+
+```python
+from agent_framework.ag_ui import (
+    AgentFrameworkWorkflow,
+    add_agent_framework_fastapi_endpoint,
+)
+
+app = FastAPI()
+
+demo_workflow = AgentFrameworkWorkflow(
+    workflow_factory=lambda _thread_id: create_handoff_workflow(),
+    name="ag_ui_handoff_workflow_demo",
+)
+
+add_agent_framework_fastapi_endpoint(
+    app=app, agent=demo_workflow, path="/handoff_demo",
+)
+```
+
+`workflow_factory`为每个线程创建一个新的工作流，这样每个对话都有隔离的状态。端点自动处理所有SSE管道。如果你已经在使用FastAPI（或者可以把它作为轻量层添加），这几乎是零摩擦的。
+
+## 我的看法
+
+对于我们.NET开发者来说，第一个问题是："我能用C#做这个吗？"Agent Framework同时支持.NET和Python，AG-UI协议是语言无关的（只是SSE）。所以虽然这个特定演示使用Python和FastAPI，但模式可以直接移植。你可以用ASP.NET Core最小API配合SSE端点，遵循相同的AG-UI事件模式来实现。
+
+更重要的启示是，多智能体UI正在成为一等公民的关注点，而不是事后才想到的事情。如果你在构建任何需要智能体与人类交互的东西——客户支持、审批工作流、文档处理——MAF编排加AG-UI透明度的组合就是应该遵循的模式。
+
+## 总结
+
+AG-UI + Microsoft Agent Framework给你两全其美：后端强大的多智能体编排和前端的实时可视化。不再有黑盒式的智能体交互。
+
+查看[完整教程](https://devblogs.microsoft.com/agent-framework/ag-ui-multi-agent-workflow-demo/)和[AG-UI协议仓库](https://github.com/ag-ui-protocol/ag-ui)以深入了解。
+
+
+---
+## 将 Azure Functions 上的 MCP 服务器连接到 Foundry 代理 — 方法在这里
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/foundry-agents-mcp-servers-azure-functions/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: mcp, azure-functions, foundry, ai, azure, dotnet
+- **Reading time**: 1 min
+
+> 一次构建 MCP 服务器，部署到 Azure Functions，通过适当的身份验证连接到 Microsoft Foundry 代理。你的工具随处可用 — VS Code、Cursor，现在还有企业级 AI 代理。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "foundry-agents-mcp-servers-azure-functions.md" >}})。*
+
+这是我喜欢 MCP 生态系统的一点：你只需构建一次服务器，它就能在任何地方运行。VS Code、Visual Studio、Cursor、ChatGPT — 每个 MCP 客户端都能发现并使用你的工具。现在，微软正在向这个列表中添加另一个消费者：Foundry 代理。
+
+Azure SDK 团队的 Lily Ma [发布了一份实用指南](https://devblogs.microsoft.com/azure-sdk/give-your-foundry-agent-custom-tools-with-mcp-servers-on-azure-functions/)，介绍如何将部署在 Azure Functions 上的 MCP 服务器与 Microsoft Foundry 代理连接。如果你已经有了 MCP 服务器，这纯粹是增值 — 无需重新构建。
+
+## 为什么这种组合有意义
+
+Azure Functions 为托管 MCP 服务器提供了可扩展的基础设施、内置身份验证和无服务器计费。Microsoft Foundry 为你提供能够推理、规划和行动的 AI 代理。连接两者意味着你的自定义工具 — 查询数据库、调用业务 API、运行验证逻辑 — 成为企业 AI 代理可以自主发现和使用的能力。
+
+关键点：你的 MCP 服务器保持不变。你只是将 Foundry 添加为另一个消费者。在 VS Code 设置中运行的相同工具现在为你的团队或客户交互的 AI 代理提供动力。
+
+## 身份验证选项
+
+这是文章真正增值的地方。根据你的场景提供四种身份验证方法：
+
+| 方法 | 使用场景 |
+|------|---------|
+| **基于密钥**（默认） | 开发或没有 Entra 身份验证的服务器 |
+| **Microsoft Entra** | 使用托管标识的生产环境 |
+| **OAuth 身份透传** | 每个用户单独认证的生产环境 |
+| **无身份验证** | 开发/测试或仅公开数据 |
+
+对于生产环境，使用代理身份的 Microsoft Entra 是推荐路径。OAuth 身份透传适用于用户上下文重要的场景 — 代理提示用户登录，每个请求携带用户自己的令牌。
+
+## 设置方法
+
+大致流程：
+
+1. **将 MCP 服务器部署到 Azure Functions** — [.NET](https://github.com/Azure-Samples/remote-mcp-functions-dotnet)、Python、TypeScript 和 Java 的示例均可用
+2. **在你的函数应用上启用内置 MCP 身份验证**
+3. **获取你的端点 URL** — `https://<FUNCTION_APP_NAME>.azurewebsites.net/runtime/webhooks/mcp`
+4. **在 Foundry 中添加 MCP 服务器作为工具** — 在门户中导航到你的代理，添加新的 MCP 工具，提供端点和凭据
+
+然后在 Agent Builder 操场中发送一个会触发你某个工具的提示来测试它。
+
+## 我的看法
+
+这里的组合性故事变得非常强大。用 .NET（或 Python、TypeScript、Java）构建一次 MCP 服务器，部署到 Azure Functions，每个 MCP 兼容的客户端都能使用它 — 编码工具、聊天应用，现在还有企业 AI 代理。这是一个真正有效的"一次编写，到处使用"模式。
+
+特别是对于 .NET 开发者，[Azure Functions MCP 扩展](https://github.com/Azure-Samples/remote-mcp-functions-dotnet)让这一切变得简单明了。你将工具定义为 Azure Functions，部署，就拥有了一个具备 Azure Functions 所提供的所有安全性和可扩展性的生产级 MCP 服务器。
+
+## 总结
+
+如果你有在 Azure Functions 上运行的 MCP 工具，将它们连接到 Foundry 代理是一个快速的胜利 — 你的自定义工具变成了企业 AI 能力，具有适当的身份验证，且服务器本身无需代码更改。
+
+阅读[完整指南](https://devblogs.microsoft.com/azure-sdk/give-your-foundry-agent-custom-tools-with-mcp-servers-on-azure-functions/)了解每种身份验证方法的分步说明，查看[详细文档](https://learn.microsoft.com/azure/azure-functions/functions-mcp-foundry-tools?tabs=entra%2Cmcp-extension%2Cfoundry)了解生产环境配置。
+
+
+---
+## 那个你不知道的Visual Studio浮动窗口设置（但你应该知道）
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: visual-studio, developer-tools, productivity, powertoys
+- **Reading time**: 1 min
+
+> Visual Studio的一个隐藏设置让你完全控制浮动窗口 — 独立的任务栏条目、正确的多显示器行为，以及完美的FancyZones集成。一个下拉菜单改变一切。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "visual-studio-floating-windows-powertoys.md" >}})。*
+
+如果你在Visual Studio中使用多个显示器（说实话，现在谁不用呢？），你可能经历过这种烦恼：浮动工具窗口在你最小化主IDE时消失，它们总是在所有窗口之上，而且不会在任务栏中显示为单独的按钮。这对某些工作流有效，但对多显示器设置来说很令人沮丧。
+
+Visual Studio团队的Mads Kristensen [分享了一个鲜为人知的设置](https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/)，它完全改变了浮动窗口的行为。一个下拉菜单。就这样。
+
+## 设置
+
+**Tools > Options > Environment > Windows > Floating Windows**
+
+下拉菜单"These floating windows are owned by the main window"有三个选项：
+
+- **None** — 完全独立。每个浮动窗口都有自己的任务栏条目，行为就像普通的Windows窗口。
+- **Tool Windows**（默认）— 文档自由浮动，工具窗口保持与IDE绑定。
+- **Documents and Tool Windows** — 经典的Visual Studio行为，所有窗口都绑定到主窗口。
+
+## 为什么"None"是多显示器设置的最佳选择
+
+将其设置为**None**，突然间你所有的浮动工具窗口和文档都像真正的Windows应用程序一样运行。它们出现在任务栏中，当你最小化Visual Studio主窗口时保持可见，并且不再强制自己始终在最前面。
+
+将此与**PowerToys FancyZones**结合使用，效果惊人。在你的显示器上创建自定义布局，将解决方案资源管理器放在一个区域，调试器放在另一个区域，代码文件放在你想要的任何地方。一切都保持在原位，一切都可以独立访问，你的工作空间感觉有条理而不是混乱的。
+
+## 快速建议
+
+- **多显示器高级用户**：设置为**None**，搭配FancyZones
+- **偶尔浮动的用户**：**Tool Windows**（默认）是不错的折中方案
+- **传统工作流**：**Documents and Tool Windows**保持经典行为
+
+专业提示：在任何工具窗口的标题栏上**Ctrl + 双击**即可立即浮动或停靠。更改设置后无需重启。
+
+## 总结
+
+这是那种"我不敢相信我之前不知道"的设置之一。如果Visual Studio中的浮动窗口曾经让你烦恼，现在就去改掉它。
+
+阅读[完整文章](https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/)获取详细信息和截图。
+
+
+---
+## 智能体平台工程正在成为现实 — Git-APE展示了方法
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, github-copilot, platform-engineering, agents, mcp, devops
+- **Reading time**: 1 min
+
+> 微软的Git-APE项目将智能体平台工程付诸实践 — 使用GitHub Copilot智能体和Azure MCP将自然语言请求转化为经过验证的云基础设施。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "agentic-platform-engineering-git-ape" >}})。*
+
+平台工程一直是那种在技术大会上听起来很棒的术语，但通常意味着"我们搭了一个内部门户和一个Terraform封装器。"真正的承诺 — 真正安全、受治理且快速的自助式基础设施 — 总是差那么几步。
+
+Azure团队刚刚发布了[智能体平台工程系列的第二部分](https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/)，这次全是关于动手实现。他们称之为**Git-APE**（是的，这个缩写是故意的），这是一个开源项目，使用GitHub Copilot智能体加Azure MCP服务器，将自然语言请求转化为经过验证和部署的基础设施。
+
+## Git-APE究竟做什么
+
+核心思路：开发者不再需要学习Terraform模块、浏览门户UI或向平台团队提交工单，而是直接和Copilot智能体对话。智能体理解意图、生成基础设施即代码、根据策略进行验证并部署 — 全部在VS Code内完成。
+
+配置如下：
+
+```bash
+git clone https://github.com/Azure/git-ape
+cd git-ape
+```
+
+在VS Code中打开工作区，GitHub Copilot会自动发现智能体配置文件。你直接与智能体交互：
+
+```
+@git-ape deploy a function app with storage in West Europe
+```
+
+智能体在底层使用Azure MCP Server与Azure服务交互。VS Code设置中的MCP配置启用特定功能：
+
+```json
+{
+  "azureMcp.serverMode": "namespace",
+  "azureMcp.enabledServices": [
+    "deploy", "bestpractices", "group",
+    "subscription", "functionapp", "storage",
+    "sql", "monitor"
+  ],
+  "azureMcp.readOnly": false
+}
+```
+
+## 为什么这很重要
+
+对于我们在Azure上构建的人来说，这将平台工程的对话从"如何构建一个门户"转变为"如何将我们的护栏描述为API。"当你的平台接口是AI智能体时，你的约束和策略的质量就成了产品本身。
+
+第一部分博客阐述了理论：描述良好的API、控制模式和明确的护栏使平台做好了智能体化的准备。第二部分通过交付实际工具证明它确实有效。智能体不会盲目生成资源 — 它会根据最佳实践进行验证、遵守命名约定并应用你组织的策略。
+
+清理同样简单：
+
+```
+@git-ape destroy my-resource-group
+```
+
+## 我的看法
+
+说实话 — 这里更多是关于模式而非具体工具。Git-APE本身是一个演示/参考架构。但底层的理念 — 智能体作为平台的接口、MCP作为协议、GitHub Copilot作为宿主 — 这就是企业开发者体验的前进方向。
+
+如果你是一个正在寻找如何让内部工具对智能体友好的平台团队，没有比这更好的起点了。如果你是.NET开发者想知道这和你的世界如何关联：Azure MCP Server和GitHub Copilot智能体可以与任何Azure工作负载配合使用。你的ASP.NET Core API、你的.NET Aspire技术栈、你的容器化微服务 — 都可以成为智能体部署流程的目标。
+
+## 总结
+
+Git-APE是对智能体平台工程实践的一个早期但具体的展示。克隆[仓库](https://github.com/Azure/git-ape)，试试演示，开始思考你的平台的API和策略需要是什么样子，才能让智能体安全地使用它们。
+
+阅读[完整文章](https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/)获取详细教程和演示视频。
+
+
+---
+## VS Code 1.115 — 后台终端通知、SSH Agent 模式及更多
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/
+- **Date**: April 06, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: vscode, developer-tools, copilot, ai, remote-development
+- **Reading time**: 1 min
+
+> VS Code 1.115 带来了面向 Agent 的后台终端通知、SSH 远程 Agent 托管、终端文件粘贴以及会话感知的编辑追踪。以下是对 .NET 开发者重要的内容。
+
+
+
+> *本文为自动翻译。如需查看原文，[请点击这里]({{< ref "vscode-1-115-agent-improvements.md" >}})。*
+
+VS Code 1.115 刚刚[发布](https://code.visualstudio.com/updates/v1_115)了，虽然从主要功能来看这是一个较轻量的版本，但如果你每天都在使用 AI 编程助手，那么与 Agent 相关的改进确实非常实用。
+
+让我来重点介绍一下真正值得了解的内容。
+
+## 后台终端与 Agent 通信
+
+这是本次最突出的功能。后台终端现在会在命令完成时自动通知 Agent，包括退出代码和终端输出。后台终端中的输入提示也会被检测并展示给用户。
+
+这为什么重要？如果你用过 Copilot 的 Agent 模式在后台运行构建命令或测试套件，你肯定知道"那个跑完了没？"的痛苦——后台终端基本上就是发射后不管。现在 Agent 会在你的 `dotnet build` 或 `dotnet test` 完成时收到通知，看到输出，并相应地做出反应。这是一个小改动，但让 Agent 驱动的工作流程变得更加可靠。
+
+还有一个新的 `send_to_terminal` 工具，允许 Agent 在用户确认后向后台终端发送命令，解决了 `run_in_terminal` 带超时参数时会将终端移到后台并使其变为只读的问题。
+
+## SSH 远程 Agent 托管
+
+VS Code 现在支持通过 SSH 连接到远程机器，自动安装 CLI 并以 Agent 主机模式启动。这意味着你的 AI Agent 会话可以直接针对远程环境——对于在 Linux 服务器或云虚拟机上构建和测试的 .NET 开发者来说非常有用。
+
+## Agent 会话中的编辑追踪
+
+Agent 会话期间进行的文件编辑现在会被追踪和恢复，支持差异对比、撤销/重做和状态恢复。如果 Agent 修改了你的代码并且出了问题，你可以准确地看到哪些内容发生了变化并将其回滚。让 Agent 修改代码库时更加安心。
+
+## 浏览器标签页感知及其他改进
+
+还有一些生活质量方面的提升：
+
+- **浏览器标签页追踪** — 聊天现在可以追踪和链接会话期间打开的浏览器标签页，这样 Agent 可以引用你正在查看的网页
+- **终端文件粘贴** — 使用 Ctrl+V、拖放或右键点击将文件（包括图片）粘贴到终端
+- **小地图中的测试覆盖率** — 测试覆盖率指示器现在显示在小地图中，提供快速的视觉概览
+- **Mac 上的双指缩放** — 集成浏览器支持双指缩放手势
+- **会话中的 Copilot 使用权限** — 状态栏在会话视图中显示使用信息
+- **转到文件中的网站图标** — 打开的网页在快速选择列表中显示网站图标
+
+## 总结
+
+VS Code 1.115 是一个渐进式版本，但 Agent 改进——后台终端通知、SSH Agent 托管和编辑追踪——加在一起为 AI 辅助开发带来了明显更流畅的体验。如果你在 .NET 项目中使用 Copilot 的 Agent 模式，这些正是每天减少摩擦的生活质量改进。
+
+查看[完整的发行说明](https://code.visualstudio.com/updates/v1_115)了解所有细节。
+
+
+---
+## C# 15 引入联合类型 — 正是我们一直在期待的
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/csharp-15-union-types-exhaustive-matching/
+- **Date**: April 05, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: csharp, dotnet, union-types, pattern-matching, dotnet-11, language-features
+- **Reading time**: 2 min
+
+> C# 15 引入了 union 关键字 — 编译器强制的可区分联合类型，支持穷举模式匹配。来看看它们长什么样、为什么重要，以及如何今天就试用。
+
+
+
+> *本文为自动翻译。查看原文请[点击这里]({{< ref "csharp-15-union-types-exhaustive-matching.md" >}})。*
+
+这就是我一直在等的那个功能。C# 15 引入了 `union` 关键字 — 真正的可区分联合类型，带有编译器强制的穷举模式匹配。如果你曾经羡慕过 F# 的可区分联合或 Rust 的 enum，你就明白这为什么重要了。
+
+Bill Wagner 在 .NET 博客上[发布了深度解析](https://devblogs.microsoft.com/dotnet/csharp-15-union-types/)，说实话？设计干净、实用，非常 C#。让我带你看看实际有什么，以及为什么它比乍看之下更重要。
+
+## 联合类型解决的问题
+
+在 C# 15 之前，从方法返回"多个可能类型之一"总是一种妥协：
+
+- **`object`** — 没有约束，没有编译器帮助，到处都是防御性类型转换
+- **标记接口** — 好一些，但任何人都可以实现它们。编译器永远无法认为集合是完整的
+- **抽象基类** — 同样的问题，而且类型需要共同的祖先
+
+这些都无法给你真正想要的东西：一个封闭的类型集合，编译器保证你已经处理了每种情况。这就是联合类型的作用。
+
+## 语法优雅简洁
+
+```csharp
+public record class Cat(string Name);
+public record class Dog(string Name);
+public record class Bird(string Name);
+
+public union Pet(Cat, Dog, Bird);
+```
+
+一行代码。`Pet` 可以包含一个 `Cat`、一个 `Dog` 或一个 `Bird`。隐式转换会自动生成：
+
+```csharp
+Pet pet = new Dog("Rex");
+Console.WriteLine(pet.Value); // Dog { Name = Rex }
+```
+
+魔法来了 — 编译器强制穷举匹配：
+
+```csharp
+string name = pet switch
+{
+    Dog d => d.Name,
+    Cat c => c.Name,
+    Bird b => b.Name,
+};
+```
+
+不需要丢弃模式 `_`。编译器知道这个 switch 覆盖了所有可能的情况。如果你之后向联合添加第四个类型，每个没有处理它的 switch 表达式都会产生警告。缺失的情况在编译时被捕获，而不是在运行时。
+
+## 真正实用的地方
+
+`Pet` 的例子很可爱，但这里才是联合类型在真实代码中真正发光的地方。
+
+### 返回不同形状的 API 响应
+
+```csharp
+public union ApiResult<T>(T, ApiError, ValidationFailure);
+```
+
+现在每个消费者都被强制处理成功、错误和验证失败。再也不会有"忘记检查错误情况"的 bug 了。
+
+### 单值或集合
+
+`OneOrMore<T>` 模式展示了联合如何拥有带有辅助方法的主体：
+
+```csharp
+public union OneOrMore<T>(T, IEnumerable<T>)
+{
+    public IEnumerable<T> AsEnumerable() => Value switch
+    {
+        T single => [single],
+        IEnumerable<T> multiple => multiple,
+        null => []
+    };
+}
+```
+
+调用者传递最方便的形式：
+
+```csharp
+OneOrMore<string> tags = "dotnet";
+OneOrMore<string> moreTags = new[] { "csharp", "unions", "preview" };
+
+foreach (var tag in tags.AsEnumerable())
+    Console.Write($"[{tag}] ");
+// [dotnet]
+```
+
+### 组合不相关的类型
+
+这是相对于传统继承层次结构的杀手级功能。你可以联合没有任何共同点的类型 — `string` 和 `Exception`、`int` 和 `IEnumerable<T>`。不需要共同祖先。
+
+## 为现有库创建自定义联合
+
+这是一个聪明的设计选择：任何带有 `[Union]` 属性的类或结构体都会被识别为联合类型，只要它遵循基本模式（case 类型的公共构造函数和 `Value` 属性）。像 OneOf 这样已经提供类似联合功能的库可以选择加入编译器支持，而无需重写其内部实现。
+
+对于使用值类型的性能敏感场景，库可以通过 `HasValue` 和 `TryGetValue` 方法实现无装箱的访问模式。
+
+## 更大的图景
+
+联合类型是 C# 即将到来的更广泛穷举性故事的一部分：
+
+- **联合类型** — 对封闭类型集合的穷举匹配（现已在预览版中可用）
+- **密封层次结构** — `closed` 修饰符阻止在定义程序集之外派生类（已提议）
+- **密封枚举** — 阻止创建声明成员之外的值（已提议）
+
+这三个功能结合在一起，将使 C# 拥有所有主流语言中最全面的类型安全模式匹配系统之一。
+
+## 今天就试试
+
+联合类型在 .NET 11 Preview 2 中可用：
+
+1. 安装 [.NET 11 Preview SDK](https://dotnet.microsoft.com/download/dotnet)
+2. 在项目中目标设为 `net11.0`
+3. 设置 `<LangVersion>preview</LangVersion>`
+
+一个注意事项：在 Preview 2 中，你需要在项目中声明 `UnionAttribute` 和 `IUnion`，因为它们还没有包含在运行时中。从 docs 仓库获取 [RuntimePolyfill.cs](https://github.com/dotnet/docs/blob/e68b5dd1e557b53c45ca43e61b013bc919619fb9/docs/csharp/language-reference/builtin-types/snippets/unions/RuntimePolyfill.cs)，或添加以下代码：
+
+```csharp
+namespace System.Runtime.CompilerServices
+{
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct,
+        AllowMultiple = false)]
+    public sealed class UnionAttribute : Attribute;
+
+    public interface IUnion
+    {
+        object? Value { get; }
+    }
+}
+```
+
+## 总结
+
+联合类型是那种让你不禁感叹"以前没有它们我们是怎么过来的"的功能。编译器强制的穷举匹配、简洁的语法、泛型支持，以及与现有模式匹配的集成 — 这是我们一直要求的一切，以 C# 的方式实现。
+
+在 .NET 11 Preview 2 中试用它们，尽情折腾，并[在 GitHub 上分享你的反馈](https://github.com/dotnet/csharplang/discussions/9663)。这是预览版，C# 团队正在积极倾听。你的边界情况和设计反馈将塑造最终版本。
+
+完整的语言参考请查看[联合类型文档](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/union)和[功能规范](https://learn.microsoft.com/dotnet/csharp/language-reference/proposals/unions)。
+
+
+---
+## Aspire 13.2 自带文档 CLI — 你的 AI 代理也能用
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/
+- **Date**: April 04, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: aspire, dotnet, cli, ai, developer-tools, documentation
+- **Reading time**: 1 min
+
+> .NET Aspire 13.2 新增了 aspire docs — 一个无需离开终端即可搜索、浏览和阅读官方文档的 CLI。它也可以作为 AI 代理的工具。这就是为什么这很重要。
+
+
+
+> *本文为自动翻译。查看原文请[点击此处]({{< ref "aspire-docs-cli-ai-skills.md" >}})。*
+
+你知道那种时刻吗——你正深入一个 Aspire AppHost，接入各种集成，然后需要确认 Redis 集成到底需要哪些参数？你 Alt-Tab 切到浏览器，在 aspire.dev 上翻来翻去，眯着眼看 API 文档，然后切回编辑器。上下文没了，心流断了。
+
+Aspire 13.2 刚刚[发布了解决方案](https://devblogs.microsoft.com/aspire/aspire-docs-in-your-terminal/)。`aspire docs` CLI 让你直接从终端搜索、浏览和阅读 Aspire 官方文档。而且因为它由可复用的服务支撑，AI 代理和技能可以使用同样的命令来查找文档，而不是幻想出不存在的 API。
+
+## 这到底解决了什么问题
+
+David Pine 在原文中说得很到位：AI 代理在帮助开发者构建 Aspire 应用方面*糟糕透了*。它们推荐 `dotnet run` 而不是 `aspire run`，引用 learn.microsoft.com 来查找实际在 aspire.dev 上的文档，建议过时的 NuGet 包，还有——我个人最喜欢的——幻想出根本不存在的 API。
+
+为什么？因为 Aspire 作为 .NET 专属工具的时间远比它成为多语言工具的时间长，而且 LLM 使用的训练数据早于最新功能。当你给 AI 代理真正查找当前文档的能力时，它就不再猜测，开始变得有用了。
+
+## 三个命令，零个浏览器标签页
+
+CLI 简洁得令人耳目一新：
+
+### 列出所有文档
+
+```bash
+aspire docs list
+```
+
+返回 aspire.dev 上所有可用的文档页面。需要机器可读的输出？加上 `--format Json`。
+
+### 搜索主题
+
+```bash
+aspire docs search "redis"
+```
+
+同时搜索标题和内容，使用加权相关性评分。与内部驱动文档工具的搜索引擎完全一样。你会得到带有标题、slug 和相关性分数的排名结果。
+
+### 阅读完整页面（或仅一个章节）
+
+```bash
+aspire docs get redis-integration
+```
+
+将完整页面以 markdown 格式流式传输到你的终端。只需要一个章节？
+
+```bash
+aspire docs get redis-integration --section "Add Redis resource"
+```
+
+精准定位。不用滚动 500 行。只看你需要的部分。
+
+## AI 代理的视角
+
+对于我们这些使用 AI 工具进行开发的人来说，这才是真正有趣的地方。同样的 `aspire docs` 命令可以作为 AI 代理的工具——通过技能、MCP 服务器或简单的 CLI 封装。
+
+你的 AI 助手不再根据过时的训练数据编造 Aspire API，而是可以调用 `aspire docs search "postgres"`，找到官方集成文档，阅读正确的页面，给你文档记录的方案。实时的、最新的文档——而不是模型六个月前记住的内容。
+
+背后的架构是有意为之的。Aspire 团队构建了可复用的服务（`IDocsIndexService`、`IDocsSearchService`、`IDocsFetcher`、`IDocsCache`），而不是一次性集成。这意味着同一个搜索引擎为终端中的人类、编辑器中的 AI 代理以及 CI 流水线中的自动化服务。
+
+## 真实场景
+
+**终端快速查询：** 你已经深入到第三个文件，需要 Redis 配置参数。两个命令，九十秒，回去干活：
+
+```bash
+aspire docs search "redis" --limit 1
+aspire docs get redis-integration --section "Configuration"
+```
+
+**AI 辅助开发：** 你的 VS Code 技能封装了 CLI 命令。你问"给我的 AppHost 添加一个 PostgreSQL 数据库"，代理在回答之前先查阅真实文档。没有幻觉。
+
+**CI/CD 验证：** 你的流水线以编程方式根据官方文档验证 AppHost 配置。`--format Json` 输出可以干净地通过管道传递给 `jq` 和其他工具。
+
+**自定义知识库：** 在构建自己的 AI 工具？将结构化 JSON 输出直接导入你的知识库：
+
+```bash
+aspire docs search "monitoring" --format Json | jq '[.[] | {slug, title, summary}]'
+```
+
+不需要网页抓取。不需要 API 密钥。与文档工具内部使用的完全一样的结构化数据。
+
+## 文档始终是最新的
+
+这是我最欣赏的部分。CLI 不会下载快照——它通过基于 ETag 的缓存查询 aspire.dev。文档一旦更新，你的 CLI 和构建在其之上的所有技能都会反映出来。没有过时的副本，没有"但是 wiki 上说的是..."的尴尬时刻。
+
+## 总结
+
+`aspire docs` 是那种以简洁方式解决真实问题的小功能之一。人类获得了终端原生的文档访问。AI 代理获得了停止猜测、开始引用真实文档的方式。而且一切都由同一个事实来源支撑。
+
+如果你正在使用 .NET Aspire 开发，还没试过这个 CLI，运行 `aspire docs search "你的主题"` 看看感觉如何。然后考虑将这些命令封装到你正在使用的任何 AI 技能或自动化设置中——你的代理会感谢你的。
+
+查看 [David Pine 的深入分析](https://davidpine.dev/posts/aspire-docs-mcp-tools/)了解文档工具是如何构建的，以及[官方 CLI 参考](https://aspire.dev/reference/cli/commands/aspire-docs/)获取所有细节。
+
+
+---
+## Microsoft Agent Framework 正式发布 1.0 — 这些才是 .NET 开发者真正需要关注的
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agent-framework-1-0-production-ready/
+- **Date**: April 03, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: agent-framework, dotnet, ai, semantic-kernel, azure-openai, multi-agent
+- **Reading time**: 2 min
+
+> Microsoft Agent Framework 1.0 已具备生产环境就绪能力，拥有稳定的 API、多代理编排以及所有主流 AI 提供商的连接器。以下是作为 .NET 开发者你需要了解的内容。
+
+
+
+> *本文为自动翻译。如需查看原文，请[点击此处]({{< ref "agent-framework-1-0-production-ready.md" >}})。*
+
+如果你一直在关注 Agent Framework 从早期 Semantic Kernel 和 AutoGen 时代走来的历程，这次的消息意义重大。Microsoft Agent Framework 刚刚[发布了 1.0 版本](https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/) — 生产就绪、API 稳定、长期支持承诺。它同时支持 .NET 和 Python，并且真正可以承载实际工作负载。
+
+让我跳过公告的噪音，专注于你用 .NET 构建 AI 驱动应用时真正重要的内容。
+
+## 简短版本
+
+Agent Framework 1.0 将之前的 Semantic Kernel 和 AutoGen 统一为一个开源 SDK。一个代理抽象。一个编排引擎。多个 AI 提供商。如果你之前一直在 Semantic Kernel（企业模式）和 AutoGen（研究级多代理工作流）之间来回切换，现在可以停了。这就是那个唯一的 SDK。
+
+## 入门简单得几乎不公平
+
+这是一个在 .NET 中运行的代理：
+
+```csharp
+// dotnet add package Microsoft.Agents.AI.OpenAI --prerelease
+using Microsoft.Agents.AI;
+using Microsoft.Agents.AI.Foundry;
+using Azure.Identity;
+
+var agent = new AIProjectClient(endpoint: "https://your-project.services.ai.azure.com")
+    .GetResponsesClient("gpt-5.3")
+    .AsAIAgent(
+        name: "HaikuBot",
+        instructions: "You are an upbeat assistant that writes beautifully."
+    );
+
+Console.WriteLine(await agent.RunAsync("Write a haiku about shipping 1.0."));
+```
+
+就这些。几行代码，你就有了一个在 Azure Foundry 上运行的 AI 代理。Python 的等效代码同样简洁。随着需求增长，逐步添加函数工具、多轮对话和流式输出 — API 表面会平稳地扩展，不会变得奇怪。
+
+## 多代理编排 — 这才是真正的核心
+
+单个代理对演示来说够了，但生产场景通常需要协调。Agent Framework 1.0 附带了经过实战考验的编排模式，直接来自 Microsoft Research 和 AutoGen：
+
+- **顺序执行** — 代理按顺序处理（写手 → 审核 → 编辑）
+- **并发执行** — 并行分发给多个代理，汇聚结果
+- **移交** — 一个代理根据意图委托给另一个代理
+- **群组聊天** — 多个代理讨论并收敛到一个解决方案
+- **Magentic-One** — 来自 MSR 的研究级多代理模式
+
+所有这些都支持流式处理、检查点、人机回路审批以及暂停/恢复。检查点部分至关重要 — 长时间运行的工作流在进程重启后依然可以恢复。对于我们这些用 Azure Functions 构建过持久工作流的 .NET 开发者来说，这感觉很熟悉。
+
+## 最重要的功能
+
+以下是我认为值得了解的要点：
+
+**中间件钩子。** 你知道 ASP.NET Core 有中间件管道吗？同样的概念，但用于代理执行。拦截每个阶段 — 添加内容安全、日志记录、合规策略 — 而无需触碰代理的提示词。这就是让代理达到企业级标准的方式。
+
+**可插拔内存。** 对话历史、持久键值状态、基于向量的检索。选择你的后端：Foundry Agent Service、Mem0、Redis、Neo4j，或者自己实现。内存是将无状态的 LLM 调用变成真正能记住上下文的代理的关键。
+
+**声明式 YAML 代理。** 在版本控制的 YAML 文件中定义代理的指令、工具、内存和编排拓扑。通过单个 API 调用加载和运行。这对于想要在不重新部署代码的情况下迭代代理行为的团队来说是颠覆性的。
+
+**A2A 和 MCP 支持。** MCP（Model Context Protocol）让代理能够动态发现和调用外部工具。A2A（Agent-to-Agent 协议）实现跨运行时协作 — 你的 .NET 代理可以与其他框架中运行的代理进行协调。A2A 1.0 支持即将推出。
+
+## 值得关注的预览功能
+
+1.0 中有些功能以预览形式发布 — 功能可用但 API 可能会演进：
+
+- **DevUI** — 一个基于浏览器的本地调试器，用于实时可视化代理执行、消息流和工具调用。可以把它想象成 Application Insights，但用于代理推理。
+- **GitHub Copilot SDK 和 Claude Code SDK** — 直接从编排代码中使用 Copilot 或 Claude 作为代理工具。在同一工作流中将编程代理与其他代理组合在一起。
+- **Agent Harness** — 一个可定制的本地运行时，为代理提供对 shell、文件系统和消息循环的访问。可以理解为编码代理和自动化模式。
+- **Skills** — 可复用的领域能力包，为代理提供开箱即用的结构化能力。
+
+## 从 Semantic Kernel 或 AutoGen 迁移
+
+如果你有现有的 Semantic Kernel 或 AutoGen 代码，有专门的迁移助手可以分析你的代码并生成逐步迁移计划。[Semantic Kernel 迁移指南](https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-semantic-kernel)和 [AutoGen 迁移指南](https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-autogen)会引导你完成所有步骤。
+
+如果你一直在使用 RC 包，升级到 1.0 只需更改版本号。
+
+## 总结
+
+Agent Framework 1.0 是企业团队一直在等待的生产里程碑。稳定的 API、多提供商支持、真正能在大规模下运行的编排模式，以及从 Semantic Kernel 和 AutoGen 的迁移路径。
+
+该框架已[在 GitHub 上完全开源](https://github.com/microsoft/agent-framework)，你今天就可以通过 `dotnet add package Microsoft.Agents.AI` 开始使用。查看[快速入门指南](https://learn.microsoft.com/en-us/agent-framework/get-started/)和[示例](https://github.com/microsoft/agent-framework)来动手实践。
+
+如果你一直在等待"可以安全用于生产"的信号 — 就是现在。
+
+
+---
+## Aspire 13.2的Dashboard现在有了遥测API — 这改变了一切
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/
+- **Date**: April 02, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: aspire, dotnet, opentelemetry, dashboard, observability, ai
+- **Reading time**: 1 min
+
+> .NET Aspire 13.2带来了更智能的遥测导出、可编程的trace和日志API，以及GenAI可视化改进。了解为什么这对你的调试工作流很重要。
+
+
+
+> *本文为自动翻译。查看原始版本，请[点击这里]({{< ref "aspire-132-dashboard-export-telemetry.md" >}})。*
+
+如果你一直在用 .NET Aspire 构建分布式应用，你已经知道dashboard是整个体验中最棒的部分。所有的trace、日志和指标都在一个地方 — 不需要外部的Jaeger，不需要Seq配置，不需要"让我看看另一个终端"的时刻。
+
+Aspire 13.2 刚刚做了重大改进。James Newton-King [发布了更新公告](https://devblogs.microsoft.com/aspire/aspire-dashboard-improvements-export-and-telemetry/)，说实话，单是遥测导出和API功能就值得升级。
+
+## 像正常人一样导出遥测数据
+
+这是我们都经历过的场景：你在调试一个分布式问题，花了二十分钟终于复现了，现在你需要和团队分享发生了什么。之前？截图。复制粘贴trace ID。一如既往的混乱。
+
+Aspire 13.2 添加了一个**管理日志和遥测**对话框，你可以：
+
+- 清除所有遥测（在复现bug之前很有用）
+- 将选定的遥测数据导出为标准OTLP/JSON格式的ZIP文件
+- 稍后将该ZIP重新导入任何Aspire dashboard
+
+最后一点是杀手级功能。你复现一个bug，导出遥测数据，附加到工作项，你的队友可以导入到自己的dashboard中，看到你所看到的完全一样的内容。不再需要"你能在你的机器上复现吗？"
+
+单个trace、span和日志也在上下文菜单中有了"Export JSON"选项。需要分享一个特定的trace？右键点击，复制JSON，粘贴到PR描述中。搞定。
+
+## 遥测API才是真正的革命性变化
+
+这是最让我兴奋的。Dashboard现在在`/api/telemetry`下暴露了HTTP API，用于编程式查询遥测数据。可用端点：
+
+- `GET /api/telemetry/resources` — 列出有遥测数据的资源
+- `GET /api/telemetry/spans` — 带过滤器查询span
+- `GET /api/telemetry/logs` — 带过滤器查询日志
+- `GET /api/telemetry/traces` — 列出trace
+- `GET /api/telemetry/traces/{traceId}` — 获取特定trace的所有span
+
+一切都以OTLP JSON格式返回。这驱动了新的CLI命令`aspire agent mcp`和`aspire otel`，但真正的意义更大：你现在可以构建工具、脚本和AI代理集成，直接查询你应用的遥测数据。
+
+想象一个AI编码代理在调试时能看到你实际的分布式trace。这不再是假设 — 这就是这个API所实现的。
+
+## GenAI遥测变得实用
+
+如果你正在用Semantic Kernel或Microsoft.Extensions.AI构建AI驱动的应用，你会喜欢改进的GenAI遥测可视化器。Aspire 13.2 新增了：
+
+- AI工具描述以Markdown渲染
+- Trace页面上的专用GenAI按钮，方便快速访问
+- 对截断或非标准GenAI JSON更好的错误处理
+- 工具定义之间的点击高亮导航
+
+文章提到VS Code Copilot chat、Copilot CLI和OpenCode都支持配置`OTEL_EXPORTER_OTLP_ENDPOINT`。将它们指向Aspire dashboard，你可以通过遥测数据实时观看你的AI代理思考过程。这是你在其他任何地方都找不到的调试体验。
+
+## 总结
+
+Aspire 13.2将dashboard从"不错的调试UI"转变为"可编程的可观测性平台"。单是导出/导入工作流就能在分布式调试中节省真实时间，而遥测API为AI辅助诊断打开了大门。
+
+如果你已经在用Aspire，升级吧。如果还没有 — 这是一个了解[aspire.dev](https://aspire.dev)的好理由。
+
+
+---
+## azd现在可以在本地运行和调试AI代理了 — 2026年3月都有哪些变化
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/
+- **Date**: April 02, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, azd, ai, agents, dotnet, developer-tools, containers
+- **Reading time**: 1 min
+
+> Azure Developer CLI在2026年3月发布了七个版本。亮点：AI代理的本地运行和调试循环、GitHub Copilot项目设置集成、Container App Jobs支持。
+
+
+
+> *本文为自动翻译。查看原始版本，请[点击这里]({{< ref "azd-march-2026-local-ai-agent-debugging.md" >}})。*
+
+一个月七个版本。这是Azure Developer CLI (`azd`) 团队在2026年3月发布的成果，而头条功能正是我一直在等的：**AI代理的本地运行和调试循环**。
+
+PC Chan [发布了完整摘要](https://devblogs.microsoft.com/azure-sdk/azure-developer-cli-azd-march-2026/)，虽然内容很多，但让我筛选出对构建AI驱动应用的.NET开发者真正重要的部分。
+
+## 不用部署就能运行和调试AI代理
+
+这是最大的亮点。新的 `azure.ai.agents` 扩展添加了一组命令，为AI代理提供了完整的内循环体验：
+
+- `azd ai agent run` — 在本地启动你的代理
+- `azd ai agent invoke` — 向其发送消息（本地或已部署的）
+- `azd ai agent show` — 显示容器状态和健康状况
+- `azd ai agent monitor` — 实时流式传输容器日志
+
+以前，测试AI代理意味着每次修改都要部署到Microsoft Foundry。现在你可以在本地迭代，测试代理行为，准备好了再部署。
+
+## GitHub Copilot为你配置azd项目
+
+`azd init` 现在提供了"Set up with GitHub Copilot (Preview)"选项。无需手动回答关于项目结构的提示，Copilot代理为你生成配置。当命令失败时，`azd` 提供AI辅助的问题排查——全程不需要离开终端。
+
+## Container App Jobs和部署改进
+
+- **Container App Jobs**：`azd`现在通过现有的`host: containerapp`配置部署`Microsoft.App/jobs`。
+- **可配置的部署超时**：`azd deploy`的新`--timeout`标志和`azure.yaml`中的`deployTimeout`字段。
+- **远程构建回退**：当ACR构建失败时，`azd`自动回退到本地Docker/Podman构建。
+- **本地预检验证**：部署前在本地验证Bicep参数。
+
+## 开发体验改进
+
+- **自动检测pnpm/yarn** — JS/TS项目
+- **pyproject.toml支持** — Python打包
+- **本地模板目录** — `azd init --template`接受文件系统路径
+- **更好的错误消息** — `--no-prompt`模式
+- **构建环境变量** — 注入到所有框架构建子进程（.NET、Node.js、Java、Python）
+
+## 总结
+
+本地AI代理调试循环是这个版本的明星，但部署改进和DX优化的积累使`azd`比以往更加成熟。如果你在Azure上部署.NET应用——特别是AI代理——这次更新值得关注。
+
+查看[完整发行说明](https://devblogs.microsoft.com/azure-sdk/azure-developer-cli-azd-march-2026/)了解所有细节。
+
+
+---
+## Azure DevOps终于修好了所有人都在抱怨的Markdown编辑器
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/
+- **Date**: April 02, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure-devops, devops, productivity, developer-tools
+- **Reading time**: 1 min
+
+> Azure DevOps的工作项Markdown编辑器获得了更清晰的预览与编辑模式区分。一个小改动，却解决了一个真正恼人的工作流问题。
+
+
+
+> *本文为自动翻译。查看原始版本，请[点击这里]({{< ref "azure-devops-markdown-editor-work-items.md" >}})。*
+
+如果你使用Azure Boards，你可能经历过这种情况：你在阅读一个工作项描述，也许在检查验收标准，然后不小心双击了。砰——你进入了编辑模式。你根本不想编辑任何东西。你只是在阅读。
+
+Dan Hellem [宣布了这个修复](https://devblogs.microsoft.com/devops/improving-the-markdown-editor-for-work-items/)，这是那种听起来很小但确实从日常工作流中消除了真正摩擦的改动。
+
+## 什么变了
+
+工作项文本字段的Markdown编辑器现在**默认以预览模式打开**。你可以阅读和交互内容——跟随链接、检查格式——不用担心意外进入编辑模式。
+
+当你真的想要编辑时，点击字段顶部的编辑图标。完成后，显式退出到预览模式。简单、有意图、可预测。
+
+## 为什么这比听起来更重要
+
+[社区反馈帖子](https://developercommunity.visualstudio.com/t/Markdown-editor-for-work-item-multi-line/10935496)很长。双击编辑的行为是在2025年7月随Markdown编辑器引入的，投诉几乎立刻开始了。
+
+对于使用Azure Boards进行冲刺计划、需求梳理或代码审查的团队来说，这种微摩擦会累积。
+
+## 部署状态
+
+已经在向部分客户推出，将在未来两到三周内扩展到所有人。
+
+## 总结
+
+不是每个改进都需要成为头条功能。有时候最好的更新就是简单地移除恼人的东西。这就是其中之一——一个小小的UX修复，让Azure Boards对只想安静阅读工作项的人变得不再那么敌意。
+
+
+---
+## Bookmark Studio为Visual Studio书签带来基于槽位的导航和分享功能
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/
+- **Date**: April 02, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: visual-studio, extensions, productivity, developer-tools
+- **Reading time**: 1 min
+
+> Mads Kristensen的新Bookmark Studio扩展为Visual Studio书签添加了键盘驱动的槽位导航、书签管理器、颜色、标签和导出功能。
+
+
+
+> *本文为自动翻译。查看原始版本，请[点击这里]({{< ref "bookmark-studio-visual-studio-extension.md" >}})。*
+
+Visual Studio中的书签一直...还行。你设置一个，导航到下一个，然后忘记哪个是哪个。它们能用，但从来不是你会称之为强大的功能。
+
+Mads Kristensen刚刚[发布了Bookmark Studio](https://devblogs.microsoft.com/visualstudio/bookmark-studio-evolving-bookmarks-in-visual-studio/)，一个实验性扩展，精确填补了你可能遇到的空缺。
+
+## 基于槽位的导航
+
+书签可以分配到1-9号槽位，通过`Alt+Shift+1`到`Alt+Shift+9`直接跳转。新书签自动获得下一个可用槽位。
+
+## 书签管理器
+
+新的工具窗口在一个地方显示所有书签，支持按名称、文件、位置、颜色或槽位过滤。
+
+## 用标签、颜色和文件夹组织
+
+书签可以有标签、颜色，并分组到文件夹中。元数据按解决方案存储。
+
+## 导出和分享
+
+Bookmark Studio允许将书签导出为纯文本、Markdown或CSV。
+
+## 跟随代码移动的书签
+
+Bookmark Studio相对于锚定的文本跟踪书签，所以编辑时不会漂移到错误的行。
+
+## 总结
+
+Bookmark Studio没有重新发明任何东西。它把一个多年来"够用"的功能变得真正有用。从[Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BookmarkStudio)下载吧。
+
+
+---
+## Visual Studio 3月更新允许构建自定义Copilot代理 — find_symbol是一大亮点
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/
+- **Date**: April 02, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: visual-studio, github-copilot, dotnet, ai, developer-tools, profiling
+- **Reading time**: 1 min
+
+> Visual Studio 2026年3月更新带来了自定义Copilot代理、可复用的代理技能、语言感知的find_symbol工具、以及从Test Explorer进行的Copilot性能分析。
+
+
+
+> *本文为自动翻译。查看原始版本，请[点击这里]({{< ref "visual-studio-march-2026-custom-copilot-agents.md" >}})。*
+
+Visual Studio刚刚获得了最重要的Copilot更新。Mark Downie [发布了3月版本](https://devblogs.microsoft.com/visualstudio/visual-studio-march-update-build-your-own-custom-agents/)，标题是自定义代理——但说实话，`find_symbol`工具可能才是最能改变你工作流的功能。
+
+## 仓库中的自定义Copilot代理
+
+想让Copilot遵循你团队的编码标准？自定义代理定义为`.github/agents/`中的`.agent.md`文件。每个代理都有完整的工作区感知、代码理解、工具、首选模型和MCP连接访问权限。
+
+## 代理技能：可复用的指令包
+
+技能从仓库的`.github/skills/`或个人资料的`~/.copilot/skills/`自动加载。
+
+## find_symbol：语言感知导航
+
+新的`find_symbol`工具为Copilot的代理模式提供了基于语言服务的符号导航。代理不再搜索文本，而是可以找到符号的所有引用并访问类型信息和作用域。
+
+对于.NET开发者来说这是巨大改进——拥有深层类型层次结构的C#代码库受益匪浅。
+
+## 用Copilot分析测试性能
+
+Test Explorer上下文菜单中新增了**Profile with Copilot**。Profiling Agent自动运行测试并分析性能。
+
+## 实时调试中的Perf Tips
+
+性能优化现在在调试过程中进行。Visual Studio内联显示执行时间。看到慢的行？点击Perf Tip向Copilot请求优化建议。
+
+## 从Solution Explorer修复NuGet漏洞
+
+当检测到NuGet包漏洞时，Solution Explorer中直接显示**Fix with GitHub Copilot**链接。
+
+## 总结
+
+自定义代理和技能是标题，但`find_symbol`是隐藏的亮点——它从根本上改变了Copilot重构.NET代码时的准确性。下载[Visual Studio 2026 Insiders](https://visualstudio.microsoft.com/downloads/)来体验所有新功能。
+
+
+---
+## KubeCon Europe 2026：.NET 开发者真正需要关注的内容
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/kubecon-2026-aks-updates-dotnet-developers/
+- **Date**: March 29, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: kubernetes, aks, azure, dotnet, cloud-native, ai
+- **Reading time**: 2 min
+
+> 微软在 KubeCon Europe 2026 上发布了大量 Kubernetes 公告。这是过滤后的版本——只有当你在交付 .NET 应用时真正重要的 AKS 和云原生更新。
+
+
+
+*本文为自动翻译。查看原文请[点击这里]({{< ref "kubecon-2026-aks-updates-dotnet-developers" >}})。*
+
+你知道那种感觉吗？一个巨大的公告文章出来了，你一边滚动一边想"不错，但这对我到底有什么改变"？这就是我每个 KubeCon 季的状态。
+
+微软刚刚发布了他们的 [KubeCon Europe 2026 完整总结](https://opensource.microsoft.com/blog/2026/03/24/whats-new-with-microsoft-in-open-source-and-kubernetes-at-kubecon-cloudnativecon-europe-2026/)——出自 Brendan Burns 本人之手——说实话？这次有真正的干货。不只是功能清单，而是真正改变你在生产环境中运维方式的运营改进。
+
+让我来梳理一下对我们 .NET 开发者真正重要的内容。
+
+## 不用付服务网格税的 mTLS
+
+服务网格的问题在于：每个人都想要安全保障，没人想要运营负担。AKS 终于在弥补这个差距了。
+
+[Azure Kubernetes Application Network](https://aka.ms/aks/application-network) 给你提供了双向 TLS、应用感知授权和流量遥测——不需要部署一个带 sidecar 的重型 mesh。结合 [Advanced Container Networking Services 中的 Cilium mTLS](https://aka.ms/acns/cilium-mtls)，你可以获得使用 X.509 证书和 SPIRE 身份管理的加密 pod 间通信。
+
+这在实践中意味着什么：你的 ASP.NET Core API 与后台 worker 通信，你的 gRPC 服务互相调用——全部在网络层加密和身份验证，零应用代码更改。这意义重大。
+
+对于从 `ingress-nginx` 迁移的团队，还有 [Meshless Istio 的 Application Routing](https://aka.ms/aks/app-routing/gateway-api) 全面支持 Kubernetes Gateway API。无 sidecar。基于标准。并且发布了 `ingress2gateway` 工具用于增量迁移。
+
+## 不再是事后想到的 GPU 可观测性
+
+如果你在 .NET 服务旁运行 AI 推理（说实话，谁现在还没开始？），你可能遇到过 GPU 监控盲区。CPU/内存仪表板很棒，然后 GPU 部分…没有手动配置导出器就什么都没有。
+
+[AKS 现在原生暴露 GPU 指标](https://aka.ms/aks/managed-gpu-metrics) 到托管的 Prometheus 和 Grafana。同样的技术栈，同样的仪表板，同样的告警管道。无需自定义导出器，无需第三方代理。
+
+在网络方面，增加了 HTTP、gRPC 和 Kafka 流量的逐流可见性，配合[一键 Azure Monitor 体验](https://learn.microsoft.com/en-us/azure/aks/container-network-observability-logs)。IP、端口、工作负载、流方向、策略决策——全部在内置仪表板中。
+
+让我看了两遍的是：[agentic container networking](https://learn.microsoft.com/en-us/azure/aks/advanced-container-networking-services-overview) 添加了一个 Web UI，你可以用自然语言询问集群的网络状态。"为什么 pod X 无法到达服务 Y？"→ 从实时遥测获取只读诊断。凌晨两点真的很有用。
+
+## 不需要博士学位的跨集群网络
+
+多集群 Kubernetes 历来是"自带网络胶水"的体验。Azure Kubernetes Fleet Manager 现在通过托管 Cilium 集群网格提供[跨集群网络](https://aka.ms/kubernetes-fleet/networking/cross-cluster)：
+
+- AKS 集群间的统一连接
+- 用于跨集群发现的全局服务注册表
+- 集中管理配置，而不是每个集群重复
+
+如果你为了弹性或合规在多个区域运行 .NET 微服务，这替代了很多脆弱的自定义胶水。West Europe 的服务 A 可以通过网格发现和调用 East US 的服务 B，使用一致的路由和安全策略。
+
+## 不需要勇气的升级
+
+说实话——生产环境中的 Kubernetes 升级是有压力的。"升级然后祈祷"一直是太多团队的实际策略，也是集群版本落后的主要原因。
+
+两个新功能改变了这一点：
+
+**Blue-green 代理池升级** 用新配置创建一个并行节点池。验证行为，逐步转移流量，保持干净的回滚路径。不再在生产节点上进行就地变更。
+
+**代理池回滚** 允许你在升级出问题后将节点池恢复到之前的 Kubernetes 版本和节点镜像——无需重建集群。
+
+两者结合，终于给运维人员提供了对升级生命周期的真正控制。对于 .NET 团队来说很重要，因为平台速度直接控制你能多快采用新的运行时、安全补丁和网络能力。
+
+## AI 工作负载成为 Kubernetes 一等公民
+
+上游开源工作同样重要。Dynamic Resource Allocation (DRA) 刚在 Kubernetes 1.36 中 GA，使 GPU 调度成为真正的一等功能而不是变通方案。
+
+值得关注的项目：
+
+| 项目 | 作用 |
+|------|------|
+| [AI Runway](https://github.com/kaito-project/kubeairunway) | 推理的通用 Kubernetes API——不懂 K8s 也能部署模型，带 HuggingFace 发现和成本估算 |
+| [HolmesGPT](https://www.cncf.io/blog/2026/01/07/holmesgpt-agentic-troubleshooting-built-for-the-cloud-native-era/) | 云原生的智能体故障排除——现在是 CNCF Sandbox 项目 |
+| [Dalec](https://github.com/project-dalec/dalec) | 带 SBOM 生成的声明式容器镜像构建——构建阶段减少 CVE |
+
+方向很明确：你的 .NET API、Semantic Kernel 编排层和推理工作负载应该都运行在一个一致的平台模型上。我们正在接近。
+
+## 这周我会从哪里开始
+
+如果你在为团队评估这些变化，这是我真诚的优先级列表：
+
+1. **先搞可观测性**——在非生产集群中启用 GPU 指标和网络流日志。看看你一直错过了什么。
+2. **测试 blue-green 升级**——在下次生产集群升级前测试回滚工作流。建立对流程的信心。
+3. **试点身份感知网络**——选择一个内部服务路径并用 Cilium 启用 mTLS。测量开销（剧透：很小）。
+4. **评估 Fleet Manager**——如果你运行超过两个集群，跨集群网络光减少自定义胶水就能回本。
+
+小实验，快反馈。这永远是正确的做法。
+
+## 总结
+
+KubeCon 公告可能让人应接不暇，但这批更新确实为 AKS 上的 .NET 团队带来了实质性改变。更好的网络安全（无 mesh 开销）、真正的 GPU 可观测性、更安全的升级以及更强大的 AI 基础设施支撑。
+
+如果你已经在用 AKS，现在是加强运营基准的好时机。如果你计划将 .NET 工作负载迁移到 Kubernetes——平台刚刚变得更加适合生产环境了。
+
+
+---
+## SQL MCP Server、SSMS 中的 Copilot 以及带 AI 代理的 Database Hub：SQLCon 2026 真正重要的内容
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agentic-ai-microsoft-databases-what-matters/
+- **Date**: March 28, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, ai, sql, databases, mcp
+- **Reading time**: 1 min
+
+> Microsoft 在 SQLCon 2026 上发布了一系列数据库公告。如果你在 Azure SQL 上构建 AI 应用，这些才是真正重要的内容。
+
+
+
+Microsoft 刚刚在[亚特兰大与 FabCon 同期举办了 SQLCon 2026](https://www.microsoft.com/en-us/sql-server/blog/2026/03/18/advancing-agentic-ai-with-microsoft-databases-across-a-unified-data-estate/)，内容非常多。原始公告涵盖了从节省计划到企业合规功能的方方面面。我打算跳过企业定价的幻灯片，专注于对使用 Azure SQL 和 AI 进行开发的人来说真正重要的部分。
+
+## SQL MCP Server   
+
+这是我眼中的头条新闻。Azure SQL Database Hyperscale 现在有了一个 **SQL MCP Server** 公共预览版，让你可以使用 [Model Context Protocol](https://modelcontextprotocol.io/) 将 SQL 数据安全地连接到 AI 代理和 Copilot。
+
+如果你一直在关注 MCP 的浪潮——说实话，现在想不注意到都难——这是一个大事件。你不再需要构建自定义数据管道来为 AI 代理提供来自数据库的上下文，而是获得了一个标准化协议来直接公开 SQL 数据。你的代理可以查询、推理并基于实时数据库信息采取行动。
+
+对于我们这些用 Semantic Kernel 或 Microsoft Agent Framework 构建 AI 代理的人来说，这打开了一条干净的集成路径。你的代理需要检查库存？查找客户记录？验证订单？MCP 提供了一种结构化的方式来做这些事情，而不需要你为每个场景编写定制的数据获取代码。
+
+## SSMS 22 中的 GitHub Copilot 现已正式发布
+
+如果你在 SQL Server Management Studio 中花过任何时间——说实话，我们大多数人还在用——GitHub Copilot 现在已在 SSMS 22 中正式发布。和你在 VS Code 和 Visual Studio 中使用的 Copilot 体验一样，但用于 T-SQL。
+
+实际价值很直接：基于聊天的辅助来编写查询、重构存储过程、排查性能问题和处理管理任务。概念上没什么革命性的，但直接在 SSMS 中使用意味着你不需要为了获得数据库工作的 AI 帮助而切换到另一个编辑器。
+
+## 向量索引获得了重大升级
+
+Azure SQL Database 现在拥有更快、更强大的向量索引，完全支持插入、更新和删除操作。这意味着你的向量数据可以实时保持最新——不需要批量重建索引。
+
+新功能如下：
+- **量化** 在不损失太多精度的情况下缩小索引大小
+- **迭代过滤** 获得更精确的结果
+- **与查询优化器更紧密的集成** 实现可预测的性能
+
+如果你正在使用 Azure SQL 作为向量存储进行 Retrieval-Augmented Generation (RAG)，这些改进直接有用。你可以将向量和关系数据放在同一个数据库中，相比运行单独的向量数据库，这大大简化了你的架构。
+
+同样的向量增强功能在 Fabric 中的 SQL Database 也可用，因为两者底层运行的是同一个 SQL 引擎。
+
+## Fabric 中的 Database Hub：代理式管理
+
+这个更偏向未来，但很有意思。Microsoft 宣布了 **Microsoft Fabric 中的 Database Hub**（抢先体验），为你提供跨 Azure SQL、Cosmos DB、PostgreSQL、MySQL 和 SQL Server via Arc 的统一视图。
+
+有意思的不仅仅是统一视图——而是代理式的管理方法。AI 代理持续监控你的数据库群，展示发生了什么变化，解释为什么重要，并建议下一步该做什么。这是一个人机协作（human-in-the-loop）模型，代理做前期工作，你来做决策。
+
+对于管理多个数据库的团队来说，这可能真正减少运维噪音。代理把信号带给你，而不是让你在各个门户之间跳来跳去手动检查指标。
+
+## 这对 .NET 开发者意味着什么
+
+贯穿所有这些公告的主线很清晰：Microsoft 正在将 AI 代理嵌入数据库技术栈的每一层。不是作为噱头，而是作为实用的工具层。
+
+如果你正在构建基于 Azure SQL 的 .NET 应用，以下是我实际会做的事情：
+
+1. **试试 SQL MCP Server**，如果你在构建 AI 代理的话。这是给代理提供数据库访问最干净的方式，不需要自定义的管道代码。
+2. **在 SSMS 中启用 Copilot**，如果还没有的话——对日常 SQL 工作来说是免费的生产力提升。
+3. **了解一下向量索引**，如果你在做 RAG 且目前运行着单独的向量存储。整合到 Azure SQL 意味着少管理一个服务。
+
+## 总结
+
+完整公告还有更多内容——节省计划、迁移助手、合规功能——但对开发者来说，重点在 MCP Server、向量改进和代理式管理层。这些才是改变你构建方式的东西，而不仅仅是改变你做预算的方式。
+
+查看 [Shireesh Thota 的完整公告](https://www.microsoft.com/en-us/sql-server/blog/2026/03/18/advancing-agentic-ai-with-microsoft-databases-across-a-unified-data-estate/) 获取全貌，如果你想试试新的管理体验，可以[注册 Database Hub 抢先体验](https://aka.ms/database-hub)。
+
+
+---
+## Azure DevOps MCP Server 登陆 Microsoft Foundry：这对你的 AI 代理意味着什么
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/
+- **Date**: March 26, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, devops, ai, mcp, foundry
+- **Reading time**: 1 min
+
+> Azure DevOps MCP Server 现已在 Microsoft Foundry 中可用。只需几次点击，即可将你的 AI 代理直接连接到 DevOps 工作流 — 工作项、仓库、管道。
+
+
+
+MCP（Model Context Protocol）正在迎来它的高光时刻。如果你一直在关注 AI 代理生态系统，你可能已经注意到 MCP 服务器到处涌现 — 通过标准化协议赋予代理与外部工具和服务交互的能力。
+
+现在 [Azure DevOps MCP Server 已在 Microsoft Foundry 中可用](https://devblogs.microsoft.com/devops/remote-mcp-server-preview-in-microsoft-foundry/)，这是那种让你思考实际可能性的集成之一。
+
+## 这里到底发生了什么
+
+Microsoft 已经发布了 Azure DevOps MCP Server 的[公开预览版](https://devblogs.microsoft.com/devops/azure-devops-remote-mcp-server-public-preview) — 那是 MCP 服务器本身。新的是 Foundry 集成。你现在可以直接从工具目录将 Azure DevOps MCP Server 添加到 Foundry 代理中。
+
+对于还不熟悉 Foundry 的人：它是 Microsoft 用于大规模构建和管理 AI 驱动应用程序和代理的统一平台。模型访问、编排、评估、部署 — 全部在一个地方。
+
+## 配置
+
+配置出奇地简单：
+
+1. 在你的 Foundry 代理中，进入 **Add Tools** > **Catalog**
+2. 搜索 "Azure DevOps"
+3. 选择 Azure DevOps MCP Server（preview）并点击 **Create**
+4. 输入你的组织名称并连接
+
+就这样。你的代理现在可以访问 Azure DevOps 工具了。
+
+## 控制代理可以访问什么
+
+这是我欣赏的部分：你不会被困在全有或全无的方式中。你可以指定哪些工具对代理可用。如果你只想让它读取工作项但不碰管道，可以这样配置。最小权限原则，应用到你的 AI 代理上。
+
+这在企业场景中很重要，你不希望一个代理因为有人让它"帮忙发布"就意外触发部署管道。
+
+## 为什么这对 .NET 团队很有趣
+
+想想这在实践中能实现什么：
+
+- **冲刺规划助手** — 可以拉取工作项、分析速度数据并建议冲刺容量的代理
+- **代码审查机器人** — 因为能实际读取你的仓库和关联的工作项，所以理解你的 PR 上下文的代理
+- **事件响应** — 可以创建工作项、查询最近的部署并将 bug 与最近的更改关联的代理
+- **开发者入职** — "我应该做什么？"得到基于实际项目数据的真实回答
+
+对于已经在 CI/CD 管道和项目管理中使用 Azure DevOps 的 .NET 团队来说，拥有一个能直接与这些系统交互的 AI 代理是迈向有用自动化的重要一步。
+
+## 更大的 MCP 图景
+
+这是更广泛趋势的一部分：MCP 服务器正在成为 AI 代理与外部世界交互的标准方式。我们在 GitHub、Azure DevOps、数据库、SaaS API 中都能看到它们 — 而 Foundry 正在成为所有这些连接汇聚的中心。
+
+如果你在 .NET 生态系统中构建代理，MCP 值得关注。协议是标准化的，工具正在成熟，Foundry 集成使其无需手动配置服务器连接即可访问。
+
+## 总结
+
+Foundry 中的 Azure DevOps MCP Server 目前处于预览阶段，所以预计它会继续发展。但核心工作流是可靠的：连接、配置工具访问，让你的代理使用你的 DevOps 数据工作。如果你已经在 Foundry 生态系统中，只需几次点击就能开始。试试看你能构建什么工作流。
+
+查看[完整公告](https://devblogs.microsoft.com/devops/remote-mcp-server-preview-in-microsoft-foundry/)获取完整的配置步骤和更多详情。
+
+
+---
+## Foundry Agent Service 正式发布：对 .NET 代理开发者真正重要的是什么
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/foundry-agent-service-ga-what-matters/
+- **Date**: March 26, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, ai, foundry, agents, dotnet
+- **Reading time**: 2 min
+
+> 微软的 Foundry Agent Service 刚刚正式发布，带来了私有网络、Voice Live、生产评估和开放的多模型运行时。这是你需要知道的。
+
+
+
+说实话 — 构建一个 AI 代理原型是简单的部分。困难的是之后的一切：用适当的网络隔离投入生产、运行真正有意义的评估、处理合规要求，以及不在凌晨 2 点搞崩东西。
+
+[Foundry Agent Service 刚刚正式发布](https://devblogs.microsoft.com/foundry/foundry-agent-service-ga/)，这个版本像激光一样聚焦在"之后一切"的鸿沟上。
+
+## 构建在 Responses API 之上
+
+标题新闻：新一代 Foundry Agent Service 构建在 OpenAI Responses API 之上。如果你已经在用这个 wire protocol 构建，迁移到 Foundry 只需最少的代码改动。你获得的：企业安全、私有网络、Entra RBAC、完整追踪和评估 — 在你现有的代理逻辑之上。
+
+架构是有意开放的。你不被锁定在一个模型提供商或一个编排框架上。用 DeepSeek 做规划、OpenAI 做生成、LangGraph 做编排 — 运行时处理一致性层。
+
+```python
+from azure.ai.projects import AIProjectClient
+from azure.ai.projects.models import PromptAgentDefinition
+
+with (
+    DefaultAzureCredential() as credential,
+    AIProjectClient(endpoint=os.environ["AZURE_AI_PROJECT_ENDPOINT"],
+                    credential=credential) as project_client,
+    project_client.get_openai_client() as openai_client,
+):
+    agent = project_client.agents.create_version(
+        agent_name="my-enterprise-agent",
+        definition=PromptAgentDefinition(
+            model=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
+            instructions="You are a helpful assistant.",
+        ),
+    )
+
+    conversation = openai_client.conversations.create()
+    response = openai_client.responses.create(
+        conversation=conversation.id,
+        input="What are best practices for building AI agents?",
+        extra_body={
+            "agent_reference": {"name": agent.name, "type": "agent_reference"}
+        },
+    )
+    print(response.output_text)
+```
+
+> 如果你从 `azure-ai-agents` 包迁移过来，代理现在是 `azure-ai-projects` 中 `AIProjectClient` 的一等操作。移除独立依赖，使用 `get_openai_client()` 来驱动响应。
+
+## 私有网络：企业阻碍已移除
+
+这是解锁企业采用的功能。Foundry 现在支持完整的端到端私有网络配合 BYO VNet：
+
+- **无公共出口** — 代理流量永远不会触及公共互联网
+- **容器/子网注入**到你的网络以实现本地通信
+- **工具连接也包含在内** — MCP 服务器、Azure AI Search、Fabric 数据代理都通过私有路径运作
+
+最后一点至关重要。不只是推理调用保持私有 — 每个工具调用和检索调用也都留在你的网络边界内。对于在数据分类策略下禁止外部路由的团队来说，这就是缺失的那块。
+
+## MCP 认证做对了
+
+MCP 服务器连接现在支持完整的认证模式谱系：
+
+| 认证方式 | 何时使用 |
+|----------|----------|
+| 基于密钥 | 组织范围内部工具的简单共享访问 |
+| Entra Agent Identity | 服务间；代理以自身身份认证 |
+| Entra Managed Identity | 按项目隔离；无凭证管理 |
+| OAuth Identity Passthrough | 用户委托访问；代理代表用户行事 |
+
+OAuth Identity Passthrough 是有趣的那个。当用户需要授予代理访问他们的个人数据 — 他们的 OneDrive、Salesforce 组织、按用户范围的 SaaS API — 代理使用标准 OAuth 流程代表他们行事。没有假装是所有人的共享系统身份。
+
+## Voice Live：无需管道工程的语音对语音
+
+给代理添加语音曾经意味着拼凑 STT、LLM 和 TTS — 三个服务、三次延迟跳转、三个计费面，全部手动同步。**Voice Live** 将这一切压缩为单个托管 API：
+
+- 语义语音活动和轮次结束检测（理解含义，不仅仅是沉默）
+- 服务端噪声抑制和回声消除
+- 插话支持（用户可以在响应中途打断）
+
+语音交互通过与文本相同的代理运行时。相同的评估器、相同的追踪、相同的成本可见性。对于客户支持、现场服务或无障碍场景，这取代了以前需要自定义音频管道的方案。
+
+## 评估：从勾选框到持续监控
+
+这是 Foundry 认真对待生产质量的地方。评估系统现在有三层：
+
+1. **开箱即用评估器** — 连贯性、相关性、扎实度、检索质量、安全性。连接到数据集或实时流量获取分数。
+
+2. **自定义评估器** — 编码你自己的业务逻辑、语调标准和领域特定合规规则。
+
+3. **持续评估** — Foundry 采样实时生产流量，运行你的评估器套件，并在仪表板中显示结果。设置 Azure Monitor 告警以监控扎实度下降或安全阈值突破。
+
+一切发布到 Azure Monitor Application Insights。代理质量、基础设施健康、成本和应用遥测 — 全在一处。
+
+```python
+eval_object = openai_client.evals.create(
+    name="Agent Quality Evaluation",
+    data_source_config=DataSourceConfigCustom(
+        type="custom",
+        item_schema={
+            "type": "object",
+            "properties": {"query": {"type": "string"}},
+            "required": ["query"],
+        },
+        include_sample_schema=True,
+    ),
+    testing_criteria=[
+        {
+            "type": "azure_ai_evaluator",
+            "name": "fluency",
+            "evaluator_name": "builtin.fluency",
+            "initialization_parameters": {
+                "deployment_name": os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"]
+            },
+            "data_mapping": {
+                "query": "{{item.query}}",
+                "response": "{{sample.output_text}}",
+            },
+        },
+    ],
+)
+```
+
+## 六个新区域支持托管代理
+
+托管代理现在在 East US、North Central US、Sweden Central、Southeast Asia、Japan East 等区域可用。这对数据驻留要求很重要，也有助于在代理靠近数据源运行时压缩延迟。
+
+## 为什么这对 .NET 开发者重要
+
+虽然 GA 公告中的代码示例是 Python 优先的，但底层基础设施是语言无关的 — `azure-ai-projects` 的 .NET SDK 遵循相同的模式。Responses API、评估框架、私有网络、MCP 认证 — 这些都可以从 .NET 使用。
+
+如果你一直在等 AI 代理从"酷炫演示"变成"我真的可以在工作中交付"，这个 GA 版本就是信号。私有网络、适当的认证、持续评估和生产监控是缺失的那些拼图。
+
+## 总结
+
+Foundry Agent Service 现在可用。安装 SDK，打开[门户](https://ai.azure.com)，开始构建。[快速入门指南](https://learn.microsoft.com/azure/foundry/quickstarts/get-started-code)带你在几分钟内从零到运行中的代理。
+
+包含所有代码示例的完整技术深度分析，请查看 [GA 公告](https://devblogs.microsoft.com/foundry/foundry-agent-service-ga/)。
+
+
+---
+## Microsoft Agent Framework 中的后台响应：告别超时焦虑
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/background-responses-agent-framework-long-running-tasks/
+- **Date**: March 26, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet, ai, agent-framework, azure
+- **Reading time**: 1 min
+
+> Microsoft Agent Framework 现在允许通过延续令牌卸载长时间运行的 AI 任务。了解后台响应如何工作以及为什么它们对你的 .NET 代理很重要。
+
+
+
+如果你用 o3 或 GPT-5.2 等推理模型构建过任何东西，你就知道那种痛苦。你的代理开始思考一个复杂的任务，客户端在那里等待，在"没问题"和"它是不是崩了？"之间的某个时刻，你的连接超时了。那些工作？全没了。
+
+Microsoft Agent Framework 刚刚推出了[后台响应](https://devblogs.microsoft.com/agent-framework/handling-long-running-operations-with-background-responses/) — 说实话，这是那种从第一天就应该存在的功能。
+
+## 阻塞调用的问题
+
+在传统的请求-响应模式中，你的客户端会阻塞直到代理完成。对于快速任务来说没问题。但当你让推理模型做深度研究、多步分析或生成 20 页报告时？你面对的是几分钟的实际等待时间。在这个窗口期：
+
+- HTTP 连接可能超时
+- 网络抖动会杀死整个操作
+- 你的用户盯着一个加载动画想知道是否有事情在发生
+
+后台响应彻底翻转了这个局面。
+
+## 延续令牌如何工作
+
+你不再阻塞等待，而是启动代理任务并获得一个**延续令牌**。把它想象成修理店的取件单 — 你不需要站在柜台前等着，准备好了再回来取就行。
+
+流程很简单：
+
+1. 使用 `AllowBackgroundResponses = true` 发送请求
+2. 如果代理支持后台处理，你会收到一个延续令牌
+3. 按你的节奏轮询，直到令牌返回 `null` — 这意味着结果准备好了
+
+这是 .NET 版本：
+
+```csharp
+AIAgent agent = new AzureOpenAIClient(
+    new Uri("https://<myresource>.openai.azure.com"),
+    new DefaultAzureCredential())
+    .GetResponsesClient("<deployment-name>")
+    .AsAIAgent();
+
+AgentRunOptions options = new()
+{
+    AllowBackgroundResponses = true
+};
+
+AgentSession session = await agent.CreateSessionAsync();
+
+AgentResponse response = await agent.RunAsync(
+    "Write a detailed market analysis for the Q4 product launch.", session, options);
+
+// 轮询直到完成
+while (response.ContinuationToken is not null)
+{
+    await Task.Delay(TimeSpan.FromSeconds(2));
+    options.ContinuationToken = response.ContinuationToken;
+    response = await agent.RunAsync(session, options);
+}
+
+Console.WriteLine(response.Text);
+```
+
+如果代理立即完成（简单任务、不需要后台处理的模型），不会返回延续令牌。你的代码正常工作 — 无需特殊处理。
+
+## 带恢复的流式传输：真正的魔法
+
+轮询对于即发即忘的场景没问题，但当你想要实时进度呢？后台响应也支持带内置恢复功能的流式传输。
+
+每个流式更新都携带自己的延续令牌。如果你的连接在流传输中断了，你可以从中断的确切位置恢复：
+
+```csharp
+AgentRunOptions options = new()
+{
+    AllowBackgroundResponses = true
+};
+
+AgentSession session = await agent.CreateSessionAsync();
+AgentResponseUpdate? latestUpdate = null;
+
+await foreach (var update in agent.RunStreamingAsync(
+    "Write a detailed market analysis for the Q4 product launch.", session, options))
+{
+    Console.Write(update.Text);
+    latestUpdate = update;
+    break; // 模拟网络中断
+}
+
+// 从中断的确切位置恢复
+options.ContinuationToken = latestUpdate?.ContinuationToken;
+await foreach (var update in agent.RunStreamingAsync(session, options))
+{
+    Console.Write(update.Text);
+}
+```
+
+无论客户端发生什么，代理都会继续在服务器端处理。这是内置的容错能力，无需你编写重试逻辑或断路器。
+
+## 什么时候该真正使用这个
+
+不是每个代理调用都需要后台响应。对于快速完成，你只是在无故增加复杂性。但以下场景是它们大放异彩的地方：
+
+- **复杂推理任务** — 多步分析、深度研究、任何让推理模型真正思考的内容
+- **长内容生成** — 详细报告、多部分文档、广泛分析
+- **不可靠的网络** — 移动客户端、边缘部署、不稳定的企业 VPN
+- **异步 UX 模式** — 提交任务，去做别的事，回来取结果
+
+对于构建企业应用的 .NET 开发者来说，最后一点特别有趣。想想一个 Blazor 应用，用户请求一个复杂的报告 — 你启动代理任务，显示进度指示器，让他们继续工作。不需要 WebSocket 体操，不需要自定义队列基础设施，只需一个令牌和一个轮询循环。
+
+## 总结
+
+后台响应现在通过 Microsoft Agent Framework 在 .NET 和 Python 中都可用。如果你构建的代理做的事情比简单的问答更复杂，这值得加入你的工具包。延续令牌模式保持简单的同时解决了一个非常真实的生产问题。
+
+查看[完整文档](https://devblogs.microsoft.com/agent-framework/handling-long-running-operations-with-background-responses/)获取完整的 API 参考和更多示例。
+
+
+---
+## VS Code 1.112：.NET 开发者真正应该关注的内容
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/vscode-1-112-dotnet-developers/
+- **Date**: March 26, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet, visual-studio, tooling, productivity, ai
+- **Reading time**: 2 min
+
+> VS Code 1.112 刚刚发布，满载代理升级、集成浏览器调试器、MCP 沙箱和 monorepo 支持。如果你用 .NET 开发，这些是真正重要的内容。
+
+
+
+VS Code 1.112 刚落地，说实话？如果你每天都在 .NET 的世界里，这个版本感觉不一样。[官方发布说明](https://code.visualstudio.com/updates/v1_112) 里有很多内容，但让我帮你省点滚动，专注于对我们真正重要的东西。
+
+## Copilot CLI 变得更有用了
+
+这个版本的大主题是**代理自主性** — 给 Copilot 更多空间做它的事，不需要你看管每一步。
+
+### 消息引导和排队
+
+你知道 Copilot CLI 在任务进行到一半时，你突然想起忘了提什么东西的那个时刻吗？以前你只能等。现在你可以在请求还在运行时发送消息 — 要么引导当前响应，要么排队后续指令。
+
+这对那些较长的 `dotnet` 脚手架任务来说太棒了，你看着 Copilot 设置项目然后想"哦等等，我还需要 MassTransit"。
+
+### 权限级别
+
+这是我最兴奋的。Copilot CLI 会话现在支持三个权限级别：
+
+- **默认权限** — 工具在运行前请求确认的常规流程
+- **跳过审批** — 自动批准一切并在出错时重试
+- **自动驾驶** — 完全自主：批准工具、回答自己的问题、持续到任务完成
+
+如果你在做类似用 Entity Framework、migrations 和 Docker 设置创建新的 ASP.NET Core API 这样的事 — 自动驾驶模式意味着你描述想要什么然后去拿杯咖啡。它会搞定的。
+
+你可以用 `chat.autopilot.enabled` 设置启用自动驾驶。
+
+### 委托前预览更改
+
+当你把任务委托给 Copilot CLI 时，它会创建一个 worktree。以前如果你有未提交的更改，你得检查源代码管理来看什么会受影响。现在聊天视图会在你决定复制、移动或忽略之前直接显示待处理的更改。
+
+小事情，但省去了"等等，我 staging 了什么？"的时刻。
+
+## 不离开 VS Code 就能调试 Web 应用
+
+集成浏览器现在支持**完整调试**。你可以设断点、单步执行代码、检查变量 — 全在 VS Code 内。不用再切换到 Edge DevTools 了。
+
+有一个新的 `editor-browser` 调试类型，如果你已经有 `msedge` 或 `chrome` 的启动配置，迁移只需改 `launch.json` 里的 `type` 字段：
+
+```json
+{
+  "type": "editor-browser",
+  "request": "launch",
+  "name": "Debug Blazor App",
+  "url": "https://localhost:5001"
+}
+```
+
+对 Blazor 开发者来说，这是颠覆性的。你已经在终端运行 `dotnet watch` — 现在调试也留在同一个窗口里。
+
+浏览器还获得了独立的缩放级别（终于）、正确的右键上下文菜单，缩放按网站记忆。
+
+## MCP 服务器沙箱
+
+这比你想的更重要。如果你在用 MCP 服务器 — 也许你为 Azure 资源或数据库查询设置了自定义的 — 它们一直以和你的 VS Code 进程相同的权限运行。这意味着对你的文件系统、网络等一切的完全访问。
+
+现在你可以对它们做沙箱处理。在你的 `mcp.json` 中：
+
+```json
+{
+  "servers": {
+    "my-azure-tools": {
+      "command": "node",
+      "args": ["./mcp-server.js"],
+      "sandboxEnabled": true
+    }
+  }
+}
+```
+
+当沙箱化的服务器需要访问它没有的东西时，VS Code 会提示你授予权限。比"希望没人做奇怪的事"的方式好太多了。
+
+> **注意：** 沙箱目前在 macOS 和 Linux 上可用。Windows 支持即将到来 — 不过 WSL 等远程场景是可以工作的。
+
+## Monorepo 自定义发现
+
+如果你在 monorepo 中工作（说实话，很多企业 .NET 解决方案最终都变成了 monorepo），这解决了一个真正的痛点。
+
+以前，如果你打开仓库的子文件夹，VS Code 找不到仓库根目录的 `copilot-instructions.md`、`AGENTS.md` 或自定义技能。现在通过 `chat.useCustomizationsInParentRepositories` 设置，它会向上查找到 `.git` 根目录并发现所有内容。
+
+这意味着你的团队可以在 monorepo 中跨所有项目共享代理指令、提示文件和自定义工具，不需要每个人都打开根文件夹。
+
+## /troubleshoot 用于代理调试
+
+有没有设置过自定义指令或技能，然后纳闷为什么没被检测到？新的 `/troubleshoot` 技能读取代理调试日志并告诉你发生了什么 — 哪些工具被使用或跳过了，为什么指令没加载，什么导致了慢响应。
+
+用以下配置启用：
+
+```json
+{
+  "github.copilot.chat.agentDebugLog.enabled": true,
+  "github.copilot.chat.agentDebugLog.fileLogging.enabled": true
+}
+```
+
+然后在聊天中输入 `/troubleshoot why is my custom skill not loading?`。
+
+你现在还可以导出和导入这些调试日志，当某些东西不按预期工作时，和团队分享很方便。
+
+## 图像和二进制文件支持
+
+代理现在可以从磁盘原生读取图像文件和二进制文件。二进制文件以 hexdump 格式呈现，图像输出（如集成浏览器的截图）以轮播视图显示。
+
+对 .NET 开发者来说：把 UI bug 的截图粘贴到聊天中让代理理解问题所在，或者让它分析 Blazor 组件渲染的输出。
+
+## 自动符号引用
+
+小的生活质量改善：当你复制一个符号名称（类、方法等）并粘贴到聊天中时，VS Code 现在自动将其转换为 `#sym:Name` 引用。这给代理提供了关于该符号的完整上下文，无需手动添加。
+
+如果你想要纯文本，使用 `Ctrl+Shift+V`。
+
+## 插件现在可以启用/禁用
+
+以前禁用 MCP 服务器或插件意味着卸载它。现在你可以开关它们 — 全局和按工作区都可以。在扩展视图或自定义视图中右键单击就行。
+
+npm 和 pypi 的插件现在也可以自动更新了，不过会先请求批准，因为更新意味着在你的机器上运行新代码。
+
+## 总结
+
+VS Code 1.112 明显在大力推进代理体验 — 更多自主性、更好的调试、更严格的安全。对 .NET 开发者来说，集成浏览器调试和 Copilot CLI 改进是最突出的功能。
+
+如果你还没试过为 .NET 项目在自动驾驶模式下运行完整的 Copilot CLI 会话，这个版本是开始的好时机。记得设置你的权限然后让它干活。
+
+[下载 VS Code 1.112](https://code.visualstudio.com/updates/v1_112) 或在 VS Code 内通过**帮助 > 检查更新**进行更新。
+
+
+---
+## 从笔记本到生产：用两个命令将 AI 代理部署到 Microsoft Foundry
+
+- **URL**: https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/deploy-ai-agents-foundry-azd-two-commands/
+- **Date**: March 26, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, ai, foundry, developer-tools, azd
+- **Reading time**: 1 min
+
+> Azure Developer CLI 现在有了 'azd ai agent' 命令，可以在几分钟内将你的 AI 代理从本地开发带到 Foundry 的生产端点。这是完整的工作流程。
+
+
+
+你知道"在我的机器上能跑"和"已部署并正在处理流量"之间的鸿沟吗？对于 AI 代理来说，这个鸿沟一直痛苦地大。你需要配置资源、部署模型、配置身份、设置监控 — 这些都是在任何人能实际调用你的代理之前要做的。
+
+Azure Developer CLI 刚刚把这变成了[两个命令的事](https://devblogs.microsoft.com/azure-sdk/azd-ai-agent-end-to-end/)。
+
+## 新的 `azd ai agent` 工作流
+
+让我带你看看这实际是什么样子。你有一个 AI 代理项目 — 比如说一个酒店礼宾代理。它在本地运行正常。你想让它在 Microsoft Foundry 上运行。
+
+```bash
+azd ai agent init
+azd up
+```
+
+就这样。两个命令。`azd ai agent init` 在你的仓库中生成基础设施即代码，`azd up` 在 Azure 上配置一切并发布你的代理。你会得到一个直接指向 Foundry 门户中你的代理的链接。
+
+## 底层发生了什么
+
+`init` 命令在你的仓库中生成真实的、可检查的 Bicep 模板：
+
+- 一个 **Foundry Resource**（顶层容器）
+- 一个 **Foundry Project**（你的代理所在的地方）
+- **模型部署**配置（GPT-4o 等）
+- 带有适当 RBAC 角色分配的**托管身份**
+- 服务映射用的 `azure.yaml`
+- 带有代理元数据和环境变量的 `agent.yaml`
+
+关键是：这一切都是你的。它是仓库中的版本化 Bicep。你可以检查它、自定义它，并与你的代理代码一起提交。没有魔法黑盒。
+
+## 开发内循环
+
+我真正喜欢的是本地开发体验。当你在迭代代理逻辑时，不想每次改变提示词都重新部署：
+
+```bash
+azd ai agent run
+```
+
+这会在本地启动你的代理。配合 `azd ai agent invoke` 发送测试提示，你就有了一个紧密的反馈循环。编辑代码、重启、调用、重复。
+
+`invoke` 命令的路由也很智能 — 当本地代理在运行时，它会自动指向本地。不在运行时，指向远程端点。
+
+## 实时监控
+
+这是说服我的功能。一旦你的代理部署完成：
+
+```bash
+azd ai agent monitor --follow
+```
+
+流经你的代理的每个请求和响应都会实时传输到你的终端。对于调试生产问题，这是无价之宝。不用挖 Log Analytics，不用等指标聚合 — 你看到的就是现在正在发生的事情。
+
+## 完整的命令集
+
+快速参考：
+
+| 命令 | 功能 |
+|------|------|
+| `azd ai agent init` | 用 IaC 搭建 Foundry 代理项目 |
+| `azd up` | 配置 Azure 资源并部署代理 |
+| `azd ai agent invoke` | 向远程或本地代理发送提示 |
+| `azd ai agent run` | 在本地运行代理用于开发 |
+| `azd ai agent monitor` | 从已发布的代理流式传输实时日志 |
+| `azd ai agent show` | 检查代理健康状态和状态 |
+| `azd down` | 清理所有 Azure 资源 |
+
+## 为什么这对 .NET 开发者重要
+
+虽然公告中的示例是基于 Python 的，但基础设施的故事是语言无关的。你的 .NET 代理得到相同的 Bicep 脚手架、相同的托管身份设置、相同的监控管道。如果你已经在用 `azd` 部署 .NET Aspire 应用或 Azure 部署，这直接融入你现有的工作流。
+
+AI 代理的部署鸿沟一直是生态系统中最大的摩擦点之一。从一个工作原型到一个具有适当身份、网络和监控的生产端点，不应该需要一周的 DevOps 工作。现在只需要两个命令和几分钟。
+
+## 总结
+
+`azd ai agent` 现在可用。如果你一直因为基础设施设置看起来工作量太大而推迟部署 AI 代理，试试看。查看[完整教程](https://devblogs.microsoft.com/azure-sdk/azd-ai-agent-end-to-end/)获取包括前端聊天应用集成在内的完整步骤。
+
+
+---
+
+## Events
+### NDC Oslo 2026
+
+- **URL**: https://thedotnetblog.com/zh/events/ndc-oslo-2026/
+- **Date**: September 14, 2026
+- **Type**: Conference
+- **Location**: Oslo Spektrum, 奥斯陆, 挪威
+
+> 欧洲最大的开发者大会之一 — 在 Oslo Spektrum 举办的5天工作坊、演讲和社交活动，150多位演讲者，160场演讲。
+
+
+
+**NDC Oslo 2026** 于 **2026年9月14日至18日** 在挪威奥斯陆的 **Oslo Spektrum** 举办。
+
+NDC Oslo 是欧洲最大、最受尊敬的开发者大会之一，涵盖 .NET、云计算、安全、架构、AI 等众多主题。2026年版目前正在预订阶段，正在组建庞大的演讲阵容。
+
+## 数据概览
+
+- **160 场演讲**（预订中）
+- **150 位演讲者**（预订中）
+- **15 场工作坊**（预订中）
+- **5 天** — 工作坊 + 大会
+
+## 已确认的演讲者
+
+演讲者名单正在建设中，已确认的名字包括：
+
+- **Nick Chapsas**
+- **Maddy Montaquila**
+- **Troy Hunt**
+- **Kevlin Henney**
+- **Venkat Subramaniam**
+- **Jeff Fritz**
+- **Philippe De Ryck**
+- **Nhlanhla Lucky Nkosi**
+- **Aleksander Stensby**
+
+## 门票
+
+早鸟票已开售 — 早鸟优惠截止至 **2026年5月22日**。
+
+CFP（征稿）也已开放。
+
+## 2026年其他 NDC 活动
+
+- NDC Sydney — 2026年4月22日–24日
+- NDC Toronto — 2026年5月5日–8日
+- NDC Copenhagen — 2026年6月1日–4日
+- NDC AI — 2026年6月8日–10日
+- NDC TechTown — 2026年9月21日–24日
+
+## 链接
+
+- [活动网站](https://ndcoslo.com/)
+- [门票](https://ndcoslo.com/tickets)
+- [Call for Papers](https://ndcoslo.com/call-for-papers)
+- [演讲者](https://ndcoslo.com/speakers)
+
+
+---
+### .NET Day Switzerland 2026
+
+- **URL**: https://thedotnetblog.com/zh/events/dotnet-day-switzerland-2026/
+- **Date**: August 25, 2026
+- **Type**: Conference
+- **Location**: Arena Cinemas Sihlcity, 苏黎世, 瑞士
+
+> 面向 .NET 开发者、架构师和专家的非营利社区大会 — 涵盖 .NET、C#、ASP.NET Core、Azure 等 — 在苏黎世举办。
+
+
+
+**.NET Day Switzerland 2026** 于 **2026年8月25日** 在 **Arena Cinemas Sihlcity**（Kalanderplatz 8, 8045 苏黎世）举办。
+
+这是一场独立的非营利社区大会，面向开发者、架构师和专家，讨论 .NET、C#、ASP.NET Core、Azure 和更广泛的 Microsoft 开发生态系统。所有演讲者和工作人员都是志愿参与，门票销售的盈余将捐赠给慈善机构或瑞士 .NET 社区。
+
+## 参会收获
+
+- 国际专家带来的高质量演讲
+- 与其他参会者交流
+- 茶歇、午餐和餐前酒期间的餐饮
+- 通过赞助商互动获得职业机会
+- 茶歇期间与演讲者直接交流
+
+## 门票
+
+| 类别 | 价格 | 可用性 |
+|-----|------|-------|
+| 超早鸟票（4月1日–30日） | 299 CHF | 最多100张 |
+| 早鸟票 | 399 CHF | 最多100张 |
+| 普通票 | 449 CHF | 售完即止 |
+
+演讲者和日程尚未公布 — 演讲者征集已在 [Sessionize](https://sessionize.com/net-day-switzerland-2026/) 上开放。
+
+## 组织者
+
+- [Fabian Gosebrink](https://twitter.com/FabianGosebrink)
+- [Manuel Meyer](https://twitter.com/manumeyer1)
+- [Thomas Gassmann](https://twitter.com/gassmannt)
+
+## 链接
+
+- [活动网站](https://dotnetday.ch/)
+- [订阅通讯](http://eepurl.com/dDoFEn)
+
+
+---
+### SDD Conference 2026
+
+- **URL**: https://thedotnetblog.com/zh/events/sdd-conference-2026/
+- **Date**: May 11, 2026
+- **Type**: Conference
+- **Location**: Barbican Centre, 伦敦, 英国
+
+> 在伦敦 Barbican Centre 举办的5天软件开发大会，78场演讲和14场工作坊，涵盖架构、.NET、AI、Azure、DevOps 等主题。
+
+
+
+**SDD 2026** 于 **2026年5月11日至15日** 在 **伦敦 Barbican Centre** 举办。为期3天的核心大会从周二到周四，周一和周五有可选的全天工作坊。
+
+拥有 **78场演讲** 和 **14场工作坊**，是欧洲内容最丰富的开发者大会之一。
+
+## 主题
+
+- 架构思维
+- C# 13 中的函数式代码
+- 无服务器设计
+- 语义 AI
+- Azure Kubernetes Services
+- 精益 DevOps 策略
+- 模型上下文协议 (MCP)
+- .NET 中的智能代理 AI
+- 重构单体应用
+- 使用 LLM 更快编程
+- 后量子世界中的密码学
+- 本地优先开发
+
+## 演讲者
+
+世界级阵容包括 **Kevlin Henney**、**Neal Ford**、**Sander Hoogendoorn**、**Andrew Clymer**、**Jacqui Read**、**Christian Weyer**、**Jeff Prosise**、**Jules May**、**Oliver Sturm** 和 **Raju Gandhi**。
+
+## 门票和信息
+
+- [活动网站](https://sddconf.com/)
+- [完整议程 PDF](https://sddvault.s3.amazonaws.com/assets/SDD_2026_schedule.pdf)
+- [注册选项](https://sddconf.com/register)
+
+98%的 SDD 2025 参会者将整体体验评为"好"、"非常好"或"优秀"。
+
+
+---
+### Global Azure Spain 2026
+
+- **URL**: https://thedotnetblog.com/zh/events/global-azure-spain-2026/
+- **Date**: April 18, 2026
+- **Type**: Conference
+- **Location**: Kinépolis Diversia, Alcobendas, 马德里, 西班牙
+
+> 西班牙最大的 Azure 社区活动 — 一整天的 Azure、AI、数据、安全和云原生开发主题演讲，38位演讲者，3个分场。
+
+
+
+Global Azure Spain 2026 于 **2026年4月18日** 在马德里 Alcobendas 的 **Kinépolis Diversia** 举办。这是西班牙最大的社区驱动 Azure 活动，38位演讲者在3个平行分场分享 AI 代理、Azure 网络、Cosmos DB、Fabric、IoT、安全等主题。
+
+活动时间为 **08:30 至 18:30**，包括主题演讲、茶歇、午餐和闭幕问答环节。
+
+## 议程亮点
+
+- **Domando Agentes de IA**：使用 Azure AI Foundry 和 Azure API Management 的治理、工具和 API
+- **Construyendo agentes con LibreChat en Azure**
+- **How Can I Steal Your Data with Azure Private Endpoints**
+- **Stop Building APIs. Forge Agents with Azure**
+- **Agentic DevOps Meets IoT: Real-Time Systems with Fabric and GitHub Copilot**
+- **El regreso de los tamagotchis!**：多代理系统实战
+- **Foundry Control Plane como plataforma de Agentes global**
+- **Rompiendo el perímetro: Zero Trust aplicado en Azure**
+
+## 门票
+
+注册为象征性捐赠 — 门票全部收入直接捐赠给 **Plan International**，支持全球儿童权利和平等。名额有限，请尽早报名。
+
+- [在 Eventbrite 获取门票](https://www.eventbrite.es/e/entradas-global-azure-spain-2026-en-madrid-1981594189564)
+- [活动网站](https://globalazure.es/)
+
+## Azure Tour 2026
+
+除马德里外，Global Azure Tour 2026 还将在 **萨拉戈萨**、**特内里费** 和 **塞维利亚** 举办。
+
+
+---
+
+## Authors
+### Emiliano Montesdeoca
+
+- **URL**: https://thedotnetblog.com/zh/authors/emiliano-montesdeoca/
+- **Role**: Microsoft MVP & 云解决方案团队负责人
+- **Bio**: Emiliano是一位乌拉圭裔西班牙软件开发者，Microsoft MVP（开发者技术方向），社区倡导者，现居加那利群岛特内里费。
+
+他专注于使用微软技术构建可扩展的云解决方案，目前在Intelequia Technologies担任云解决方案团队负责人。
+
+作为活跃的国际会议演讲者和热心的知识分享者，他将实际问题的解决方案转化为对开发者有用的实践洞见。
+
+
+---

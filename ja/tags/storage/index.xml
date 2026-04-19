@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Storage on The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/storage/</link><description>Recent content in Storage on The .NET Blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Wed, 15 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/storage/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure Smart TierがGAに — ライフサイクルルール不要でBlob Storageのコストを自動最適化</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/</link><pubDate>Wed, 15 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されています。オリジナル版は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Azure Blob Storageのライフサイクルポリシーの調整に時間をかけた結果、アクセスパターンが変わった途端に全部崩れた経験があるなら、この記事はまさにあなた向けです。Microsoftは、Azure BlobおよびData Lake Storage向けの&lt;a href="https://azure.microsoft.com/en-us/blog/optimize-object-storage-costs-automatically-with-smart-tier-now-generally-available/"&gt;smart tierの一般提供&lt;/a&gt;を発表しました — 実際の使用状況に基づいて、オブジェクトをhot、cool、coldティア間で自動的に移動するフルマネージドのティアリング機能です。&lt;/p&gt;
+&lt;h2 id="smart-tierが実際にやること"&gt;Smart tierが実際にやること&lt;/h2&gt;
+&lt;p&gt;コンセプトはシンプルです。smart tierはストレージアカウント内の各オブジェクトの最終アクセス時刻を継続的に評価します。頻繁にアクセスされるデータはhotに留まり、非アクティブなデータは30日後にcoolへ、さらに60日後にcoldへ移動します。データが再びアクセスされると、すぐにhotに昇格します。サイクルが再開します。&lt;/p&gt;
+&lt;p&gt;設定するライフサイクルルールなし。アクセスパターンの予測なし。手動チューニングなし。&lt;/p&gt;
+&lt;p&gt;プレビュー期間中、Microsoftは&lt;strong&gt;smart tierで管理された容量の50%以上が、実際のアクセスパターンに基づいて自動的にクールなティアに移行した&lt;/strong&gt;と報告しています。大規模なストレージアカウントにとって意味のあるコスト削減です。&lt;/p&gt;
+&lt;h2 id="net開発者にとってなぜ重要か"&gt;.NET開発者にとってなぜ重要か&lt;/h2&gt;
+&lt;p&gt;ログ、テレメトリ、分析データ、あるいは何らかの成長するデータ資産を生成するアプリケーションを構築しているなら — 正直なところ、そうでない人はいないでしょう — ストレージコストはすぐに膨れ上がります。従来のアプローチは、ライフサイクル管理ポリシーを書き、テストし、アプリのアクセスパターンが変わったら再調整することでした。Smart tierはそのワークフロー全体を排除します。&lt;/p&gt;
+&lt;p&gt;これが役立つ実用的なシナリオ：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;アプリケーションのテレメトリとログ&lt;/strong&gt; — デバッグ中はhot、数週間後にはほとんどアクセスされない&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;データパイプラインとETL出力&lt;/strong&gt; — 処理中は頻繁にアクセス、その後はほぼcold&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ユーザー生成コンテンツ&lt;/strong&gt; — 最近のアップロードはhot、古いコンテンツは徐々に冷却&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;バックアップとアーカイブデータ&lt;/strong&gt; — コンプライアンスのため時々アクセス、ほとんどアイドル&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="セットアップ方法"&gt;セットアップ方法&lt;/h2&gt;
+&lt;p&gt;Smart tierの有効化は一度きりの設定です：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;新しいアカウント&lt;/strong&gt;：ストレージアカウント作成時にsmart tierをデフォルトのアクセスティアとして選択（ゾーン冗長が必要）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;既存のアカウント&lt;/strong&gt;：blobアクセスティアを現在のデフォルトからsmart tierに切り替え&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;128 KiB未満のオブジェクトはhotに留まり、モニタリング料金は発生しません。それ以外は、ティア移行料金なし、早期削除料金なし、データ取得コストなしの標準hot/cool/cold容量料金を支払います。オブジェクトごとの月額モニタリング料金がオーケストレーションをカバーします。&lt;/p&gt;
+&lt;h2 id="知っておくべきトレードオフ"&gt;知っておくべきトレードオフ&lt;/h2&gt;
+&lt;p&gt;Smart tierのティアリングルールは固定です（30日→cool、90日→cold）。カスタムしきい値が必要な場合 — 例えば、特定のワークロードで7日後にcoolに移動したい場合 — ライフサイクルルールが引き続き正解です。そして両方を混ぜないでください：smart tierで管理されているオブジェクトにライフサイクルルールを使用すると競合する可能性があるため、避けてください。&lt;/p&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;革命的ではありませんが、実際の運用上の頭痛の種を解決します。成長するBlob Storageアカウントを管理していて、ライフサイクルポリシーの維持に疲れているなら、&lt;a href="https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-smart"&gt;smart tierを有効化&lt;/a&gt;してAzureに任せましょう。現在、ほぼすべてのゾーンパブリッククラウドリージョンで利用可能です。&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Accessibility on The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/accessibility/</link><description>Recent content in Accessibility on The .NET Blog</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/accessibility/index.xml" rel="self" type="application/rss+xml"/><item><title>VS Code 1.116 — Agents应用获得键盘导航和文件上下文补全</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原文请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;VS Code 1.116是2026年4月的版本，虽然比最近的一些更新更轻量，但变化是有针对性且有意义的 — 尤其是如果你每天都在使用Agents应用。&lt;/p&gt;
+&lt;p&gt;以下是基于&lt;a href="https://code.visualstudio.com/updates/v1_116"&gt;官方发行说明&lt;/a&gt;的更新内容。&lt;/p&gt;
+&lt;h2 id="agents应用改进"&gt;Agents应用改进&lt;/h2&gt;
+&lt;p&gt;Agents应用继续通过可用性优化不断成熟，这些改进在日常工作流中产生了真正的影响：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;专属快捷键&lt;/strong&gt; — 现在你可以用专属命令和键盘快捷键来聚焦更改视图、更改中的文件树，以及聊天自定义视图。如果你之前一直在Agents应用中到处点击来导航，这带来了完全由键盘驱动的工作流。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;辅助功能帮助对话框&lt;/strong&gt; — 在聊天输入框中按&lt;code&gt;Alt+F1&lt;/code&gt;现在会打开一个辅助功能帮助对话框，显示可用的命令和快捷键。屏幕阅读器用户还可以控制播报的详细程度。良好的辅助功能让每个人受益。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;文件上下文补全&lt;/strong&gt; — 在Agents应用聊天中输入&lt;code&gt;#&lt;/code&gt;来触发限定在当前工作区范围内的文件上下文补全。这是那些加速每次交互的小型生活质量改进之一 — 不再需要在引用代码时输入完整的文件路径。&lt;/p&gt;
+&lt;h2 id="css-import链接解析"&gt;CSS &lt;code&gt;@import&lt;/code&gt;链接解析&lt;/h2&gt;
+&lt;p&gt;前端开发者的好消息：VS Code现在可以解析使用node_modules路径的CSS &lt;code&gt;@import&lt;/code&gt;引用。当使用打包工具时，你可以通过&lt;code&gt;Ctrl+点击&lt;/code&gt;跳转到像&lt;code&gt;@import &amp;quot;some-module/style.css&amp;quot;&lt;/code&gt;这样的导入。虽小但消除了CSS工作流中的一个摩擦点。&lt;/p&gt;
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;p&gt;VS Code 1.116是关于改进的 — 让Agents应用更易导航、更易访问、更友好的键盘操作。如果你在Agents应用中花费大量时间（我猜很多人都是如此），这些变化会累积起来。&lt;/p&gt;
+&lt;p&gt;查看&lt;a href="https://code.visualstudio.com/updates/v1_116"&gt;完整发行说明&lt;/a&gt;获取完整列表。&lt;/p&gt;</description></item></channel></rss>
