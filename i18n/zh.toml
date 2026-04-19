@@ -1,3 +1,6 @@
+[nav_contribute]
+other = "贡献"
+
 [nav_posts]
 other = "文章"
 
@@ -132,3 +135,13 @@ other = "阅读原文"
 
 [language_label]
 other = "语言"
+
+# ── Contribute ──
+[contribute_page_eyebrow]
+other = "// 贡献"
+
+[contribute_page_title]
+other = "为 The .NET Blog 投稿"
+
+[contribute_page_desc]
+other = "与 .NET 社区分享你的知识。"

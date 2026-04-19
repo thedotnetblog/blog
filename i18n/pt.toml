@@ -1,3 +1,6 @@
+[nav_contribute]
+other = "contribuir"
+
 [nav_posts]
 other = "artigos"
 
@@ -133,3 +136,13 @@ other = "Ler o original"
 
 [language_label]
 other = "Idioma"
+
+# ── Contribute ──
+[contribute_page_eyebrow]
+other = "// contribuir"
+
+[contribute_page_title]
+other = "Escreva para The .NET Blog"
+
+[contribute_page_desc]
+other = "Compartilhe seu conhecimento com a comunidade .NET."

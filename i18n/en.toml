@@ -1,6 +1,7 @@
-# ── Navigation ──
-[nav_posts]
-other = "posts"
+[nav_contribute]
+other = "contribute"
+
+
 
 [nav_events]
 other = "events"
@@ -142,3 +143,13 @@ other = "Read the original"
 # ── Language Selector ──
 [language_label]
 other = "Language"
+
+# ── Contribute ──
+[contribute_page_eyebrow]
+other = "// contribute"
+
+[contribute_page_title]
+other = "Write for The .NET Blog"
+
+[contribute_page_desc]
+other = "Share your knowledge with the .NET community."
