@@ -1,8 +1,8 @@
 ---
-title: "रियल-टाइम मल्टी-एजेंट UIs बनाना जो ब्लैक बॉक्स जैसी न लगें"
+title: "रियल-टाइम Multi-Agent UIs बनाना जो Black Box की तरह न लगें"
 date: 2026-04-10
 author: "Emiliano Montesdeoca"
-description: "AG-UI और Microsoft Agent Framework मिलकर मल्टी-एजेंट वर्कफ़्लो को एक उचित फ्रंटएंड देते हैं — रियल-टाइम स्ट्रीमिंग, मानव अनुमोदन और आपके एजेंट्स की पूरी पारदर्शिता के साथ।"
+description: "AG-UI और Microsoft Agent Framework मिलकर multi-agent workflows को एक उचित frontend देते हैं — real-time streaming, human approvals, और आपके agents क्या कर रहे हैं इसकी पूरी जानकारी के साथ।"
 tags:
   - agent-framework
   - ai
@@ -14,19 +14,19 @@ tags:
 
 > *यह पोस्ट स्वचालित रूप से अनुवादित है। मूल के लिए, [यहाँ क्लिक करें]({{< ref "ag-ui-real-time-multi-agent-ui-maf" >}}).*
 
-मल्टी-एजेंट सिस्टम के बारे में सच्चाई यह है: वे डेमो में शानदार दिखते हैं। तीन एजेंट काम को आगे बढ़ाते हुए, समस्याएं सुलझाते हुए, निर्णय लेते हुए। फिर आप इसे असली उपयोगकर्ताओं के सामने रखने की कोशिश करते हैं और... सन्नाटा। एक घूमता हुआ इंडिकेटर। कोई अंदाज़ा नहीं कि कौन सा एजेंट क्या कर रहा है या सिस्टम क्यों रुका हुआ है। यह एक प्रोडक्ट नहीं है — यह एक भरोसे की समस्या है।
+multi-agent systems के बारे में एक बात यह है: demos में वे बेहद शानदार लगते हैं। तीन agents काम आगे-पीछे भेज रहे हैं, समस्याएँ सुलझा रहे हैं, निर्णय ले रहे हैं। फिर आप इसे असली users के सामने रखने की कोशिश करते हैं और... खामोशी। एक घूमता हुआ indicator। कोई अंदाज़ा नहीं कि कौन-सा agent क्या कर रहा है या सिस्टम क्यों रुका हुआ है। यह कोई product नहीं है — यह एक भरोसे की समस्या है।
 
-Microsoft Agent Framework टीम ने हाल ही में MAF वर्कफ़्लो को [AG-UI](https://github.com/ag-ui-protocol/ag-ui) के साथ जोड़ने पर एक [शानदार वॉकथ्रू](https://devblogs.microsoft.com/agent-framework/ag-ui-multi-agent-workflow-demo/) प्रकाशित किया है — यह Server-Sent Events पर एजेंट निष्पादन इवेंट्स को फ्रंटएंड तक स्ट्रीम करने के लिए एक खुला प्रोटोकॉल है। और सच में? यही वो ब्रिज है जिसकी हमें ज़रूरत थी।
+Microsoft Agent Framework team ने अभी-अभी MAF workflows को [AG-UI](https://github.com/ag-ui-protocol/ag-ui) के साथ जोड़ने पर एक [शानदार walkthrough](https://devblogs.microsoft.com/agent-framework/ag-ui-multi-agent-workflow-demo/) प्रकाशित किया है। AG-UI एक open protocol है जो Server-Sent Events के ज़रिए agent execution events को frontend पर stream करता है। और सच में? यही वह bridge है जिसकी हमें कमी थी।
 
-## .NET डेवलपर्स के लिए यह क्यों मायने रखता है
+## .NET developers के लिए यह क्यों मायने रखता है
 
-अगर आप AI-पावर्ड ऐप्स बना रहे हैं, तो आप शायद इस दीवार से टकरा चुके हैं। आपका बैकएंड ऑर्केस्ट्रेशन बढ़िया काम करता है — एजेंट्स एक-दूसरे को काम सौंपते हैं, टूल्स चलते हैं, निर्णय लिए जाते हैं। लेकिन फ्रंटएंड को पर्दे के पीछे क्या हो रहा है उसका कोई अंदाज़ा नहीं होता। AG-UI इसे ठीक करता है, SSE पर सीधे आपकी UI लेयर तक एजेंट इवेंट्स (`RUN_STARTED`, `STEP_STARTED`, `TOOL_CALL_*`, `TEXT_MESSAGE_*`) स्ट्रीम करने के लिए एक मानक प्रोटोकॉल परिभाषित करके।
+अगर आप AI-powered apps बना रहे हैं, तो आप शायद इस दीवार से टकरा चुके हैं। आपका backend orchestration बढ़िया काम करता है — agents एक-दूसरे को काम सौंपते हैं, tools चलते हैं, फैसले होते हैं। लेकिन frontend को पर्दे के पीछे क्या हो रहा है, इसका कोई अंदाज़ा नहीं। AG-UI इसे ठीक करता है — यह agent events (जैसे `RUN_STARTED`, `STEP_STARTED`, `TOOL_CALL_*`, `TEXT_MESSAGE_*`) को SSE पर सीधे आपकी UI layer तक stream करने के लिए एक standard protocol परिभाषित करता है।
 
-उन्होंने जो डेमो बनाया वह तीन एजेंट्स के साथ एक कस्टमर सपोर्ट वर्कफ़्लो है: एक ट्राइएज एजेंट जो रिक्वेस्ट रूट करता है, एक रिफंड एजेंट जो पैसों की बातें संभालता है, और एक ऑर्डर एजेंट जो रिप्लेसमेंट प्रबंधित करता है। प्रत्येक एजेंट के अपने टूल्स हैं, और हैंडऑफ टोपोलॉजी स्पष्ट रूप से परिभाषित है — "प्रॉम्प्ट से पता करो" वाला माहौल नहीं।
+जो demo उन्होंने बनाया वह तीन agents वाला customer support workflow है: एक triage agent जो requests को route करता है, एक refund agent जो पैसों का काम संभालता है, और एक order agent जो replacements manage करता है। हर agent के अपने tools हैं, और handoff topology स्पष्ट रूप से परिभाषित है — "prompt से खुद समझ लो" वाला कोई झमेला नहीं।
 
-## हैंडऑफ टोपोलॉजी असली सितारा है
+## Handoff topology असली सितारा है
 
-मुझे जो बात खास लगी वह यह है कि `HandoffBuilder` आपको एजेंट्स के बीच एक डायरेक्टेड रूटिंग ग्राफ डिक्लेयर करने देता है:
+जो चीज़ मेरी नज़र में आई वह यह है कि `HandoffBuilder` आपको agents के बीच एक directed routing graph घोषित करने देता है:
 
 ```python
 builder = HandoffBuilder(
@@ -44,21 +44,21 @@ builder = HandoffBuilder(
 )
 ```
 
-प्रत्येक `add_handoff` नेचुरल-लैंग्वेज डिस्क्रिप्शन के साथ एक डायरेक्टेड एज बनाता है। फ्रेमवर्क इस टोपोलॉजी के आधार पर प्रत्येक एजेंट के लिए हैंडऑफ टूल्स जेनरेट करता है। इसलिए रूटिंग निर्णय आपकी ऑर्केस्ट्रेशन संरचना पर आधारित होते हैं, न कि LLM की मनमर्जी पर। प्रोडक्शन विश्वसनीयता के लिए यह बहुत बड़ी बात है।
+हर `add_handoff` एक natural-language description के साथ एक directed edge बनाता है। Framework इस topology के आधार पर हर agent के लिए handoff tools generate करता है। तो routing के फैसले आपकी orchestration structure पर आधारित हैं, न कि LLM की मर्ज़ी पर। production reliability के लिए यह बहुत बड़ी बात है।
 
-## ह्यूमन-इन-द-लूप जो वास्तव में काम करता है
+## Human-in-the-loop जो वाकई काम करता है
 
-डेमो दो इंटरप्ट पैटर्न दिखाता है जो किसी भी रियल-वर्ल्ड एजेंट ऐप को चाहिए:
+Demo में दो interrupt patterns दिखाए गए हैं जो किसी भी real-world agent app को चाहिए:
 
-**टूल अप्रूवल इंटरप्ट्स** — जब कोई एजेंट `approval_mode="always_require"` के साथ मार्क किए गए टूल को कॉल करता है, तो वर्कफ़्लो रुक जाता है और एक इवेंट एमिट करता है। फ्रंटएंड टूल का नाम और आर्ग्युमेंट के साथ एक अप्रूवल मोडल रेंडर करता है। कोई टोकन जलाने वाला रिट्राई लूप नहीं — बस एक साफ पॉज़-अप्रूव-रेज़्यूम फ्लो।
+**Tool approval interrupts** — जब कोई agent `approval_mode="always_require"` वाला tool call करता है, तो workflow रुक जाता है और एक event emit होता है। Frontend tool name और arguments के साथ एक approval modal render करता है। कोई token-burning retry loops नहीं — बस एक साफ pause-approve-resume flow।
 
-**इन्फॉर्मेशन रिक्वेस्ट इंटरप्ट्स** — जब किसी एजेंट को यूज़र से अधिक कॉन्टेक्स्ट चाहिए (जैसे ऑर्डर ID), तो वह रुकता है और पूछता है। फ्रंटएंड सवाल दिखाता है, यूज़र जवाब देता है, और एक्ज़ीक्यूशन ठीक वहीं से रेज़्यूम होता है जहाँ रुका था।
+**Information request interrupts** — जब किसी agent को user से ज़्यादा context चाहिए (जैसे कोई order ID), तो वह रुकता है और पूछता है। Frontend सवाल दिखाता है, user जवाब देता है, और execution ठीक वहाँ से दोबारा शुरू होती है जहाँ वह रुकी थी।
 
-दोनों पैटर्न स्टैंडर्ड AG-UI इवेंट्स के रूप में स्ट्रीम होते हैं, इसलिए आपके फ्रंटएंड को प्रति एजेंट कस्टम लॉजिक की ज़रूरत नहीं — यह बस SSE कनेक्शन से जो भी इवेंट आए उसे रेंडर करता है।
+दोनों patterns standard AG-UI events की तरह stream होते हैं, इसलिए आपके frontend को हर agent के लिए custom logic की ज़रूरत नहीं — वह बस SSE connection से आने वाला event render करता है।
 
-## वायरिंग करना आश्चर्यजनक रूप से सरल है
+## Wiring up करना हैरानी की हद तक आसान है
 
-MAF और AG-UI के बीच इंटीग्रेशन एक सिंगल फंक्शन कॉल है:
+MAF और AG-UI के बीच integration एक single function call है:
 
 ```python
 from agent_framework.ag_ui import (
@@ -78,16 +78,16 @@ add_agent_framework_fastapi_endpoint(
 )
 ```
 
-`workflow_factory` प्रति थ्रेड एक नया वर्कफ़्लो बनाता है, इसलिए प्रत्येक बातचीत को अलग स्टेट मिलती है। एंडपॉइंट सभी SSE प्लंबिंग अपने आप संभालता है। अगर आप पहले से FastAPI उपयोग कर रहे हैं (या इसे एक लाइटवेट लेयर के रूप में जोड़ सकते हैं), तो इसमें लगभग शून्य फ्रिक्शन है।
+`workflow_factory` हर thread के लिए एक fresh workflow बनाता है, इसलिए हर conversation को isolated state मिलती है। Endpoint सारी SSE plumbing अपने आप handle करता है। अगर आप पहले से FastAPI use कर रहे हैं (या इसे एक lightweight layer के रूप में जोड़ सकते हैं), तो यह लगभग zero friction है।
 
-## मेरा नज़रिया
+## मेरी राय
 
-हम .NET डेवलपर्स के लिए तुरंत सवाल यह है: "क्या मैं इसे C# में कर सकता हूँ?" Agent Framework .NET और Python दोनों के लिए उपलब्ध है, और AG-UI प्रोटोकॉल लैंग्वेज-अग्नॉस्टिक है (यह बस SSE है)। इसलिए जबकि यह डेमो Python और FastAPI उपयोग करता है, पैटर्न सीधे ट्रांसलेट होता है। आप उसी AG-UI इवेंट स्कीमा के साथ SSE एंडपॉइंट्स के साथ ASP.NET Core मिनिमल API वायर अप कर सकते हैं।
+हम .NET developers के लिए तुरंत यह सवाल उठता है: "क्या मैं यह C# में कर सकता हूँ?" Agent Framework .NET और Python दोनों के लिए उपलब्ध है, और AG-UI protocol language-agnostic है (यह बस SSE है)। तो यह specific demo Python और FastAPI use करता है, लेकिन pattern सीधे translate होता है। आप same AG-UI event schema का पालन करते हुए SSE endpoints के साथ एक ASP.NET Core minimal API wire up कर सकते हैं।
 
-बड़ी बात यह है कि मल्टी-एजेंट UIs एक बाद में सोचने वाली चीज़ नहीं बल्कि एक फर्स्ट-क्लास कंसर्न बन रहे हैं। अगर आप ऐसा कुछ बना रहे हैं जहाँ एजेंट्स इंसानों के साथ इंटरैक्ट करते हैं — कस्टमर सपोर्ट, अप्रूवल वर्कफ़्लो, डॉक्युमेंट प्रोसेसिंग — तो MAF ऑर्केस्ट्रेशन और AG-UI ट्रांसपेरेंसी का यह संयोजन अनुसरण करने वाला पैटर्न है।
+बड़ी बात यह है कि multi-agent UIs एक first-class concern बनती जा रही हैं, afterthought नहीं। अगर आप कुछ ऐसा बना रहे हैं जहाँ agents humans के साथ interact करते हैं — customer support, approval workflows, document processing — तो MAF orchestration और AG-UI transparency का यह combination वह pattern है जिसे follow करना चाहिए।
 
-## समापन
+## Wrapping up
 
-AG-UI + Microsoft Agent Framework आपको दोनों दुनिया का सबसे अच्छा देता है: बैकएंड पर मज़बूत मल्टी-एजेंट ऑर्केस्ट्रेशन और फ्रंटएंड पर रियल-टाइम विज़िबिलिटी। अब कोई ब्लैक-बॉक्स एजेंट इंटरैक्शन नहीं।
+AG-UI + Microsoft Agent Framework आपको दोनों दुनियाओं का सर्वश्रेष्ठ देता है: backend पर robust multi-agent orchestration और frontend पर real-time visibility। Black-box agent interactions अब नहीं।
 
-अधिक जानने के लिए [पूरा वॉकथ्रू](https://devblogs.microsoft.com/agent-framework/ag-ui-multi-agent-workflow-demo/) और [AG-UI प्रोटोकॉल रेपो](https://github.com/ag-ui-protocol/ag-ui) देखें।
+और गहराई से जानने के लिए [full walkthrough](https://devblogs.microsoft.com/agent-framework/ag-ui-multi-agent-workflow-demo/) और [AG-UI protocol repo](https://github.com/ag-ui-protocol/ag-ui) देखें।
