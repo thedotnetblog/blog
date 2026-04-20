@@ -1,8 +1,8 @@
 ---
-title: "VS Code 1.117: Agenci Otrzymują Własne Gałęzie Git i Jestem Za"
+title: "VS Code 1.117: Agenty dostają własne gałęzie Git i jestem za tym wszystkimi czterema"
 date: 2026-04-19
 author: "Emiliano Montesdeoca"
-description: "VS Code 1.117 dostarcza izolację worktree dla sesji agentów, trwały tryb Autopilot i wsparcie dla subagentów. Agentatyczny przepływ pracy stał się o wiele bardziej realny."
+description: "VS Code 1.117 dostarcza izolację worktree dla sesji agentów, trwały tryb Autopilot i wsparcie dla subagentów. Agentyczny przepływ pracy kodowania właśnie stał się znacznie bardziej realny."
 tags:
   - vscode
   - developer-tools
@@ -13,44 +13,55 @@ tags:
 
 > *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "vscode-1-117-agents-autopilot-worktrees" >}}).*
 
-Granica między "asystentem AI" a "współpracownikiem AI" stale się zaciera. VS Code 1.117 właśnie wylądował i [pełne notatki do wydania](https://code.visualstudio.com/updates/v1_117) są gęste, ale historia jest jasna: agenci stają się obywatelami pierwszej klasy w Twoim przepływie pracy.
+Linia między "asystentem AI" a "kolegą AI" nieustannie się zaciera. VS Code 1.117 właśnie wyszedł i [pełne notatki wydania](https://code.visualstudio.com/updates/v1_117) są pełne treści, ale historia jest tu jasna: agenty stają się pierwszoklasowymi obywatelami w twoim przepływie pracy deweloperskiej.
 
-Oto co naprawdę ma znaczenie.
+Oto co naprawdę ważne.
 
-## Tryb Autopilot w końcu pamięta Twoje preferencje
+## Tryb Autopilot wreszcie pamięta twoje preferencje
 
-Wcześniej musiałeś ponownie włączać Autopilot za każdym razem, gdy zaczynałeś nową sesję. Irytujące. Teraz Twój tryb uprawnień utrzymuje się między sesjami i możesz skonfigurować domyślny.
+Wcześniej musiałeś ponownie włączać Autopilot przy każdej nowej sesji. Irytujące. Teraz twój tryb uprawnień utrzymuje się między sesjami i możesz skonfigurować domyślny.
 
 Host Agenta obsługuje trzy konfiguracje sesji:
 
-- **Default** — narzędzia proszą o potwierdzenie przed uruchomieniem
-- **Bypass** — automatycznie zatwierdza wszystko
-- **Autopilot** — w pełni autonomiczny, odpowiada na własne pytania i kontynuuje
+- **Domyślny** — narzędzia proszą o potwierdzenie przed uruchomieniem
+- **Pomiń** — automatycznie zatwierdza wszystko
+- **Autopilot** — pełna autonomia, odpowiada na własne pytania i kontynuuje
 
-Jeśli tworzysz nowy projekt .NET z migracjami, Dockerem i CI — ustaw raz na Autopilot i zapomnij. Ta preferencja zostaje.
+Jeśli szkieletujesz nowy projekt .NET z migracjami, Docker i CI — ustaw go na Autopilot raz i zapomnij o tym. Ta preferencja zostaje.
 
 ## Izolacja worktree i git dla sesji agentów
 
-To jest ta wielka. Sesje agentów obsługują teraz pełną izolację worktree i git. Oznacza to, że gdy agent pracuje nad zadaniem, otrzymuje własną gałąź i katalog roboczy. Twoja główna gałąź pozostaje nienaruszony.
+To jest ta duża. Sesje agentów obsługują teraz pełną izolację worktree i git. To oznacza, że gdy agent pracuje nad zadaniem, dostaje własną gałąź i katalog roboczy. Twoja gałąź główna pozostaje nienaruszona.
 
-Co więcej — Copilot CLI generuje sensowne nazwy gałęzi dla tych sesji worktree. Koniec z `agent-session-abc123`. Dostajesz coś, co naprawdę opisuje, co agent robi.
+Co więcej — Copilot CLI generuje znaczące nazwy gałęzi dla tych sesji worktree. Koniec z `agent-session-abc123`. Dostajesz coś, co faktycznie opisuje co agent robi.
 
-Dla programistów .NET uruchamiających wiele gałęzi funkcji lub naprawiających błędy, gdy długie zadanie szkieletowania trwa, to rewolucja. Możesz mieć agenta budującego kontrolery API w jednym worktree, gdy Ty debugujesz warstwę serwisu w innym. Żadnych konfliktów. Żadnego stashowania. Żadnego bałaganu.
+Dla programistów .NET pracujących na wielu gałęziach funkcji lub naprawiających błędy, gdy długie zadanie szkieletowania działa, to zmiana zasad gry. Możesz mieć agenta budującego kontrolery API w jednym worktree, podczas gdy ty debugujesz warstwę usługową w innym. Żadnych konfliktów. Żadnego stashowania. Żadnego bałaganu.
 
-## Subagenci i zespoły agentów
+## Subagenty i zespoły agentów
 
-Agent Host Protocol teraz obsługuje subagentów. Agent może uruchamiać inne agenty do obsługi części zadania. Pomyśl o tym jako delegowaniu — główny agent koordynuje, a wyspecjalizowane agenty obsługują kawałki.
+Protokół Hosta Agenta obsługuje teraz subagenty. Agent może uruchamiać inne agenty do obsługi części zadania. Pomyśl o tym jak o delegowaniu — twój główny agent koordynuje, a wyspecjalizowane agenty obsługują kawałki.
 
-To jest wczesne, ale potencjał dla przepływów pracy .NET jest oczywisty. Wyobraź sobie jednego agenta obsługującego migracje EF Core, gdy inny konfiguruje testy integracyjne.
+To wczesne, ale potencjał dla przepływów pracy .NET jest oczywisty. Wyobraź sobie jednego agenta obsługującego twoje migracje EF Core podczas gdy inny konfiguruje testy integracyjne. Jeszcze tam nie jesteśmy w pełni, ale wsparcie protokołu lądujące teraz oznacza, że narzędzia pojawią się szybko.
 
-## Wynik terminalu automatycznie dołączany, gdy agenci wysyłają wejście
+## Wyjście terminala automatycznie włączone gdy agenty wysyłają dane wejściowe
 
-Małe, ale znaczące. Gdy agent wysyła wejście do terminalu, wynik terminalu jest teraz automatycznie dołączany do kontekstu. Jeśli kiedykolwiek obserwowałeś agenta uruchamiającego `dotnet build`, który zawiódł, a następnie musiał wykonać kolejną rundę tylko żeby zobaczyć błąd — to tarcie zniknęło.
+Małe, ale znaczące. Gdy agent wysyła dane wejściowe do terminala, wyjście terminala jest teraz automatycznie dołączane do kontekstu. Wcześniej agent musiał wykonać dodatkową turę tylko by zobaczyć co się stało.
 
-## Samodzielna aktualizacja aplikacji Agentów na macOS
+Jeśli kiedykolwiek obserwowałeś agenta uruchamiającego `dotnet build`, niepowodzenie i następnie kolejny przebieg tylko by zobaczyć błąd — to tarcie zniknęło. Widzi wyjście natychmiast i reaguje.
 
-Samodzielna aplikacja Agentów na macOS teraz aktualizuje się sama. Koniec z ręcznym pobieraniem nowych wersji.
+## Samooaktualizacja aplikacji Agents na macOS
 
-## Podsumowanie
+Samodzielna aplikacja Agents na macOS teraz się samooaktualizuje. Koniec z ręcznym pobieraniem nowych wersji. Po prostu pozostaje aktualna.
 
-VS Code 1.117 to infrastruktura. Izolacja worktree, trwałe uprawnienia, protokoły subagentów — to są elementy składowe dla przepływu pracy, w którym agenci obsługują prawdziwe, równoległe zadania bez ingerencji w Twój kod. Jeśli budujesz z .NET i jeszcze nie zanurzyłeś się w agentyczny przepływ pracy, szczerze, teraz jest czas, żeby zacząć.
+## Mniejsze rzeczy warte wiedzy
+
+- **Podglądy package.json** teraz pokazują zarówno zainstalowaną wersję jak i ostatnio dostępną. Przydatne jeśli zarządzasz narzędziami npm obok projektów .NET.
+- **Obrazy w komentarzach JSDoc** renderują się poprawnie w podglądach i uzupełnieniach.
+- **Sesje Copilot CLI** teraz wskazują czy zostały utworzone przez VS Code czy zewnętrznie — przydatne gdy przeskakujesz między terminalami.
+- **Copilot CLI, Claude Code i Gemini CLI** są rozpoznawane jako typy powłoki. Edytor wie co uruchamiasz.
+
+## Wnioski
+
+VS Code 1.117 nie jest efektownym zrzutem funkcji. To infrastruktura. Izolacja worktree, trwałe uprawnienia, protokoły subagentów — to są cegiełki dla przepływu pracy, gdzie agenty obsługują prawdziwe, równoległe zadania bez nadepnięcia na twój kod.
+
+Jeśli budujesz z .NET i jeszcze nie zanurzyłeś się w agentyczny przepływ pracy, szczerze, teraz jest czas, by zacząć.
