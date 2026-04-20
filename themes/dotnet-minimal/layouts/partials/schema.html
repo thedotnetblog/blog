@@ -94,11 +94,19 @@
   },
   "inLanguage": "{{ .Site.Language.Lang | default "en-US" }}"
   {{- with $image }},
-  "image": "{{ . }}"
+  "image": {
+    "@type": "ImageObject",
+    "url": "{{ . }}"
+    {{- if strings.HasSuffix . (strings.TrimPrefix "/" $.Site.Params.defaultImage) }},
+    "width": 1536,
+    "height": 1024
+    {{- end }}
+  }
   {{- end }}
   {{- with .Params.tags }},
   "keywords": "{{ delimit . ", " }}"
   {{- end }},
+  "isAccessibleForFree": true,
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": ["h1", ".post-description", ".post-summary"]

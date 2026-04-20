@@ -36,10 +36,16 @@ The .NET Blog is a community-driven publication featuring articles, tutorials, a
 
 ## Topics
 
-{{- $tags := slice }}{{ range $name, $_ := .Site.Taxonomies.tags }}{{ $tags = $tags | append $name }}{{ end }}
-{{- $tags = sort $tags }}
-{{- if gt (len $tags) 0 }}
-This blog covers: {{ delimit $tags ", " }}.
+{{- $tags := .Site.Taxonomies.tags }}
+{{- $tagNames := slice }}{{ range $name, $_ := $tags }}{{ $tagNames = $tagNames | append $name }}{{ end }}
+{{- $tagNames = sort $tagNames }}
+{{- if gt (len $tagNames) 0 }}
+This blog covers the following topics (with post count):
+
+{{- range $tagNames }}
+{{- $count := len (index $tags .) }}
+- {{ . }} ({{ $count }} {{ if eq $count 1 }}post{{ else }}posts{{ end }})
+{{- end }}
 {{- else }}
 This blog currently has no tagged topics.
 {{- end }}

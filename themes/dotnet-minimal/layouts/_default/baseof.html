@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ if .IsHome }}{{ with .Site.Params.homeTitle }}{{ . }}{{ else }}{{ .Site.Title }} · .NET, Azure, AI, and Cloud-Native Tutorials{{ end }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
-  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}" />
+  {{- $metaDesc := "" -}}
+  {{- with .Description }}{{- $metaDesc = . | plainify | truncate 200 -}}
+  {{- else }}{{- if .IsPage }}{{- $metaDesc = .Summary | plainify | truncate 200 -}}
+  {{- else }}{{- $metaDesc = .Site.Params.description -}}{{- end }}{{- end }}
+  <meta name="description" content="{{ $metaDesc }}" />
 
   {{- partial "seo.html" . -}}
 
@@ -54,6 +58,7 @@
 
   <!-- LLM discoverability -->
   <link rel="alternate" type="text/plain" href="{{ "llms.txt" | absURL }}" title="LLM-readable summary" />
+  <link rel="alternate" type="text/plain" href="{{ "llms-full.txt" | absURL }}" title="LLM full content" />
 
   {{- partial "umami.html" . -}}
 
