@@ -1,3 +1,10 @@
+{{ define "head_extra" }}
+{{- with .Paginator }}
+{{- with .Prev }}<link rel="prev" href="{{ .URL | absURL }}" />{{ end }}
+{{- with .Next }}<link rel="next" href="{{ .URL | absURL }}" />{{ end }}
+{{- end }}
+{{ end }}
+
 {{ define "main" }}
 <div class="container">
 
