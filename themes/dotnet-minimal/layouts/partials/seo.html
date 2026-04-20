@@ -41,6 +41,21 @@
 <meta name="robots" content="index, follow" />
 {{- end }}
 
+<!-- hreflang for multilingual SEO -->
+{{- range .AllTranslations }}
+<link rel="alternate" hreflang="{{ .Language.LanguageCode }}" href="{{ .Permalink }}" />
+{{- end }}
+{{- $xDefault := "" -}}
+{{- range .AllTranslations }}
+  {{- if eq .Language.Lang "en" }}{{ $xDefault = .Permalink }}{{ end }}
+{{- end }}
+{{- with $xDefault }}<link rel="alternate" hreflang="x-default" href="{{ . }}" />{{ end }}
+
+<!-- Author -->
+{{- if and .IsPage .Params.author }}
+<meta name="author" content="{{ .Params.author }}" />
+{{- end }}
+
 <!-- Open Graph -->
 <meta property="og:title" content="{{ $title }}" />
 <meta property="og:description" content="{{ $description | plainify | truncate 200 }}" />
