@@ -43,8 +43,7 @@ map.Pins.Add(new Pin
 ```csharp
 map.ClusterClicked += async (sender, e) =>
 {
-    string names = string.Join("
-", e.Pins.Select(p => p.Label));
+    string names = string.Join("\n", e.Pins.Select(p => p.Label));
     await DisplayAlert($"Cluster ({e.Pins.Count} pins)", names, "OK");
 };
 ```

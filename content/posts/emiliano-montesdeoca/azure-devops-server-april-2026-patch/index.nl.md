@@ -1,5 +1,5 @@
 ---
-title: "Azure DevOps Server April 2026 Patch — PR-afrondingsopleossing en Beveiligingsupdates"
+title: "Azure DevOps Server April 2026 Patch — PR-afrondingsoplossing en Beveiligingsupdates"
 date: 2026-04-15
 author: "Emiliano Montesdeoca"
 description: "Azure DevOps Server krijgt Patch 3 met een oplossing voor PR-afrondingsfouten, verbeterde afmeldvalidatie en herstelde GitHub Enterprise Server PAT-verbindingen."
