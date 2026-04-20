@@ -49,3 +49,15 @@ Allow: /
 
 User-agent: YouBot
 Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: Omgilibot
+Allow: /

@@ -96,8 +96,10 @@
 {{- if strings.HasSuffix . ".webp" }}{{- $imageType = "image/webp" -}}{{- end }}
 <meta property="og:image" content="{{ . }}" />
 <meta property="og:image:type" content="{{ $imageType }}" />
+{{- if strings.HasSuffix . (strings.TrimPrefix "/" $.Site.Params.defaultImage) }}
 <meta property="og:image:width" content="1536" />
 <meta property="og:image:height" content="1024" />
+{{- end }}
 <meta property="og:image:alt" content="{{ $imageAlt }}" />
 {{- end }}
 
@@ -105,6 +107,19 @@
 <meta name="twitter:card" content="{{ if $image }}summary_large_image{{ else }}summary{{ end }}" />
 {{- with .Site.Params.twitter }}
 <meta name="twitter:site" content="@{{ . }}" />
+{{- end }}
+{{- if and .IsPage .Params.author }}
+  {{- $authorSlug := .Params.author | urlize }}
+  {{- $author := .Site.GetPage (printf "/authors/%s" $authorSlug) }}
+  {{- if not $author }}{{- $author = (index .Sites 0).GetPage (printf "/authors/%s" $authorSlug) }}{{- end }}
+  {{- if $author }}
+    {{- range $author.Params.socials }}
+      {{- if or (eq .platform "Twitter") (eq .platform "X") }}
+        {{- $handle := .url | replaceRE `https?://(www\.)?(twitter\.com|x\.com)/(@)?` "" | replaceRE `/.*` "" }}
+<meta name="twitter:creator" content="@{{ $handle }}" />
+      {{- end }}
+    {{- end }}
+  {{- end }}
 {{- end }}
 <meta name="twitter:title" content="{{ $title }}" />
 <meta name="twitter:description" content="{{ $description | plainify | truncate 200 }}" />
