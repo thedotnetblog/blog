@@ -1,0 +1,153 @@
+[nav_contribute]
+other = "ساهم"
+
+[nav_events]
+other = "الفعاليات"
+
+[nav_authors]
+other = "الكتّاب"
+
+[nav_tags]
+other = "الوسوم"
+
+# ── Homepage ──
+[hero_eyebrow]
+other = "مدونة مجتمع .NET"
+
+[hero_title]
+other = "حيث <span class=\"accent\">مطوّرو .NET</span>"
+
+[hero_desc]
+other = "تحليلات معمّقة، ودروس تعليمية، وقصص مجتمعية — كتبها مطوّرون، لمطوّرين."
+
+[typewriter_phrases]
+other = "يشاركون ما يبنون.|يتعلمون من بعضهم.|ينشرون أسرع مع .NET 10.|يحبون المصدر المفتوح.|يبنون تطبيقات سحابية.|يستكشفون الذكاء الاصطناعي.|يتقنون Blazor وSignalR.|يتطورون معاً.|يكتبون كوداً أقل.|يدفعون المنصة للأمام."
+
+[hero_cta_blog]
+other = "اقرأ المدونة →"
+
+[hero_cta_authors]
+other = "تعرّف على الكتّاب"
+
+[section_latest_posts]
+other = "// أحدث المقالات"
+
+[section_all_posts]
+other = "جميع المقالات →"
+
+[section_upcoming_events]
+other = "// الفعاليات القادمة"
+
+[section_all_events]
+other = "جميع الفعاليات →"
+
+[no_events]
+other = "// لا توجد فعاليات قادمة."
+
+[load_more_posts]
+other = "تحميل المزيد من المقالات ↓"
+
+# ── Posts ──
+[posts_page_eyebrow]
+other = "// المقالات"
+
+[posts_page_title]
+other = "المدونة"
+
+[no_posts]
+other = "// لا توجد مقالات بعد — تحقق لاحقاً."
+
+[min_read]
+other = "دقائق قراءة"
+
+[share_label]
+other = "شارك:"
+
+[view_source]
+other = "عرض الكود المصدري لهذا المقال على GitHub ↗"
+
+# ── Authors ──
+[authors_page_eyebrow]
+other = "// الكتّاب"
+
+[authors_page_title]
+other = "تعرّف على الكتّاب"
+
+[authors_page_desc]
+other = "الأشخاص وراء The .NET Blog."
+
+[posts_by]
+other = "// مقالات {{ .Name }}"
+
+[posts_count]
+one = "{{ .Count }} مقال"
+other = "{{ .Count }} مقالات"
+
+[posts_published]
+other = "منشور"
+
+[no_author_posts]
+other = "// لا توجد مقالات منشورة بعد."
+
+[view_author_source]
+other = "عرض الكود المصدري لصفحة الكاتب على GitHub ↗"
+
+# ── Events ──
+[events_page_eyebrow]
+other = "// الفعاليات"
+
+[events_page_title]
+other = "فعاليات المجتمع"
+
+[events_page_desc]
+other = "مؤتمرات، لقاءات، ندوات عبر الإنترنت وإصدارات — على خط زمني واحد."
+
+[no_events_scheduled]
+other = "// لا توجد فعاليات مجدولة بعد."
+
+[all_events_link]
+other = "← جميع الفعاليات"
+
+[view_event_source]
+other = "عرض الكود المصدري لهذه الفعالية على GitHub ↗"
+
+# ── Tags ──
+[tags_page_eyebrow]
+other = "// الوسوم"
+
+[tags_page_title]
+other = "جميع الوسوم"
+
+[tag_eyebrow]
+other = "// وسم"
+
+[all_tags_link]
+other = "← جميع الوسوم"
+
+# ── Footer ──
+[footer_copy]
+other = "من مطوّرين إلى مطوّرين"
+
+# ── Translations ──
+[translation_available]
+other = "هذا المقال متاح أيضاً بـ:"
+
+[translation_notice]
+other = "تمت ترجمة هذا المقال تلقائياً."
+
+[translation_original]
+other = "اقرأ النسخة الأصلية"
+
+# ── Language Selector ──
+[language_label]
+other = "اللغة"
+
+# ── Contribute ──
+[contribute_page_eyebrow]
+other = "// ساهم"
+
+[contribute_page_title]
+other = "اكتب لـ The .NET Blog"
+
+[contribute_page_desc]
+other = "شارك معرفتك مع مجتمع .NET."

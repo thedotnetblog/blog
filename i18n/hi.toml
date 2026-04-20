@@ -1,0 +1,153 @@
+[nav_contribute]
+other = "योगदान करें"
+
+[nav_events]
+other = "इवेंट्स"
+
+[nav_authors]
+other = "लेखक"
+
+[nav_tags]
+other = "टैग्स"
+
+# ── Homepage ──
+[hero_eyebrow]
+other = "द .NET कम्युनिटी ब्लॉग"
+
+[hero_title]
+other = "जहाँ <span class=\"accent\">.NET डेवलपर्स</span>"
+
+[hero_desc]
+other = "गहन अन्वेषण, ट्यूटोरियल और कम्युनिटी कहानियाँ — डेवलपर्स द्वारा, डेवलपर्स के लिए।"
+
+[typewriter_phrases]
+other = "अपना निर्माण साझा करते हैं.|एक-दूसरे से सीखते हैं.|.NET 10 के साथ तेज़ी से शिप करते हैं.|ओपन सोर्स से प्यार करते हैं.|क्लाउड-नेटिव ऐप्स बनाते हैं.|AI को एक्सप्लोर करते हैं.|Blazor और SignalR में महारत हासिल करते हैं.|साथ मिलकर आगे बढ़ते हैं.|कम बॉयलरप्लेट लिखते हैं.|प्लेटफ़ॉर्म को आगे बढ़ाते हैं."
+
+[hero_cta_blog]
+other = "ब्लॉग पढ़ें →"
+
+[hero_cta_authors]
+other = "लेखकों से मिलें"
+
+[section_latest_posts]
+other = "// नवीनतम पोस्ट"
+
+[section_all_posts]
+other = "सभी पोस्ट →"
+
+[section_upcoming_events]
+other = "// आगामी इवेंट्स"
+
+[section_all_events]
+other = "सभी इवेंट्स →"
+
+[no_events]
+other = "// कोई आगामी इवेंट नहीं।"
+
+[load_more_posts]
+other = "अधिक पोस्ट लोड करें ↓"
+
+# ── Posts ──
+[posts_page_eyebrow]
+other = "// पोस्ट"
+
+[posts_page_title]
+other = "ब्लॉग"
+
+[no_posts]
+other = "// अभी तक कोई पोस्ट नहीं — जल्द वापस देखें।"
+
+[min_read]
+other = "मिनट पढ़ें"
+
+[share_label]
+other = "साझा करें:"
+
+[view_source]
+other = "GitHub पर इस पोस्ट का सोर्स कोड देखें ↗"
+
+# ── Authors ──
+[authors_page_eyebrow]
+other = "// लेखक"
+
+[authors_page_title]
+other = "लेखकों से मिलें"
+
+[authors_page_desc]
+other = "द .NET ब्लॉग के पीछे के लोग।"
+
+[posts_by]
+other = "// {{ .Name }} द्वारा पोस्ट"
+
+[posts_count]
+one = "{{ .Count }} पोस्ट"
+other = "{{ .Count }} पोस्ट"
+
+[posts_published]
+other = "प्रकाशित"
+
+[no_author_posts]
+other = "// अभी तक कोई पोस्ट प्रकाशित नहीं।"
+
+[view_author_source]
+other = "GitHub पर इस लेखक पृष्ठ का सोर्स कोड देखें ↗"
+
+# ── Events ──
+[events_page_eyebrow]
+other = "// इवेंट्स"
+
+[events_page_title]
+other = "कम्युनिटी इवेंट्स"
+
+[events_page_desc]
+other = "सम्मेलन, मीटअप, वेबिनार और रिलीज़ — एक टाइमलाइन पर।"
+
+[no_events_scheduled]
+other = "// अभी तक कोई इवेंट निर्धारित नहीं।"
+
+[all_events_link]
+other = "← सभी इवेंट्स"
+
+[view_event_source]
+other = "GitHub पर इस इवेंट का सोर्स कोड देखें ↗"
+
+# ── Tags ──
+[tags_page_eyebrow]
+other = "// टैग्स"
+
+[tags_page_title]
+other = "सभी टैग्स"
+
+[tag_eyebrow]
+other = "// टैग"
+
+[all_tags_link]
+other = "← सभी टैग्स"
+
+# ── Footer ──
+[footer_copy]
+other = "डेवलपर्स से डेवलपर्स के लिए"
+
+# ── Translations ──
+[translation_available]
+other = "यह पोस्ट इसमें भी उपलब्ध है:"
+
+[translation_notice]
+other = "यह पोस्ट स्वचालित रूप से अनुवादित है।"
+
+[translation_original]
+other = "मूल पढ़ें"
+
+# ── Language Selector ──
+[language_label]
+other = "भाषा"
+
+# ── Contribute ──
+[contribute_page_eyebrow]
+other = "// योगदान"
+
+[contribute_page_title]
+other = "The .NET Blog के लिए लिखें"
+
+[contribute_page_desc]
+other = ".NET कम्युनिटी के साथ अपना ज्ञान साझा करें।"

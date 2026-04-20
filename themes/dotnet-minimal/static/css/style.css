@@ -2338,3 +2338,93 @@ hr {
 .translation-link:hover {
   color: var(--accent-2);
 }
+
+/* ── RTL Support (Arabic) ───────────────────── */
+[dir="rtl"] {
+  text-align: right;
+  font-family: 'Segoe UI', 'Tahoma', 'Arial', system-ui, sans-serif;
+}
+
+[dir="rtl"] .nav-inner {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .nav-links {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .site-logo {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] blockquote {
+  border-left: none;
+  border-right: 3px solid var(--accent);
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+
+[dir="rtl"] ul,
+[dir="rtl"] ol {
+  padding-left: 0;
+  padding-right: 1.4em;
+}
+
+[dir="rtl"] .hero-eyebrow {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .hero-eyebrow::before {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+[dir="rtl"] .post-meta {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .tag-list {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .post-translations-label {
+  margin-right: 0;
+  margin-left: .3rem;
+}
+
+[dir="rtl"] .lang-dropdown {
+  right: auto;
+  left: 0;
+}
+
+[dir="rtl"] .post-nav {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .footer-inner {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .card-meta {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .author-card {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+[dir="rtl"] .share-bar {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] code,
+[dir="rtl"] pre {
+  direction: ltr;
+  text-align: left;
+}
+
+@media (max-width: 680px) {
+  [dir="rtl"] .nav-links.open {
+    align-items: flex-end;
+  }
+}
