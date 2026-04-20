@@ -1,0 +1,153 @@
+[nav_contribute]
+other = "bijdragen"
+
+[nav_events]
+other = "evenementen"
+
+[nav_authors]
+other = "auteurs"
+
+[nav_tags]
+other = "tags"
+
+# ── Homepage ──
+[hero_eyebrow]
+other = "De .NET Communityblog"
+
+[hero_title]
+other = "Waar <span class=\"accent\">.NET-ontwikkelaars</span>"
+
+[hero_desc]
+other = "Diepgaande analyses, tutorials en communityverhalen — geschreven door ontwikkelaars, voor ontwikkelaars."
+
+[typewriter_phrases]
+other = "delen wat ze bouwen.|van elkaar leren.|sneller shippen met .NET 10.|van open source houden.|cloud-native apps bouwen.|AI verkennen.|Blazor en SignalR beheersen.|samen groeien.|minder boilerplate schrijven.|het platform vooruithelpen."
+
+[hero_cta_blog]
+other = "Lees de blog →"
+
+[hero_cta_authors]
+other = "Ontmoet de auteurs"
+
+[section_latest_posts]
+other = "// nieuwste berichten"
+
+[section_all_posts]
+other = "alle berichten →"
+
+[section_upcoming_events]
+other = "// aankomende evenementen"
+
+[section_all_events]
+other = "alle evenementen →"
+
+[no_events]
+other = "// geen aankomende evenementen."
+
+[load_more_posts]
+other = "Meer berichten laden ↓"
+
+# ── Posts ──
+[posts_page_eyebrow]
+other = "// berichten"
+
+[posts_page_title]
+other = "Blog"
+
+[no_posts]
+other = "// nog geen berichten — kom snel terug."
+
+[min_read]
+other = "minuten lezen"
+
+[share_label]
+other = "Delen:"
+
+[view_source]
+other = "Bekijk de broncode van dit bericht op GitHub ↗"
+
+# ── Authors ──
+[authors_page_eyebrow]
+other = "// auteurs"
+
+[authors_page_title]
+other = "Ontmoet de Auteurs"
+
+[authors_page_desc]
+other = "De mensen achter The .NET Blog."
+
+[posts_by]
+other = "// berichten van {{ .Name }}"
+
+[posts_count]
+one = "{{ .Count }} bericht"
+other = "{{ .Count }} berichten"
+
+[posts_published]
+other = "gepubliceerd"
+
+[no_author_posts]
+other = "// nog geen berichten gepubliceerd."
+
+[view_author_source]
+other = "Bekijk de broncode van deze auteurspagina op GitHub ↗"
+
+# ── Events ──
+[events_page_eyebrow]
+other = "// evenementen"
+
+[events_page_title]
+other = "Community-evenementen"
+
+[events_page_desc]
+other = "Conferenties, meetups, webinars en releases — op één tijdlijn."
+
+[no_events_scheduled]
+other = "// nog geen evenementen gepland."
+
+[all_events_link]
+other = "← Alle evenementen"
+
+[view_event_source]
+other = "Bekijk de broncode van dit evenement op GitHub ↗"
+
+# ── Tags ──
+[tags_page_eyebrow]
+other = "// tags"
+
+[tags_page_title]
+other = "Alle Tags"
+
+[tag_eyebrow]
+other = "// tag"
+
+[all_tags_link]
+other = "← Alle tags"
+
+# ── Footer ──
+[footer_copy]
+other = "Van ontwikkelaars voor ontwikkelaars"
+
+# ── Translations ──
+[translation_available]
+other = "Dit bericht is ook beschikbaar in:"
+
+[translation_notice]
+other = "Dit bericht is automatisch vertaald."
+
+[translation_original]
+other = "Lees het origineel"
+
+# ── Language Selector ──
+[language_label]
+other = "Taal"
+
+# ── Contribute ──
+[contribute_page_eyebrow]
+other = "// bijdragen"
+
+[contribute_page_title]
+other = "Schrijf voor The .NET Blog"
+
+[contribute_page_desc]
+other = "Deel je kennis met de .NET-community."

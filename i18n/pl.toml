@@ -1,0 +1,153 @@
+[nav_contribute]
+other = "współtwórz"
+
+[nav_events]
+other = "wydarzenia"
+
+[nav_authors]
+other = "autorzy"
+
+[nav_tags]
+other = "tagi"
+
+# ── Homepage ──
+[hero_eyebrow]
+other = "Blog Społeczności .NET"
+
+[hero_title]
+other = "Gdzie <span class=\"accent\">deweloperzy .NET</span>"
+
+[hero_desc]
+other = "Dogłębne analizy, tutoriale i historie społeczności — pisane przez deweloperów, dla deweloperów."
+
+[typewriter_phrases]
+other = "dzielą się tym, co tworzą.|uczą się od siebie nawzajem.|szybciej wdrażają z .NET 10.|kochają open source.|budują aplikacje cloud-native.|eksplorują AI.|opanowują Blazor i SignalR.|razem się rozwijają.|piszą mniej kodu boilerplate.|posuwają platformę naprzód."
+
+[hero_cta_blog]
+other = "Czytaj blog →"
+
+[hero_cta_authors]
+other = "Poznaj autorów"
+
+[section_latest_posts]
+other = "// najnowsze posty"
+
+[section_all_posts]
+other = "wszystkie posty →"
+
+[section_upcoming_events]
+other = "// nadchodzące wydarzenia"
+
+[section_all_events]
+other = "wszystkie wydarzenia →"
+
+[no_events]
+other = "// brak nadchodzących wydarzeń."
+
+[load_more_posts]
+other = "Załaduj więcej postów ↓"
+
+# ── Posts ──
+[posts_page_eyebrow]
+other = "// posty"
+
+[posts_page_title]
+other = "Blog"
+
+[no_posts]
+other = "// brak postów — wróć wkrótce."
+
+[min_read]
+other = "minut czytania"
+
+[share_label]
+other = "Udostępnij:"
+
+[view_source]
+other = "Zobacz kod źródłowy tego posta na GitHub ↗"
+
+# ── Authors ──
+[authors_page_eyebrow]
+other = "// autorzy"
+
+[authors_page_title]
+other = "Poznaj Autorów"
+
+[authors_page_desc]
+other = "Ludzie stojący za The .NET Blog."
+
+[posts_by]
+other = "// posty przez {{ .Name }}"
+
+[posts_count]
+one = "{{ .Count }} post"
+other = "{{ .Count }} postów"
+
+[posts_published]
+other = "opublikowanych"
+
+[no_author_posts]
+other = "// brak opublikowanych postów."
+
+[view_author_source]
+other = "Zobacz kod źródłowy tej strony autora na GitHub ↗"
+
+# ── Events ──
+[events_page_eyebrow]
+other = "// wydarzenia"
+
+[events_page_title]
+other = "Wydarzenia Społeczności"
+
+[events_page_desc]
+other = "Konferencje, spotkania, webinary i wydania — na jednej osi czasu."
+
+[no_events_scheduled]
+other = "// brak zaplanowanych wydarzeń."
+
+[all_events_link]
+other = "← Wszystkie wydarzenia"
+
+[view_event_source]
+other = "Zobacz kod źródłowy tego wydarzenia na GitHub ↗"
+
+# ── Tags ──
+[tags_page_eyebrow]
+other = "// tagi"
+
+[tags_page_title]
+other = "Wszystkie Tagi"
+
+[tag_eyebrow]
+other = "// tag"
+
+[all_tags_link]
+other = "← Wszystkie tagi"
+
+# ── Footer ──
+[footer_copy]
+other = "Od deweloperów dla deweloperów"
+
+# ── Translations ──
+[translation_available]
+other = "Ten post jest dostępny również w:"
+
+[translation_notice]
+other = "Ten post został automatycznie przetłumaczony."
+
+[translation_original]
+other = "Czytaj oryginał"
+
+# ── Language Selector ──
+[language_label]
+other = "Język"
+
+# ── Contribute ──
+[contribute_page_eyebrow]
+other = "// współtwórz"
+
+[contribute_page_title]
+other = "Pisz dla The .NET Blog"
+
+[contribute_page_desc]
+other = "Podziel się swoją wiedzą ze społecznością .NET."

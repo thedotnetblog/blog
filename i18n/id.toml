@@ -1,0 +1,153 @@
+[nav_contribute]
+other = "kontribusi"
+
+[nav_events]
+other = "acara"
+
+[nav_authors]
+other = "penulis"
+
+[nav_tags]
+other = "tagar"
+
+# ── Homepage ──
+[hero_eyebrow]
+other = "Blog Komunitas .NET"
+
+[hero_title]
+other = "Tempat <span class=\"accent\">developer .NET</span>"
+
+[hero_desc]
+other = "Pembahasan mendalam, tutorial, dan cerita komunitas — ditulis oleh developer, untuk developer."
+
+[typewriter_phrases]
+other = "berbagi apa yang mereka bangun.|belajar dari satu sama lain.|ship lebih cepat dengan .NET 10.|mencintai open source.|membangun aplikasi cloud-native.|mengeksplorasi AI.|menguasai Blazor dan SignalR.|berkembang bersama.|menulis lebih sedikit boilerplate.|mendorong platform maju."
+
+[hero_cta_blog]
+other = "Baca Blog →"
+
+[hero_cta_authors]
+other = "Kenali Penulis"
+
+[section_latest_posts]
+other = "// postingan terbaru"
+
+[section_all_posts]
+other = "semua postingan →"
+
+[section_upcoming_events]
+other = "// acara mendatang"
+
+[section_all_events]
+other = "semua acara →"
+
+[no_events]
+other = "// tidak ada acara mendatang."
+
+[load_more_posts]
+other = "Muat Lebih Banyak ↓"
+
+# ── Posts ──
+[posts_page_eyebrow]
+other = "// postingan"
+
+[posts_page_title]
+other = "Blog"
+
+[no_posts]
+other = "// belum ada postingan — kembali lagi nanti."
+
+[min_read]
+other = "menit baca"
+
+[share_label]
+other = "Bagikan:"
+
+[view_source]
+other = "Lihat kode sumber postingan ini di GitHub ↗"
+
+# ── Authors ──
+[authors_page_eyebrow]
+other = "// penulis"
+
+[authors_page_title]
+other = "Kenali Para Penulis"
+
+[authors_page_desc]
+other = "Orang-orang di balik The .NET Blog."
+
+[posts_by]
+other = "// postingan oleh {{ .Name }}"
+
+[posts_count]
+one = "{{ .Count }} postingan"
+other = "{{ .Count }} postingan"
+
+[posts_published]
+other = "diterbitkan"
+
+[no_author_posts]
+other = "// belum ada postingan yang diterbitkan."
+
+[view_author_source]
+other = "Lihat kode sumber halaman penulis ini di GitHub ↗"
+
+# ── Events ──
+[events_page_eyebrow]
+other = "// acara"
+
+[events_page_title]
+other = "Acara Komunitas"
+
+[events_page_desc]
+other = "Konferensi, meetup, webinar, dan rilis — dalam satu linimasa."
+
+[no_events_scheduled]
+other = "// belum ada acara yang dijadwalkan."
+
+[all_events_link]
+other = "← Semua Acara"
+
+[view_event_source]
+other = "Lihat kode sumber acara ini di GitHub ↗"
+
+# ── Tags ──
+[tags_page_eyebrow]
+other = "// tagar"
+
+[tags_page_title]
+other = "Semua Tagar"
+
+[tag_eyebrow]
+other = "// tagar"
+
+[all_tags_link]
+other = "← Semua Tagar"
+
+# ── Footer ──
+[footer_copy]
+other = "Dari developer untuk developer"
+
+# ── Translations ──
+[translation_available]
+other = "Postingan ini juga tersedia dalam:"
+
+[translation_notice]
+other = "Postingan ini diterjemahkan secara otomatis."
+
+[translation_original]
+other = "Baca yang asli"
+
+# ── Language Selector ──
+[language_label]
+other = "Bahasa"
+
+# ── Contribute ──
+[contribute_page_eyebrow]
+other = "// kontribusi"
+
+[contribute_page_title]
+other = "Tulis untuk The .NET Blog"
+
+[contribute_page_desc]
+other = "Bagikan pengetahuan Anda dengan komunitas .NET."
