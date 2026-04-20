@@ -71,6 +71,14 @@
     "@type": "Organization",
     "name": "{{ .Site.Title }}",
     "url": "{{ .Site.BaseURL }}"
+    {{- with .Site.Params.logo }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ if strings.HasPrefix . "http" }}{{ . }}{{ else }}{{ printf "%s%s" $.Site.BaseURL (strings.TrimPrefix "/" .) }}{{ end }}",
+      "width": 1536,
+      "height": 1024
+    }
+    {{- end }}
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
@@ -96,6 +104,7 @@
   "description": "{{ with .Params.description }}{{ . | plainify }}{{ else }}{{ .Summary | plainify | truncate 200 }}{{ end }}",
   "url": "{{ .Permalink }}",
   "startDate": "{{ .Date.Format "2006-01-02" }}",
+  "eventStatus": "https://schema.org/EventScheduled",
   {{- with .Params.location }}
   "location": {
     "@type": "{{ if eq . "Virtual" }}VirtualLocation{{ else }}Place{{ end }}",

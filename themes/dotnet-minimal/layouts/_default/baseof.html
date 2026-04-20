@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang | default "en" }}"{{ with .Site.Params.dir }} dir="{{ . }}"{{ end }}>
+<html lang="{{ .Site.Language.Lang | default "en" }}"{{ with .Site.Params.dir }} dir="{{ . }}"{{ end }} prefix="og: https://ogp.me/ns#">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +7,15 @@
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}" />
 
   {{- partial "seo.html" . -}}
+
+  <!-- Theme color (light / dark) -->
+  <meta name="theme-color" content="#f8f9fb" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0d0f12" media="(prefers-color-scheme: dark)" />
+
+  <!-- DNS prefetch for third-party origins -->
+  {{- with .Site.Params.umami.src }}
+  <link rel="dns-prefetch" href="{{ . | replaceRE `(https?://[^/]+).*` `$1` }}" />
+  {{- end }}
 
   <!-- RSS Autodiscovery -->
   {{- with .OutputFormats.Get "RSS" }}
@@ -21,6 +30,7 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600;700&display=swap" /></noscript>
 
   <!-- Theme CSS -->
+  <link rel="preload" as="style" href="{{ "css/style.css" | relURL }}" />
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}" />
 
   <!-- Theme init (runs before paint to prevent flash) -->
@@ -46,6 +56,8 @@
   <link rel="alternate" type="text/plain" href="{{ "llms.txt" | absURL }}" title="LLM-readable summary" />
 
   {{- partial "umami.html" . -}}
+
+  {{ block "head_extra" . }}{{ end }}
 
   {{ hugo.Generator }}
 </head>
