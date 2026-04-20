@@ -9,7 +9,7 @@ tags:
   - patches
 ---
 
-Informació ràpida per als equips que executen Azure DevOps Server: Microsoft va llançar [el pegat 3 per a l'abril de 2026] (https://devblogs.microsoft.com/devops/april-patches-for-azure-devops-server/) amb tres solucions específiques.
+Informació ràpida per als equips que executen Azure DevOps Server: Microsoft va llançar [el pegat 3 per a l'abril de 2026](https://devblogs.microsoft.com/devops/april-patches-for-azure-devops-server/) amb tres solucions específiques.
 
 ## Què s'ha solucionat
 

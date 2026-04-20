@@ -22,7 +22,7 @@ PC Chan [va publicar el resum complet](https://devblogs.microsoft.com/azure-sdk/
 Aquest és el gran. La nova extensió `azure.ai.agents` afegeix un conjunt d'ordres que us ofereixen una experiència de bucle interior adequada per als agents d'IA:
 
 - `azd ai agent run`: inicia el vostre agent localment
-- <<CODI0>>: li envia missatges (locals o desplegats)
+- `azd ai agent invoke`: li envia missatges (locals o desplegats)
 - `azd ai agent show`: mostra l'estat i la salut del contenidor
 - `azd ai agent monitor`: transmet els registres dels contenidors en temps real
 

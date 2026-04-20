@@ -35,19 +35,19 @@ A continuació, al vostre projecte de consum, afegiu la integració d'EF Core:
 dotnet add package Aspire.MongoDB.EntityFrameworkCore
 ```
 
-I registre el teu <<CODI0>>:
+I registre el teu `DbContext`:
 
 ```csharp
 builder.AddMongoDbContext<MyDbContext>("mongodb", "mydb");
 ```
 
-A partir d'aquí, és EF Core estàndard. Defineix les teves entitats, utilitza el teu <<CODI0>> com ho faries amb qualsevol altre proveïdor. La integració gestiona l'agrupació de connexions, les traces d'OpenTelemetry i les comprovacions de salut darrere de les escenes.
+A partir d'aquí, és EF Core estàndard. Defineix les teves entitats, utilitza el teu `DbContext` com ho faries amb qualsevol altre proveïdor. La integració gestiona l'agrupació de connexions, les traces d'OpenTelemetry i les comprovacions de salut darrere de les escenes.
 
 Per als desenvolupadors de.NET que han estat utilitzant MongoDB amb el controlador en brut i cablejat manualment les cadenes de connexió, aquesta és una bona actualització de qualitat de vida. Obteniu l'abstracció completa d'EF Core sense perdre el descobriment del servei d'Aspire.
 
 ## Azure Data Lake Storage s'uneix a la festa
 
-La segona gran incorporació és una [integració d'Azure Data Lake Storage (ADLS)] (https://aspire.dev/integrations/cloud/azure/azure-storage-datalake/). Si esteu creant canalitzacions de dades, processos ETL o plataformes d'anàlisi, ara podeu connectar els recursos de Data Lake de la mateixa manera que connectaríeu qualsevol altra dependència d'Aspire.
+La segona gran incorporació és una [integració d'Azure Data Lake Storage (ADLS)](https://aspire.dev/integrations/cloud/azure/azure-storage-datalake/). Si esteu creant canalitzacions de dades, processos ETL o plataformes d'anàlisi, ara podeu connectar els recursos de Data Lake de la mateixa manera que connectaríeu qualsevol altra dependència d'Aspire.
 
 A l'AppHost:
 
