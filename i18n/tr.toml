@@ -1,0 +1,153 @@
+[nav_contribute]
+other = "katkıda bulun"
+
+[nav_events]
+other = "etkinlikler"
+
+[nav_authors]
+other = "yazarlar"
+
+[nav_tags]
+other = "etiketler"
+
+# ── Homepage ──
+[hero_eyebrow]
+other = ".NET Topluluk Blogu"
+
+[hero_title]
+other = "<span class=\"accent\">.NET geliştiricilerinin</span> buluştuğu yer"
+
+[hero_desc]
+other = "Derinlemesine analizler, öğreticiler ve topluluk hikayeleri — geliştiriciler tarafından, geliştiriciler için."
+
+[typewriter_phrases]
+other = "ne ürettiklerini paylaşırlar.|birbirlerinden öğrenirler.|.NET 10 ile daha hızlı yayınlarlar.|açık kaynağı severler.|bulut yerel uygulamalar yaparlar.|AI keşfederler.|Blazor ve SignalR ustasıdırlar.|birlikte büyürler.|daha az şablon kod yazarlar.|platformu ilerletirler."
+
+[hero_cta_blog]
+other = "Blogu Oku →"
+
+[hero_cta_authors]
+other = "Yazarlarla Tanış"
+
+[section_latest_posts]
+other = "// son yazılar"
+
+[section_all_posts]
+other = "tüm yazılar →"
+
+[section_upcoming_events]
+other = "// yaklaşan etkinlikler"
+
+[section_all_events]
+other = "tüm etkinlikler →"
+
+[no_events]
+other = "// yaklaşan etkinlik yok."
+
+[load_more_posts]
+other = "Daha Fazla Yazı Yükle ↓"
+
+# ── Posts ──
+[posts_page_eyebrow]
+other = "// yazılar"
+
+[posts_page_title]
+other = "Blog"
+
+[no_posts]
+other = "// henüz yazı yok — yakında tekrar kontrol edin."
+
+[min_read]
+other = "dakika okuma"
+
+[share_label]
+other = "Paylaş:"
+
+[view_source]
+other = "Bu yazının kaynak kodunu GitHub'da görüntüleyin ↗"
+
+# ── Authors ──
+[authors_page_eyebrow]
+other = "// yazarlar"
+
+[authors_page_title]
+other = "Yazarlarla Tanış"
+
+[authors_page_desc]
+other = "The .NET Blog'un arkasındaki insanlar."
+
+[posts_by]
+other = "// {{ .Name }} tarafından yazılar"
+
+[posts_count]
+one = "{{ .Count }} yazı"
+other = "{{ .Count }} yazı"
+
+[posts_published]
+other = "yayınlandı"
+
+[no_author_posts]
+other = "// henüz yayınlanmış yazı yok."
+
+[view_author_source]
+other = "Bu yazar sayfasının kaynak kodunu GitHub'da görüntüleyin ↗"
+
+# ── Events ──
+[events_page_eyebrow]
+other = "// etkinlikler"
+
+[events_page_title]
+other = "Topluluk Etkinlikleri"
+
+[events_page_desc]
+other = "Konferanslar, buluşmalar, web seminerleri ve yayınlar — tek bir zaman çizelgesinde."
+
+[no_events_scheduled]
+other = "// henüz planlanmış etkinlik yok."
+
+[all_events_link]
+other = "← Tüm Etkinlikler"
+
+[view_event_source]
+other = "Bu etkinliğin kaynak kodunu GitHub'da görüntüleyin ↗"
+
+# ── Tags ──
+[tags_page_eyebrow]
+other = "// etiketler"
+
+[tags_page_title]
+other = "Tüm Etiketler"
+
+[tag_eyebrow]
+other = "// etiket"
+
+[all_tags_link]
+other = "← Tüm Etiketler"
+
+# ── Footer ──
+[footer_copy]
+other = "Geliştiricilerden geliştiricilere"
+
+# ── Translations ──
+[translation_available]
+other = "Bu yazı şu dillerde de mevcut:"
+
+[translation_notice]
+other = "Bu yazı otomatik olarak çevrilmiştir."
+
+[translation_original]
+other = "Orijinali Oku"
+
+# ── Language Selector ──
+[language_label]
+other = "Dil"
+
+# ── Contribute ──
+[contribute_page_eyebrow]
+other = "// katkıda bulun"
+
+[contribute_page_title]
+other = "The .NET Blog için Yaz"
+
+[contribute_page_desc]
+other = "Bilgini .NET topluluğuyla paylaş."

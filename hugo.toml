@@ -55,6 +55,32 @@ buildFuture = true
     languageCode = "ru"
     languageName = "Русский"
     weight = 10
+  [languages.hi]
+    languageCode = "hi"
+    languageName = "हिन्दी"
+    weight = 11
+  [languages.pl]
+    languageCode = "pl"
+    languageName = "Polski"
+    weight = 12
+  [languages.tr]
+    languageCode = "tr"
+    languageName = "Türkçe"
+    weight = 13
+  [languages.ar]
+    languageCode = "ar"
+    languageName = "العربية"
+    weight = 14
+    [languages.ar.params]
+      dir = "rtl"
+  [languages.id]
+    languageCode = "id"
+    languageName = "Bahasa Indonesia"
+    weight = 15
+  [languages.nl]
+    languageCode = "nl"
+    languageName = "Nederlands"
+    weight = 16
 
 [markup]
   [markup.highlight]
