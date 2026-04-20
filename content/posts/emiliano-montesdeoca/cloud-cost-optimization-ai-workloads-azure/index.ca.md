@@ -13,7 +13,7 @@ tags:
 
 Si esteu creant aplicacions amb intel·ligència artificial a Azure en aquest moment, probablement heu notat alguna cosa: la vostra factura al núvol sembla diferent del que abans. No només més alt, sinó més estrany. Espinós. Difícil de predir.
 
-Microsoft acaba de publicar un article fantàstic sobre [principis d'optimització de costos del núvol que encara importen] (https://azure.microsoft.com/en-us/blog/cloud-cost-optimization-principles-that-still-matter/), i sincerament, el moment no podria ser millor. Perquè les càrregues de treball d'IA han canviat el joc pel que fa als costos.
+Microsoft acaba de publicar un article fantàstic sobre [principis d'optimització de costos del núvol que encara importen](https://azure.microsoft.com/en-us/blog/cloud-cost-optimization-principles-that-still-matter/), i sincerament, el moment no podria ser millor. Perquè les càrregues de treball d'IA han canviat el joc pel que fa als costos.
 
 ## Per què les càrregues de treball d'IA són diferents
 

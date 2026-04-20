@@ -25,8 +25,8 @@ Així és com resumiria el paisatge:
 |**AKS**|Compliment empresarial, multi-clúster, xarxes personalitzades|Tot (aquest és el punt)|
 |**Funcions d'Azure**|Tasques d'agent de curta durada i impulsades per esdeveniments|No gaire, veritat sense servidor|
 |**Servei d'aplicacions**|Agents HTTP simples, trànsit previsible|Desplegament, configuració d'escalat|
-|**Agents de foneria**|Agents opcionals de codi a través del portal/SDK|Gairebé res|
-|**Agents allotjats de la foneria**|Agents de marc personalitzats amb infraestructures gestionades|Només el vostre codi d'agent|
+|**Agents de Foundry**|Agents opcionals de codi a través del portal/SDK|Gairebé res|
+|**Agents allotjats de Foundry**|Agents de marc personalitzats amb infraestructures gestionades|Només el vostre codi d'agent|
 
 Els quatre primers són càlculs de propòsit general: *podeu* executar-hi agents, però no estaven dissenyats per a això. Els dos últims són nadius dels agents: entenen les converses, les trucades d'eines i els cicles de vida dels agents com a conceptes de primera classe.
 
@@ -97,7 +97,7 @@ No Redis. No hi ha botiga de sessions de Cosmos DB. No hi ha programari intermed
 
 Després de revisar les sis opcions, aquí teniu el meu model mental ràpid:
 
-1. **Necessites zero infraestructura?** → Agents de fundició (portal/SDK, sense contenidors)
+1. **Necessites zero infraestructura?** → Agents de Foundry (portal/SDK, sense contenidors)
 2. **Tens un codi d'agent personalitzat però vols un allotjament gestionat?** → Agents allotjats de Foundry
 3. **Necessiteu tasques d'agent de curta durada i basades en esdeveniments?** → Azure Functions
 4. **Necessites el màxim control dels contenidors sense K8?** → Aplicacions de contenidors

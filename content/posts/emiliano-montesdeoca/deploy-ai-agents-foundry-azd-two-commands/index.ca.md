@@ -30,8 +30,8 @@ Això és tot. Dues ordres. `azd ai agent init` arma la infraestructura com a co
 
 L'ordre `init` genera plantilles de bíceps reals i inspeccionables al vostre repositori:
 
-- Un **Recurs de foneria** (contenidor de primer nivell)
-- Un **Projecte de foneria** (on viu el vostre agent)
+- Un **Recurs de Foundry** (contenidor de primer nivell)
+- Un **Projecte de Foundry** (on viu el vostre agent)
 - **Configuració del model de desplegament** (GPT-4o, etc.)
 - **Identitat gestionada** amb assignacions de rol RBAC adequades
 - `azure.yaml` per al mapa de serveis
@@ -67,13 +67,13 @@ Aquí teniu la referència ràpida:
 
 |Comandament|Què fa|
 |---------|-------------|
-|<<CODI0>>|Armar un projecte d'agent de foneria amb IaC|
-|<<CODI0>>|Proveïu els recursos d'Azure i implementeu l'agent|
-|<<CODI0>>|Envieu sol·licituds a l'agent local o remot|
-|<<CODI0>>|Executeu l'agent localment per al desenvolupament|
-|<<CODI0>>|Transmet els registres en temps real de l'agent publicat|
-|<<CODI0>>|Comproveu l'estat i l'estat de l'agent|
-|<<CODI0>>|Netegeu tots els recursos d'Azure|
+|`azd ai agent init`|Armar un projecte d'agent de Foundry amb IaC|
+|`azd up`|Proveïu els recursos d'Azure i implementeu l'agent|
+|`azd ai agent invoke`|Envieu sol·licituds a l'agent local o remot|
+|`azd ai agent run`|Executeu l'agent localment per al desenvolupament|
+|`azd ai agent monitor`|Transmet els registres en temps real de l'agent publicat|
+|`azd ai agent show`|Comproveu l'estat i l'estat de l'agent|
+|`azd down`|Netegeu tots els recursos d'Azure|
 
 ## Per què això és important per als desenvolupadors de.NET
 

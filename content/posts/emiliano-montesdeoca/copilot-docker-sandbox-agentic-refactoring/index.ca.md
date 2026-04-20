@@ -13,7 +13,7 @@ tags:
 
 Si heu utilitzat el mode d'agent de Copilot per a qualsevol cosa més enllà de petites edicions, coneixeu el dolor. Cada escriptura de fitxers, cada ordre del terminal: un altre indicador de permís. Ara imagineu-ho fent servir 50 projectes. No és divertit.
 
-L'equip d'Azure acaba de publicar una publicació sobre [Docker Sandbox for GitHub Copilot agents] (https://devblogs.microsoft.com/all-things-azure/best-of-both-worlds-for-agentic-refactoring-github-copilot-microvms-via-docker-sandbox/), i sincerament, aquesta és una de les millores d'eines d'agents més pràctiques que he vist. Utilitza microVMs per oferir a Copilot un entorn totalment aïllat on es pot desenredar: instal·lar paquets, executar compilacions, executar proves, sense tocar el vostre sistema amfitrió.
+L'equip d'Azure acaba de publicar una publicació sobre [Docker Sandbox for GitHub Copilot agents](https://devblogs.microsoft.com/all-things-azure/best-of-both-worlds-for-agentic-refactoring-github-copilot-microvms-via-docker-sandbox/), i sincerament, aquesta és una de les millores d'eines d'agents més pràctiques que he vist. Utilitza microVMs per oferir a Copilot un entorn totalment aïllat on es pot desenredar: instal·lar paquets, executar compilacions, executar proves, sense tocar el vostre sistema amfitrió.
 
 ## Què us ofereix realment Docker Sandbox
 
