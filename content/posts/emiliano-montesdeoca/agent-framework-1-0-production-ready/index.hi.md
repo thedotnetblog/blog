@@ -1,8 +1,8 @@
 ---
-title: "Microsoft Agent Framework 1.0 लॉन्च — .NET डेवलपर्स के लिए वास्तव में क्या मायने रखता है"
+title: "Microsoft Agent Framework 1.0 पर पहुँचा — .NET Developers के लिए असल में क्या मायने रखता है"
 date: 2026-04-03
 author: "Emiliano Montesdeoca"
-description: "Microsoft Agent Framework 1.0 स्थिर APIs, मल्टी-एजेंट ऑर्केस्ट्रेशन और हर प्रमुख AI प्रोवाइडर के लिए कनेक्टर्स के साथ प्रोडक्शन-रेडी है। एक .NET डेवलपर के रूप में आपको क्या जानना चाहिए।"
+description: "Microsoft Agent Framework 1.0 production-ready है — stable APIs, multi-agent orchestration, और हर प्रमुख AI provider के लिए connectors के साथ। एक .NET developer के रूप में आपको यह जानना चाहिए।"
 tags:
   - agent-framework
   - dotnet
@@ -14,17 +14,17 @@ tags:
 
 > *यह पोस्ट स्वचालित रूप से अनुवादित है। मूल के लिए, [यहाँ क्लिक करें]({{< ref "agent-framework-1-0-production-ready" >}}).*
 
-अगर आप Semantic Kernel और AutoGen के शुरुआती दिनों से Agent Framework की यात्रा को फॉलो कर रहे हैं, तो यह खबर महत्वपूर्ण है। Microsoft Agent Framework ने अभी [वर्शन 1.0 हासिल किया है](https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/) — प्रोडक्शन-रेडी, स्थिर APIs, दीर्घकालिक सपोर्ट की प्रतिबद्धता। यह .NET और Python दोनों के लिए उपलब्ध है, और वास्तव में असली वर्कलोड के लिए तैयार है।
+अगर आप Agent Framework की यात्रा को Semantic Kernel और AutoGen के शुरुआती दिनों से follow कर रहे हैं, तो यह milestone महत्वपूर्ण है। Microsoft Agent Framework ने अभी-अभी [version 1.0](https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/) हासिल किया है — production-ready, stable APIs, long-term support का वादा। यह .NET और Python दोनों के लिए उपलब्ध है, और वाकई real workloads के लिए तैयार है।
 
-आइए घोषणा के शोर को काटकर उस पर ध्यान दें जो मायने रखता है अगर आप .NET के साथ AI-पावर्ड ऐप्स बना रहे हैं।
+घोषणा के शोर को काटकर, अगर आप .NET के साथ AI-powered apps बना रहे हैं तो जो मायने रखता है उस पर ध्यान देते हैं।
 
-## संक्षेप में
+## संक्षिप्त में
 
-Agent Framework 1.0 उस चीज़ को एकीकृत करता है जो पहले Semantic Kernel और AutoGen था, एक एकल ओपन-सोर्स SDK में। एक एजेंट एब्स्ट्रैक्शन। एक ऑर्केस्ट्रेशन इंजन। कई AI प्रोवाइडर। अगर आप एंटरप्राइज पैटर्न के लिए Semantic Kernel और रिसर्च-ग्रेड मल्टी-एजेंट वर्कफ़्लो के लिए AutoGen के बीच झूल रहे थे, तो अब रुक सकते हैं। यही वह एक SDK है।
+Agent Framework 1.0 जो पहले Semantic Kernel और AutoGen थे उन्हें एक single, open-source SDK में एकत्रित करता है। एक agent abstraction। एक orchestration engine। कई AI providers। अगर आप enterprise patterns के लिए Semantic Kernel और research-grade multi-agent workflows के लिए AutoGen के बीच झूलते रहे हैं, तो अब रुकिए। यही एक SDK है।
 
-## शुरू करना आश्चर्यजनक रूप से आसान है
+## शुरुआत करना लगभग आसान है
 
-यहाँ .NET में एक वर्किंग एजेंट है:
+.NET में एक working agent यह रहा:
 
 ```csharp
 // dotnet add package Microsoft.Agents.AI.OpenAI --prerelease
@@ -42,43 +42,51 @@ var agent = new AIProjectClient(endpoint: "https://your-project.services.ai.azur
 Console.WriteLine(await agent.RunAsync("Write a haiku about shipping 1.0."));
 ```
 
-बस इतना। कुछ ही लाइनें और आपके पास Azure Foundry के खिलाफ चलने वाला एक AI एजेंट है। Python का बराबर भी उतना ही संक्षिप्त है। जैसे-जैसे आगे बढ़ें, फंक्शन टूल्स, मल्टी-टर्न बातचीत और स्ट्रीमिंग जोड़ें — API सरफेस बिना अजीब हुए स्केल अप होती है।
+बस इतना। कुछ lines और आपके पास Azure Foundry के विरुद्ध एक AI agent चल रहा है। Python का equivalent उतना ही संक्षिप्त है। जैसे-जैसे आगे बढ़ें, function tools, multi-turn conversations, और streaming जोड़ें — API surface बड़ा होता जाता है लेकिन अजीब नहीं।
 
-## मल्टी-एजेंट ऑर्केस्ट्रेशन — यह असली चीज़ है
+## Multi-agent orchestration — यह असली चीज़ है
 
-सिंगल एजेंट डेमो के लिए ठीक हैं, लेकिन प्रोडक्शन सिनेरियो में आमतौर पर कोऑर्डिनेशन की ज़रूरत होती है। Agent Framework 1.0 Microsoft Research और AutoGen से सीधे बैटल-टेस्टेड ऑर्केस्ट्रेशन पैटर्न के साथ आता है:
+Single agents demos के लिए ठीक हैं, लेकिन production scenarios में अक्सर coordination की ज़रूरत होती है। Agent Framework 1.0 Microsoft Research और AutoGen से सीधे battle-tested orchestration patterns लेकर आता है:
 
-- **Sequential** — एजेंट क्रम में प्रोसेस करते हैं (writer → reviewer → editor)
-- **Concurrent** — कई एजेंट्स में समानांतर में फैनआउट करें, परिणामों को एकत्रित करें
-- **Handoff** — एक एजेंट intent के आधार पर दूसरे को डेलिगेट करता है
-- **Group chat** — कई एजेंट चर्चा करते हैं और एक समाधान पर पहुंचते हैं
-- **Magentic-One** — MSR का रिसर्च-ग्रेड मल्टी-एजेंट पैटर्न
+- **Sequential** — agents क्रम में process करते हैं (writer → reviewer → editor)
+- **Concurrent** — कई agents को parallel में fan out करें, results converge करें
+- **Handoff** — एक agent intent के आधार पर दूसरे को delegate करता है
+- **Group chat** — कई agents discuss करते हैं और solution पर converge होते हैं
+- **Magentic-One** — MSR का research-grade multi-agent pattern
 
-सभी स्ट्रीमिंग, चेकपॉइंटिंग, ह्यूमन-इन-द-लूप अप्रूवल और पॉज़/रेज़्यूम सपोर्ट करते हैं। चेकपॉइंटिंग वाला हिस्सा महत्वपूर्ण है — लंबे समय तक चलने वाले वर्कफ़्लो प्रोसेस रीस्टार्ट से बचे रहते हैं।
+सभी streaming, checkpointing, human-in-the-loop approvals, और pause/resume support करते हैं। Checkpointing हिस्सा बेहद ज़रूरी है — long-running workflows process restarts के बाद भी survive करते हैं। हम .NET developers के लिए जिन्होंने Azure Functions के साथ durable workflows बनाए हैं, यह जाना-पहचाना लगता है।
 
-## सबसे ज़्यादा मायने रखने वाले फीचर्स
+## सबसे ज़्यादा मायने रखने वाले features
 
-**Middleware हुक्स।** जानते हैं ASP.NET Core में middleware pipelines होते हैं? वही कॉन्सेप्ट, लेकिन एजेंट एग्जीक्यूशन के लिए। हर स्टेज को इंटरसेप्ट करें — content safety, logging, compliance policies जोड़ें — एजेंट प्रॉम्प्ट्स को छुए बिना।
+जो जानने लायक है उसकी मेरी shortlist:
 
-**Pluggable memory।** बातचीत का इतिहास, persistent key-value स्टेट, vector-based retrieval। अपना बैकएंड चुनें: Foundry Agent Service, Mem0, Redis, Neo4j, या खुद का रोल करें।
+**Middleware hooks।** आप जानते हैं कैसे ASP.NET Core में middleware pipelines होती हैं? वही concept, लेकिन agent execution के लिए। हर stage को intercept करें — agent prompts को छुए बिना content safety, logging, compliance policies जोड़ें। यही तरीका है agents को enterprise-ready बनाने का।
 
-**Declarative YAML एजेंट्स।** अपने एजेंट की instructions, tools, memory और orchestration topology को version-controlled YAML फ़ाइलों में परिभाषित करें। एक API कॉल से लोड और रन करें।
+**Pluggable memory।** Conversational history, persistent key-value state, vector-based retrieval। अपना backend चुनें: Foundry Agent Service, Mem0, Redis, Neo4j, या खुद का बनाएँ। Memory ही एक stateless LLM call को ऐसे agent में बदलती है जो वाकई context याद रखता है।
 
-**A2A और MCP सपोर्ट।** MCP (Model Context Protocol) एजेंट्स को बाहरी टूल्स को डायनामिक रूप से खोजने और उनका उपयोग करने देता है। A2A (Agent-to-Agent protocol) क्रॉस-रनटाइम कोलैबोरेशन सक्षम करता है।
+**Declarative YAML agents।** अपने agent की instructions, tools, memory, और orchestration topology को version-controlled YAML files में define करें। Single API call से load और run करें। जो teams बिना code redeploy किए agent behavior पर iterate करना चाहती हैं, उनके लिए यह game-changer है।
 
-## देखने लायक प्रीव्यू फीचर्स
+**A2A और MCP support।** MCP (Model Context Protocol) agents को dynamically external tools discover और invoke करने देता है। A2A (Agent-to-Agent protocol) cross-runtime collaboration सक्षम करता है — आपके .NET agents दूसरे frameworks में चल रहे agents के साथ coordinate कर सकते हैं। A2A 1.0 support जल्द आ रहा है।
 
-- **DevUI** — एजेंट एग्जीक्यूशन, मैसेज फ्लो और टूल कॉल्स को रियल टाइम में विज़ुअलाइज़ करने के लिए एक ब्राउज़र-बेस्ड लोकल डिबगर।
-- **GitHub Copilot SDK और Claude Code SDK** — Copilot या Claude को अपने ऑर्केस्ट्रेशन कोड से सीधे एजेंट हार्नेस के रूप में उपयोग करें।
-- **Agent Harness** — एजेंट्स को shell, file system और messaging loops तक एक्सेस देने वाला कस्टमाइज़ेबल लोकल रनटाइम।
-- **Skills** — पुन: उपयोग योग्य domain capability packages।
+## देखने लायक preview features
 
-## Semantic Kernel या AutoGen से माइग्रेट करना
+1.0 में कुछ features preview के रूप में ship हुए हैं — functional हैं लेकिन APIs बदल सकती हैं:
 
-अगर आपके पास मौजूदा Semantic Kernel या AutoGen कोड है, तो dedicated migration assistants हैं जो आपके कोड का विश्लेषण करते हैं और step-by-step माइग्रेशन प्लान जेनरेट करते हैं।
+- **DevUI** — agent execution, message flows, और tool calls को real time में visualize करने के लिए browser-based local debugger। Application Insights की तरह समझें, लेकिन agent reasoning के लिए।
+- **GitHub Copilot SDK और Claude Code SDK** — अपने orchestration code से सीधे Copilot या Claude को agent harness के रूप में use करें। एक coding-capable agent को उसी workflow में अपने दूसरे agents के साथ compose करें।
+- **Agent Harness** — agents को shell, file system, और messaging loops तक access देने वाला customizable local runtime। Coding agents और automation patterns सोचें।
+- **Skills** — reusable domain capability packages जो agents को out of the box structured capabilities देते हैं।
 
-## समापन
+## Semantic Kernel या AutoGen से migrate करना
 
-Agent Framework 1.0 वह प्रोडक्शन माइलस्टोन है जिसका एंटरप्राइज टीमें इंतज़ार कर रही थीं। स्थिर APIs, मल्टी-प्रोवाइडर सपोर्ट, और ऑर्केस्ट्रेशन पैटर्न जो वास्तव में स्केल पर काम करते हैं।
+अगर आपके पास existing Semantic Kernel या AutoGen code है, तो dedicated migration assistants हैं जो आपका code analyze करते हैं और step-by-step migration plans generate करते हैं। [Semantic Kernel migration guide](https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-semantic-kernel) और [AutoGen migration guide](https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-autogen) सब कुछ walk through करते हैं।
 
-फ्रेमवर्क [GitHub पर पूरी तरह ओपन सोर्स](https://github.com/microsoft/agent-framework) है। अगर आप "प्रोडक्शन में उपयोग करने के लिए सुरक्षित" का सिग्नल ढूंढ रहे थे — यही वह है।
+अगर आप RC packages पर हैं, तो 1.0 में upgrade करना बस एक version bump है।
+
+## Wrapping up
+
+Agent Framework 1.0 वह production milestone है जिसका enterprise teams को इंतज़ार था। Stable APIs, multi-provider support, orchestration patterns जो scale पर वाकई काम करते हैं, और Semantic Kernel और AutoGen दोनों से migration paths।
+
+Framework [GitHub पर पूरी तरह open source](https://github.com/microsoft/agent-framework) है, और आप आज ही `dotnet add package Microsoft.Agents.AI` से शुरुआत कर सकते हैं। हाथ गंदे करने के लिए [quickstart guide](https://learn.microsoft.com/en-us/agent-framework/get-started/) और [samples](https://github.com/microsoft/agent-framework) देखें।
+
+अगर आप "production में use करना safe है" का signal ढूंढ रहे थे — यह रहा।
