@@ -25,7 +25,15 @@
       "url": "{{ .Site.BaseURL }}",
       "name": "{{ .Site.Title }}",
       "description": "{{ .Site.Params.description }}",
-      "inLanguage": "{{ .Site.Language.Lang | default "en-US" }}"
+      "inLanguage": "{{ .Site.Language.Lang | default "en-US" }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ .Site.BaseURL }}posts/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
     },
     {
       "@type": "Blog",
@@ -90,7 +98,11 @@
   {{- end }}
   {{- with .Params.tags }},
   "keywords": "{{ delimit . ", " }}"
-  {{- end }}
+  {{- end }},
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": ["h1", ".post-description", ".post-summary"]
+  }
 }
 </script>
 

@@ -56,6 +56,11 @@
 <meta name="author" content="{{ .Params.author }}" />
 {{- end }}
 
+<!-- Keywords -->
+{{- with .Params.tags }}
+<meta name="keywords" content="{{ delimit . ", " }}" />
+{{- end }}
+
 <!-- Open Graph -->
 <meta property="og:title" content="{{ $title }}" />
 <meta property="og:description" content="{{ $description | plainify | truncate 200 }}" />
