@@ -1,8 +1,8 @@
 ---
-title: "Azure'da AI Agentlarınızı Nerede Barındırmalısınız? Pratik Bir Karar Kılavuzu"
+title: "Azure'da AI Ajanlarınızı Nerede Barındırmalısınız? Pratik Bir Karar Rehberi"
 date: 2026-04-15
 author: "Emiliano Montesdeoca"
-description: "Azure, AI agentlarını barındırmak için altı yol sunuyor — ham konteynerlerden tam yönetilen Foundry Hosted Agents'a kadar. .NET iş yükünüz için doğru olanı nasıl seçersiniz."
+description: "Azure, AI ajanları barındırmak için ham container'lardan tam yönetimli Foundry Hosted Agents'a kadar altı yol sunuyor. .NET iş yükünüz için doğru seçeneği nasıl belirleyeceğinizi burada bulabilirsiniz."
 tags:
   - azure
   - ai
@@ -15,41 +15,101 @@ tags:
 
 > *Bu yazı otomatik olarak çevrilmiştir. Orijinal için [buraya tıklayın]({{< ref "azure-ai-agent-hosting-options-guide" >}}).*
 
-.NET ile şu anda AI agentları geliştiriyorsanız, muhtemelen fark etmişsinizdir: Azure'da onları barındırmanın *pek çok* yolu var. Container Apps, AKS, Functions, App Service, Foundry Agents, Foundry Hosted Agents.
-
-Microsoft [Azure AI agent barındırma için kapsamlı bir kılavuz](https://devblogs.microsoft.com/all-things-azure/hostedagent/) yayımladı.
+Şu an .NET ile AI ajanları geliştiriyorsanız, muhtemelen bunu fark etmişsinizdir: Azure'da bunları barındırmanın *pek çok* yolu var. Container Apps, AKS, Functions, App Service, Foundry Agents, Foundry Hosted Agents — ve gerçekten birini seçmeniz gerekene kadar hepsi makul görünüyor. Microsoft, bunu netleştiren [Azure AI ajan barındırma için kapsamlı bir rehber](https://devblogs.microsoft.com/all-things-azure/hostedagent/) yayımladı ve ben bunu pratik bir .NET geliştirici perspektifinden ele almak istiyorum.
 
 ## Altı seçeneğe genel bakış
 
-| Seçenek | En iyi şunun için | Siz yönetirsiniz |
-|---------|-----------------|-----------------|
-| **Container Apps** | K8s karmaşıklığı olmadan tam konteyner kontrolü | Gözlemlenebilirlik, durum, yaşam döngüsü |
-| **AKS** | Enterprise uyumluluk, çoklu küme | Her şeyi |
-| **Azure Functions** | Olay güdümlü, kısa süreli görevler | Neredeyse hiçbir şeyi |
-| **App Service** | Basit HTTP agentları | Dağıtım, ölçeklendirme |
-| **Foundry Agents** | Kodsuz agentlar | Neredeyse hiçbir şeyi |
-| **Foundry Hosted Agents** | Özel framework agentları | Sadece agent kodunuzu |
+Ortamı şöyle özetlerim:
 
-## Foundry Hosted Agents — .NET agent geliştiricileri için tatlı nokta
+| Seçenek | En iyi kullanım | Siz yönetirsiniz |
+|---------|-----------------|------------------|
+| **Container Apps** | K8s karmaşıklığı olmadan tam container kontrolü | Gözlemlenebilirlik, durum, yaşam döngüsü |
+| **AKS** | Kurumsal uyumluluk, çok kümeli, özel ağ | Her şey (bu onun amacı) |
+| **Azure Functions** | Olay odaklı, kısa süren ajan görevleri | Çok az — gerçek serverless |
+| **App Service** | Basit HTTP ajanları, öngörülebilir trafik | Dağıtım, ölçeklendirme yapılandırması |
+| **Foundry Agents** | Portal/SDK aracılığıyla kod gerektirmeyen ajanlar | Neredeyse hiçbir şey |
+| **Foundry Hosted Agents** | Yönetilen altyapıyla özel framework ajanları | Yalnızca ajan kodunuz |
 
-Dağıtım gerçekten basit:
+İlk dördü genel amaçlı işlem — üzerlerinde ajan *çalıştırabilirsiniz*, ancak bunlar bunun için tasarlanmadı. Son ikisi ajan doğasında: konuşmaları, araç çağrılarını ve ajan yaşam döngülerini birinci sınıf kavramlar olarak anlıyorlar.
+
+## Foundry Hosted Agents — .NET ajan geliştiricileri için tatlı nokta
+
+İşte dikkatimi çeken kısım. Foundry Hosted Agents tam ortada duruyor: kendi kodunuzu çalıştırma esnekliğini alıyorsunuz (Semantic Kernel, Agent Framework, LangGraph — her neyse), ancak platform altyapıyı, gözlemlenebilirliği ve konuşma yönetimini üstleniyor.
+
+Kilit parça **Hosting Adapter** — ajan framework'ünüzü Foundry platformuna köprüleyen ince bir soyutlama katmanı. Microsoft Agent Framework için şöyle görünüyor:
+
+```python
+from azure.ai.agentserver.agentframework import from_agent_framework
+
+agent = ChatAgent(
+    chat_client=AzureAIAgentClient(...),
+    instructions="You are a helpful assistant.",
+    tools=[get_local_time],
+)
+
+if __name__ == "__main__":
+    from_agent_framework(agent).run()
+```
+
+Barındırma hikayenizin tamamı bu. Adapter, protokol çevirisini, server-sent events aracılığıyla streaming'i, konuşma geçmişini ve OpenTelemetry izlemeyi otomatik olarak hallediyor. Özel middleware yok, manuel bağlantı yok.
+
+## Dağıtım gerçekten basit
+
+Daha önce Container Apps'e ajan dağıttım ve çalışıyor, ancak durum yönetimi ve gözlemlenebilirlik için çok fazla yapıştırıcı kod yazıyorsunuz. Hosted Agents ve `azd` ile dağıtım şöyle:
 
 ```bash
+# AI agent uzantısını yükle
 azd ext install azure.ai.agents
+
+# Bir şablondan başlat
 azd ai agent init
+
+# Derle, gönder, dağıt — tamam
 azd up
 ```
 
-O tek `azd up` konteyneri oluşturur, ACR'a gönderir, Foundry projesini sağlar ve agentı başlatır.
+Tek `azd up` komutu, container'ınızı derliyor, ACR'a gönderiyor, Foundry projesini oluşturuyor, model endpoint'lerini dağıtıyor ve ajanınızı başlatıyor. Beş adım tek komuta indirgeniyor.
+
+## Yerleşik konuşma yönetimi
+
+Bu, üretimde en çok zaman kazandıran kısım. Kendi konuşma durum deposunuzu oluşturmak yerine, Hosted Agents bunu doğal olarak hallediyor:
+
+```python
+# Kalıcı bir konuşma oluştur
+conversation = openai_client.conversations.create()
+
+# İlk tur
+response1 = openai_client.responses.create(
+    conversation=conversation.id,
+    extra_body={"agent_reference": {"name": "MyAgent", "type": "agent_reference"}},
+    input="Unutma: favori numaram 42.",
+)
+
+# İkinci tur — bağlam korunuyor
+response2 = openai_client.responses.create(
+    conversation=conversation.id,
+    extra_body={"agent_reference": {"name": "MyAgent", "type": "agent_reference"}},
+    input="Favori numamı 10 ile çarp.",
+)
+```
+
+Redis yok. Cosmos DB oturum deposu yok. Mesaj serileştirme için özel middleware yok. Platform sadece hallediyor.
 
 ## Karar çerçevem
 
-1. **Sıfır altyapı mı istiyorsunuz?** → Foundry Agents
-2. **Özel agent kodunuz var ama yönetilen barındırma mı istiyorsunuz?** → Foundry Hosted Agents
-3. **Olay güdümlü, kısa ömürlü görevler mi?** → Azure Functions
-4. **Maksimum konteyner kontrolü mü?** → Container Apps
-5. **Katı uyumluluk ve çoklu küme mi?** → AKS
+Altı seçeneğin tamamını inceledikten sonra, işte hızlı zihinsel modelim:
 
-## Sonuç
+1. **Sıfır altyapı mı istiyorsunuz?** → Foundry Agents (portal/SDK, container yok)
+2. **Özel ajan kodunuz var ama yönetilen barındırma mı istiyorsunuz?** → Foundry Hosted Agents
+3. **Olay odaklı, kısa ömürlü ajan görevlerine mi ihtiyacınız var?** → Azure Functions
+4. **K8s olmadan maksimum container kontrolü mü istiyorsunuz?** → Container Apps
+5. **Katı uyumluluk ve çok kümeli mimariye mi ihtiyacınız var?** → AKS
+6. **Öngörülebilir trafikli basit bir HTTP ajanınız mı var?** → App Service
 
-.NET geliştiricilerinin çoğu için Hosted Agents muhtemelen doğru başlangıç noktasıdır. [Microsoft'un tam kılavuzunu](https://devblogs.microsoft.com/all-things-azure/hostedagent/) inceleyin.
+Semantic Kernel veya Microsoft Agent Framework ile geliştiren çoğu .NET geliştirici için, Hosted Agents muhtemelen doğru başlangıç noktası. Sıfıra ölçekleme, yerleşik OpenTelemetry, konuşma yönetimi ve framework esnekliği alıyorsunuz — Kubernetes yönetmeden veya kendi gözlemlenebilirlik yığınınızı bağlamadan.
+
+## Özet
+
+Azure'daki ajan barındırma ortamı hızla olgunlaşıyor. Bugün yeni bir AI ajan projesi başlatıyorsanız, alışkanlıkla Container Apps veya AKS'e uzanmadan önce Foundry Hosted Agents'ı ciddi olarak değerlendirirdim. Yönetilen altyapı gerçek zaman kazandırıyor ve hosting adapter modeli, framework seçiminizi korumanıza olanak tanıyor.
+
+Çalışan örnekler için [Microsoft'ın tam rehberine](https://devblogs.microsoft.com/all-things-azure/hostedagent/) ve [Foundry Samples reposuna](https://github.com/microsoft-foundry/foundry-samples/tree/main/samples/python/hosted-agents) göz atın.
