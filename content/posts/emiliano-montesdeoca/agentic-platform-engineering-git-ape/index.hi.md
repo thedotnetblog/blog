@@ -2,7 +2,7 @@
 title: "Agentic Platform Engineering हकीकत बन रही है — Git-APE दिखाता है कैसे"
 date: 2026-04-10
 author: "Emiliano Montesdeoca"
-description: "Microsoft का Git-APE प्रोजेक्ट agentic platform engineering को व्यवहार में लाता है — GitHub Copilot एजेंट्स और Azure MCP का उपयोग करके natural-language अनुरोधों को validated cloud infrastructure में बदलने के लिए।"
+description: "Microsoft का Git-APE project agentic platform engineering को व्यवहार में लाता है — GitHub Copilot agents और Azure MCP का उपयोग करके natural-language requests को validated cloud infrastructure में बदलता है।"
 tags:
   - azure
   - github-copilot
@@ -14,37 +14,61 @@ tags:
 
 > *यह पोस्ट स्वचालित रूप से अनुवादित है। मूल के लिए, [यहाँ क्लिक करें]({{< ref "agentic-platform-engineering-git-ape" >}}).*
 
-Platform engineering उन शब्दों में से एक रहा है जो conference talks में शानदार लगता है लेकिन आमतौर पर "हमने एक internal portal और Terraform wrapper बनाया" का मतलब होता है। असली वादा — self-service infrastructure जो वास्तव में safe, governed और fast हो — हमेशा कुछ कदम दूर रहा है।
+Platform engineering उन terms में से एक रही है जो conference talks में बहुत अच्छी लगती है, लेकिन आमतौर पर इसका मतलब होता है "हमने एक internal portal और एक Terraform wrapper बनाया।" असली वादा — self-service infrastructure जो वास्तव में safe, governed और fast हो — हमेशा कुछ कदम दूर रही है।
 
-Azure टीम ने [agentic platform engineering series का Part 2](https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/) प्रकाशित किया है। वे इसे **Git-APE** कहते हैं — एक open-source प्रोजेक्ट जो GitHub Copilot एजेंट्स और Azure MCP सर्वर का उपयोग करके natural-language अनुरोधों को validated, deployed infrastructure में बदलता है।
+Azure team ने अभी [अपनी agentic platform engineering series का Part 2 प्रकाशित किया](https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/), और यह पूरी तरह hands-on implementation के बारे में है। वे इसे **Git-APE** कहते हैं (हाँ, acronym जानबूझकर है), और यह एक open-source project है जो GitHub Copilot agents plus Azure MCP servers का उपयोग करके natural-language requests को validated, deployed infrastructure में बदलता है।
 
 ## Git-APE वास्तव में क्या करता है
 
-मूल विचार: developers Terraform modules सीखने के बजाय, एक Copilot एजेंट से बात करते हैं। एजेंट intent interpret करता है, Infrastructure-as-Code generate करता है, policies के खिलाफ validate करता है, और deploy करता है — सब VS Code में।
+मूल विचार: developers को Terraform modules सीखने, portal UIs navigate करने, या platform team को tickets file करने की बजाय, वे एक Copilot agent से बात करते हैं। Agent intent को समझता है, Infrastructure-as-Code generate करता है, उसे policies के खिलाफ validate करता है, और deploy करता है — सब VS Code के अंदर।
+
+यहाँ setup है:
 
 ```bash
 git clone https://github.com/Azure/git-ape
 cd git-ape
 ```
 
-VS Code में workspace खोलें, और agent configuration files GitHub Copilot द्वारा auto-discovered हो जाती हैं:
+VS Code में workspace खोलें, और agent configuration files GitHub Copilot द्वारा auto-discovered हो जाती हैं। आप agent के साथ directly interact करते हैं:
 
 ```
 @git-ape deploy a function app with storage in West Europe
 ```
 
-Clean-up भी उतना ही आसान है:
+Agent Azure services के साथ interact करने के लिए Azure MCP Server का उपयोग करता है। VS Code settings में MCP configuration specific capabilities enable करता है:
+
+```json
+{
+  "azureMcp.serverMode": "namespace",
+  "azureMcp.enabledServices": [
+    "deploy", "bestpractices", "group",
+    "subscription", "functionapp", "storage",
+    "sql", "monitor"
+  ],
+  "azureMcp.readOnly": false
+}
+```
+
+## यह क्यों मायने रखता है
+
+जो लोग Azure पर build कर रहे हैं, उनके लिए यह platform engineering की conversation को "हम एक portal कैसे बनाएं" से "हम अपने guardrails को APIs के रूप में कैसे describe करें" की ओर shift करता है। जब आपके platform का interface एक AI agent हो, तो आपके constraints और policies की गुणवत्ता ही product बन जाती है।
+
+Part 1 blog ने theory रखी: well-described APIs, control schemas, और explicit guardrails platforms को agent-ready बनाते हैं। Part 2 actual tooling ship करके साबित करता है कि यह काम करता है। Agent अंधाधुंध resources generate नहीं करता — यह best practices के खिलाफ validate करता है, naming conventions का सम्मान करता है, और आपके organization की policies लागू करता है।
+
+Clean-up भी उतनी ही आसान है:
 
 ```
 @git-ape destroy my-resource-group
 ```
 
-## यह क्यों मायने रखता है
+## मेरी राय
 
-Azure पर build करने वालों के लिए, यह platform engineering conversation को "हम portal कैसे बनाएं" से "हम अपने guardrails को APIs के रूप में कैसे describe करें" में shift करता है।
+सच कहूँ तो — यह specific tool से ज़्यादा pattern के बारे में है। Git-APE खुद एक demo/reference architecture है। लेकिन underlying idea — agents आपके platform का interface, MCP protocol, GitHub Copilot host — यही वह जगह है जहाँ enterprise developer experience जा रही है।
 
-.NET डेवलपर के रूप में: Azure MCP Server और GitHub Copilot एजेंट्स किसी भी Azure workload के साथ काम करते हैं। आपकी ASP.NET Core API, .NET Aspire stack — सब कुछ agentic deployment flow का target हो सकता है।
+अगर आप एक platform team हैं जो देख रहे हैं कि अपने internal tooling को agent-friendly कैसे बनाएं, तो इससे बेहतर कोई starting point नहीं है। और अगर आप एक .NET developer हैं जो सोच रहे हैं कि यह आपकी दुनिया से कैसे जुड़ता है: Azure MCP Server और GitHub Copilot agents किसी भी Azure workload के साथ काम करते हैं। आपकी ASP.NET Core API, आपका .NET Aspire stack, आपके containerized microservices — यह सब एक agentic deployment flow का target हो सकता है।
 
-## समापन
+## अंत में
 
-Git-APE agentic platform engineering का एक शुरुआती लेकिन concrete नज़रिया है। [रेपो](https://github.com/Azure/git-ape) clone करें और [पूरी पोस्ट](https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/) पढ़ें।
+Git-APE agentic platform engineering का एक प्रारंभिक लेकिन ठोस रूप है। [repo](https://github.com/Azure/git-ape) clone करें, demo आज़माएं, और सोचना शुरू करें कि आपके platform की APIs और policies को एक agent द्वारा safely उपयोग किए जाने के लिए कैसा दिखना होगा।
+
+walkthrough और video demos के लिए [पूरा post](https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/) पढ़ें।
