@@ -71,6 +71,8 @@ buildFuture = true
     languageCode = "ar"
     languageName = "العربية"
     weight = 14
+    [languages.ar.params]
+      dir = "rtl"
   [languages.id]
     languageCode = "id"
     languageName = "Bahasa Indonesia"
