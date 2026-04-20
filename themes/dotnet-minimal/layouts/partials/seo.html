@@ -41,12 +41,32 @@
 <meta name="robots" content="index, follow" />
 {{- end }}
 
+<!-- hreflang for multilingual SEO -->
+{{- range .AllTranslations }}
+<link rel="alternate" hreflang="{{ .Language.LanguageCode }}" href="{{ .Permalink }}" />
+{{- end }}
+{{- $xDefault := "" -}}
+{{- range .AllTranslations }}
+  {{- if eq .Language.Lang "en" }}{{ $xDefault = .Permalink }}{{ end }}
+{{- end }}
+{{- with $xDefault }}<link rel="alternate" hreflang="x-default" href="{{ . }}" />{{ end }}
+
+<!-- Author -->
+{{- if and .IsPage .Params.author }}
+<meta name="author" content="{{ .Params.author }}" />
+{{- end }}
+
 <!-- Open Graph -->
 <meta property="og:title" content="{{ $title }}" />
 <meta property="og:description" content="{{ $description | plainify | truncate 200 }}" />
 <meta property="og:url" content="{{ $url }}" />
 <meta property="og:site_name" content="{{ .Site.Title }}" />
-<meta property="og:locale" content="{{ replace (.Site.Language.Lang | default "en-us") "-" "_" }}" />
+<meta property="og:locale" content="{{ replace (.Site.Language.LanguageCode | default "en-us") "-" "_" }}" />
+{{- range .AllTranslations }}
+{{- if ne .Language.LanguageCode $.Site.Language.LanguageCode }}
+<meta property="og:locale:alternate" content="{{ replace .Language.LanguageCode "-" "_" }}" />
+{{- end }}
+{{- end }}
 {{- if .IsPage }}
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" />
@@ -56,6 +76,9 @@
 {{- with .Params.author }}
 <meta property="article:author" content="{{ . }}" />
 {{- end }}
+{{- with .Section }}
+<meta property="article:section" content="{{ . | title }}" />
+{{- end }}
 {{- range .Params.tags }}
 <meta property="article:tag" content="{{ . }}" />
 {{- end }}
@@ -63,9 +86,13 @@
 <meta property="og:type" content="website" />
 {{- end }}
 {{- with $image }}
+{{- $imageType := "image/png" -}}
+{{- if or (strings.HasSuffix . ".jpg") (strings.HasSuffix . ".jpeg") }}{{- $imageType = "image/jpeg" -}}{{- end }}
+{{- if strings.HasSuffix . ".webp" }}{{- $imageType = "image/webp" -}}{{- end }}
 <meta property="og:image" content="{{ . }}" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="{{ $imageType }}" />
+<meta property="og:image:width" content="1536" />
+<meta property="og:image:height" content="1024" />
 <meta property="og:image:alt" content="{{ $imageAlt }}" />
 {{- end }}
 

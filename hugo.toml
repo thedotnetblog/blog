@@ -6,7 +6,7 @@ defaultContentLanguageInSubdir = false
 enableMissingTranslationPlaceholders = false
 paginate = 10
 enableRobotsTXT = true
-enableGitInfo = false
+enableGitInfo = true
 summaryLength = 70
 buildFuture = true
 

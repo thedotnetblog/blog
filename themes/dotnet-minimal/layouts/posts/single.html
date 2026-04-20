@@ -68,7 +68,7 @@
   <div class="post-author-card">
     {{ $avatarPath := $author.Params.avatar }}
     {{ if $avatarPath }}
-    <img src="{{ $avatarPath }}" alt="{{ $author.Title }}" class="author-avatar" />
+    <img src="{{ $avatarPath }}" alt="{{ $author.Title }}" class="author-avatar" width="200" height="200" loading="lazy" />
     {{ else }}
     <div class="author-avatar-placeholder">{{ substr $author.Title 0 1 }}</div>
     {{ end }}

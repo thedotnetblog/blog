@@ -5,7 +5,7 @@
     <div class="author-hero-inner">
       {{ $avatarPath := .Params.avatar }}
       {{ if $avatarPath }}
-      <img src="{{ $avatarPath }}" alt="{{ .Title }}" class="author-hero-avatar" />
+      <img src="{{ $avatarPath }}" alt="{{ .Title }}" class="author-hero-avatar" width="120" height="120" loading="lazy" />
       {{ else }}
       <div class="author-hero-avatar-placeholder">{{ substr .Title 0 1 }}</div>
       {{ end }}

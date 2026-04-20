@@ -17,7 +17,7 @@
         <div class="author-card-top">
           {{ $avatarPath := .Params.avatar }}
           {{ if $avatarPath }}
-          <img src="{{ $avatarPath }}" alt="{{ .Title }}" class="avatar" />
+          <img src="{{ $avatarPath }}" alt="{{ .Title }}" class="avatar" width="64" height="64" loading="lazy" />
           {{ else }}
           <div class="avatar-placeholder">{{ substr .Title 0 1 }}</div>
           {{ end }}
