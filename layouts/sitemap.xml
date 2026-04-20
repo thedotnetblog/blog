@@ -10,7 +10,7 @@
   {{- else if and .IsPage (eq .Section "authors") }}{{ $priority = "0.6" }}
   {{- else if not .IsPage }}
     {{- if eq .Section "posts" }}{{ $priority = "0.8" }}
-    {{- else if eq .Section "tags" }}{{ $priority = "0.4" }}
+    {{- else if and (or (eq .Kind "taxonomy") (eq .Kind "term")) (eq .Type "tags") }}{{ $priority = "0.4" }}
     {{- else if eq .Section "authors" }}{{ $priority = "0.5" }}
     {{- else }}{{ $priority = "0.5" }}
     {{- end }}

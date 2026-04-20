@@ -177,15 +177,15 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Home",
-      "item": "{{ .Site.BaseURL }}"
+      "name": {{ i18n "home" | default "Home" | jsonify }},
+      "item": "{{ .Site.Home.Permalink }}"
     }
     {{- if .IsPage }},
     {
       "@type": "ListItem",
       "position": 2,
       "name": "{{ .Section | title }}",
-      "item": "{{ .Site.BaseURL }}{{ .Section }}/"
+      "item": "{{ .CurrentSection.Permalink }}"
     },
     {
       "@type": "ListItem",
