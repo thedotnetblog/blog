@@ -1,3 +1,4 @@
+content = """\
 ---
 title: "azd update — आपके सभी Package Managers को एक Command से संभालें"
 date: 2026-04-15
@@ -42,3 +43,9 @@ Command आपकी current installation method detect करती है औ�
 यह एक छोटा quality-of-life improvement है, लेकिन उन लोगों के लिए जो daily basis पर Azure पर AI agents और Aspire apps deploy करने के लिए `azd` use करते हैं, current रहने का मतलब है कम "यह bug तो latest version में already fix हो गया था" moments। एक कम चीज़ जिसके बारे में सोचना पड़े।
 
 अधिक context के लिए [पूरी announcement](https://devblogs.microsoft.com/azure-sdk/azd-update/) और Jon Gallant का [deeper dive](https://blog.jongallant.com/2026/04/azd-update) पढ़ें।
+"""
+
+path = "/Users/emiliano/.copilot/copilot-worktrees/blog/emimontesdeoca-unwresting-colby/content/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/index.hi.md"
+with open(path, "w", encoding="utf-8") as f:
+    f.write(content)
+print("Post 6 done")

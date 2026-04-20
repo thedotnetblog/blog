@@ -1,3 +1,4 @@
+content = """\
 ---
 title: "azd अब आपको AI Agents को Locally Run और Debug करने देता है — March 2026 में क्या बदला"
 date: 2026-04-02
@@ -64,3 +65,9 @@ Invoke command local और deployed दोनों agents के against क�
 Local AI agent debugging loop इस release का star है, लेकिन deployment improvements और DX polish का जमावड़ा `azd` को पहले से कहीं ज़्यादा mature feel कराता है। अगर आप Azure पर .NET apps deploy कर रहे हैं — खासकर AI agents — तो यह update install करने लायक है।
 
 हर detail के लिए [पूरे release notes](https://devblogs.microsoft.com/azure-sdk/azure-developer-cli-azd-march-2026/) देखें, या [azd install](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) से शुरू करें।
+"""
+
+path = "/Users/emiliano/.copilot/copilot-worktrees/blog/emimontesdeoca-unwresting-colby/content/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/index.hi.md"
+with open(path, "w", encoding="utf-8") as f:
+    f.write(content)
+print("Post 5 done")

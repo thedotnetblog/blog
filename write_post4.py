@@ -1,3 +1,4 @@
+content = """\
 ---
 title: "Aspire का Isolated Mode Parallel Development के लिए Port Conflict के nightmare को ठीक करता है"
 date: 2026-04-10
@@ -73,3 +74,9 @@ aspire run --isolated
 Isolated mode एक छोटी feature है जो एक असली, तेज़ी से common होती समस्या को हल करती है। जैसे-जैसे AI-assisted development हमें अधिक parallel workflows की तरफ धकेलता है — multiple agents, multiple worktrees, multiple contexts — ports पर लड़ाई के बिना बस एक और instance spin up करने की क्षमता ज़रूरी है।
 
 सभी technical details के लिए [पूरा पोस्ट](https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/) पढ़ें और 13.2 आज़माने के लिए `aspire update --self` से update करें।
+"""
+
+path = "/Users/emiliano/.copilot/copilot-worktrees/blog/emimontesdeoca-unwresting-colby/content/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/index.hi.md"
+with open(path, "w", encoding="utf-8") as f:
+    f.write(content)
+print("Post 4 done")
