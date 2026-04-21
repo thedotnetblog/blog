@@ -18,3 +18,4 @@ socials:
     url: "https://linkedin.com/in/emimontesdeoca"
   - platform: "Blog"
     url: "https://blog.emilianomontesdeoca.com"
+---
