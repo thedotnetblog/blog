@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Bicep | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/bicep/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 21 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/bicep/index.xml" rel="self" type="application/rss+xml"/><item><title>azd + GitHub Copilot: إعداد المشروع بالذكاء الاصطناعي وحل الأخطاء بذكاء</title><link>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</link><pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</guid><description>يتكامل Azure Developer CLI الآن مع GitHub Copilot لإنشاء بنية المشروع التحتية وحل أخطاء النشر — دون مغادرة الطرفية.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;تُرجِمت هذه المقالة تلقائيًا. للاطلاع على النسخة الأصلية بالإنجليزية، &lt;a href="https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/"&gt;انقر هنا&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;هل تعرف تلك اللحظة التي تريد فيها نشر تطبيق موجود على Azure فتجد نفسك تحدق في ملف &lt;code&gt;azure.yaml&lt;/code&gt; فارغ، محاولًا تذكر ما إذا كان Express API الخاص بك يجب أن يستخدم Container Apps أم App Service؟ تلك اللحظة أصبحت الآن أقصر بكثير.&lt;/p&gt;
+&lt;p&gt;يتكامل Azure Developer CLI (&lt;code&gt;azd&lt;/code&gt;) الآن مع GitHub Copilot بطريقتين عمليتين: سقالة المشروع بمساعدة الذكاء الاصطناعي خلال &lt;code&gt;azd init&lt;/code&gt;، واستكشاف الأخطاء وإصلاحها بذكاء عند فشل عمليات النشر. كلا الميزتين تعملان بالكامل داخل الطرفية.&lt;/p&gt;
+&lt;h2 id="الإعداد-مع-copilot-أثناء-azd-init"&gt;الإعداد مع Copilot أثناء azd init&lt;/h2&gt;
+&lt;p&gt;عند تشغيل &lt;code&gt;azd init&lt;/code&gt;، يظهر الآن خيار &amp;ldquo;Set up with GitHub Copilot (Preview)&amp;rdquo;. اختره وسيحلل Copilot قاعدة التعليمات البرمجية الخاصة بك لإنشاء &lt;code&gt;azure.yaml&lt;/code&gt; وقوالب البنية التحتية ووحدات Bicep — بناءً على الكود الفعلي.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd init
+# اختر: &amp;#34;Set up with GitHub Copilot (Preview)&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;المتطلبات:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;azd 1.23.11 أو أحدث&lt;/strong&gt; — تحقق بـ &lt;code&gt;azd version&lt;/code&gt; أو حدّث بـ &lt;code&gt;azd update&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;اشتراك نشط في GitHub Copilot&lt;/strong&gt; (فردي أو للأعمال أو للمؤسسات)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub CLI (&lt;code&gt;gh&lt;/code&gt;)&lt;/strong&gt; — سيطلب &lt;code&gt;azd&lt;/code&gt; تسجيل الدخول إذا لزم الأمر&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;ما أجده مفيدًا حقًا: يعمل في الاتجاهين. تبني من الصفر؟ يساعدك Copilot على تهيئة خدمات Azure الصحيحة من البداية. لديك تطبيق موجود تريد نشره؟ وجّه Copilot إليه وسيُنشئ التهيئة دون الحاجة إلى إعادة هيكلة أي شيء.&lt;/p&gt;
+&lt;h3 id="ما-الذي-يفعله-فعليا"&gt;ما الذي يفعله فعليًا&lt;/h3&gt;
+&lt;p&gt;لنفترض أن لديك Node.js Express API يعتمد على PostgreSQL. بدلًا من اتخاذ قرار يدوي بين Container Apps وApp Service ثم كتابة Bicep من الصفر، يكتشف Copilot تقنياتك ويُنشئ:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;azure.yaml&lt;/code&gt; بالإعدادات الصحيحة لـ &lt;code&gt;language&lt;/code&gt; و&lt;code&gt;host&lt;/code&gt; و&lt;code&gt;build&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;وحدة Bicep لـ Azure Container Apps&lt;/li&gt;
+&lt;li&gt;وحدة Bicep لـ Azure Database for PostgreSQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;ويُجري فحوصات مسبقة قبل تغيير أي شيء — يتحقق من نظافة دليل git، ويطلب موافقتك على أدوات خادم MCP مسبقًا. لا شيء يحدث دون علمك بما سيتغير بالضبط.&lt;/p&gt;
+&lt;h2 id="استكشاف-الأخطاء-وإصلاحها-مع-copilot"&gt;استكشاف الأخطاء وإصلاحها مع Copilot&lt;/h2&gt;
+&lt;p&gt;أخطاء النشر لا مفر منها. معاملات مفقودة، مشكلات في الأذونات، توفر SKU — ونادرًا ما تخبرك رسالة الخطأ بالشيء الوحيد الذي تحتاج معرفته فعلًا: &lt;em&gt;كيف تُصلحه&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;بدون Copilot، الحلقة تبدو هكذا: انسخ الخطأ ← ابحث في المستندات ← اقرأ ثلاث إجابات Stack Overflow غير ذات صلة ← شغّل بعض أوامر &lt;code&gt;az&lt;/code&gt; CLI ← أعد المحاولة وتمنَّ. مع Copilot في &lt;code&gt;azd&lt;/code&gt;، تنهار هذه الحلقة. عند فشل أي أمر &lt;code&gt;azd&lt;/code&gt;، يعرض فورًا أربعة خيارات:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Explain&lt;/strong&gt; — شرح بلغة مبسطة لما حدث&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Guidance&lt;/strong&gt; — تعليمات خطوة بخطوة لإصلاح المشكلة&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Diagnose and Guide&lt;/strong&gt; — تحليل كامل + يطبق Copilot الإصلاح (بموافقتك) + إعادة محاولة اختيارية&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skip&lt;/strong&gt; — التعامل معه بنفسك&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;النقطة الرئيسية: لدى Copilot بالفعل سياق مشروعك والأمر الفاشل وتفاصيل الخطأ. اقتراحاته خاصة بـ &lt;em&gt;وضعك&lt;/em&gt;.&lt;/p&gt;
+&lt;h3 id="ضبط-السلوك-الافتراضي"&gt;ضبط السلوك الافتراضي&lt;/h3&gt;
+&lt;p&gt;إذا كنت دائمًا تختار نفس الخيار، تجاوز الموجه التفاعلي:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.category troubleshoot
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;القيم: &lt;code&gt;explain&lt;/code&gt; و&lt;code&gt;guidance&lt;/code&gt; و&lt;code&gt;troubleshoot&lt;/code&gt; و&lt;code&gt;fix&lt;/code&gt; و&lt;code&gt;skip&lt;/code&gt;. يمكنك أيضًا تمكين الإصلاح التلقائي وإعادة المحاولة:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.fix allow
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;العودة إلى الوضع التفاعلي في أي وقت:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config unset copilot.errorHandling.category
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="خاتمة"&gt;خاتمة&lt;/h2&gt;
+&lt;p&gt;شغّل &lt;code&gt;azd update&lt;/code&gt; للحصول على أحدث إصدار وجرّب &lt;code&gt;azd init&lt;/code&gt; في مشروعك القادم.&lt;/p&gt;
+&lt;p&gt;اقرأ &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-copilot-integration/"&gt;الإعلان الأصلي هنا&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Machine-Learning | The .NET Blog</title><link>https://thedotnetblog.com/tags/machine-learning/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>en</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tags/machine-learning/index.xml" rel="self" type="application/rss+xml"/><item><title>Foundry's RFT Just Got Cheaper and Smarter — Here's What Changed</title><link>https://thedotnetblog.com/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</guid><description>Microsoft Foundry shipped three RFT updates this month: global training for o4-mini, new GPT-4.1 model graders, and a best practices guide that'll save you hours of debugging.</description><content:encoded>&lt;p&gt;If you&amp;rsquo;re building .NET apps that rely on fine-tuned models, this month&amp;rsquo;s Foundry updates are worth paying attention to. Reinforcement Fine-Tuning just got more accessible and significantly cheaper.&lt;/p&gt;
+&lt;p&gt;The full details are in the &lt;a href="https://devblogs.microsoft.com/foundry/whats-new-in-foundry-finetune-april-2026/"&gt;official announcement&lt;/a&gt;, but here&amp;rsquo;s the practical breakdown.&lt;/p&gt;
+&lt;h2 id="global-training-for-o4-mini"&gt;Global Training for o4-mini&lt;/h2&gt;
+&lt;p&gt;o4-mini is the go-to model for reasoning-heavy and agentic workloads. The big news: you can now launch fine-tuning jobs from 13+ Azure regions with lower per-token training rates compared to Standard training. Same infrastructure, same quality, broader reach.&lt;/p&gt;
+&lt;p&gt;If your team is spread across geographies, this matters. You&amp;rsquo;re no longer pinned to a handful of regions to train.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s the REST API call to kick off a global training job:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://&amp;lt;your-resource&amp;gt;.openai.azure.com/openai/fine_tuning/jobs?api-version=2025-04-01-preview&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;api-key: &lt;/span&gt;&lt;span class="nv"&gt;$AZURE_OPENAI_API_KEY&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s1"&gt;&amp;#39;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;model&amp;#34;: &amp;#34;o4-mini&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;training_file&amp;#34;: &amp;#34;&amp;lt;your-training-file-id&amp;gt;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;method&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;reinforcement&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reinforcement&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;grader&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;string_check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;name&amp;#34;: &amp;#34;answer-check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;input&amp;#34;: &amp;#34;{{sample.output_text}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reference&amp;#34;: &amp;#34;{{item.reference_answer}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;operation&amp;#34;: &amp;#34;eq&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;hyperparameters&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;n_epochs&amp;#34;: 2,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;compute_multiplier&amp;#34;: 1.0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;trainingType&amp;#34;: &amp;#34;globalstandard&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;That &lt;code&gt;trainingType: globalstandard&lt;/code&gt; flag is the key difference.&lt;/p&gt;
+&lt;h2 id="new-model-graders-gpt-41-family"&gt;New Model Graders: GPT-4.1 Family&lt;/h2&gt;
+&lt;p&gt;Graders define the reward signal your model optimizes against. Until now, model-based graders were limited to a smaller set of models. Now you get three new options: GPT-4.1, GPT-4.1-mini, and GPT-4.1-nano.&lt;/p&gt;
+&lt;p&gt;When should you reach for model graders instead of deterministic ones? When your task output is open-ended, when you need partial credit scoring across multiple dimensions, or when you&amp;rsquo;re building agentic workflows where tool-call correctness depends on semantic context.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s the thing &amp;ndash; the tiering strategy is practical:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-nano&lt;/strong&gt; for initial iterations. Low cost, fast feedback loops.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-mini&lt;/strong&gt; once your grading rubric is stable and you need higher fidelity.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1&lt;/strong&gt; for production grading or complex rubrics where every scoring decision counts.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can even mix grader types in a single RFT job. Use string-match for the &amp;ldquo;correct answer&amp;rdquo; dimension and a model grader for evaluating reasoning quality. That flexibility is honestly what makes this useful for real workloads.&lt;/p&gt;
+&lt;h2 id="the-rft-data-format-gotcha"&gt;The RFT Data Format Gotcha&lt;/h2&gt;
+&lt;p&gt;This trips people up. RFT data format is different from SFT. The last message in each row must be a User or Developer role &amp;ndash; not Assistant. The expected answer goes in a top-level key like &lt;code&gt;reference_answer&lt;/code&gt; that the grader references directly.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;ve been doing supervised fine-tuning and want to switch to RFT, you need to restructure your training data. Don&amp;rsquo;t skip this step or your jobs will fail silently.&lt;/p&gt;
+&lt;h2 id="why-this-matters-for-net-developers"&gt;Why This Matters for .NET Developers&lt;/h2&gt;
+&lt;p&gt;If you&amp;rsquo;re calling fine-tuned models from your .NET apps through the Azure OpenAI SDK, cheaper training means you can iterate more aggressively. The model grader options mean you can fine-tune for nuanced tasks &amp;ndash; not just exact-match scenarios. And the best practices guide on &lt;a href="https://github.com/microsoft-foundry/fine-tuning/blob/main/Demos/Agentic_RFT_PrivatePreview/RFT_Best_Practice.md"&gt;GitHub&lt;/a&gt; will save you real debugging time.&lt;/p&gt;
+&lt;p&gt;Start small. Ten to a hundred samples. Simple grader. Validate the loop. Then scale.&lt;/p&gt;</content:encoded></item></channel></rss>

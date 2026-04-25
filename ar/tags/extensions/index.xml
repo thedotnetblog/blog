@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Extensions | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/extensions/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 02 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/extensions/index.xml" rel="self" type="application/rss+xml"/><item><title>Bookmark Studio يُضيف نظام التنقل بالفتحات والمشاركة إلى إشارات Visual Studio المرجعية</title><link>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/</guid><description>إضافة Bookmark Studio الجديدة من Mads Kristensen تضيف التنقل بلوحة المفاتيح عبر الفتحات، ومدير الإشارات المرجعية، والألوان، والتسميات، وإمكانيات التصدير والمشاركة إلى إشارات Visual Studio المرجعية.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;تمت ترجمة هذا المقال تلقائياً. للنسخة الأصلية، &lt;a href="https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/"&gt;انقر هنا&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;الإشارات المرجعية في Visual Studio كانت دومًا&amp;hellip; مقبولة. تضع إشارة، تنتقل إلى التالية، ثم تنسى أيها أيها. تؤدي وظيفتها، لكنها لم تكن يومًا الميزة التي تصفها بالقوية.&lt;/p&gt;
+&lt;p&gt;أصدر Mads Kristensen للتو &lt;a href="https://devblogs.microsoft.com/visualstudio/bookmark-studio-evolving-bookmarks-in-visual-studio/"&gt;Bookmark Studio&lt;/a&gt;، وهي إضافة تجريبية تسد بالضبط الفجوات التي ربما اصطدمت بها إذا كنت تستخدم الإشارات المرجعية بانتظام.&lt;/p&gt;
+&lt;h2 id="التنقل-بالفتحات"&gt;التنقل بالفتحات&lt;/h2&gt;
+&lt;p&gt;الإضافة الأساسية: يمكن الآن تعيين الإشارات المرجعية إلى فتحات من 1 إلى 9 والقفز إليها مباشرةً بـ &lt;code&gt;Alt+Shift+1&lt;/code&gt; حتى &lt;code&gt;Alt+Shift+9&lt;/code&gt;. تحصل الإشارات الجديدة تلقائيًا على الفتحة المتاحة التالية، لذا يعمل التنقل السريع في معظم الحالات دون أي إعداد.&lt;/p&gt;
+&lt;p&gt;قد يبدو هذا بسيطًا، لكنه يحوّل الإشارات المرجعية من &amp;ldquo;لديّ بعض الإشارات في مكان ما&amp;rdquo; إلى &amp;ldquo;الفتحة 3 هي وحدة التحكم API، الفتحة 5 هي طبقة الخدمة، الفتحة 7 هي الاختبار.&amp;rdquo; هذا النوع من التنظيم المكاني يجعل التنقل شبه فوري خلال جلسات العمل المركّز.&lt;/p&gt;
+&lt;h2 id="مدير-الإشارات-المرجعية"&gt;مدير الإشارات المرجعية&lt;/h2&gt;
+&lt;p&gt;نافذة أداة جديدة تعرض جميع إشاراتك المرجعية في مكان واحد مع إمكانية التصفية بالاسم أو الملف أو الموقع أو اللون أو الفتحة. انقر نقرًا مزدوجًا أو تنقل بلوحة المفاتيح للقفز إلى أي إشارة.&lt;/p&gt;
+&lt;p&gt;إذا كان لديك يومًا ما خمس أو ست إشارات مرجعية أو أكثر وعجزت عن تحديد أيها أيها، فهذا وحده يستحق تثبيت الإضافة.&lt;/p&gt;
+&lt;h2 id="التنظيم-بالتسميات-والألوان-والمجلدات"&gt;التنظيم بالتسميات والألوان والمجلدات&lt;/h2&gt;
+&lt;p&gt;يمكن اختياريًا إضافة تسميات وألوان للإشارات المرجعية وتجميعها في مجلدات. لا شيء من هذا إلزامي — سير العمل الحالي الخاص بك يبقى كما هو. لكن عندما تكون في مرحلة تصحيح مشكلة معقدة أو استكشاف قاعدة كود غير مألوفة، فإن ترميز إشاراتك بالألوان والتسميات يضيف سياقًا مفيدًا.&lt;/p&gt;
+&lt;p&gt;جميع البيانات الوصفية تُخزَّن لكل حل (solution)، لذا يظل تنظيم إشاراتك المرجعية محفوظًا عبر الجلسات.&lt;/p&gt;
+&lt;h2 id="التصدير-والمشاركة"&gt;التصدير والمشاركة&lt;/h2&gt;
+&lt;p&gt;هذه هي الميزة التي لم أكن أعلم أنني أريدها. يتيح لك Bookmark Studio تصدير الإشارات المرجعية كنص عادي أو Markdown أو CSV. هذا يعني أنك تستطيع:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;تضمين مسارات الإشارات في أوصاف طلبات السحب&lt;/li&gt;
+&lt;li&gt;مشاركة مسارات التحقيق مع زملاء الفريق&lt;/li&gt;
+&lt;li&gt;نقل مجموعات الإشارات بين المستودعات أو الفروع&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;تتحول الإشارات المرجعية من أداة تنقل فردية إلى وسيلة للتواصل قائلًا &amp;ldquo;إليك المسار عبر هذا الكود.&amp;rdquo;&lt;/p&gt;
+&lt;h2 id="إشارات-مرجعية-تتتبع-حركة-الكود"&gt;إشارات مرجعية تتتبع حركة الكود&lt;/h2&gt;
+&lt;p&gt;يتتبع Bookmark Studio الإشارات المرجعية بالنسبة للنص المرتبطة به، لذا لا تنزلق إلى سطور خاطئة بينما تُحرِّر الكود. إذا سبق لك أن وضعت إشارات خلال جلسة تصحيح أخطاء ثم وجدتها كلها تشير إلى سطور خاطئة بعد عملية إعادة هيكلة — هذا يحل تلك المشكلة.&lt;/p&gt;
+&lt;h2 id="خلاصة"&gt;خلاصة&lt;/h2&gt;
+&lt;p&gt;لا يُعيد Bookmark Studio اختراع أي شيء. بل يأخذ ميزة كانت &amp;ldquo;كافية&amp;rdquo; لسنوات ويجعلها مفيدة حقًا للتطوير المركّز. التنقل بالفتحات ومدير الإشارات المرجعية وإمكانيات التصدير هي أبرز ما يقدمه.&lt;/p&gt;
+&lt;p&gt;احصل عليه من &lt;a href="https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BookmarkStudio"&gt;Visual Studio Marketplace&lt;/a&gt; وجرّبه.&lt;/p&gt;</content:encoded></item></channel></rss>

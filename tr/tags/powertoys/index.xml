@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Powertoys | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/powertoys/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/powertoys/index.xml" rel="self" type="application/rss+xml"/><item><title>O Visual Studio Kayan Pencere Ayarını Hiç Duydunuz mu? (Duymanız Gerekiyor)</title><link>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/</guid><description>Gizli bir Visual Studio ayarı, kayan pencereler üzerinde tam kontrol sağlıyor — bağımsız görev çubuğu girişleri, düzgün çoklu monitör davranışı ve mükemmel FancyZones entegrasyonu. Tek bir açılır menü her şeyi değiştiriyor.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Bu yazı otomatik olarak çevrilmiştir. Orijinal için &lt;a href="https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/"&gt;buraya tıklayın&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Birden fazla monitörle Visual Studio kullanıyorsanız (ve dürüstçe söylemek gerekirse, günümüzde kim kullanmıyor ki), muhtemelen o can sıkıcı durumu yaşamışsınızdır: ana IDE&amp;rsquo;yi küçülttüğünüzde kayan araç pencereleri kayboluyor, her zaman her şeyin üstünde kalıyor ve ayrı görev çubuğu butonları olarak görünmüyorlar. Bazı iş akışları için işe yarayabilir, ancak çoklu monitör kurulumlarında oldukça sinir bozucu.&lt;/p&gt;
+&lt;p&gt;Visual Studio ekibinden Mads Kristensen, kayan pencerelerin davranışını kökten değiştiren &lt;a href="https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/"&gt;az bilinen bir ayarı paylaştı&lt;/a&gt;. Tek bir açılır menü. Hepsi bu kadar.&lt;/p&gt;
+&lt;h2 id="ayar-nerede"&gt;Ayar nerede?&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Tools &amp;gt; Options &amp;gt; Environment &amp;gt; Windows &amp;gt; Floating Windows&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;These floating windows are owned by the main window&amp;rdquo; açılır menüsünde üç seçenek bulunuyor:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;None&lt;/strong&gt; — tam bağımsızlık. Her kayan pencere kendi görev çubuğu girişini alır ve normal bir Windows penceresi gibi davranır.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tool Windows&lt;/strong&gt; (varsayılan) — belgeler serbestçe kalar, araç pencereleri IDE&amp;rsquo;ye bağlı kalır.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Documents and Tool Windows&lt;/strong&gt; — klasik Visual Studio davranışı, her şey ana pencereye bağlı.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="çoklu-monitör-kurulumlarında-neden-none-doğru-seçim"&gt;Çoklu monitör kurulumlarında neden &amp;ldquo;None&amp;rdquo; doğru seçim?&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;None&lt;/strong&gt; olarak ayarlayın ve aniden tüm kayan araç pencereleriniz ve belgeleriniz gerçek Windows uygulamaları gibi davranmaya başlar. Görev çubuğunda görünürler, ana Visual Studio penceresini küçülttüğünüzde görünür kalmaya devam ederler ve artık her şeyin önüne zorla gelmiyor.&lt;/p&gt;
+&lt;p&gt;Bunu &lt;strong&gt;PowerToys FancyZones&lt;/strong&gt; ile birleştirirseniz oyun değiştirucu bir deneyim elde edersiniz. Monitörlerinizde özel düzenler oluşturun, Solution Explorer&amp;rsquo;ınızı bir bölgeye, hata ayıklayıcıyı bir diğerine ve kod dosyalarını istediğiniz yere yerleştirin. Her şey yerinde kalır, her şeye bağımsız olarak erişilebilir ve çalışma alanınız kaotik yerine düzenli hissedilir.&lt;/p&gt;
+&lt;h2 id="hızlı-öneriler"&gt;Hızlı öneriler&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Çoklu monitör güç kullanıcıları&lt;/strong&gt;: &lt;strong&gt;None&lt;/strong&gt; olarak ayarlayın, FancyZones ile birleştirin&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ara sıra kayan pencere kullananlar&lt;/strong&gt;: &lt;strong&gt;Tool Windows&lt;/strong&gt; (varsayılan) sağlam bir orta yol&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Geleneksel iş akışı&lt;/strong&gt;: &lt;strong&gt;Documents and Tool Windows&lt;/strong&gt; her şeyi klasik tutar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;İpucu: Herhangi bir araç penceresi başlık çubuğuna &lt;strong&gt;Ctrl + çift tıklayarak&lt;/strong&gt; anında kayan veya yerleşik hale getirebilirsiniz. Ayarı değiştirdikten sonra yeniden başlatmaya gerek yok.&lt;/p&gt;
+&lt;h2 id="sonuç"&gt;Sonuç&lt;/h2&gt;
+&lt;p&gt;Bu, &amp;ldquo;bunu neden daha önce bilmiyordum&amp;rdquo; dedirten ayarlardan biri. Visual Studio&amp;rsquo;daki kayan pencereler sizi hiç rahatsız ettiyse şu anda gidip bunu değiştirin.&lt;/p&gt;
+&lt;p&gt;Ayrıntılar ve ekran görüntüleri için &lt;a href="https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/"&gt;tam yazıyı&lt;/a&gt; okuyun.&lt;/p&gt;</content:encoded></item></channel></rss>

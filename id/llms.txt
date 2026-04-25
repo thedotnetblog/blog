@@ -1,0 +1,184 @@
+# The .NET Blog
+
+> Articles, tutorials and insights from the .NET community.
+
+The .NET Blog is a community-driven publication featuring articles, tutorials, and deep dives on .NET, ASP.NET Core, C#, cloud architecture, and software engineering. Written by developers, for developers.
+
+## Metadata
+
+- URL: https://thedotnetblog.com/
+- Language: id
+- Last Updated: 2026-04-25
+
+## Blog Posts
+- [.NET 10 Hadir Bersama Ubuntu 26.04 LTS — Ini yang Baru](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/): Ubuntu 26.04 LTS (Resolute Raccoon) hadir dengan .NET 10 sebagai toolchain kelas satu. Native AOT, Chiseled container, Linux 7.0.
+- [Azure MCP Server Kini .mcpb — Instal Tanpa Runtime Apapun](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-mcp-server-mcpb-no-runtime-install/): Azure MCP Server kini tersedia sebagai MCP Bundle (.mcpb) — unduh, seret ke Claude Desktop, selesai. Tidak perlu Node.js, Python, atau .NET.
+- [CodeAct di Agent Framework: Cara Memotong Latensi Agen Anda Setengahnya](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/codeact-agent-framework-hyperlight-50-percent-faster/): CodeAct menyatukan rantai alat multi-langkah menjadi satu blok kode yang disandbox — memangkas latensi 52% dan penggunaan token 64%.
+- [Di Mana Agen Anda Mengingat Hal-hal? Panduan Praktis Penyimpanan Riwayat Obrolan](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/chat-history-storage-patterns-agent-framework/): Dikelola layanan atau klien? Linear atau percabangan? Keputusan arsitektur yang menentukan apa yang benar-benar bisa dilakukan agen AI Anda — dengan contoh kode C# dan Python.
+- [GPT-5.5 Hadir di Azure Foundry — Yang Perlu Diketahui Developer .NET](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/gpt-55-foundry-ga-what-dotnet-developers-need-to-know/): GPT-5.5 tersedia umum di Microsoft Foundry. Evolusi dari GPT-5 ke 5.5, apa yang benar-benar meningkat dan cara mulai menggunakannya di agent Anda hari ini.
+- [VS Code 1.118: Copilot CLI Mendapat Nama Sesi, Lencana Model, dan TypeScript 7.0 Nightly](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/vscode-1-118-copilot-cli-session-names-model-badge/): Visual Studio Code 1.118 adalah rilis terfokus pada peningkatan Copilot CLI — penamaan sesi, lencana model, pemilihan model otomatis, dan opt-in TypeScript 7.0 Nightly.
+- [Foundry Toolboxes: Satu Endpoint untuk Semua Alat Agen AI](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/foundry-toolboxes-curate-manage-tools-ai-agents/): Microsoft Foundry meluncurkan Toolboxes dalam preview publik — cara untuk mengelola dan mengekspos alat agen AI melalui satu endpoint yang kompatibel dengan MCP.
+- [Hooks azd dengan Python, TypeScript, dan .NET: Selamat Tinggal Shell Script](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azd-hooks-python-javascript-typescript-dotnet/): Azure Developer CLI kini mendukung hooks dalam Python, JavaScript, TypeScript, dan .NET. Tidak perlu lagi beralih ke Bash hanya untuk menjalankan script migrasi.
+- [Windows App Dev CLI v0.3: F5 dari Terminal dan UI Automation untuk Agen AI](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/): Windows App Development CLI v0.3 menghadirkan winapp run untuk peluncuran debug dari terminal, winapp ui untuk otomasi antarmuka, dan paket NuGet baru yang membuat dotnet run bekerja dengan aplikasi yang dikemas.
+- [azd + GitHub Copilot: Penyiapan Proyek Berbantuan AI dan Pemecahan Masalah Error Cerdas](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/): Azure Developer CLI kini terintegrasi dengan GitHub Copilot untuk membuat infrastruktur proyek dan menyelesaikan error deployment — tanpa keluar dari terminal.
+- [Menulis Native Addon Node.js dalam C# dengan .NET Native AOT](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/nodejs-addons-csharp-native-aot/): Tim C# Dev Kit mengganti addon Node.js berbasis C++ dengan .NET Native AOT — hasilnya lebih bersih, lebih aman, dan hanya butuh .NET SDK.
+- [VS Code 1.117: Agen Mendapatkan Cabang Git Sendiri dan Saya Sangat Setuju](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/vscode-1-117-agents-autopilot-worktrees/): VS Code 1.117 menghadirkan isolasi worktree untuk sesi agen, mode Autopilot yang persisten, dan dukungan subagen. Alur kerja coding agentik semakin nyata.
+- [Eksperimen AI Anda di Azure Membakar Uang — Inilah Cara Memperbaikinya](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/): Beban kerja AI di Azure bisa cepat mahal. Mari bicara tentang apa yang sebenarnya berhasil untuk mengontrol biaya tanpa memperlambat pengembangan.
+- [RFT Foundry Menjadi Lebih Murah dan Lebih Pintar — Inilah yang Berubah](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/): Microsoft Foundry mengirimkan tiga pembaruan RFT bulan ini: pelatihan global untuk o4-mini, penilai model GPT-4.1 baru, dan panduan praktik terbaik.
+- [Berhenti Mengawasi Terminal: Mode Terpisah Aspire Mengubah Alur Kerja](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/): Aspire 13.2 memungkinkan Anda menjalankan AppHost di background dan mengambil kembali terminal Anda. Dikombinasikan dengan perintah CLI baru dan dukungan agen, ini lebih besar dari yang terlihat.
+- [Docker Sandbox Memungkinkan Agen Copilot Melakukan Refaktor Kode Tanpa Membahayakan Mesin Anda](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/): Docker Sandbox memberi agen GitHub Copilot microVM yang aman untuk melakukan refaktor sesuka hati — tanpa prompt izin, tanpa risiko ke host. Inilah mengapa itu mengubah segalanya untuk modernisasi .NET skala besar.
+- [Alat Azure MCP Kini Tertanam di Visual Studio 2022 — Tanpa Ekstensi](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-mcp-tools-built-into-visual-studio-2022/): Alat Azure MCP dikirim sebagai bagian dari workload pengembangan Azure di Visual Studio 2022. Lebih dari 230 alat, 45 layanan Azure, nol ekstensi untuk dipasang.
+- [Pin Clustering Akhirnya Hadir di .NET MAUI Maps — Satu Properti, Nol Rasa Sakit](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/maui-maps-pin-clustering-finally/): .NET MAUI 11 Preview 3 menambahkan pengelompokan pin native ke kontrol Map. Satu properti, grup clustering terpisah, dan penanganan ketukan — semuanya bawaan.
+- [.NET April 2026 Servicing — Patch Keamanan yang Harus Anda Terapkan Hari Ini](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/dotnet-april-2026-servicing-security-patches/): Rilis servicing April 2026 menambal 6 CVE di .NET 10, .NET 9, .NET 8, dan .NET Framework — termasuk dua kerentanan eksekusi kode jarak jauh.
+- [Aspire 13.2 Mendapatkan MongoDB EF Core dan Azure Data Lake — Dua Integrasi yang Patut Dicoba](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-132-mongodb-efcore-data-lake/): Aspire 13.2 menambahkan integrasi MongoDB Entity Framework Core dan Azure Data Lake Storage dengan health check otomatis dan service discovery. Inilah tampilannya dalam praktik.
+- [azd update — Satu Perintah untuk Semua Package Manager Anda](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/): Azure Developer CLI kini memiliki perintah pembaruan universal yang bekerja terlepas dari cara Anda menginstalnya — winget, Homebrew, Chocolatey, atau skrip instalasi.
+- [Azure DevOps Server Patch April 2026 — Perbaikan Penyelesaian PR dan Pembaruan Keamanan](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/): Azure DevOps Server mendapatkan Patch 3 dengan perbaikan kegagalan penyelesaian PR, validasi keluar yang ditingkatkan, dan koneksi PAT GitHub Enterprise Server yang dipulihkan.
+- [Azure Smart Tier Kini GA — Optimasi Biaya Blob Storage Otomatis Tanpa Aturan Siklus Hidup](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/): Tingkat cerdas Azure Blob Storage kini tersedia secara umum, secara otomatis memindahkan objek antara tingkat hot, cool, dan cold berdasarkan pola akses aktual.
+- [Di Mana Anda Harus Meng-host Agen AI di Azure? Panduan Keputusan Praktis](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-ai-agent-hosting-options-guide/): Azure menawarkan enam cara untuk meng-host agen AI — dari kontainer mentah hingga Foundry Hosted Agents yang sepenuhnya dikelola. Inilah cara memilih yang tepat untuk workload .NET Anda.
+- [Agent Skills di .NET Kini Benar-Benar Fleksibel](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/): Microsoft Agent Framework kini mendukung tiga cara penulisan skill — file, kelas, dan kode inline — semuanya disusun melalui satu provider. Inilah alasannya penting dan cara menggunakan masing-masing.
+- [Azure MCP Server 2.0 Baru Dirilis — Otomasi Cloud Agentic Self-Hosted Sudah Ada](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-mcp-server-2-self-hosted-agentic-cloud/): Azure MCP Server 2.0 mencapai stabilitas dengan deployment remote self-hosted, 276 alat di 57 layanan Azure, dan keamanan tingkat enterprise.
+- [.NET Aspire 13.2 Ingin Menjadi Sahabat Terbaik Agen AI Anda](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/): Aspire 13.2 all-in pada pengembangan agentik — output CLI terstruktur, eksekusi terisolasi, lingkungan yang menyembuhkan sendiri, dan data OpenTelemetry penuh agar agen AI Anda benar-benar dapat membangun, menjalankan, dan mengamati aplikasi Anda.
+- [Agentic Platform Engineering Menjadi Nyata — Git-APE Menunjukkan Caranya](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/): Proyek Git-APE Microsoft mempraktikkan agentic platform engineering — menggunakan agen GitHub Copilot dan Azure MCP untuk mengubah permintaan bahasa alami menjadi infrastruktur cloud yang tervalidasi.
+- [Aplikasi MCP Mendapatkan Fluent API — Buat UI Alat AI Kaya di .NET dalam Tiga Langkah](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/mcp-fluent-api-azure-functions-dotnet/): API konfigurasi fluent baru untuk Aplikasi MCP di Azure Functions memungkinkan Anda mengubah alat MCP .NET mana pun menjadi aplikasi lengkap dengan tampilan, izin, dan kebijakan CSP.
+- [Hubungkan Server MCP Anda di Azure Functions ke Agen Foundry — Begini Caranya](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/foundry-agents-mcp-servers-azure-functions/): Bangun server MCP Anda sekali, deploy ke Azure Functions, dan hubungkan ke agen Microsoft Foundry dengan autentikasi yang tepat.
+- [Membangun UI Multi-Agen Real-Time yang Tidak Terasa Seperti Kotak Hitam](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/ag-ui-real-time-multi-agent-ui-maf/): AG-UI dan Microsoft Agent Framework bergabung untuk memberikan alur kerja multi-agen frontend yang layak — dengan streaming real-time, persetujuan manusia, dan visibilitas penuh atas apa yang dilakukan agen Anda.
+- [Microsoft Foundry Maret 2026 — GPT-5.4, Agent Service GA, dan SDK Refresh yang Mengubah Segalanya](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/microsoft-foundry-march-2026-whats-new/): Pembaruan Foundry Maret 2026 sangat besar: Agent Service mencapai GA, GPT-5.4 menghadirkan penalaran yang andal, SDK azure-ai-projects stabil di semua bahasa.
+- [Mode Terisolasi Aspire Memperbaiki Mimpi Buruk Konflik Port dalam Pengembangan Paralel](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/): Aspire 13.2 memperkenalkan mode --isolated: port acak, rahasia terpisah, dan nol tabrakan saat menjalankan beberapa instans AppHost yang sama. Sempurna untuk agen AI, worktree, dan alur kerja paralel.
+- [Pengaturan Floating Windows Visual Studio yang Tidak Kamu Ketahui (Tapi Harus Tahu)](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/): Pengaturan tersembunyi di Visual Studio memberi kendali penuh atas floating windows — entri taskbar mandiri, perilaku multi-monitor yang benar, dan integrasi FancyZones yang sempurna. Satu dropdown mengubah segalanya.
+- [Penilaian Modernisasi GitHub Copilot Adalah Alat Migrasi Terbaik yang Belum Anda Gunakan](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/): Ekstensi modernisasi GitHub Copilot tidak hanya menyarankan perubahan kode — melainkan menghasilkan penilaian migrasi lengkap dengan masalah yang dapat ditindaklanjuti, perbandingan target Azure, dan alur kerja kolaboratif.
+- [SQL MCP Server — Cara yang Tepat untuk Memberi Agen AI Akses Database](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/): SQL MCP Server dari Data API builder memberi agen AI akses database yang aman dan deterministik tanpa mengekspos skema atau mengandalkan NL2SQL.
+- [VS Code 1.116 — Aplikasi Agen Mendapatkan Navigasi Keyboard dan Penyelesaian Konteks File](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/): VS Code 1.116 berfokus pada polesan aplikasi Agen — keybinding khusus, peningkatan aksesibilitas, penyelesaian konteks file, dan resolusi tautan CSS @import.
+- [VS Code 1.115 — Notifikasi Terminal Latar Belakang, Mode Agen SSH, dan Lainnya](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/): VS Code 1.115 menghadirkan notifikasi terminal latar belakang untuk agen, hosting agen jarak jauh SSH, tempel file di terminal, dan pelacakan edit sadar sesi. Inilah yang penting untuk developer .NET.
+- [C# 15 Mendapatkan Tipe Union — Dan Itu Persis Yang Kita Minta](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/csharp-15-union-types-exhaustive-matching/): C# 15 memperkenalkan kata kunci `union` — union diskriminasi yang dipaksakan kompiler dengan pencocokan pola yang lengkap. Seperti apa tampilannya, mengapa penting, dan cara mencobanya hari ini.
+- [Aspire 13.2 Memiliki CLI Dokumentasi — dan Agen AI Anda Bisa Menggunakannya Juga](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/): .NET Aspire 13.2 menambahkan aspire docs — CLI untuk mencari, menelusuri, dan membaca dokumentasi resmi tanpa meninggalkan terminal. Juga berfungsi sebagai alat untuk agen AI.
+- [Microsoft Agent Framework Mencapai Versi 1.0 — Inilah yang Benar-Benar Penting bagi Developer .NET](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/agent-framework-1-0-production-ready/): Microsoft Agent Framework 1.0 siap produksi dengan API stabil, orkestrasi multi-agen, dan konektor untuk setiap penyedia AI utama. Inilah yang perlu Anda ketahui sebagai developer .NET.
+- [azd Kini Memungkinkan Anda Menjalankan dan Men-debug Agen AI Secara Lokal — Apa yang Berubah di Maret 2026](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/): Azure Developer CLI merilis tujuh rilis di Maret 2026. Highlight: loop jalankan-dan-debug lokal untuk agen AI, integrasi GitHub Copilot dalam pengaturan proyek, dan dukungan Container App Jobs.
+- [Azure DevOps Akhirnya Memperbaiki UX Editor Markdown yang Dikeluhkan Semua Orang](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/): Editor Markdown Azure DevOps untuk item kerja mendapatkan perbedaan yang lebih jelas antara mode pratinjau dan mode edit. Ini perubahan kecil yang memperbaiki masalah alur kerja yang benar-benar mengganggu.
+- [Bookmark Studio Menghadirkan Navigasi Berbasis Slot dan Berbagi ke Bookmark Visual Studio](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/): Ekstensi Bookmark Studio baru dari Mads Kristensen menambahkan navigasi slot berbasis keyboard, manajer bookmark, warna, label, dan kemampuan ekspor/berbagi ke bookmark Visual Studio.
+- [Dashboard Aspire 13.2 Kini Memiliki Telemetry API — dan Ini Mengubah Segalanya](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/): .NET Aspire 13.2 hadir dengan ekspor telemetri yang lebih cerdas, API yang dapat diprogram untuk trace dan log, dan peningkatan visualisasi GenAI. Inilah mengapa ini penting untuk alur kerja debugging Anda.
+- [Pembaruan Maret Visual Studio Memungkinkan Kamu Membangun Agen Copilot Kustom — dan Alat find_symbol Adalah Hal Besar](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/): Pembaruan Maret 2026 Visual Studio menghadirkan agen Copilot kustom, skill agen yang dapat digunakan ulang, alat find_symbol yang sadar bahasa, dan profiling bertenaga Copilot dari Test Explorer. Inilah yang penting.
+- [KubeCon Europe 2026: Yang Sebenarnya Perlu Diperhatikan Pengembang .NET](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/kubecon-2026-aks-updates-dotnet-developers/): Microsoft menjatuhkan tembok pengumuman Kubernetes di KubeCon Europe 2026. Inilah versi tersaringnya — hanya pembaruan AKS dan cloud-native yang penting jika Anda mengekspedisi aplikasi .NET.
+- [SQL MCP Server, Copilot di SSMS, dan Database Hub dengan AI Agent: Yang Benar-Benar Penting dari SQLCon 2026](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/agentic-ai-microsoft-databases-what-matters/): Microsoft merilis serangkaian pengumuman database di SQLCon 2026. Inilah yang benar-benar penting jika Anda membangun aplikasi bertenaga AI di Azure SQL.
+- [Azure DevOps MCP Server Hadir di Microsoft Foundry: Apa Artinya untuk Agen AI Anda](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/): Azure DevOps MCP Server kini tersedia di Microsoft Foundry. Hubungkan agen AI Anda langsung ke alur kerja DevOps — item kerja, repo, pipeline — dengan beberapa klik.
+- [Dari Laptop ke Produksi: Deploy Agen AI ke Microsoft Foundry dengan Dua Perintah](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/deploy-ai-agents-foundry-azd-two-commands/): Azure Developer CLI kini memiliki perintah 'azd ai agent' yang membawa agen AI Anda dari pengembangan lokal ke endpoint Foundry langsung dalam hitungan menit.
+- [Foundry Agent Service Sudah GA: Yang Benar-benar Penting untuk Pengembang Agen .NET](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/foundry-agent-service-ga-what-matters/): Foundry Agent Service Microsoft baru saja mencapai GA dengan jaringan privat, Voice Live, evaluasi produksi, dan runtime multi-model terbuka.
+- [Respons Latar Belakang di Microsoft Agent Framework: Tidak Ada Lagi Kecemasan Timeout](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/background-responses-agent-framework-long-running-tasks/): Microsoft Agent Framework kini memungkinkan Anda membongkar tugas AI yang berjalan lama dengan token kelanjutan. Begini cara respons latar belakang bekerja dan mengapa itu penting untuk agen .NET Anda.
+- [VS Code 1.112: Apa yang Benar-benar Perlu Diperhatikan Developer .NET](https://thedotnetblog.com/id/posts/emiliano-montesdeoca/vscode-1-112-dotnet-developers/): VS Code 1.112 baru saja rilis dan penuh dengan peningkatan agen, debugger browser terintegrasi, sandboxing MCP, dan dukungan monorepo. Inilah yang sebenarnya penting jika kamu membangun dengan .NET.
+
+## Events
+- No events published yet.
+
+## Authors
+- [Emiliano Montesdeoca](https://thedotnetblog.com/id/authors/emiliano-montesdeoca/): Microsoft MVP & Team Lead Cloud Solutions — Emiliano adalah pengembang perangkat lunak Uruguay-Spanyol, Microsoft MVP dalam Developer Technologies, dan advokat komunitas yang berbasis di Tenerife, Kepulauan Canary.
+
+Ia berspesialisasi dalam merancang solusi cloud yang skalabel menggunakan teknologi Microsoft dan saat ini menjabat sebagai Team Lead untuk Tim Cloud Solutions di Intelequia Technologies.
+
+Pembicara konferensi internasional yang sering tampil dan bersemangat berbagi pengetahuan, ia menerjemahkan pemecahan masalah dunia nyata menjadi wawasan yang dapat ditindaklanjuti oleh para developer.
+
+
+## Topics
+This blog covers the following topics (with post count):
+- .net (3 posts)
+- .net 10 (1 post)
+- accessibility (1 post)
+- ag-ui (1 post)
+- agent framework (7 posts)
+- agents (11 posts)
+- ai (32 posts)
+- aks (2 posts)
+- architecture (1 post)
+- aspire (5 posts)
+- aspnet-core (1 post)
+- azd (5 posts)
+- azure (26 posts)
+- azure-developer-cli (2 posts)
+- azure-devops (2 posts)
+- azure-functions (2 posts)
+- azure-openai (1 post)
+- azure-sdk (3 posts)
+- azure-sql (1 post)
+- bicep (1 post)
+- blob-storage (1 post)
+- c# (1 post)
+- cli (6 posts)
+- cloud (1 post)
+- cloud-native (5 posts)
+- coding-agents (1 post)
+- containers (3 posts)
+- copilot (2 posts)
+- cost-optimization (2 posts)
+- csharp (2 posts)
+- dashboard (1 post)
+- data-api-builder (1 post)
+- data-lake (1 post)
+- databases (2 posts)
+- developer tooling (2 posts)
+- developer-tools (21 posts)
+- devops (4 posts)
+- docker (2 posts)
+- documentation (1 post)
+- dotnet (21 posts)
+- dotnet-11 (2 posts)
+- dotnet-aspire (1 post)
+- dotnet-framework (1 post)
+- efcore (1 post)
+- extensions (1 post)
+- fine-tuning (1 post)
+- finops (1 post)
+- foundry (7 posts)
+- github copilot (7 posts)
+- gpt-5 (1 post)
+- gpt-5-4 (1 post)
+- hyperlight (1 post)
+- infrastructure as code (1 post)
+- interop (1 post)
+- kubernetes (1 post)
+- language-features (1 post)
+- linux (1 post)
+- machine-learning (1 post)
+- maps (1 post)
+- maui (1 post)
+- mcp (11 posts)
+- microsoft-foundry (2 posts)
+- migration (1 post)
+- mobile (1 post)
+- modernization (2 posts)
+- mongodb (1 post)
+- multi-agent (2 posts)
+- native aot (2 posts)
+- node.js (1 post)
+- observability (1 post)
+- opentelemetry (1 post)
+- parallel-development (1 post)
+- patches (1 post)
+- pattern-matching (1 post)
+- platform-engineering (1 post)
+- powertoys (1 post)
+- productivity (4 posts)
+- profiling (1 post)
+- python (3 posts)
+- remote-development (1 post)
+- sdk (1 post)
+- security (1 post)
+- semantic kernel (2 posts)
+- servicing (1 post)
+- sql (1 post)
+- sse (1 post)
+- storage (1 post)
+- telemetry (1 post)
+- tooling (1 post)
+- typescript (2 posts)
+- ubuntu (1 post)
+- union-types (1 post)
+- visual-studio (5 posts)
+- vs code (2 posts)
+- vscode (3 posts)
+- windows (1 post)
+- winui (1 post)
+- wpf (1 post)
+
+## Optional
+
+- [Full content version](https://thedotnetblog.com/llms-full.txt)
+- [Sitemap](https://thedotnetblog.com/sitemap.xml)
+- [RSS Feed](https://thedotnetblog.com/index.xml)

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fine-Tuning | The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/fine-tuning/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ko</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/fine-tuning/index.xml" rel="self" type="application/rss+xml"/><item><title>Foundry의 RFT가 더 저렴하고 스마트해졌습니다 — 변경된 내용 정리</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</guid><description>Microsoft Foundry가 이번 달 세 가지 RFT 업데이트를 출시했습니다: o4-mini 글로벌 트레이닝, 새로운 GPT-4.1 모델 그레이더, 그리고 디버깅 시간을 크게 줄여줄 모범 사례 가이드.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;이 글은 자동 번역되었습니다. 원문은 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/"&gt;여기&lt;/a&gt;에서 확인하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;파인튜닝된 모델에 의존하는 .NET 앱을 개발하고 있다면, 이번 달 Foundry 업데이트에 주목할 필요가 있습니다. Reinforcement Fine-Tuning이 더 접근하기 쉬워지고 비용이 크게 낮아졌습니다.&lt;/p&gt;
+&lt;p&gt;자세한 내용은 &lt;a href="https://devblogs.microsoft.com/foundry/whats-new-in-foundry-finetune-april-2026/"&gt;공식 발표&lt;/a&gt;에 있지만, 여기서 실용적인 요약을 정리해 드리겠습니다.&lt;/p&gt;
+&lt;h2 id="o4-mini-글로벌-트레이닝"&gt;o4-mini 글로벌 트레이닝&lt;/h2&gt;
+&lt;p&gt;o4-mini는 추론 중심 및 에이전트 워크로드에 가장 적합한 모델입니다. 큰 소식: 이제 13개 이상의 Azure 리전에서 파인튜닝 작업을 시작할 수 있으며, Standard 트레이닝 대비 토큰당 트레이닝 비용이 더 낮습니다. 동일한 인프라, 동일한 품질, 더 넓은 범위.&lt;/p&gt;
+&lt;p&gt;팀이 여러 지역에 분산되어 있다면 이것은 중요합니다. 더 이상 트레이닝을 위해 소수의 리전에 묶여 있을 필요가 없습니다.&lt;/p&gt;
+&lt;p&gt;글로벌 트레이닝 작업을 시작하는 REST API 호출은 다음과 같습니다:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://&amp;lt;your-resource&amp;gt;.openai.azure.com/openai/fine_tuning/jobs?api-version=2025-04-01-preview&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;api-key: &lt;/span&gt;&lt;span class="nv"&gt;$AZURE_OPENAI_API_KEY&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s1"&gt;&amp;#39;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;model&amp;#34;: &amp;#34;o4-mini&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;training_file&amp;#34;: &amp;#34;&amp;lt;your-training-file-id&amp;gt;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;method&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;reinforcement&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reinforcement&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;grader&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;string_check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;name&amp;#34;: &amp;#34;answer-check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;input&amp;#34;: &amp;#34;{{sample.output_text}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reference&amp;#34;: &amp;#34;{{item.reference_answer}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;operation&amp;#34;: &amp;#34;eq&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;hyperparameters&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;n_epochs&amp;#34;: 2,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;compute_multiplier&amp;#34;: 1.0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;trainingType&amp;#34;: &amp;#34;globalstandard&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;trainingType: globalstandard&lt;/code&gt; 플래그가 핵심적인 차이점입니다.&lt;/p&gt;
+&lt;h2 id="새로운-모델-그레이더-gpt-41-패밀리"&gt;새로운 모델 그레이더: GPT-4.1 패밀리&lt;/h2&gt;
+&lt;p&gt;그레이더는 모델이 최적화하는 보상 신호를 정의합니다. 지금까지 모델 기반 그레이더는 소수의 모델로 제한되어 있었습니다. 이제 세 가지 새로운 옵션이 추가되었습니다: GPT-4.1, GPT-4.1-mini, GPT-4.1-nano.&lt;/p&gt;
+&lt;p&gt;결정적 그레이더 대신 모델 그레이더를 사용해야 할 때는? 태스크 출력이 개방형일 때, 여러 차원에서 부분 점수가 필요할 때, 또는 도구 호출의 정확성이 의미적 맥락에 따라 달라지는 에이전트 워크플로를 구축할 때입니다.&lt;/p&gt;
+&lt;p&gt;핵심은 티어링 전략이 실용적이라는 것입니다:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-nano&lt;/strong&gt; 초기 반복용. 낮은 비용, 빠른 피드백 루프.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-mini&lt;/strong&gt; 평가 기준이 안정되고 더 높은 정확도가 필요할 때.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1&lt;/strong&gt; 프로덕션 평가 또는 모든 점수 결정이 중요한 복잡한 기준용.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;단일 RFT 작업에서 그레이더 유형을 혼합할 수도 있습니다. &amp;ldquo;정답&amp;rdquo; 차원에는 string-match를 사용하고 추론 품질 평가에는 모델 그레이더를 사용하세요. 솔직히 이 유연성이 실제 워크로드에서 유용한 이유입니다.&lt;/p&gt;
+&lt;h2 id="rft-데이터-형식-주의사항"&gt;RFT 데이터 형식 주의사항&lt;/h2&gt;
+&lt;p&gt;많은 사람들이 여기서 실수합니다. RFT 데이터 형식은 SFT와 다릅니다. 각 행의 마지막 메시지는 User 또는 Developer 역할이어야 합니다 — Assistant가 아닙니다. 예상 답변은 그레이더가 직접 참조하는 &lt;code&gt;reference_answer&lt;/code&gt;와 같은 최상위 키에 넣습니다.&lt;/p&gt;
+&lt;p&gt;지금까지 지도 파인튜닝을 해왔고 RFT로 전환하고 싶다면, 트레이닝 데이터를 재구성해야 합니다. 이 단계를 건너뛰면 작업이 조용히 실패합니다.&lt;/p&gt;
+&lt;h2 id="net-개발자에게-왜-중요한가"&gt;.NET 개발자에게 왜 중요한가&lt;/h2&gt;
+&lt;p&gt;Azure OpenAI SDK를 통해 .NET 앱에서 파인튜닝된 모델을 호출하고 있다면, 더 저렴한 트레이닝은 더 공격적으로 반복할 수 있다는 뜻입니다. 모델 그레이더 옵션은 정확 일치 시나리오뿐만 아니라 미묘한 태스크에 대해서도 파인튜닝할 수 있다는 것을 의미합니다. 그리고 &lt;a href="https://github.com/microsoft-foundry/fine-tuning/blob/main/Demos/Agentic_RFT_PrivatePreview/RFT_Best_Practice.md"&gt;GitHub&lt;/a&gt;의 모범 사례 가이드는 실제 디버깅 시간을 절약해 줄 것입니다.&lt;/p&gt;
+&lt;p&gt;작게 시작하세요. 10개에서 100개 샘플. 간단한 그레이더. 루프를 검증하세요. 그다음 확장하세요.&lt;/p&gt;</content:encoded></item></channel></rss>

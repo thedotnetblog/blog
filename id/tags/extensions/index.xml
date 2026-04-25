@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Extensions | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/extensions/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 02 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/extensions/index.xml" rel="self" type="application/rss+xml"/><item><title>Bookmark Studio Menghadirkan Navigasi Berbasis Slot dan Berbagi ke Bookmark Visual Studio</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/</guid><description>Ekstensi Bookmark Studio baru dari Mads Kristensen menambahkan navigasi slot berbasis keyboard, manajer bookmark, warna, label, dan kemampuan ekspor/berbagi ke bookmark Visual Studio.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Bookmark di Visual Studio selalu&amp;hellip; cukup baik. Anda mengaturnya, menavigasi ke yang berikutnya, lupa mana yang mana.&lt;/p&gt;
+&lt;p&gt;Mads Kristensen baru saja &lt;a href="https://devblogs.microsoft.com/visualstudio/bookmark-studio-evolving-bookmarks-in-visual-studio/"&gt;merilis Bookmark Studio&lt;/a&gt;, ekstensi eksperimental yang mengisi kesenjangan yang mungkin Anda temui jika menggunakan bookmark secara teratur.&lt;/p&gt;
+&lt;h2 id="navigasi-berbasis-slot"&gt;Navigasi berbasis slot&lt;/h2&gt;
+&lt;p&gt;Tambahan utama: bookmark sekarang dapat ditetapkan ke slot 1–9 dan langsung melompat dengan &lt;code&gt;Alt+Shift+1&lt;/code&gt; hingga &lt;code&gt;Alt+Shift+9&lt;/code&gt;. Ini mengubah bookmark dari &amp;ldquo;saya punya beberapa bookmark di suatu tempat&amp;rdquo; menjadi &amp;ldquo;Slot 3 adalah controller API saya, Slot 5 adalah lapisan layanan.&amp;rdquo;&lt;/p&gt;
+&lt;h2 id="manajer-bookmark"&gt;Manajer Bookmark&lt;/h2&gt;
+&lt;p&gt;Jendela alat baru menampilkan semua bookmark Anda di satu tempat dengan pemfilteran berdasarkan nama, file, lokasi, warna, atau slot.&lt;/p&gt;
+&lt;h2 id="organisasi-dengan-label-warna-dan-folder"&gt;Organisasi dengan label, warna, dan folder&lt;/h2&gt;
+&lt;p&gt;Bookmark secara opsional dapat memiliki label dan warna serta dikelompokkan ke dalam folder. Semua metadata disimpan per solusi.&lt;/p&gt;
+&lt;h2 id="ekspor-dan-berbagi"&gt;Ekspor dan berbagi&lt;/h2&gt;
+&lt;p&gt;Bookmark Studio memungkinkan Anda mengekspor bookmark sebagai teks biasa, Markdown, atau CSV:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Sertakan jalur bookmark dalam deskripsi pull request&lt;/li&gt;
+&lt;li&gt;Bagikan jejak investigasi dengan rekan tim&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ambil dari &lt;a href="https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BookmarkStudio"&gt;Visual Studio Marketplace&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

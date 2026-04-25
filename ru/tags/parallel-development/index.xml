@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Parallel-Development | The .NET Blog</title><link>https://thedotnetblog.com/ru/tags/parallel-development/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ru</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ru/tags/parallel-development/index.xml" rel="self" type="application/rss+xml"/><item><title>Изолированный режим Aspire устраняет кошмар конфликтов портов при параллельной разработке</title><link>https://thedotnetblog.com/ru/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ru/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</guid><description>Aspire 13.2 вводит режим --isolated: случайные порты, отдельные секреты и ноль коллизий при запуске нескольких экземпляров одного AppHost. Идеально для ИИ-агентов, worktrees и параллельных рабочих процессов.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Этот пост был переведён автоматически. Оригинал можно прочитать &lt;a href="https://thedotnetblog.com/ru/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/"&gt;здесь&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Если вы когда-нибудь пытались запустить два экземпляра одного проекта одновременно, вы знаете эту боль. Порт 8080 уже используется. Порт 17370 занят. Убить что-то, перезапустить, жонглировать переменными окружения — настоящий убийца продуктивности.&lt;/p&gt;
+&lt;p&gt;Эта проблема не улучшается, а ухудшается. ИИ-агенты создают git worktrees для независимой работы. Фоновые агенты поднимают отдельные среды. Разработчики дважды клонируют один репозиторий для feature-веток. Каждый из этих сценариев упирается в одну и ту же стену: два экземпляра одного приложения борются за одни и те же порты.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 решает это одним флагом. James Newton-King из команды Aspire &lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;описал все детали&lt;/a&gt;, и это одна из тех фич «почему у нас этого не было раньше».&lt;/p&gt;
+&lt;h2 id="решение---isolated"&gt;Решение: &lt;code&gt;--isolated&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Вот и всё. Каждый запуск получает:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Случайные порты&lt;/strong&gt; — больше никаких коллизий между экземплярами&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Изолированные пользовательские секреты&lt;/strong&gt; — строки подключения и API-ключи остаются раздельными для каждого экземпляра&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Никакого ручного переназначения портов. Никакого жонглирования переменными окружения. Каждый запуск автоматически получает чистую среду без коллизий.&lt;/p&gt;
+&lt;h2 id="реальные-сценарии-где-это-сияет"&gt;Реальные сценарии, где это сияет&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Множественные checkout.&lt;/strong&gt; У вас feature-ветка в одной директории и bugfix в другой:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-feature
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-bugfix
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Оба работают без конфликтов. Дашборд показывает, что где запущено.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Фоновые агенты в VS Code.&lt;/strong&gt; Когда фоновый агент Copilot Chat создаёт git worktree для независимой работы с вашим кодом, ему может понадобиться запустить ваш Aspire AppHost. Без &lt;code&gt;--isolated&lt;/code&gt; это конфликт портов с основным worktree. С ним оба экземпляра просто работают.&lt;/p&gt;
+&lt;p&gt;Навык Aspire, поставляемый с &lt;code&gt;aspire agent init&lt;/code&gt;, автоматически инструктирует агентов использовать &lt;code&gt;--isolated&lt;/code&gt; при работе в worktrees. Так что фоновый агент Copilot должен справляться с этим из коробки.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Интеграционные тесты параллельно с разработкой.&lt;/strong&gt; Нужно запускать тесты против работающего AppHost, продолжая разрабатывать фичи? Изолированный режим даёт каждому контексту собственные порты и конфигурацию.&lt;/p&gt;
+&lt;h2 id="как-это-работает-под-капотом"&gt;Как это работает под капотом&lt;/h2&gt;
+&lt;p&gt;Когда вы передаёте &lt;code&gt;--isolated&lt;/code&gt;, CLI генерирует уникальный ID экземпляра для запуска. Это управляет двумя поведениями:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Рандомизация портов&lt;/strong&gt; — вместо привязки к предсказуемым портам, определённым в конфигурации AppHost, изолированный режим выбирает случайные доступные порты для всего — дашборда, эндпоинтов сервисов, всего. Service discovery автоматически подстраивается, чтобы сервисы находили друг друга независимо от назначенных портов.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Изоляция секретов&lt;/strong&gt; — каждый изолированный запуск получает собственное хранилище пользовательских секретов, привязанное к ID экземпляра. Строки подключения и API-ключи одного запуска не утекают в другой.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Ваш код не нуждается в изменениях. Service discovery Aspire разрешает эндпоинты во время выполнения, так что всё подключается правильно независимо от назначения портов.&lt;/p&gt;
+&lt;h2 id="когда-использовать"&gt;Когда использовать&lt;/h2&gt;
+&lt;p&gt;Используйте &lt;code&gt;--isolated&lt;/code&gt; при запуске нескольких экземпляров одного AppHost одновременно — будь то параллельная разработка, автоматизированные тесты, ИИ-агенты или git worktrees. Для разработки с единственным экземпляром, где вы предпочитаете предсказуемые порты, обычный &lt;code&gt;aspire run&lt;/code&gt; по-прежнему отлично работает.&lt;/p&gt;
+&lt;h2 id="подведём-итоги"&gt;Подведём итоги&lt;/h2&gt;
+&lt;p&gt;Изолированный режим — это маленькая фича, которая решает реальную и всё более распространённую проблему. По мере того как разработка с ИИ подталкивает нас к большему количеству параллельных рабочих процессов — множество агентов, множество worktrees, множество контекстов — возможность просто поднять ещё один экземпляр без борьбы за порты становится необходимой.&lt;/p&gt;
+&lt;p&gt;Прочитайте &lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;полный пост&lt;/a&gt; для всех технических деталей и попробуйте с &lt;code&gt;aspire update --self&lt;/code&gt; для получения 13.2.&lt;/p&gt;</content:encoded></item></channel></rss>

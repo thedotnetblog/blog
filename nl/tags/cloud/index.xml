@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Cloud | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/cloud/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/cloud/index.xml" rel="self" type="application/rss+xml"/><item><title>Je AI-experimenten op Azure Verbranden Geld — Hier is Hoe je Dat Oplost</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/</guid><description>AI-workloads op Azure kunnen snel duur worden. Laten we het hebben over wat echt werkt om kosten onder controle te houden zonder je ontwikkeling te vertragen.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Als je momenteel AI-aangedreven apps bouwt op Azure, heb je waarschijnlijk iets opgemerkt: je cloudfactuur ziet er anders uit. Niet alleen hoger — vreemder. Grillig. Moeilijk te voorspellen.&lt;/p&gt;
+&lt;p&gt;Microsoft heeft zojuist een geweldig stuk gepubliceerd over &lt;a href="https://azure.microsoft.com/en-us/blog/cloud-cost-optimization-principles-that-still-matter/"&gt;cloud cost optimization-principes die nog steeds relevant zijn&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="waarom-ai-workloads-anders-zijn"&gt;Waarom AI-workloads anders zijn&lt;/h2&gt;
+&lt;p&gt;Traditionele .NET-workloads zijn relatief voorspelbaar. AI-workloads? Niet echt. Je test meerdere modellen, draait GPU-infrastructuur op, en maakt API-aanroepen naar Azure OpenAI waarbij tokenverbruik enorm varieert.&lt;/p&gt;
+&lt;h2 id="beheer-vs-optimalisatie--ken-het-verschil"&gt;Beheer vs. optimalisatie — ken het verschil&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Beheer&lt;/strong&gt;: bijhouden en rapporteren.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Optimalisatie&lt;/strong&gt;: daadwerkelijk beslissingen nemen. Heb je echt die S3-laag nodig? Zit die altijd-aan instantie in het weekend te niets doen?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="wat-echt-werkt"&gt;Wat echt werkt&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Tag je resources&lt;/strong&gt; — als je niet kunt zien welk project je budget opeet, kun je niets optimaliseren&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stel vangrails in vóór experimenten&lt;/strong&gt; — gebruik Azure Policy om dure SKU&amp;rsquo;s te beperken&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pas de grootte voortdurend aan&lt;/strong&gt; — bekijk aanbevelingen van Azure Advisor&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Denk aan de levenscyclus&lt;/strong&gt; — dev-resources moeten worden afgesloten&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Meet waarde, niet alleen kosten&lt;/strong&gt; — een duurder model dat significant betere resultaten levert, kan de juiste keuze zijn&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item></channel></rss>

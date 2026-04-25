@@ -1,0 +1,184 @@
+# The .NET Blog
+
+> Articles, tutorials and insights from the .NET community.
+
+The .NET Blog is a community-driven publication featuring articles, tutorials, and deep dives on .NET, ASP.NET Core, C#, cloud architecture, and software engineering. Written by developers, for developers.
+
+## Metadata
+
+- URL: https://thedotnetblog.com/
+- Language: ar
+- Last Updated: 2026-04-25
+
+## Blog Posts
+- [.NET 10 يأتي مع Ubuntu 26.04 LTS — ما الجديد](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/): أُطلق Ubuntu 26.04 LTS (Resolute Raccoon) مع .NET 10 كسلسلة أدوات من الدرجة الأولى. Native AOT وحاويات Chiseled وLinux 7.0.
+- [Azure MCP Server الآن .mcpb — ثبّته بدون أي Runtime](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azure-mcp-server-mcpb-no-runtime-install/): Azure MCP Server متاح الآن كـ MCP Bundle (.mcpb) — نزّله، اسحبه إلى Claude Desktop وانتهى الأمر. لا Node.js ولا Python ولا .NET مطلوبة.
+- [CodeAct في Agent Framework: كيف تخفض زمن استجابة وكيلك إلى النصف](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/codeact-agent-framework-hyperlight-50-percent-faster/): يضغط CodeAct سلاسل الأدوات متعددة الخطوات في كتلة كود واحدة معزولة — يقلل زمن الاستجابة بنسبة 52% واستخدام الرموز بنسبة 64%.
+- [GPT-5.5 هنا ويأتي إلى Azure Foundry — ما يحتاج مطورو .NET معرفته](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/gpt-55-foundry-ga-what-dotnet-developers-need-to-know/): GPT-5.5 متاح عمومًا في Microsoft Foundry. التطور من GPT-5 إلى 5.5، ما الذي تحسّن فعلًا وكيف تبدأ باستخدامه في وكلائك اليوم.
+- [VS Code 1.118: يحصل Copilot CLI على أسماء الجلسات وشارات النماذج وـ TypeScript 7.0 Nightly](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/vscode-1-118-copilot-cli-session-names-model-badge/): Visual Studio Code 1.118 إصدار مركّز على تحسينات Copilot CLI — تسمية الجلسات، شارات النماذج، الاختيار التلقائي للنموذج، والانضمام إلى TypeScript 7.0 Nightly.
+- [أين يتذكر وكيلك الأشياء؟ دليل عملي لتخزين سجل المحادثات](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/chat-history-storage-patterns-agent-framework/): مُدار من الخدمة أم من العميل؟ خطي أم متفرع؟ القرار المعماري الذي يحدد ما يستطيع وكيل الذكاء الاصطناعي لديك فعله حقًا — مع أمثلة برمجية بـ C# و Python.
+- [Foundry Toolboxes: نقطة نهاية واحدة لجميع أدوات وكلاء الذكاء الاصطناعي](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/foundry-toolboxes-curate-manage-tools-ai-agents/): أطلقت Microsoft Foundry ميزة Toolboxes في معاينة عامة — طريقة لإدارة أدوات وكلاء الذكاء الاصطناعي وعرضها عبر نقطة نهاية واحدة متوافقة مع MCP.
+- [Windows App Dev CLI v0.3: تشغيل F5 من الطرفية وأتمتة واجهة المستخدم للوكلاء الذكيين](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/): يُقدّم Windows App Development CLI v0.3 أمر winapp run لتشغيل التطبيقات وتنقيحها من الطرفية، وأمر winapp ui لأتمتة الواجهة، وحزمة NuGet جديدة تتيح dotnet run مع التطبيقات المُحزَّمة.
+- [كتابة Hooks في azd بـ Python وTypeScript و.NET: وداعًا لسكريبتات Shell](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azd-hooks-python-javascript-typescript-dotnet/): تدعم Azure Developer CLI الآن كتابة hooks بـ Python وJavaScript وTypeScript و.NET. لا مزيد من التبديل إلى Bash من أجل سكريبت migration واحد.
+- [azd + GitHub Copilot: إعداد المشروع بالذكاء الاصطناعي وحل الأخطاء بذكاء](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/): يتكامل Azure Developer CLI الآن مع GitHub Copilot لإنشاء بنية المشروع التحتية وحل أخطاء النشر — دون مغادرة الطرفية.
+- [كتابة إضافات Node.js الأصلية بلغة C# مع .NET Native AOT](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/nodejs-addons-csharp-native-aot/): استبدل فريق C# Dev Kit إضافات Node.js المكتوبة بـ C++ بـ .NET Native AOT — النتيجة أنظف وأكثر أمانًا وتحتاج فقط إلى .NET SDK.
+- [VS Code 1.117: الوكلاء يحصلون على فروع Git الخاصة بهم وهذا رائع](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/vscode-1-117-agents-autopilot-worktrees/): يأتي VS Code 1.117 بعزل worktree لجلسات الوكلاء، ووضع Autopilot الدائم، ودعم الوكلاء الفرعيين. سير عمل الترميز الآلي أصبح أكثر واقعية.
+- [الضبط الدقيق RFT في Foundry أصبح أرخص وأذكى — إليك ما تغيّر](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/): شحنت Microsoft Foundry ثلاثة تحديثات RFT هذا الشهر: التدريب العالمي لـ o4-mini، ومُقيِّمات النماذج الجديدة GPT-4.1، ودليل أفضل الممارسات الذي سيوفّر عليك ساعات من التصحيح.
+- [تجاربك في الذكاء الاصطناعي على Azure تُهدر المال — إليك كيفية إصلاح ذلك](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/): أعباء عمل الذكاء الاصطناعي على Azure يمكن أن تُكلف كثيرًا بسرعة. نناقش هنا ما يُحدث فرقًا حقيقيًا في ضبط التكاليف دون إبطاء عملية التطوير.
+- [Docker Sandbox يسمح لوكلاء Copilot بإعادة هيكلة كودك دون تعريض جهازك للخطر](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/): يمنح Docker Sandbox وكلاء GitHub Copilot بيئة microVM آمنة لتنفيذ عمليات إعادة الهيكلة بحرية — دون مطالبات بالإذن، ودون خطر على جهازك المضيف. إليك لماذا يُغير ذلك كل شيء في عمليات تحديث .NET واسعة النطاق.
+- [توقف عن حراسة طرفيتك: الوضع المنفصل في Aspire يغير سير العمل](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/): يتيح لك Aspire 13.2 تشغيل AppHost في الخلفية واسترداد طرفيتك. مقرون بأوامر CLI الجديدة ودعم الوكلاء، هذا أمر أكبر مما يبدو.
+- [أدوات Azure MCP مدمجة الآن في Visual Studio 2022 — لا حاجة إلى امتداد](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azure-mcp-tools-built-into-visual-studio-2022/): تُشحن أدوات Azure MCP كجزء من حمل عمل تطوير Azure في Visual Studio 2022. أكثر من 230 أداة، و45 خدمة Azure، وصفر امتدادات للتثبيت.
+- [تجميع الدبابيس يصل أخيراً إلى خرائط .NET MAUI — خاصية واحدة، لا ألم](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/maui-maps-pin-clustering-finally/): .NET MAUI 11 Preview 3 يضيف تجميع الدبابيس الأصيلي إلى عنصر التحكم Map. خاصية واحدة، ومجموعات تجميع منفصلة، ومعالجة النقر — كل ذلك مدمج.
+- [.NET أبريل 2026 — تحديثات الأمان التي يجب تطبيقها اليوم](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/dotnet-april-2026-servicing-security-patches/): تُصلح تحديثات خدمة أبريل 2026 ست ثغرات أمنية عبر .NET 10 و.NET 9 و.NET 8 و.NET Framework — بما في ذلك ثغرتان للتنفيذ عن بُعد.
+- [Aspire 13.2 يضيف MongoDB EF Core وAzure Data Lake — تكاملان يستحقان التجربة](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/aspire-132-mongodb-efcore-data-lake/): يُضيف Aspire 13.2 تكاملَي MongoDB Entity Framework Core وAzure Data Lake Storage مع فحوصات صحة وسرد خدمات بدون إعداد. إليك شكلهما في التطبيق العملي.
+- [azd update — أمر واحد يتحكّم في جميع مديري الحزم](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/): يمتلك Azure Developer CLI الآن أمر تحديث عالمياً يعمل بصرف النظر عن طريقة التثبيت — winget أو Homebrew أو Chocolatey أو سكريبت التثبيت.
+- [Azure Smart Tier متاح للعموم — تحسين تكاليف تخزين Blob تلقائياً بدون قواعد دورة الحياة](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/): أصبح Smart Tier في Azure Blob Storage متاحاً للعموم، حيث ينقل الكائنات تلقائياً بين الطبقات الساخنة والباردة والمتجمدة بناءً على أنماط الوصول الفعلية — دون الحاجة إلى قواعد دورة الحياة.
+- [أين تستضيف وكلاء الذكاء الاصطناعي على Azure؟ دليل عملي للقرار](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azure-ai-agent-hosting-options-guide/): تُقدّم Azure ستة طرق لاستضافة وكلاء الذكاء الاصطناعي — من الحاويات الخام إلى Foundry Hosted Agents المُدارة بالكامل. إليك كيفية اختيار الخيار المناسب لعبء عمل .NET.
+- [تصحيح Azure DevOps Server لشهر أبريل 2026 — إصلاح اكتمال طلبات السحب وتحديثات الأمان](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/): يحصل Azure DevOps Server على التصحيح 3 مع إصلاح فشل اكتمال طلبات السحب، وتحسين التحقق من تسجيل الخروج، واستعادة اتصالات PAT الخاصة بـ GitHub Enterprise Server.
+- [مهارات الوكيل في .NET أصبحت أكثر مرونة من أي وقت مضى](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/): يدعم Microsoft Agent Framework الآن ثلاث طرق لتأليف المهارات — ملفات، وفئات، وكود مضمّن — وكلها تُركَّب عبر مزوّد واحد. إليك لماذا يهمّ هذا وكيف تستخدم كل طريقة.
+- [إطلاق Azure MCP Server 2.0 — أتمتة السحابة الوكيلية المستضافة ذاتياً أصبحت حقيقة](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azure-mcp-server-2-self-hosted-agentic-cloud/): يصل Azure MCP Server 2.0 إلى مرحلة الاستقرار مع نشر عن بُعد مستضاف ذاتياً، و276 أداة عبر 57 خدمة Azure، وأمان على مستوى المؤسسات — إليك ما يهم مطوري .NET الذين يبنون سير عمل وكيلية.
+- [.NET Aspire 13.2 يريد أن يكون أفضل صديق لوكيل الذكاء الاصطناعي](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/): يُركّز Aspire 13.2 كلياً على التطوير الوكيلي — مخرجات CLI منظّمة، وتشغيل معزول، وبيئات ذاتية الإصلاح، وبيانات OpenTelemetry كاملة حتى تتمكن وكلاء الذكاء الاصطناعي من بناء تطبيقاتك وتشغيلها ومراقبتها فعلاً.
+- [Microsoft Foundry مارس 2026 — GPT-5.4 وإطلاق خدمة Agent وتحديث SDK الذي يغيّر كل شيء](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/microsoft-foundry-march-2026-whats-new/): تحديث Microsoft Foundry لمارس 2026 ضخم: خدمة Agent تصبح متاحة للعموم، GPT-5.4 يوفّر استدلالاً موثوقاً، حزمة azure-ai-projects SDK تصبح مستقرة عبر جميع اللغات، وFireworks AI تجلب النماذج المفتوحة إلى Azure.
+- [VS Code 1.116 — تطبيق Agents يحصل على التنقل بلوحة المفاتيح وإكمالات سياق الملفات](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/): يركّز VS Code 1.116 على صقل تطبيق Agents — اختصارات لوحة مفاتيح مخصصة، وتحسينات إمكانية الوصول، وإكمالات سياق الملفات، وحل روابط CSS @import.
+- [إعداد النوافذ العائمة في Visual Studio الذي لم تكن تعرفه (لكنك يجب أن تعرفه)](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/): إعداد خفي في Visual Studio يمنحك تحكماً كاملاً في النوافذ العائمة — إدخالات مستقلة في شريط المهام، وسلوك صحيح مع الشاشات المتعددة، وتكامل مثالي مع FancyZones. قائمة منسدلة واحدة تغير كل شيء.
+- [الوضع المعزول في Aspire يحلّ كابوس تعارض المنافذ في التطوير المتوازي](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/): يُقدّم Aspire 13.2 وضع --isolated: منافذ عشوائية، وأسرار منفصلة، وانعدام كامل للتعارضات عند تشغيل نسخ متعددة من AppHost. مثالي للوكلاء والـ worktrees والسير المتوازية.
+- [بناء واجهات مستخدم متعددة الوكلاء في الوقت الفعلي دون أن تبدو صندوقاً أسود](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/ag-ui-real-time-multi-agent-ui-maf/): يتعاون AG-UI مع إطار عمل Microsoft Agent لمنح مهام سير العمل متعددة الوكلاء واجهة أمامية حقيقية — مع بث فوري، وموافقات بشرية، ورؤية كاملة لما تفعله وكلاؤك.
+- [تطبيقات MCP تحصل على واجهة برمجة سلسة — أنشئ واجهات أدوات AI غنية في .NET بثلاث خطوات](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/mcp-fluent-api-azure-functions-dotnet/): واجهة التهيئة السلسة الجديدة لتطبيقات MCP على Azure Functions تتيح لك تحويل أي أداة .NET MCP إلى تطبيق كامل بمشاهدات وصلاحيات وسياسات CSP في بضعة أسطر من الكود.
+- [تقييم التحديث من GitHub Copilot هو أفضل أداة ترحيل لا تستخدمها بعد](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/): إضافة التحديث في GitHub Copilot لا تقترح تغييرات الكود فحسب — بل تُنتج تقييم ترحيل كاملًا مع مشكلات قابلة للتنفيذ ومقارنات لأهداف Azure وسير عمل تعاوني. إليك لماذا وثيقة التقييم هي مفتاح كل شيء.
+- [خادم SQL MCP — الطريقة الصحيحة لمنح وكلاء الذكاء الاصطناعي وصولاً إلى قواعد البيانات](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/): يمنح خادم SQL MCP من Data API builder وكلاءَ الذكاء الاصطناعي وصولاً آمناً وحتمياً إلى قواعد البيانات دون كشف المخططات أو الاعتماد على NL2SQL. يأتي مزوداً بتحكم في الصلاحيات، وتخزين مؤقت، ودعم لقواعد بيانات متعددة — كل ذلك مدمج فيه.
+- [ربط خوادم MCP على Azure Functions بوكلاء Foundry — إليك الطريقة](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/foundry-agents-mcp-servers-azure-functions/): أنشئ خادم MCP مرة واحدة، وانشره على Azure Functions، وربطه بوكلاء Microsoft Foundry مع المصادقة المناسبة. أدواتك تعمل في كل مكان — VS Code وCursor والآن وكلاء الذكاء الاصطناعي المؤسسي.
+- [هندسة المنصات الوكيلية تصبح حقيقة — Git-APE يُظهر كيف](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/): يضع مشروع Git-APE من Microsoft هندسة المنصات الوكيلية موضع التطبيق — باستخدام وكلاء GitHub Copilot وAzure MCP لتحويل الطلبات باللغة الطبيعية إلى بنية تحتية سحابية مُتحقَّق منها.
+- [VS Code 1.115 — إشعارات الطرفيات الخلفية، واستضافة وكلاء SSH، والمزيد](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/): يجلب VS Code 1.115 إشعارات الطرفيات الخلفية للوكلاء، واستضافة وكلاء SSH عن بُعد، ولصق الملفات في الطرفيات، وتتبع التعديلات المرتبط بالجلسات. إليك ما يهم مطوري .NET.
+- [C# 15 يحصل على أنواع الاتحاد — وهي بالضبط ما كنا نطلبه](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/csharp-15-union-types-exhaustive-matching/): يُقدّم C# 15 الكلمة المفتاحية union — أنواع اتحاد مُميَّزة يُطبّقها المُحوِّل مع مطابقة أنماط شاملة. إليك شكلها ولماذا تهم وكيف تجربها اليوم.
+- [Aspire 13.2 يُقدّم CLI للوثائق — ويمكن لوكيل الذكاء الاصطناعي استخدامه أيضاً](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/): يُضيف .NET Aspire 13.2 أمر aspire docs — واجهة CLI للبحث عن الوثائق الرسمية وتصفّحها وقراءتها دون مغادرة الطرفية. كما يعمل أداةً لوكلاء الذكاء الاصطناعي. إليك سبب أهميّته.
+- [إطار عمل Microsoft Agent يصل إلى الإصدار 1.0 — إليك ما يهمّ فعلاً لمطوّري .NET](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/agent-framework-1-0-production-ready/): إطار عمل Microsoft Agent 1.0 جاهز للإنتاج مع واجهات برمجية مستقرة، وتنسيق متعدد الوكلاء، وموصلات لكل مزوّد ذكاء اصطناعي رئيسي. إليك ما تحتاج معرفته كمطوّر .NET.
+- [azd يتيح الآن تشغيل وكلاء الذكاء الاصطناعي وتصحيح أخطائها محلياً — إليك ما تغيّر في مارس 2026](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/): شحنت واجهة Azure Developer CLI سبعة إصدارات في مارس 2026. أبرزها: حلقة تشغيل وتصحيح محلية لوكلاء الذكاء الاصطناعي، وتكامل GitHub Copilot في إعداد المشاريع، ودعم Container App Jobs.
+- [Azure DevOps يُصلح أخيراً تجربة مستخدم محرر Markdown التي اشتكى منها الجميع](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/): يحصل محرر Markdown في Azure DevOps لعناصر العمل على تمييز أوضح بين وضعَي المعاينة والتحرير. إنه تغيير صغير يحل مشكلة حقيقية ومزعجة في سير العمل.
+- [Bookmark Studio يُضيف نظام التنقل بالفتحات والمشاركة إلى إشارات Visual Studio المرجعية](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/): إضافة Bookmark Studio الجديدة من Mads Kristensen تضيف التنقل بلوحة المفاتيح عبر الفتحات، ومدير الإشارات المرجعية، والألوان، والتسميات، وإمكانيات التصدير والمشاركة إلى إشارات Visual Studio المرجعية.
+- [تحديث Visual Studio لشهر مارس يتيح لك بناء وكلاء Copilot مخصصين — وأداة find_symbol تستحق الاهتمام](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/): يأتي تحديث Visual Studio لشهر مارس 2026 بوكلاء Copilot مخصصين، ومهارات وكلاء قابلة لإعادة الاستخدام، وأداة find_symbol تدرك لغات البرمجة، وتحليل أداء مدعوم بـ Copilot من Test Explorer. إليك ما يستحق الاهتمام.
+- [لوحة تحكم Aspire 13.2 حصلت للتو على واجهة برمجية للقياس عن بُعد — وهذا يغيّر كل شيء](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/): يُشحن .NET Aspire 13.2 مع تصدير قياس عن بُعد أذكى، وواجهة برمجية قابلة للبرمجة للتتبعات والسجلات، وتحسينات تصوير GenAI. إليك لماذا يهمّ هذا لسير عمل التصحيح لديك.
+- [KubeCon أوروبا 2026: ما يجب أن يهتمّ به مطوّرو .NET فعلاً](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/kubecon-2026-aks-updates-dotnet-developers/): أطلقت Microsoft حزمة ضخمة من إعلانات Kubernetes في KubeCon أوروبا 2026. هذه النسخة المصفّاة — فقط تحديثات AKS والسحابة الأصيلة التي تهمّك إذا كنت تشحن تطبيقات .NET.
+- [خادم SQL MCP، وCopilot في SSMS، ومحور قواعد البيانات بالوكلاء: ما الذي يهمّ فعلاً من SQLCon 2026](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/agentic-ai-microsoft-databases-what-matters/): أعلنت Microsoft عن مجموعة من تحديثات قواعد البيانات في SQLCon 2026. إليك ما يهمّ فعلاً إذا كنت تبني تطبيقات مدعومة بالذكاء الاصطناعي على Azure SQL.
+- [VS Code 1.112: ما يهمك فعلاً كمطور .NET](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/vscode-1-112-dotnet-developers/): صدر VS Code 1.112 وهو محمّل بتحسينات للوكلاء، ومتصفح مدمج للتصحيح، وعزل MCP في صندوق رمل، ودعم monorepo. إليك ما يهم فعلاً إذا كنت تطور باستخدام .NET.
+- [الاستجابات في الخلفية في Microsoft Agent Framework: لا مزيد من القلق من انتهاء المهلة](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/background-responses-agent-framework-long-running-tasks/): يتيح لك Microsoft Agent Framework الآن تفريغ مهام الذكاء الاصطناعي طويلة التشغيل باستخدام رموز الاستمرارية. إليك كيفية عمل الاستجابات في الخلفية ولماذا تهم وكلاء .NET الخاصة بك.
+- [خادم Azure DevOps MCP يصل إلى Microsoft Foundry: ما الذي يعنيه هذا لوكلاء الذكاء الاصطناعي لديك](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/): أصبح خادم Azure DevOps MCP متاحاً الآن في Microsoft Foundry. اربط وكلاء الذكاء الاصطناعي مباشرةً بسير عمل DevOps — عناصر العمل والمستودعات والمسارات — ببضع نقرات.
+- [خدمة Foundry Agent متاحة للعموم: ما يهمّ فعلاً لبنّائي وكلاء .NET](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/foundry-agent-service-ga-what-matters/): أصبحت خدمة Foundry Agent من Microsoft متاحة للعموم مع دعم الشبكات الخاصة، وVoice Live، وتقييمات الإنتاج، وبيئة تشغيل متعددة النماذج ومفتوحة. إليك ما تحتاج إلى معرفته.
+- [من الحاسوب المحمول إلى الإنتاج: نشر وكلاء الذكاء الاصطناعي إلى Microsoft Foundry بأمرين](https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/deploy-ai-agents-foundry-azd-two-commands/): Azure Developer CLI يمتلك الآن أوامر 'azd ai agent' التي تأخذ وكيل الذكاء الاصطناعي الخاص بك من التطوير المحلي إلى نقطة نهاية Foundry حية في دقائق. إليك سير العمل الكامل.
+
+## Events
+- No events published yet.
+
+## Authors
+- [Emiliano Montesdeoca](https://thedotnetblog.com/ar/authors/emiliano-montesdeoca/): Microsoft MVP وقائد فريق حلول السحابة — إميليانو مطوّر برمجيات أوروغوياني-إسباني، وMicrosoft MVP في تقنيات المطورين، ومناصر للمجتمع مقيم في تينيريفي، جزر الكناري.
+
+يتخصص في تصميم حلول سحابية قابلة للتوسع باستخدام تقنيات Microsoft، ويشغل حاليًا منصب قائد فريق حلول السحابة في Intelequia Technologies.
+
+متحدث دولي متكرر في المؤتمرات وشغوف بمشاركة المعرفة، يُترجم حل المشكلات الواقعية إلى رؤى عملية قابلة للتطبيق للمطورين.
+
+
+## Topics
+This blog covers the following topics (with post count):
+- .net (3 posts)
+- .net 10 (1 post)
+- accessibility (1 post)
+- ag-ui (1 post)
+- agent framework (7 posts)
+- agents (11 posts)
+- ai (32 posts)
+- aks (2 posts)
+- architecture (1 post)
+- aspire (5 posts)
+- aspnet-core (1 post)
+- azd (5 posts)
+- azure (26 posts)
+- azure-developer-cli (2 posts)
+- azure-devops (2 posts)
+- azure-functions (2 posts)
+- azure-openai (1 post)
+- azure-sdk (3 posts)
+- azure-sql (1 post)
+- bicep (1 post)
+- blob-storage (1 post)
+- c# (1 post)
+- cli (6 posts)
+- cloud (1 post)
+- cloud-native (5 posts)
+- coding-agents (1 post)
+- containers (3 posts)
+- copilot (2 posts)
+- cost-optimization (2 posts)
+- csharp (2 posts)
+- dashboard (1 post)
+- data-api-builder (1 post)
+- data-lake (1 post)
+- databases (2 posts)
+- developer tooling (2 posts)
+- developer-tools (21 posts)
+- devops (4 posts)
+- docker (2 posts)
+- documentation (1 post)
+- dotnet (21 posts)
+- dotnet-11 (2 posts)
+- dotnet-aspire (1 post)
+- dotnet-framework (1 post)
+- efcore (1 post)
+- extensions (1 post)
+- fine-tuning (1 post)
+- finops (1 post)
+- foundry (7 posts)
+- github copilot (7 posts)
+- gpt-5 (1 post)
+- gpt-5-4 (1 post)
+- hyperlight (1 post)
+- infrastructure as code (1 post)
+- interop (1 post)
+- kubernetes (1 post)
+- language-features (1 post)
+- linux (1 post)
+- machine-learning (1 post)
+- maps (1 post)
+- maui (1 post)
+- mcp (11 posts)
+- microsoft-foundry (2 posts)
+- migration (1 post)
+- mobile (1 post)
+- modernization (2 posts)
+- mongodb (1 post)
+- multi-agent (2 posts)
+- native aot (2 posts)
+- node.js (1 post)
+- observability (1 post)
+- opentelemetry (1 post)
+- parallel-development (1 post)
+- patches (1 post)
+- pattern-matching (1 post)
+- platform-engineering (1 post)
+- powertoys (1 post)
+- productivity (4 posts)
+- profiling (1 post)
+- python (3 posts)
+- remote-development (1 post)
+- sdk (1 post)
+- security (1 post)
+- semantic kernel (2 posts)
+- servicing (1 post)
+- sql (1 post)
+- sse (1 post)
+- storage (1 post)
+- telemetry (1 post)
+- tooling (1 post)
+- typescript (2 posts)
+- ubuntu (1 post)
+- union-types (1 post)
+- visual-studio (5 posts)
+- vs code (2 posts)
+- vscode (3 posts)
+- windows (1 post)
+- winui (1 post)
+- wpf (1 post)
+
+## Optional
+
+- [Full content version](https://thedotnetblog.com/llms-full.txt)
+- [Sitemap](https://thedotnetblog.com/sitemap.xml)
+- [RSS Feed](https://thedotnetblog.com/index.xml)

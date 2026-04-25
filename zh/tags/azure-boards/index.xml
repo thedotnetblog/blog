@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure Boards | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/azure-boards/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 27 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/azure-boards/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure DevOps MCP服务器4月更新：WIQL查询、PAT认证和实验性MCP Apps</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-devops-mcp-server-april-2026-wiql-pat-apps/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-devops-mcp-server-april-2026-wiql-pat-apps/</guid><description>Azure DevOps MCP服务器获得了WIQL驱动的工作项查询、个人访问令牌身份验证、MCP注解，以及将常见工作流打包成可重用工具的实验性MCP Apps功能。</description><content:encoded>&lt;p&gt;&lt;em&gt;本文已自动翻译。要查看原始版本，请&lt;a href="https://thedotnetblog.com/posts/emiliano-montesdeoca/azure-devops-mcp-server-april-2026-wiql-pat-apps/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Azure DevOps MCP服务器持续改进。Dan Hellem的四月更新同时覆盖了本地和远程服务器。&lt;/p&gt;
+&lt;h2 id="wiql查询支持"&gt;WIQL查询支持&lt;/h2&gt;
+&lt;p&gt;新的&lt;code&gt;wit_query_by_wiql&lt;/code&gt;工具允许直接从MCP客户端运行工作项查询语言查询。&lt;/p&gt;
+&lt;h2 id="个人访问令牌"&gt;个人访问令牌&lt;/h2&gt;
+&lt;p&gt;本地服务器上的PAT身份验证 — 对于没有交互式身份验证的集成场景很重要。&lt;/p&gt;
+&lt;h2 id="mcp注解"&gt;MCP注解&lt;/h2&gt;
+&lt;p&gt;只读、破坏性和开放世界工具的元数据标签 — 代理可靠性的基础。&lt;/p&gt;
+&lt;h2 id="wiki工具整合"&gt;Wiki工具整合&lt;/h2&gt;
+&lt;p&gt;5个独立的wiki工具 → 2个更强大的工具。工具越少 = LLM性能越好。&lt;/p&gt;
+&lt;h2 id="实验性mcp-apps"&gt;实验性：MCP Apps&lt;/h2&gt;
+&lt;p&gt;在MCP服务器环境中打包的工作流。方向是对的。&lt;/p&gt;
+&lt;p&gt;Dan Hellem的原始文章：&lt;a href="https://devblogs.microsoft.com/devops/azure-devops-mcp-server-april-update/"&gt;Azure DevOps MCP Server April Update&lt;/a&gt;。&lt;/p&gt;</content:encoded></item></channel></rss>

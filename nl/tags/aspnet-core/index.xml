@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Aspnet-Core | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/aspnet-core/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/aspnet-core/index.xml" rel="self" type="application/rss+xml"/><item><title>De Moderniseringsbeoordelingstool van GitHub Copilot Is het Beste Migratiehulpmiddel Dat Je Nog Niet Gebruikt</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/</guid><description>De moderniseringsextensie van GitHub Copilot stelt niet alleen codewijzigingen voor — het produceert een volledige migratiebeoordeling met uitvoerbare problemen, Azure-doelvergelijkingen en een collaboratieve workflow.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Het migreren van een legacy .NET Framework-app naar modern .NET is een van die taken die iedereen weet dat ze moeten doen maar niemand wil beginnen.&lt;/p&gt;
+&lt;p&gt;Jeffrey Fritz heeft zojuist een &lt;a href="https://devblogs.microsoft.com/dotnet/your-migrations-source-of-truth-the-modernization-assessment/"&gt;diepgaande analyse van de moderniseringsbeoordelingstool van GitHub Copilot&lt;/a&gt; gepubliceerd.&lt;/p&gt;
+&lt;h2 id="het-is-niet-alleen-een-code-suggestie-engine"&gt;Het is niet alleen een code-suggestie-engine&lt;/h2&gt;
+&lt;p&gt;De VS Code-extensie volgt een &lt;strong&gt;Beoordeel → Plan → Uitvoer&lt;/strong&gt;-model. De beoordelingsfase analyseert je volledige codebase en produceert een gestructureerd document dat alles vastlegt.&lt;/p&gt;
+&lt;p&gt;De beoordeling wordt opgeslagen onder &lt;code&gt;.github/modernize/assessment/&lt;/code&gt;. Elke run produceert een onafhankelijk rapport.&lt;/p&gt;
+&lt;h2 id="twee-manieren-om-te-starten"&gt;Twee manieren om te starten&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Aanbevolen beoordeling&lt;/strong&gt; — het snelle pad. Kies uit gecureerde domeinen (Java/.NET Upgrade, Cloud Readiness, Security).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Aangepaste beoordeling&lt;/strong&gt; — het gerichte pad. Configureer exact wat te analyseren: doelcomputing (App Service, AKS, Container Apps), doelbesturingssysteem, containerisatieanalyse.&lt;/p&gt;
+&lt;h2 id="de-probleemindeling-is-uitvoerbaar"&gt;De probleemindeling is uitvoerbaar&lt;/h2&gt;
+&lt;p&gt;Elk probleem heeft een kriticiteitsniveau:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Verplicht&lt;/strong&gt; — moet worden opgelost of migratie mislukt&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Potentieel&lt;/strong&gt; — kan migratie beïnvloeden, vereist menselijk oordeel&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Optioneel&lt;/strong&gt; — aanbevolen verbeteringen, blokkeert migratie niet&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="mijn-mening"&gt;Mijn mening&lt;/h2&gt;
+&lt;p&gt;Als je legacy .NET Framework-apps hebt, is dit &lt;em&gt;het&lt;/em&gt; hulpmiddel om mee te beginnen.&lt;/p&gt;
+&lt;p&gt;Lees de &lt;a href="https://devblogs.microsoft.com/dotnet/your-migrations-source-of-truth-the-modernization-assessment/"&gt;volledige walkthrough&lt;/a&gt; en download de &lt;a href="https://aka.ms/ghcp-appmod/vscode-ext"&gt;VS Code-extensie&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

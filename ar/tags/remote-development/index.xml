@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Remote-Development | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/remote-development/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 06 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/remote-development/index.xml" rel="self" type="application/rss+xml"/><item><title>VS Code 1.115 — إشعارات الطرفيات الخلفية، واستضافة وكلاء SSH، والمزيد</title><link>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/</link><pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/</guid><description>يجلب VS Code 1.115 إشعارات الطرفيات الخلفية للوكلاء، واستضافة وكلاء SSH عن بُعد، ولصق الملفات في الطرفيات، وتتبع التعديلات المرتبط بالجلسات. إليك ما يهم مطوري .NET.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;تمت ترجمة هذا المقال تلقائياً. للنسخة الأصلية، &lt;a href="https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/"&gt;انقر هنا&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;وصل VS Code 1.115 للتو، وبينما يكون إصداراً أخف من حيث الميزات الرئيسية، فإن التحسينات المتعلقة بالوكيل مفيدة حقاً إذا كنت تعمل مع مساعدي الترميز بالذكاء الاصطناعي يومياً.&lt;/p&gt;
+&lt;p&gt;دعني أسلط الضوء على ما يستحق المعرفة فعلاً.&lt;/p&gt;
+&lt;h2 id="الطرفيات-الخلفية-تبلغ-الوكلاء-الآن"&gt;الطرفيات الخلفية تُبلّغ الوكلاء الآن&lt;/h2&gt;
+&lt;p&gt;هذه الميزة البارزة. تُشعر الطرفيات الخلفية الآن الوكلاءَ تلقائياً عند اكتمال الأوامر، بما في ذلك رمز الخروج ومخرجات الطرفية. كما يتم الكشف عن مطالبات الإدخال في الطرفيات الخلفية وعرضها على المستخدم.&lt;/p&gt;
+&lt;p&gt;لماذا يهم هذا؟ إذا استخدمت وضع وكيل Copilot لتشغيل أوامر البناء أو مجموعات الاختبار في الخلفية، فأنت تعرف ألم سؤال &amp;ldquo;هل انتهى ذلك بعد؟&amp;rdquo; — كانت الطرفيات الخلفية أساساً نهج &amp;ldquo;أطلق وانسَ&amp;rdquo;. الآن يتلقى الوكيل إشعاراً عند اكتمال &lt;code&gt;dotnet build&lt;/code&gt; أو &lt;code&gt;dotnet test&lt;/code&gt;، يرى المخرجات، ويمكنه الاستجابة وفقاً لذلك. تغيير بسيط يجعل سير العمل المدفوع بالوكلاء أكثر موثوقية بشكل ملحوظ.&lt;/p&gt;
+&lt;p&gt;يوجد أيضاً أداة &lt;code&gt;send_to_terminal&lt;/code&gt; جديدة تتيح للوكلاء إرسال أوامر إلى الطرفيات الخلفية مع تأكيد المستخدم، مما يحل مشكلة كون &lt;code&gt;run_in_terminal&lt;/code&gt; مع مهلة ينقل الطرفيات إلى الخلفية ويجعلها للقراءة فقط.&lt;/p&gt;
+&lt;h2 id="استضافة-الوكيل-عن-بعد-عبر-ssh"&gt;استضافة الوكيل عن بُعد عبر SSH&lt;/h2&gt;
+&lt;p&gt;يدعم VS Code الآن الاتصال بالأجهزة البعيدة عبر SSH، وتثبيت CLI تلقائياً وتشغيله في وضع مضيف الوكيل. هذا يعني أن جلسات الوكيل الذكي لديك يمكن أن تستهدف البيئات البعيدة مباشرة — مفيد لمطوري .NET الذين يبنون ويختبرون على خوادم Linux أو الأجهزة الافتراضية السحابية.&lt;/p&gt;
+&lt;h2 id="تتبع-التعديلات-في-جلسات-الوكيل"&gt;تتبع التعديلات في جلسات الوكيل&lt;/h2&gt;
+&lt;p&gt;يتم الآن تتبع تعديلات الملفات التي تتم خلال جلسات الوكيل واستعادتها، مع عرض الفروقات والتراجع/الإعادة واستعادة الحالة. إذا أجرى وكيل تغييرات على كودك وحدث خطأ ما، يمكنك رؤية ما تغيّر بالضبط والتراجع عنه. راحة بال حقيقية عند السماح للوكلاء بتعديل قاعدة الكود.&lt;/p&gt;
+&lt;h2 id="وعي-علامات-تبويب-المتصفح-وتحسينات-أخرى"&gt;وعي علامات تبويب المتصفح وتحسينات أخرى&lt;/h2&gt;
+&lt;p&gt;بعض الإضافات الإضافية لجودة الحياة:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;تتبع علامات تبويب المتصفح&lt;/strong&gt; — يمكن للمحادثة الآن تتبع علامات التبويب المفتوحة خلال جلسة والربط بها، حتى يتمكن الوكلاء من الإشارة إلى صفحات الويب التي تشاهدها&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;لصق الملفات في الطرفية&lt;/strong&gt; — الصق الملفات (بما في ذلك الصور) في الطرفية بـ Ctrl+V أو السحب والإفلات أو النقر الأيمن&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;تغطية الاختبار في الخريطة المصغرة&lt;/strong&gt; — تظهر مؤشرات تغطية الاختبار الآن في الخريطة المصغرة لنظرة عامة بصرية سريعة&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;الضغط للتكبير على Mac&lt;/strong&gt; — يدعم المتصفح المدمج إيماءات الضغط للتكبير&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;حصص Copilot في Sessions&lt;/strong&gt; — يعرض شريط الحالة معلومات الاستخدام في عرض Sessions&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;الأيقونات المفضلة في Go to File&lt;/strong&gt; — صفحات الويب المفتوحة تعرض أيقوناتها المفضلة في قائمة الاختيار السريع&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="خلاصة-القول"&gt;خلاصة القول&lt;/h2&gt;
+&lt;p&gt;VS Code 1.115 إصدار تدريجي، لكن تحسينات الوكيل — إشعارات الطرفيات الخلفية واستضافة وكيل SSH وتتبع التعديلات — تتجمع لتعطي تجربة أكثر سلاسة ملحوظة للتطوير المدعوم بالذكاء الاصطناعي. إذا كنت تستخدم وضع وكيل Copilot لمشاريع .NET، فهذه هي إصلاحات جودة الحياة التي تقلل الاحتكاك اليومي.&lt;/p&gt;
+&lt;p&gt;اطلع على &lt;a href="https://code.visualstudio.com/updates/v1_115"&gt;ملاحظات الإصدار الكاملة&lt;/a&gt; لكل التفاصيل.&lt;/p&gt;</content:encoded></item></channel></rss>

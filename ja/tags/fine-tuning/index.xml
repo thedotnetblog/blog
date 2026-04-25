@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fine-Tuning | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/fine-tuning/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/fine-tuning/index.xml" rel="self" type="application/rss+xml"/><item><title>FoundryのRFTがより安く、よりスマートに — 変更点まとめ</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</guid><description>Microsoft Foundryが今月3つのRFTアップデートをリリース：o4-miniのグローバルトレーニング、新しいGPT-4.1モデルグレーダー、そしてデバッグ時間を大幅に節約できるベストプラクティスガイド。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されています。原文は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ファインチューニングされたモデルに依存する.NETアプリを開発しているなら、今月のFoundryアップデートは注目に値します。Reinforcement Fine-Tuningがより利用しやすく、大幅に安くなりました。&lt;/p&gt;
+&lt;p&gt;詳細は&lt;a href="https://devblogs.microsoft.com/foundry/whats-new-in-foundry-finetune-april-2026/"&gt;公式発表&lt;/a&gt;にありますが、ここでは実用的なポイントをまとめます。&lt;/p&gt;
+&lt;h2 id="o4-miniのグローバルトレーニング"&gt;o4-miniのグローバルトレーニング&lt;/h2&gt;
+&lt;p&gt;o4-miniは推論重視のワークロードやエージェント型ワークロードに最適なモデルです。大きなニュース：13以上のAzureリージョンからファインチューニングジョブを起動でき、Standardトレーニングと比較してトークンあたりのトレーニングコストが低くなりました。同じインフラ、同じ品質、より広い対応範囲。&lt;/p&gt;
+&lt;p&gt;チームが複数の地域に分散している場合、これは重要です。トレーニングのために少数のリージョンに縛られることはもうありません。&lt;/p&gt;
+&lt;p&gt;グローバルトレーニングジョブを開始するREST APIコールはこちらです：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://&amp;lt;your-resource&amp;gt;.openai.azure.com/openai/fine_tuning/jobs?api-version=2025-04-01-preview&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;api-key: &lt;/span&gt;&lt;span class="nv"&gt;$AZURE_OPENAI_API_KEY&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s1"&gt;&amp;#39;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;model&amp;#34;: &amp;#34;o4-mini&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;training_file&amp;#34;: &amp;#34;&amp;lt;your-training-file-id&amp;gt;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;method&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;reinforcement&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reinforcement&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;grader&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;string_check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;name&amp;#34;: &amp;#34;answer-check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;input&amp;#34;: &amp;#34;{{sample.output_text}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reference&amp;#34;: &amp;#34;{{item.reference_answer}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;operation&amp;#34;: &amp;#34;eq&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;hyperparameters&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;n_epochs&amp;#34;: 2,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;compute_multiplier&amp;#34;: 1.0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;trainingType&amp;#34;: &amp;#34;globalstandard&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;この&lt;code&gt;trainingType: globalstandard&lt;/code&gt;フラグが重要な違いです。&lt;/p&gt;
+&lt;h2 id="新しいモデルグレーダーgpt-41ファミリー"&gt;新しいモデルグレーダー：GPT-4.1ファミリー&lt;/h2&gt;
+&lt;p&gt;グレーダーはモデルが最適化する報酬シグナルを定義します。これまで、モデルベースのグレーダーは限られたモデルセットに制約されていました。今回、GPT-4.1、GPT-4.1-mini、GPT-4.1-nanoの3つの新しいオプションが追加されました。&lt;/p&gt;
+&lt;p&gt;決定的グレーダーの代わりにモデルグレーダーを使うべきなのはどんな時でしょうか？タスクの出力がオープンエンドの場合、複数の次元で部分的なスコアリングが必要な場合、またはツール呼び出しの正確さがセマンティックコンテキストに依存するエージェント型ワークフローを構築している場合です。&lt;/p&gt;
+&lt;p&gt;ポイントは、ティアリング戦略が実用的であること：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-nano&lt;/strong&gt; 初期のイテレーション用。低コスト、高速なフィードバックループ。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-mini&lt;/strong&gt; 評価ルーブリックが安定し、より高い精度が必要になったら。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1&lt;/strong&gt; 本番環境の評価や、すべてのスコアリング判断が重要な複雑なルーブリック用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;単一のRFTジョブでグレーダータイプを混在させることもできます。「正解」の次元にはstring-matchを使い、推論品質の評価にはモデルグレーダーを使う。この柔軟性が、実際のワークロードで本当に役立つ理由です。&lt;/p&gt;
+&lt;h2 id="rftデータフォーマットの落とし穴"&gt;RFTデータフォーマットの落とし穴&lt;/h2&gt;
+&lt;p&gt;ここでつまずく人が多いです。RFTのデータフォーマットはSFTとは異なります。各行の最後のメッセージはUserまたはDeveloperロールでなければなりません — Assistantではありません。期待される回答は、グレーダーが直接参照する&lt;code&gt;reference_answer&lt;/code&gt;のようなトップレベルのキーに入れます。&lt;/p&gt;
+&lt;p&gt;これまでSupervised Fine-Tuningを行っていてRFTに切り替えたい場合は、トレーニングデータを再構築する必要があります。このステップを飛ばすと、ジョブがサイレントに失敗します。&lt;/p&gt;
+&lt;h2 id="net開発者にとってなぜ重要か"&gt;.NET開発者にとってなぜ重要か&lt;/h2&gt;
+&lt;p&gt;Azure OpenAI SDKを通じて.NETアプリからファインチューニングされたモデルを呼び出している場合、トレーニングコストの低下はより積極的にイテレーションできることを意味します。モデルグレーダーのオプションにより、完全一致シナリオだけでなく、ニュアンスのあるタスクに対してファインチューニングが可能になります。そして&lt;a href="https://github.com/microsoft-foundry/fine-tuning/blob/main/Demos/Agentic_RFT_PrivatePreview/RFT_Best_Practice.md"&gt;GitHub&lt;/a&gt;のベストプラクティスガイドは、実際のデバッグ時間を節約してくれます。&lt;/p&gt;
+&lt;p&gt;小さく始めましょう。10から100サンプル。シンプルなグレーダー。ループを検証。そしてスケール。&lt;/p&gt;</content:encoded></item></channel></rss>

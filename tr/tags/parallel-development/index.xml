@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Parallel-Development | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/parallel-development/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/parallel-development/index.xml" rel="self" type="application/rss+xml"/><item><title>Aspire'ın Isolated Modu Paralel Geliştirmedeki Port Çakışma Kabusu'nu Çözüyor</title><link>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</guid><description>Aspire 13.2, --isolated modunu tanıtıyor: rastgele port ataması, ayrı secret'lar ve aynı AppHost'un birden fazla örneğini çalıştırırken sıfır çakışma. AI ajanları, worktree'ler ve paralel iş akışları için mükemmel.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Bu yazı otomatik olarak çevrilmiştir. Orijinal için &lt;a href="https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/"&gt;buraya tıklayın&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Aynı projenin iki örneğini aynı anda çalıştırmayı hiç denediniz mi? O acıyı bilirsiniz. Port 8080 zaten kullanımda. Port 17370 alınmış. Bir şeyleri kapatın, yeniden başlatın, ortam değişkenlerini dengeleyin — bu, üretkenliği mahveden bir durum.&lt;/p&gt;
+&lt;p&gt;Bu sorun daha da kötüleşiyor, iyileşmiyor. AI ajanlar bağımsız çalışmak için git worktree&amp;rsquo;ler oluşturuyor. Background agent&amp;rsquo;lar ayrı ortamlar başlatıyor. Geliştiriciler özellik dalları için aynı repoyu iki kez checkout yapıyor. Bu senaryoların her biri aynı engelle karşılaşıyor: aynı uygulamanın iki örneği aynı portlar için çarpışıyor.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 bunu tek bir bayrakla çözüyor. Aspire ekibinden James Newton-King &lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;tüm ayrıntıları yazdı&lt;/a&gt; ve bu, &amp;ldquo;bunu neden daha önce yoktu?&amp;rdquo; diye düşündüren özelliklerden biri.&lt;/p&gt;
+&lt;h2 id="çözüm---isolated"&gt;Çözüm: &lt;code&gt;--isolated&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Hepsi bu. Her çalıştırma şunları alıyor:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Rastgele portlar&lt;/strong&gt; — örnekler arasında artık çakışma yok&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;İzole user secret&amp;rsquo;lar&lt;/strong&gt; — bağlantı dizeleri ve API anahtarları örnek başına ayrı kalıyor&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Manuel port yeniden ataması yok. Ortam değişkeni dengeleme yok. Her çalıştırma otomatik olarak taze, çakışmasız bir ortam alıyor.&lt;/p&gt;
+&lt;h2 id="bunun-parladığı-gerçek-senaryolar"&gt;Bunun parladığı gerçek senaryolar&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Çoklu checkout&amp;rsquo;lar.&lt;/strong&gt; Bir dizinde özellik dalı, başka bir dizinde hata düzeltmesi var:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-feature
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-bugfix
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Her ikisi de çakışma olmadan çalışıyor. Dashboard neyin nerede çalıştığını gösteriyor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;VS Code&amp;rsquo;daki background agent&amp;rsquo;lar.&lt;/strong&gt; Copilot Chat&amp;rsquo;in background agent&amp;rsquo;ı kodunuz üzerinde bağımsız çalışmak için bir git worktree oluşturduğunda, Aspire AppHost&amp;rsquo;unuzu çalıştırması gerekebilir. &lt;code&gt;--isolated&lt;/code&gt; olmadan, bu birincil worktree&amp;rsquo;nizle port çakışmasına yol açar. Bununla birlikte her iki örnek de çalışır.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;aspire agent init&lt;/code&gt; ile birlikte gelen Aspire skill&amp;rsquo;i, worktree&amp;rsquo;lerde çalışırken ajanlara otomatik olarak &lt;code&gt;--isolated&lt;/code&gt; kullanmalarını talimatlandırıyor. Dolayısıyla Copilot&amp;rsquo;un background agent&amp;rsquo;ı bunu kutudan çıkar çıkmaz halledebilmeli.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Geliştirmeyle eş zamanlı entegrasyon testleri.&lt;/strong&gt; Özellik geliştirmeye devam ederken canlı bir AppHost&amp;rsquo;a karşı test çalıştırmanız mı gerekiyor? Isolated mod, her bağlama kendi portlarını ve yapılandırmasını veriyor.&lt;/p&gt;
+&lt;h2 id="arka-planda-nasıl-çalışıyor"&gt;Arka planda nasıl çalışıyor&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;--isolated&lt;/code&gt; geçirdiğinizde, CLI çalıştırma için benzersiz bir örnek kimliği oluşturuyor. Bu iki davranışı yönlendiriyor:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Port rastgeleleştirmesi&lt;/strong&gt; — AppHost yapılandırmanızda tanımlanan öngörülebilir portlara bağlanmak yerine, isolated mod her şey için — dashboard, servis endpoint&amp;rsquo;leri, hepsi — rastgele uygun portlar seçiyor. Servis keşfi otomatik olarak ayarlanıyor, bu nedenle servisler hangi portlara düşerlerse düşsünler birbirlerini buluyor.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Secret izolasyonu&lt;/strong&gt; — Her izole çalıştırma, örnek kimliğiyle anahtarlanan kendi user secret deposunu alıyor. Bir çalıştırmadan bağlantı dizeleri ve API anahtarları diğerine sızmıyor.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Kodunuzun değiştirilmesi gerekmiyor. Aspire&amp;rsquo;ın servis keşfi, endpoint&amp;rsquo;leri çalışma zamanında çözümlüyor, bu nedenle port atamasından bağımsız olarak her şey doğru şekilde bağlanıyor.&lt;/p&gt;
+&lt;h2 id="ne-zaman-kullanmalı"&gt;Ne zaman kullanmalı&lt;/h2&gt;
+&lt;p&gt;Aynı AppHost&amp;rsquo;un birden fazla örneğini aynı anda çalıştırırken &lt;code&gt;--isolated&lt;/code&gt; kullanın — ister paralel geliştirme, ister otomatik testler, ister AI ajanları, ister git worktree&amp;rsquo;ler olsun. Tahmin edilebilir portları tercih ettiğiniz tek örnekli geliştirme için, normal &lt;code&gt;aspire run&lt;/code&gt; hâlâ gayet iyi çalışıyor.&lt;/p&gt;
+&lt;h2 id="özet"&gt;Özet&lt;/h2&gt;
+&lt;p&gt;Isolated mod, gerçek ve giderek yaygınlaşan bir sorunu çözen küçük bir özellik. AI destekli geliştirme bizi daha fazla paralel iş akışına — birden fazla ajan, birden fazla worktree, birden fazla bağlam — doğru iterken, portlar için çakışmadan yeni bir örnek başlatabilme yeteneği vazgeçilmez hale geliyor.&lt;/p&gt;
+&lt;p&gt;Tüm teknik ayrıntılar için &lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;tam yazıyı&lt;/a&gt; okuyun ve 13.2&amp;rsquo;yi almak için &lt;code&gt;aspire update --self&lt;/code&gt; ile deneyin.&lt;/p&gt;</content:encoded></item></channel></rss>

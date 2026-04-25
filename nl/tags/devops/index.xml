@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Devops | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/devops/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Wed, 15 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/devops/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure DevOps Server April 2026 Patch — PR-afrondingsoplossing en Beveiligingsupdates</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/</link><pubDate>Wed, 15 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/</guid><description>Azure DevOps Server krijgt Patch 3 met een oplossing voor PR-afrondingsfouten, verbeterde afmeldvalidatie en herstelde GitHub Enterprise Server PAT-verbindingen.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Snel bericht voor teams die zelf gehoste Azure DevOps Server draaien: Microsoft heeft &lt;a href="https://devblogs.microsoft.com/devops/april-patches-for-azure-devops-server/"&gt;Patch 3 voor april 2026&lt;/a&gt; uitgebracht met drie gerichte fixes.&lt;/p&gt;
+&lt;h2 id="wat-er-opgelost-is"&gt;Wat er opgelost is&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Pull request-afrondingsfouten&lt;/strong&gt; — een null reference exception bij automatisch afronden van werkitems kon PR-merges laten mislukken&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Afmeldomleidingsvalidatie&lt;/strong&gt; — verbeterde validatie bij afmelden om potentieel kwaadaardige omleidingen te voorkomen&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub Enterprise Server PAT-verbindingen&lt;/strong&gt; — het aanmaken van Personal Access Token-verbindingen is hersteld&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="hoe-te-updaten"&gt;Hoe te updaten&lt;/h2&gt;
+&lt;p&gt;Download &lt;a href="https://aka.ms/devopsserverpatch3"&gt;Patch 3&lt;/a&gt; en voer het installatieprogramma uit. Controleer of de patch is toegepast:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;patch-installer&amp;gt;.exe CheckInstall
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Microsoft raadt sterk aan om op de nieuwste patch te blijven voor zowel veiligheid als betrouwbaarheid.&lt;/p&gt;</content:encoded></item><item><title>Agentic Platform Engineering Wordt Werkelijkheid — Git-APE Laat Zien Hoe</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/</guid><description>Microsofts Git-APE project brengt agentic platform engineering in de praktijk — met GitHub Copilot-agents en Azure MCP om natuurlijke taalverzoeken om te zetten in gevalideerde cloudinfrastructuur.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Platform engineering is een van die termen die geweldig klinkt op conferenties maar meestal &amp;ldquo;we hebben een intern portaal en een Terraform-wrapper gebouwd&amp;rdquo; betekent. De echte belofte — self-service infrastructuur die werkelijk veilig, beheerd en snel is — was altijd een paar stappen verwijderd.&lt;/p&gt;
+&lt;p&gt;Het Azure-team heeft zojuist &lt;a href="https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/"&gt;Deel 2 van hun agentic platform engineering-serie&lt;/a&gt; gepubliceerd. Ze noemen het &lt;strong&gt;Git-APE&lt;/strong&gt; — een open-source project dat GitHub Copilot-agents en Azure MCP-servers gebruikt om natuurlijke taalverzoeken om te zetten in gevalideerde, geïmplementeerde infrastructuur.&lt;/p&gt;
+&lt;h2 id="wat-git-ape-eigenlijk-doet"&gt;Wat Git-APE eigenlijk doet&lt;/h2&gt;
+&lt;p&gt;Het kernidee: in plaats van Terraform-modules te leren, praten ontwikkelaars met een Copilot-agent. De agent interpreteert de intentie, genereert Infrastructure-as-Code, valideert tegen beleid en implementeert — allemaal in VS Code.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/Azure/git-ape
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; git-ape
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Open de werkruimte in VS Code, en de agent-configuratiebestanden worden automatisch gevonden door GitHub Copilot:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;@git-ape deploy a function app with storage in West Europe
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Opruimen is net zo eenvoudig:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;@git-ape destroy my-resource-group
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="waarom-dit-ertoe-doet"&gt;Waarom dit ertoe doet&lt;/h2&gt;
+&lt;p&gt;Voor degenen die op Azure bouwen, verschuift dit het platform engineering-gesprek van &amp;ldquo;hoe bouwen we een portaal&amp;rdquo; naar &amp;ldquo;hoe beschrijven we onze guardrails als API&amp;rsquo;s.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Als .NET-ontwikkelaar: Azure MCP Server en GitHub Copilot-agents werken met elke Azure-workload — je ASP.NET Core API, .NET Aspire-stack — alles kan het doel zijn van een agentische deployment flow.&lt;/p&gt;
+&lt;h2 id="samenvatting"&gt;Samenvatting&lt;/h2&gt;
+&lt;p&gt;Git-APE is een vroeg maar concreet beeld van agentic platform engineering in de praktijk. Clone de &lt;a href="https://github.com/Azure/git-ape"&gt;repo&lt;/a&gt; en lees de &lt;a href="https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/"&gt;volledige post&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title>Azure DevOps Lost Eindelijk de Markdown Editor UX op Waar Iedereen Over Klaagde</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/</guid><description>De Markdown-editor van Azure DevOps voor werkitems krijgt een duidelijker onderscheid tussen voorbeeld- en bewerkmodus. Het is een kleine verandering die een echte workflow-irritatie oplost.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Als je Azure Boards gebruikt, heb je dit waarschijnlijk meegemaakt: je leest door een werkitembeschrijving, misschien acceptatiecriteria bekijkend, en dan klik je per ongeluk dubbel. Boem — je bent in de bewerkingsmodus. Je wilde helemaal niets bewerken. Je was gewoon aan het lezen.&lt;/p&gt;
+&lt;p&gt;Dan Hellem &lt;a href="https://devblogs.microsoft.com/devops/improving-the-markdown-editor-for-work-items/"&gt;kondigde de fix aan&lt;/a&gt;, en het is een van die veranderingen die klein klinkt maar echt wrijving verwijdert uit je dagelijkse workflow.&lt;/p&gt;
+&lt;h2 id="wat-er-veranderd-is"&gt;Wat er veranderd is&lt;/h2&gt;
+&lt;p&gt;De Markdown-editor voor tekstuele werkitemvelden opent nu standaard in &lt;strong&gt;voorbeeldmodus&lt;/strong&gt;. Je kunt inhoud lezen en ermee interageren — links volgen, opmaak bekijken — zonder je zorgen te maken dat je per ongeluk in de bewerkingsmodus terechtkomt.&lt;/p&gt;
+&lt;p&gt;Wanneer je daadwerkelijk wilt bewerken, klik je op het bewerkingspictogram bovenaan het veld. Wanneer je klaar bent, ga je expliciet terug naar de voorbeeldmodus.&lt;/p&gt;
+&lt;h2 id="waarom-het-meer-uitmaakt-dan-het-klinkt"&gt;Waarom het meer uitmaakt dan het klinkt&lt;/h2&gt;
+&lt;p&gt;De &lt;a href="https://developercommunity.visualstudio.com/t/Markdown-editor-for-work-item-multi-line/10935496"&gt;community-feedbackthread&lt;/a&gt; hierover was lang. Het dubbelklik-om-te-bewerken-gedrag werd geïntroduceerd met de Markdown-editor in juli 2025, en de klachten begonnen bijna onmiddellijk.&lt;/p&gt;
+&lt;h2 id="uitrolstatus"&gt;Uitrolstatus&lt;/h2&gt;
+&lt;p&gt;Dit wordt al uitgerold naar een subset van klanten en breidt zich de komende twee tot drie weken uit naar iedereen.&lt;/p&gt;</content:encoded></item><item><title>Azure DevOps MCP Server Beschikbaar in Microsoft Foundry: Wat Dit Betekent voor je AI-Agents</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/</link><pubDate>Thu, 26 Mar 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/</guid><description>De Azure DevOps MCP Server is nu beschikbaar in Microsoft Foundry. Verbind je AI-agents rechtstreeks met DevOps-workflows — werkitems, repos, pipelines — met een paar klikken.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;MCP (Model Context Protocol) heeft z&amp;rsquo;n moment. Als je het AI-agent-ecosysteem volgt, heb je waarschijnlijk MCP-servers overal zien opduiken.&lt;/p&gt;
+&lt;p&gt;Nu is de &lt;a href="https://devblogs.microsoft.com/devops/remote-mcp-server-preview-in-microsoft-foundry/"&gt;Azure DevOps MCP Server beschikbaar in Microsoft Foundry&lt;/a&gt;, en dit is een van die integraties die je laat nadenken over de praktische mogelijkheden.&lt;/p&gt;
+&lt;h2 id="wat-er-eigenlijk-gebeurt"&gt;Wat er eigenlijk gebeurt&lt;/h2&gt;
+&lt;p&gt;Microsoft heeft de Azure DevOps MCP Server al uitgebracht als &lt;a href="https://devblogs.microsoft.com/devops/azure-devops-remote-mcp-server-public-preview"&gt;publieke preview&lt;/a&gt;. Nieuw is de Foundry-integratie. Je kunt de Azure DevOps MCP Server nu toevoegen aan je Foundry-agents rechtstreeks vanuit de toolcatalogus.&lt;/p&gt;
+&lt;h2 id="instellen"&gt;Instellen&lt;/h2&gt;
+&lt;p&gt;De instelling is verrassend eenvoudig:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Ga in je Foundry-agent naar &lt;strong&gt;Tools toevoegen&lt;/strong&gt; &amp;gt; &lt;strong&gt;Catalogus&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Zoek op &amp;ldquo;Azure DevOps&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Selecteer de Azure DevOps MCP Server (preview) en klik op &lt;strong&gt;Aanmaken&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Voer je organisatienaam in en verbind&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="toegang-beheren"&gt;Toegang beheren&lt;/h2&gt;
+&lt;p&gt;Je kunt opgeven welke tools beschikbaar zijn voor je agent. Principe van minste privileges, toegepast op je AI-agents.&lt;/p&gt;
+&lt;h2 id="waarom-dit-interessant-is-voor-net-teams"&gt;Waarom dit interessant is voor .NET-teams&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Sprint-planningsassistenten&lt;/strong&gt; — agents die werkitems ophalen en sprintcapaciteit voorstellen&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Code review-bots&lt;/strong&gt; — agents die PR-context begrijpen&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Incident response&lt;/strong&gt; — agents die werkitems aanmaken en bugs correleren&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Onboarding&lt;/strong&gt; — echte antwoorden gebaseerd op projectdata&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="samenvatting"&gt;Samenvatting&lt;/h2&gt;
+&lt;p&gt;Bekijk de &lt;a href="https://devblogs.microsoft.com/devops/remote-mcp-server-preview-in-microsoft-foundry/"&gt;volledige aankondiging&lt;/a&gt; voor details.&lt;/p&gt;</content:encoded></item></channel></rss>

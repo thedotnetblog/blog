@@ -1,0 +1,184 @@
+# The .NET Blog
+
+> Articles, tutorials and insights from the .NET community.
+
+The .NET Blog is a community-driven publication featuring articles, tutorials, and deep dives on .NET, ASP.NET Core, C#, cloud architecture, and software engineering. Written by developers, for developers.
+
+## Metadata
+
+- URL: https://thedotnetblog.com/
+- Language: tr
+- Last Updated: 2026-04-25
+
+## Blog Posts
+- [.NET 10 Ubuntu 26.04 LTS ile Geliyor — Neler Yeni](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/): Ubuntu 26.04 LTS (Resolute Raccoon) .NET 10'u birinci sınıf araç zinciri olarak getiriyor. Native AOT, Chiseled konteyner, Linux 7.0.
+- [Agent Framework'te CodeAct: Ajanınızın Gecikmesini Yarıya Nasıl İndirirsiniz](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/codeact-agent-framework-hyperlight-50-percent-faster/): CodeAct, çok adımlı araç zincirlerini tek bir sandbox kod bloğunda birleştirir — gecikmeyi %52, token kullanımını %64 azaltır.
+- [Ajanınız Şeyleri Nerede Hatırlıyor? Sohbet Geçmişi Depolama için Pratik Rehber](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/chat-history-storage-patterns-agent-framework/): Servis tarafından mı yoksa istemci tarafından mı yönetiliyor? Doğrusal mı yoksa dallanma destekli mi? AI ajanınızın ne yapabileceğini belirleyen mimari karar — C# ve Python örnekleriyle.
+- [Azure MCP Server Artık .mcpb — Herhangi Bir Runtime Olmadan Yükle](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azure-mcp-server-mcpb-no-runtime-install/): Azure MCP Server artık MCP Bundle (.mcpb) olarak kullanılabilir — indirin, Claude Desktop'a sürükleyin ve bitti. Node.js, Python veya .NET gerekmiyor.
+- [GPT-5.5 Burada ve Azure Foundry'e Geliyor — .NET Geliştiricilerinin Bilmesi Gerekenler](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/gpt-55-foundry-ga-what-dotnet-developers-need-to-know/): GPT-5.5 Microsoft Foundry'de genel kullanıma sunuldu. GPT-5'ten 5.5'e evrim, gerçekte ne gelişti ve bugün agentlarınızda nasıl kullanmaya başlayacağınız.
+- [VS Code 1.118: Copilot CLI Oturum Adları, Model Rozetleri ve TypeScript 7.0 Nightly Alıyor](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/vscode-1-118-copilot-cli-session-names-model-badge/): Visual Studio Code 1.118, Copilot CLI iyileştirmelerine odaklanmış bir sürüm — oturum adlandırma, model rozetleri, otomatik model seçimi ve TypeScript 7.0 Nightly katılımı.
+- [Foundry Toolboxes: Tüm Ajan Araçları için Tek Bir Endpoint](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/foundry-toolboxes-curate-manage-tools-ai-agents/): Microsoft Foundry, Toolboxes'ı genel önizleme olarak yayımladı — AI ajan araçlarını tek bir MCP uyumlu endpoint üzerinden yönetmenin ve sunmanın yolu.
+- [Python, TypeScript ve .NET ile azd Hook Yazma: Shell Script'lere Veda](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azd-hooks-python-javascript-typescript-dotnet/): Azure Developer CLI artık Python, JavaScript, TypeScript veya .NET ile hook yazmayı destekliyor. Sadece bir migrasyon scripti çalıştırmak için Bash'e geçmek zorunda kalmayacaksınız.
+- [Windows App Dev CLI v0.3: Terminalden F5 Hata Ayıklama ve Ajanlar için UI Otomasyonu](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/): Windows App Development CLI v0.3, terminalden hata ayıklama başlatmak için winapp run, UI otomasyonu için winapp ui ve paketlenmiş uygulamalarla dotnet run'ı çalıştıran yeni bir NuGet paketi getiriyor.
+- [azd + GitHub Copilot: Yapay Zeka Destekli Proje Kurulumu ve Akıllı Hata Çözümü](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/): Azure Developer CLI artık GitHub Copilot ile entegre olarak proje altyapısını oluşturuyor ve dağıtım hatalarını çözüyor — terminal'den çıkmadan.
+- [Node.js için C# ile .NET Native AOT Kullanarak Yerel Eklenti Yazma](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/nodejs-addons-csharp-native-aot/): C# Dev Kit ekibi C++ Node.js eklentilerini .NET Native AOT ile değiştirdi — sonuç daha temiz, daha güvenli ve yalnızca .NET SDK gerektiriyor.
+- [VS Code 1.117: Agentlar Artık Kendi Git Dallarını Alıyor ve Ben Bunun İçin Buradayım](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/vscode-1-117-agents-autopilot-worktrees/): VS Code 1.117, agent oturumları için worktree izolasyonu, kalıcı Autopilot modu ve alt-agent desteği sunuyor. Ajanlı kodlama iş akışı çok daha gerçek hale geldi.
+- [Azure'daki AI Deneyimleriniz Para Yakıyor — İşte Bunu Düzeltmenin Yolu](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/): Azure'daki AI iş yükleri hızla pahalıya gelebilir. Geliştirmenizi yavaşlatmadan maliyetleri kontrol altında tutmak için gerçekten işe yarayan yöntemlerden bahsedelim.
+- [Foundry'nin RFT'si Daha Ucuz ve Daha Akıllı Hale Geldi — İşte Neler Değişti](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/): Microsoft Foundry bu ay üç RFT güncellemesi gönderdi: o4-mini için global eğitim, yeni GPT-4.1 model grader'ları ve saatlerince hata ayıklamadan tasarruf etmenizi sağlayacak en iyi pratikler kılavuzu.
+- [Docker Sandbox, Copilot Agent'larının Makinenizi Tehlikeye Atmadan Kodunuzu Yeniden Düzenlemesini Sağlıyor](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/): Docker Sandbox, GitHub Copilot agent'larına yeniden düzenleme işlemleri için güvenli bir microVM ortamı sunuyor — izin isteği yok, ana sisteminize risk yok. Bu durum büyük ölçekli .NET modernizasyonunda neden her şeyi değiştiriyor, işte açıklıyoruz.
+- [Terminalinizi Serbest Bırakın: Aspire'ın Detached Modu İş Akışını Değiştiriyor](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/): Aspire 13.2, AppHost'unuzu arka planda çalıştırmanıza ve terminalinizi geri almanıza olanak tanıyor. Yeni CLI komutları ve agent desteğiyle birlikte bu, göründüğünden çok daha büyük bir gelişme.
+- [.NET MAUI Maps'e Nihayet Pin Kümeleme Geldi — Tek Özellik, Sıfır Acı](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/maui-maps-pin-clustering-finally/): .NET MAUI 11 Preview 3, Map kontrolüne yerel pin kümeleme ekliyor. Tek bir özellik, ayrı kümeleme grupları ve tap yönetimi — hepsi yerleşik.
+- [Azure MCP Araçları Artık Visual Studio 2022'ye Entegre — Uzantı Gerekmiyor](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azure-mcp-tools-built-into-visual-studio-2022/): Azure MCP araçları, Visual Studio 2022'de Azure geliştirme iş yükünün bir parçası olarak geliyor. 230'dan fazla araç, 45 Azure servisi, yüklenecek sıfır uzantı.
+- [.NET Nisan 2026 Bakım Güncellemesi — Bugün Uygulamanız Gereken Güvenlik Yamaları](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/dotnet-april-2026-servicing-security-patches/): Nisan 2026 bakım sürümü, .NET 10, .NET 9, .NET 8 ve .NET Framework genelinde 6 CVE'yi yamalıyor — iki uzaktan kod yürütme açığı da dahil olmak üzere.
+- [Aspire 13.2, MongoDB EF Core ve Azure Data Lake Desteği Kazandı — Denemeye Değer İki Entegrasyon](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/aspire-132-mongodb-efcore-data-lake/): Aspire 13.2, sıfır yapılandırmalı sağlık kontrolleri ve servis keşfi ile MongoDB Entity Framework Core ve Azure Data Lake Storage entegrasyonları ekliyor. Bunların pratikte nasıl göründüğü.
+- [azd update — Tüm Paket Yöneticileriniz İçin Tek Bir Komut](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/): Azure Developer CLI artık, onu nasıl yüklediğinizden bağımsız olarak güncelleyen evrensel bir güncelleme komutuna sahip — winget, Homebrew, Chocolatey veya kurulum betiği.
+- [Azure DevOps Server Nisan 2026 Yaması — PR Tamamlama Düzeltmesi ve Güvenlik Güncellemeleri](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/): Azure DevOps Server, PR tamamlama hatalarına yönelik bir düzeltme, geliştirilmiş oturum kapatma doğrulaması ve yeniden çalışır hale getirilen GitHub Enterprise Server PAT bağlantılarıyla birlikte Patch 3'ü aldı.
+- [Azure Smart Tier Genel Kullanıma Açıldı — Yaşam Döngüsü Kuralları Olmadan Otomatik Blob Depolama Maliyet Optimizasyonu](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/): Azure Blob Storage smart tier artık genel kullanıma açık; nesneleri gerçek erişim kalıplarına göre hot, cool ve cold katmanları arasında otomatik olarak taşıyor — yaşam döngüsü kurallarına gerek yok.
+- [Azure'da AI Ajanlarınızı Nerede Barındırmalısınız? Pratik Bir Karar Rehberi](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azure-ai-agent-hosting-options-guide/): Azure, AI ajanları barındırmak için ham container'lardan tam yönetimli Foundry Hosted Agents'a kadar altı yol sunuyor. .NET iş yükünüz için doğru seçeneği nasıl belirleyeceğinizi burada bulabilirsiniz.
+- [.NET'te Agent Skills Ciddi Anlamda Esnek Hale Geldi](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/): Microsoft Agent Framework artık skill yazmak için üç yol destekliyor — dosya tabanlı, sınıf tabanlı ve satır içi kod — hepsi tek bir provider üzerinden birleştiriliyor. Bunun neden önemli olduğu ve her birini nasıl kullanacağınız.
+- [Azure MCP Server 2.0 Yayınlandı — Self-Hosted Agentic Bulut Otomasyonu Artık Burada](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azure-mcp-server-2-self-hosted-agentic-cloud/): Azure MCP Server 2.0, self-hosted uzak dağıtımlar, 57 Azure servisi genelinde 276 araç ve kurumsal düzeyde güvenlikle kararlı sürüme ulaştı — agentic iş akışları geliştiren .NET geliştiricileri için önemli olan her şey burada.
+- [.NET Aspire 13.2 AI Ajanınızın En İyi Dostu Olmak İstiyor](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/): Aspire 13.2 ajansal geliştirmeye tam anlamıyla odaklanıyor — yapılandırılmış CLI çıktısı, izole çalıştırmalar, otomatik iyileştirme ortamları ve tam OpenTelemetry verisi sayesinde AI ajanlarınız uygulamalarınızı gerçekten derleyip çalıştırabilir ve izleyebilir.
+- [Ajanlı Platform Mühendisliği Gerçek Oluyor — Git-APE Bunu Nasıl Yapıyor](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/): Microsoft'un Git-APE projesi, ajanlı platform mühendisliğini pratiğe döküyor — GitHub Copilot agentları ve Azure MCP kullanarak doğal dil isteklerini doğrulanmış bulut altyapısına dönüştürüyor.
+- [Aspire'ın Isolated Modu Paralel Geliştirmedeki Port Çakışma Kabusu'nu Çözüyor](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/): Aspire 13.2, --isolated modunu tanıtıyor: rastgele port ataması, ayrı secret'lar ve aynı AppHost'un birden fazla örneğini çalıştırırken sıfır çakışma. AI ajanları, worktree'ler ve paralel iş akışları için mükemmel.
+- [Azure Functions Üzerindeki MCP Server'larınızı Foundry Agent'larına Bağlayın — İşte Nasıl Yapılır](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/foundry-agents-mcp-servers-azure-functions/): MCP server'ınızı bir kez oluşturun, Azure Functions'a dağıtın ve uygun auth ile Microsoft Foundry agent'larına bağlayın. Araçlarınız her yerde çalışır — VS Code, Cursor ve artık kurumsal AI agent'ları.
+- [GitHub Copilot'un Modernizasyon Değerlendirmesi, Henüz Kullanmadığınız En İyi Göç Aracı](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/): GitHub Copilot'un modernizasyon uzantısı yalnızca kod değişikliği önermekle kalmıyor — uygulanabilir sorunlar, Azure hedef karşılaştırmaları ve iş birliğine dayalı bir iş akışıyla eksiksiz bir göç değerlendirmesi üretiyor. Değerlendirme belgesinin neden her şeyin anahtarı olduğunu işte burada açıklıyoruz.
+- [Kara Kutu Hissi Vermeyen Gerçek Zamanlı Çoklu-Agent Arayüzleri Oluşturmak](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/ag-ui-real-time-multi-agent-ui-maf/): AG-UI ve Microsoft Agent Framework, çoklu-agent iş akışlarına gerçek zamanlı streaming, insan onayları ve agentların ne yaptığına dair tam görünürlük sunan bir frontend katmanı kazandırıyor.
+- [MCP Uygulamaları Fluent API Kazandı — .NET'te Üç Adımda Zengin AI Araç Arayüzleri Oluşturun](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/mcp-fluent-api-azure-functions-dotnet/): Azure Functions'daki MCP Apps için yeni fluent yapılandırma API'si, herhangi bir .NET MCP aracını yalnızca birkaç satır kodla görünümler, izinler ve CSP politikaları olan tam bir uygulamaya dönüştürmenizi sağlar.
+- [Microsoft Foundry Mart 2026 — GPT-5.4, Agent Service GA ve Her Şeyi Değiştiren SDK Yenilemesi](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/microsoft-foundry-march-2026-whats-new/): Microsoft Foundry'nin Mart 2026 güncellemesi devasa: Agent Service GA'ya geçiyor, GPT-5.4 güvenilir akıl yürütme getiriyor, azure-ai-projects SDK tüm dillerde kararlı hale geliyor ve Fireworks AI açık modelleri Azure'a taşıyor.
+- [O Visual Studio Kayan Pencere Ayarını Hiç Duydunuz mu? (Duymanız Gerekiyor)](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/): Gizli bir Visual Studio ayarı, kayan pencereler üzerinde tam kontrol sağlıyor — bağımsız görev çubuğu girişleri, düzgün çoklu monitör davranışı ve mükemmel FancyZones entegrasyonu. Tek bir açılır menü her şeyi değiştiriyor.
+- [SQL MCP Server — AI Ajanlarına Veritabanı Erişimi Vermenin Doğru Yolu](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/): Data API builder'dan SQL MCP Server, AI ajanlara şema açıklamadan ve NL2SQL'e dayanmadan güvenli, deterministik veritabanı erişimi sağlar. RBAC, önbellekleme, çoklu veritabanı desteği — hepsi yerleşik.
+- [VS Code 1.116 — Agents Uygulaması Klavye Navigasyonu ve Dosya Bağlamı Tamamlamaları Kazandı](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/): VS Code 1.116, Agents uygulamasını geliştirmeye odaklanıyor — özel kısayol tuşları, erişilebilirlik iyileştirmeleri, dosya bağlamı tamamlamaları ve CSS @import bağlantı çözümlemesi.
+- [VS Code 1.115 — Arka Plan Terminal Bildirimleri, SSH Agent Modu ve Daha Fazlası](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/): VS Code 1.115, agentlar için arka plan terminal bildirimleri, SSH uzak agent barındırma, terminale dosya yapıştırma ve oturum bazlı düzenleme takibi getiriyor. .NET geliştiricileri için önemli olan şeyler burada.
+- [C# 15 Union Türlerini Alıyor — ve Bunlar Tam İstediğimiz Şey](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/csharp-15-union-types-exhaustive-matching/): C# 15, union anahtar sözcüğünü tanıtıyor — derleyici tarafından zorunlu kılınan kapsamlı desen eşleştirmeli discriminated union'lar. Nasıl göründükleri, neden önemli oldukları ve bugün nasıl deneyebileceğiniz burada.
+- [Aspire 13.2 Bir Dokümantasyon CLI'ı Sunuyor — ve AI Ajanınız da Kullanabilir](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/): .NET Aspire 13.2, aspire docs'u ekliyor — terminali terk etmeden resmi belgeleri aramanızı, gezmenizi ve okumanızı sağlayan bir CLI. AI ajanları için de araç olarak çalışıyor. Bunun neden önemli olduğunu burada açıklıyoruz.
+- [Microsoft Agent Framework 1.0 Yayımlandı — .NET Geliştiricileri İçin Gerçekten Önemli Olan Şeyler](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/agent-framework-1-0-production-ready/): Microsoft Agent Framework 1.0, kararlı API'lar, çoklu-agent orkestrasyonu ve tüm büyük AI sağlayıcıları için bağlayıcılarla üretime hazır hale geldi. Bir .NET geliştiricisi olarak bilmeniz gerekenler.
+- [Aspire 13.2 Dashboard'una Telemetri API'si Geldi — ve Her Şeyi Değiştiriyor](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/): .NET Aspire 13.2, daha akıllı telemetri dışa aktarma, izler ve loglar için programlanabilir bir API ve GenAI görselleştirme iyileştirmeleri sunuyor. Bunun hata ayıklama iş akışınız için neden önemli olduğu.
+- [azd Artık AI Ajanlarınızı Yerel Ortamda Çalıştırıp Hata Ayıklamanıza İzin Veriyor — Mart 2026'daki Değişiklikler](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/): Azure Developer CLI, Mart 2026'da yedi sürüm yayımladı. Öne çıkanlar: AI ajanları için yerel çalıştırma ve hata ayıklama döngüsü, proje kurulumunda GitHub Copilot entegrasyonu ve Container App Jobs desteği.
+- [Azure DevOps Sonunda Herkesin Şikayet Ettiği Markdown Editörü UX'ini Düzeltiyor](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/): Azure DevOps iş öğeleri için Markdown editörü, önizleme ile düzenleme modu arasında daha net bir ayrım alıyor. Bu küçük bir değişiklik gibi görünse de gerçekten can sıkıcı bir iş akışı sorununu çözüyor.
+- [Bookmark Studio, Visual Studio Yer İşaretlerine Slot Tabanlı Gezinti ve Paylaşım Getiriyor](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/): Mads Kristensen'in yeni Bookmark Studio uzantısı, Visual Studio yer işaretlerine klavye odaklı slot gezintisi, bir yer işareti yöneticisi, renkler, etiketler ve dışa aktarma/paylaşma özellikleri ekliyor.
+- [Visual Studio'nun Mart Güncellemesiyle Özel Copilot Agentları Oluşturabilirsiniz — find_symbol Aracı Gerçekten Büyük](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/): Visual Studio'nun Mart 2026 güncellemesi özel Copilot agentları, yeniden kullanılabilir agent becerileri, dile duyarlı bir find_symbol aracı ve Test Gezgini'nden Copilot destekli profil oluşturmayı içeriyor. İşte önemli olanlar.
+- [KubeCon Avrupa 2026: .NET Geliştiricilerinin Gerçekten Önemsemesi Gerekenler](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/kubecon-2026-aks-updates-dotnet-developers/): Microsoft, KubeCon Avrupa 2026'da bir dizi Kubernetes duyurusu yaptı. İşte filtrelenmiş versiyonu — .NET uygulamaları gönderiyorsanız önemli olan yalnızca AKS ve cloud-native güncellemeleri.
+- [SQL MCP Server, SSMS'de Copilot ve AI Agentlı Veritabanı Hub'ı: SQLCon 2026'dan Gerçekten Önemli Olanlar](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/agentic-ai-microsoft-databases-what-matters/): Microsoft, SQLCon 2026'da bir dizi veritabanı duyurusu yaptı. Azure SQL üzerine AI destekli uygulamalar geliştiriyorsanız gerçekten önemli olanlar burada.
+- [.NET Geliştiricilerinin VS Code 1.112'de Gerçekten Önemsemesi Gerekenler](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/vscode-1-112-dotnet-developers/): VS Code 1.112 yayınlandı ve agent yükseltmeleri, entegre bir tarayıcı hata ayıklayıcı, MCP korumalı alan ve monorepo desteğiyle dolu. .NET ile geliştirme yapıyorsanız gerçekten önemli olan şeyler burada.
+- [Azure DevOps MCP Server Microsoft Foundry'ye Geldi: AI Agent'larınız İçin Ne Anlama Geliyor](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/): Azure DevOps MCP Server artık Microsoft Foundry'de mevcut. AI agent'larınızı birkaç tıklamayla DevOps iş akışlarına — iş öğeleri, repolar, pipeline'lar — doğrudan bağlayın.
+- [Dizüstü Bilgisayardan Üretime: İki Komutla AI Agent'larını Microsoft Foundry'ye Dağıtma](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/deploy-ai-agents-foundry-azd-two-commands/): Azure Developer CLI artık 'azd ai agent' komutlarına sahip; bu komutlar AI agent'ınızı yerel geliştirmeden canlı bir Foundry endpoint'ine dakikalar içinde taşıyor. İşte tam iş akışı.
+- [Foundry Agent Service GA'ya Geçti: .NET Agent Geliştiricileri İçin Gerçekten Önemli Olan Nedir?](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/foundry-agent-service-ga-what-matters/): Microsoft'un Foundry Agent Service'i özel ağ desteği, Voice Live, üretim değerlendirmeleri ve açık çok modelli runtime ile GA'ya geçti. İşte bilmeniz gerekenler.
+- [Microsoft Agent Framework'te Arka Plan Yanıtları: Zaman Aşımı Kaygısına Son](https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/background-responses-agent-framework-long-running-tasks/): Microsoft Agent Framework artık uzun süren AI görevlerini continuation token'larla arka plana almanıza olanak tanıyor. Arka plan yanıtlarının nasıl çalıştığını ve .NET agent'larınız için neden önemli olduğunu açıklıyoruz.
+
+## Events
+- No events published yet.
+
+## Authors
+- [Emiliano Montesdeoca](https://thedotnetblog.com/tr/authors/emiliano-montesdeoca/): Microsoft MVP ve Bulut Çözümleri Ekip Lideri — Emiliano, Tenerife, Kanarya Adaları'nda yaşayan Uruguaylı-İspanyol bir yazılım geliştiricisi, Developer Technologies alanında Microsoft MVP ve topluluk savunucusudur.
+
+Microsoft teknolojilerini kullanarak ölçeklenebilir bulut çözümleri tasarlama konusunda uzmanlaşmış olup şu anda Intelequia Technologies'de Bulut Çözümleri Ekibi'nin Ekip Lideri olarak görev yapmaktadır.
+
+Sık sık uluslararası konferanslarda konuşan ve bilgi paylaşımına tutkuyla bağlı olan Emiliano, gerçek dünya problem çözümünü geliştiriciler için eyleme dönüştürülebilir içgörülere çevirir.
+
+
+## Topics
+This blog covers the following topics (with post count):
+- .net (3 posts)
+- .net 10 (1 post)
+- accessibility (1 post)
+- ag-ui (1 post)
+- agent framework (7 posts)
+- agents (11 posts)
+- ai (32 posts)
+- aks (2 posts)
+- architecture (1 post)
+- aspire (5 posts)
+- aspnet-core (1 post)
+- azd (5 posts)
+- azure (26 posts)
+- azure-developer-cli (2 posts)
+- azure-devops (2 posts)
+- azure-functions (2 posts)
+- azure-openai (1 post)
+- azure-sdk (3 posts)
+- azure-sql (1 post)
+- bicep (1 post)
+- blob-storage (1 post)
+- c# (1 post)
+- cli (6 posts)
+- cloud (1 post)
+- cloud-native (5 posts)
+- coding-agents (1 post)
+- containers (3 posts)
+- copilot (2 posts)
+- cost-optimization (2 posts)
+- csharp (2 posts)
+- dashboard (1 post)
+- data-api-builder (1 post)
+- data-lake (1 post)
+- databases (2 posts)
+- developer tooling (2 posts)
+- developer-tools (21 posts)
+- devops (4 posts)
+- docker (2 posts)
+- documentation (1 post)
+- dotnet (21 posts)
+- dotnet-11 (2 posts)
+- dotnet-aspire (1 post)
+- dotnet-framework (1 post)
+- efcore (1 post)
+- extensions (1 post)
+- fine-tuning (1 post)
+- finops (1 post)
+- foundry (7 posts)
+- github copilot (7 posts)
+- gpt-5 (1 post)
+- gpt-5-4 (1 post)
+- hyperlight (1 post)
+- infrastructure as code (1 post)
+- interop (1 post)
+- kubernetes (1 post)
+- language-features (1 post)
+- linux (1 post)
+- machine-learning (1 post)
+- maps (1 post)
+- maui (1 post)
+- mcp (11 posts)
+- microsoft-foundry (2 posts)
+- migration (1 post)
+- mobile (1 post)
+- modernization (2 posts)
+- mongodb (1 post)
+- multi-agent (2 posts)
+- native aot (2 posts)
+- node.js (1 post)
+- observability (1 post)
+- opentelemetry (1 post)
+- parallel-development (1 post)
+- patches (1 post)
+- pattern-matching (1 post)
+- platform-engineering (1 post)
+- powertoys (1 post)
+- productivity (4 posts)
+- profiling (1 post)
+- python (3 posts)
+- remote-development (1 post)
+- sdk (1 post)
+- security (1 post)
+- semantic kernel (2 posts)
+- servicing (1 post)
+- sql (1 post)
+- sse (1 post)
+- storage (1 post)
+- telemetry (1 post)
+- tooling (1 post)
+- typescript (2 posts)
+- ubuntu (1 post)
+- union-types (1 post)
+- visual-studio (5 posts)
+- vs code (2 posts)
+- vscode (3 posts)
+- windows (1 post)
+- winui (1 post)
+- wpf (1 post)
+
+## Optional
+
+- [Full content version](https://thedotnetblog.com/llms-full.txt)
+- [Sitemap](https://thedotnetblog.com/sitemap.xml)
+- [RSS Feed](https://thedotnetblog.com/index.xml)

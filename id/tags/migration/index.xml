@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Migration | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/migration/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/migration/index.xml" rel="self" type="application/rss+xml"/><item><title>Penilaian Modernisasi GitHub Copilot Adalah Alat Migrasi Terbaik yang Belum Anda Gunakan</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/</guid><description>Ekstensi modernisasi GitHub Copilot tidak hanya menyarankan perubahan kode — melainkan menghasilkan penilaian migrasi lengkap dengan masalah yang dapat ditindaklanjuti, perbandingan target Azure, dan alur kerja kolaboratif.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Memigrasikan aplikasi .NET Framework lama ke .NET modern adalah salah satu tugas yang semua orang tahu harus dilakukan tapi tidak ada yang ingin memulainya.&lt;/p&gt;
+&lt;p&gt;Jeffrey Fritz baru saja menerbitkan &lt;a href="https://devblogs.microsoft.com/dotnet/your-migrations-source-of-truth-the-modernization-assessment/"&gt;analisis mendalam tentang penilaian modernisasi GitHub Copilot&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="ini-bukan-sekadar-mesin-saran-kode"&gt;Ini bukan sekadar mesin saran kode&lt;/h2&gt;
+&lt;p&gt;Ekstensi VS Code mengikuti model &lt;strong&gt;Nilai → Rencanakan → Eksekusi&lt;/strong&gt;. Fase penilaian menganalisis seluruh basis kode dan menghasilkan dokumen terstruktur yang menangkap semuanya.&lt;/p&gt;
+&lt;p&gt;Penilaian disimpan di bawah &lt;code&gt;.github/modernize/assessment/&lt;/code&gt;. Setiap run menghasilkan laporan independen.&lt;/p&gt;
+&lt;h2 id="dua-cara-untuk-memulai"&gt;Dua cara untuk memulai&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Penilaian yang Direkomendasikan&lt;/strong&gt; — jalur cepat. Pilih dari domain yang dikurasi (Peningkatan Java/.NET, Kesiapan Cloud, Keamanan).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Penilaian Kustom&lt;/strong&gt; — jalur terarah. Konfigurasikan apa yang akan dianalisis: komputasi target (App Service, AKS, Container Apps), OS target, analisis kontainerisasi.&lt;/p&gt;
+&lt;h2 id="rincian-masalah-dapat-ditindaklanjuti"&gt;Rincian masalah dapat ditindaklanjuti&lt;/h2&gt;
+&lt;p&gt;Setiap masalah dilengkapi level kritis:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Wajib&lt;/strong&gt; — harus diperbaiki atau migrasi akan gagal&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Potensial&lt;/strong&gt; — mungkin berdampak pada migrasi, memerlukan penilaian manusia&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Opsional&lt;/strong&gt; — perbaikan yang direkomendasikan, tidak akan memblokir migrasi&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="pendapat-saya"&gt;Pendapat saya&lt;/h2&gt;
+&lt;p&gt;Jika Anda memiliki aplikasi .NET Framework lama, ini adalah alat &lt;em&gt;terbaik&lt;/em&gt; untuk memulai. Dokumen penilaian saja sudah sepadan dengan waktunya.&lt;/p&gt;
+&lt;p&gt;Baca &lt;a href="https://devblogs.microsoft.com/dotnet/your-migrations-source-of-truth-the-modernization-assessment/"&gt;panduan lengkap&lt;/a&gt; dan unduh &lt;a href="https://aka.ms/ghcp-appmod/vscode-ext"&gt;ekstensi VS Code&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

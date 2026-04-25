@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Parallel-Development | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/parallel-development/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/parallel-development/index.xml" rel="self" type="application/rss+xml"/><item><title>Aspire的隔离模式解决了并行开发中端口冲突的噩梦</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</guid><description>Aspire 13.2引入--isolated模式：随机端口、独立密钥，运行同一AppHost的多个实例时零冲突。完美适用于AI智能体、worktree和并行工作流。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原文请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果你曾试过同时运行同一个项目的两个实例，你就知道那种痛苦。端口8080已被占用。端口17370已被使用。杀掉进程、重启、摆弄环境变量 — 这是生产力杀手。&lt;/p&gt;
+&lt;p&gt;这个问题在变得更严重，而不是更好。AI智能体创建git worktree来独立工作。后台智能体启动独立环境。开发者为了功能分支两次checkout同一个仓库。每一个场景都撞上了同一堵墙：同一个应用的两个实例在争夺相同的端口。&lt;/p&gt;
+&lt;p&gt;Aspire 13.2用一个flag就解决了这个问题。Aspire团队的James Newton-King&lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;写了完整的细节&lt;/a&gt;，这是那种&amp;quot;我们怎么之前没有这个&amp;quot;的功能。&lt;/p&gt;
+&lt;h2 id="解决方案--isolated"&gt;解决方案：&lt;code&gt;--isolated&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;就这样。每次运行获得：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;随机端口&lt;/strong&gt; — 实例间不再冲突&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;隔离的用户密钥&lt;/strong&gt; — 连接字符串和API密钥在每个实例间保持独立&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不需要手动重新分配端口。不需要摆弄环境变量。每次运行自动获得一个干净的、无冲突的环境。&lt;/p&gt;
+&lt;h2 id="这个功能发光的真实场景"&gt;这个功能发光的真实场景&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;多次checkout。&lt;/strong&gt; 你有一个功能分支在一个目录，一个bugfix在另一个：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-feature
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-bugfix
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;两个都无冲突运行。仪表盘显示什么在运行以及在哪里运行。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;VS Code中的后台智能体。&lt;/strong&gt; 当Copilot Chat的后台智能体创建git worktree来独立处理你的代码时，它可能需要运行你的Aspire AppHost。没有&lt;code&gt;--isolated&lt;/code&gt;，这就会和你的主worktree产生端口冲突。有了它，两个实例就能正常运行。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;aspire agent init&lt;/code&gt;附带的Aspire技能会自动指导智能体在worktree中工作时使用&lt;code&gt;--isolated&lt;/code&gt;。所以Copilot的后台智能体应该能原生处理这个问题。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;开发同时运行集成测试。&lt;/strong&gt; 需要在继续开发功能的同时对活跃的AppHost运行测试？隔离模式给每个上下文提供独立的端口和配置。&lt;/p&gt;
+&lt;h2 id="底层工作原理"&gt;底层工作原理&lt;/h2&gt;
+&lt;p&gt;当你传递&lt;code&gt;--isolated&lt;/code&gt;时，CLI会为该运行生成一个唯一的实例ID。这驱动两个行为：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;端口随机化&lt;/strong&gt; — 不再绑定到AppHost配置中定义的可预测端口，隔离模式为所有内容选择随机可用端口 — 仪表盘、服务端点，全部。服务发现自动调整，所以服务能找到彼此，不管它们落在哪个端口上。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;密钥隔离&lt;/strong&gt; — 每个隔离运行获得自己的用户密钥存储，以实例ID为键。一次运行的连接字符串和API密钥不会泄露到另一次运行中。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;你的代码不需要任何改动。Aspire的服务发现在运行时解析端点，所以不管端口分配如何，一切都能正确连接。&lt;/p&gt;
+&lt;h2 id="何时使用"&gt;何时使用&lt;/h2&gt;
+&lt;p&gt;当同时运行同一AppHost的多个实例时使用&lt;code&gt;--isolated&lt;/code&gt; — 无论是并行开发、自动化测试、AI智能体还是git worktree。对于偏好可预测端口的单实例开发，常规的&lt;code&gt;aspire run&lt;/code&gt;仍然可以正常使用。&lt;/p&gt;
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;p&gt;隔离模式是一个解决真实且越来越常见问题的小功能。随着AI辅助开发推动我们走向更多并行工作流 — 多个智能体、多个worktree、多个上下文 — 能够简单地启动另一个实例而不必争夺端口是必不可少的。&lt;/p&gt;
+&lt;p&gt;阅读&lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;完整文章&lt;/a&gt;获取所有技术细节，并用&lt;code&gt;aspire update --self&lt;/code&gt;获取13.2来试用。&lt;/p&gt;</content:encoded></item></channel></rss>

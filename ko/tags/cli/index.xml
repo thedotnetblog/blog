@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Cli | The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/cli/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ko</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/cli/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows App Dev CLI v0.3: 터미널에서 F5 디버그와 에이전트를 위한 UI 자동화</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</guid><description>Windows App Development CLI v0.3는 터미널에서 디버그 실행을 위한 winapp run, UI 자동화를 위한 winapp ui, 그리고 패키지 앱에서 dotnet run을 동작하게 하는 NuGet 패키지를 제공합니다.</description><content:encoded>&lt;p&gt;&lt;em&gt;이 게시물은 자동으로 번역되었습니다. 원본을 보려면 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/"&gt;여기를 클릭하세요&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Visual Studio의 F5 경험은 훌륭합니다. 하지만 CI 파이프라인, 자동화 워크플로우, 또는 AI 에이전트가 테스트를 수행할 때 패키지된 Windows 앱을 시작하고 디버그하기 위해 VS를 열어야 한다면 너무 번거롭습니다.&lt;/p&gt;
+&lt;p&gt;Windows App Development CLI v0.3이 &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;출시&lt;/a&gt;되었으며, 두 가지 핵심 기능으로 이를 직접 해결합니다: &lt;code&gt;winapp run&lt;/code&gt;과 &lt;code&gt;winapp ui&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="winapp-run-어디서나-f5"&gt;winapp run: 어디서나 F5&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;winapp run&lt;/code&gt;은 언패키지된 앱 폴더와 매니페스트를 받아, VS가 디버그 시작 시 수행하는 모든 작업을 실행합니다: 루스 패키지 등록, 앱 시작, 재배포 간 &lt;code&gt;LocalState&lt;/code&gt; 보존.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 앱을 빌드한 다음 패키지 앱으로 실행&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp run ./bin/Debug
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;WinUI, WPF, WinForms, Console, Avalonia 등에서 동작합니다. 모드는 개발자와 자동화 워크플로우 모두를 위해 설계되었습니다:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--detach&lt;/code&gt;&lt;/strong&gt;: 시작 후 즉시 터미널에 제어권을 반환합니다. CI/자동화에 적합합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--unregister-on-exit&lt;/code&gt;&lt;/strong&gt;: 앱 종료 시 등록된 패키지를 정리합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--debug-output&lt;/code&gt;&lt;/strong&gt;: &lt;code&gt;OutputDebugString&lt;/code&gt; 메시지와 예외를 실시간으로 캡처합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="새로운-nuget-패키지-패키지-앱을-위한-dotnet-run"&gt;새로운 NuGet 패키지: 패키지 앱을 위한 dotnet run&lt;/h2&gt;
+&lt;p&gt;.NET 개발자를 위한 새로운 NuGet 패키지가 있습니다: &lt;code&gt;Microsoft.Windows.SDK.BuildTools.WinApp&lt;/code&gt;. 설치 후 &lt;code&gt;dotnet run&lt;/code&gt;이 전체 이너 루프를 처리합니다: 빌드, 루스 레이아웃 패키지 준비, Windows 등록 및 시작 — 모두 한 단계로.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp init
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 또는&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet add package Microsoft.Windows.SDK.BuildTools.WinApp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="winapp-ui-커맨드-라인에서-ui-자동화"&gt;winapp ui: 커맨드 라인에서 UI 자동화&lt;/h2&gt;
+&lt;p&gt;이것이 에이전트 시나리오를 여는 기능입니다. &lt;code&gt;winapp ui&lt;/code&gt;는 터미널에서 실행 중인 모든 Windows 앱(WPF, WinForms, Win32, Electron, WinUI3)에 대한 완전한 UI 자동화 액세스를 제공합니다.&lt;/p&gt;
+&lt;p&gt;가능한 작업:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;모든 최상위 창 나열&lt;/li&gt;
+&lt;li&gt;창의 전체 UI 자동화 트리 탐색&lt;/li&gt;
+&lt;li&gt;이름, 유형 또는 자동화 ID로 요소 검색&lt;/li&gt;
+&lt;li&gt;클릭, 호출 및 값 설정&lt;/li&gt;
+&lt;li&gt;스크린샷 캡처&lt;/li&gt;
+&lt;li&gt;요소 나타날 때까지 대기 — 테스트 동기화에 이상적&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;winapp ui&lt;/code&gt;와 &lt;code&gt;winapp run&lt;/code&gt;을 결합하면 터미널에서 완전한 빌드 → 시작 → 검증 워크플로우가 가능합니다. 에이전트가 앱을 실행하고, UI 상태를 검사하고, 프로그래밍 방식으로 상호작용하여 결과를 검증할 수 있습니다.&lt;/p&gt;
+&lt;h2 id="기타-새로운-기능"&gt;기타 새로운 기능&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp unregister&lt;/code&gt;&lt;/strong&gt;: 완료 후 사이드로드된 패키지를 제거합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp manifest add-alias&lt;/code&gt;&lt;/strong&gt;: 터미널에서 이름으로 앱을 시작하는 별칭을 추가합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;탭 자동완성&lt;/strong&gt;: 단일 명령으로 PowerShell 완성을 구성합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="설치-방법"&gt;설치 방법&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winget install Microsoft.WinAppCli
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 또는&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npm install -g @microsoft/winappcli
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;CLI는 공개 미리 보기 중입니다. 전체 문서는 &lt;a href="https://github.com/microsoft/WinAppCli"&gt;GitHub 저장소&lt;/a&gt;를, 모든 세부 정보는 &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;원본 발표&lt;/a&gt;를 참조하세요.&lt;/p&gt;</content:encoded></item><item><title>터미널 감시는 그만: Aspire의 분리 모드가 워크플로를 바꾼다</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</link><pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</guid><description>Aspire 13.2에서는 AppHost를 백그라운드에서 실행하고 터미널을 되찾을 수 있습니다. 새로운 CLI 명령과 에이전트 지원과 결합하면, 생각보다 훨씬 큰 변화입니다.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;이 글은 자동 번역되었습니다. 원문은 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/"&gt;여기&lt;/a&gt;에서 확인하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Aspire AppHost를 실행할 때마다 터미널이 사라집니다. 잠겨버립니다. Ctrl+C를 누를 때까지 점유된 상태입니다. 빠르게 명령어를 실행해야 하나요? 다른 탭을 엽니다. 로그를 확인하고 싶나요? 또 다른 탭. 작은 불편함이지만 빠르게 쌓입니다.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2가 이 문제를 해결합니다. James Newton-King이 &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;자세한 내용을 작성했는데&lt;/a&gt;, 솔직히 이건 사용하는 순간 바로 작업 방식이 바뀌는 기능 중 하나입니다.&lt;/p&gt;
+&lt;h2 id="분리-모드-명령어-하나로-터미널-되찾기"&gt;분리 모드: 명령어 하나로 터미널 되찾기&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이것은 &lt;code&gt;aspire run --detach&lt;/code&gt;의 단축 명령입니다. AppHost가 백그라운드에서 시작되고 터미널이 즉시 돌아옵니다. 추가 탭 없이. 터미널 멀티플렉서 없이. 프롬프트만 준비된 상태로요.&lt;/p&gt;
+&lt;h2 id="실행-중인-프로세스-관리하기"&gt;실행 중인 프로세스 관리하기&lt;/h2&gt;
+&lt;p&gt;핵심은 이겁니다 — 백그라운드 실행은 실행 중인 것을 관리할 수 있어야만 의미가 있습니다. Aspire 13.2는 바로 이를 위한 완전한 CLI 명령 세트를 제공합니다:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# List all running AppHosts&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire ps
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Inspect the state of a specific AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire describe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stream logs from a running AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire logs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stop a specific AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire stop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이로써 Aspire CLI가 본격적인 프로세스 관리자가 됩니다. 여러 AppHost를 시작하고, 상태를 확인하고, 로그를 추적하고, 종료할 수 있습니다 — 모두 하나의 터미널 세션에서.&lt;/p&gt;
+&lt;h2 id="격리-모드와-결합하기"&gt;격리 모드와 결합하기&lt;/h2&gt;
+&lt;p&gt;분리 모드는 격리 모드와 자연스럽게 어울립니다. 포트 충돌 없이 같은 프로젝트의 인스턴스 두 개를 백그라운드에서 실행하고 싶다면?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;각각 랜덤 포트, 별도의 시크릿, 자체 라이프사이클을 갖습니다. &lt;code&gt;aspire ps&lt;/code&gt;로 둘 다 확인하고, &lt;code&gt;aspire stop&lt;/code&gt;으로 필요 없는 것을 중지하세요.&lt;/p&gt;
+&lt;h2 id="코딩-에이전트에게-이것이-중요한-이유"&gt;코딩 에이전트에게 이것이 중요한 이유&lt;/h2&gt;
+&lt;p&gt;여기서부터 정말 흥미로워집니다. 터미널에서 작업하는 코딩 에이전트가 이제 다음을 할 수 있습니다:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;aspire start&lt;/code&gt;로 앱 시작&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aspire describe&lt;/code&gt;로 상태 조회&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aspire logs&lt;/code&gt;로 로그를 확인하여 문제 진단&lt;/li&gt;
+&lt;li&gt;완료 후 &lt;code&gt;aspire stop&lt;/code&gt;으로 중지&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;모두 터미널 세션을 잃지 않고 수행할 수 있습니다. 분리 모드 이전에는 AppHost를 실행한 에이전트가 자신의 터미널에 갇혀버렸습니다. 이제는 시작, 관찰, 반복, 정리가 가능합니다 — 자율 에이전트에게 기대하는 바로 그 동작입니다.&lt;/p&gt;
+&lt;p&gt;Aspire 팀은 이 부분에 공을 들였습니다. &lt;code&gt;aspire agent init&lt;/code&gt;을 실행하면 에이전트에게 이러한 명령을 가르치는 Aspire 스킬 파일이 설정됩니다. 이를 통해 Copilot의 코딩 에이전트 같은 도구가 바로 Aspire 워크로드를 관리할 수 있습니다.&lt;/p&gt;
+&lt;h2 id="마무리"&gt;마무리&lt;/h2&gt;
+&lt;p&gt;분리 모드는 단순한 플래그로 위장한 워크플로 업그레이드입니다. 터미널 간 컨텍스트 전환이 사라지고, 에이전트가 스스로를 차단하지 않으며, 새로운 CLI 명령으로 실행 중인 것을 실시간으로 파악할 수 있습니다. 실용적이고, 깔끔하며, 일상 개발 사이클이 눈에 띄게 매끄러워집니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;전체 글&lt;/a&gt;에서 모든 세부 사항을 확인하고, &lt;code&gt;aspire update --self&lt;/code&gt;로 Aspire 13.2를 설치하세요.&lt;/p&gt;</content:encoded></item><item><title>azd update — 모든 패키지 매니저를 지배하는 하나의 명령어</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/</link><pubDate>Wed, 15 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/</guid><description>Azure Developer CLI에 설치 방법에 관계없이 작동하는 범용 업데이트 명령어가 추가되었습니다 — winget, Homebrew, Chocolatey, 설치 스크립트 모두 지원.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;이 글은 자동 번역되었습니다. 원문은 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/"&gt;여기&lt;/a&gt;를 참조하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;몇 주마다 뜨는 &amp;ldquo;새로운 버전의 azd를 사용할 수 있습니다&amp;rdquo; 메시지 아시죠? &lt;code&gt;azd&lt;/code&gt;를 winget으로 설치했는지, Homebrew인지, 아니면 6개월 전에 실행한 curl 스크립트인지 기억이 안 나서 그냥 무시하게 되는 그 메시지요. 드디어 해결됐습니다.&lt;/p&gt;
+&lt;p&gt;Microsoft가 &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-update/"&gt;&lt;code&gt;azd update&lt;/code&gt;&lt;/a&gt;를 출시했습니다 — 원래 어떤 방법으로 설치했든 상관없이 Azure Developer CLI를 최신 버전으로 업데이트하는 단 하나의 명령어입니다. Windows, macOS, Linux — 상관없습니다. 명령어 하나면 됩니다.&lt;/p&gt;
+&lt;h2 id="작동-방식"&gt;작동 방식&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd update
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이게 전부입니다. 새로운 기능을 미리 체험하고 싶다면 일일 Insiders 빌드로 전환할 수 있습니다:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd update --channel daily
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd update --channel stable
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 명령어는 현재 설치 방법을 감지하고 내부적으로 적절한 업데이트 메커니즘을 사용합니다. 더 이상 &amp;ldquo;잠깐, 이 컴퓨터에서 winget을 썼었나, choco였나?&amp;rdquo; 고민할 필요 없습니다.&lt;/p&gt;
+&lt;h2 id="한-가지-참고사항"&gt;한 가지 참고사항&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;azd update&lt;/code&gt;는 버전 1.23.x부터 제공됩니다. 이전 버전을 사용 중이라면 원래 설치 방법으로 마지막 수동 업데이트를 한 번만 해주면 됩니다. 그 이후로는 &lt;code&gt;azd update&lt;/code&gt;가 모든 것을 처리합니다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;azd version&lt;/code&gt;으로 현재 버전을 확인하세요. 새로 설치가 필요하다면 &lt;a href="https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd"&gt;설치 문서&lt;/a&gt;를 참고하세요.&lt;/p&gt;
+&lt;h2 id="왜-중요한가"&gt;왜 중요한가&lt;/h2&gt;
+&lt;p&gt;작은 삶의 질 개선이지만, AI 에이전트와 Aspire 앱을 Azure에 배포하기 위해 매일 &lt;code&gt;azd&lt;/code&gt;를 사용하는 우리에게 최신 상태를 유지한다는 것은 &amp;ldquo;그 버그는 최신 버전에서 이미 수정됐습니다&amp;quot;라는 순간이 줄어든다는 의미입니다. 신경 쓸 일이 하나 줄어드는 거죠.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-update/"&gt;전체 발표&lt;/a&gt;와 Jon Gallant의 &lt;a href="https://blog.jongallant.com/2026/04/azd-update"&gt;상세 분석&lt;/a&gt;에서 자세한 내용을 확인하세요.&lt;/p&gt;</content:encoded></item><item><title>.NET Aspire 13.2는 AI 에이전트의 가장 친한 친구가 되고 싶어한다</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/</guid><description>Aspire 13.2가 에이전틱 개발에 올인합니다 — 구조화된 CLI 출력, 격리된 실행, 자동 복구 환경, 그리고 완전한 OpenTelemetry 데이터로 AI 에이전트가 실제로 앱을 빌드, 실행, 관찰할 수 있게 합니다.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;이 글은 자동 번역되었습니다. 원문은 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/"&gt;여기&lt;/a&gt;에서 확인하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;AI 코딩 에이전트가 꽤 괜찮은 코드를 작성해서 기대했는데, 그것을 실제로 &lt;em&gt;실행&lt;/em&gt;하려고 하면 전부 무너지는 그 순간 아시죠? 포트 충돌, 고스트 프로세스, 잘못된 환경 변수 — 갑자기 에이전트가 기능을 만드는 대신 시작 문제를 디버깅하느라 토큰을 소모합니다.&lt;/p&gt;
+&lt;p&gt;Aspire 팀이 바로 이 문제에 대한 &lt;a href="https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/"&gt;정말 사려 깊은 글&lt;/a&gt;을 발표했고, 그들의 답은 설득력이 있습니다: Aspire 13.2는 인간만을 위한 것이 아니라 AI 에이전트를 위해서도 설계되었습니다.&lt;/p&gt;
+&lt;h2 id="문제는-현실입니다"&gt;문제는 현실입니다&lt;/h2&gt;
+&lt;p&gt;AI 에이전트는 코드 작성에 놀라운 능력을 보여줍니다. 하지만 작동하는 풀스택 앱을 배포하려면 파일 생성 이상의 것이 필요합니다. 서비스를 올바른 순서로 시작하고, 포트를 관리하고, 환경 변수를 설정하고, 데이터베이스를 연결하고, 문제가 생겼을 때 피드백을 받아야 합니다. 현재 대부분의 에이전트는 이 모든 것을 시행착오로 처리합니다 — 명령 실행, 에러 출력 읽기, 재시도.&lt;/p&gt;
+&lt;p&gt;Markdown 지침, 커스텀 스킬, 프롬프트를 쌓아올려 가이드하려 하지만, 이것들은 예측 불가능하고 컴파일할 수 없으며 파싱하는 것만으로도 토큰이 듭니다. Aspire 팀은 핵심 인사이트를 정확히 짚었습니다: 에이전트에게 필요한 것은 &lt;strong&gt;컴파일러와 구조화된 API&lt;/strong&gt;이지, 더 많은 Markdown이 아닙니다.&lt;/p&gt;
+&lt;h2 id="에이전트-인프라로서의-aspire"&gt;에이전트 인프라로서의 Aspire&lt;/h2&gt;
+&lt;p&gt;Aspire 13.2가 에이전틱 개발 테이블에 가져오는 것들:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;전체 스택을 타입이 있는 코드로.&lt;/strong&gt; AppHost가 앱의 전체 토폴로지 — API, 프론트엔드, 데이터베이스, 캐시 — 를 컴파일 가능한 TypeScript 또는 C#로 정의합니다:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;createBuilder&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;./.modules/aspire.js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;createBuilder&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addPostgres&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;pg&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;addDatabase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;catalog&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;cache&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addRedis&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;cache&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;api&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addNodeApp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;api&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;./api&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;src/index.ts&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withHttpEndpoint&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="nx"&gt;env&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;PORT&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withReference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;postgres&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withReference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addViteApp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;frontend&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;./frontend&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withReference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;waitFor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;build&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nx"&gt;run&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;에이전트는 이것을 읽어 앱 토폴로지를 이해하고, 리소스를 추가하고, 연결을 설정하고, &lt;em&gt;검증을 위해 빌드&lt;/em&gt;할 수 있습니다. 컴파일러가 뭔가 잘못되면 즉시 알려줍니다. 추측 불필요, 설정 파일에 대한 시행착오 불필요.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;하나의 명령으로 모두 지배.&lt;/strong&gt; 에이전트가 &lt;code&gt;docker compose up&lt;/code&gt;, &lt;code&gt;npm run dev&lt;/code&gt;, 데이터베이스 시작 스크립트를 저글링하는 대신, 모든 것이 &lt;code&gt;aspire start&lt;/code&gt; 하나입니다. 모든 리소스가 올바른 순서로, 올바른 포트에, 올바른 설정으로 시작됩니다. 장시간 실행 프로세스도 에이전트를 멈추지 않습니다 — Aspire가 관리합니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;병렬 에이전트를 위한 격리 모드.&lt;/strong&gt; &lt;code&gt;--isolated&lt;/code&gt;를 사용하면 각 Aspire 실행이 자체 랜덤 포트와 별도의 사용자 시크릿을 갖습니다. 여러 에이전트가 git worktree에서 작업 중인가요? 충돌하지 않습니다. 이것은 VS Code의 백그라운드 에이전트처럼 병렬 환경을 생성하는 도구에 매우 중요합니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;텔레메트리를 통한 에이전트의 눈.&lt;/strong&gt; 여기서 정말 강력해집니다. Aspire CLI는 개발 중 완전한 OpenTelemetry 데이터를 노출합니다 — 트레이스, 메트릭, 구조화된 로그. 에이전트가 콘솔 출력을 읽고 최선을 바라는 것이 아닙니다. 서비스 간 실패한 요청을 추적하고, 느린 엔드포인트를 프로파일링하고, 정확히 어디서 문제가 발생하는지 파악할 수 있습니다. 개발 루프에 프로덕션급 관찰 가능성이 있는 것입니다.&lt;/p&gt;
+&lt;h2 id="볼링-범퍼-비유"&gt;볼링 범퍼 비유&lt;/h2&gt;
+&lt;p&gt;Aspire 팀은 훌륭한 비유를 사용합니다: Aspire를 AI 에이전트를 위한 볼링 레인 범퍼라고 생각하세요. 에이전트가 완벽하지 않다면 (그리고 완벽하지 않을 것입니다), 범퍼가 거터볼을 치지 않도록 막아줍니다. 스택 정의가 잘못된 구성을 방지하고, 컴파일러가 오류를 잡고, CLI가 프로세스 관리를 담당하고, 텔레메트리가 피드백 루프를 제공합니다.&lt;/p&gt;
+&lt;p&gt;이것을 Playwright CLI 같은 것과 결합하면, 에이전트가 실제로 앱을 &lt;em&gt;사용&lt;/em&gt;할 수 있습니다 — 플로우를 클릭하고, DOM을 확인하고, 텔레메트리에서 깨진 것을 보고, 코드를 수정하고, 재시작하고, 다시 테스트합니다. 빌드, 실행, 관찰, 수정. 이것이 우리가 추구해온 자율 개발 루프입니다.&lt;/p&gt;
+&lt;h2 id="시작하기"&gt;시작하기&lt;/h2&gt;
+&lt;p&gt;Aspire가 처음이세요? &lt;a href="https://get.aspire.dev"&gt;get.aspire.dev&lt;/a&gt;에서 CLI를 설치하고 &lt;a href="https://aspire.dev/get-started/first-app"&gt;시작 가이드&lt;/a&gt;를 따르세요.&lt;/p&gt;
+&lt;p&gt;이미 Aspire를 사용 중이세요? &lt;code&gt;aspire update --self&lt;/code&gt;를 실행하여 13.2를 받고, 좋아하는 코딩 에이전트를 레포에 연결하세요. Aspire의 가드레일이 있으면 에이전트가 얼마나 더 멀리까지 갈 수 있는지 놀라실 수 있습니다.&lt;/p&gt;
+&lt;h2 id="마무리"&gt;마무리&lt;/h2&gt;
+&lt;p&gt;Aspire 13.2는 더 이상 단순한 분산 앱 프레임워크가 아닙니다 — 필수적인 에이전트 인프라가 되고 있습니다. 구조화된 스택 정의, 원커맨드 시작, 격리된 병렬 실행, 실시간 텔레메트리가 AI 에이전트에게 코드 작성에서 앱 배포로 넘어가는 데 필요한 모든 것을 제공합니다.&lt;/p&gt;
+&lt;p&gt;Aspire 팀의 &lt;a href="https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/"&gt;전체 포스트&lt;/a&gt;에서 모든 세부사항과 데모 비디오를 확인하세요.&lt;/p&gt;</content:encoded></item><item><title>Aspire의 격리 모드가 병렬 개발의 포트 충돌 악몽을 해결한다</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</guid><description>Aspire 13.2가 --isolated 모드를 도입합니다: 랜덤 포트, 분리된 시크릿, 동일한 AppHost의 여러 인스턴스를 실행할 때 충돌 제로. AI 에이전트, worktree, 병렬 워크플로우에 완벽합니다.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;이 글은 자동 번역되었습니다. 원문은 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/"&gt;여기&lt;/a&gt;에서 확인하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;같은 프로젝트의 두 인스턴스를 동시에 실행하려고 해본 적이 있다면, 그 고통을 알 것입니다. 포트 8080이 이미 사용 중입니다. 포트 17370이 점유되어 있습니다. 뭔가를 kill하고, 재시작하고, 환경 변수를 저글링하는 — 생산성 킬러입니다.&lt;/p&gt;
+&lt;p&gt;이 문제는 나아지는 게 아니라 악화되고 있습니다. AI 에이전트가 독립적으로 작업하기 위해 git worktree를 만듭니다. 백그라운드 에이전트가 별도의 환경을 생성합니다. 개발자가 피처 브랜치를 위해 같은 레포를 두 번 체크아웃합니다. 이 모든 시나리오가 같은 벽에 부딪힙니다: 같은 앱의 두 인스턴스가 같은 포트를 놓고 싸우는 것입니다.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2가 단 하나의 플래그로 이것을 해결합니다. Aspire 팀의 James Newton-King이 &lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;전체 상세 내용을 작성했는데&lt;/a&gt;, &amp;ldquo;왜 진작 이게 없었지?&amp;ldquo;라는 기능 중 하나입니다.&lt;/p&gt;
+&lt;h2 id="해결책---isolated"&gt;해결책: &lt;code&gt;--isolated&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;끝입니다. 각 실행이 다음을 얻습니다:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;랜덤 포트&lt;/strong&gt; — 인스턴스 간 충돌 없음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;격리된 사용자 시크릿&lt;/strong&gt; — 연결 문자열과 API 키가 인스턴스별로 분리&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;수동 포트 재할당이 필요 없습니다. 환경 변수 저글링도 필요 없습니다. 각 실행이 자동으로 깨끗하고 충돌 없는 환경을 얻습니다.&lt;/p&gt;
+&lt;h2 id="이-기능이-빛나는-실제-시나리오"&gt;이 기능이 빛나는 실제 시나리오&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;다중 체크아웃.&lt;/strong&gt; 한 디렉토리에 피처 브랜치가 있고 다른 디렉토리에 버그픽스가 있는 경우:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-feature
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-bugfix
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;둘 다 충돌 없이 실행됩니다. 대시보드에서 무엇이 어디서 실행 중인지 확인할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;VS Code의 백그라운드 에이전트.&lt;/strong&gt; Copilot Chat의 백그라운드 에이전트가 코드에 독립적으로 작업하기 위해 git worktree를 만들면, Aspire AppHost를 실행해야 할 수 있습니다. &lt;code&gt;--isolated&lt;/code&gt; 없이는 기본 worktree와 포트 충돌이 발생합니다. 이것이 있으면 두 인스턴스 모두 문제없이 동작합니다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;aspire agent init&lt;/code&gt;에 포함된 Aspire 스킬은 worktree에서 작업할 때 &lt;code&gt;--isolated&lt;/code&gt;를 사용하도록 에이전트에게 자동으로 지시합니다. 따라서 Copilot의 백그라운드 에이전트는 이것을 기본적으로 처리할 것입니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;개발과 병행하는 통합 테스트.&lt;/strong&gt; 기능을 계속 만들면서 라이브 AppHost에 대해 테스트를 실행해야 하나요? 격리 모드는 각 컨텍스트에 자체 포트와 설정을 제공합니다.&lt;/p&gt;
+&lt;h2 id="내부-작동-원리"&gt;내부 작동 원리&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;--isolated&lt;/code&gt;를 전달하면, CLI가 해당 실행을 위한 고유 인스턴스 ID를 생성합니다. 이것이 두 가지 동작을 구동합니다:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;포트 랜덤화&lt;/strong&gt; — AppHost 설정에 정의된 예측 가능한 포트에 바인딩하는 대신, 격리 모드는 모든 것에 대해 사용 가능한 랜덤 포트를 선택합니다 — 대시보드, 서비스 엔드포인트, 전부. 서비스 디스커버리가 자동으로 조정되어 어떤 포트에 할당되든 서비스들이 서로를 찾습니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;시크릿 격리&lt;/strong&gt; — 각 격리된 실행은 인스턴스 ID로 키가 지정된 자체 사용자 시크릿 저장소를 갖습니다. 한 실행의 연결 문자열과 API 키가 다른 실행으로 누출되지 않습니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;코드 변경은 필요 없습니다. Aspire의 서비스 디스커버리가 런타임에 엔드포인트를 해석하므로, 포트 할당에 관계없이 모든 것이 올바르게 연결됩니다.&lt;/p&gt;
+&lt;h2 id="언제-사용할-것인가"&gt;언제 사용할 것인가&lt;/h2&gt;
+&lt;p&gt;같은 AppHost의 여러 인스턴스를 동시에 실행할 때 &lt;code&gt;--isolated&lt;/code&gt;를 사용하세요 — 병렬 개발, 자동화된 테스트, AI 에이전트, 또는 git worktree 어떤 경우든. 예측 가능한 포트를 선호하는 단일 인스턴스 개발에는 일반 &lt;code&gt;aspire run&lt;/code&gt;이 여전히 잘 작동합니다.&lt;/p&gt;
+&lt;h2 id="마무리"&gt;마무리&lt;/h2&gt;
+&lt;p&gt;격리 모드는 실제적이고 점점 더 흔해지는 문제를 해결하는 작은 기능입니다. AI 지원 개발이 더 많은 병렬 워크플로우 — 다중 에이전트, 다중 worktree, 다중 컨텍스트 — 로 우리를 밀어붙이는 만큼, 포트 경쟁 없이 또 다른 인스턴스를 간단히 띄울 수 있는 능력은 필수적입니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;전체 포스트&lt;/a&gt;에서 모든 기술적 세부사항을 확인하고, &lt;code&gt;aspire update --self&lt;/code&gt;로 13.2를 받아 시도해 보세요.&lt;/p&gt;</content:encoded></item><item><title>Aspire 13.2에 문서 CLI가 탑재 — AI 에이전트도 사용할 수 있습니다</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/</link><pubDate>Sat, 04 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/</guid><description>.NET Aspire 13.2에 aspire docs가 추가되었습니다. 터미널을 떠나지 않고 공식 문서를 검색, 탐색, 읽을 수 있는 CLI입니다. AI 에이전트의 도구로도 작동합니다. 이것이 왜 중요한지 알려드립니다.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;이 글은 자동 번역되었습니다. 원문은 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/"&gt;여기를 클릭&lt;/a&gt;하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Aspire AppHost 깊숙이 들어가서 통합을 연결하는 중에, Redis 통합이 정확히 어떤 파라미터를 기대하는지 확인해야 하는 그 순간을 아시죠? Alt-Tab으로 브라우저로 전환하고, aspire.dev를 뒤지고, API 문서를 눈을 가늘게 뜨고 보다가, 다시 에디터로 돌아옵니다. 컨텍스트를 잃었고, 플로우가 끊겼습니다.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2가 바로 &lt;a href="https://devblogs.microsoft.com/aspire/aspire-docs-in-your-terminal/"&gt;그 해결책을 출시했습니다&lt;/a&gt;. &lt;code&gt;aspire docs&lt;/code&gt; CLI를 사용하면 터미널에서 직접 Aspire 공식 문서를 검색하고, 탐색하고, 읽을 수 있습니다. 그리고 재사용 가능한 서비스에 기반하고 있어서, AI 에이전트와 스킬이 같은 명령어를 사용해 문서를 조회할 수 있습니다. 존재하지 않는 API를 환각하는 대신에요.&lt;/p&gt;
+&lt;h2 id="이것이-실제로-해결하는-문제"&gt;이것이 실제로 해결하는 문제&lt;/h2&gt;
+&lt;p&gt;David Pine이 원문에서 정확히 짚었습니다: AI 에이전트는 개발자가 Aspire 앱을 구축하는 것을 돕는 데 &lt;em&gt;끔찍했습니다&lt;/em&gt;. &lt;code&gt;aspire run&lt;/code&gt; 대신 &lt;code&gt;dotnet run&lt;/code&gt;을 추천하고, aspire.dev에 있는 문서에 대해 learn.microsoft.com을 참조하고, 오래된 NuGet 패키지를 제안하고, 그리고 — 개인적으로 가장 좋아하는 — 존재하지 않는 API를 환각했습니다.&lt;/p&gt;
+&lt;p&gt;왜 그럴까요? Aspire가 폴리글랏이 된 것보다 .NET 전용이었던 기간이 훨씬 길었고, LLM은 최신 기능보다 앞선 학습 데이터로 작동하기 때문입니다. AI 에이전트에게 현재 문서를 실제로 조회할 수 있는 능력을 주면, 추측을 멈추고 유용해지기 시작합니다.&lt;/p&gt;
+&lt;h2 id="세-가지-명령어-브라우저-탭은-제로"&gt;세 가지 명령어, 브라우저 탭은 제로&lt;/h2&gt;
+&lt;p&gt;CLI는 상쾌할 정도로 간단합니다:&lt;/p&gt;
+&lt;h3 id="모든-문서-나열"&gt;모든 문서 나열&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;aspire.dev에서 사용 가능한 모든 문서 페이지를 반환합니다. 기계가 읽을 수 있는 출력이 필요하세요? &lt;code&gt;--format Json&lt;/code&gt;을 추가하세요.&lt;/p&gt;
+&lt;h3 id="주제-검색"&gt;주제 검색&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs search &lt;span class="s2"&gt;&amp;#34;redis&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;가중 관련성 점수로 제목과 콘텐츠 모두를 검색합니다. 내부적으로 문서 도구를 구동하는 것과 같은 검색 엔진입니다. 제목, 슬러그, 관련성 점수가 포함된 순위별 결과를 얻을 수 있습니다.&lt;/p&gt;
+&lt;h3 id="전체-페이지-읽기-또는-한-섹션만"&gt;전체 페이지 읽기 (또는 한 섹션만)&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs get redis-integration
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;전체 페이지를 마크다운으로 터미널에 스트리밍합니다. 한 섹션만 필요하세요?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs get redis-integration --section &lt;span class="s2"&gt;&amp;#34;Add Redis resource&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;외과적 정밀도. 500줄을 스크롤할 필요 없습니다. 필요한 부분만.&lt;/p&gt;
+&lt;h2 id="ai-에이전트-관점"&gt;AI 에이전트 관점&lt;/h2&gt;
+&lt;p&gt;AI 도구로 개발하는 우리 개발자들에게 흥미로워지는 부분입니다. 같은 &lt;code&gt;aspire docs&lt;/code&gt; 명령어가 스킬, MCP 서버, 또는 간단한 CLI 래퍼를 통해 AI 에이전트의 도구로 작동합니다.&lt;/p&gt;
+&lt;p&gt;AI 어시스턴트가 오래된 학습 데이터를 기반으로 Aspire API를 지어내는 대신, &lt;code&gt;aspire docs search &amp;quot;postgres&amp;quot;&lt;/code&gt;를 호출하고, 공식 통합 문서를 찾고, 올바른 페이지를 읽고, 문서화된 접근 방식을 제공할 수 있습니다. 실시간이고 최신인 문서 — 모델이 6개월 전에 기억한 것이 아닙니다.&lt;/p&gt;
+&lt;p&gt;이 뒤의 아키텍처는 의도적입니다. Aspire 팀은 일회성 통합 대신 재사용 가능한 서비스(&lt;code&gt;IDocsIndexService&lt;/code&gt;, &lt;code&gt;IDocsSearchService&lt;/code&gt;, &lt;code&gt;IDocsFetcher&lt;/code&gt;, &lt;code&gt;IDocsCache&lt;/code&gt;)를 구축했습니다. 이는 같은 검색 엔진이 터미널의 사람, 에디터의 AI 에이전트, CI 파이프라인의 자동화를 위해 작동한다는 의미입니다.&lt;/p&gt;
+&lt;h2 id="실제-시나리오"&gt;실제 시나리오&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;터미널에서 빠른 조회:&lt;/strong&gt; 파일 세 개 깊이에 있고 Redis 설정 파라미터가 필요합니다. 두 개의 명령어, 90초, 다시 작업으로:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs search &lt;span class="s2"&gt;&amp;#34;redis&amp;#34;&lt;/span&gt; --limit &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs get redis-integration --section &lt;span class="s2"&gt;&amp;#34;Configuration&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;AI 지원 개발:&lt;/strong&gt; VS Code 스킬이 CLI 명령어를 래핑합니다. &amp;ldquo;내 AppHost에 PostgreSQL 데이터베이스를 추가해&amp;quot;라고 물으면 에이전트가 답변하기 전에 실제 문서를 조회합니다. 환각 없음.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CI/CD 검증:&lt;/strong&gt; 파이프라인이 공식 문서에 대해 AppHost 설정을 프로그래밍 방식으로 검증합니다. &lt;code&gt;--format Json&lt;/code&gt; 출력은 &lt;code&gt;jq&lt;/code&gt; 및 다른 도구와 깔끔하게 연결됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;커스텀 지식 베이스:&lt;/strong&gt; 자체 AI 도구를 구축하고 있나요? 구조화된 JSON 출력을 지식 베이스에 직접 파이프:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs search &lt;span class="s2"&gt;&amp;#34;monitoring&amp;#34;&lt;/span&gt; --format Json &lt;span class="p"&gt;|&lt;/span&gt; jq &lt;span class="s1"&gt;&amp;#39;[.[] | {slug, title, summary}]&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;웹 스크래핑 없음. API 키 없음. 문서 도구가 내부적으로 사용하는 것과 같은 구조화된 데이터.&lt;/p&gt;
+&lt;h2 id="문서는-항상-최신-상태"&gt;문서는 항상 최신 상태&lt;/h2&gt;
+&lt;p&gt;이것이 제가 가장 높이 평가하는 부분입니다. CLI는 스냅샷을 다운로드하지 않습니다 — ETag 기반 캐싱으로 aspire.dev를 조회합니다. 문서가 업데이트되는 순간, CLI와 그 위에 구축된 모든 스킬이 이를 반영합니다. 오래된 복사본도 없고, &amp;ldquo;하지만 위키에는&amp;hellip;&amp;ldquo;하는 순간도 없습니다.&lt;/p&gt;
+&lt;h2 id="마무리"&gt;마무리&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;aspire docs&lt;/code&gt;는 실제 문제를 깔끔하게 해결하는 작은 기능 중 하나입니다. 사람은 터미널 네이티브 문서 접근을 얻습니다. AI 에이전트는 추측을 멈추고 실제 문서를 참조할 수 있는 방법을 얻습니다. 그리고 모든 것이 같은 진실의 원천에 의해 뒷받침됩니다.&lt;/p&gt;
+&lt;p&gt;.NET Aspire로 개발하고 있고 아직 CLI를 시도해보지 않았다면, &lt;code&gt;aspire docs search &amp;quot;여러분의-주제&amp;quot;&lt;/code&gt; 를 실행하고 어떤 느낌인지 확인해 보세요. 그런 다음 사용 중인 AI 스킬이나 자동화 설정에 이 명령어들을 래핑하는 것을 고려해 보세요 — 여러분의 에이전트가 감사할 것입니다.&lt;/p&gt;
+&lt;p&gt;문서 도구가 어떻게 만들어졌는지에 대한 &lt;a href="https://davidpine.dev/posts/aspire-docs-mcp-tools/"&gt;David Pine의 심층 분석&lt;/a&gt;과 모든 세부 사항이 담긴 &lt;a href="https://aspire.dev/reference/cli/commands/aspire-docs/"&gt;공식 CLI 레퍼런스&lt;/a&gt;를 확인해 보세요.&lt;/p&gt;</content:encoded></item></channel></rss>

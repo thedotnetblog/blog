@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Extensions | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/extensions/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 02 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/extensions/index.xml" rel="self" type="application/rss+xml"/><item><title>Bookmark Studio Brengt Op Slots Gebaseerde Navigatie en Delen naar Visual Studio-bladwijzers</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/</guid><description>De nieuwe Bookmark Studio-extensie van Mads Kristensen voegt via het toetsenbord aangestuurde slotnavigatie, een bladwijzerbeheerder, kleuren, labels en export-/deelmogelijkheden toe.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Bladwijzers in Visual Studio zijn altijd&amp;hellip; oké geweest. Je plaatst er een, navigeert naar de volgende, vergeet welke welke is.&lt;/p&gt;
+&lt;p&gt;Mads Kristensen heeft zojuist &lt;a href="https://devblogs.microsoft.com/visualstudio/bookmark-studio-evolving-bookmarks-in-visual-studio/"&gt;Bookmark Studio uitgebracht&lt;/a&gt;, een experimentele extensie die precies de gaten opvult die je waarschijnlijk bent tegengekomen als je bladwijzers regelmatig gebruikt.&lt;/p&gt;
+&lt;h2 id="op-slots-gebaseerde-navigatie"&gt;Op slots gebaseerde navigatie&lt;/h2&gt;
+&lt;p&gt;De kerntoevoeging: bladwijzers kunnen nu worden toegewezen aan slots 1–9 en direct worden bereikt met &lt;code&gt;Alt+Shift+1&lt;/code&gt; tot &lt;code&gt;Alt+Shift+9&lt;/code&gt;. Dit verandert bladwijzers van &amp;ldquo;ik heb ergens bladwijzers&amp;rdquo; naar &amp;ldquo;Slot 3 is mijn API-controller, Slot 5 is de servicelaag.&amp;rdquo;&lt;/p&gt;
+&lt;h2 id="de-bladwijzerbeheerder"&gt;De Bladwijzerbeheerder&lt;/h2&gt;
+&lt;p&gt;Een nieuw toolvenster toont al je bladwijzers op één plek met filtering op naam, bestand, locatie, kleur of slot.&lt;/p&gt;
+&lt;h2 id="organisatie-met-labels-kleuren-en-mappen"&gt;Organisatie met labels, kleuren en mappen&lt;/h2&gt;
+&lt;p&gt;Bladwijzers kunnen optioneel labels en kleuren hebben en in mappen worden gegroepeerd. Alle metadata wordt per oplossing opgeslagen.&lt;/p&gt;
+&lt;h2 id="exporteren-en-delen"&gt;Exporteren en delen&lt;/h2&gt;
+&lt;p&gt;Bookmark Studio laat je bladwijzers exporteren als platte tekst, Markdown of CSV:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bladwijzerpaden opnemen in pull request-beschrijvingen&lt;/li&gt;
+&lt;li&gt;Onderzoekssporen delen met teamleden&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Haal het op van de &lt;a href="https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BookmarkStudio"&gt;Visual Studio Marketplace&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

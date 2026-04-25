@@ -1,0 +1,205 @@
+# The .NET Blog
+
+> Articles, tutorials and insights from the .NET community.
+
+The .NET Blog is a community-driven publication featuring articles, tutorials, and deep dives on .NET, ASP.NET Core, C#, cloud architecture, and software engineering. Written by developers, for developers.
+
+## Metadata
+
+- URL: https://thedotnetblog.com/
+- Language: ja
+- Last Updated: 2026-04-25
+
+## Blog Posts
+- [Azure DevOps MCP Server 4月アップデート: WIQLクエリ、PAT認証、実験的MCP Apps](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-devops-mcp-server-april-2026-wiql-pat-apps/): Azure DevOps MCP ServerがWIQLによるwork itemクエリ、Personal Access Token認証、MCPアノテーション、そして一般的なワークフローをパッケージ化する実験的MCP Apps機能を取得。
+- [SQL Server 2025 エージェント対応データベース：1つのエンジンでセキュリティ、バックアップ、MCP](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/sql-server-2025-agent-ready-security-mcp/): Polyglot Taxシリーズの最終回は、本番環境の難しい問題に取り組みます：リレーショナル、JSON、グラフ、ベクターデータ全体での統一Row-Level Security、そしてMCP統合。
+- [.NET 10 が Ubuntu 26.04 LTS に搭載 — 新機能まとめ](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/): Ubuntu 26.04 LTS (Resolute Raccoon) が .NET 10 をファーストクラスのツールチェーンとして搭載。Native AOT、Chiseled コンテナ、Linux 7.0。
+- [Agent FrameworkのCodeAct：エージェントのレイテンシを半分にする方法](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/codeact-agent-framework-hyperlight-50-percent-faster/): CodeActは複数ステップのツールチェーンを単一のサンドボックス化されたコードブロックに圧縮します。レイテンシ52%削減、トークン使用量64%削減を実現します。
+- [Azure MCP Server が .mcpb になった — ランタイムなしでインストール](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-mcp-server-mcpb-no-runtime-install/): Azure MCP Server が MCP Bundle (.mcpb) として利用可能になりました — ダウンロードして Claude Desktop にドラッグするだけ。Node.js、Python、.NET 不要。
+- [Azure SDK 2026年4月: AI Foundry 2.0と.NET開発者が知るべきこと](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-sdk-april-2026-ai-foundry-2-stable/): 2026年4月のAzure SDKリリースは、重要な破壊的変更を伴うAzure.AI.Projects 2.0.0安定版、Cosmos DBの重大なセキュリティ修正、および.NET向けの新しいProvisioningライブラリを提供します。
+- [GPT-5.5 が Azure Foundry に登場 — .NET 開発者が知っておくべきこと](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/gpt-55-foundry-ga-what-dotnet-developers-need-to-know/): GPT-5.5 が Microsoft Foundry で一般提供開始。GPT-5 から 5.5 への進化、実際に何が改善されたか、そして今日エージェントで使い始める方法。
+- [VS Code 1.118: Copilot CLI にセッション名、モデルバッジ、TypeScript 7.0 ナイトリーオプトイン](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/vscode-1-118-copilot-cli-session-names-model-badge/): Visual Studio Code 1.118 は Copilot CLI の改善に焦点を当てたリリース — セッション名、モデルバッジ、自動モデル選択、TypeScript 7.0 ナイトリーのオプトイン。
+- [あなたのエージェントはどこで物事を覚えているか？チャット履歴ストレージの実践ガイド](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/chat-history-storage-patterns-agent-framework/): サービス管理かクライアント管理か？線形か分岐型か？AIエージェントが実際に何ができるかを決める重要なアーキテクチャ上の決定。C#とPythonのコード例付き。
+- [Aspire 13.2: Bun サポート、コンテナ改善、デバッグの摩擦軽減](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-132-bun-container-enhancements/): Aspire 13.2はViteアプリへのBunサポートをファーストクラスで追加し、Yarnの信頼性を修正し、ローカル開発の動作をより予測可能にするコンテナ改善を提供します。
+- [1日68分もコードを再説明している？解決策があります](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/auto-memory-stop-re-explaining-code-to-copilot/): コンテキストロットは現実です — AIエージェントは30ターン後に迷子になり、毎時間コンパクション税を支払っています。auto-memoryはGitHub Copilot CLIに何千ものトークンを消費せずに外科的な記憶を与えます。
+- [Foundry Toolboxes: AIエージェントツールのための統一エンドポイント](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/foundry-toolboxes-curate-manage-tools-ai-agents/): Microsoft FoundryがToolboxesをパブリックプレビューで公開した。AIエージェントツールを単一のMCP互換エンドポイントで管理・公開するための仕組みだ。
+- [Python、TypeScript、.NETでazdフックを書く：シェルスクリプトとの決別](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azd-hooks-python-javascript-typescript-dotnet/): Azure Developer CLIがPython、JavaScript、TypeScript、.NETでのフック作成をサポート。マイグレーションスクリプトのためだけにBashへ切り替える必要はもうない。
+- [Windows App Dev CLI v0.3: ターミナルからF5デバッグとエージェント向けUIオートメーション](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/): Windows App Development CLI v0.3では、ターミナルからデバッグ起動できるwinapp run、UIオートメーション機能のwinapp ui、そしてパッケージアプリでdotnet runを使えるNuGetパッケージが追加されました。
+- [今すぐパッチを: .NET 10.0.7 OOBセキュリティアップデート (ASP.NET Core Data Protection)](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/dotnet-10-0-7-oob-security-patch-data-protection/): .NET 10.0.7はMicrosoft.AspNetCore.DataProtectionのセキュリティ脆弱性を修正するOut-of-Bandリリース — 管理された認証暗号化機がペイロードの誤ったバイトでHMACを計算し、権限昇格につながる可能性がありました。
+- [.NET Native AOT を使って C# で Node.js ネイティブアドオンを書く](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/nodejs-addons-csharp-native-aot/): C# Dev Kit チームは C++ で書かれた Node.js アドオンを .NET Native AOT で置き換えました — 結果はよりクリーンで安全、.NET SDK だけで動きます。
+- [azd + GitHub Copilot: AIによるプロジェクトセットアップとスマートなエラー解決](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/): Azure Developer CLIがGitHub Copilotと統合され、プロジェクトのスキャフォールディングとデプロイエラーの解決をターミナルから直接できるようになりました。
+- [VS Code 1.117：エージェントが専用のGitブランチを持つようになった、これは最高だ](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/vscode-1-117-agents-autopilot-worktrees/): VS Code 1.117はエージェントセッションのworktree分離、永続的なAutopilotモード、サブエージェントサポートを搭載。エージェント型コーディングワークフローがさらに本格的になった。
+- [AzureでのAI実験がお金を燃やしている — その解決方法はこちら](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/): AzureでのAIワークロードはすぐに高額になりがちです。開発スピードを落とさずにコストをコントロールするために、実際に効果がある方法についてお話しします。
+- [FoundryのRFTがより安く、よりスマートに — 変更点まとめ](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/): Microsoft Foundryが今月3つのRFTアップデートをリリース：o4-miniのグローバルトレーニング、新しいGPT-4.1モデルグレーダー、そしてデバッグ時間を大幅に節約できるベストプラクティスガイド。
+- [Docker Sandboxで、Copilotエージェントがマシンをリスクにさらさずにコードをリファクタリングできるようになった](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/): Docker SandboxはGitHub Copilotエージェントにセキュアなマイクロ VMを提供し、許可プロンプトなし、ホストへのリスクなしで自由にリファクタリングできる環境を実現します。大規模な.NETモダナイゼーションにとって、これがなぜゲームチェンジャーなのかを解説します。
+- [ターミナルの見張り番はもう終わり：Aspireのデタッチモードがワークフローを変える](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/): Aspire 13.2ではAppHostをバックグラウンドで実行してターミナルを取り戻せます。新しいCLIコマンドやエージェントサポートと組み合わせると、思った以上に大きな変化です。
+- [Azure MCPツールがVisual Studio 2022に組み込まれました — 拡張機能のインストール不要](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-mcp-tools-built-into-visual-studio-2022/): Azure MCPツールがVisual Studio 2022のAzure開発ワークロードの一部として同梱されました。230以上のツール、45のAzureサービス、インストールする拡張機能はゼロ。
+- [ピンクラスタリングがついに .NET MAUI Maps に登場 — プロパティ1つ、手間ゼロ](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/maui-maps-pin-clustering-finally/): .NET MAUI 11 Preview 3 で Map コントロールにネイティブなピンクラスタリングが追加されました。プロパティ1つ、独立したクラスタリンググループ、タップ処理 — すべて組み込み。
+- [.NET 2026年4月サービシング — 今すぐ適用すべきセキュリティパッチ](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/dotnet-april-2026-servicing-security-patches/): 2026年4月のサービシングリリースは、.NET 10、.NET 9、.NET 8、.NET Frameworkにわたる6件のCVEを修正します — リモートコード実行の脆弱性2件を含みます。
+- [Aspire 13.2にMongoDB EF CoreとAzure Data Lakeが追加 — 試す価値のある2つのインテグレーション](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-132-mongodb-efcore-data-lake/): Aspire 13.2では、設定不要のヘルスチェックとサービスディスカバリを備えたMongoDB Entity Framework CoreとAzure Data Lake Storageのインテグレーションが追加されました。実際にどのように使えるか紹介します。
+- [azd update — すべてのパッケージマネージャーを統べる一つのコマンド](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/): Azure Developer CLIに、インストール方法を問わず動作するユニバーサルなアップデートコマンドが追加されました — winget、Homebrew、Chocolatey、インストールスクリプトのいずれでも対応。
+- [Azure DevOps Server 2026年4月パッチ — PRの完了修正とセキュリティアップデート](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/): Azure DevOps Serverがパッチ3を取得。PR完了の失敗修正、サインアウト時の検証改善、GitHub Enterprise Server PATの接続復元が含まれます。
+- [Azure Smart TierがGAに — ライフサイクルルール不要でBlob Storageのコストを自動最適化](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/): Azure Blob Storageのsmart tierが一般提供開始。実際のアクセスパターンに基づいて、オブジェクトをhot、cool、coldティア間で自動的に移動します — ライフサイクルルールは不要です。
+- [AzureでAIエージェントをどこにホストすべき？実践的な判断ガイド](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-ai-agent-hosting-options-guide/): Azureには生のコンテナからフルマネージドのFoundry Hosted Agentsまで、AIエージェントをホストする6つの方法があります。.NETワークロードに最適なものを選ぶ方法を解説します。
+- [.NETのAgent Skillsが本気で柔軟になった](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/): Microsoft Agent Frameworkがスキルの作成方法を3つサポート — ファイル、クラス、インラインコード — すべて単一のプロバイダーで構成可能に。なぜこれが重要なのか、それぞれの使い方を解説します。
+- [Azure MCP Server 2.0 がリリース — セルフホスト型エージェンティック クラウド オートメーションがここに](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-mcp-server-2-self-hosted-agentic-cloud/): Azure MCP Server 2.0 は、セルフホスト型のリモート展開、57 の Azure サービス全体で 276 のツール、エンタープライズグレードのセキュリティを備え、安定版となりました。エージェンティック ワークフローを構築する .NET 開発者にとって重要な点をここに紹介します。
+- [.NET Aspire 13.2はあなたのAIエージェントの親友になりたがっている](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/): Aspire 13.2がエージェンティック開発に全力投球 — 構造化されたCLI出力、分離実行、自動修復環境、そして完全なOpenTelemetryデータにより、AIエージェントがアプリを実際にビルド、実行、観察できるようになります。
+- [Aspireの分離モードが並列開発のポート競合の悪夢を解決する](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/): Aspire 13.2が--isolatedモードを導入：ランダムポート、分離されたシークレット、同じAppHostの複数インスタンス実行時のゼロコリジョン。AIエージェント、ワークツリー、並列ワークフローに最適。
+- [Azure FunctionsのMCPサーバーをFoundryエージェントに接続する方法](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/foundry-agents-mcp-servers-azure-functions/): MCPサーバーを一度構築し、Azure Functionsにデプロイして、適切な認証付きでMicrosoft Foundryエージェントに接続。ツールはどこでも動作します — VS Code、Cursor、そして今やエンタープライズAIエージェントでも。
+- [GitHub Copilotのモダナイゼーション評価は、まだ使っていない最高の移行ツール](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/): GitHub Copilotのモダナイゼーション拡張機能は、コード変更を提案するだけでなく、アクション可能なIssue、Azureターゲット比較、コラボレーティブなワークフローを備えた完全な移行評価を生成します。評価ドキュメントがすべての鍵である理由をお伝えします。
+- [MCP AppsにFluent APIが登場 — .NETでリッチなAIツールUIを3ステップで構築](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/mcp-fluent-api-azure-functions-dotnet/): Azure Functions上のMCP Apps向け新しいFluent設定APIにより、あらゆる.NET MCPツールをビュー、パーミッション、CSPポリシーを備えた完全なアプリに、わずか数行のコードで変換できます。
+- [Microsoft Foundry 2026年3月 — GPT-5.4、Agent Service GA、そしてすべてを変えるSDKリフレッシュ](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/microsoft-foundry-march-2026-whats-new/): Microsoft Foundryの2026年3月アップデートは大規模：Agent ServiceがGAに到達、GPT-5.4が信頼性の高い推論を実現、azure-ai-projects SDKが全言語で安定版に、そしてFireworks AIがオープンモデルをAzureに提供。
+- [SQL MCP Server — AIエージェントにデータベースアクセスを与える正しい方法](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/): Data API builderのSQL MCP Serverは、スキーマを公開したりNL2SQLに頼ることなく、AIエージェントに安全で決定的なデータベースアクセスを提供します。RBAC、キャッシュ、マルチデータベース対応 — すべて組み込み済み。
+- [VS Code 1.116 — Agentsアプリがキーボードナビゲーションとファイルコンテキスト補完を獲得](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/): VS Code 1.116はAgentsアプリの磨き上げに注力 — 専用キーバインド、アクセシビリティの改善、ファイルコンテキスト補完、CSS @importリンク解決。
+- [エージェンティックなプラットフォームエンジニアリングが現実になりつつある — Git-APEがその方法を示す](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/): MicrosoftのGit-APEプロジェクトがエージェンティックなプラットフォームエンジニアリングを実践 — GitHub CopilotエージェントとAzure MCPを使って自然言語のリクエストを検証済みクラウドインフラに変換します。
+- [ブラックボックスに感じないリアルタイムマルチエージェントUIを構築する](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/ag-ui-real-time-multi-agent-ui-maf/): AG-UIとMicrosoft Agent Frameworkが連携し、マルチエージェントワークフローにリアルタイムストリーミング、人間の承認、エージェントの動作の完全な可視化を備えた本格的なフロントエンドを提供します。
+- [知らなかったVisual Studioのフローティングウィンドウ設定（でも知るべき）](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/): Visual Studioの隠れた設定でフローティングウィンドウを完全にコントロール — 独立したタスクバーエントリ、適切なマルチモニター動作、そして完璧なFancyZones統合。ドロップダウン一つですべてが変わります。
+- [VS Code 1.115 — バックグラウンドターミナル通知、SSHエージェントモードなど](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/): VS Code 1.115では、エージェント向けバックグラウンドターミナル通知、SSHリモートエージェントホスティング、ターミナルへのファイル貼り付け、セッション対応の編集追跡が導入されました。.NET開発者にとって重要なポイントをまとめます。
+- [C# 15にユニオン型が登場 — まさに私たちが求めていたもの](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/csharp-15-union-types-exhaustive-matching/): C# 15がunionキーワードを導入 — コンパイラが強制する判別共用体と網羅的パターンマッチング。その見た目、重要な理由、そして今日試す方法を紹介します。
+- [Aspire 13.2にドキュメントCLIが搭載 — AIエージェントも使えます](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/): .NET Aspire 13.2にaspire docsが追加されました。ターミナルを離れずに公式ドキュメントを検索、閲覧、読むためのCLIです。AIエージェントのツールとしても動作します。なぜこれが重要なのかをお伝えします。
+- [Microsoft Agent Frameworkが1.0に到達 — .NET開発者にとって本当に重要なこと](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/agent-framework-1-0-production-ready/): Microsoft Agent Framework 1.0が安定したAPI、マルチエージェントオーケストレーション、主要AIプロバイダー向けコネクタを備えて本番環境対応になりました。.NET開発者として知っておくべきことをまとめます。
+- [Aspire 13.2のダッシュボードにテレメトリAPIが搭載 — これで全てが変わる](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/): .NET Aspire 13.2がスマートなテレメトリエクスポート、トレースとログのプログラマブルAPI、GenAIビジュアライゼーションの改善を提供。デバッグワークフローにとってなぜ重要かを解説します。
+- [azdでAIエージェントをローカル実行・デバッグ可能に — 2026年3月の変更点まとめ](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/): Azure Developer CLIが2026年3月に7つのリリースを公開。ハイライト：AIエージェントのローカル実行＆デバッグループ、GitHub Copilotのプロジェクトセットアップ統合、Container App Jobsサポート。
+- [Azure DevOpsがついに全員が不満だったMarkdownエディタを修正](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/): Azure DevOpsのワークアイテム用Markdownエディタがプレビューと編集モードの明確な区別を獲得。小さな変更ですが、本当に厄介なワークフロー問題を解決します。
+- [Bookmark Studioがスロットベースのナビゲーションと共有をVisual Studioのブックマークに追加](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/): Mads Kristensenの新しいBookmark Studio拡張機能がキーボード駆動のスロットナビゲーション、ブックマークマネージャー、色、ラベル、エクスポート機能をVisual Studioのブックマークに追加。
+- [Visual Studioの3月アップデートでカスタムCopilotエージェントが作成可能に — find_symbolが大きな進化](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/): Visual Studioの2026年3月アップデートがカスタムCopilotエージェント、再利用可能なスキル、言語対応のfind_symbolツール、Test ExplorerからのCopilotプロファイリングを提供。
+- [KubeCon Europe 2026：.NET開発者が本当に知るべきこと](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/kubecon-2026-aks-updates-dotnet-developers/): MicrosoftがKubeCon Europe 2026で大量のKubernetesアナウンスを発表しました。.NETアプリを出荷しているなら知っておくべきAKSとクラウドネイティブのアップデートだけをフィルタリングしてお届けします。
+- [SQL MCP Server、SSMS の Copilot、AI エージェント付き Database Hub：SQLCon 2026 で本当に重要なこと](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/agentic-ai-microsoft-databases-what-matters/): Microsoft が SQLCon 2026 でデータベース関連の発表を大量にリリースしました。Azure SQL で AI アプリを構築しているなら、本当に重要なポイントをまとめました。
+- [Azure DevOps MCPサーバーがMicrosoft Foundryに登場：AIエージェントにとっての意味](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/): Azure DevOps MCPサーバーがMicrosoft Foundryで利用可能になりました。AIエージェントをDevOpsワークフロー（ワークアイテム、リポジトリ、パイプライン）に数クリックで直接接続できます。
+- [Foundry Agent ServiceがGA：.NETエージェント開発者にとって本当に重要なこと](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/foundry-agent-service-ga-what-matters/): MicrosoftのFoundry Agent ServiceがプライベートネットワーキングVoice Live、本番評価、オープンなマルチモデルランタイムでGAに到達。知っておくべきことはこちら。
+- [Microsoft Agent Frameworkのバックグラウンドレスポンス：タイムアウトの不安から解放](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/background-responses-agent-framework-long-running-tasks/): Microsoft Agent Frameworkが継続トークンで長時間実行AIタスクのオフロードを可能に。バックグラウンドレスポンスの仕組みと.NETエージェントにとっての重要性を解説します。
+- [VS Code 1.112：.NET開発者が本当に注目すべきこと](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/vscode-1-112-dotnet-developers/): VS Code 1.112がリリースされ、エージェントのアップグレード、統合ブラウザデバッガー、MCPサンドボックス、モノレポサポートが満載です。.NETで開発しているなら本当に重要なポイントを紹介します。
+- [ラップトップから本番へ：2つのコマンドでAIエージェントをMicrosoft Foundryにデプロイ](https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/deploy-ai-agents-foundry-azd-two-commands/): Azure Developer CLIに'azd ai agent'コマンドが追加され、AIエージェントをローカル開発から数分でFoundryの本番エンドポイントへ。完全なワークフローを紹介します。
+
+## Events
+- [NDC Oslo 2026](https://thedotnetblog.com/ja/events/ndc-oslo-2026/): ヨーロッパ最大級の開発者カンファレンスの一つ — Oslo Spektrumで5日間のワークショップ、セッション、ネットワーキング。150名以上のスピーカー、160セッション。
+- [.NET Day Switzerland 2026](https://thedotnetblog.com/ja/events/dotnet-day-switzerland-2026/): .NET開発者、アーキテクト、エキスパートのための非営利コミュニティカンファレンス — .NET、C#、ASP.NET Core、Azureなどをカバー — チューリッヒにて開催。
+- [SDD Conference 2026](https://thedotnetblog.com/ja/events/sdd-conference-2026/): ロンドンのBarbican Centreで開催される5日間のソフトウェア開発カンファレンス — 78セッションと14ワークショップ。アーキテクチャ、.NET、AI、Azure、DevOpsなどをカバー。
+- [Global Azure Spain 2026](https://thedotnetblog.com/ja/events/global-azure-spain-2026/): スペイン最大のAzureコミュニティイベント — Azure、AI、データ、セキュリティ、クラウドネイティブ開発に関する1日セッション、38名のスピーカー、3トラック。
+
+## Authors
+- [Emiliano Montesdeoca](https://thedotnetblog.com/ja/authors/emiliano-montesdeoca/): Microsoft MVP & クラウドソリューションチームリード — Emilianoはウルグアイ系スペイン人のソフトウェア開発者で、Microsoft MVP（Developer Technologies）であり、カナリア諸島テネリフェを拠点とするコミュニティアドボケイトです。
+
+Microsoft技術を使用したスケーラブルなクラウドソリューションの設計を専門とし、現在Intelequia Technologiesでクラウドソリューションチームのリーダーを務めています。
+
+頻繁に国際カンファレンスに登壇し、知識共有に情熱を持つ彼は、実世界の問題解決を開発者のための実践的なインサイトに変換します。
+
+
+## Topics
+This blog covers the following topics (with post count):
+- .net (5 posts)
+- .net 10 (2 posts)
+- .net aspire (1 post)
+- accessibility (1 post)
+- ag-ui (1 post)
+- agent framework (7 posts)
+- agentic devops (1 post)
+- agents (11 posts)
+- ai (35 posts)
+- ai apps (2 posts)
+- ai foundry (2 posts)
+- aks (2 posts)
+- architecture (3 posts)
+- asp.net core (1 post)
+- aspire (7 posts)
+- aspnet-core (1 post)
+- azd (5 posts)
+- azure (31 posts)
+- azure boards (1 post)
+- azure sql (2 posts)
+- azure-developer-cli (2 posts)
+- azure-devops (3 posts)
+- azure-functions (2 posts)
+- azure-openai (1 post)
+- azure-sdk (4 posts)
+- bicep (1 post)
+- blob-storage (1 post)
+- c# (1 post)
+- cli (6 posts)
+- cloud (2 posts)
+- cloud-native (6 posts)
+- coding-agents (1 post)
+- community (2 posts)
+- containers (4 posts)
+- copilot (2 posts)
+- cost-optimization (2 posts)
+- csharp (3 posts)
+- dashboard (1 post)
+- data-api-builder (1 post)
+- data-lake (1 post)
+- databases (2 posts)
+- developer productivity (3 posts)
+- developer tooling (2 posts)
+- developer-tools (21 posts)
+- devops (5 posts)
+- docker (2 posts)
+- documentation (1 post)
+- dotnet (24 posts)
+- dotnet-11 (2 posts)
+- dotnet-aspire (1 post)
+- dotnet-framework (1 post)
+- efcore (1 post)
+- extensions (1 post)
+- fine-tuning (1 post)
+- finops (1 post)
+- foundry (7 posts)
+- github copilot (9 posts)
+- gpt-5 (1 post)
+- gpt-5-4 (1 post)
+- hyperlight (1 post)
+- infrastructure as code (1 post)
+- interop (1 post)
+- javascript (1 post)
+- kubernetes (1 post)
+- language-features (1 post)
+- linux (1 post)
+- machine-learning (1 post)
+- maintenance & updates (1 post)
+- maps (1 post)
+- maui (1 post)
+- mcp (14 posts)
+- microsoft-foundry (2 posts)
+- migration (1 post)
+- mobile (1 post)
+- modernization (2 posts)
+- mongodb (1 post)
+- multi-agent (2 posts)
+- native aot (2 posts)
+- node.js (1 post)
+- nuget (1 post)
+- observability (1 post)
+- opentelemetry (1 post)
+- parallel-development (1 post)
+- patches (1 post)
+- pattern-matching (1 post)
+- platform-engineering (1 post)
+- powertoys (1 post)
+- productivity (4 posts)
+- profiling (1 post)
+- python (3 posts)
+- remote-development (1 post)
+- sdk (1 post)
+- security (4 posts)
+- semantic kernel (2 posts)
+- servicing (1 post)
+- sql (1 post)
+- sql server (1 post)
+- sse (1 post)
+- storage (1 post)
+- telemetry (1 post)
+- tooling (1 post)
+- typescript (2 posts)
+- ubuntu (1 post)
+- union-types (1 post)
+- visual-studio (5 posts)
+- vs code (2 posts)
+- vscode (3 posts)
+- windows (1 post)
+- winui (1 post)
+- wpf (1 post)
+
+## Optional
+
+- [Full content version](https://thedotnetblog.com/llms-full.txt)
+- [Sitemap](https://thedotnetblog.com/sitemap.xml)
+- [RSS Feed](https://thedotnetblog.com/index.xml)

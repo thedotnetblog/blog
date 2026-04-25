@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Windows | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/windows/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows App Dev CLI v0.3: Terminalden F5 Hata Ayıklama ve Ajanlar için UI Otomasyonu</title><link>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</guid><description>Windows App Development CLI v0.3, terminalden hata ayıklama başlatmak için winapp run, UI otomasyonu için winapp ui ve paketlenmiş uygulamalarla dotnet run'ı çalıştıran yeni bir NuGet paketi getiriyor.</description><content:encoded>&lt;p&gt;&lt;em&gt;Bu gönderi otomatik olarak çevrilmiştir. Orijinal için &lt;a href="https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/"&gt;buraya tıklayın&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Visual Studio&amp;rsquo;nun F5 deneyimi harika. Ama yalnızca paketlenmiş bir Windows uygulamasını başlatıp hata ayıklamak için VS&amp;rsquo;yi açmak — bir CI boru hattında, otomatik bir iş akışında veya bir yapay zeka ajanı testleri çalıştırırken — fazla ağır bir yük.&lt;/p&gt;
+&lt;p&gt;Windows App Development CLI v0.3 &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;yayınlandı&lt;/a&gt; ve bunu iki temel özellikle doğrudan ele alıyor: &lt;code&gt;winapp run&lt;/code&gt; ve &lt;code&gt;winapp ui&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="winapp-run-her-yerden-f5"&gt;winapp run: Her yerden F5&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;winapp run&lt;/code&gt; paketlenmemiş bir uygulama klasörü ve manifest alır; VS&amp;rsquo;nin hata ayıklama başlatmasında yaptığı her şeyi yapar: loose paket kaydeder, uygulamayı başlatır ve yeniden dağıtımlar arasında &lt;code&gt;LocalState&lt;/code&gt;&amp;lsquo;i korur.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Uygulamayı derleyin, ardından paketlenmiş uygulama olarak çalıştırın&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp run ./bin/Debug
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;WinUI, WPF, WinForms, Console, Avalonia ve daha fazlası için çalışır. Modlar hem geliştiriciler hem de otomatik iş akışları için tasarlanmıştır:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--detach&lt;/code&gt;&lt;/strong&gt;: Başlatır ve hemen terminale kontrolü geri döndürür. CI için ideal.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--unregister-on-exit&lt;/code&gt;&lt;/strong&gt;: Uygulama kapatıldığında kayıtlı paketi temizler.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--debug-output&lt;/code&gt;&lt;/strong&gt;: &lt;code&gt;OutputDebugString&lt;/code&gt; mesajlarını ve istisnaları gerçek zamanlı yakalar.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="yeni-nuget-paketi-paketlenmiş-uygulamalar-için-dotnet-run"&gt;Yeni NuGet Paketi: Paketlenmiş uygulamalar için dotnet run&lt;/h2&gt;
+&lt;p&gt;.NET geliştiricileri için yeni bir NuGet paketi var: &lt;code&gt;Microsoft.Windows.SDK.BuildTools.WinApp&lt;/code&gt;. Kurulumdan sonra &lt;code&gt;dotnet run&lt;/code&gt; tüm iç döngüyü yönetir: derleme, loose-layout paketi hazırlama, Windows&amp;rsquo;ta kayıt ve başlatma — tek adımda.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp init
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# veya&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet add package Microsoft.Windows.SDK.BuildTools.WinApp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="winapp-ui-komut-satırından-ui-otomasyonu"&gt;winapp ui: Komut satırından UI Otomasyonu&lt;/h2&gt;
+&lt;p&gt;Bu, ajan senaryolarını açan özellik. &lt;code&gt;winapp ui&lt;/code&gt;, terminalden çalışan herhangi bir Windows uygulamasına (WPF, WinForms, Win32, Electron, WinUI3) tam UI Automation erişimi sağlar.&lt;/p&gt;
+&lt;p&gt;Yapılabilecekler:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tüm üst düzey pencereleri listele&lt;/li&gt;
+&lt;li&gt;Herhangi bir pencerenin tam UI Automation ağacında gezin&lt;/li&gt;
+&lt;li&gt;Ad, tür veya otomasyon kimliğine göre öğe ara&lt;/li&gt;
+&lt;li&gt;Tıkla, çağır ve değer ayarla&lt;/li&gt;
+&lt;li&gt;Ekran görüntüsü al&lt;/li&gt;
+&lt;li&gt;Öğelerin görünmesini bekle — test senkronizasyonu için ideal&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;winapp ui&lt;/code&gt; ile &lt;code&gt;winapp run&lt;/code&gt;&amp;lsquo;ı birleştirmek, terminalden eksiksiz bir derleme → başlatma → doğrulama iş akışı sağlar. Bir ajan uygulamayı çalıştırabilir, UI durumunu inceleyebilir, programatik olarak etkileşime girebilir ve sonucu doğrulayabilir.&lt;/p&gt;
+&lt;h2 id="diğer-yenilikler"&gt;Diğer yenilikler&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp unregister&lt;/code&gt;&lt;/strong&gt;: Tamamlandığında yandan yüklenmiş paketi kaldırır.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp manifest add-alias&lt;/code&gt;&lt;/strong&gt;: Terminalden adıyla uygulama başlatmak için takma ad ekler.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sekme tamamlama&lt;/strong&gt;: PowerShell tamamlamayı tek komutla yapılandırın.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="nasıl-edinilir"&gt;Nasıl edinilir&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winget install Microsoft.WinAppCli
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# veya&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npm install -g @microsoft/winappcli
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;CLI genel önizleme aşamasında. Tam belgeleme için &lt;a href="https://github.com/microsoft/WinAppCli"&gt;GitHub deposuna&lt;/a&gt;, tüm ayrıntılar için &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;orijinal duyuruya&lt;/a&gt; bakın.&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Powertoys | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/powertoys/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/powertoys/index.xml" rel="self" type="application/rss+xml"/><item><title>Pengaturan Floating Windows Visual Studio yang Tidak Kamu Ketahui (Tapi Harus Tahu)</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/</guid><description>Pengaturan tersembunyi di Visual Studio memberi kendali penuh atas floating windows — entri taskbar mandiri, perilaku multi-monitor yang benar, dan integrasi FancyZones yang sempurna. Satu dropdown mengubah segalanya.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Jika kamu menggunakan beberapa monitor dengan Visual Studio (dan jujur saja, siapa yang tidak zaman sekarang), kamu mungkin pernah merasakan frustrasi ini: floating tool windows menghilang saat kamu meminimalkan IDE utama, selalu berada di atas segalanya, dan tidak muncul sebagai tombol taskbar terpisah. Ini mungkin berhasil untuk beberapa alur kerja, tapi untuk setup multi-monitor sangat menjengkelkan.&lt;/p&gt;
+&lt;p&gt;Mads Kristensen dari tim Visual Studio &lt;a href="https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/"&gt;berbagi pengaturan yang kurang dikenal&lt;/a&gt; yang sepenuhnya mengubah cara floating windows berperilaku. Satu dropdown. Itu saja.&lt;/p&gt;
+&lt;h2 id="pengaturannya"&gt;Pengaturannya&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Tools &amp;gt; Options &amp;gt; Environment &amp;gt; Windows &amp;gt; Floating Windows&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Dropdown &amp;ldquo;These floating windows are owned by the main window&amp;rdquo; memiliki tiga opsi:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;None&lt;/strong&gt; — independensi penuh. Setiap floating window mendapat entri taskbar sendiri dan berperilaku seperti jendela Windows biasa.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tool Windows&lt;/strong&gt; (default) — dokumen mengapung bebas, tool windows tetap terikat ke IDE.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Documents and Tool Windows&lt;/strong&gt; — perilaku Visual Studio klasik, semuanya terikat ke jendela utama.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="mengapa-none-adalah-pilihan-terbaik-untuk-setup-multi-monitor"&gt;Mengapa &amp;ldquo;None&amp;rdquo; adalah Pilihan Terbaik untuk Setup Multi-Monitor&lt;/h2&gt;
+&lt;p&gt;Atur ke &lt;strong&gt;None&lt;/strong&gt; dan tiba-tiba semua floating tool windows dan dokumen berperilaku seperti aplikasi Windows nyata. Mereka muncul di taskbar, tetap terlihat saat kamu meminimalkan jendela Visual Studio utama, dan berhenti memaksa diri ke depan segalanya.&lt;/p&gt;
+&lt;p&gt;Kombinasikan ini dengan &lt;strong&gt;PowerToys FancyZones&lt;/strong&gt; dan itu mengubah segalanya. Buat tata letak kustom di seluruh monitormu, snap Solution Explorer ke satu zona, debugger ke zona lain, dan file kode di mana pun kamu mau. Semuanya tetap di tempat, semuanya dapat diakses secara mandiri.&lt;/p&gt;
+&lt;h2 id="rekomendasi-cepat"&gt;Rekomendasi Cepat&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Pengguna multi-monitor&lt;/strong&gt;: Atur ke &lt;strong&gt;None&lt;/strong&gt;, pasangkan dengan FancyZones&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Floating windows sesekali&lt;/strong&gt;: &lt;strong&gt;Tool Windows&lt;/strong&gt; (default) adalah jalan tengah yang solid&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Alur kerja tradisional&lt;/strong&gt;: &lt;strong&gt;Documents and Tool Windows&lt;/strong&gt; mempertahankan gaya klasik&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tips: &lt;strong&gt;Ctrl + double-click&lt;/strong&gt; pada title bar tool window mana pun untuk langsung memfloat atau mendocknya. Tidak perlu restart setelah mengubah pengaturan.&lt;/p&gt;
+&lt;h2 id="kesimpulan"&gt;Kesimpulan&lt;/h2&gt;
+&lt;p&gt;Ini salah satu pengaturan &amp;ldquo;Saya tidak percaya saya tidak tahu tentang ini&amp;rdquo;. Jika floating windows di Visual Studio pernah membuatmu kesal, pergi ubah ini sekarang.&lt;/p&gt;
+&lt;p&gt;Baca &lt;a href="https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/"&gt;postingan lengkapnya&lt;/a&gt; untuk detail dan screenshot.&lt;/p&gt;</content:encoded></item></channel></rss>

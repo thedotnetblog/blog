@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure Developer CLI | The .NET Blog</title><link>https://thedotnetblog.com/de/tags/azure-developer-cli/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>de</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/de/tags/azure-developer-cli/index.xml" rel="self" type="application/rss+xml"/><item><title>azd-Hooks in Python, TypeScript und .NET: Schluss mit Shell-Skripten</title><link>https://thedotnetblog.com/de/posts/emiliano-montesdeoca/azd-hooks-python-javascript-typescript-dotnet/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/de/posts/emiliano-montesdeoca/azd-hooks-python-javascript-typescript-dotnet/</guid><description>Die Azure Developer CLI unterstützt jetzt Hooks in Python, JavaScript, TypeScript und .NET. Kein Kontextwechsel zu Bash mehr nur für ein Migrations-Skript.</description><content:encoded>&lt;p&gt;&lt;em&gt;Dieser Beitrag wurde automatisch übersetzt. Für die Originalversion &lt;a href="https://thedotnetblog.com/de/posts/emiliano-montesdeoca/azd-hooks-python-javascript-typescript-dotnet/"&gt;hier klicken&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Wer schon einmal ein vollständig in .NET geschriebenes Projekt hatte und trotzdem Bash-Skripte für azd-Hooks schreiben musste, kennt den Schmerz. Warum in Shell-Syntax wechseln für einen Pre-Provisioning-Schritt, wenn der Rest des Projekts C# ist?&lt;/p&gt;
+&lt;p&gt;Diese Frustration hat jetzt eine offizielle Lösung. Die Azure Developer CLI hat &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-multi-language-hooks/"&gt;Multi-Sprachen-Unterstützung für Hooks eingeführt&lt;/a&gt;, und es ist genauso gut wie es klingt.&lt;/p&gt;
+&lt;h2 id="was-sind-hooks"&gt;Was sind Hooks?&lt;/h2&gt;
+&lt;p&gt;Hooks sind Skripte, die an wichtigen Punkten im &lt;code&gt;azd&lt;/code&gt;-Lebenszyklus ausgeführt werden — vor dem Provisioning, nach dem Deployment und mehr. Sie werden in &lt;code&gt;azure.yaml&lt;/code&gt; definiert und ermöglichen die Injektion von benutzerdefinierter Logik ohne Änderungen an der CLI.&lt;/p&gt;
+&lt;p&gt;Bisher wurden nur Bash und PowerShell unterstützt. Jetzt kann man &lt;strong&gt;Python, JavaScript, TypeScript oder .NET&lt;/strong&gt; verwenden — und &lt;code&gt;azd&lt;/code&gt; erledigt den Rest automatisch.&lt;/p&gt;
+&lt;h2 id="wie-die-erkennung-funktioniert"&gt;Wie die Erkennung funktioniert&lt;/h2&gt;
+&lt;p&gt;Man verweist den Hook auf eine Datei, und &lt;code&gt;azd&lt;/code&gt; leitet die Sprache aus der Dateiendung ab:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;hooks&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;preprovision&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;./hooks/setup.py&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;postdeploy&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;./hooks/seed.ts&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;postprovision&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;./hooks/migrate.cs&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Keine zusätzliche Konfiguration. Bei mehrdeutigen Endungen kann man &lt;code&gt;kind: python&lt;/code&gt; (oder die entsprechende Sprache) explizit angeben.&lt;/p&gt;
+&lt;h2 id="sprachspezifische-details"&gt;Sprachspezifische Details&lt;/h2&gt;
+&lt;h3 id="python"&gt;Python&lt;/h3&gt;
+&lt;p&gt;Eine &lt;code&gt;requirements.txt&lt;/code&gt; oder &lt;code&gt;pyproject.toml&lt;/code&gt; neben dem Skript ablegen (oder in einem übergeordneten Verzeichnis). &lt;code&gt;azd&lt;/code&gt; erstellt automatisch eine virtuelle Umgebung, installiert Abhängigkeiten und führt das Skript aus.&lt;/p&gt;
+&lt;h3 id="javascript-und-typescript"&gt;JavaScript und TypeScript&lt;/h3&gt;
+&lt;p&gt;Dasselbe Muster — eine &lt;code&gt;package.json&lt;/code&gt; in der Nähe des Skripts, und &lt;code&gt;azd&lt;/code&gt; führt zuerst &lt;code&gt;npm install&lt;/code&gt; aus. Für TypeScript wird &lt;code&gt;npx tsx&lt;/code&gt; verwendet, ohne Kompilierungsschritt und ohne &lt;code&gt;tsconfig.json&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id="net"&gt;.NET&lt;/h3&gt;
+&lt;p&gt;Zwei Modi verfügbar:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Projektmodus&lt;/strong&gt;: Liegt eine &lt;code&gt;.csproj&lt;/code&gt; neben dem Skript, führt &lt;code&gt;azd&lt;/code&gt; automatisch &lt;code&gt;dotnet restore&lt;/code&gt; und &lt;code&gt;dotnet build&lt;/code&gt; aus.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Single-File-Modus&lt;/strong&gt;: Ab .NET 10+ können eigenständige &lt;code&gt;.cs&lt;/code&gt;-Dateien direkt via &lt;code&gt;dotnet run script.cs&lt;/code&gt; ausgeführt werden. Kein Projektdatei erforderlich.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="executor-spezifische-konfiguration"&gt;Executor-spezifische Konfiguration&lt;/h2&gt;
+&lt;p&gt;Jede Sprache unterstützt einen optionalen &lt;code&gt;config&lt;/code&gt;-Block:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;hooks&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;preprovision&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;./hooks/setup.ts&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;config&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;packageManager&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;pnpm&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;postprovision&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;./hooks/migrate.cs&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;config&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;configuration&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;Release&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;framework&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;net10.0&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="warum-das-für-net-entwickler-wichtig-ist"&gt;Warum das für .NET-Entwickler wichtig ist&lt;/h2&gt;
+&lt;p&gt;Hooks waren der letzte Ort in einem azd-basierten Projekt, der einen Sprachwechsel erzwang. Jetzt kann die gesamte Deployment-Pipeline — App-Code, Infrastrukturskripte und Lifecycle-Hooks — in einer einzigen Sprache leben. Bestehende .NET-Utilities lassen sich in Hooks wiederverwenden, gemeinsame Bibliotheken referenzieren, und Shell-Skript-Pflege entfällt.&lt;/p&gt;
+&lt;h2 id="fazit"&gt;Fazit&lt;/h2&gt;
+&lt;p&gt;Einer dieser Änderungen, die klein klingen, aber täglich Reibung aus dem azd-Workflow nehmen. Multi-Sprachen-Hook-Unterstützung ist jetzt verfügbar — alle Details im &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-multi-language-hooks/"&gt;offiziellen Post&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title>azd + GitHub Copilot: KI-gestütztes Projekt-Setup und intelligente Fehlerbehandlung</title><link>https://thedotnetblog.com/de/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</link><pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/de/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</guid><description>Die Azure Developer CLI integriert sich jetzt mit GitHub Copilot, um dein Projekt zu scaffolden und Deployment-Fehler zu beheben — alles ohne das Terminal zu verlassen.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dieser Beitrag wurde automatisch übersetzt. Die englische Originalversion findest du &lt;a href="https://thedotnetblog.com/de/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/"&gt;hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Du kennst diesen Moment, wenn du eine bestehende App in Azure deployen möchtest und plötzlich auf eine leere &lt;code&gt;azure.yaml&lt;/code&gt; starrst und versuchst zu erinnern, ob deine Express-API Container Apps oder App Service verwenden sollte? Genau dieser Moment wird jetzt deutlich kürzer.&lt;/p&gt;
+&lt;p&gt;Die Azure Developer CLI (&lt;code&gt;azd&lt;/code&gt;) integriert sich jetzt mit GitHub Copilot auf zwei sinnvolle Arten: KI-gestütztes Projekt-Scaffolding während &lt;code&gt;azd init&lt;/code&gt; und intelligente Fehlerbehebung, wenn Deployments schiefgehen. Beide Funktionen bleiben vollständig im Terminal — genau dort, wo ich sie haben möchte.&lt;/p&gt;
+&lt;h2 id="setup-mit-copilot-während-azd-init"&gt;Setup mit Copilot während azd init&lt;/h2&gt;
+&lt;p&gt;Wenn du &lt;code&gt;azd init&lt;/code&gt; ausführst, gibt es jetzt die Option &amp;ldquo;Set up with GitHub Copilot (Preview)&amp;rdquo;. Wähle sie aus, und Copilot analysiert deine Codebasis, um die &lt;code&gt;azure.yaml&lt;/code&gt;, Infrastruktur-Templates und Bicep-Module zu generieren — basierend auf deinem tatsächlichen Code.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd init
+# Wähle: &amp;#34;Set up with GitHub Copilot (Preview)&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Voraussetzungen:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;azd 1.23.11 oder neuer&lt;/strong&gt; — prüfe mit &lt;code&gt;azd version&lt;/code&gt; oder aktualisiere mit &lt;code&gt;azd update&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Aktives GitHub Copilot-Abonnement&lt;/strong&gt; (Individual, Business oder Enterprise)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub CLI (&lt;code&gt;gh&lt;/code&gt;)&lt;/strong&gt; — &lt;code&gt;azd&lt;/code&gt; fragt bei Bedarf nach dem Login&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Was ich dabei wirklich nützlich finde: Es funktioniert in beide Richtungen. Baust du von Grund auf neu? Copilot hilft dir, von Anfang an die richtigen Azure-Services einzurichten. Hast du eine bestehende App, die du schon länger deployen wolltest? Zeig Copilot auf sie, und er generiert die Konfiguration, ohne dass du irgendetwas umstrukturieren musst.&lt;/p&gt;
+&lt;h3 id="was-es-wirklich-macht"&gt;Was es wirklich macht&lt;/h3&gt;
+&lt;p&gt;Angenommen, du hast eine Node.js Express-API mit PostgreSQL-Abhängigkeit. Statt manuell zwischen Container Apps und App Service zu entscheiden und dann Bicep von Grund auf zu schreiben, erkennt Copilot deinen Stack und generiert:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Eine &lt;code&gt;azure.yaml&lt;/code&gt; mit den richtigen &lt;code&gt;language&lt;/code&gt;-, &lt;code&gt;host&lt;/code&gt;- und &lt;code&gt;build&lt;/code&gt;-Einstellungen&lt;/li&gt;
+&lt;li&gt;Ein Bicep-Modul für Azure Container Apps&lt;/li&gt;
+&lt;li&gt;Ein Bicep-Modul für Azure Database for PostgreSQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Vor jeder Änderung werden Vorab-Prüfungen durchgeführt — das Git-Arbeitsverzeichnis wird auf Sauberkeit geprüft, und MCP-Server-Tool-Zustimmung wird im Voraus eingeholt. Nichts passiert, ohne dass du genau weißt, was sich ändert.&lt;/p&gt;
+&lt;h2 id="copilot-gestützte-fehlerbehebung"&gt;Copilot-gestützte Fehlerbehebung&lt;/h2&gt;
+&lt;p&gt;Deployment-Fehler sind unvermeidlich. Fehlende Parameter, Berechtigungsprobleme, SKU-Verfügbarkeitsprobleme — und die Fehlermeldung sagt dir selten das eine, was du wirklich wissen musst: &lt;em&gt;wie du es behebst&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Ohne Copilot sieht die Schleife so aus: Fehler kopieren → Docs durchsuchen → drei irrelevante Stack-Overflow-Antworten lesen → einige &lt;code&gt;az&lt;/code&gt;-CLI-Befehle ausführen → nochmal versuchen und hoffen. Mit Copilot, der in &lt;code&gt;azd&lt;/code&gt; integriert ist, kollabiert diese Schleife. Wenn ein &lt;code&gt;azd&lt;/code&gt;-Befehl fehlschlägt, bietet er sofort vier Optionen an:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Explain&lt;/strong&gt; — Klartextbeschreibung, was schiefgelaufen ist&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Guidance&lt;/strong&gt; — Schritt-für-Schritt-Anweisungen zur Behebung&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Diagnose and Guide&lt;/strong&gt; — vollständige Analyse + Copilot wendet die Lösung an (mit deiner Genehmigung) + optionaler Retry&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skip&lt;/strong&gt; — selbst lösen&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Das Entscheidende: Copilot hat bereits Kontext über dein Projekt, den fehlgeschlagenen Befehl und die Fehlerausgabe. Seine Vorschläge sind spezifisch für &lt;em&gt;deine Situation&lt;/em&gt;, keine generischen Docs.&lt;/p&gt;
+&lt;h3 id="typische-fehler-bei-denen-das-glänzt"&gt;Typische Fehler, bei denen das glänzt&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Ressourcenanbieter nicht registriert:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;ERROR: deployment failed: MissingSubscriptionRegistration:
+The subscription is not registered to use namespace &amp;#39;Microsoft.App&amp;#39;.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Das trifft jeden bei einem ersten Deployment in einem neuen Abonnement. Copilot kann den Provider registrieren und das Deployment automatisch neu starten.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SKU nicht verfügbar:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;ERROR: deployment failed: SkuNotAvailable:
+The requested VM size &amp;#39;Standard_D2s_v3&amp;#39; is not available in location &amp;#39;westus&amp;#39;.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Copilot erklärt, welche VM-Größe oder Region blockiert ist, und schlägt verfügbare Alternativen vor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Speicherkontoname bereits vergeben:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;ERROR: deployment failed: StorageAccountAlreadyTaken:
+The storage account named &amp;#39;myappstorage&amp;#39; is already taken.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Globale Eindeutigkeit erwischt jeden mindestens einmal. Copilot schlägt vor, deinen Umgebungsnamen oder ein zufälliges Suffix zu deinen Bicep-Parametern hinzuzufügen.&lt;/p&gt;
+&lt;h3 id="standardverhalten-konfigurieren"&gt;Standardverhalten konfigurieren&lt;/h3&gt;
+&lt;p&gt;Wenn du immer die gleiche Option willst, überspringe den interaktiven Prompt:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.category troubleshoot
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Werte: &lt;code&gt;explain&lt;/code&gt;, &lt;code&gt;guidance&lt;/code&gt;, &lt;code&gt;troubleshoot&lt;/code&gt;, &lt;code&gt;fix&lt;/code&gt;, &lt;code&gt;skip&lt;/code&gt;. Du kannst auch Auto-Fix und Retry aktivieren:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.fix allow
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Zurück zum interaktiven Modus jederzeit:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config unset copilot.errorHandling.category
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="fazit"&gt;Fazit&lt;/h2&gt;
+&lt;p&gt;Das ist genau die Art von Copilot-Integration, die echten Mehrwert bringt. Probiere es aus, indem du &lt;code&gt;azd update&lt;/code&gt; für die neueste Version ausführst, und verwende dann &lt;code&gt;azd init&lt;/code&gt; für dein nächstes Projekt.&lt;/p&gt;
+&lt;p&gt;Den &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-copilot-integration/"&gt;originalen Ankündigungsbeitrag findest du hier&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

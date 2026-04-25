@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Finops | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/finops/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/finops/index.xml" rel="self" type="application/rss+xml"/><item><title>你在Azure上的AI实验正在烧钱——这样解决</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/</guid><description>Azure上的AI工作负载很容易变得昂贵。让我们聊聊在不拖慢开发进度的情况下，什么方法真正有效地控制成本。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原文请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果你现在正在Azure上构建AI驱动的应用，你可能已经注意到一件事：你的云账单看起来和以前不一样了。不只是更高了——更奇怪了。波动很大，难以预测。&lt;/p&gt;
+&lt;p&gt;Microsoft刚刚发布了一篇关于&lt;a href="https://azure.microsoft.com/en-us/blog/cloud-cost-optimization-principles-that-still-matter/"&gt;仍然重要的云成本优化原则&lt;/a&gt;的优秀文章，说实话，时机再好不过了。因为AI工作负载在成本方面已经改变了游戏规则。&lt;/p&gt;
+&lt;h2 id="为什么ai工作负载不一样"&gt;为什么AI工作负载不一样&lt;/h2&gt;
+&lt;p&gt;事情是这样的。传统的.NET工作负载相对可预测。你了解你的App Service层级，了解你的SQL DTU，可以相当准确地估算每月开支。AI工作负载呢？完全不是这么回事。&lt;/p&gt;
+&lt;p&gt;你在测试多个模型看哪个合适。你在启动GPU支持的基础设施进行微调。你在调用Azure OpenAI的API，而token消耗量会因prompt长度和用户行为的不同而产生巨大差异。每个实验都要花真金白银，你可能需要运行几十次才能找到正确的方法。&lt;/p&gt;
+&lt;p&gt;这种不可预测性正是成本优化至关重要的原因——不是事后才想到，而是从第一天开始。&lt;/p&gt;
+&lt;h2 id="管理与优化了解区别"&gt;管理与优化——了解区别&lt;/h2&gt;
+&lt;p&gt;文章中有一个我认为开发者容易忽视的区别：成本&lt;em&gt;管理&lt;/em&gt;和成本&lt;em&gt;优化&lt;/em&gt;是不同的。&lt;/p&gt;
+&lt;p&gt;管理是跟踪和报告。你在Azure Cost Management中设置预算，收到警报，查看仪表板。这是基本功。&lt;/p&gt;
+&lt;p&gt;优化是你真正做决策的地方。你真的需要S3层级，还是S1就能处理你的负载？那个始终运行的计算实例周末是不是闲着？你能否用竞价实例来跑训练任务？&lt;/p&gt;
+&lt;p&gt;作为.NET开发者，我们往往专注于代码，把基础设施决策留给&amp;quot;运维团队&amp;quot;。但如果你在Azure上部署，这些决策也是你的决策。&lt;/p&gt;
+&lt;h2 id="真正有效的方法"&gt;真正有效的方法&lt;/h2&gt;
+&lt;p&gt;根据这篇文章和我自己的经验，以下是真正能产生效果的做法：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;了解你在花什么钱、花在哪里。&lt;/strong&gt; 给你的资源打标签。我是认真的。如果你无法分辨哪个项目或实验在消耗你的预算，你就无法优化任何东西。配合适当标签的Azure Cost Management是你最好的朋友。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;实验之前设好护栏。&lt;/strong&gt; 使用Azure Policy限制dev/test环境中昂贵的SKU。为你的Azure OpenAI部署设置消费上限。不要等到账单到了才发现有人让GPU集群在周末一直运行。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;持续进行合理配置。&lt;/strong&gt; 原型阶段选的那个VM？可能不适合生产环境。Azure Advisor会给你建议——真的去看看。每月审查，而不是每年。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;考虑生命周期。&lt;/strong&gt; 开发资源应该关闭。测试环境不需要7×24小时运行。使用自动关机策略。特别是对于AI工作负载，考虑使用按执行付费的无服务器选项，而不是让计算资源一直保持运行。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;衡量价值，而不仅仅是成本。&lt;/strong&gt; 这一点容易忘记。一个成本更高但能产出显著更好结果的模型可能才是正确的选择。目标不是花最少的钱——而是花得聪明。&lt;/p&gt;
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;p&gt;云成本优化不是一次性的清理工作。它是一个习惯。随着AI工作负载让开支比以往任何时候都更难预测，尽早养成这个习惯可以帮你避免日后的痛苦惊喜。&lt;/p&gt;
+&lt;p&gt;如果你是一名在Azure上构建的.NET开发者，开始像对待代码一样对待你的云账单吧——定期审查，混乱时重构，永远不要在不了解成本的情况下部署。&lt;/p&gt;</content:encoded></item></channel></rss>

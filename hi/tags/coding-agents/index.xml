@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Coding-Agents | The .NET Blog</title><link>https://thedotnetblog.com/hi/tags/coding-agents/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>hi</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 17 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/hi/tags/coding-agents/index.xml" rel="self" type="application/rss+xml"/><item><title>Terminal की देखभाल बंद करें: Aspire का Detached Mode Workflow बदल देता है</title><link>https://thedotnetblog.com/hi/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</link><pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/hi/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</guid><description>Aspire 13.2 आपको AppHost को background में चलाने और अपना terminal वापस लेने देता है। नए CLI commands और agent support के साथ मिलाकर, यह उतना बड़ा deal है जितना सुनने में लगता है।</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;यह पोस्ट स्वचालित रूप से अनुवादित है। मूल के लिए, &lt;a href="https://thedotnetblog.com/hi/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/"&gt;यहाँ क्लिक करें&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;हर बार जब आप Aspire AppHost चलाते हैं, तो आपका terminal चला जाता है। बंद। कब्ज़ा हो जाता है जब तक आप Ctrl+C से बाहर नहीं निकलते। एक quick command चलानी है? दूसरा tab खोलिए। Logs चेक करने हैं? एक और tab। यह एक छोटी सी रुकावट है जो जल्दी बड़ी हो जाती है।&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 इसे ठीक करता है। James Newton-King ने &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;पूरी जानकारी लिखी है&lt;/a&gt;, और सच कहूँ तो, यह उन features में से एक है जो तुरंत आपके काम करने का तरीका बदल देती है।&lt;/p&gt;
+&lt;h2 id="detached-mode-एक-command-terminal-वपस"&gt;Detached mode: एक command, terminal वापस&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;यह &lt;code&gt;aspire run --detach&lt;/code&gt; का shorthand है। आपका AppHost background में boot होता है और आपको तुरंत terminal वापस मिल जाता है। कोई extra tab नहीं। कोई terminal multiplexer नहीं। बस आपका prompt, काम के लिए तैयार।&lt;/p&gt;
+&lt;h2 id="ज-चल-रह-ह-उस-manage-करन"&gt;जो चल रहा है उसे manage करना&lt;/h2&gt;
+&lt;p&gt;यहाँ बात यह है — background में चलाना तभी उपयोगी है जब आप वाकई manage कर सकें कि क्या चल रहा है। Aspire 13.2 इसके लिए CLI commands का पूरा सेट लेकर आता है:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# सभी running AppHosts की list&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire ps
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# किसी specific AppHost की state देखें&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire describe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# किसी running AppHost के logs stream करें&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire logs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# किसी specific AppHost को रोकें&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire stop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;इससे Aspire CLI एक proper process manager बन जाता है। आप कई AppHosts शुरू कर सकते हैं, उनकी status चेक कर सकते हैं, उनके logs tail कर सकते हैं, और उन्हें बंद कर सकते हैं — सब एक ही terminal session से।&lt;/p&gt;
+&lt;h2 id="isolated-mode-क-सथ-मलए"&gt;Isolated mode के साथ मिलाएं&lt;/h2&gt;
+&lt;p&gt;Detached mode naturally isolated mode के साथ काम करता है। क्या आप बिना port conflicts के background में एक ही project के दो instances चलाना चाहते हैं?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;हर एक को random ports, अलग secrets, और अपना lifecycle मिलता है। दोनों देखने के लिए &lt;code&gt;aspire ps&lt;/code&gt; का उपयोग करें, जिसे बंद करना हो उसके लिए &lt;code&gt;aspire stop&lt;/code&gt; का।&lt;/p&gt;
+&lt;h2 id="coding-agents-क-लए-यह-कय-बड-बत-ह"&gt;Coding agents के लिए यह क्यों बड़ी बात है&lt;/h2&gt;
+&lt;p&gt;यहीं चीज़ें वाकई दिलचस्प हो जाती हैं। आपके terminal में काम करने वाला एक coding agent अब यह कर सकता है:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;aspire start&lt;/code&gt; से app शुरू करें&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aspire describe&lt;/code&gt; से उसकी state query करें&lt;/li&gt;
+&lt;li&gt;समस्याएं diagnose करने के लिए &lt;code&gt;aspire logs&lt;/code&gt; से logs चेक करें&lt;/li&gt;
+&lt;li&gt;काम हो जाने पर &lt;code&gt;aspire stop&lt;/code&gt; से बंद करें&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;बिना terminal session खोए। Detached mode से पहले, एक agent जो आपका AppHost चलाता वह अपने ही terminal से lock out हो जाता। अब वह शुरू कर सकता है, observe कर सकता है, iterate कर सकता है, और cleanup कर सकता है — बिल्कुल वैसे जैसा आप एक autonomous agent से चाहते हैं।&lt;/p&gt;
+&lt;p&gt;Aspire team ने इसी पर ध्यान दिया। &lt;code&gt;aspire agent init&lt;/code&gt; चलाने से एक Aspire skill file setup होती है जो agents को ये commands सिखाती है। तो Copilot का coding agent जैसे tools out of the box ही आपके Aspire workloads manage कर सकते हैं।&lt;/p&gt;
+&lt;h2 id="नषकरष"&gt;निष्कर्ष&lt;/h2&gt;
+&lt;p&gt;Detached mode एक simple flag के रूप में छुपा हुआ workflow upgrade है। आप terminals के बीच context-switch करना बंद कर देते हैं, agents खुद को block करना बंद कर देते हैं, और नए CLI commands आपको यह देखने की असली visibility देते हैं कि क्या चल रहा है। यह practical है, यह clean है, और यह daily development loop को ध्यान देने योग्य रूप से smooth बनाता है।&lt;/p&gt;
+&lt;p&gt;सभी details के लिए &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;पूरा पोस्ट&lt;/a&gt; पढ़ें और &lt;code&gt;aspire update --self&lt;/code&gt; से Aspire 13.2 प्राप्त करें।&lt;/p&gt;</content:encoded></item></channel></rss>

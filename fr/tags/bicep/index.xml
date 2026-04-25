@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Bicep | The .NET Blog</title><link>https://thedotnetblog.com/fr/tags/bicep/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>fr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 21 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/fr/tags/bicep/index.xml" rel="self" type="application/rss+xml"/><item><title>azd + GitHub Copilot : Configuration de projet assistée par IA et résolution intelligente des erreurs</title><link>https://thedotnetblog.com/fr/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</link><pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/fr/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</guid><description>L'Azure Developer CLI s'intègre maintenant avec GitHub Copilot pour scaffolder ton projet et résoudre les erreurs de déploiement — sans quitter le terminal.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Cet article a été traduit automatiquement. Pour la version originale en anglais, &lt;a href="https://thedotnetblog.com/fr/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/"&gt;clique ici&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Tu connais ce moment où tu veux déployer une app existante sur Azure et tu te retrouves à fixer un &lt;code&gt;azure.yaml&lt;/code&gt; vide, en essayant de te rappeler si ton API Express devrait utiliser Container Apps ou App Service ? Ce moment vient de devenir beaucoup plus court.&lt;/p&gt;
+&lt;p&gt;L&amp;rsquo;Azure Developer CLI (&lt;code&gt;azd&lt;/code&gt;) s&amp;rsquo;intègre maintenant avec GitHub Copilot de deux façons concrètes : scaffolding assisté par IA pendant &lt;code&gt;azd init&lt;/code&gt;, et résolution intelligente des erreurs quand les déploiements échouent. Les deux fonctionnalités restent entièrement dans ton terminal — exactement là où je veux qu&amp;rsquo;elles soient.&lt;/p&gt;
+&lt;h2 id="configuration-avec-copilot-pendant-azd-init"&gt;Configuration avec Copilot pendant azd init&lt;/h2&gt;
+&lt;p&gt;Quand tu lances &lt;code&gt;azd init&lt;/code&gt;, il y a maintenant une option &amp;ldquo;Set up with GitHub Copilot (Preview)&amp;rdquo;. Sélectionne-la et Copilot analyse ta base de code pour générer l&amp;rsquo;&lt;code&gt;azure.yaml&lt;/code&gt;, les templates d&amp;rsquo;infrastructure et les modules Bicep — basés sur ton code réel.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd init
+# Sélectionne : &amp;#34;Set up with GitHub Copilot (Preview)&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Prérequis :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;azd 1.23.11 ou supérieur&lt;/strong&gt; — vérifie avec &lt;code&gt;azd version&lt;/code&gt; ou mets à jour avec &lt;code&gt;azd update&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Un abonnement GitHub Copilot actif&lt;/strong&gt; (Individual, Business ou Enterprise)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub CLI (&lt;code&gt;gh&lt;/code&gt;)&lt;/strong&gt; — &lt;code&gt;azd&lt;/code&gt; demandera la connexion si nécessaire&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ce que je trouve vraiment utile : ça fonctionne dans les deux sens. Tu construis depuis zéro ? Copilot t&amp;rsquo;aide à configurer les bons services Azure dès le départ. Tu as une app existante que tu voulais déployer depuis longtemps ? Pointe Copilot dessus et il génère la configuration sans que tu aies à restructurer quoi que ce soit.&lt;/p&gt;
+&lt;h3 id="ce-que-ça-fait-concrètement"&gt;Ce que ça fait concrètement&lt;/h3&gt;
+&lt;p&gt;Imaginons une API Express Node.js avec une dépendance PostgreSQL. Au lieu de décider manuellement entre Container Apps et App Service, puis d&amp;rsquo;écrire du Bicep depuis zéro, Copilot détecte ton stack et génère :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Un &lt;code&gt;azure.yaml&lt;/code&gt; avec les bons paramètres &lt;code&gt;language&lt;/code&gt;, &lt;code&gt;host&lt;/code&gt; et &lt;code&gt;build&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Un module Bicep pour Azure Container Apps&lt;/li&gt;
+&lt;li&gt;Un module Bicep pour Azure Database for PostgreSQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Et il effectue des vérifications préalables avant de toucher quoi que ce soit — vérifie que ton répertoire git est propre, demande le consentement pour les outils du serveur MCP. Rien ne se passe sans que tu saches exactement ce qui va changer.&lt;/p&gt;
+&lt;h2 id="résolution-derreurs-avec-copilot"&gt;Résolution d&amp;rsquo;erreurs avec Copilot&lt;/h2&gt;
+&lt;p&gt;Les erreurs de déploiement, ça arrive. Paramètres manquants, problèmes de permissions, disponibilité des SKUs — et le message d&amp;rsquo;erreur ne te dit rarement la seule chose dont tu as vraiment besoin : &lt;em&gt;comment régler le problème&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Sans Copilot, la boucle ressemble à : copier l&amp;rsquo;erreur → chercher dans la doc → lire trois réponses Stack Overflow hors sujet → exécuter quelques commandes &lt;code&gt;az&lt;/code&gt; CLI → réessayer en espérant que ça marche. Avec Copilot intégré dans &lt;code&gt;azd&lt;/code&gt;, cette boucle s&amp;rsquo;effondre. Quand une commande &lt;code&gt;azd&lt;/code&gt; échoue, elle propose immédiatement quatre options :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Explain&lt;/strong&gt; — explication en langage naturel de ce qui s&amp;rsquo;est passé&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Guidance&lt;/strong&gt; — instructions étape par étape pour corriger le problème&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Diagnose and Guide&lt;/strong&gt; — analyse complète + Copilot applique le correctif (avec ton approbation) + nouvelle tentative optionnelle&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skip&lt;/strong&gt; — gérer toi-même&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;L&amp;rsquo;essentiel : Copilot a déjà le contexte de ton projet, la commande qui a échoué et les détails de l&amp;rsquo;erreur. Ses suggestions sont spécifiques à &lt;em&gt;ta situation&lt;/em&gt;, pas de la documentation générique.&lt;/p&gt;
+&lt;h3 id="configurer-un-comportement-par-défaut"&gt;Configurer un comportement par défaut&lt;/h3&gt;
+&lt;p&gt;Si tu choisis toujours la même option, saute le prompt interactif :&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.category troubleshoot
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Valeurs : &lt;code&gt;explain&lt;/code&gt;, &lt;code&gt;guidance&lt;/code&gt;, &lt;code&gt;troubleshoot&lt;/code&gt;, &lt;code&gt;fix&lt;/code&gt;, &lt;code&gt;skip&lt;/code&gt;. Tu peux aussi activer l&amp;rsquo;auto-fix et le retry :&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.fix allow
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Retour au mode interactif à tout moment :&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config unset copilot.errorHandling.category
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;C&amp;rsquo;est exactement le type d&amp;rsquo;intégration Copilot qui apporte une vraie valeur. Essaie-le en lançant &lt;code&gt;azd update&lt;/code&gt; pour obtenir la dernière version, puis utilise &lt;code&gt;azd init&lt;/code&gt; sur ton prochain projet.&lt;/p&gt;
+&lt;p&gt;Lis l&amp;rsquo;&lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-copilot-integration/"&gt;annonce originale ici&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

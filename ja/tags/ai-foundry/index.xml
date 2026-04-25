@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>AI Foundry | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/ai-foundry/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 25 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/ai-foundry/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure SDK 2026年4月: AI Foundry 2.0と.NET開発者が知るべきこと</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-sdk-april-2026-ai-foundry-2-stable/</link><pubDate>Sat, 25 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-sdk-april-2026-ai-foundry-2-stable/</guid><description>2026年4月のAzure SDKリリースは、重要な破壊的変更を伴うAzure.AI.Projects 2.0.0安定版、Cosmos DBの重大なセキュリティ修正、および.NET向けの新しいProvisioningライブラリを提供します。</description><content:encoded>&lt;p&gt;&lt;em&gt;この投稿は自動翻訳されています。オリジナル版は&lt;a href="https://thedotnetblog.com/posts/emiliano-montesdeoca/azure-sdk-april-2026-ai-foundry-2-stable/"&gt;こちら&lt;/a&gt;をクリックしてください。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;月次SDKリリースはよく見落とされがちですが、今回は特に注意すべき点があります。&lt;/p&gt;
+&lt;h2 id="azureaiprojects-200--意味のある破壊的変更"&gt;Azure.AI.Projects 2.0.0 — 意味のある破壊的変更&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Azure.AI.Projects&lt;/code&gt; NuGetパッケージが安定版2.0.0に到達。名前空間の分割、型の名前変更、ブール値プロパティの&lt;code&gt;Is*&lt;/code&gt;規則の統一。&lt;/p&gt;
+&lt;h2 id="cosmos-db-java-重大なセキュリティ修正rce"&gt;Cosmos DB Java: 重大なセキュリティ修正（RCE）&lt;/h2&gt;
+&lt;p&gt;バージョン4.79.0で**リモートコード実行脆弱性（CWE-502）**の重大な修正。Azure Cosmos DBを使用しているJavaサービスがあれば直ちに更新してください。&lt;/p&gt;
+&lt;h2 id="net向け新しいprovisioningライブラリ"&gt;.NET向け新しいProvisioningライブラリ&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.nuget.org/packages/Azure.Provisioning.Network/1.0.0"&gt;Azure.Provisioning.Network 1.0.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.nuget.org/packages/Azure.Provisioning.PrivateDns/1.0.0"&gt;Azure.Provisioning.PrivateDns 1.0.0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;オリジナルポスト: &lt;a href="https://devblogs.microsoft.com/azure-sdk/azure-sdk-release-april-2026/"&gt;Azure SDK Release (April 2026)&lt;/a&gt;。&lt;/p&gt;</content:encoded></item><item><title>1日68分もコードを再説明している？解決策があります</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/auto-memory-stop-re-explaining-code-to-copilot/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/auto-memory-stop-re-explaining-code-to-copilot/</guid><description>コンテキストロットは現実です — AIエージェントは30ターン後に迷子になり、毎時間コンパクション税を支払っています。auto-memoryはGitHub Copilot CLIに何千ものトークンを消費せずに外科的な記憶を与えます。</description><content:encoded>&lt;p&gt;&lt;em&gt;この投稿は自動翻訳されています。オリジナル版は&lt;a href="https://thedotnetblog.com/posts/emiliano-montesdeoca/auto-memory-stop-re-explaining-code-to-copilot/"&gt;こちら&lt;/a&gt;をクリックしてください。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Copilotセッションが&lt;code&gt;/compact&lt;/code&gt;に達し、エージェントが何をしていたか完全に忘れてしまう瞬間を知っていますか？次の5分間、ファイル構造、失敗したテスト、すでに試した3つのアプローチを再説明します。そしてまた同じことが起きます。&lt;/p&gt;
+&lt;p&gt;Desi Villanueva が計測しました：&lt;strong&gt;1日68分&lt;/strong&gt; — 再オリエンテーションだけに。コードを書くのでも、PRをレビューするのでもなく、AIがすでに知っていたことを再び教えるだけに。&lt;/p&gt;
+&lt;h2 id="コンテキストウィンドウの嘘"&gt;コンテキストウィンドウの嘘&lt;/h2&gt;
+&lt;p&gt;実際の計算：200Kのうち、MCAツールで65K、インストラクションファイルで10K消費され、&lt;strong&gt;言葉を入力する前に125K&lt;/strong&gt;しか残りません。そして60%の容量で壁に当たります。&lt;/p&gt;
+&lt;p&gt;有効な制限：&lt;strong&gt;45Kトークン&lt;/strong&gt; — これが実際の制約です。&lt;/p&gt;
+&lt;h2 id="コンパクション税"&gt;コンパクション税&lt;/h2&gt;
+&lt;p&gt;残酷な部分：&lt;strong&gt;記憶はすでに存在します。&lt;/strong&gt; Copilot CLIは&lt;code&gt;~/.copilot/session-store.db&lt;/code&gt;にすべてのセッションを書き込みます。エージェントはただ読めないだけです。&lt;/p&gt;
+&lt;h2 id="auto-memoryリコールレイヤー"&gt;auto-memory：リコールレイヤー&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pip install auto-memory
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;~1,900行のPython。依存関係ゼロ。30秒でインストール完了。&lt;/p&gt;
+&lt;p&gt;grepの洪水の代わりに、&lt;strong&gt;10,000トークンではなく50トークン&lt;/strong&gt;で昨日触れたファイルへの外科的アクセスを提供します。&lt;/p&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;コンテキストロットは本物のアーキテクチャ的制約です。auto-memoryはエージェントに安価で正確なリコールメカニズムを与えることでこれを回避します。&lt;/p&gt;
+&lt;p&gt;チェックしてみてください：&lt;a href="https://github.com/dezgit2025/auto-memory"&gt;GitHubのauto-memory&lt;/a&gt;。オリジナル記事（Desi Villanueva著）：&lt;a href="https://devblogs.microsoft.com/all-things-azure/i-wasted-68-minutes-a-day-re-explaining-my-code-then-i-built-auto-memory/"&gt;I Wasted 68 Minutes a Day&lt;/a&gt;。&lt;/p&gt;</content:encoded></item></channel></rss>

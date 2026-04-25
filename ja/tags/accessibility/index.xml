@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Accessibility | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/accessibility/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/accessibility/index.xml" rel="self" type="application/rss+xml"/><item><title>VS Code 1.116 — Agentsアプリがキーボードナビゲーションとファイルコンテキスト補完を獲得</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/</guid><description>VS Code 1.116はAgentsアプリの磨き上げに注力 — 専用キーバインド、アクセシビリティの改善、ファイルコンテキスト補完、CSS @importリンク解決。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されました。原文は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;VS Code 1.116は2026年4月のリリースで、最近のいくつかのアップデートよりは軽めですが、変更点は的を絞った意味のあるものです — 特にAgentsアプリを日常的に使っている方にとっては。&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://code.visualstudio.com/updates/v1_116"&gt;公式リリースノート&lt;/a&gt;に基づいて、何が追加されたか見ていきましょう。&lt;/p&gt;
+&lt;h2 id="agentsアプリの改善"&gt;Agentsアプリの改善&lt;/h2&gt;
+&lt;p&gt;Agentsアプリは、日常のワークフローに本当の違いをもたらすユーザビリティの磨き上げで成熟を続けています：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;専用キーバインド&lt;/strong&gt; — Changesビュー、Changes内のファイルツリー、Chat カスタマイズビューに専用のコマンドとキーボードショートカットでフォーカスできるようになりました。Agentsアプリ内をクリックして回っていた方には、これで完全にキーボード駆動のワークフローが実現します。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;アクセシビリティヘルプダイアログ&lt;/strong&gt; — チャット入力ボックスで&lt;code&gt;Alt+F1&lt;/code&gt;を押すと、利用可能なコマンドとキーバインドを表示するアクセシビリティヘルプダイアログが開くようになりました。スクリーンリーダーユーザーはアナウンスの詳細度も制御できます。良いアクセシビリティはすべての人に利益をもたらします。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ファイルコンテキスト補完&lt;/strong&gt; — Agentsアプリのチャットで&lt;code&gt;#&lt;/code&gt;を入力すると、現在のワークスペースにスコープされたファイルコンテキスト補完がトリガーされます。これはすべてのインタラクションを加速するあの小さなクオリティ・オブ・ライフの改善の一つです — コードを参照する際にフルファイルパスを入力する必要はもうありません。&lt;/p&gt;
+&lt;h2 id="css-importリンク解決"&gt;CSS &lt;code&gt;@import&lt;/code&gt;リンク解決&lt;/h2&gt;
+&lt;p&gt;フロントエンド開発者にうれしいニュース：VS Codeがnode_modulesパスを使用するCSS &lt;code&gt;@import&lt;/code&gt;参照を解決するようになりました。バンドラーを使用している場合、&lt;code&gt;@import &amp;quot;some-module/style.css&amp;quot;&lt;/code&gt;のようなインポートを&lt;code&gt;Ctrl+クリック&lt;/code&gt;で辿れます。小さいですがCSSワークフローの摩擦点を解消します。&lt;/p&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;VS Code 1.116は洗練がテーマです — Agentsアプリをより操作しやすく、よりアクセシブルに、よりキーボードフレンドリーにすること。Agentsアプリでかなりの時間を過ごしているなら（そして多くの方がそうだと思いますが）、これらの変更は積み重なっていきます。&lt;/p&gt;
+&lt;p&gt;完全なリストは&lt;a href="https://code.visualstudio.com/updates/v1_116"&gt;フルリリースノート&lt;/a&gt;をご確認ください。&lt;/p&gt;</content:encoded></item></channel></rss>

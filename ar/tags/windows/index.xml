@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Windows | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/windows/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows App Dev CLI v0.3: تشغيل F5 من الطرفية وأتمتة واجهة المستخدم للوكلاء الذكيين</title><link>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</guid><description>يُقدّم Windows App Development CLI v0.3 أمر winapp run لتشغيل التطبيقات وتنقيحها من الطرفية، وأمر winapp ui لأتمتة الواجهة، وحزمة NuGet جديدة تتيح dotnet run مع التطبيقات المُحزَّمة.</description><content:encoded>&lt;p&gt;&lt;em&gt;تمت ترجمة هذا المنشور تلقائيًا. للاطلاع على النص الأصلي، &lt;a href="https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/"&gt;انقر هنا&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;تجربة F5 في Visual Studio رائعة. لكن فتح VS لمجرد تشغيل تطبيق Windows مُحزَّم وتنقيحه — سواء في خط أنابيب CI، أو سير عمل آلي، أو عندما يُجري وكيل ذكاء اصطناعي الاختبارات — يُشكّل عبئًا زائدًا.&lt;/p&gt;
+&lt;p&gt;صدر الإصدار v0.3 من Windows App Development CLI &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;للتو&lt;/a&gt;، ويعالج هذا الأمر مباشرةً بميزتين رئيسيتين: &lt;code&gt;winapp run&lt;/code&gt; و&lt;code&gt;winapp ui&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="winapp-run-f5-من-أي-مكان"&gt;winapp run: F5 من أي مكان&lt;/h2&gt;
+&lt;p&gt;يستقبل &lt;code&gt;winapp run&lt;/code&gt; مجلد تطبيق غير مُحزَّم وملف manifest، وينفّذ كل ما يفعله VS عند تشغيل التنقيح: تسجيل حزمة loose، وتشغيل التطبيق، والحفاظ على &lt;code&gt;LocalState&lt;/code&gt; بين عمليات إعادة النشر.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# قم ببناء التطبيق، ثم شغّله كتطبيق مُحزَّم&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp run ./bin/Debug
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;يعمل مع WinUI وWPF وWinForms وConsole وAvalonia والمزيد. صُمِّمت الأوضاع للمطورين وسير العمل الآلي على حد سواء:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--detach&lt;/code&gt;&lt;/strong&gt;: يُشغَّل التطبيق ويُعاد التحكم فورًا إلى الطرفية. مثالي لـ CI.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--unregister-on-exit&lt;/code&gt;&lt;/strong&gt;: يُزيل الحزمة المُسجَّلة عند إغلاق التطبيق.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--debug-output&lt;/code&gt;&lt;/strong&gt;: يلتقط رسائل &lt;code&gt;OutputDebugString&lt;/code&gt; والاستثناءات في الوقت الفعلي.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="حزمة-nuget-جديدة-dotnet-run-للتطبيقات-المحزمة"&gt;حزمة NuGet جديدة: dotnet run للتطبيقات المُحزَّمة&lt;/h2&gt;
+&lt;p&gt;يتوفر للمطورين العاملين بـ .NET حزمة NuGet جديدة: &lt;code&gt;Microsoft.Windows.SDK.BuildTools.WinApp&lt;/code&gt;. بعد التثبيت، يتولى &lt;code&gt;dotnet run&lt;/code&gt; إدارة الحلقة الداخلية بأكملها: البناء، وتحضير حزمة loose-layout، والتسجيل في Windows، والتشغيل — كل ذلك في خطوة واحدة.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp init
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# أو&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet add package Microsoft.Windows.SDK.BuildTools.WinApp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="winapp-ui-أتمتة-واجهة-المستخدم-من-سطر-الأوامر"&gt;winapp ui: أتمتة واجهة المستخدم من سطر الأوامر&lt;/h2&gt;
+&lt;p&gt;هذه هي الميزة التي تفتح سيناريوهات الوكلاء الذكيين. يوفر &lt;code&gt;winapp ui&lt;/code&gt; وصولًا كاملًا عبر UI Automation لأي تطبيق Windows قيد التشغيل — WPF وWinForms وWin32 وElectron وWinUI3 — مباشرةً من الطرفية.&lt;/p&gt;
+&lt;p&gt;ما يمكن تحقيقه:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;سرد جميع النوافذ على المستوى الأعلى&lt;/li&gt;
+&lt;li&gt;التنقل في شجرة UI Automation الكاملة لأي نافذة&lt;/li&gt;
+&lt;li&gt;البحث عن عناصر بالاسم أو النوع أو معرّف الأتمتة&lt;/li&gt;
+&lt;li&gt;النقر والاستدعاء وتعيين القيم&lt;/li&gt;
+&lt;li&gt;التقاط لقطات الشاشة&lt;/li&gt;
+&lt;li&gt;انتظار ظهور العناصر — مثالي لمزامنة الاختبارات&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;يُتيح الجمع بين &lt;code&gt;winapp ui&lt;/code&gt; و&lt;code&gt;winapp run&lt;/code&gt; سير عملًا كاملًا من الطرفية: بناء ← تشغيل ← تحقق. يمكن للوكيل تشغيل التطبيق، وفحص حالة الواجهة، والتفاعل برمجيًا، والتحقق من النتيجة.&lt;/p&gt;
+&lt;h2 id="مستجدات-أخرى"&gt;مستجدات أخرى&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp unregister&lt;/code&gt;&lt;/strong&gt;: يحذف حزمة sideloaded عند الانتهاء.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp manifest add-alias&lt;/code&gt;&lt;/strong&gt;: يُضيف اسمًا مستعارًا لتشغيل التطبيق بالاسم من الطرفية.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;إكمال تلقائي بـ Tab&lt;/strong&gt;: تهيئة إكمال PowerShell بأمر واحد.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="كيفية-التثبيت"&gt;كيفية التثبيت&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winget install Microsoft.WinAppCli
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# أو&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npm install -g @microsoft/winappcli
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;الأداة في معاينة عامة. راجع &lt;a href="https://github.com/microsoft/WinAppCli"&gt;مستودع GitHub&lt;/a&gt; للتوثيق الكامل، و&lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;الإعلان الأصلي&lt;/a&gt; لجميع التفاصيل.&lt;/p&gt;</content:encoded></item></channel></rss>

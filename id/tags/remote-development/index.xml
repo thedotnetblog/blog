@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Remote-Development | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/remote-development/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 06 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/remote-development/index.xml" rel="self" type="application/rss+xml"/><item><title>VS Code 1.115 — Notifikasi Terminal Latar Belakang, Mode Agen SSH, dan Lainnya</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/</link><pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/</guid><description>VS Code 1.115 menghadirkan notifikasi terminal latar belakang untuk agen, hosting agen jarak jauh SSH, tempel file di terminal, dan pelacakan edit sadar sesi. Inilah yang penting untuk developer .NET.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;VS Code 1.115 baru saja &lt;a href="https://code.visualstudio.com/updates/v1_115"&gt;rilis&lt;/a&gt;, dan meskipun ini adalah rilis yang lebih ringan dalam hal fitur utama, peningkatan terkait agen benar-benar berguna jika kamu bekerja dengan asisten coding AI setiap hari.&lt;/p&gt;
+&lt;p&gt;Biarkan aku menyoroti apa yang sebenarnya layak diketahui.&lt;/p&gt;
+&lt;h2 id="terminal-latar-belakang-berkomunikasi-kembali-ke-agen"&gt;Terminal latar belakang berkomunikasi kembali ke agen&lt;/h2&gt;
+&lt;p&gt;Ini adalah fitur unggulan. Terminal latar belakang sekarang secara otomatis memberi tahu agen ketika perintah selesai, termasuk kode keluar dan output terminal.&lt;/p&gt;
+&lt;p&gt;Mengapa ini penting? Jika kamu menggunakan mode agen Copilot untuk menjalankan perintah build atau suite test di latar belakang, kamu tahu rasa sakit &amp;ldquo;apakah itu sudah selesai?&amp;rdquo; — terminal latar belakang pada dasarnya adalah tembak dan lupakan. Sekarang agen mendapat pemberitahuan ketika &lt;code&gt;dotnet build&lt;/code&gt; atau &lt;code&gt;dotnet test&lt;/code&gt;mu selesai, melihat output, dan dapat bereaksi sesuai. Ini adalah perubahan kecil yang membuat alur kerja yang digerakkan agen jauh lebih andal.&lt;/p&gt;
+&lt;p&gt;Ada juga alat &lt;code&gt;send_to_terminal&lt;/code&gt; baru yang memungkinkan agen mengirim perintah ke terminal latar belakang dengan konfirmasi pengguna.&lt;/p&gt;
+&lt;h2 id="hosting-agen-jarak-jauh-ssh"&gt;Hosting agen jarak jauh SSH&lt;/h2&gt;
+&lt;p&gt;VS Code sekarang mendukung koneksi ke mesin jarak jauh melalui SSH, secara otomatis menginstal CLI dan memulainya dalam mode host agen.&lt;/p&gt;
+&lt;h2 id="pelacakan-edit-dalam-sesi-agen"&gt;Pelacakan edit dalam sesi agen&lt;/h2&gt;
+&lt;p&gt;Edit file yang dibuat selama sesi agen sekarang dilacak dan dipulihkan, dengan diff, undo/redo, dan pemulihan state.&lt;/p&gt;
+&lt;h2 id="kesadaran-tab-browser-dan-peningkatan-lainnya"&gt;Kesadaran tab browser dan peningkatan lainnya&lt;/h2&gt;
+&lt;p&gt;Beberapa tambahan kualitas hidup lainnya:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Pelacakan tab browser&lt;/strong&gt; — chat sekarang bisa melacak dan menautkan ke tab browser yang dibuka selama sesi&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tempel file di terminal&lt;/strong&gt; — tempel file (termasuk gambar) ke terminal dengan Ctrl+V&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cakupan tes di minimap&lt;/strong&gt; — indikator cakupan tes sekarang muncul di minimap&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pinch-to-zoom di Mac&lt;/strong&gt; — browser terintegrasi mendukung gestur pinch-to-zoom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="kesimpulan"&gt;Kesimpulan&lt;/h2&gt;
+&lt;p&gt;VS Code 1.115 adalah rilis inkremental, tapi peningkatan agen — notifikasi terminal latar belakang, hosting agen SSH, dan pelacakan edit — menambah pengalaman yang terasa lebih lancar secara keseluruhan. Lihat &lt;a href="https://code.visualstudio.com/updates/v1_115"&gt;catatan rilis lengkapnya&lt;/a&gt; untuk setiap detail.&lt;/p&gt;</content:encoded></item></channel></rss>

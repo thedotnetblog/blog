@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Data-Api-Builder | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/data-api-builder/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/data-api-builder/index.xml" rel="self" type="application/rss+xml"/><item><title>خادم SQL MCP — الطريقة الصحيحة لمنح وكلاء الذكاء الاصطناعي وصولاً إلى قواعد البيانات</title><link>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>يمنح خادم SQL MCP من Data API builder وكلاءَ الذكاء الاصطناعي وصولاً آمناً وحتمياً إلى قواعد البيانات دون كشف المخططات أو الاعتماد على NL2SQL. يأتي مزوداً بتحكم في الصلاحيات، وتخزين مؤقت، ودعم لقواعد بيانات متعددة — كل ذلك مدمج فيه.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;تمت ترجمة هذا المقال تلقائياً. للنسخة الأصلية، &lt;a href="https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;انقر هنا&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;لنكن صريحين: معظم خوادم MCP الخاصة بقواعد البيانات المتاحة اليوم مثيرة للقلق. تأخذ استعلاماً بلغة طبيعية، وتولّد SQL بشكل ديناميكي، وتشغّله مباشرةً على بياناتك الإنتاجية. ماذا يمكن أن يحدث بسبب ذلك؟ (كل شيء. كل شيء يمكن أن يحدث.)&lt;/p&gt;
+&lt;p&gt;أعلن فريق Azure SQL للتو عن &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;خادم SQL MCP&lt;/a&gt;، وهو يتبع نهجاً مختلفاً جذرياً. مبنيٌّ كميزة في Data API builder (DAB) 2.0، يمنح وكلاءَ الذكاء الاصطناعي وصولاً منظّماً وحتمياً إلى عمليات قاعدة البيانات — دون NL2SQL، ودون كشف مخططك، وبتحكم كامل في الصلاحيات في كل خطوة.&lt;/p&gt;
+&lt;h2 id="لماذا-لا-nl2sql"&gt;لماذا لا NL2SQL؟&lt;/h2&gt;
+&lt;p&gt;هذا هو أكثر قرارات التصميم إثارةً للاهتمام. النماذج اللغوية ليست حتمية، والاستعلامات المعقدة هي الأكثر عرضة لإنتاج أخطاء دقيقة. الاستعلامات ذاتها التي يأمل المستخدمون أن يولّدها الذكاء الاصطناعي هي التي تحتاج أكبر قدر من التدقيق عند إنتاجها بطريقة غير حتمية.&lt;/p&gt;
+&lt;p&gt;بدلاً من ذلك، يستخدم خادم SQL MCP نهج &lt;strong&gt;NL2DAB&lt;/strong&gt;. يتعامل الوكيل مع طبقة تجريد الكيانات في Data API builder ومنشئ الاستعلامات المدمج فيه لإنتاج T-SQL دقيق ومنسّق بشكل حتمي. النتيجة ذاتها للمستخدم، لكن دون مخاطر الـ JOINs المهلوسة أو الكشف غير المقصود للبيانات.&lt;/p&gt;
+&lt;h2 id="سبعة-أدوات-لا-سبعمائة"&gt;سبعة أدوات، لا سبعمائة&lt;/h2&gt;
+&lt;p&gt;يكشف خادم SQL MCP عن سبعة أدوات DML بالضبط، بغض النظر عن حجم قاعدة البيانات:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — اكتشاف الكيانات المتاحة والعمليات&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — إدراج صفوف&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — الاستعلام عن الجداول والعروض&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — تعديل الصفوف&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — حذف الصفوف&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — تشغيل الإجراءات المخزّنة&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — استعلامات التجميع&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;هذا ذكي لأن نوافذ السياق هي مساحة تفكير الوكيل. إغراقها بمئات من تعريفات الأدوات يقلص مساحة الاستدلال. سبعة أدوات ثابتة تُبقي الوكيل مركّزاً على &lt;em&gt;التفكير&lt;/em&gt; بدلاً من &lt;em&gt;التنقل&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;يمكن تمكين أو تعطيل كل أداة بشكل مستقل:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;runtime&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;path&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dml-tools&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;describe-entities&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;create-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;read-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;update-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;delete-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;execute-entity&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;aggregate-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="البدء-بثلاثة-أوامر"&gt;البدء بثلاثة أوامر&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --database-type mssql &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --source dbo.Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;هذا خادم SQL MCP يعمل ويكشف جدول Customers لديك. تعني طبقة تجريد الكيانات أنه بإمكانك تغيير الأسماء والأعمدة، وتقييد الحقول لكل دور، والتحكم بدقة فيما يراه الوكلاء — دون الكشف عن تفاصيل المخطط الداخلي.&lt;/p&gt;
+&lt;h2 id="قصة-الأمان-متينة"&gt;قصة الأمان متينة&lt;/h2&gt;
+&lt;p&gt;هنا تؤتي نضج Data API builder ثماره:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;التحكم في الصلاحيات في كل طبقة&lt;/strong&gt; — كل كيان يحدد الأدوار التي يمكنها القراءة والإنشاء والتحديث والحذف، والحقول المرئية لكل دور&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;تكامل Azure Key Vault&lt;/strong&gt; — إدارة آمنة لسلاسل الاتصال والأسرار&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Microsoft Entra + OAuth مخصص&lt;/strong&gt; — مصادقة جاهزة للإنتاج&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;سياسة أمان المحتوى&lt;/strong&gt; — يتفاعل الوكلاء عبر عقد محكوم، لا SQL خام&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;تجريد المخطط مهم بشكل خاص. أسماء الجداول والأعمدة الداخلية لا تُكشف أبداً للوكيل. تعرّف الكيانات والأسماء المستعارة والأوصاف التي تناسب تفاعل الذكاء الاصطناعي — لا ERD قاعدة بياناتك.&lt;/p&gt;
+&lt;h2 id="قواعد-بيانات-وبروتوكولات-متعددة"&gt;قواعد بيانات وبروتوكولات متعددة&lt;/h2&gt;
+&lt;p&gt;يدعم خادم SQL MCP كلاً من: Microsoft SQL وPostgreSQL وAzure Cosmos DB وMySQL. ولأنه ميزة DAB، فإنك تحصل على نقاط نهاية REST وGraphQL وMCP في آنٍ واحد من نفس الإعداد. نفس تعريفات الكيانات، ونفس قواعد التحكم في الصلاحيات، ونفس الأمان — عبر البروتوكولات الثلاثة.&lt;/p&gt;
+&lt;p&gt;يمكن للإعداد التلقائي في DAB 2.0 فحص قاعدة بياناتك وبناء الإعداد بشكل ديناميكي، إذا كنت مرتاحاً لتجريد أقل في مرحلة النمذجة السريعة.&lt;/p&gt;
+&lt;h2 id="رأيي"&gt;رأيي&lt;/h2&gt;
+&lt;p&gt;هذه هي الطريقة الصحيحة للوصول المؤسسي إلى قواعد البيانات في وكلاء الذكاء الاصطناعي. ليس &amp;ldquo;هيا أيها LLM، اكتب لي بعض SQL ودعه يعمل على الإنتاج&amp;rdquo;. بدلاً من ذلك: طبقة كيانات محددة بوضوح، وتوليد استعلامات حتمي، وتحكم في الصلاحيات في كل خطوة، وتخزين مؤقت، ومراقبة، وقياسات أداء. إنه ممل بأفضل طريقة ممكنة.&lt;/p&gt;
+&lt;p&gt;بالنسبة لمطوري .NET، قصة التكامل واضحة — DAB أداة .NET، يعمل خادم MCP كحاوية، ويتعامل مع Azure SQL الذي يستخدمه معظمنا. إذا كنت تبني وكلاء ذكاء اصطناعي تحتاج وصولاً إلى البيانات، فابدأ من هنا.&lt;/p&gt;
+&lt;h2 id="خلاصة-القول"&gt;خلاصة القول&lt;/h2&gt;
+&lt;p&gt;خادم SQL MCP مجاني ومفتوح المصدر ويعمل في أي مكان. إنه النهج التوجيهي من Microsoft لمنح وكلاء الذكاء الاصطناعي وصولاً آمناً إلى قواعد البيانات. اطلع على &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;المقال الكامل&lt;/a&gt; و&lt;a href="https://aka.ms/sql/mcp"&gt;الوثائق&lt;/a&gt; للبدء.&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Parallel-Development | The .NET Blog</title><link>https://thedotnetblog.com/it/tags/parallel-development/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>it</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/it/tags/parallel-development/index.xml" rel="self" type="application/rss+xml"/><item><title>La Modalità Isolata di Aspire Risolve l'Incubo dei Conflitti di Porta per lo Sviluppo Parallelo</title><link>https://thedotnetblog.com/it/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/it/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</guid><description>Aspire 13.2 introduce la modalità --isolated: porte random, segreti separati e zero collisioni quando si eseguono più istanze dello stesso AppHost. Perfetto per agenti IA, worktree e workflow paralleli.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Questo post è stato tradotto automaticamente. Per la versione originale, &lt;a href="https://thedotnetblog.com/it/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/"&gt;clicca qui&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Se hai mai provato a eseguire due istanze dello stesso progetto contemporaneamente, conosci il dolore. La porta 8080 è già in uso. La porta 17370 è occupata. Uccidi qualcosa, riavvia, destreggiati tra le variabili d&amp;rsquo;ambiente — è un killer della produttività.&lt;/p&gt;
+&lt;p&gt;Questo problema sta peggiorando, non migliorando. Gli agenti IA creano git worktree per lavorare in modo indipendente. Gli agenti in background avviano ambienti separati. Gli sviluppatori fanno checkout dello stesso repo due volte per i feature branch. Ognuno di questi scenari sbatte contro lo stesso muro: due istanze della stessa app che lottano per le stesse porte.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 risolve questo con un singolo flag. James Newton-King del team Aspire ha &lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;scritto tutti i dettagli&lt;/a&gt;, ed è una di quelle feature &amp;ldquo;perché non l&amp;rsquo;avevamo già?&amp;rdquo;&lt;/p&gt;
+&lt;h2 id="la-soluzione---isolated"&gt;La soluzione: &lt;code&gt;--isolated&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Questo è tutto. Ogni esecuzione ottiene:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Porte random&lt;/strong&gt; — niente più collisioni tra istanze&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Segreti utente isolati&lt;/strong&gt; — connection string e chiavi API restano separate per istanza&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Nessuna riassegnazione manuale delle porte. Nessun giocoleria con le variabili d&amp;rsquo;ambiente. Ogni esecuzione ottiene un ambiente pulito e privo di collisioni automaticamente.&lt;/p&gt;
+&lt;h2 id="scenari-reali-dove-questo-brilla"&gt;Scenari reali dove questo brilla&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Checkout multipli.&lt;/strong&gt; Hai un feature branch in una directory e un bugfix in un&amp;rsquo;altra:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-feature
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-bugfix
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Entrambi girano senza conflitti. La dashboard mostra cosa sta girando e dove.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Agenti in background in VS Code.&lt;/strong&gt; Quando l&amp;rsquo;agente in background di Copilot Chat crea un git worktree per lavorare sul tuo codice in modo indipendente, potrebbe aver bisogno di eseguire il tuo AppHost Aspire. Senza &lt;code&gt;--isolated&lt;/code&gt;, c&amp;rsquo;è un conflitto di porte con il tuo worktree principale. Con esso, entrambe le istanze funzionano e basta.&lt;/p&gt;
+&lt;p&gt;Lo skill Aspire distribuito con &lt;code&gt;aspire agent init&lt;/code&gt; istruisce automaticamente gli agenti a usare &lt;code&gt;--isolated&lt;/code&gt; quando lavorano nei worktree. Quindi l&amp;rsquo;agente in background di Copilot dovrebbe gestire tutto nativamente.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Test di integrazione in parallelo allo sviluppo.&lt;/strong&gt; Hai bisogno di eseguire test contro un AppHost live mentre continui a sviluppare funzionalità? La modalità isolata dà a ogni contesto le sue porte e la sua configurazione.&lt;/p&gt;
+&lt;h2 id="come-funziona-sotto-il-cofano"&gt;Come funziona sotto il cofano&lt;/h2&gt;
+&lt;p&gt;Quando passi &lt;code&gt;--isolated&lt;/code&gt;, la CLI genera un ID di istanza unico per l&amp;rsquo;esecuzione. Questo guida due comportamenti:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Randomizzazione delle porte&lt;/strong&gt; — invece di legarsi a porte prevedibili definite nella configurazione del tuo AppHost, la modalità isolata sceglie porte casuali disponibili per tutto — la dashboard, gli endpoint dei servizi, tutto. Il service discovery si adatta automaticamente, così i servizi si trovano a vicenda indipendentemente da quali porte ottengono.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Isolamento dei segreti&lt;/strong&gt; — ogni esecuzione isolata ottiene il proprio store di segreti utente, identificato dall&amp;rsquo;ID dell&amp;rsquo;istanza. Connection string e chiavi API di un&amp;rsquo;esecuzione non trapelano in un&amp;rsquo;altra.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Il tuo codice non ha bisogno di modifiche. Il service discovery di Aspire risolve gli endpoint a runtime, quindi tutto si connette correttamente indipendentemente dall&amp;rsquo;assegnazione delle porte.&lt;/p&gt;
+&lt;h2 id="quando-usarlo"&gt;Quando usarlo&lt;/h2&gt;
+&lt;p&gt;Usa &lt;code&gt;--isolated&lt;/code&gt; quando esegui più istanze dello stesso AppHost contemporaneamente — che si tratti di sviluppo parallelo, test automatizzati, agenti IA o git worktree. Per lo sviluppo a singola istanza dove preferisci porte prevedibili, il normale &lt;code&gt;aspire run&lt;/code&gt; funziona ancora benissimo.&lt;/p&gt;
+&lt;h2 id="per-concludere"&gt;Per concludere&lt;/h2&gt;
+&lt;p&gt;La modalità isolata è una piccola feature che risolve un problema reale e sempre più comune. Man mano che lo sviluppo assistito da IA ci spinge verso più workflow paralleli — agenti multipli, worktree multipli, contesti multipli — la capacità di semplicemente avviare un&amp;rsquo;altra istanza senza lottare per le porte è essenziale.&lt;/p&gt;
+&lt;p&gt;Leggi il &lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;post completo&lt;/a&gt; per tutti i dettagli tecnici e provalo con &lt;code&gt;aspire update --self&lt;/code&gt; per ottenere la 13.2.&lt;/p&gt;</content:encoded></item></channel></rss>

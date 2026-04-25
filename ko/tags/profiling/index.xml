@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Profiling | The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/profiling/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ko</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 02 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/profiling/index.xml" rel="self" type="application/rss+xml"/><item><title>Visual Studio 3월 업데이트로 커스텀 Copilot 에이전트 제작 가능 — find_symbol이 큰 변화</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/</guid><description>Visual Studio 2026년 3월 업데이트가 커스텀 Copilot 에이전트, 재사용 가능한 스킬, 언어 인식 find_symbol 도구, Test Explorer에서의 Copilot 프로파일링을 제공합니다.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;이 글은 자동 번역되었습니다. 원본은 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/"&gt;여기&lt;/a&gt;에서 확인하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Visual Studio가 가장 중요한 Copilot 업데이트를 받았습니다. Mark Downie가 &lt;a href="https://devblogs.microsoft.com/visualstudio/visual-studio-march-update-build-your-own-custom-agents/"&gt;3월 릴리스를 발표&lt;/a&gt;했는데, 헤드라인은 커스텀 에이전트이지만 솔직히 &lt;code&gt;find_symbol&lt;/code&gt; 도구가 워크플로를 가장 많이 바꿀 기능일 수 있습니다.&lt;/p&gt;
+&lt;h2 id="리포에-커스텀-copilot-에이전트"&gt;리포에 커스텀 Copilot 에이전트&lt;/h2&gt;
+&lt;p&gt;Copilot이 팀의 코딩 표준을 따르게 하고 싶으세요? 커스텀 에이전트는 리포의 &lt;code&gt;.github/agents/&lt;/code&gt;에 &lt;code&gt;.agent.md&lt;/code&gt; 파일로 정의됩니다. 각 에이전트는 워크스페이스 인식, 코드 이해, 도구, 선호 모델, MCP 연결에 대한 전체 접근 권한을 가집니다.&lt;/p&gt;
+&lt;h2 id="에이전트-스킬-재사용-가능한-인스트럭션-팩"&gt;에이전트 스킬: 재사용 가능한 인스트럭션 팩&lt;/h2&gt;
+&lt;p&gt;스킬은 리포의 &lt;code&gt;.github/skills/&lt;/code&gt;나 프로필의 &lt;code&gt;~/.copilot/skills/&lt;/code&gt;에서 자동 로드됩니다.&lt;/p&gt;
+&lt;h2 id="find_symbol-언어-인식-내비게이션"&gt;find_symbol: 언어 인식 내비게이션&lt;/h2&gt;
+&lt;p&gt;새로운 &lt;code&gt;find_symbol&lt;/code&gt; 도구는 Copilot의 에이전트 모드에 언어 서비스 기반 심볼 내비게이션을 제공합니다. 텍스트 검색 대신 심볼의 모든 참조를 찾고 타입 정보와 스코프에 접근할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;.NET 개발자에게 이것은 엄청난 개선입니다 — 깊은 타입 계층 구조를 가진 C# 코드베이스가 크게 혜택을 받습니다.&lt;/p&gt;
+&lt;h2 id="copilot으로-테스트-프로파일링"&gt;Copilot으로 테스트 프로파일링&lt;/h2&gt;
+&lt;p&gt;Test Explorer 컨텍스트 메뉴에 &lt;strong&gt;Profile with Copilot&lt;/strong&gt;이 추가됐습니다. Profiling Agent가 테스트를 실행하고 자동으로 성능을 분석합니다.&lt;/p&gt;
+&lt;h2 id="라이브-디버깅-중-perf-tips"&gt;라이브 디버깅 중 Perf Tips&lt;/h2&gt;
+&lt;p&gt;성능 최적화가 이제 디버깅 중에 이루어집니다. Visual Studio가 인라인으로 실행 시간을 표시합니다. 느린 라인을 발견하면 Perf Tip을 클릭하고 Copilot에게 최적화 제안을 요청하세요.&lt;/p&gt;
+&lt;h2 id="solution-explorer에서-nuget-취약점-수정"&gt;Solution Explorer에서 NuGet 취약점 수정&lt;/h2&gt;
+&lt;p&gt;NuGet 패키지 취약점이 감지되면 Solution Explorer에 직접 &lt;strong&gt;Fix with GitHub Copilot&lt;/strong&gt; 링크가 표시됩니다.&lt;/p&gt;
+&lt;h2 id="마무리"&gt;마무리&lt;/h2&gt;
+&lt;p&gt;커스텀 에이전트와 스킬이 헤드라인이지만, &lt;code&gt;find_symbol&lt;/code&gt;이 숨겨진 보석입니다 — .NET 코드 리팩토링 시 Copilot의 정확도를 근본적으로 바꿉니다. &lt;a href="https://visualstudio.microsoft.com/downloads/"&gt;Visual Studio 2026 Insiders&lt;/a&gt;를 다운로드해서 모든 기능을 체험해보세요.&lt;/p&gt;</content:encoded></item></channel></rss>

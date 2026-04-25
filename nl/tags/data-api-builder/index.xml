@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Data-Api-Builder | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/data-api-builder/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/data-api-builder/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL MCP Server — De Juiste Manier om AI-agents Databasetoegang te Geven</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>SQL MCP Server van Data API builder geeft AI-agents veilige, deterministische databasetoegang zonder schema's bloot te stellen of te vertrouwen op NL2SQL.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Laten we eerlijk zijn: de meeste database-MCP-servers die vandaag beschikbaar zijn, zijn angstaanjagend. Ze nemen een zoekopdracht in natuurlijke taal, genereren SQL on-the-fly en voeren het uit op je productiegegevens.&lt;/p&gt;
+&lt;p&gt;Het Azure SQL-team heeft zojuist &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;SQL MCP Server geïntroduceerd&lt;/a&gt;, en het neemt een fundamenteel andere aanpak.&lt;/p&gt;
+&lt;h2 id="waarom-geen-nl2sql"&gt;Waarom geen NL2SQL?&lt;/h2&gt;
+&lt;p&gt;Modellen zijn niet deterministisch. SQL MCP Server gebruikt een &lt;strong&gt;NL2DAB&lt;/strong&gt;-aanpak. De agent werkt met de entiteitsabstractielaag van Data API builder om nauwkeurige T-SQL deterministisch te produceren.&lt;/p&gt;
+&lt;h2 id="zeven-tools-niet-zevenhonderd"&gt;Zeven tools, niet zevenhonderd&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server biedt precies zeven DML-tools:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — ontdek beschikbare entiteiten&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — rijen invoegen&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — tabellen en views opvragen&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — rijen wijzigen&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — rijen verwijderen&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — opgeslagen procedures uitvoeren&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — aggregatiequery&amp;rsquo;s&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="in-drie-opdrachten-aan-de-slag"&gt;In drie opdrachten aan de slag&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers --source dbo.Customers --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="het-beveiligingsverhaal-is-solide"&gt;Het beveiligingsverhaal is solide&lt;/h2&gt;
+&lt;p&gt;RBAC op elke laag, Azure Key Vault-integratie, Microsoft Entra + aangepaste OAuth.&lt;/p&gt;
+&lt;p&gt;Bekijk de &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;volledige post&lt;/a&gt; en &lt;a href="https://aka.ms/sql/mcp"&gt;documentatie&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

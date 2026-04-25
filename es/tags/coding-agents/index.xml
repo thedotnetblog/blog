@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Coding-Agents | The .NET Blog</title><link>https://thedotnetblog.com/es/tags/coding-agents/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>es</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 17 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/es/tags/coding-agents/index.xml" rel="self" type="application/rss+xml"/><item><title>Deja de vigilar tu terminal: el modo desacoplado de Aspire cambia el flujo de trabajo</title><link>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</link><pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</guid><description>Aspire 13.2 te permite ejecutar tu AppHost en segundo plano y recuperar tu terminal. Combinado con los nuevos comandos CLI y el soporte para agentes, esto es más importante de lo que parece.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Este post fue traducido automáticamente. Para la versión original, &lt;a href="https://thedotnetblog.com/es/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/"&gt;haz clic aquí&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Cada vez que ejecutas un AppHost de Aspire, tu terminal desaparece. Bloqueada. Ocupada hasta que presionas Ctrl+C. ¿Necesitas ejecutar un comando rápido? Abre otra pestaña. ¿Quieres revisar los logs? Otra pestaña. Es una pequeña fricción que se acumula rápido.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 soluciona esto. James Newton-King &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;escribió todos los detalles&lt;/a&gt;, y honestamente, esta es una de esas funcionalidades que cambia inmediatamente tu forma de trabajar.&lt;/p&gt;
+&lt;h2 id="modo-desacoplado-un-comando-terminal-de-vuelta"&gt;Modo desacoplado: un comando, terminal de vuelta&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ese es el atajo para &lt;code&gt;aspire run --detach&lt;/code&gt;. Tu AppHost arranca en segundo plano y recuperas tu terminal de inmediato. Sin pestañas extra. Sin multiplexor de terminal. Solo tu prompt, listo para usar.&lt;/p&gt;
+&lt;h2 id="gestionando-lo-que-está-en-ejecución"&gt;Gestionando lo que está en ejecución&lt;/h2&gt;
+&lt;p&gt;La cuestión es que ejecutar en segundo plano solo es útil si puedes gestionar lo que hay ahí fuera. Aspire 13.2 incluye un conjunto completo de comandos CLI para exactamente eso:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# List all running AppHosts&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire ps
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Inspect the state of a specific AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire describe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stream logs from a running AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire logs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stop a specific AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire stop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Esto convierte el CLI de Aspire en un gestor de procesos completo. Puedes iniciar múltiples AppHosts, verificar su estado, seguir sus logs y apagarlos — todo desde una sola sesión de terminal.&lt;/p&gt;
+&lt;h2 id="combínalo-con-el-modo-aislado"&gt;Combínalo con el modo aislado&lt;/h2&gt;
+&lt;p&gt;El modo desacoplado se combina naturalmente con el modo aislado. ¿Quieres ejecutar dos instancias del mismo proyecto en segundo plano sin conflictos de puertos?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Cada uno obtiene puertos aleatorios, secretos separados y su propio ciclo de vida. Usa &lt;code&gt;aspire ps&lt;/code&gt; para ver ambos, &lt;code&gt;aspire stop&lt;/code&gt; para detener el que ya no necesites.&lt;/p&gt;
+&lt;h2 id="por-qué-esto-es-enorme-para-los-agentes-de-código"&gt;Por qué esto es enorme para los agentes de código&lt;/h2&gt;
+&lt;p&gt;Aquí es donde se pone realmente interesante. Un agente de código trabajando en tu terminal ahora puede:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Iniciar la app con &lt;code&gt;aspire start&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Consultar su estado con &lt;code&gt;aspire describe&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Revisar logs con &lt;code&gt;aspire logs&lt;/code&gt; para diagnosticar problemas&lt;/li&gt;
+&lt;li&gt;Detenerla con &lt;code&gt;aspire stop&lt;/code&gt; cuando termine&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Todo sin perder la sesión de terminal. Antes del modo desacoplado, un agente que ejecutara tu AppHost se bloqueaba a sí mismo en su propia terminal. Ahora puede iniciar, observar, iterar y limpiar — exactamente como querrías que funcione un agente autónomo.&lt;/p&gt;
+&lt;p&gt;El equipo de Aspire se volcó en esto. Ejecutar &lt;code&gt;aspire agent init&lt;/code&gt; configura un archivo de habilidades de Aspire que enseña estos comandos a los agentes. Así, herramientas como el agente de código de Copilot pueden gestionar tus cargas de trabajo de Aspire directamente.&lt;/p&gt;
+&lt;h2 id="para-cerrar"&gt;Para cerrar&lt;/h2&gt;
+&lt;p&gt;El modo desacoplado es una mejora de flujo de trabajo disfrazada de un simple flag. Dejas de cambiar contexto entre terminales, los agentes dejan de bloquearse a sí mismos, y los nuevos comandos CLI te dan visibilidad real de lo que está en ejecución. Es práctico, es limpio, y hace que el ciclo de desarrollo diario sea notablemente más fluido.&lt;/p&gt;
+&lt;p&gt;Lee el &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;post completo&lt;/a&gt; para todos los detalles y obtén Aspire 13.2 con &lt;code&gt;aspire update --self&lt;/code&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

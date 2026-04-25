@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Wpf | The .NET Blog</title><link>https://thedotnetblog.com/it/tags/wpf/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>it</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/it/tags/wpf/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows App Dev CLI v0.3: F5 dal terminale e UI Automation per gli agenti</title><link>https://thedotnetblog.com/it/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/it/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</guid><description>Windows App Development CLI v0.3 porta winapp run per avviare e fare debug dal terminale, winapp ui per l'automazione dell'interfaccia e un nuovo pacchetto NuGet che fa funzionare dotnet run con le app pacchettizzate.</description><content:encoded>&lt;p&gt;&lt;em&gt;Questo articolo è stato tradotto automaticamente. Per la versione originale, &lt;a href="https://thedotnetblog.com/it/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/"&gt;clicca qui&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;L&amp;rsquo;esperienza F5 di Visual Studio è fantastica. Ma dover aprire VS solo per avviare e fare debug di un&amp;rsquo;app Windows pacchettizzata è eccessivo — che si tratti di una pipeline CI, di un workflow automatizzato o di un agente AI che esegue i test.&lt;/p&gt;
+&lt;p&gt;Windows App Development CLI v0.3 è &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;appena uscita&lt;/a&gt; e lo affronta direttamente con due funzionalità principali: &lt;code&gt;winapp run&lt;/code&gt; e &lt;code&gt;winapp ui&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="winapp-run-f5-da-qualsiasi-posto"&gt;winapp run: F5 da qualsiasi posto&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;winapp run&lt;/code&gt; prende una cartella di app non pacchettizzata e un manifesto, e fa tutto ciò che VS fa nel debug launch: registra un pacchetto loose, avvia l&amp;rsquo;app e preserva il &lt;code&gt;LocalState&lt;/code&gt; tra i re-deploy.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Compila l&amp;#39;app, poi avviala come app pacchettizzata&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp run ./bin/Debug
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Funziona per WinUI, WPF, WinForms, Console, Avalonia e altro. Le modalità sono pensate per sviluppatori e workflow automatizzati:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--detach&lt;/code&gt;&lt;/strong&gt;: Avvia e restituisce il controllo al terminale immediatamente. Perfetto per CI.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--unregister-on-exit&lt;/code&gt;&lt;/strong&gt;: Pulisce il pacchetto registrato alla chiusura dell&amp;rsquo;app.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--debug-output&lt;/code&gt;&lt;/strong&gt;: Cattura i messaggi &lt;code&gt;OutputDebugString&lt;/code&gt; e le eccezioni in tempo reale.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="nuovo-pacchetto-nuget-dotnet-run-per-le-app-pacchettizzate"&gt;Nuovo pacchetto NuGet: dotnet run per le app pacchettizzate&lt;/h2&gt;
+&lt;p&gt;Per gli sviluppatori .NET c&amp;rsquo;è un nuovo pacchetto NuGet: &lt;code&gt;Microsoft.Windows.SDK.BuildTools.WinApp&lt;/code&gt;. Dopo l&amp;rsquo;installazione, &lt;code&gt;dotnet run&lt;/code&gt; gestisce tutto l&amp;rsquo;inner loop: build, preparare un pacchetto loose-layout, registrare su Windows e avviare — tutto in un unico step.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp init
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# o&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet add package Microsoft.Windows.SDK.BuildTools.WinApp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="winapp-ui-ui-automation-dalla-riga-di-comando"&gt;winapp ui: UI Automation dalla riga di comando&lt;/h2&gt;
+&lt;p&gt;Questa è la funzionalità che apre gli scenari agentici. &lt;code&gt;winapp ui&lt;/code&gt; fornisce accesso completo UI Automation a qualsiasi app Windows in esecuzione — WPF, WinForms, Win32, Electron, WinUI3 — direttamente dal terminale.&lt;/p&gt;
+&lt;p&gt;Cosa si può fare:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Elencare tutte le finestre di primo livello&lt;/li&gt;
+&lt;li&gt;Navigare l&amp;rsquo;albero completo di UI Automation di una finestra&lt;/li&gt;
+&lt;li&gt;Cercare elementi per nome, tipo o ID di automazione&lt;/li&gt;
+&lt;li&gt;Cliccare, invocare e impostare valori&lt;/li&gt;
+&lt;li&gt;Fare screenshot&lt;/li&gt;
+&lt;li&gt;Attendere la comparsa di elementi — ideale per la sincronizzazione dei test&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Combinare &lt;code&gt;winapp ui&lt;/code&gt; con &lt;code&gt;winapp run&lt;/code&gt; crea un workflow completo build → avvio → verifica dal terminale. Un agente può eseguire l&amp;rsquo;app, ispezionare lo stato dell&amp;rsquo;UI e validare il risultato.&lt;/p&gt;
+&lt;h2 id="altre-novità"&gt;Altre novità&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp unregister&lt;/code&gt;&lt;/strong&gt;: Rimuove un pacchetto sideloaded quando si è finito.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp manifest add-alias&lt;/code&gt;&lt;/strong&gt;: Aggiunge un alias per avviare l&amp;rsquo;app per nome dal terminale.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tab completion&lt;/strong&gt;: Configura il completamento PowerShell con un singolo comando.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="come-ottenerlo"&gt;Come ottenerlo&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winget install Microsoft.WinAppCli
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# o&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npm install -g @microsoft/winappcli
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;La CLI è in preview pubblica. Il &lt;a href="https://github.com/microsoft/WinAppCli"&gt;repository su GitHub&lt;/a&gt; ha la documentazione completa e l&amp;rsquo;&lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;annuncio originale&lt;/a&gt; ha tutti i dettagli.&lt;/p&gt;</content:encoded></item></channel></rss>

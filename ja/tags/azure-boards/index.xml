@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure Boards | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/azure-boards/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 27 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/azure-boards/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure DevOps MCP Server 4月アップデート: WIQLクエリ、PAT認証、実験的MCP Apps</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-devops-mcp-server-april-2026-wiql-pat-apps/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azure-devops-mcp-server-april-2026-wiql-pat-apps/</guid><description>Azure DevOps MCP ServerがWIQLによるwork itemクエリ、Personal Access Token認証、MCPアノテーション、そして一般的なワークフローをパッケージ化する実験的MCP Apps機能を取得。</description><content:encoded>&lt;p&gt;&lt;em&gt;この投稿は自動翻訳されています。オリジナル版は&lt;a href="https://thedotnetblog.com/posts/emiliano-montesdeoca/azure-devops-mcp-server-april-2026-wiql-pat-apps/"&gt;こちら&lt;/a&gt;をクリックしてください。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Azure DevOps MCP Serverは着実に改善されています。Dan Hellemの4月アップデートは両方のサーバーをカバーしています。&lt;/p&gt;
+&lt;h2 id="wiqlクエリサポート"&gt;WIQLクエリサポート&lt;/h2&gt;
+&lt;p&gt;新しい&lt;code&gt;wit_query_by_wiql&lt;/code&gt;ツールにより、MCPクライアントから直接Work Item Query Languageクエリを実行できます。&lt;/p&gt;
+&lt;h2 id="personal-access-tokens"&gt;Personal Access Tokens&lt;/h2&gt;
+&lt;p&gt;ローカルサーバーでのPAT認証 — インタラクティブ認証が利用できない統合シナリオに重要。&lt;/p&gt;
+&lt;h2 id="mcpアノテーション"&gt;MCPアノテーション&lt;/h2&gt;
+&lt;p&gt;読み取り専用、破壊的、オープンワールドツールのメタデータタグ — エージェントの信頼性の基盤。&lt;/p&gt;
+&lt;h2 id="wikiツールの統合"&gt;Wikiツールの統合&lt;/h2&gt;
+&lt;p&gt;5つの別々のWikiツール → 2つのより有能なツール。ツールが少ない = LLMパフォーマンスが向上。&lt;/p&gt;
+&lt;h2 id="実験的-mcp-apps"&gt;実験的: MCP Apps&lt;/h2&gt;
+&lt;p&gt;MCSサーバー環境内でパッケージ化されたワークフロー。方向性は正しい。&lt;/p&gt;
+&lt;p&gt;Dan Hellemのオリジナルポスト: &lt;a href="https://devblogs.microsoft.com/devops/azure-devops-mcp-server-april-update/"&gt;Azure DevOps MCP Server April Update&lt;/a&gt;。&lt;/p&gt;</content:encoded></item></channel></rss>

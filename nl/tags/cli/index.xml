@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Cli | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/cli/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/cli/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows App Dev CLI v0.3: F5 vanuit de terminal en UI Automation voor agenten</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</guid><description>Windows App Development CLI v0.3 brengt winapp run voor debug-launches vanuit de terminal, winapp ui voor UI-automatisering en een nieuw NuGet-pakket dat dotnet run laat werken met gepackagede apps.</description><content:encoded>&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor de originele versie, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;De F5-ervaring in Visual Studio is fantastisch. Maar VS openen alleen om een gepackagede Windows-app te starten en te debuggen — of dat nu in een CI-pipeline is, een geautomatiseerde workflow, of wanneer een AI-agent de tests uitvoert — is te veel gevraagd.&lt;/p&gt;
+&lt;p&gt;Windows App Development CLI v0.3 is &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;net uitgekomen&lt;/a&gt; en pakt dit direct aan met twee hoofdfuncties: &lt;code&gt;winapp run&lt;/code&gt; en &lt;code&gt;winapp ui&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="winapp-run-f5-vanuit-overal"&gt;winapp run: F5 vanuit overal&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;winapp run&lt;/code&gt; neemt een ongepackagede app-map en een manifest, en doet alles wat VS doet bij een debug-launch: registreert een loose package, start de app op en bewaart de &lt;code&gt;LocalState&lt;/code&gt; tussen re-deploys.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Bouw de app, voer hem dan uit als gepackagede app&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp run ./bin/Debug
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Werkt voor WinUI, WPF, WinForms, Console, Avalonia en meer. De modi zijn ontworpen voor zowel developers als geautomatiseerde workflows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--detach&lt;/code&gt;&lt;/strong&gt;: Start op en geeft meteen de controle terug aan de terminal. Perfect voor CI.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--unregister-on-exit&lt;/code&gt;&lt;/strong&gt;: Ruimt het geregistreerde package op bij het sluiten van de app.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--debug-output&lt;/code&gt;&lt;/strong&gt;: Legt &lt;code&gt;OutputDebugString&lt;/code&gt;-berichten en uitzonderingen real-time vast.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="nieuw-nuget-pakket-dotnet-run-voor-gepackagede-apps"&gt;Nieuw NuGet-pakket: dotnet run voor gepackagede apps&lt;/h2&gt;
+&lt;p&gt;Voor .NET-developers is er een nieuw NuGet-pakket: &lt;code&gt;Microsoft.Windows.SDK.BuildTools.WinApp&lt;/code&gt;. Na installatie beheert &lt;code&gt;dotnet run&lt;/code&gt; de gehele inner loop: bouwen, een loose-layout package voorbereiden, registreren bij Windows en starten — alles in één stap.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp init
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# of&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet add package Microsoft.Windows.SDK.BuildTools.WinApp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="winapp-ui-ui-automation-vanuit-de-commandoregel"&gt;winapp ui: UI Automation vanuit de commandoregel&lt;/h2&gt;
+&lt;p&gt;Dit is de functie die agentische scenario&amp;rsquo;s mogelijk maakt. &lt;code&gt;winapp ui&lt;/code&gt; biedt volledige UI Automation-toegang tot elke actieve Windows-app — WPF, WinForms, Win32, Electron, WinUI3 — direct vanuit de terminal.&lt;/p&gt;
+&lt;p&gt;Wat mogelijk is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Alle vensters op het hoogste niveau weergeven&lt;/li&gt;
+&lt;li&gt;De volledige UI Automation-boom van een venster doorlopen&lt;/li&gt;
+&lt;li&gt;Elementen zoeken op naam, type of automatiserings-ID&lt;/li&gt;
+&lt;li&gt;Klikken, aanroepen en waarden instellen&lt;/li&gt;
+&lt;li&gt;Screenshots maken&lt;/li&gt;
+&lt;li&gt;Wachten op het verschijnen van elementen — ideaal voor testsynchronisatie&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;winapp ui&lt;/code&gt; combineren met &lt;code&gt;winapp run&lt;/code&gt; geeft een complete build → starten → verifiëren workflow vanuit de terminal. Een agent kan de app uitvoeren, de UI-status inspecteren, programmatisch interageren en het resultaat valideren.&lt;/p&gt;
+&lt;h2 id="andere-nieuwigheden"&gt;Andere nieuwigheden&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp unregister&lt;/code&gt;&lt;/strong&gt;: Verwijdert een sideloaded package na gebruik.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp manifest add-alias&lt;/code&gt;&lt;/strong&gt;: Voegt een alias toe om de app op naam te starten vanuit de terminal.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tab-aanvulling&lt;/strong&gt;: Configureer PowerShell-aanvulling met één commando.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="hoe-te-verkrijgen"&gt;Hoe te verkrijgen&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winget install Microsoft.WinAppCli
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# of&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npm install -g @microsoft/winappcli
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;De CLI is in publieke preview. Bekijk de &lt;a href="https://github.com/microsoft/WinAppCli"&gt;GitHub-repository&lt;/a&gt; voor volledige documentatie en de &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;originele aankondiging&lt;/a&gt; voor alle details.&lt;/p&gt;</content:encoded></item><item><title>Stop met het Bewaken van je Terminal: Aspire's Losstaande Modus Verandert de Workflow</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</link><pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</guid><description>Aspire 13.2 laat je AppHost op de achtergrond uitvoeren en je terminal terugkrijgen. Gecombineerd met nieuwe CLI-opdrachten en agentondersteuning is dit een grotere deal dan het klinkt.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Elke keer dat je een Aspire AppHost uitvoert, is je terminal weg. Vergrendeld. Bezet totdat je Ctrl+C uitvoert. Wil je een snel commando uitvoeren? Open een nieuw tabblad. Logs controleren? Nog een tabblad. Deze kleine wrijving telt snel op.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 lost dit op. James Newton-King &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;heeft alle details opgeschreven&lt;/a&gt;, en eerlijk gezegd is dit een van die functies die onmiddellijk veranderen hoe je werkt.&lt;/p&gt;
+&lt;h2 id="losstaande-modus-één-commando-terminal-terug"&gt;Losstaande modus: één commando, terminal terug&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Dit is de afkorting voor &lt;code&gt;aspire run --detach&lt;/code&gt;. Je AppHost start op de achtergrond en je krijgt je terminal onmiddellijk terug.&lt;/p&gt;
+&lt;h2 id="beheren-wat-er-draait"&gt;Beheren wat er draait&lt;/h2&gt;
+&lt;p&gt;Op de achtergrond draaien is alleen nuttig als je daadwerkelijk kunt beheren wat er draait. Aspire 13.2 levert een volledige set CLI-opdrachten:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Lijst alle draaiende AppHosts&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire ps
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Inspecteer de status van een specifieke AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire describe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stream logs van een draaiende AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire logs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stop een specifieke AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire stop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="combineer-het-met-de-geïsoleerde-modus"&gt;Combineer het met de geïsoleerde modus&lt;/h2&gt;
+&lt;p&gt;De losstaande modus combineert natuurlijk met de geïsoleerde modus:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Elke instantie krijgt willekeurige poorten, afzonderlijke geheimen en zijn eigen levenscyclus.&lt;/p&gt;
+&lt;h2 id="waarom-dit-groot-is-voor-coding-agents"&gt;Waarom dit groot is voor coding agents&lt;/h2&gt;
+&lt;p&gt;Een coding agent die in je terminal werkt, kan nu:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;De app starten met &lt;code&gt;aspire start&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;De status opvragen met &lt;code&gt;aspire describe&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Logs controleren met &lt;code&gt;aspire logs&lt;/code&gt; om problemen te diagnosticeren&lt;/li&gt;
+&lt;li&gt;Stoppen met &lt;code&gt;aspire stop&lt;/code&gt; als klaar&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;aspire agent init&lt;/code&gt; uitvoeren stelt een Aspire-vaardigheidsbestand in dat agents deze opdrachten leert.&lt;/p&gt;
+&lt;h2 id="samenvatting"&gt;Samenvatting&lt;/h2&gt;
+&lt;p&gt;De losstaande modus is een workflow-upgrade vermomd als een eenvoudige vlag. Lees de &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;volledige post&lt;/a&gt; en haal Aspire 13.2 met &lt;code&gt;aspire update --self&lt;/code&gt;.&lt;/p&gt;</content:encoded></item><item><title>azd update — Één Opdracht voor Al je Package Managers</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/</link><pubDate>Wed, 15 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/</guid><description>De Azure Developer CLI heeft nu een universele updateopdracht die werkt ongeacht hoe je het hebt geïnstalleerd — winget, Homebrew, Chocolatey of installatiescript.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Ken je dat bericht &amp;ldquo;Een nieuwe versie van azd is beschikbaar&amp;rdquo; dat elke paar weken verschijnt? De boodschap die je wegklikt omdat je niet meer weet of je &lt;code&gt;azd&lt;/code&gt; via winget, Homebrew of dat curl-script van zes maanden geleden hebt geïnstalleerd? Dat is eindelijk opgelost.&lt;/p&gt;
+&lt;p&gt;Microsoft heeft zojuist &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-update/"&gt;&lt;code&gt;azd update&lt;/code&gt;&lt;/a&gt; uitgebracht — één opdracht die de Azure Developer CLI bijwerkt naar de nieuwste versie, ongeacht hoe je het oorspronkelijk hebt geïnstalleerd.&lt;/p&gt;
+&lt;h2 id="hoe-het-werkt"&gt;Hoe het werkt&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd update
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Dat is alles. Voor vroege toegang tot nieuwe functies:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd update --channel daily
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd update --channel stable
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;De opdracht detecteert je huidige installatiemethode en gebruikt het juiste updatemechanisme.&lt;/p&gt;
+&lt;h2 id="de-kleine-vangst"&gt;De kleine vangst&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;azd update&lt;/code&gt; wordt geleverd vanaf versie 1.23.x. Als je een oudere versie hebt, moet je één laatste handmatige update uitvoeren. Daarna regelt &lt;code&gt;azd update&lt;/code&gt; alles.&lt;/p&gt;
+&lt;h2 id="waarom-het-uitmaakt"&gt;Waarom het uitmaakt&lt;/h2&gt;
+&lt;p&gt;Dit is een kleine kwaliteitsverbetering, maar voor degenen onder ons die &lt;code&gt;azd&lt;/code&gt; dagelijks gebruiken voor het implementeren van AI-agents en Aspire-apps naar Azure, is het bijblijven belangrijk.&lt;/p&gt;
+&lt;p&gt;Lees de &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-update/"&gt;volledige aankondiging&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title>.NET Aspire 13.2 Wil de Beste Vriend van je AI-Agent Zijn</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/</guid><description>Aspire 13.2 gaat all-in op agentische ontwikkeling — gestructureerde CLI-uitvoer, geïsoleerde runs, zelfherstellende omgevingen en volledige OpenTelemetry-data zodat je AI-agents je apps daadwerkelijk kunnen bouwen, uitvoeren en observeren.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Ken je dat moment waarop je AI-codeagent solide code schrijft, je enthousiast wordt, en dan valt alles uit elkaar bij het proberen het &lt;em&gt;uit te voeren&lt;/em&gt;? Poortconflicten, phantom processes, verkeerde omgevingsvariabelen — plotseling brandt je agent tokens voor het oplossen van opstartproblemen in plaats van het bouwen van functies.&lt;/p&gt;
+&lt;p&gt;Het Aspire-team heeft een &lt;a href="https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/"&gt;zeer doordachte post&lt;/a&gt; gepubliceerd over precies dit probleem, en hun antwoord is overtuigend: Aspire 13.2 is ontworpen niet alleen voor mensen, maar voor AI-agents.&lt;/p&gt;
+&lt;h2 id="aspire-als-agentinfrastructuur"&gt;Aspire als agentinfrastructuur&lt;/h2&gt;
+&lt;p&gt;Dit is wat Aspire 13.2 meebrengt voor agentische ontwikkeling:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Je hele stack in getypte code.&lt;/strong&gt; De AppHost definieert je volledige topologie — in compileerbare TypeScript of C#:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;createBuilder&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;./.modules/aspire.js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;createBuilder&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addPostgres&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;pg&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;addDatabase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;catalog&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;cache&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addRedis&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;cache&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;api&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addNodeApp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;api&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;./api&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;src/index.ts&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withHttpEndpoint&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="nx"&gt;env&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;PORT&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withReference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;postgres&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withReference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addViteApp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;frontend&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;./frontend&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withReference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;waitFor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;build&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nx"&gt;run&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Één commando voor alles.&lt;/strong&gt; In plaats van jongleren met &lt;code&gt;docker compose up&lt;/code&gt;, &lt;code&gt;npm run dev&lt;/code&gt; en database-opstartscripts — alles is gewoon &lt;code&gt;aspire start&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Geïsoleerde modus voor parallelle agents.&lt;/strong&gt; Met &lt;code&gt;--isolated&lt;/code&gt; krijgt elke Aspire-run zijn eigen willekeurige poorten en afzonderlijke gebruikersgeheimen.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Agentogen via telemetrie.&lt;/strong&gt; De Aspire CLI stelt tijdens development volledige OpenTelemetry-data bloot — traces, metrics, gestructureerde logs.&lt;/p&gt;
+&lt;h2 id="de-bowlingbaan-bumper-analogie"&gt;De bowlingbaan-bumper analogie&lt;/h2&gt;
+&lt;p&gt;Het Aspire-team gebruikt een geweldige analogie: denk aan Aspire als bowlingbaanbumpers voor AI-agents. Als de agent niet perfect is (en dat zal hij niet zijn), houden de bumpers hem van het gooien in de goot.&lt;/p&gt;
+&lt;h2 id="samenvatting"&gt;Samenvatting&lt;/h2&gt;
+&lt;p&gt;Aspire 13.2 is niet alleen een framework voor gedistribueerde apps — het wordt essentiële agentinfrastructuur. Lees de &lt;a href="https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/"&gt;volledige post&lt;/a&gt; van het Aspire-team.&lt;/p&gt;</content:encoded></item><item><title>Aspire's Geïsoleerde Modus Lost de Port-Conflict Nachtmerrie op voor Parallelle Ontwikkeling</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</guid><description>Aspire 13.2 introduceert --isolated modus: willekeurige poorten, afzonderlijke geheimen en nul botsingen bij het uitvoeren van meerdere instanties van dezelfde AppHost. Perfect voor AI-agents, worktrees en parallelle workflows.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Als je ooit twee instanties van hetzelfde project tegelijkertijd hebt geprobeerd uit te voeren, ken je de pijn. Poort 8080 is al in gebruik.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 lost dit op met één vlag. James Newton-King heeft &lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;alle details opgeschreven&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="de-oplossing---isolated"&gt;De oplossing: &lt;code&gt;--isolated&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Elke run krijgt:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Willekeurige poorten&lt;/strong&gt; — geen botsingen tussen instanties&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Geïsoleerde gebruikersgeheimen&lt;/strong&gt; — verbindingsstrings en API-sleutels blijven afzonderlijk per instantie&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="echte-scenarios"&gt;Echte scenario&amp;rsquo;s&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Meerdere checkouts:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-feature
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-bugfix
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Beide draaien zonder conflicten.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Achtergrondagents in VS Code.&lt;/strong&gt; Wanneer de achtergrondagent van Copilot Chat een git worktree aanmaakt om onafhankelijk te werken, zorgt de geïsoleerde modus ervoor dat beide instanties gewoon werken.&lt;/p&gt;
+&lt;h2 id="samenvatting"&gt;Samenvatting&lt;/h2&gt;
+&lt;p&gt;Geïsoleerde modus is een kleine functie die een reëel, steeds vaker voorkomend probleem oplost. Haal 13.2 op met &lt;code&gt;aspire update --self&lt;/code&gt;.&lt;/p&gt;</content:encoded></item><item><title>Aspire 13.2 Brengt een Docs CLI — en je AI-Agent Kan die Ook Gebruiken</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/</link><pubDate>Sat, 04 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/</guid><description>.NET Aspire 13.2 voegt aspire docs toe — een CLI voor het zoeken, doorbladeren en lezen van officiële documentatie zonder je terminal te verlaten. Werkt ook als tool voor AI-agents.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Ken je dat moment waarop je diep in een Aspire AppHost zit, integraties bekabelt, en je precies moet controleren welke parameters de Redis-integratie verwacht? Je alt-tabbt naar je browser, zoekt op aspire.dev. Context verloren.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 heeft &lt;a href="https://devblogs.microsoft.com/aspire/aspire-docs-in-your-terminal/"&gt;een oplossing daarvoor gepubliceerd&lt;/a&gt;. De &lt;code&gt;aspire docs&lt;/code&gt; CLI laat je zoeken in officiële Aspire-documentatie, er doorheen bladeren en het lezen, direct vanuit je terminal.&lt;/p&gt;
+&lt;h2 id="drie-opdrachten-nul-browsertabbladen"&gt;Drie opdrachten, nul browsertabbladen&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Lijst alle docs&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs list
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Zoek een onderwerp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs search &lt;span class="s2"&gt;&amp;#34;redis&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Lees een volledige pagina&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs get redis-integration
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Slechts één sectie&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs get redis-integration --section &lt;span class="s2"&gt;&amp;#34;Add Redis resource&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="de-ai-agent-invalshoek"&gt;De AI-agent invalshoek&lt;/h2&gt;
+&lt;p&gt;Dezelfde &lt;code&gt;aspire docs&lt;/code&gt;-opdrachten werken als tools voor AI-agents. In plaats van Aspire API&amp;rsquo;s te verzinnen op basis van verouderde trainingsdata, kan de agent &lt;code&gt;aspire docs search &amp;quot;postgres&amp;quot;&lt;/code&gt; aanroepen en de officiële integratiedocumentatie lezen.&lt;/p&gt;
+&lt;h2 id="samenvatting"&gt;Samenvatting&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;aspire docs&lt;/code&gt; is een kleine functie die een echt probleem netjes oplost. Bekijk &lt;a href="https://davidpine.dev/posts/aspire-docs-mcp-tools/"&gt;David Pine&amp;rsquo;s diepgaande analyse&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

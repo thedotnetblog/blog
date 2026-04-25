@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azd | The .NET Blog</title><link>https://thedotnetblog.com/es/tags/azd/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>es</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/es/tags/azd/index.xml" rel="self" type="application/rss+xml"/><item><title>Hooks de azd en Python, TypeScript y .NET: adiós a los scripts de shell</title><link>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/azd-hooks-python-javascript-typescript-dotnet/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/azd-hooks-python-javascript-typescript-dotnet/</guid><description>La CLI de Azure Developer ahora permite escribir hooks en Python, JavaScript, TypeScript o .NET. Se acabó el cambio de contexto a Bash solo para ejecutar un script de migración.</description><content:encoded>&lt;p&gt;&lt;em&gt;Esta publicación fue traducida automáticamente. Para la versión original, &lt;a href="https://thedotnetblog.com/es/posts/emiliano-montesdeoca/azd-hooks-python-javascript-typescript-dotnet/"&gt;haz clic aquí&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Si alguna vez has tenido un proyecto completamente en .NET y aun así tuviste que escribir scripts Bash solo para los hooks de azd, conoces bien ese dolor. ¿Por qué cambiar a sintaxis de shell en un paso de pre-provisioning cuando todo lo demás en el proyecto es C#?&lt;/p&gt;
+&lt;p&gt;Esa frustración tiene solución oficial. La Azure Developer CLI &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-multi-language-hooks/"&gt;acaba de lanzar soporte multi-lenguaje para hooks&lt;/a&gt;, y es exactamente tan bueno como suena.&lt;/p&gt;
+&lt;h2 id="hooks-brevemente-por-si-no-los-conoces"&gt;Hooks, brevemente, por si no los conoces&lt;/h2&gt;
+&lt;p&gt;Los hooks son scripts que se ejecutan en puntos clave del ciclo de vida de &lt;code&gt;azd&lt;/code&gt; — antes del provisioning, después del despliegue, y más. Se definen en &lt;code&gt;azure.yaml&lt;/code&gt; y permiten inyectar lógica personalizada sin modificar la CLI.&lt;/p&gt;
+&lt;p&gt;Antes solo se admitían Bash y PowerShell. Ahora puedes usar &lt;strong&gt;Python, JavaScript, TypeScript o .NET&lt;/strong&gt; — y &lt;code&gt;azd&lt;/code&gt; se encarga del resto automáticamente.&lt;/p&gt;
+&lt;h2 id="cómo-funciona-la-detección"&gt;Cómo funciona la detección&lt;/h2&gt;
+&lt;p&gt;Simplemente apuntas el hook a un archivo y &lt;code&gt;azd&lt;/code&gt; infiere el lenguaje por la extensión:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;hooks&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;preprovision&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;./hooks/setup.py&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;postdeploy&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;./hooks/seed.ts&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;postprovision&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;./hooks/migrate.cs&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Eso es todo. Sin config adicional. Si la extensión es ambigua, puedes añadir &lt;code&gt;kind: python&lt;/code&gt; (o el que corresponda) para especificarlo explícitamente.&lt;/p&gt;
+&lt;h2 id="detalles-importantes-por-lenguaje"&gt;Detalles importantes por lenguaje&lt;/h2&gt;
+&lt;h3 id="python"&gt;Python&lt;/h3&gt;
+&lt;p&gt;Coloca un &lt;code&gt;requirements.txt&lt;/code&gt; o &lt;code&gt;pyproject.toml&lt;/code&gt; junto al script (o en cualquier directorio padre) y &lt;code&gt;azd&lt;/code&gt; crea un entorno virtual, instala dependencias y ejecuta el script:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;hooks/
+├── setup.py
+└── requirements.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Sin gestión manual de virtualenv. &lt;code&gt;azd&lt;/code&gt; busca hacia arriba desde el script el archivo de proyecto más cercano.&lt;/p&gt;
+&lt;h3 id="javascript-y-typescript"&gt;JavaScript y TypeScript&lt;/h3&gt;
+&lt;p&gt;El mismo patrón — pon un &lt;code&gt;package.json&lt;/code&gt; cerca del script y &lt;code&gt;azd&lt;/code&gt; ejecutará &lt;code&gt;npm install&lt;/code&gt; primero. Para TypeScript, usa &lt;code&gt;npx tsx&lt;/code&gt; sin paso de compilación ni &lt;code&gt;tsconfig.json&lt;/code&gt;:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;hooks/
+├── seed.ts
+└── package.json
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;¿Quieres usar pnpm o yarn? Hay una opción &lt;code&gt;config.packageManager&lt;/code&gt; para eso.&lt;/p&gt;
+&lt;h3 id="net"&gt;.NET&lt;/h3&gt;
+&lt;p&gt;Dos modos disponibles:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Modo proyecto&lt;/strong&gt;: Si hay un &lt;code&gt;.csproj&lt;/code&gt; junto al script, &lt;code&gt;azd&lt;/code&gt; ejecuta &lt;code&gt;dotnet restore&lt;/code&gt; y &lt;code&gt;dotnet build&lt;/code&gt; automáticamente.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Modo single-file&lt;/strong&gt;: En .NET 10+, puedes poner un archivo &lt;code&gt;.cs&lt;/code&gt; independiente y se ejecuta directamente con &lt;code&gt;dotnet run script.cs&lt;/code&gt;. Sin archivo de proyecto.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;hooks&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;postprovision&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;./hooks/migrate.cs&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Si ya estás en .NET 10, el modo single-file es la opción más limpia para scripts simples de migración o seeding. Sin scaffolding, sin &lt;code&gt;.csproj&lt;/code&gt; que mantener.&lt;/p&gt;
+&lt;h2 id="config-por-ejecutor"&gt;Config por ejecutor&lt;/h2&gt;
+&lt;p&gt;Cada lenguaje soporta un bloque &lt;code&gt;config&lt;/code&gt; opcional para ajustar los valores por defecto:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;hooks&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;preprovision&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;./hooks/setup.ts&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;config&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;packageManager&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;pnpm&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;postdeploy&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;./hooks/seed.py&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;config&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;virtualEnvName&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;.venv&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;postprovision&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;./hooks/migrate.cs&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;config&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;configuration&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;Release&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;framework&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;net10.0&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;También puedes mezclar formatos en el mismo bloque &lt;code&gt;hooks:&lt;/code&gt; — distintos lenguajes para distintos eventos del ciclo de vida, overrides por plataforma para Windows vs. Linux, lo que necesites.&lt;/p&gt;
+&lt;h2 id="por-qué-importa-para-desarrolladores-net"&gt;Por qué importa para desarrolladores .NET&lt;/h2&gt;
+&lt;p&gt;La respuesta aburrida es &amp;ldquo;consistencia&amp;rdquo;. Pero en la práctica va más allá. Los hooks eran el último lugar de un proyecto basado en azd que te obligaba a usar otro lenguaje. Ahora todo el pipeline de despliegue — código de app, scripts de infraestructura y hooks del ciclo de vida — puede vivir en un solo lenguaje.&lt;/p&gt;
+&lt;p&gt;Más concreto: puedes reutilizar tus utilidades .NET existentes en los hooks. ¿Tienes una librería compartida para gestión de esquemas de base de datos? Simplemente referencíala en el proyecto del hook. ¿Tienes un script Python de seeding que ya escribiste? Ponlo directamente en &lt;code&gt;azure.yaml&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="conclusión"&gt;Conclusión&lt;/h2&gt;
+&lt;p&gt;Es uno de esos cambios que parecen pequeños pero que eliminan mucha fricción del día a día con azd. El soporte multi-lenguaje para hooks ya está disponible — revisa el &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-multi-language-hooks/"&gt;post oficial&lt;/a&gt; para la documentación completa y el &lt;a href="https://github.com/Azure/azure-dev"&gt;repositorio de azd en GitHub&lt;/a&gt; para probarlo en tu próximo proyecto.&lt;/p&gt;</content:encoded></item><item><title>azd + GitHub Copilot: Configuración de proyectos con IA y resolución inteligente de errores</title><link>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</link><pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</guid><description>El Azure Developer CLI ahora se integra con GitHub Copilot para generar la infraestructura de tu proyecto y resolver errores de despliegue — sin salir del terminal.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Este artículo fue traducido automáticamente. Para ver la versión original en inglés, &lt;a href="https://thedotnetblog.com/es/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/"&gt;haz clic aquí&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;¿Conoces ese momento en que quieres desplegar una app existente en Azure y te quedas mirando un &lt;code&gt;azure.yaml&lt;/code&gt; en blanco, intentando recordar si tu API Express debería usar Container Apps o App Service? Ese momento acaba de volverse mucho más corto.&lt;/p&gt;
+&lt;p&gt;El Azure Developer CLI (&lt;code&gt;azd&lt;/code&gt;) ahora se integra con GitHub Copilot de dos formas muy concretas: scaffolding asistido por IA durante &lt;code&gt;azd init&lt;/code&gt;, y resolución inteligente de errores cuando los despliegues fallan. Ambas funciones se quedan completamente en tu terminal, que es exactamente donde quiero que estén.&lt;/p&gt;
+&lt;h2 id="configuración-con-copilot-durante-azd-init"&gt;Configuración con Copilot durante azd init&lt;/h2&gt;
+&lt;p&gt;Cuando ejecutas &lt;code&gt;azd init&lt;/code&gt;, ahora aparece la opción &amp;ldquo;Set up with GitHub Copilot (Preview)&amp;rdquo;. Selecciónala y Copilot analiza tu codebase para generar el &lt;code&gt;azure.yaml&lt;/code&gt;, las plantillas de infraestructura y los módulos Bicep — basándose en tu código real, no en suposiciones.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd init
+# Selecciona: &amp;#34;Set up with GitHub Copilot (Preview)&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Para que funcione necesitas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;azd 1.23.11 o superior&lt;/strong&gt; — comprueba con &lt;code&gt;azd version&lt;/code&gt; o actualiza con &lt;code&gt;azd update&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Una suscripción activa de GitHub Copilot&lt;/strong&gt; (Individual, Business o Enterprise)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub CLI (&lt;code&gt;gh&lt;/code&gt;)&lt;/strong&gt; — &lt;code&gt;azd&lt;/code&gt; pedirá login si es necesario&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Lo que me parece genuinamente útil es que funciona en los dos sentidos. ¿Construyendo desde cero? Copilot te ayuda a configurar los servicios Azure correctos desde el principio. ¿Tienes una app existente que llevas tiempo sin desplegar? Apunta Copilot hacia ella y genera la configuración sin que tengas que reestructurar nada.&lt;/p&gt;
+&lt;h3 id="lo-que-hace-realmente"&gt;Lo que hace realmente&lt;/h3&gt;
+&lt;p&gt;Imagina que tienes una API Express en Node.js con dependencia de PostgreSQL. En lugar de decidir manualmente entre Container Apps o App Service, y luego escribir Bicep desde cero, Copilot detecta tu stack y genera:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Un &lt;code&gt;azure.yaml&lt;/code&gt; con los ajustes correctos de &lt;code&gt;language&lt;/code&gt;, &lt;code&gt;host&lt;/code&gt; y &lt;code&gt;build&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Un módulo Bicep para Azure Container Apps&lt;/li&gt;
+&lt;li&gt;Un módulo Bicep para Azure Database for PostgreSQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Y hace comprobaciones previas antes de tocar nada — verifica que tu directorio git esté limpio, pide consentimiento para las herramientas del servidor MCP. Nada ocurre sin que sepas exactamente qué va a cambiar.&lt;/p&gt;
+&lt;h2 id="resolución-de-errores-potenciada-por-copilot"&gt;Resolución de errores potenciada por Copilot&lt;/h2&gt;
+&lt;p&gt;Los errores de despliegue son inevitables. Parámetros faltantes, problemas de permisos, disponibilidad de SKUs — y el mensaje de error raramente te dice lo único que realmente necesitas saber: &lt;em&gt;cómo solucionarlo&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Sin Copilot, el ciclo es: copiar el error → buscar en docs → leer tres respuestas irrelevantes de Stack Overflow → ejecutar algunos comandos &lt;code&gt;az&lt;/code&gt; CLI → volver a intentarlo y rezar. Con Copilot integrado en &lt;code&gt;azd&lt;/code&gt;, ese ciclo se colapsa. Cuando cualquier comando &lt;code&gt;azd&lt;/code&gt; falla, ofrece inmediatamente cuatro opciones:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Explain&lt;/strong&gt; — descripción en lenguaje natural de qué salió mal&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Guidance&lt;/strong&gt; — instrucciones paso a paso para solucionarlo&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Diagnose and Guide&lt;/strong&gt; — análisis completo + Copilot aplica la solución (con tu aprobación) + reintento opcional&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skip&lt;/strong&gt; — gestionarlo tú mismo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Lo clave: Copilot ya tiene contexto sobre tu proyecto, el comando que falló y la salida del error. Sus sugerencias son específicas para &lt;em&gt;tu situación&lt;/em&gt;, no documentación genérica.&lt;/p&gt;
+&lt;h3 id="ejemplos-reales-donde-brilla"&gt;Ejemplos reales donde brilla&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Proveedor de recursos no registrado:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;ERROR: deployment failed: MissingSubscriptionRegistration:
+The subscription is not registered to use namespace &amp;#39;Microsoft.App&amp;#39;.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Esto falla a cualquiera que despliega en una suscripción nueva. Copilot puede registrar el proveedor y relanzar el despliegue automáticamente.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SKU no disponible:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;ERROR: deployment failed: SkuNotAvailable:
+The requested VM size &amp;#39;Standard_D2s_v3&amp;#39; is not available in location &amp;#39;westus&amp;#39;.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Copilot explica qué tamaño de VM o región está bloqueado y sugiere alternativas disponibles en tu suscripción.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Colisión de nombre de cuenta de almacenamiento:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;ERROR: deployment failed: StorageAccountAlreadyTaken:
+The storage account named &amp;#39;myappstorage&amp;#39; is already taken.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;La unicidad global le pasa a todo el mundo al menos una vez. Copilot sugiere añadir el nombre del entorno o un sufijo aleatorio a tus parámetros Bicep.&lt;/p&gt;
+&lt;h3 id="configurar-un-comportamiento-predeterminado"&gt;Configurar un comportamiento predeterminado&lt;/h3&gt;
+&lt;p&gt;Si siempre quieres la misma opción, salta el prompt interactivo:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.category troubleshoot
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Opciones: &lt;code&gt;explain&lt;/code&gt;, &lt;code&gt;guidance&lt;/code&gt;, &lt;code&gt;troubleshoot&lt;/code&gt;, &lt;code&gt;fix&lt;/code&gt;, &lt;code&gt;skip&lt;/code&gt;. También puedes habilitar auto-fix y reintento:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.fix allow
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Vuelve al modo interactivo en cualquier momento:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config unset copilot.errorHandling.category
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="por-qué-importa-esto-para-los-desarrolladores-net"&gt;Por qué importa esto para los desarrolladores .NET&lt;/h2&gt;
+&lt;p&gt;Si estás construyendo en Azure — ya sea una app .NET Aspire, una API en contenedor, o cualquier otra cosa — &lt;code&gt;azd&lt;/code&gt; es la herramienta que debes conocer. Esta integración con Copilot elimina la última barrera de fricción que antes hacía que necesitaras una chuleta para empezar.&lt;/p&gt;
+&lt;p&gt;La pieza de scaffolding es genial para proyectos brownfield. Tienes una app ASP.NET Core funcionando localmente perfectamente, pero llevarla a Azure siempre ha requerido algo de conocimiento de infraestructura. Ahora Copilot tiende ese puente. Y la función de resolución de errores es algo que desearía haber tenido la última vez que pasé 45 minutos depurando un error &lt;code&gt;SkuNotAvailable&lt;/code&gt; en tres regiones diferentes.&lt;/p&gt;
+&lt;h2 id="conclusión"&gt;Conclusión&lt;/h2&gt;
+&lt;p&gt;Esta es exactamente el tipo de integración de Copilot que aporta valor real — no IA por el gusto de la IA, sino IA que entiende tu contexto y te ahorra tiempo real. Pruébalo ejecutando &lt;code&gt;azd update&lt;/code&gt; para obtener la última versión, y usa &lt;code&gt;azd init&lt;/code&gt; en tu próximo proyecto. El equipo está trabajando en funciones más profundas incluyendo personalización de infraestructura asistida por Copilot, así que ahora es un buen momento para &lt;a href="https://aka.ms/azd-user-research-signup"&gt;apuntarte a la investigación de usuarios&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Lee el &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-copilot-integration/"&gt;anuncio original aquí&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title>azd update — Un solo comando para gobernar todos tus gestores de paquetes</title><link>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/</link><pubDate>Wed, 15 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/</guid><description>Azure Developer CLI ahora tiene un comando de actualización universal que funciona sin importar cómo lo instalaste — winget, Homebrew, Chocolatey o script de instalación.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Este post fue traducido automáticamente. Para la versión original, &lt;a href="https://thedotnetblog.com/es/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/"&gt;haz clic aquí&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;¿Conoces ese mensaje de &amp;ldquo;Hay una nueva versión de azd disponible&amp;rdquo; que aparece cada pocas semanas? ¿Ese que ignoras porque no recuerdas si instalaste &lt;code&gt;azd&lt;/code&gt; con winget, Homebrew o ese script de curl que ejecutaste hace seis meses? Bueno, eso por fin tiene solución.&lt;/p&gt;
+&lt;p&gt;Microsoft acaba de lanzar &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-update/"&gt;&lt;code&gt;azd update&lt;/code&gt;&lt;/a&gt; — un único comando que actualiza Azure Developer CLI a la última versión sin importar cómo lo instalaste originalmente. Windows, macOS, Linux — da igual. Un solo comando.&lt;/p&gt;
+&lt;h2 id="cómo-funciona"&gt;Cómo funciona&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd update
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Eso es todo. Si quieres acceso anticipado a nuevas funcionalidades, puedes cambiar a la build diaria de insiders:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd update --channel daily
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd update --channel stable
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;El comando detecta tu método de instalación actual y usa el mecanismo de actualización apropiado internamente. Se acabó el &amp;ldquo;espera, ¿usé winget o choco en esta máquina?&amp;rdquo;&lt;/p&gt;
+&lt;h2 id="el-pequeño-detalle"&gt;El pequeño detalle&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;azd update&lt;/code&gt; viene a partir de la versión 1.23.x. Si estás en una versión anterior, necesitarás hacer una última actualización manual usando tu método de instalación original. Después de eso, &lt;code&gt;azd update&lt;/code&gt; se encarga de todo en adelante.&lt;/p&gt;
+&lt;p&gt;Comprueba tu versión actual con &lt;code&gt;azd version&lt;/code&gt;. Si necesitas una instalación desde cero, la &lt;a href="https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd"&gt;documentación de instalación&lt;/a&gt; te cubre.&lt;/p&gt;
+&lt;h2 id="por-qué-importa"&gt;Por qué importa&lt;/h2&gt;
+&lt;p&gt;Es una pequeña mejora de calidad de vida, pero para los que usamos &lt;code&gt;azd&lt;/code&gt; a diario para desplegar agentes de IA y apps de Aspire en Azure, estar actualizado significa menos momentos de &amp;ldquo;ese bug ya estaba corregido en la última versión&amp;rdquo;. Una cosa menos en la que pensar.&lt;/p&gt;
+&lt;p&gt;Lee el &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-update/"&gt;anuncio completo&lt;/a&gt; y el &lt;a href="https://blog.jongallant.com/2026/04/azd-update"&gt;análisis más detallado&lt;/a&gt; de Jon Gallant para más contexto.&lt;/p&gt;</content:encoded></item><item><title>azd ahora te permite ejecutar y depurar agentes IA localmente — Esto es lo que cambió en marzo 2026</title><link>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/</guid><description>El Azure Developer CLI publicó siete versiones en marzo 2026. Lo destacado: un bucle local de ejecución y depuración para agentes IA, integración con GitHub Copilot en la configuración de proyectos, y soporte para Container App Jobs.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Este post fue traducido automáticamente. Para la versión original, &lt;a href="https://thedotnetblog.com/es/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/"&gt;haz clic aquí&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Siete versiones en un mes. Eso es lo que el equipo del Azure Developer CLI (&lt;code&gt;azd&lt;/code&gt;) publicó en marzo 2026, y la función estrella es la que estaba esperando: &lt;strong&gt;un bucle local de ejecución y depuración para agentes IA&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;PC Chan &lt;a href="https://devblogs.microsoft.com/azure-sdk/azure-developer-cli-azd-march-2026/"&gt;publicó el resumen completo&lt;/a&gt;, y aunque hay mucho contenido, déjame filtrarlo a lo que realmente importa para desarrolladores .NET que construyen apps con IA.&lt;/p&gt;
+&lt;h2 id="ejecutar-y-depurar-agentes-ia-sin-desplegar"&gt;Ejecutar y depurar agentes IA sin desplegar&lt;/h2&gt;
+&lt;p&gt;Esta es la grande. La nueva extensión &lt;code&gt;azure.ai.agents&lt;/code&gt; añade un conjunto de comandos que te dan una experiencia de bucle interno adecuada para agentes IA:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;azd ai agent run&lt;/code&gt; — inicia tu agente localmente&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;azd ai agent invoke&lt;/code&gt; — le envía mensajes (local o desplegado)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;azd ai agent show&lt;/code&gt; — muestra el estado del contenedor y su salud&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;azd ai agent monitor&lt;/code&gt; — transmite logs del contenedor en tiempo real&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Antes, probar un agente IA significaba desplegarlo en Microsoft Foundry cada vez que hacías un cambio. Ahora puedes iterar localmente, probar el comportamiento de tu agente, y solo desplegarlo cuando estés listo. Si has estado construyendo agentes con el Microsoft Agent Framework o Semantic Kernel, esto cambia tu flujo de trabajo diario.&lt;/p&gt;
+&lt;p&gt;El comando invoke funciona tanto contra agentes locales como desplegados, lo que significa que puedes usar el mismo flujo de pruebas sin importar dónde esté corriendo el agente. Ese es el tipo de detalle que te ahorra mantener dos conjuntos de scripts de prueba.&lt;/p&gt;
+&lt;h2 id="github-copilot-configura-tu-proyecto-azd"&gt;GitHub Copilot configura tu proyecto azd&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;azd init&lt;/code&gt; ahora ofrece una opción &amp;ldquo;Set up with GitHub Copilot (Preview)&amp;rdquo;. En lugar de responder prompts manualmente sobre la estructura de tu proyecto, un agente Copilot genera la configuración por ti. Verifica que el directorio de trabajo esté limpio antes de modificar archivos y pide consentimiento de herramientas MCP por adelantado.&lt;/p&gt;
+&lt;p&gt;Cuando un comando falla, &lt;code&gt;azd&lt;/code&gt; ahora ofrece troubleshooting asistido por IA: elige una categoría (explicar, guiar, solucionar o saltar), deja que el agente sugiera una corrección, y reintenta — todo sin salir de la terminal. Para configuraciones de infraestructura complejas, eso ahorra tiempo real.&lt;/p&gt;
+&lt;h2 id="container-app-jobs-y-mejoras-de-despliegue"&gt;Container App Jobs y mejoras de despliegue&lt;/h2&gt;
+&lt;p&gt;Algunas funciones de despliegue que vale la pena mencionar:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Container App Jobs&lt;/strong&gt;: &lt;code&gt;azd&lt;/code&gt; ahora despliega &lt;code&gt;Microsoft.App/jobs&lt;/code&gt; a través de la configuración existente &lt;code&gt;host: containerapp&lt;/code&gt;. Tu plantilla Bicep determina si el destino es un Container App o un Job — sin configuración extra.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Timeouts configurables&lt;/strong&gt;: Nueva flag &lt;code&gt;--timeout&lt;/code&gt; en &lt;code&gt;azd deploy&lt;/code&gt; y un campo &lt;code&gt;deployTimeout&lt;/code&gt; en &lt;code&gt;azure.yaml&lt;/code&gt;. Sin más adivinanzas sobre el límite predeterminado de 1200 segundos.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fallback de build remoto&lt;/strong&gt;: Cuando falla el build remoto en ACR, &lt;code&gt;azd&lt;/code&gt; hace fallback automático a Docker/Podman local.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Validación preflight local&lt;/strong&gt;: Los parámetros de Bicep se validan localmente antes de desplegar, detectando parámetros faltantes sin un viaje de ida y vuelta a Azure.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="pulido-en-la-experiencia-de-desarrollador"&gt;Pulido en la experiencia de desarrollador&lt;/h2&gt;
+&lt;p&gt;Algunas mejoras más pequeñas que se suman:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Detección automática de pnpm/yarn&lt;/strong&gt; para proyectos JS/TS&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Soporte para pyproject.toml&lt;/strong&gt; para paquetes Python&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Directorios de plantillas locales&lt;/strong&gt; — &lt;code&gt;azd init --template&lt;/code&gt; ahora acepta rutas del sistema de archivos para iteración offline&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mejores mensajes de error&lt;/strong&gt; en modo &lt;code&gt;--no-prompt&lt;/code&gt; — todos los valores faltantes reportados de una vez con comandos de resolución&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Variables de entorno de build&lt;/strong&gt; inyectadas en todos los subprocesos de build (.NET, Node.js, Java, Python)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;La última es sutil pero importante: tu build .NET ahora tiene acceso a las variables de entorno de &lt;code&gt;azd&lt;/code&gt;, lo que significa que puedes hacer inyección de configuración en tiempo de compilación sin scripting adicional.&lt;/p&gt;
+&lt;h2 id="para-cerrar"&gt;Para cerrar&lt;/h2&gt;
+&lt;p&gt;El bucle de depuración local de agentes IA es la estrella de esta versión, pero la acumulación de mejoras de despliegue y refinamiento de DX hace que &lt;code&gt;azd&lt;/code&gt; se sienta más maduro que nunca. Si estás desplegando apps .NET en Azure — especialmente agentes IA — esta actualización vale la pena.&lt;/p&gt;
+&lt;p&gt;Revisa las &lt;a href="https://devblogs.microsoft.com/azure-sdk/azure-developer-cli-azd-march-2026/"&gt;notas completas de la versión&lt;/a&gt; para todos los detalles, o comienza con &lt;a href="https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd"&gt;la instalación de azd&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title>Del portátil a producción: desplegando agentes de IA en Microsoft Foundry con dos comandos</title><link>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/deploy-ai-agents-foundry-azd-two-commands/</link><pubDate>Thu, 26 Mar 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/deploy-ai-agents-foundry-azd-two-commands/</guid><description>El Azure Developer CLI ahora tiene comandos 'azd ai agent' que llevan tu agente de IA desde el desarrollo local a un endpoint en Foundry en minutos. Aquí está el flujo de trabajo completo.</description><content:encoded>&lt;p&gt;¿Conoces esa brecha entre &amp;ldquo;funciona en mi máquina&amp;rdquo; y &amp;ldquo;está desplegado y sirviendo tráfico&amp;rdquo;? Para agentes de IA, esa brecha ha sido dolorosamente amplia. Necesitas provisionar recursos, desplegar modelos, configurar identidad, montar monitoreo — y eso es antes de que alguien pueda realmente llamar a tu agente.&lt;/p&gt;
+&lt;p&gt;El Azure Developer CLI acaba de convertir esto en &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-ai-agent-end-to-end/"&gt;un asunto de dos comandos&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="el-nuevo-flujo-de-trabajo-azd-ai-agent"&gt;El nuevo flujo de trabajo &lt;code&gt;azd ai agent&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Déjame mostrarte cómo se ve esto realmente. Tienes un proyecto de agente de IA — digamos un agente concierge de hotel. Funciona localmente. Quieres que corra en Microsoft Foundry.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd ai agent init
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd up
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Eso es todo. Dos comandos. &lt;code&gt;azd ai agent init&lt;/code&gt; genera la infraestructura como código en tu repositorio, y &lt;code&gt;azd up&lt;/code&gt; provisiona todo en Azure y publica tu agente. Obtienes un enlace directo a tu agente en el portal de Foundry.&lt;/p&gt;
+&lt;h2 id="qué-pasa-por-debajo"&gt;Qué pasa por debajo&lt;/h2&gt;
+&lt;p&gt;El comando &lt;code&gt;init&lt;/code&gt; genera plantillas Bicep reales e inspeccionables en tu repositorio:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Un &lt;strong&gt;Foundry Resource&lt;/strong&gt; (contenedor de nivel superior)&lt;/li&gt;
+&lt;li&gt;Un &lt;strong&gt;Foundry Project&lt;/strong&gt; (donde vive tu agente)&lt;/li&gt;
+&lt;li&gt;Configuración de &lt;strong&gt;despliegue de modelo&lt;/strong&gt; (GPT-4o, etc.)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Identidad administrada&lt;/strong&gt; con asignaciones de roles RBAC apropiadas&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;azure.yaml&lt;/code&gt; para el mapa de servicios&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;agent.yaml&lt;/code&gt; con metadatos del agente y variables de entorno&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;La parte clave: todo esto es tuyo. Es Bicep versionado en tu repositorio. Puedes inspeccionarlo, personalizarlo y hacer commit junto con el código de tu agente. Sin cajas negras mágicas.&lt;/p&gt;
+&lt;h2 id="el-ciclo-interno-de-desarrollo"&gt;El ciclo interno de desarrollo&lt;/h2&gt;
+&lt;p&gt;Lo que realmente me gusta es la historia de desarrollo local. Cuando estás iterando sobre la lógica del agente, no quieres redesplegar cada vez que cambias un prompt:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd ai agent run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Esto inicia tu agente localmente. Combínalo con &lt;code&gt;azd ai agent invoke&lt;/code&gt; para enviar prompts de prueba, y tienes un ciclo de retroalimentación rápido. Editar código, reiniciar, invocar, repetir.&lt;/p&gt;
+&lt;p&gt;El comando &lt;code&gt;invoke&lt;/code&gt; es inteligente con el enrutamiento también — cuando un agente local está corriendo, lo apunta automáticamente. Cuando no, apunta al endpoint remoto.&lt;/p&gt;
+&lt;h2 id="monitoreo-en-tiempo-real"&gt;Monitoreo en tiempo real&lt;/h2&gt;
+&lt;p&gt;Esta es la característica que me convenció. Una vez que tu agente está desplegado:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd ai agent monitor --follow
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Cada petición y respuesta que fluye a través de tu agente se transmite a tu terminal en tiempo real. Para depurar problemas en producción, esto es invaluable. Sin buscar en log analytics, sin esperar a que las métricas se agreguen — ves lo que está pasando ahora mismo.&lt;/p&gt;
+&lt;h2 id="el-set-completo-de-comandos"&gt;El set completo de comandos&lt;/h2&gt;
+&lt;p&gt;Aquí la referencia rápida:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Comando&lt;/th&gt;
+&lt;th&gt;Qué hace&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;azd ai agent init&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Genera un proyecto de agente Foundry con IaC&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;azd up&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Provisiona recursos Azure y despliega el agente&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;azd ai agent invoke&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Envía prompts al agente remoto o local&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;azd ai agent run&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Ejecuta el agente localmente para desarrollo&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;azd ai agent monitor&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Transmite logs en tiempo real del agente publicado&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;azd ai agent show&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Verifica la salud y estado del agente&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;azd down&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Limpia todos los recursos Azure&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="por-qué-esto-importa-para-desarrolladores-net"&gt;Por qué esto importa para desarrolladores .NET&lt;/h2&gt;
+&lt;p&gt;Aunque el ejemplo del anuncio está basado en Python, la historia de infraestructura es agnóstica al lenguaje. Tu agente .NET obtiene el mismo scaffolding Bicep, la misma configuración de identidad administrada, el mismo pipeline de monitoreo. Y si ya estás usando &lt;code&gt;azd&lt;/code&gt; para tus apps .NET Aspire o despliegues Azure, esto encaja directamente en tu flujo de trabajo existente.&lt;/p&gt;
+&lt;p&gt;La brecha de despliegue para agentes de IA ha sido uno de los mayores puntos de fricción en el ecosistema. Pasar de un prototipo funcional a un endpoint de producción con identidad, networking y monitoreo adecuados no debería requerir una semana de trabajo DevOps. Ahora requiere dos comandos y unos minutos.&lt;/p&gt;
+&lt;h2 id="para-cerrar"&gt;Para cerrar&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;azd ai agent&lt;/code&gt; está disponible ahora. Si has estado posponiendo el despliegue de tus agentes de IA porque la configuración de infraestructura parecía demasiado trabajo, dale una oportunidad. Revisa el &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-ai-agent-end-to-end/"&gt;tutorial completo&lt;/a&gt; para el paso a paso completo incluyendo integración de app de chat frontend.&lt;/p&gt;</content:encoded></item></channel></rss>

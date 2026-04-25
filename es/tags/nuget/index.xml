@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>NuGet | The .NET Blog</title><link>https://thedotnetblog.com/es/tags/nuget/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>es</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 25 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/es/tags/nuget/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure SDK Abril 2026: AI Foundry 2.0 y Lo Que Deben Saber los Desarrolladores .NET</title><link>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/azure-sdk-april-2026-ai-foundry-2-stable/</link><pubDate>Sat, 25 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/azure-sdk-april-2026-ai-foundry-2-stable/</guid><description>El lanzamiento del Azure SDK de abril 2026 incluye Azure.AI.Projects 2.0.0 stable con cambios importantes, correcciones críticas de seguridad en Cosmos DB y nuevas bibliotecas de Provisioning para .NET.</description><content:encoded>&lt;p&gt;&lt;em&gt;Este post fue traducido automáticamente. Para la versión original, &lt;a href="https://thedotnetblog.com/posts/emiliano-montesdeoca/azure-sdk-april-2026-ai-foundry-2-stable/"&gt;haz clic aquí&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Los lanzamientos mensuales del SDK son fáciles de ignorar. Este tiene algunas cosas que vale la pena atender — especialmente si construyes con AI Foundry, Cosmos DB en Java, o haces aprovisionamiento de infraestructura desde código .NET.&lt;/p&gt;
+&lt;h2 id="azureaiprojects-200--cambios-breaking-que-tienen-sentido"&gt;Azure.AI.Projects 2.0.0 — Cambios Breaking que Tienen Sentido&lt;/h2&gt;
+&lt;p&gt;El paquete NuGet &lt;code&gt;Azure.AI.Projects&lt;/code&gt; alcanza la versión estable 2.0.0 con cambios arquitectónicos significativos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Divisiones de namespace&lt;/strong&gt;: Evaluaciones movidas a &lt;code&gt;Azure.AI.Projects.Evaluation&lt;/code&gt;, operaciones de memoria a &lt;code&gt;Azure.AI.Projects.Memory&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tipos renombrados&lt;/strong&gt;: &lt;code&gt;Insights&lt;/code&gt; → &lt;code&gt;ProjectInsights&lt;/code&gt;, &lt;code&gt;Schedules&lt;/code&gt; → &lt;code&gt;ProjectSchedules&lt;/code&gt;, etc.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Convenciones de nomenclatura&lt;/strong&gt;: Propiedades booleanas siguen consistentemente la convención &lt;code&gt;Is*&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Estos son los cambios breaking que duelen una vez y luego se sienten correctos para siempre.&lt;/p&gt;
+&lt;h2 id="cosmos-db-java-corrección-crítica-de-seguridad-rce"&gt;Cosmos DB Java: Corrección Crítica de Seguridad (RCE)&lt;/h2&gt;
+&lt;p&gt;Esta es seria. La biblioteca Java Cosmos DB versión 4.79.0 incluye una corrección crítica para una &lt;strong&gt;vulnerabilidad de Ejecución Remota de Código (CWE-502)&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Si tienes servicios Java usando Azure Cosmos DB, actualiza a 4.79.0 inmediatamente.&lt;/p&gt;
+&lt;h2 id="nuevas-bibliotecas-de-provisioning-para-net"&gt;Nuevas Bibliotecas de Provisioning para .NET&lt;/h2&gt;
+&lt;p&gt;Varias bibliotecas estables de Provisioning llegan a 1.0.0:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.nuget.org/packages/Azure.Provisioning.Network/1.0.0"&gt;Azure.Provisioning.Network 1.0.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.nuget.org/packages/Azure.Provisioning.PrivateDns/1.0.0"&gt;Azure.Provisioning.PrivateDns 1.0.0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="resumiendo"&gt;Resumiendo&lt;/h2&gt;
+&lt;p&gt;Lo más destacado para desarrolladores .NET es &lt;code&gt;Azure.AI.Projects 2.0.0&lt;/code&gt; alcanzando estabilidad. Post original: &lt;a href="https://devblogs.microsoft.com/azure-sdk/azure-sdk-release-april-2026/"&gt;Azure SDK Release (April 2026)&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

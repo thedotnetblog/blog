@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Linux | The .NET Blog</title><link>https://thedotnetblog.com/tags/linux/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>en</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 25 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET 10 Ships with Ubuntu 26.04 LTS — Here's What's New</title><link>https://thedotnetblog.com/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/</link><pubDate>Sat, 25 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/</guid><description>Ubuntu 26.04 LTS (Resolute Raccoon) launched today with .NET 10 as a first-class supported toolchain. Native AOT, chiseled containers, Linux 7.0 — here's what you need to know.</description><content:encoded>&lt;p&gt;It&amp;rsquo;s Ubuntu LTS day. &lt;a href="https://canonical.com/blog/canonical-releases-ubuntu-26-04-lts-resolute-raccoon"&gt;Ubuntu 26.04 (Resolute Raccoon)&lt;/a&gt; launched today, and as with every Ubuntu LTS, it ships with the latest .NET LTS — in this case, &lt;a href="https://devblogs.microsoft.com/dotnet/whats-new-for-dotnet-in-ubuntu-2604/"&gt;.NET 10&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you deploy .NET apps on Linux, this is the release cycle you care about. LTS on LTS — five years of support for the OS, matching .NET 10&amp;rsquo;s own long-term support window.&lt;/p&gt;
+&lt;h2 id="install-net-10-in-two-commands"&gt;Install .NET 10 in two commands&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt install dotnet-sdk-10.0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;That&amp;rsquo;s it. .NET is one of the &lt;a href="https://ubuntu.com/toolchains"&gt;officially supported toolchains on Ubuntu&lt;/a&gt; — not a third-party add-on. Microsoft and Canonical work together to make sure it works on day one.&lt;/p&gt;
+&lt;h2 id="try-it-immediately"&gt;Try it immediately&lt;/h2&gt;
+&lt;p&gt;Here&amp;rsquo;s the thing I love about this: you can pull an &lt;code&gt;ubuntu:resolute&lt;/code&gt; container image and be running C# in under a minute.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --rm -it ubuntu:resolute
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y dotnet-sdk-10.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet run - &lt;span class="s"&gt;&amp;lt;&amp;lt; &amp;#39;EOF&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt;using System.Runtime.InteropServices;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt;Console.WriteLine($&amp;#34;Hello {RuntimeInformation.OSDescription} from .NET {RuntimeInformation.FrameworkDescription}&amp;#34;);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;That &lt;code&gt;dotnet run -&lt;/code&gt; with a heredoc is a file-based app pattern — no project file, no directory, just C# piped to stdin. Honest, if you haven&amp;rsquo;t tried file-based apps yet, it&amp;rsquo;s worth a look.&lt;/p&gt;
+&lt;h2 id="containers-update--noble-to--resolute"&gt;Containers: update &lt;code&gt;-noble&lt;/code&gt; to &lt;code&gt;-resolute&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;The new container images use the &lt;code&gt;resolute&lt;/code&gt; tag. Migration is a one-liner:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sed -i &lt;span class="s2"&gt;&amp;#34;s/noble/resolute/g&amp;#34;&lt;/span&gt; Dockerfile
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All existing image flavors — including &lt;a href="https://devblogs.microsoft.com/dotnet/announcing-dotnet-chiseled-containers/"&gt;Chiseled&lt;/a&gt; — are available. The Chiseled images are still my go-to for production: minimal attack surface, no shell, no package manager, just the runtime. Update the tag and rebuild.&lt;/p&gt;
+&lt;h2 id="native-aot-3ms-startup-14mb-binary"&gt;Native AOT: 3ms startup, 1.4MB binary&lt;/h2&gt;
+&lt;p&gt;Ubuntu 26.04 ships a dedicated AOT package:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y dotnet-sdk-aot-10.0 clang
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Here&amp;rsquo;s what you get when you publish a simple app:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet publish app.cs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# artifacts/app/app — 1.4MB native binary&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Startup time:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;real 0m0.003s
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;3 milliseconds. For a full ASP.NET Core web service, the self-contained binary is around 13MB. That&amp;rsquo;s a completely self-contained deployable with no runtime dependency whatsoever.&lt;/p&gt;
+&lt;p&gt;For cloud-native workloads where cold-start time matters — Functions, containers, serverless — this is a legitimate game changer.&lt;/p&gt;
+&lt;h2 id="what-changed-in-ubuntu-2604-that-affects-net"&gt;What changed in Ubuntu 26.04 that affects .NET&lt;/h2&gt;
+&lt;p&gt;Three things worth knowing:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Linux 7.0&lt;/strong&gt; — The .NET team will start Linux 7.0 testing once they get 26.04 VMs in the lab. No breaking changes expected, but they&amp;rsquo;ll verify.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Post-quantum cryptography&lt;/strong&gt; — Ubuntu 26.04 introduces PQC support, and .NET 10 &lt;a href="https://devblogs.microsoft.com/dotnet/post-quantum-cryptography-in-dotnet/"&gt;added post-quantum cryptography APIs&lt;/a&gt; as well. Good alignment.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;cgroup v1 removed&lt;/strong&gt; — Ubuntu 26.04 drops cgroup v1. .NET added cgroup v2 support years ago, so this is a non-event. But if you&amp;rsquo;re on an older runtime, double-check.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="need-net-8-or-9"&gt;Need .NET 8 or 9?&lt;/h2&gt;
+&lt;p&gt;Those are available via the &lt;a href="https://launchpad.net/~dotnet/&amp;#43;archive/ubuntu/backports"&gt;dotnet-backports PPA&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y software-properties-common
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;add-apt-repository ppa:dotnet/backports
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y dotnet-sdk-8.0 &lt;span class="c1"&gt;# or dotnet-sdk-9.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Support is &amp;ldquo;best-effort&amp;rdquo; — not the same guarantee as the LTS package in the main archive — but the packages are there and they work.&lt;/p&gt;
+&lt;h2 id="wrapping-up"&gt;Wrapping up&lt;/h2&gt;
+&lt;p&gt;Every two years, the Ubuntu LTS + .NET LTS alignment gives you a solid, long-support foundation for production workloads. Ubuntu 26.04 with .NET 10 is that foundation for the next cycle.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re containerizing .NET apps, update your Dockerfiles. If you&amp;rsquo;re deploying on bare metal or VMs, &lt;code&gt;apt install dotnet-sdk-10.0&lt;/code&gt; and you&amp;rsquo;re done.&lt;/p&gt;
+&lt;p&gt;Read the &lt;a href="https://devblogs.microsoft.com/dotnet/whats-new-for-dotnet-in-ubuntu-2604/"&gt;full post from Richard Lander&lt;/a&gt; for the complete installation walkthrough and container details.&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Machine-Learning | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/machine-learning/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/machine-learning/index.xml" rel="self" type="application/rss+xml"/><item><title>Foundry'nin RFT'si Daha Ucuz ve Daha Akıllı Hale Geldi — İşte Neler Değişti</title><link>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</guid><description>Microsoft Foundry bu ay üç RFT güncellemesi gönderdi: o4-mini için global eğitim, yeni GPT-4.1 model grader'ları ve saatlerince hata ayıklamadan tasarruf etmenizi sağlayacak en iyi pratikler kılavuzu.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Bu yazı otomatik olarak çevrilmiştir. Orijinal için &lt;a href="https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/"&gt;buraya tıklayın&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Fine-tune edilmiş modellere dayanan .NET uygulamaları geliştiriyorsanız, bu ayki Foundry güncellemeleri dikkat etmeye değer. Reinforcement Fine-Tuning daha erişilebilir ve önemli ölçüde daha ucuz hale geldi.&lt;/p&gt;
+&lt;p&gt;Tüm ayrıntılar &lt;a href="https://devblogs.microsoft.com/foundry/whats-new-in-foundry-finetune-april-2026/"&gt;resmi duyuruda&lt;/a&gt; mevcut, ancak işte pratik özet.&lt;/p&gt;
+&lt;h2 id="o4-mini-için-global-eğitim"&gt;o4-mini için Global Eğitim&lt;/h2&gt;
+&lt;p&gt;o4-mini, akıl yürütme ağırlıklı ve agentic iş yükleri için tercih edilen modeldir. Büyük haber: artık 13+ Azure bölgesinden fine-tuning işleri başlatabilirsiniz; Standart eğitime kıyasla daha düşük token başına eğitim maliyetiyle. Aynı altyapı, aynı kalite, daha geniş erişim.&lt;/p&gt;
+&lt;p&gt;Ekibiniz coğrafi olarak dağıtılmışsa bu önemlidir. Artık eğitim yapabilmek için birkaç bölgeyle sınırlı değilsiniz.&lt;/p&gt;
+&lt;p&gt;Global bir eğitim işi başlatmak için REST API çağrısı:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://&amp;lt;your-resource&amp;gt;.openai.azure.com/openai/fine_tuning/jobs?api-version=2025-04-01-preview&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;api-key: &lt;/span&gt;&lt;span class="nv"&gt;$AZURE_OPENAI_API_KEY&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s1"&gt;&amp;#39;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;model&amp;#34;: &amp;#34;o4-mini&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;training_file&amp;#34;: &amp;#34;&amp;lt;your-training-file-id&amp;gt;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;method&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;reinforcement&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reinforcement&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;grader&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;string_check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;name&amp;#34;: &amp;#34;answer-check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;input&amp;#34;: &amp;#34;{{sample.output_text}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reference&amp;#34;: &amp;#34;{{item.reference_answer}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;operation&amp;#34;: &amp;#34;eq&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;hyperparameters&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;n_epochs&amp;#34;: 2,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;compute_multiplier&amp;#34;: 1.0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;trainingType&amp;#34;: &amp;#34;globalstandard&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;trainingType: globalstandard&lt;/code&gt; bayrağı temel farktır.&lt;/p&gt;
+&lt;h2 id="yeni-model-graderlar-gpt-41-ailesi"&gt;Yeni Model Grader&amp;rsquo;lar: GPT-4.1 Ailesi&lt;/h2&gt;
+&lt;p&gt;Grader&amp;rsquo;lar, modelinizin optimize ettiği ödül sinyalini tanımlar. Şimdiye kadar model tabanlı grader&amp;rsquo;lar daha küçük bir model setiyle sınırlıydı. Artık üç yeni seçenek var: GPT-4.1, GPT-4.1-mini ve GPT-4.1-nano.&lt;/p&gt;
+&lt;p&gt;Deterministik grader&amp;rsquo;lar yerine model grader&amp;rsquo;larına ne zaman başvurmalısınız? Görev çıktınız açık uçluysa, birden fazla boyutta kısmi puan almanız gerekiyorsa veya araç çağrısının doğruluğunun semantik bağlama bağlı olduğu agentic iş akışları oluşturuyorsanız.&lt;/p&gt;
+&lt;p&gt;Kademeli strateji pratik:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;İlk iterasyonlar için &lt;strong&gt;GPT-4.1-nano&lt;/strong&gt;. Düşük maliyet, hızlı geri bildirim döngüleri.&lt;/li&gt;
+&lt;li&gt;Grading rubric&amp;rsquo;iniz stabil olduğunda ve daha yüksek doğruluğa ihtiyaç duyduğunuzda &lt;strong&gt;GPT-4.1-mini&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Üretim grading&amp;rsquo;i veya her puanlama kararının önemli olduğu karmaşık rubric&amp;rsquo;ler için &lt;strong&gt;GPT-4.1&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tek bir RFT işinde grader türlerini bile karıştırabilirsiniz. &amp;ldquo;Doğru cevap&amp;rdquo; boyutu için string eşleşmesi ve akıl yürütme kalitesini değerlendirmek için model grader kullanın. Bu esneklik, gerçek iş yükleri için kullanışlı kılan şey.&lt;/p&gt;
+&lt;h2 id="rft-veri-formatı-tuzağı"&gt;RFT Veri Formatı Tuzağı&lt;/h2&gt;
+&lt;p&gt;Bu insanları tökezletiyor. RFT veri formatı SFT&amp;rsquo;den farklıdır. Her satırdaki son mesaj User veya Developer rolünde olmalıdır — Assistant değil. Beklenen cevap, grader&amp;rsquo;ın doğrudan referans aldığı &lt;code&gt;reference_answer&lt;/code&gt; gibi üst düzey bir anahtara gider.&lt;/p&gt;
+&lt;p&gt;Denetimli fine-tuning yapıyorsanız ve RFT&amp;rsquo;ye geçmek istiyorsanız, eğitim verilerinizi yeniden yapılandırmanız gerekir. Bu adımı atlarsanız işleriniz sessizce başarısız olur.&lt;/p&gt;
+&lt;h2 id="net-geliştiricileri-için-neden-önemli"&gt;.NET Geliştiricileri İçin Neden Önemli?&lt;/h2&gt;
+&lt;p&gt;Azure OpenAI SDK üzerinden fine-tune edilmiş modelleri .NET uygulamalarınızdan çağırıyorsanız, daha ucuz eğitim daha agresif iterasyon yapabileceğiniz anlamına gelir. Model grader seçenekleri, nüanslı görevler için fine-tuning yapabileceğiniz anlamına gelir — yalnızca tam eşleşme senaryoları için değil. &lt;a href="https://github.com/microsoft-foundry/fine-tuning/blob/main/Demos/Agentic_RFT_PrivatePreview/RFT_Best_Practice.md"&gt;GitHub&lt;/a&gt;&amp;lsquo;daki en iyi pratikler kılavuzu size gerçek hata ayıklama süresi kazandıracak.&lt;/p&gt;
+&lt;p&gt;Küçük başlayın. On ila yüz örnek. Basit grader. Döngüyü doğrulayın. Sonra ölçeklendirin.&lt;/p&gt;</content:encoded></item></channel></rss>

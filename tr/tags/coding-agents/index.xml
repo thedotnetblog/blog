@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Coding-Agents | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/coding-agents/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 17 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/coding-agents/index.xml" rel="self" type="application/rss+xml"/><item><title>Terminalinizi Serbest Bırakın: Aspire'ın Detached Modu İş Akışını Değiştiriyor</title><link>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</link><pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</guid><description>Aspire 13.2, AppHost'unuzu arka planda çalıştırmanıza ve terminalinizi geri almanıza olanak tanıyor. Yeni CLI komutları ve agent desteğiyle birlikte bu, göründüğünden çok daha büyük bir gelişme.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Bu yazı otomatik olarak çevrilmiştir. Orijinal için &lt;a href="https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/"&gt;buraya tıklayın&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Bir Aspire AppHost çalıştırdığınız her seferinde terminaliniz kayboluyor. Kilitli. Ctrl+C ile çıkana kadar meşgul. Hızlı bir komut çalıştırmanız mı gerekiyor? Yeni bir sekme açın. Logları kontrol etmek ister misiniz? Başka bir sekme. Bu küçük sürtünme hızla birikerek büyüyor.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 bunu düzeltiyor. James Newton-King &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;tüm ayrıntıları yazdı&lt;/a&gt; ve dürüstçe söylemek gerekirse bu, çalışma şeklinizi anında değiştiren özelliklerden biri.&lt;/p&gt;
+&lt;h2 id="detached-mod-bir-komut-terminal-geri"&gt;Detached mod: bir komut, terminal geri&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Bu, &lt;code&gt;aspire run --detach&lt;/code&gt; için kısayol. AppHost&amp;rsquo;unuz arka planda başlıyor ve terminalinizi anında geri alıyorsunuz. Ekstra sekme yok. Terminal çoğullayıcı yok. Sadece prompt&amp;rsquo;unuz, hazır ve bekliyor.&lt;/p&gt;
+&lt;h2 id="çalışanları-yönetmek"&gt;Çalışanları yönetmek&lt;/h2&gt;
+&lt;p&gt;İşte şu an — arka planda çalıştırmak yalnızca orada ne olduğunu gerçekten yönetebiliyorsanız işe yarıyor. Aspire 13.2 tam bunun için eksiksiz bir CLI komut seti sunuyor:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Çalışan tüm AppHost&amp;#39;ları listele&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire ps
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Belirli bir AppHost&amp;#39;un durumunu incele&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire describe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Çalışan bir AppHost&amp;#39;tan log akışı al&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire logs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Belirli bir AppHost&amp;#39;u durdur&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire stop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Bu, Aspire CLI&amp;rsquo;ı gerçek anlamda bir süreç yöneticisine dönüştürüyor. Birden fazla AppHost başlatabilir, durumlarını kontrol edebilir, loglarını takip edebilir ve bunları kapatabilirsiniz — hepsi tek bir terminal oturumundan.&lt;/p&gt;
+&lt;h2 id="isolated-modla-birleştirin"&gt;Isolated modla birleştirin&lt;/h2&gt;
+&lt;p&gt;Detached mod, isolated modla doğal olarak uyum içinde çalışır. Port çakışması olmadan aynı projenin iki örneğini arka planda çalıştırmak ister misiniz?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Her biri rastgele portlar, ayrı secret&amp;rsquo;lar ve kendi yaşam döngüsü alıyor. Her ikisini görmek için &lt;code&gt;aspire ps&lt;/code&gt;, işi bitenini kapatmak için &lt;code&gt;aspire stop&lt;/code&gt; kullanın.&lt;/p&gt;
+&lt;h2 id="bu-neden-kodlama-ajanları-için-büyük-bir-gelişme"&gt;Bu neden kodlama ajanları için büyük bir gelişme&lt;/h2&gt;
+&lt;p&gt;İşte gerçekten ilgi çekici olan kısım. Terminalinizde çalışan bir kodlama ajanı artık şunları yapabiliyor:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;aspire start&lt;/code&gt; ile uygulamayı başlatmak&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aspire describe&lt;/code&gt; ile durumunu sorgulamak&lt;/li&gt;
+&lt;li&gt;Sorunları teşhis etmek için &lt;code&gt;aspire logs&lt;/code&gt; ile logları kontrol etmek&lt;/li&gt;
+&lt;li&gt;İşi bittiğinde &lt;code&gt;aspire stop&lt;/code&gt; ile durdurmak&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Terminal oturumunu kaybetmeden. Detached moddan önce, AppHost&amp;rsquo;unuzu çalıştıran bir ajan kendi terminaline erişimini kaybederdi. Artık başlatabilir, gözlemleyebilir, yineleyebilir ve temizleyebilir — tam olarak özerk bir ajanın çalışmasını isteyeceğiniz şekilde.&lt;/p&gt;
+&lt;p&gt;Aspire ekibi bunu benimsedi. &lt;code&gt;aspire agent init&lt;/code&gt; çalıştırmak, ajanlara bu komutları öğreten bir Aspire skill dosyası kuruyor. Bu sayede Copilot&amp;rsquo;un kodlama ajanı gibi araçlar Aspire iş yüklerinizi kutudan çıkar çıkmaz yönetebiliyor.&lt;/p&gt;
+&lt;h2 id="özet"&gt;Özet&lt;/h2&gt;
+&lt;p&gt;Detached mod, basit bir bayrak kılığında gizlenmiş bir iş akışı yükseltmesi. Terminaller arasında bağlam geçişlerini bırakıyorsunuz, ajanlar kendilerini bloke etmekten kurtuluyor ve yeni CLI komutları çalışanlar hakkında gerçek görünürlük sağlıyor. Pratik, temiz ve günlük geliştirme döngüsünü belirgin biçimde daha akıcı hale getiriyor.&lt;/p&gt;
+&lt;p&gt;Tüm ayrıntılar için &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;tam yazıyı&lt;/a&gt; okuyun ve &lt;code&gt;aspire update --self&lt;/code&gt; ile Aspire 13.2&amp;rsquo;yi edinin.&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Dashboard | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/dashboard/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 02 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/dashboard/index.xml" rel="self" type="application/rss+xml"/><item><title>Dashboard Aspire 13.2 Kini Memiliki Telemetry API — dan Ini Mengubah Segalanya</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/</guid><description>.NET Aspire 13.2 hadir dengan ekspor telemetri yang lebih cerdas, API yang dapat diprogram untuk trace dan log, dan peningkatan visualisasi GenAI. Inilah mengapa ini penting untuk alur kerja debugging Anda.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Jika Anda membangun aplikasi terdistribusi dengan .NET Aspire, Anda sudah tahu bahwa dashboard adalah bagian terbaik dari seluruh pengalaman. Aspire 13.2 membuatnya jauh lebih baik.&lt;/p&gt;
+&lt;h2 id="mengekspor-telemetri-dengan-cara-yang-masuk-akal"&gt;Mengekspor telemetri dengan cara yang masuk akal&lt;/h2&gt;
+&lt;p&gt;Aspire 13.2 menambahkan dialog &lt;strong&gt;Kelola log dan telemetri&lt;/strong&gt; yang tepat di mana Anda dapat:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Menghapus semua telemetri&lt;/li&gt;
+&lt;li&gt;Mengekspor telemetri yang dipilih ke file ZIP dalam format OTLP/JSON standar&lt;/li&gt;
+&lt;li&gt;Mengimpor ulang ZIP tersebut ke dashboard Aspire mana pun nanti&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bagian terakhir adalah fitur unggulan. Reproduksi bug, ekspor telemetri, lampirkan ke item kerja, dan rekan tim Anda dapat mengimpornya ke dashboard mereka sendiri.&lt;/p&gt;
+&lt;h2 id="telemetry-api-adalah-pengubah-permainan-sesungguhnya"&gt;Telemetry API adalah pengubah permainan sesungguhnya&lt;/h2&gt;
+&lt;p&gt;Dashboard kini mengekspos HTTP API di bawah &lt;code&gt;/api/telemetry&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;GET /api/telemetry/resources&lt;/code&gt; — daftar sumber daya dengan telemetri&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GET /api/telemetry/spans&lt;/code&gt; — kueri span dengan filter&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GET /api/telemetry/logs&lt;/code&gt; — kueri log dengan filter&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GET /api/telemetry/traces&lt;/code&gt; — daftar trace&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ini mendukung perintah CLI &lt;code&gt;aspire agent mcp&lt;/code&gt; dan &lt;code&gt;aspire otel&lt;/code&gt; yang baru.&lt;/p&gt;
+&lt;h2 id="telemetri-genai-menjadi-praktis"&gt;Telemetri GenAI menjadi praktis&lt;/h2&gt;
+&lt;p&gt;VS Code Copilot chat dan Copilot CLI mendukung konfigurasi &lt;code&gt;OTEL_EXPORTER_OTLP_ENDPOINT&lt;/code&gt; — arahkan ke dashboard Aspire dan Anda bisa melihat agen AI Anda berpikir secara real-time melalui telemetri.&lt;/p&gt;
+&lt;h2 id="kesimpulan"&gt;Kesimpulan&lt;/h2&gt;
+&lt;p&gt;Aspire 13.2 mengubah dashboard dari &amp;ldquo;UI debugging yang bagus&amp;rdquo; menjadi &amp;ldquo;platform observabilitas yang dapat diprogram&amp;rdquo;. Kunjungi &lt;a href="https://aspire.dev"&gt;aspire.dev&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

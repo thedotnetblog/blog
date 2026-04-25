@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>AI Foundry | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/ai-foundry/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 25 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/ai-foundry/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure SDK 2026年4月：AI Foundry 2.0及.NET开发者须知</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-sdk-april-2026-ai-foundry-2-stable/</link><pubDate>Sat, 25 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/azure-sdk-april-2026-ai-foundry-2-stable/</guid><description>2026年4月Azure SDK发布带来了Azure.AI.Projects 2.0.0稳定版（包含重大破坏性变更）、Cosmos DB关键安全修复以及.NET的新Provisioning库。</description><content:encoded>&lt;p&gt;&lt;em&gt;本文已自动翻译。要查看原始版本，请&lt;a href="https://thedotnetblog.com/posts/emiliano-montesdeoca/azure-sdk-april-2026-ai-foundry-2-stable/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;月度SDK发布通常容易被忽略。这次有几件事值得关注——特别是如果你在使用AI Foundry、Java版Cosmos DB或从.NET代码进行基础设施配置。&lt;/p&gt;
+&lt;h2 id="azureaiprojects-200--有意义的破坏性变更"&gt;Azure.AI.Projects 2.0.0 — 有意义的破坏性变更&lt;/h2&gt;
+&lt;p&gt;命名空间拆分、类型重命名、布尔属性统一使用&lt;code&gt;Is*&lt;/code&gt;命名规则。&lt;/p&gt;
+&lt;h2 id="cosmos-db-java关键安全修复rce"&gt;Cosmos DB Java：关键安全修复（RCE）&lt;/h2&gt;
+&lt;p&gt;4.79.0版本修复了&lt;strong&gt;远程代码执行漏洞（CWE-502）&lt;/strong&gt;。立即更新。&lt;/p&gt;
+&lt;h2 id="net的新provisioning库"&gt;.NET的新Provisioning库&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.nuget.org/packages/Azure.Provisioning.Network/1.0.0"&gt;Azure.Provisioning.Network 1.0.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.nuget.org/packages/Azure.Provisioning.PrivateDns/1.0.0"&gt;Azure.Provisioning.PrivateDns 1.0.0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;原始文章：&lt;a href="https://devblogs.microsoft.com/azure-sdk/azure-sdk-release-april-2026/"&gt;Azure SDK Release (April 2026)&lt;/a&gt;。&lt;/p&gt;</content:encoded></item><item><title>每天花68分钟重新解释代码？这里有个解决方案</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/auto-memory-stop-re-explaining-code-to-copilot/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/auto-memory-stop-re-explaining-code-to-copilot/</guid><description>上下文腐烂是真实存在的——你的AI代理在30轮之后就会迷失，你每小时都在支付压缩税。auto-memory给GitHub Copilot CLI提供了外科式的记忆，而不需要消耗数千个token。</description><content:encoded>&lt;p&gt;&lt;em&gt;本文已自动翻译。要查看原始版本，请&lt;a href="https://thedotnetblog.com/posts/emiliano-montesdeoca/auto-memory-stop-re-explaining-code-to-copilot/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;你知道那个时刻——当你的Copilot会话触发&lt;code&gt;/compact&lt;/code&gt;，代理完全忘记你在做什么？你花接下来五分钟重新解释文件结构、失败的测试、你已经尝试过的三种方法。然后又发生了。&lt;/p&gt;
+&lt;p&gt;Desi Villanueva测量了一下：&lt;strong&gt;每天68分钟&lt;/strong&gt; — 仅用于重新定向。不是写代码，不是审查PR，只是让AI了解它已经知道的事情。&lt;/p&gt;
+&lt;h2 id="上下文窗口的谎言"&gt;上下文窗口的谎言&lt;/h2&gt;
+&lt;p&gt;实际计算：200K总上下文，减去MCP工具65K，减去指令文件10K，实际上&lt;strong&gt;在你输入任何内容之前只剩125K&lt;/strong&gt;。LLM在60%容量时会撞墙，有效限制是&lt;strong&gt;45K token&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id="压缩税"&gt;压缩税&lt;/h2&gt;
+&lt;p&gt;残忍的部分：&lt;strong&gt;记忆已经存在。&lt;/strong&gt; Copilot CLI将每个会话写入&lt;code&gt;~/.copilot/session-store.db&lt;/code&gt;中的本地SQLite数据库。代理只是无法读取它。&lt;/p&gt;
+&lt;h2 id="auto-memory召回层而非记忆系统"&gt;auto-memory：召回层，而非记忆系统&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pip install auto-memory
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;~1,900行Python。零依赖。30秒安装完成。&lt;/p&gt;
+&lt;p&gt;不是用grep结果淹没上下文，而是给代理外科式访问真正重要的内容——&lt;strong&gt;50个token而不是10,000个&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;p&gt;上下文腐烂是真实的架构约束。auto-memory通过给你的代理提供廉价、精确的召回机制来绕过它。&lt;/p&gt;
+&lt;p&gt;查看：&lt;a href="https://github.com/dezgit2025/auto-memory"&gt;GitHub上的auto-memory&lt;/a&gt;。Desi Villanueva的原始文章：&lt;a href="https://devblogs.microsoft.com/all-things-azure/i-wasted-68-minutes-a-day-re-explaining-my-code-then-i-built-auto-memory/"&gt;I Wasted 68 Minutes a Day&lt;/a&gt;。&lt;/p&gt;</content:encoded></item></channel></rss>

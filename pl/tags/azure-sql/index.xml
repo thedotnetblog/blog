@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure-Sql | The .NET Blog</title><link>https://thedotnetblog.com/pl/tags/azure-sql/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>pl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/pl/tags/azure-sql/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL MCP Server — Właściwy Sposób na Danie Agentom AI Dostępu do Bazy Danych</title><link>https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>SQL MCP Server z Data API builder daje agentom AI bezpieczny, deterministyczny dostęp do bazy danych bez ujawniania schematów lub polegania na NL2SQL.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, &lt;a href="https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;kliknij tutaj&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Będąc szczerym: większość dostępnych dziś serwerów MCP dla baz danych jest przerażająca. Biorą zapytanie w języku naturalnym, generują SQL w locie i uruchamiają go na twoich danych produkcyjnych.&lt;/p&gt;
+&lt;p&gt;Zespół Azure SQL właśnie &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;przedstawił SQL MCP Server&lt;/a&gt;, i przyjmuje fundamentalnie inne podejście.&lt;/p&gt;
+&lt;h2 id="dlaczego-nie-nl2sql"&gt;Dlaczego nie NL2SQL?&lt;/h2&gt;
+&lt;p&gt;Modele nie są deterministyczne. SQL MCP Server używa podejścia &lt;strong&gt;NL2DAB&lt;/strong&gt;. Agent pracuje z warstwą abstrakcji encji Data API builder, aby deterministycznie produkować dokładne T-SQL.&lt;/p&gt;
+&lt;h2 id="siedem-narzędzi-nie-siedemset"&gt;Siedem narzędzi, nie siedemset&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server udostępnia dokładnie siedem narzędzi DML:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — odkryj dostępne encje&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — wstawiaj wiersze&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — zapytuj tabele i widoki&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — modyfikuj wiersze&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — usuń wiersze&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — uruchamiaj procedury składowane&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — zapytania agregujące&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="pierwsze-kroki-w-trzech-poleceniach"&gt;Pierwsze kroki w trzech poleceniach&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers --source dbo.Customers --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="historia-bezpieczeństwa-jest-solidna"&gt;Historia bezpieczeństwa jest solidna&lt;/h2&gt;
+&lt;p&gt;RBAC na każdej warstwie, integracja Azure Key Vault, Microsoft Entra + niestandardowy OAuth.&lt;/p&gt;
+&lt;p&gt;Sprawdź &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;pełny post&lt;/a&gt; i &lt;a href="https://aka.ms/sql/mcp"&gt;dokumentację&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

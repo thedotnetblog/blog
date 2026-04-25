@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Profiling | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/profiling/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 02 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/profiling/index.xml" rel="self" type="application/rss+xml"/><item><title>Visual Studioの3月アップデートでカスタムCopilotエージェントが作成可能に — find_symbolが大きな進化</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/</guid><description>Visual Studioの2026年3月アップデートがカスタムCopilotエージェント、再利用可能なスキル、言語対応のfind_symbolツール、Test ExplorerからのCopilotプロファイリングを提供。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されました。オリジナル版は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Visual Studioが最も重要なCopilotアップデートを受けました。Mark Downieが&lt;a href="https://devblogs.microsoft.com/visualstudio/visual-studio-march-update-build-your-own-custom-agents/"&gt;3月リリースを発表&lt;/a&gt;し、見出しはカスタムエージェントですが、正直なところ&lt;code&gt;find_symbol&lt;/code&gt;ツールがワークフローを最も変える機能かもしれません。&lt;/p&gt;
+&lt;h2 id="リポジトリ内のカスタムcopilotエージェント"&gt;リポジトリ内のカスタムCopilotエージェント&lt;/h2&gt;
+&lt;p&gt;Copilotにチームのコーディング標準に従わせたい？カスタムエージェントはリポジトリの&lt;code&gt;.github/agents/&lt;/code&gt;に&lt;code&gt;.agent.md&lt;/code&gt;ファイルとして定義されます。各エージェントはワークスペース認識、コード理解、ツール、優先モデル、MCP接続へのフルアクセスを持ちます。&lt;/p&gt;
+&lt;h2 id="エージェントスキル再利用可能なインストラクションパック"&gt;エージェントスキル：再利用可能なインストラクションパック&lt;/h2&gt;
+&lt;p&gt;スキルはリポジトリの&lt;code&gt;.github/skills/&lt;/code&gt;またはプロファイルの&lt;code&gt;~/.copilot/skills/&lt;/code&gt;から自動的にロードされます。&lt;/p&gt;
+&lt;h2 id="find_symbol言語対応ナビゲーション"&gt;find_symbol：言語対応ナビゲーション&lt;/h2&gt;
+&lt;p&gt;新しい&lt;code&gt;find_symbol&lt;/code&gt;ツールはCopilotのエージェントモードに言語サービスベースのシンボルナビゲーションを提供します。テキスト検索の代わりに、シンボルのすべての参照を見つけ、型情報やスコープにアクセスできます。&lt;/p&gt;
+&lt;p&gt;.NET開発者にとって、これは大きな改善です — 深い型階層を持つC#コードベースが大きく恩恵を受けます。&lt;/p&gt;
+&lt;h2 id="copilotでテストをプロファイル"&gt;Copilotでテストをプロファイル&lt;/h2&gt;
+&lt;p&gt;Test Explorerのコンテキストメニューに&lt;strong&gt;Profile with Copilot&lt;/strong&gt;が追加されました。Profiling Agentがテストを実行し、パフォーマンスを自動分析します。&lt;/p&gt;
+&lt;h2 id="ライブデバッグ中のperf-tips"&gt;ライブデバッグ中のPerf Tips&lt;/h2&gt;
+&lt;p&gt;パフォーマンス最適化がデバッグ中に行われるようになりました。Visual Studioがインラインで実行時間を表示します。遅い行を見つけたら、Perf Tipをクリックして最適化の提案をCopilotに依頼できます。&lt;/p&gt;
+&lt;h2 id="solution-explorerからnuget脆弱性を修正"&gt;Solution ExplorerからNuGet脆弱性を修正&lt;/h2&gt;
+&lt;p&gt;NuGetパッケージの脆弱性が検出されると、Solution Explorerに直接&lt;strong&gt;Fix with GitHub Copilot&lt;/strong&gt;リンクが表示されます。&lt;/p&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;カスタムエージェントとスキルが見出しですが、&lt;code&gt;find_symbol&lt;/code&gt;が隠れた逸品です — .NETコードのリファクタリング時のCopilotの精度を根本的に変えます。&lt;a href="https://visualstudio.microsoft.com/downloads/"&gt;Visual Studio 2026 Insiders&lt;/a&gt;をダウンロードしてお試しください。&lt;/p&gt;</content:encoded></item></channel></rss>

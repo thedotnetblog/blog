@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fine-Tuning | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/fine-tuning/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/fine-tuning/index.xml" rel="self" type="application/rss+xml"/><item><title>RFT Foundry Menjadi Lebih Murah dan Lebih Pintar — Inilah yang Berubah</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</guid><description>Microsoft Foundry mengirimkan tiga pembaruan RFT bulan ini: pelatihan global untuk o4-mini, penilai model GPT-4.1 baru, dan panduan praktik terbaik.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Jika Anda membangun aplikasi .NET yang mengandalkan model yang disetel halus, pembaruan Foundry bulan ini layak diperhatikan.&lt;/p&gt;
+&lt;p&gt;Detail lengkap ada di &lt;a href="https://devblogs.microsoft.com/foundry/whats-new-in-foundry-finetune-april-2026/"&gt;pengumuman resmi&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="pelatihan-global-untuk-o4-mini"&gt;Pelatihan Global untuk o4-mini&lt;/h2&gt;
+&lt;p&gt;o4-mini adalah model yang digunakan untuk beban kerja penalaran berat dan agentik. Anda kini dapat meluncurkan pekerjaan penyetelan halus dari 13+ region Azure dengan tarif pelatihan per-token yang lebih rendah.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;trainingType&amp;#34;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;#34;globalstandard&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="penilai-model-baru-keluarga-gpt-41"&gt;Penilai Model Baru: Keluarga GPT-4.1&lt;/h2&gt;
+&lt;p&gt;Tiga opsi baru: GPT-4.1, GPT-4.1-mini, dan GPT-4.1-nano.&lt;/p&gt;
+&lt;p&gt;Strategi pengelompokan:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-nano&lt;/strong&gt; untuk iterasi awal. Biaya rendah, loop umpan balik cepat.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-mini&lt;/strong&gt; setelah rubrik penilaian stabil.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1&lt;/strong&gt; untuk penilaian produksi.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="jebakan-format-data-rft"&gt;Jebakan Format Data RFT&lt;/h2&gt;
+&lt;p&gt;Format data RFT berbeda dari SFT. Pesan terakhir di setiap baris harus berperan User atau Developer — bukan Assistant.&lt;/p&gt;
+&lt;h2 id="mengapa-ini-penting-bagi-pengembang-net"&gt;Mengapa ini penting bagi pengembang .NET&lt;/h2&gt;
+&lt;p&gt;Pelatihan yang lebih murah berarti Anda dapat melakukan iterasi lebih agresif. &lt;a href="https://github.com/microsoft-foundry/fine-tuning/blob/main/Demos/Agentic_RFT_PrivatePreview/RFT_Best_Practice.md"&gt;Panduan praktik terbaik di GitHub&lt;/a&gt; akan menghemat waktu debugging.&lt;/p&gt;</content:encoded></item></channel></rss>

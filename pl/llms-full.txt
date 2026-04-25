@@ -1,0 +1,3200 @@
+# The .NET Blog — Full Content
+
+> Articles, tutorials and insights from the .NET community.
+
+The .NET Blog is a community-driven publication featuring articles, tutorials, and deep dives on .NET, ASP.NET Core, C#, cloud architecture, and software engineering. Written by developers, for developers.
+
+## Metadata
+
+- **URL**: https://thedotnetblog.com/
+- **Language**: pl
+- **Last Updated**: 2026-04-25
+
+---
+## .NET 10 Jest Dostarczany z Ubuntu 26.04 LTS — Co Nowego
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/
+- **Date**: April 25, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: .NET, Linux, Ubuntu, Containers, Docker, Native AOT, .NET 10
+- **Reading time**: 1 min
+
+> Ubuntu 26.04 LTS (Resolute Raccoon) wyszedł z .NET 10 jako toolchain pierwszej klasy. Native AOT, kontenery chiseled, Linux 7.0.
+
+
+
+*Ten post został automatycznie przetłumaczony. Aby zobaczyć oryginalną wersję, [kliknij tutaj]({{< ref "index.md" >}}).*
+
+To dzień Ubuntu LTS. [Ubuntu 26.04 (Resolute Raccoon)](https://canonical.com/blog/canonical-releases-ubuntu-26-04-lts-resolute-raccoon) wyszedł dziś z [.NET 10](https://devblogs.microsoft.com/dotnet/whats-new-for-dotnet-in-ubuntu-2604/).
+
+## Zainstaluj .NET 10 dwoma poleceniami
+
+```bash
+sudo apt update
+sudo apt install dotnet-sdk-10.0
+```
+
+## Kontenery: zaktualizuj `-noble` do `-resolute`
+
+```bash
+sed -i "s/noble/resolute/g" Dockerfile
+```
+
+## Native AOT: uruchomienie w 3ms, binarny plik 1,4MB
+
+```bash
+apt install -y dotnet-sdk-aot-10.0 clang
+dotnet publish app.cs
+# natywny plik binarny 1,4MB, uruchomienie w 3ms
+```
+
+Dla cloud-native workloadów, gdzie czas zimnego startu ma znaczenie — Functions, kontenery, serverless — prawdziwa zmiana gry.
+
+## Potrzebujesz .NET 8 lub 9?
+
+```bash
+apt install -y software-properties-common
+add-apt-repository ppa:dotnet/backports
+apt install -y dotnet-sdk-8.0
+```
+
+[Pełny post](https://devblogs.microsoft.com/dotnet/whats-new-for-dotnet-in-ubuntu-2604/) zawiera więcej szczegółów.
+
+
+---
+## Azure MCP Server jest Teraz .mcpb — Instaluj bez Żadnego Runtime
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/azure-mcp-server-mcpb-no-runtime-install/
+- **Date**: April 25, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: MCP, Azure, AI, Developer Tools, Azure SDK
+- **Reading time**: 1 min
+
+> Azure MCP Server jest teraz dostępny jako MCP Bundle (.mcpb) — pobierz, przeciągnij do Claude Desktop i gotowe. Bez Node.js, Python czy .NET.
+
+
+
+*Ten post został automatycznie przetłumaczony. Aby zobaczyć oryginalną wersję, [kliknij tutaj]({{< ref "index.md" >}}).*
+
+Wiesz, co było irytujące w konfiguracji serwerów MCP? Potrzebowałeś runtime. Node.js dla wersji npm, Python dla pip/uvx, .NET SDK dla wariantu dotnet.
+
+[Azure MCP Server właśnie to zmienił](https://devblogs.microsoft.com/azure-sdk/azure-mcp-server-mcpb-support/). Jest teraz dostępny jako `.mcpb` — MCP Bundle — a konfiguracja to przeciągnij i upuść.
+
+## Czym jest MCP Bundle?
+
+Pomyśl o tym jak o rozszerzeniu VS Code (`.vsix`) lub rozszerzeniu przeglądarki (`.crx`), ale dla serwerów MCP. Plik `.mcpb` to samodzielne archiwum ZIP zawierające binarny plik serwera i wszystkie jego zależności.
+
+## Jak zainstalować
+
+**1. Pobierz bundle dla swojej platformy**
+
+Przejdź na [stronę GitHub Releases](https://github.com/microsoft/mcp/releases?q=Azure.Mcp.Server) i pobierz plik `.mcpb` dla swojego OS i architektury.
+
+**2. Zainstaluj w Claude Desktop**
+
+Najłatwiej: przeciągnij plik `.mcpb` do okna Claude Desktop na stronie ustawień Rozszerzeń (`☰ → Plik → Ustawienia → Rozszerzenia`). Przejrzyj szczegóły serwera, kliknij Zainstaluj, potwierdź.
+
+**3. Uwierzytelnij się w Azure**
+
+```bash
+az login
+```
+
+## Na początek
+
+- **Pobieranie**: [GitHub Releases](https://github.com/microsoft/mcp/releases?q=Azure.Mcp.Server-)
+- **Repozytorium**: [aka.ms/azmcp](https://aka.ms/azmcp)
+- **Dokumentacja**: [aka.ms/azmcp/docs](https://aka.ms/azmcp/docs)
+
+Sprawdź [pełny post](https://devblogs.microsoft.com/azure-sdk/azure-mcp-server-mcpb-support/).
+
+
+---
+## CodeAct w Agent Framework: Jak zmniejszyć opóźnienie agenta o połowę
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/codeact-agent-framework-hyperlight-50-percent-faster/
+- **Date**: April 25, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: Agent Framework, AI, Agents, Hyperlight, Python, MCP
+- **Reading time**: 2 min
+
+> CodeAct kompresuje wieloetapowe łańcuchy narzędzi do jednego izolowanego bloku kodu — zmniejszając opóźnienie o 52% i zużycie tokenów o 64%.
+
+
+
+*Ten post został przetłumaczony automatycznie. Aby zobaczyć oryginalną wersję, [kliknij tutaj]({{< ref "index.md" >}}).*
+
+W każdym projekcie agentów przychodzi moment, gdy patrzysz na ślad i myślisz: „Dlaczego to tak długo trwa?" Model działa dobrze. Narzędzia działają. Ale jest siedem rund komunikacji, żeby uzyskać wynik, który można obliczyć za jednym razem.
+
+To właśnie problem, który rozwiązuje CodeAct — a [zespół Agent Framework właśnie wydał wsparcie alfa](https://devblogs.microsoft.com/agent-framework/codeact-with-hyperlight/) przez nowy pakiet `agent-framework-hyperlight`.
+
+## Czym jest CodeAct?
+
+[Wzorzec CodeAct](https://arxiv.org/abs/2402.01030) jest elegancko prosty: zamiast dawać modelowi listę narzędzi do wywoływania jedno po drugim, dajesz mu jedno narzędzie `execute_code` i pozwalasz wyrazić *cały plan* jako krótki program w Pythonie.
+
+| Podejście | Czas | Tokeny |
+|--------|------|--------|
+| Tradycyjne | 27,81s | 6 890 |
+| CodeAct | 13,23s | 2 489 |
+| **Poprawa** | **52,4%** | **63,9%** |
+
+## Bezpieczeństwo: Mikro-VM Hyperlight
+
+Pakiet `agent-framework-hyperlight` używa mikro-VM [Hyperlight](https://github.com/hyperlight-dev/hyperlight). Każde wywołanie `execute_code` otrzymuje własną, świeżo utworzoną mikro-VM. Uruchomienie mierzone jest w milisekundach. Izolacja jest praktycznie bezpłatna.
+
+Twoje narzędzia nadal działają na hoście. Kod kleju wygenerowany przez model działa w piaskownicy. To właściwy podział.
+
+## Minimalna konfiguracja
+
+```python
+from agent_framework import Agent, tool
+from agent_framework_hyperlight import HyperlightCodeActProvider
+
+codeact = HyperlightCodeActProvider(
+    tools=[get_weather],
+    approval_mode="never_require",
+)
+
+agent = Agent(
+    client=client,
+    name="CodeActAgent",
+    instructions="You are a helpful assistant.",
+    context_providers=[codeact],
+)
+```
+
+## Kiedy używać CodeAct (a kiedy nie)
+
+**Używaj CodeAct, gdy:**
+- Zadanie łączy wiele małych wywołań narzędzi (wyszukiwania, łączenia, obliczenia)
+- Ważne są opóźnienie i koszt tokenów
+- Potrzebujesz silnej izolacji dla kodu generowanego przez model
+
+**Zostań przy tradycyjnym wywołaniu narzędzi, gdy:**
+- Agent robi tylko jedno lub dwa wywołania na turę
+- Każde wywołanie ma skutki uboczne wymagające indywidualnego zatwierdzenia
+- Opisy narzędzi są skąpe lub niejednoznaczne
+
+## Wypróbuj teraz
+
+```bash
+pip install agent-framework-hyperlight --pre
+```
+
+Przeczytaj [pełny post na blogu Agent Framework](https://devblogs.microsoft.com/agent-framework/codeact-with-hyperlight/).
+
+
+---
+## Gdzie Twój Agent Pamięta Rzeczy? Praktyczny Przewodnik po Przechowywaniu Historii Czatu
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/chat-history-storage-patterns-agent-framework/
+- **Date**: April 25, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: Agent Framework, AI, Agents, Architecture, CSharp, Python
+- **Reading time**: 2 min
+
+> Zarządzane przez usługę czy klienta? Liniowe czy z rozgałęzieniami? Decyzja architektoniczna, która decyduje o tym, co naprawdę może robić Twój agent AI — z przykładami kodu w C# i Python.
+
+
+
+*Ten post został automatycznie przetłumaczony. Aby zobaczyć oryginalną wersję, [kliknij tutaj]({{< ref "index.md" >}}).*
+
+Budując agenta AI, większość energii poświęcasz na model, narzędzia i prompty. Pytanie *gdzie żyje historia rozmowy* wydaje się szczegółem implementacyjnym — ale jest jedną z najważniejszych decyzji architektonicznych, jakie podejmiesz.
+
+Decyduje o tym, czy użytkownicy mogą rozgałęziać rozmowy, cofać odpowiedzi, wznawiać sesje po restarcie oraz czy Twoje dane kiedykolwiek opuszczają Twoją infrastrukturę. [Zespół Agent Framework opublikował szczegółową analizę](https://devblogs.microsoft.com/agent-framework/chat-history-storage-patterns-in-microsoft-agent-framework/).
+
+## Dwa podstawowe wzorce
+
+**Zarządzane przez usługę**: usługa AI przechowuje stan rozmowy. Twoja aplikacja trzyma referencję, a usługa automatycznie dołącza odpowiednią historię do każdego żądania.
+
+**Zarządzane przez klienta**: Twoja aplikacja utrzymuje pełną historię i wysyła odpowiednie wiadomości z każdym żądaniem. Usługa jest bezstanowa. Kontrolujesz wszystko.
+
+## Jak Agent Framework to abstrahuje
+
+```csharp
+AgentSession session = await agent.CreateSessionAsync();
+var first = await agent.RunAsync("Mam na imię Alice.", session);
+var second = await agent.RunAsync("Jak mam na imię?", session);
+```
+
+```python
+session = agent.create_session()
+first = await agent.run("Mam na imię Alice.", session=session)
+second = await agent.run("Jak mam na imię?", session=session)
+```
+
+## Szybki przegląd dostawców
+
+| Dostawca | Przechowywanie | Model | Kompaktowanie |
+|----------|---------|-------|------------|
+| OpenAI/Azure Chat Completions | Klient | N/A | Ty |
+| Foundry Agent Service | Usługa | Liniowy | Usługa |
+| Responses API (domyślnie) | Usługa | Rozgałęziający | Usługa |
+| Anthropic Claude, Ollama | Klient | N/A | Ty |
+
+## Jak wybrać
+
+1. **Potrzebujesz rozgałęzień lub „cofnij"?** → Responses API zarządzane przez usługę
+2. **Potrzebujesz suwerenności danych?** → Zarządzane przez klienta z backendem DB
+3. **Prosty chatbot?** → Liniowe zarządzane przez usługę wystarczy
+
+Przeczytaj [pełny post](https://devblogs.microsoft.com/agent-framework/chat-history-storage-patterns-in-microsoft-agent-framework/) po kompletne drzewo decyzyjne.
+
+
+---
+## GPT-5.5 Jest Tutaj i Trafia do Azure Foundry — Co Muszą Wiedzieć Deweloperzy .NET
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/gpt-55-foundry-ga-what-dotnet-developers-need-to-know/
+- **Date**: April 25, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: AI, Foundry, Azure, Agent Framework, GPT-5
+- **Reading time**: 1 min
+
+> GPT-5.5 jest ogólnie dostępny w Microsoft Foundry. Ewolucja od GPT-5 do 5.5, co naprawdę się poprawiło i jak zacząć używać go w swoich agentach już dziś.
+
+
+
+*Ten post został automatycznie przetłumaczony. Aby zobaczyć oryginalną wersję, [kliknij tutaj]({{< ref "index.md" >}}).*
+
+Microsoft właśnie ogłosił, że [GPT-5.5 jest ogólnie dostępny w Microsoft Foundry](https://azure.microsoft.com/en-us/blog/openais-gpt-5-5-in-microsoft-foundry-frontier-intelligence-on-an-enterprise-ready-platform/). Jeśli budujesz agentów na Azure, to jest aktualizacja, na którą czekałeś.
+
+## Ewolucja GPT-5
+
+- **GPT-5**: połączył rozumowanie i szybkość w jednym systemie
+- **GPT-5.4**: silniejsze rozumowanie wieloetapowe, wczesne możliwości agentyczne dla enterprise
+- **GPT-5.5**: głębsze rozumowanie w długim kontekście, bardziej niezawodne wykonanie agentyczne, lepsza wydajność tokenów
+
+## Co naprawdę się zmieniło
+
+**Ulepszone kodowanie agentyczne**: GPT-5.5 utrzymuje kontekst w dużych bazach kodu, diagnozuje awarie architektoniczne i przewiduje wymagania testowe. Model rozumuje, na *co jeszcze* wpływa poprawka, zanim zadziała.
+
+**Wydajność tokenów**: Wyższa jakość danych wyjściowych przy mniejszej liczbie tokenów i mniej prób. Bezpośrednio obniżone koszty i opóźnienia w produkcji.
+
+## Cennik
+
+| Model | Wejście ($/M tokenów) | Pamięć podręczna | Wyjście ($/M tokenów) |
+|-------|-------------------|--------------|---------------------|
+| GPT-5.5 | $5,00 | $0,50 | $30,00 |
+| GPT-5.5 Pro | $30,00 | $3,00 | $180,00 |
+
+## Dlaczego Foundry jest ważny
+
+Foundry Agent Service umożliwia definiowanie agentów w YAML lub połączenie ich z Microsoft Agent Framework, GitHub Copilot SDK, LangGraph lub OpenAI Agents SDK — i uruchamianie ich jako izolowanych hostowanych agentów z trwałym systemem plików, tożsamością Microsoft Entra i cenami scale-to-zero.
+
+```csharp
+AIAgent agent = aiProjectClient
+    .AsAIAgent("gpt-5.5", instructions: "Jesteś pomocnym asystentem.", name: "MójAgent");
+```
+
+Sprawdź [pełne ogłoszenie](https://azure.microsoft.com/en-us/blog/openais-gpt-5-5-in-microsoft-foundry-frontier-intelligence-on-an-enterprise-ready-platform/).
+
+
+---
+## VS Code 1.118: Copilot CLI Dostaje Nazwy Sesji, Odznaki Modelu i TypeScript 7.0 Nightly
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/vscode-1-118-copilot-cli-session-names-model-badge/
+- **Date**: April 25, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: VS Code, GitHub Copilot, Developer Tools, TypeScript
+- **Reading time**: 1 min
+
+> Visual Studio Code 1.118 to skoncentrowane wydanie skupione na ulepszeniach Copilot CLI — nazwy sesji, odznaki modelu, automatyczny wybór modelu i opt-in do TypeScript 7.0 Nightly.
+
+
+
+*Ten post został przetłumaczony automatycznie. Aby zobaczyć wersję oryginalną, [kliknij tutaj]({{< ref "index.md" >}}).*
+
+[Visual Studio Code 1.118](https://code.visualstudio.com/updates/v1_118) to mniejsze, skoncentrowane wydanie — głównie usprawnienia Copilot CLI.
+
+## Copilot CLI: sesje mają prawdziwe nazwy
+
+API tytułów sesji SDK Copilot CLI jest teraz używane jako źródło prawdy dla nazw sesji. Zamiast automatycznie generowanych etykiet, sesje wyświetlają prawdziwą nazwę z SDK.
+
+## Szybsze przełączanie sesji
+
+Aplikacja Agents ma teraz przypisane `Ctrl+1`, `Ctrl+2` itp. do szybkiego przełączania między sesjami.
+
+## Odznaki modelu w czacie
+
+Odpowiedzi Copilot CLI w panelu czatu pokazują teraz odznakę modelu — na pierwszy rzut oka widać, który model obsłużył każde żądanie.
+
+## Automatyczny wybór modelu w Copilot CLI
+
+Funkcja automatycznego wyboru modelu działa teraz również w agencie Copilot CLI.
+
+## Opt-in do TypeScript 7.0 Nightly
+
+Możesz teraz wybrać testowanie TypeScript 7.0 nightly bezpośrednio z ustawień VS Code. TypeScript 7.0 to znaczące wydanie ([beta wyszła kilka dni temu](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0-beta/)).
+
+Zobacz [pełne informacje o wydaniu](https://code.visualstudio.com/updates/v1_118).
+
+
+---
+## Foundry Toolboxes: Jeden endpoint dla wszystkich narzędzi agentów AI
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/foundry-toolboxes-curate-manage-tools-ai-agents/
+- **Date**: April 23, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: microsoft-foundry, ai, agents, mcp, azure, developer-tools
+- **Reading time**: 2 min
+
+> Microsoft Foundry uruchomił Toolboxes w publicznym podglądzie — sposób na zarządzanie narzędziami agentów AI i ich udostępnianie przez jeden endpoint zgodny z MCP.
+
+
+
+*Ten artykuł został przetłumaczony automatycznie. Aby zobaczyć oryginalną wersję, [kliknij tutaj]({{< ref "index.md" >}}).*
+
+Jest problem, który wydaje się błahy — dopóki się na niego nie natrafi. Organizacja buduje wiele agentów AI, każdy wymaga narzędzi, a każdy zespół konfiguruje je od zera. Ta sama integracja wyszukiwania, ta sama konfiguracja Azure AI Search, to samo połączenie z serwerem GitHub MCP — ale w innym repozytorium, przez inny zespół, z innymi danymi uwierzytelniającymi i bez wspólnego zarządzania.
+
+Microsoft Foundry właśnie uruchomił [Toolboxes](https://devblogs.microsoft.com/foundry/introducing-toolboxes-in-foundry/) w publicznym podglądzie — bezpośrednia odpowiedź na ten problem.
+
+## Czym jest Toolbox?
+
+Toolbox to nazwany, wielokrotnie używalny zestaw narzędzi, który definiuje się raz w Foundry i udostępnia przez jeden endpoint zgodny z MCP. Każde środowisko uruchomieniowe agenta obsługujące MCP może je konsumować — bez uzależnienia od Foundry Agents.
+
+Obietnica jest prosta: **build once, consume anywhere**. Zdefiniuj narzędzia, skonfiguruj uwierzytelnianie centralnie (OAuth passthrough, tożsamość zarządzana Entra), opublikuj endpoint. Każdy agent potrzebujący tych narzędzi łączy się raz i dostaje je wszystkie.
+
+## Cztery filary (dwa dostępne dziś)
+
+| Filar | Status | Co robi |
+|-------|--------|---------|
+| **Discover** | Wkrótce | Znajdowanie zatwierdzonych narzędzi bez ręcznego szukania |
+| **Build** | Dostępny | Grupowanie narzędzi w wielokrotnie używalny bundle |
+| **Consume** | Dostępny | Jeden endpoint MCP udostępnia wszystkie narzędzia |
+| **Govern** | Wkrótce | Centralne uwierzytelnianie + obserwowalność wszystkich wywołań |
+
+## Przykład praktyczny
+
+```python
+from azure.identity import DefaultAzureCredential
+from azure.ai.projects import AIProjectClient
+import os
+
+client = AIProjectClient(
+    endpoint=os.environ["FOUNDRY_PROJECT_ENDPOINT"],
+    credential=DefaultAzureCredential()
+)
+
+toolbox_version = client.beta.toolboxes.create_toolbox_version(
+    toolbox_name="customer-feedback-triaging-toolbox",
+    description="Przeszukaj dokumentację i odpowiedz na issues GitHub.",
+    tools=[
+        {"type": "web_search", "description": "Szukaj publicznej dokumentacji"},
+        {"type": "azure_ai_search", "index_name": "internal-docs"},
+        {"type": "mcp_server", "server_url": "https://your-github-mcp-server.com"}
+    ]
+)
+```
+
+Po opublikowaniu Foundry udostępnia ujednolicony endpoint. Jedno połączenie — wszystkie narzędzia.
+
+## Brak uzależnienia od Foundry Agents
+
+Toolboxes są **tworzone i zarządzane** w Foundry, ale powierzchnią konsumpcji jest otwarty protokół MCP. Można ich używać z niestandardowych agentów (Microsoft Agent Framework, LangGraph), GitHub Copilot i innych środowisk IDE zgodnych z MCP.
+
+## Dlaczego to ważne teraz
+
+Fala wielu agentów dociera do produkcji. Każdy nowy agent to nowa powierzchnia zduplikowanej konfiguracji, przestarzałych danych uwierzytelniających i niespójnego zachowania. Podstawa Build + Consume wystarczy, by zacząć centralizować. Gdy pojawi się filar Govern, będzie dostępna w pełni obserwowalna, centralnie kontrolowana warstwa narzędzi dla całej floty agentów.
+
+## Podsumowanie
+
+To jeszcze wczesny etap — publiczny podgląd, Python SDK na początku, Discover i Govern jeszcze przed nami. Ale model jest solidny, a natywny design MCP oznacza, że działa z narzędziami, które już się buduje. Szczegóły w [oficjalnym ogłoszeniu](https://devblogs.microsoft.com/foundry/introducing-toolboxes-in-foundry/).
+
+
+---
+## Hooki azd w Python, TypeScript i .NET: koniec ze skryptami shell
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/azd-hooks-python-javascript-typescript-dotnet/
+- **Date**: April 23, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure-developer-cli, azd, dotnet, python, typescript, developer-tools, cloud-native
+- **Reading time**: 2 min
+
+> Azure Developer CLI obsługuje teraz hooki w Python, JavaScript, TypeScript i .NET. Koniec z przełączaniem się na Bash tylko po to, żeby uruchomić skrypt migracji.
+
+
+
+*Ten artykuł został przetłumaczony automatycznie. Aby zobaczyć oryginalną wersję, [kliknij tutaj]({{< ref "index.md" >}}).*
+
+Jeśli kiedykolwiek miałeś projekt w całości napisany w .NET i mimo to musiałeś pisać skrypty Bash dla hooków azd — znasz ten ból. Po co przełączać się na składnię shell w kroku pre-provisioning, skoro reszta projektu to C#?
+
+Ta frustracja ma teraz oficjalne rozwiązanie. Azure Developer CLI [właśnie wprowadził obsługę wielu języków dla hooków](https://devblogs.microsoft.com/azure-sdk/azd-multi-language-hooks/), i jest dokładnie tak dobre, jak brzmi.
+
+## Czym są hooki
+
+Hooki to skrypty wykonywane w kluczowych punktach cyklu życia `azd` — przed provisioningiem, po deploymencie i nie tylko. Definiuje się je w `azure.yaml` i pozwalają na wstrzyknięcie własnej logiki bez modyfikowania CLI.
+
+Wcześniej obsługiwane były tylko Bash i PowerShell. Teraz można używać **Pythona, JavaScript, TypeScript lub .NET** — resztą zajmuje się `azd` automatycznie.
+
+## Jak działa wykrywanie
+
+Wystarczy wskazać hook na plik, a `azd` wywnioskuje język z rozszerzenia:
+
+```yaml
+hooks:
+  preprovision:
+    run: ./hooks/setup.py
+  postdeploy:
+    run: ./hooks/seed.ts
+  postprovision:
+    run: ./hooks/migrate.cs
+```
+
+Bez dodatkowej konfiguracji. Jeśli rozszerzenie jest niejednoznaczne, można jawnie podać `kind: python` (lub odpowiedni język).
+
+## Ważne szczegóły według języka
+
+### Python
+
+Umieść `requirements.txt` lub `pyproject.toml` obok skryptu (lub w dowolnym katalogu nadrzędnym). `azd` automatycznie tworzy środowisko wirtualne, instaluje zależności i uruchamia skrypt.
+
+### JavaScript i TypeScript
+
+Ten sam wzorzec — `package.json` blisko skryptu, a `azd` najpierw wykona `npm install`. Dla TypeScript używa `npx tsx` bez etapu kompilacji i bez `tsconfig.json`.
+
+### .NET
+
+Dwa dostępne tryby:
+
+- **Tryb projektu**: jeśli obok skryptu jest `.csproj`, `azd` automatycznie uruchamia `dotnet restore` i `dotnet build`.
+- **Tryb single-file**: na .NET 10+ samodzielne pliki `.cs` uruchamiają się bezpośrednio przez `dotnet run script.cs`. Plik projektu nie jest wymagany.
+
+## Konfiguracja dla konkretnego executora
+
+Każdy język obsługuje opcjonalny blok `config`:
+
+```yaml
+hooks:
+  preprovision:
+    run: ./hooks/setup.ts
+    config:
+      packageManager: pnpm
+  postprovision:
+    run: ./hooks/migrate.cs
+    config:
+      configuration: Release
+      framework: net10.0
+```
+
+## Dlaczego to ważne dla programistów .NET
+
+Hooki były ostatnim miejscem w projekcie opartym na azd, które wymuszało zmianę języka. Teraz cały pipeline deploymentu — od kodu aplikacji po hooki cyklu życia — może żyć w jednym języku. Można ponownie wykorzystywać istniejące narzędzia .NET w hookach, referencować współdzielone biblioteki i porzucić utrzymywanie skryptów shell.
+
+## Podsumowanie
+
+Jedna z tych zmian, które wydają się drobne, ale naprawdę redukują codzienne tarcia w pracy z azd. Obsługa wielu języków dla hooków jest dostępna teraz — pełna dokumentacja w [oficjalnym poście](https://devblogs.microsoft.com/azure-sdk/azd-multi-language-hooks/).
+
+
+---
+## Windows App Dev CLI v0.3: F5 z terminala i UI Automation dla agentów
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/
+- **Date**: April 23, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: windows, dotnet, winui, wpf, developer-tools, cli, ai
+- **Reading time**: 2 min
+
+> Windows App Development CLI v0.3 przynosi winapp run do uruchamiania i debugowania z terminala, winapp ui do automatyzacji interfejsu oraz nowy pakiet NuGet umożliwiający działanie dotnet run z zapakowanymi aplikacjami.
+
+
+
+*Ten artykuł został przetłumaczony automatycznie. Aby zobaczyć oryginał, [kliknij tutaj]({{< ref "index.md" >}}).*
+
+Doświadczenie F5 w Visual Studio jest świetne. Ale otwieranie VS tylko po to, żeby uruchomić i debugować zapakowaną aplikację Windows — czy to w potoku CI, zautomatyzowanym workflowie, czy gdy agent AI wykonuje testy — to zbędny narzut.
+
+Windows App Development CLI v0.3 właśnie [wyszło](https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/) i rozwiązuje ten problem bezpośrednio dzięki dwóm głównym funkcjom: `winapp run` i `winapp ui`.
+
+## winapp run: F5 z dowolnego miejsca
+
+`winapp run` przyjmuje folder niezapakowanej aplikacji i manifest, wykonując wszystko, co VS robi przy uruchamianiu debugowania: rejestruje luźny pakiet, uruchamia aplikację i zachowuje `LocalState` między ponownymi deploymentami.
+
+```bash
+# Zbuduj aplikację, a następnie uruchom ją jako zapakowaną aplikację
+winapp run ./bin/Debug
+```
+
+Działa dla WinUI, WPF, WinForms, Console, Avalonia i innych. Tryby są zaprojektowane zarówno dla deweloperów, jak i zautomatyzowanych workflowów:
+
+- **`--detach`**: Uruchamia i natychmiast zwraca kontrolę do terminala. Idealny dla CI.
+- **`--unregister-on-exit`**: Usuwa zarejestrowany pakiet przy zamknięciu aplikacji.
+- **`--debug-output`**: Przechwytuje komunikaty `OutputDebugString` i wyjątki w czasie rzeczywistym.
+
+## Nowy pakiet NuGet: dotnet run dla zapakowanych aplikacji
+
+Dla deweloperów .NET jest nowy pakiet NuGet: `Microsoft.Windows.SDK.BuildTools.WinApp`. Po instalacji `dotnet run` obsługuje cały inner loop: budowanie, przygotowanie pakietu loose-layout, rejestrację w Windows i uruchomienie — wszystko w jednym kroku.
+
+```bash
+winapp init
+# lub
+dotnet add package Microsoft.Windows.SDK.BuildTools.WinApp
+```
+
+## winapp ui: UI Automation z wiersza poleceń
+
+To funkcja otwierająca scenariusze agentyczne. `winapp ui` zapewnia pełny dostęp UI Automation do dowolnej działającej aplikacji Windows — WPF, WinForms, Win32, Electron, WinUI3 — bezpośrednio z terminala.
+
+Co można robić:
+
+- Wylistować wszystkie okna najwyższego poziomu
+- Nawigować po pełnym drzewie UI Automation dowolnego okna
+- Wyszukiwać elementy po nazwie, typie lub ID automatyzacji
+- Klikać, wywoływać i ustawiać wartości
+- Robić zrzuty ekranu
+- Czekać na pojawienie się elementów — idealne do synchronizacji testów
+
+Połączenie `winapp ui` z `winapp run` daje kompletny workflow build → uruchomienie → weryfikacja z terminala. Agent może uruchomić aplikację, sprawdzić stan UI, programowo z nią interagować i zwalidować wynik.
+
+## Inne nowości
+
+- **`winapp unregister`**: Usuwa sideloadowany pakiet po zakończeniu pracy.
+- **`winapp manifest add-alias`**: Dodaje alias do uruchamiania aplikacji po nazwie z terminala.
+- **Uzupełnianie tabulatorem**: Jedno polecenie do skonfigurowania uzupełniania w PowerShell.
+
+## Jak zdobyć
+
+```bash
+winget install Microsoft.WinAppCli
+# lub
+npm install -g @microsoft/winappcli
+```
+
+CLI jest w publicznym podglądzie. Pełna dokumentacja dostępna w [repozytorium GitHub](https://github.com/microsoft/WinAppCli), a wszystkie szczegóły w [oryginalnym ogłoszeniu](https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/).
+
+
+---
+## azd + GitHub Copilot: Konfiguracja projektu z AI i inteligentne rozwiązywanie błędów
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/
+- **Date**: April 21, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: Azure, azd, GitHub Copilot, Azure Developer CLI, Bicep, Infrastructure as Code, Developer Tooling
+- **Reading time**: 3 min
+
+> Azure Developer CLI integruje się teraz z GitHub Copilot, żeby wygenerować infrastrukturę projektu i naprawiać błędy wdrożeń — bez wychodzenia z terminala.
+
+
+
+> *Ten artykuł został przetłumaczony automatycznie. Oryginalną wersję angielską znajdziesz [tutaj]({{< ref "index.md" >}}).*
+
+Znasz ten moment, gdy chcesz wdrożyć istniejącą aplikację na Azure i patrzysz na pusty `azure.yaml`, próbując przypomnieć sobie, czy Twoje Express API powinno używać Container Apps czy App Service? Ten moment właśnie stał się znacznie krótszy.
+
+Azure Developer CLI (`azd`) integruje się teraz z GitHub Copilot na dwa konkretne sposoby: scaffolding projektu wspomagany przez AI podczas `azd init` oraz inteligentne rozwiązywanie błędów gdy wdrożenia kończą się niepowodzeniem. Obie funkcje działają całkowicie w terminalu.
+
+## Konfiguracja z Copilotem podczas azd init
+
+Po uruchomieniu `azd init` pojawia się opcja "Set up with GitHub Copilot (Preview)". Wybierz ją, a Copilot przeanalizuje Twój codebase i wygeneruje `azure.yaml`, szablony infrastruktury oraz moduły Bicep — na podstawie Twojego rzeczywistego kodu.
+
+```
+azd init
+# Wybierz: "Set up with GitHub Copilot (Preview)"
+```
+
+Wymagania:
+
+- **azd 1.23.11 lub nowszy** — sprawdź przez `azd version` lub zaktualizuj przez `azd update`
+- **Aktywna subskrypcja GitHub Copilot** (Individual, Business lub Enterprise)
+- **GitHub CLI (`gh`)** — `azd` poprosi o logowanie jeśli potrzeba
+
+To co uważam za naprawdę użyteczne: działa w obu kierunkach. Budujesz od zera? Copilot pomaga skonfigurować właściwe usługi Azure od początku. Masz istniejącą aplikację do wdrożenia? Wskaż Copilotem na nią — konfiguracja zostanie wygenerowana bez konieczności restrukturyzacji kodu.
+
+### Co faktycznie robi
+
+Powiedzmy, że masz Node.js Express API z zależnością od PostgreSQL. Zamiast ręcznie wybierać między Container Apps a App Service, a potem pisać Bicep od zera, Copilot wykrywa Twój stack i generuje:
+
+- `azure.yaml` z właściwymi ustawieniami `language`, `host` i `build`
+- Moduł Bicep dla Azure Container Apps
+- Moduł Bicep dla Azure Database for PostgreSQL
+
+Przed jakąkolwiek zmianą przeprowadzane są wstępne sprawdzenia — weryfikuje czystość katalogu roboczego git, pyta z wyprzedzeniem o zgodę na narzędzia serwera MCP. Nic nie dzieje się bez Twojej wiedzy.
+
+## Rozwiązywanie błędów z Copilotem
+
+Błędy wdrożenia są nieuniknione. Brakujące parametry, problemy z uprawnieniami, dostępność SKU — a komunikat o błędzie rzadko mówi to, co naprawdę musisz wiedzieć: *jak to naprawić*.
+
+Bez Copilota pętla wygląda tak: skopiuj błąd → szukaj w dokumentacji → czytaj trzy niepowiązane odpowiedzi na Stack Overflow → uruchom kilka poleceń `az` CLI → spróbuj ponownie. Z Copilotem w `azd` ta pętla znika. Gdy jakiekolwiek polecenie `azd` kończy się błędem, natychmiast oferuje cztery opcje:
+
+- **Explain** — wyjaśnienie w zrozumiałym języku, co poszło nie tak
+- **Guidance** — instrukcje krok po kroku jak naprawić problem
+- **Diagnose and Guide** — pełna analiza + Copilot stosuje poprawkę (za Twoją zgodą) + opcjonalne ponowienie
+- **Skip** — samodzielna obsługa
+
+Kluczowa kwestia: Copilot ma już kontekst Twojego projektu, nieudanego polecenia i szczegółów błędu. Jego sugestie są specyficzne dla *Twojej sytuacji*.
+
+### Ustawianie domyślnego zachowania
+
+Jeśli zawsze wybierasz tę samą opcję, pomiń interaktywny monit:
+
+```
+azd config set copilot.errorHandling.category troubleshoot
+```
+
+Wartości: `explain`, `guidance`, `troubleshoot`, `fix`, `skip`. Możesz też włączyć automatyczną naprawę i ponowienie:
+
+```
+azd config set copilot.errorHandling.fix allow
+```
+
+Powrót do trybu interaktywnego w dowolnym momencie:
+
+```
+azd config unset copilot.errorHandling.category
+```
+
+## Podsumowanie
+
+Uruchom `azd update` po najnowszą wersję i wypróbuj `azd init` w swoim następnym projekcie.
+
+Przeczytaj [oryginalny komunikat tutaj](https://devblogs.microsoft.com/azure-sdk/azd-copilot-integration/).
+
+
+---
+## Pisanie natywnych dodatków Node.js w C# z .NET Native AOT
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/nodejs-addons-csharp-native-aot/
+- **Date**: April 21, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: .NET, C#, Native AOT, Node.js, VS Code, Interop, Developer Tooling
+- **Reading time**: 2 min
+
+> Zespół C# Dev Kit zastąpił dodatki Node.js w C++ przez .NET Native AOT — wynik jest czystszy, bezpieczniejszy i wymaga tylko .NET SDK.
+
+
+
+> *Ten artykuł został przetłumaczony automatycznie. Oryginalną angielską wersję znajdziesz [tutaj]({{< ref "index.md" >}}).*
+
+Oto scenariusz, który uwielbiam: zespół pracujący nad narzędziami .NET miał natywne dodatki Node.js napisane w C++ i kompilowane przez `node-gyp`. Działało. Ale wymagało zainstalowania Pythona na każdej maszynie dewelopera — starej wersji Pythona, nawiasem mówiąc — tylko po to, by skompilować pakiet, którego nikt w zespole nigdy nie dotykał bezpośrednio.
+
+Więc zadali bardzo rozsądne pytanie: mamy już zainstalowany .NET SDK, po co w ogóle piszemy C++?
+
+Odpowiedzią był Native AOT, a wynik jest naprawdę elegancki. Drew Noakes z zespołu C# Dev Kit opisał, jak to zrobili, i uważam, że warto to zrozumieć nawet jeśli nie budujesz rozszerzeń VS Code.
+
+## Podstawowy pomysł
+
+Natywny dodatek Node.js to biblioteka współdzielona (`.dll` na Windows, `.so` na Linux, `.dylib` na macOS), którą Node.js może załadować w czasie wykonywania. Interfejs nazywa się [N-API](https://nodejs.org/api/n-api.html) — stabilne, zgodne z ABI API języka C. N-API nie obchodzi, w jakim języku wyprodukowano bibliotekę, tylko żeby eksportowała właściwe symbole.
+
+.NET Native AOT może dokładnie to zrobić. Kompiluje kod C# z wyprzedzeniem do natywnej biblioteki współdzielonej z dowolnymi punktami wejścia.
+
+## Konfiguracja projektu
+
+Plik projektu jest minimalny:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <PublishAot>true</PublishAot>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+</Project>
+```
+
+`PublishAot` mówi SDK, by przy `dotnet publish` wygenerował bibliotekę współdzieloną.
+
+## Eksportowanie punktu wejścia
+
+Node.js oczekuje, że biblioteka wyeksportuje `napi_register_module_v1`. W C# robi to `[UnmanagedCallersOnly]`:
+
+```csharp
+[UnmanagedCallersOnly(
+    EntryPoint = "napi_register_module_v1",
+    CallConvs = [typeof(CallConvCdecl)])]
+public static nint Init(nint env, nint exports)
+{
+    Initialize();
+    RegisterFunction(env, exports, "readStringValue"u8, &ReadStringValue);
+    return exports;
+}
+```
+
+Sufiks `u8` tworzy `ReadOnlySpan<byte>` z literałem łańcucha UTF-8, przekazywanym bezpośrednio do N-API bez żadnej alokacji kodowania.
+
+## Rozwiązywanie N-API względem procesu hosta
+
+Funkcje N-API są eksportowane przez sam `node.exe`, nie przez osobną bibliotekę. Zamiast linkować do czegoś, rozwiązujesz je względem działającego procesu przy starcie:
+
+```csharp
+NativeLibrary.SetDllImportResolver(
+    System.Reflection.Assembly.GetExecutingAssembly(),
+    ResolveDllImport);
+```
+
+Z tym deklaracje P/Invoke działają czysto:
+
+```csharp
+[LibraryImport("node", EntryPoint = "napi_create_string_utf8")]
+internal static partial Status CreateStringUtf8(
+    nint env, ReadOnlySpan<byte> str, nuint length, out nint result);
+```
+
+## Wywołanie z TypeScript
+
+`dotnet publish` produkuje natywną bibliotekę dla twojej platformy. Zmieniasz jej nazwę na `.node` i używasz ze standardowym `require()`:
+
+```typescript
+const registry = require('./native/win32-x64/RegistryAddon.node') as RegistryAddon;
+const sdkPath = registry.readStringValue(
+    'SOFTWARE\\dotnet\\Setup\\InstalledVersions\\x64\\sdk',
+    'InstallLocation'
+);
+```
+
+Tyle. TypeScript do C#, bez Pythona, bez C++.
+
+## Podsumowanie
+
+Zespół C# Dev Kit zastąpił narzut Python/C++ czystym kodem C#, który każdy w zespole już umie pisać i debugować. Wzorzec nie jest skomplikowany po tym, jak się go zobaczy, i jest świetnym przykładem Native AOT rozwiązującego realny problem.
+
+Przeczytaj [oryginalny wpis na blogu .NET](https://devblogs.microsoft.com/dotnet/writing-nodejs-addons-with-dotnet-native-aot/).
+
+
+---
+## VS Code 1.117: Agenty dostają własne gałęzie Git i jestem za tym wszystkimi czterema
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/vscode-1-117-agents-autopilot-worktrees/
+- **Date**: April 19, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: vscode, developer-tools, ai, github-copilot, agents
+- **Reading time**: 3 min
+
+> VS Code 1.117 dostarcza izolację worktree dla sesji agentów, trwały tryb Autopilot i wsparcie dla subagentów. Agentyczny przepływ pracy kodowania właśnie stał się znacznie bardziej realny.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "vscode-1-117-agents-autopilot-worktrees" >}}).*
+
+Linia między "asystentem AI" a "kolegą AI" nieustannie się zaciera. VS Code 1.117 właśnie wyszedł i [pełne notatki wydania](https://code.visualstudio.com/updates/v1_117) są pełne treści, ale historia jest tu jasna: agenty stają się pierwszoklasowymi obywatelami w twoim przepływie pracy deweloperskiej.
+
+Oto co naprawdę ważne.
+
+## Tryb Autopilot wreszcie pamięta twoje preferencje
+
+Wcześniej musiałeś ponownie włączać Autopilot przy każdej nowej sesji. Irytujące. Teraz twój tryb uprawnień utrzymuje się między sesjami i możesz skonfigurować domyślny.
+
+Host Agenta obsługuje trzy konfiguracje sesji:
+
+- **Domyślny** — narzędzia proszą o potwierdzenie przed uruchomieniem
+- **Pomiń** — automatycznie zatwierdza wszystko
+- **Autopilot** — pełna autonomia, odpowiada na własne pytania i kontynuuje
+
+Jeśli szkieletujesz nowy projekt .NET z migracjami, Docker i CI — ustaw go na Autopilot raz i zapomnij o tym. Ta preferencja zostaje.
+
+## Izolacja worktree i git dla sesji agentów
+
+To jest ta duża. Sesje agentów obsługują teraz pełną izolację worktree i git. To oznacza, że gdy agent pracuje nad zadaniem, dostaje własną gałąź i katalog roboczy. Twoja gałąź główna pozostaje nienaruszona.
+
+Co więcej — Copilot CLI generuje znaczące nazwy gałęzi dla tych sesji worktree. Koniec z `agent-session-abc123`. Dostajesz coś, co faktycznie opisuje co agent robi.
+
+Dla programistów .NET pracujących na wielu gałęziach funkcji lub naprawiających błędy, gdy długie zadanie szkieletowania działa, to zmiana zasad gry. Możesz mieć agenta budującego kontrolery API w jednym worktree, podczas gdy ty debugujesz warstwę usługową w innym. Żadnych konfliktów. Żadnego stashowania. Żadnego bałaganu.
+
+## Subagenty i zespoły agentów
+
+Protokół Hosta Agenta obsługuje teraz subagenty. Agent może uruchamiać inne agenty do obsługi części zadania. Pomyśl o tym jak o delegowaniu — twój główny agent koordynuje, a wyspecjalizowane agenty obsługują kawałki.
+
+To wczesne, ale potencjał dla przepływów pracy .NET jest oczywisty. Wyobraź sobie jednego agenta obsługującego twoje migracje EF Core podczas gdy inny konfiguruje testy integracyjne. Jeszcze tam nie jesteśmy w pełni, ale wsparcie protokołu lądujące teraz oznacza, że narzędzia pojawią się szybko.
+
+## Wyjście terminala automatycznie włączone gdy agenty wysyłają dane wejściowe
+
+Małe, ale znaczące. Gdy agent wysyła dane wejściowe do terminala, wyjście terminala jest teraz automatycznie dołączane do kontekstu. Wcześniej agent musiał wykonać dodatkową turę tylko by zobaczyć co się stało.
+
+Jeśli kiedykolwiek obserwowałeś agenta uruchamiającego `dotnet build`, niepowodzenie i następnie kolejny przebieg tylko by zobaczyć błąd — to tarcie zniknęło. Widzi wyjście natychmiast i reaguje.
+
+## Samooaktualizacja aplikacji Agents na macOS
+
+Samodzielna aplikacja Agents na macOS teraz się samooaktualizuje. Koniec z ręcznym pobieraniem nowych wersji. Po prostu pozostaje aktualna.
+
+## Mniejsze rzeczy warte wiedzy
+
+- **Podglądy package.json** teraz pokazują zarówno zainstalowaną wersję jak i ostatnio dostępną. Przydatne jeśli zarządzasz narzędziami npm obok projektów .NET.
+- **Obrazy w komentarzach JSDoc** renderują się poprawnie w podglądach i uzupełnieniach.
+- **Sesje Copilot CLI** teraz wskazują czy zostały utworzone przez VS Code czy zewnętrznie — przydatne gdy przeskakujesz między terminalami.
+- **Copilot CLI, Claude Code i Gemini CLI** są rozpoznawane jako typy powłoki. Edytor wie co uruchamiasz.
+
+## Wnioski
+
+VS Code 1.117 nie jest efektownym zrzutem funkcji. To infrastruktura. Izolacja worktree, trwałe uprawnienia, protokoły subagentów — to są cegiełki dla przepływu pracy, gdzie agenty obsługują prawdziwe, równoległe zadania bez nadepnięcia na twój kod.
+
+Jeśli budujesz z .NET i jeszcze nie zanurzyłeś się w agentyczny przepływ pracy, szczerze, teraz jest czas, by zacząć.
+
+
+---
+## RFT Foundry Stał Się Tańszy i Mądrzejszy — Oto Co Się Zmieniło
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/
+- **Date**: April 18, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: ai, azure, foundry, fine-tuning, machine-learning
+- **Reading time**: 1 min
+
+> Microsoft Foundry wysłał w tym miesiącu trzy aktualizacje RFT: globalne szkolenie dla o4-mini, nowe oceniające modele GPT-4.1 i przewodnik po najlepszych praktykach.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "foundry-fine-tuning-april-2026-rft-graders" >}}).*
+
+Jeśli tworzysz aplikacje .NET opierające się na dostrojonych modelach, aktualizacje Foundry z tego miesiąca są warte uwagi.
+
+Pełne szczegóły są w [oficjalnym ogłoszeniu](https://devblogs.microsoft.com/foundry/whats-new-in-foundry-finetune-april-2026/).
+
+## Globalne szkolenie dla o4-mini
+
+o4-mini to model do intensywnego rozumowania i obciążeń agentycznych. Możesz teraz uruchamiać zadania dostrajania z 13+ regionów Azure z niższymi stawkami trenowania.
+
+```bash
+"trainingType": "globalstandard"
+```
+
+## Nowe oceniające modele: rodzina GPT-4.1
+
+Trzy nowe opcje: GPT-4.1, GPT-4.1-mini i GPT-4.1-nano.
+
+Strategia poziomowania:
+- **GPT-4.1-nano** do wstępnych iteracji. Niski koszt, szybka pętla informacji zwrotnych.
+- **GPT-4.1-mini** gdy rubrum oceniania jest stabilne.
+- **GPT-4.1** do produkcyjnego oceniania.
+
+## Pułapka formatu danych RFT
+
+Format danych RFT różni się od SFT. Ostatnia wiadomość w każdym wierszu musi mieć rolę User lub Developer — nie Assistant.
+
+## Dlaczego to ważne dla programistów .NET
+
+Tańsze szkolenie oznacza, że możesz bardziej agresywnie iterować. Przewodnik po najlepszych praktykach na [GitHub](https://github.com/microsoft-foundry/fine-tuning/blob/main/Demos/Agentic_RFT_PrivatePreview/RFT_Best_Practice.md) zaoszczędzi ci czasu debugowania.
+
+
+---
+## Twoje Eksperymenty AI na Azure Palą Pieniądze — Oto Jak To Naprawić
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/
+- **Date**: April 18, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, cloud, cost-optimization, ai, finops
+- **Reading time**: 1 min
+
+> Obciążenia AI na Azure mogą szybko stać się drogie. Porozmawiajmy o tym, co naprawdę działa w zakresie kontroli kosztów bez spowalniania rozwoju.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "cloud-cost-optimization-ai-workloads-azure" >}}).*
+
+Jeśli teraz budujesz aplikacje oparte na AI na Azure, pewnie już to zauważyłeś: twój rachunek w chmurze wygląda inaczej. Nie tylko wyższy — dziwniejszy. Skokowy. Trudny do przewidzenia.
+
+Microsoft opublikował świetny artykuł o [zasadach optymalizacji kosztów w chmurze, które wciąż mają znaczenie](https://azure.microsoft.com/en-us/blog/cloud-cost-optimization-principles-that-still-matter/).
+
+## Dlaczego obciążenia AI są inne
+
+Tradycyjne obciążenia .NET są stosunkowo przewidywalne. Obciążenia AI? Ani trochę. Testujesz wiele modeli, uruchamiasz infrastrukturę GPU, robisz wywołania API Azure OpenAI, gdzie zużycie tokenów drastycznie się waha.
+
+## Zarządzanie vs. optymalizacja — znaj różnicę
+
+- **Zarządzanie**: śledzenie i raportowanie.
+- **Optymalizacja**: faktyczne podejmowanie decyzji. Czy naprawdę potrzebujesz tego poziomu S3? Czy ta instancja siedzi bezczynnie w weekendy?
+
+## Co naprawdę działa
+
+- **Taguj zasoby** — jeśli nie wiesz, który projekt je twój budżet, nie możesz nic optymalizować
+- **Ustaw bariery przed eksperymentami** — używaj Azure Policy do ograniczania drogich jednostek SKU
+- **Stale dopasowuj rozmiary** — sprawdzaj rekomendacje Azure Advisor
+- **Myśl o cyklu życia** — zasoby dev powinny być wyłączane
+- **Mierz wartość, nie tylko koszt** — droższy model dający znacznie lepsze wyniki może być właściwym wyborem
+
+
+---
+## Docker Sandbox Pozwala Agentom Copilot Refaktoryzować Kod Bez Ryzyka dla Twojej Maszyny
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/
+- **Date**: April 17, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: github-copilot, docker, modernization, developer-tools, ai
+- **Reading time**: 1 min
+
+> Docker Sandbox daje agentom GitHub Copilot bezpieczne mikroVM do szalonych refaktoryzacji — bez monitów o uprawnienia, bez ryzyka dla hosta. Oto dlaczego to zmienia wszystko dla dużoskalowej modernizacji .NET.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "copilot-docker-sandbox-agentic-refactoring" >}}).*
+
+Jeśli używałeś trybu agenta Copilota do czegoś poza małymi edytami, znasz ten ból. Każdy zapis pliku, każde polecenie terminala — kolejny monit o uprawnienia.
+
+Zespół Azure właśnie opublikował post o [Docker Sandbox dla agentów GitHub Copilot](https://devblogs.microsoft.com/all-things-azure/best-of-both-worlds-for-agentic-refactoring-github-copilot-microvms-via-docker-sandbox/).
+
+## Co Docker Sandbox faktycznie daje
+
+Podstawowy pomysł jest prosty: uruchom lekkie mikroVM z pełnym środowiskiem Linux, zsynchronizuj workspace, i pozwól agentowi Copilota działać swobodnie wewnątrz.
+
+To więcej niż "uruchamiaj rzeczy w kontenerze":
+- **Dwukierunkowa synchronizacja workspace** z zachowaniem ścieżek absolutnych
+- **Prywatny demon Docker** działający w mikroVM
+- **Filtrujące proxy HTTP/HTTPS** kontrolujące dostęp sieciowy
+- **Tryb YOLO** — agent działa bez monitów o uprawnienia
+
+## Dlaczego deweloperzy .NET powinni to wziąć pod uwagę
+
+Dzięki Docker Sandbox możesz wskazać agenta Copilota na projekt, pozwolić mu swobodnie refaktoryzować wewnątrz mikroVM, uruchomić `dotnet build` i `dotnet test`, i akceptować tylko zmiany, które faktycznie działają.
+
+Post opisuje uruchamianie **floty równoległych agentów** — każdy we własnym sandboxie — pracujących nad różnymi projektami jednocześnie.
+
+## Wniosek
+
+Docker Sandbox rozwiązuje fundamentalne napięcie w agentic coding: agenty potrzebują wolności, żeby być użyteczne, ale wolność na Twojej maszynie hosta jest niebezpieczna. MicroVM dają ci obie.
+
+
+---
+## Przestań Pilnować Terminala: Tryb Odłączony Aspire Zmienia Przepływ Pracy
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/
+- **Date**: April 17, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: aspire, dotnet, cli, developer-tools, coding-agents
+- **Reading time**: 2 min
+
+> Aspire 13.2 pozwala uruchomić AppHost w tle i odzyskać terminal. W połączeniu z nowymi poleceniami CLI i obsługą agentów, to większa sprawa niż się wydaje.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "aspire-detached-mode-free-your-terminal" >}}).*
+
+Za każdym razem gdy uruchamiasz Aspire AppHost, twój terminal znika. Zablokowany. Zajęty do Ctrl+C. Chcesz uruchomić szybkie polecenie? Nowa karta. Sprawdzić logi? Kolejna karta. To małe tarcie szybko się kumuluje.
+
+Aspire 13.2 to naprawia. James Newton-King [opisał wszystkie szczegóły](https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/), i szczerze, to jedna z tych funkcji, która natychmiast zmienia sposób pracy.
+
+## Tryb odłączony: jedno polecenie, terminal wraca
+
+```bash
+aspire start
+```
+
+To skrót dla `aspire run --detach`. Twój AppHost uruchamia się w tle i natychmiast odzyskujesz terminal.
+
+## Zarządzanie tym, co działa
+
+Uruchamianie w tle jest przydatne tylko wtedy, gdy możesz faktycznie zarządzać tym, co jest uruchomione. Aspire 13.2 dostarcza pełny zestaw poleceń CLI:
+
+```bash
+# Lista wszystkich działających AppHostów
+aspire ps
+
+# Sprawdź stan konkretnego AppHosta
+aspire describe
+
+# Strumieniuj logi z działającego AppHosta
+aspire logs
+
+# Zatrzymaj konkretny AppHost
+aspire stop
+```
+
+## Połącz z trybem izolowanym
+
+Tryb odłączony naturalnie łączy się z trybem izolowanym:
+
+```bash
+aspire start --isolated
+aspire start --isolated
+```
+
+Każda instancja otrzymuje losowe porty, oddzielne sekrety i własny cykl życia.
+
+## Dlaczego to jest ogromne dla agentów kodowania
+
+Agent kodujący w twoim terminalu może teraz:
+
+1. Uruchomić aplikację z `aspire start`
+2. Zapytać o jej stan za pomocą `aspire describe`
+3. Sprawdzić logi `aspire logs` w celu diagnozy problemów
+4. Zatrzymać ją `aspire stop` po zakończeniu
+
+Uruchomienie `aspire agent init` konfiguruje plik umiejętności Aspire, który uczy agentów tych poleceń.
+
+## Podsumowanie
+
+Tryb odłączony to ulepszenie przepływu pracy ukryte jako prosta flaga. Przeczytaj [pełny post](https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/) i pobierz Aspire 13.2 z `aspire update --self`.
+
+
+---
+## Grupowanie Pinezek W Końcu Trafia do .NET MAUI Maps — Jedna Właściwość, Zero Bólu
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/maui-maps-pin-clustering-finally/
+- **Date**: April 16, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet, maui, mobile, maps, dotnet-11
+- **Reading time**: 1 min
+
+> .NET MAUI 11 Preview 3 dodaje natywne grupowanie pinezek do kontrolki Map. Jedna właściwość, oddzielne grupy klastrów i obsługa dotknięcia — wszystko wbudowane.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "maui-maps-pin-clustering-finally" >}}).*
+
+Znasz ten moment, gdy ładujesz mapę ze stu pinezkami i całość zamienia się w nieczytelną masę? To było doświadczenie .NET MAUI Maps — do teraz.
+
+David Ortinau [właśnie ogłosił](https://devblogs.microsoft.com/dotnet/pin-clustering-in-dotnet-maui-maps/), że .NET MAUI 11 Preview 3 dostarcza grupowanie pinezek po wyjęciu z pudełka.
+
+## Jedna właściwość do rządzenia wszystkimi
+
+```xml
+<maps:Map IsClusteringEnabled="True" />
+```
+
+Tyle. Pobliskie pinezki są grupowane w klastry z odznaką liczby.
+
+## Niezależne grupy klastrów
+
+Właściwość `ClusteringIdentifier` pozwala oddzielić pinezki na niezależne grupy:
+
+```csharp
+map.Pins.Add(new Pin
+{
+    Label = "Pike Place Coffee",
+    Location = new Location(47.6097, -122.3331),
+    ClusteringIdentifier = "coffee"
+});
+```
+
+## Obsługa dotknięcia klastra
+
+```csharp
+map.ClusterClicked += async (sender, e) =>
+{
+    string names = string.Join("\n", e.Pins.Select(p => p.Label));
+    await DisplayAlert($"Cluster ({e.Pins.Count} pins)", names, "OK");
+};
+```
+
+## Zacznij
+
+Zainstaluj [.NET 11 Preview 3](https://dotnet.microsoft.com/download/dotnet/11.0) i zaktualizuj obciążenie .NET MAUI. [Przykład Maps](https://github.com/dotnet/maui-samples/tree/main/10.0/UserInterface/Views/Map/MapDemo/WorkingWithMaps) zawiera nową stronę Clustering.
+
+
+---
+## Narzędzia Azure MCP Są Teraz Wbudowane w Visual Studio 2022 — Żadnego Rozszerzenia
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/azure-mcp-tools-built-into-visual-studio-2022/
+- **Date**: April 16, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: visual-studio, azure, mcp, copilot, developer-tools
+- **Reading time**: 1 min
+
+> Narzędzia Azure MCP są dostarczane jako część obciążenia deweloperskiego Azure w Visual Studio 2022. Ponad 230 narzędzi, 45 usług Azure, zero rozszerzeń do zainstalowania.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "azure-mcp-tools-built-into-visual-studio-2022" >}}).*
+
+Jeśli korzystałeś z narzędzi Azure MCP w Visual Studio przez oddzielne rozszerzenie, znasz procedurę — zainstaluj VSIX, zrestartuj, miej nadzieję, że nie popsuje, zarządzaj niezgodnościami wersji. To tarcie zniknęło.
+
+Yun Jung Choi [ogłosiła](https://devblogs.microsoft.com/visualstudio/azure-mcp-tools-now-ship-built-into-visual-studio-2022-no-extension-required/), że narzędzia Azure MCP są teraz dostarczane bezpośrednio jako część obciążenia deweloperskiego Azure w Visual Studio 2022. Żadnego rozszerzenia. Żadnego VSIX.
+
+## Co to faktycznie oznacza
+
+Ponad 230 narzędzi w 45 usługach Azure — dostępnych bezpośrednio z okna czatu. Wylistuj swoje konta pamięci masowej, wdróż aplikację ASP.NET Core, diagnostykuj problemy App Service — wszystko bez otwierania karty przeglądarki.
+
+## Jak włączyć
+
+1. Zaktualizuj do Visual Studio 2022 **17.14.30** lub nowszego
+2. Upewnij się, że obciążenie **Azure development** jest zainstalowane
+3. Otwórz GitHub Copilot Chat
+4. Kliknij przycisk **Wybierz narzędzia** (ikona dwóch kluczy)
+5. Włącz **Azure MCP Server**
+
+Pozostaje włączone między sesjami.
+
+## Zastrzeżenie
+
+Narzędzia są domyślnie wyłączone — musisz je włączyć. Dla .NET deweloperów korzystających z Visual Studio oznacza to jeszcze mniej powodów do przełączania kontekstu do portalu Azure.
+
+
+---
+## .NET Kwiecień 2026 Serwisowanie — Poprawki Bezpieczeństwa, Które Powinieneś Zastosować Dziś
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/dotnet-april-2026-servicing-security-patches/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet, security, servicing, dotnet-framework
+- **Reading time**: 1 min
+
+> Wydanie serwisowe z kwietnia 2026 roku łata 6 CVE w .NET 10, .NET 9, .NET 8 i .NET Framework — w tym dwie luki zdalnego wykonania kodu.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "dotnet-april-2026-servicing-security-patches" >}}).*
+
+[Aktualizacje serwisowe z kwietnia 2026](https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-april-2026-servicing-updates/) dla .NET i .NET Framework są dostępne, i ta zawiera poprawki bezpieczeństwa, które będziesz chciał zastosować wkrótce. Sześć CVE załatanych, w tym dwie luki zdalnego wykonania kodu (RCE).
+
+## Co zostało załatane
+
+| CVE | Typ | Dotyczy |
+|-----|-----|---------|
+| CVE-2026-26171 | Obejście funkcji bezpieczeństwa | .NET 10, 9, 8 + .NET Framework |
+| CVE-2026-32178 | **Zdalne wykonanie kodu** | .NET 10, 9, 8 + .NET Framework |
+| CVE-2026-33116 | **Zdalne wykonanie kodu** | .NET 10, 9, 8 |
+| CVE-2026-32203 | Odmowa usługi | .NET 10, 9, 8 + .NET Framework |
+| CVE-2026-23666 | Odmowa usługi | .NET Framework 3.0–4.8.1 |
+| CVE-2026-32226 | Odmowa usługi | .NET Framework 2.0–4.8.1 |
+
+## Zaktualizowane wersje
+
+- **.NET 10**: 10.0.6
+- **.NET 9**: 9.0.15
+- **.NET 8**: 8.0.26
+
+## Co zrobić
+
+Zaktualizuj swoje projekty i pipeline'y CI/CD do najnowszych wersji. Dwie luki RCE to nie jest coś, co się odkłada.
+
+
+---
+## Aktualizacja Azure DevOps Server Kwiecień 2026 — Poprawka PR i Aktualizacje Bezpieczeństwa
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure-devops, devops, patches
+- **Reading time**: 1 min
+
+> Azure DevOps Server otrzymuje Patch 3 z naprawą błędów ukończenia PR, ulepszoną walidacją wylogowania i przywróconymi połączeniami PAT GitHub Enterprise Server.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "azure-devops-server-april-2026-patch" >}}).*
+
+Szybka informacja dla zespołów uruchamiających samodzielnie hostowany Azure DevOps Server: Microsoft wydał [Patch 3 na kwiecień 2026](https://devblogs.microsoft.com/devops/april-patches-for-azure-devops-server/) z trzema celowanymi poprawkami.
+
+## Co zostało naprawione
+
+- **Błędy ukończenia pull requestów** — wyjątek null reference podczas auto-ukończenia elementu roboczego mógł powodować niepowodzenia scalania PR
+- **Walidacja przekierowania przy wylogowaniu** — ulepszona walidacja podczas wylogowywania zapobiegająca potencjalnym złośliwym przekierowaniom
+- **Połączenia PAT GitHub Enterprise Server** — tworzenie połączeń Personal Access Token zostało przywrócone
+
+## Jak zaktualizować
+
+Pobierz [Patch 3](https://aka.ms/devopsserverpatch3) i uruchom instalator. Aby zweryfikować zastosowanie łatki:
+
+```bash
+<patch-installer>.exe CheckInstall
+```
+
+Microsoft zdecydowanie zaleca stosowanie najnowszej łatki dla bezpieczeństwa i niezawodności.
+
+
+---
+## Aspire 13.2 Dostaje MongoDB EF Core i Azure Data Lake — Dwie Integracje Warte Wypróbowania
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/aspire-132-mongodb-efcore-data-lake/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet-aspire, efcore, mongodb, azure, data-lake, cloud-native
+- **Reading time**: 1 min
+
+> Aspire 13.2 dodaje integracje MongoDB Entity Framework Core i Azure Data Lake Storage z automatycznymi health checks i service discovery. Oto jak wyglądają w praktyce.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "aspire-132-mongodb-efcore-data-lake" >}}).*
+
+Aspire 13.2 właśnie wylądował z dwiema nowymi integracjami bazodanowymi, które są warte uwagi: MongoDB Entity Framework Core i Azure Data Lake Storage.
+
+## MongoDB spotyka EF Core w Aspire
+
+To ta, z której jestem najbardziej podekscytowany. Aspire obsługiwał MongoDB przez chwilę, ale zawsze był to surowy sterownik — bez EF Core, bez DbContext, bez zapytań LINQ. Teraz otrzymujesz pełne doświadczenie EF Core z MongoDB, wraz z automatycznymi health checks i service discovery Aspire.
+
+Konfiguracja w AppHost:
+
+```csharp
+var mongodb = builder.AddMongoDB("mongodb")
+    .WithDataVolume()
+    .WithLifetime(ContainerLifetime.Persistent);
+
+var apiService = builder.AddProject<Projects.ApiService>("api")
+    .WithReference(mongodb);
+```
+
+W projekcie klienckim:
+
+```bash
+dotnet add package Aspire.MongoDB.EntityFrameworkCore
+```
+
+Zarejestruj DbContext:
+
+```csharp
+builder.AddMongoDbContext<MyDbContext>("mongodb", "mydb");
+```
+
+Integracja obsługuje connection pooling, ślady OpenTelemetry i health checks za kulisami.
+
+## Azure Data Lake Storage dołącza do zabawy
+
+W AppHost:
+
+```csharp
+var storage = builder.AddAzureStorage("azure-storage");
+var dataLake = storage.AddDataLake("data-lake");
+var fileSystem = storage.AddDataLakeFileSystem("data-lake-file-system");
+
+var analyticsService = builder.AddProject<Projects.AnalyticsService>("analytics")
+    .WithReference(dataLake)
+    .WithReference(fileSystem);
+```
+
+W projekcie klienckim:
+
+```csharp
+builder.AddAzureDataLakeServiceClient("data-lake");
+builder.AddAzureDataLakeFileSystemClient("data-lake-file-system");
+```
+
+Żadnego ręcznego zarządzania ciągami połączeń, żadnego polowania na poświadczenia.
+
+## Podsumowanie
+
+Aspire 13.2 to wydanie przyrostowe, ale integracje MongoDB EF Core i Data Lake wypełniają rzeczywiste luki. [Zaktualizuj do 13.2](https://get.aspire.dev) i wypróbuj je.
+
+
+---
+## azd update — Jedno Polecenie do Wszystkich Menedżerów Pakietów
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, azd, developer-tools, cli
+- **Reading time**: 1 min
+
+> Azure Developer CLI ma teraz uniwersalne polecenie aktualizacji, które działa niezależnie od metody instalacji — winget, Homebrew, Chocolatey lub skrypt instalacyjny.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "azd-update-universal-upgrade-command" >}}).*
+
+Znasz ten komunikat "Dostępna jest nowa wersja azd", który pojawia się co kilka tygodni? Ten, który odrzucasz, bo nie pamiętasz, czy zainstalowałeś `azd` przez winget, Homebrew czy ten skrypt curl z sześciu miesięcy temu? To jest w końcu naprawione.
+
+Microsoft właśnie dostarczył [`azd update`](https://devblogs.microsoft.com/azure-sdk/azd-update/) — pojedyncze polecenie, które aktualizuje Azure Developer CLI do najnowszej wersji niezależnie od tego, jak go pierwotnie zainstalowałeś.
+
+## Jak to działa
+
+```bash
+azd update
+```
+
+To wszystko. Dla wczesnego dostępu do nowych funkcji:
+
+```bash
+azd update --channel daily
+azd update --channel stable
+```
+
+Polecenie wykrywa Twoją aktualną metodę instalacji i używa odpowiedniego mechanizmu aktualizacji.
+
+## Mały haczyk
+
+`azd update` jest dostarczany od wersji 1.23.x. Jeśli jesteś na starszej wersji, będziesz musiał wykonać jedną ostatnią ręczną aktualizację. Potem `azd update` zajmuje się wszystkim.
+
+## Dlaczego to ważne
+
+To małe ulepszenie jakości życia, ale dla tych z nas, którzy używają `azd` na co dzień do wdrażania agentów AI i aplikacji Aspire do Azure, bycie na bieżąco ma znaczenie.
+
+Przeczytaj [pełne ogłoszenie](https://devblogs.microsoft.com/azure-sdk/azd-update/).
+
+
+---
+## Azure Smart Tier jest GA — Automatyczna Optymalizacja Kosztów Blob Storage Bez Reguł Cyklu Życia
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, storage, blob-storage, cost-optimization, cloud-native
+- **Reading time**: 1 min
+
+> Inteligentna warstwa Azure Blob Storage jest teraz ogólnie dostępna, automatycznie przenosząc obiekty między warstwami hot, cool i cold na podstawie rzeczywistych wzorców dostępu.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "azure-smart-tier-blob-storage-ga" >}}).*
+
+Jeśli kiedykolwiek spędziłeś czas na dostosowywaniu polityk cyklu życia Azure Blob Storage i obserwowałeś ich rozpadanie się, gdy wzorce dostępu się zmieniły, to jest coś dla Ciebie. Microsoft właśnie ogłosił [ogólną dostępność inteligentnej warstwy](https://azure.microsoft.com/en-us/blog/optimize-object-storage-costs-automatically-with-smart-tier-now-generally-available/) dla Azure Blob i Data Lake Storage.
+
+## Co inteligentna warstwa faktycznie robi
+
+Inteligentna warstwa ciągle ocenia czas ostatniego dostępu do każdego obiektu. Często dostępne dane pozostają w hot, nieaktywne dane przechodzą do cool po 30 dniach, następnie do cold po kolejnych 60 dniach. Gdy dane są ponownie dostępne, są natychmiast promowane z powrotem do hot.
+
+Podczas podglądu Microsoft poinformował, że **ponad 50% pojemności zarządzanej przez inteligentną warstwę automatycznie przesunęło się do chłodniejszych warstw**.
+
+## Dlaczego to ważne dla deweloperów .NET
+
+Scenariusze praktyczne:
+- **Telemetria i logi aplikacji** — gorące podczas debugowania, rzadko dostępne po kilku tygodniach
+- **Pipeline'y danych i wyniki ETL** — intensywnie dostępne podczas przetwarzania, potem głównie zimne
+- **Treści generowane przez użytkowników** — nowe przesłania są gorące, starsze treści stopniowo się schładzają
+
+## Konfiguracja
+
+- **Nowe konta**: Wybierz inteligentną warstwę jako domyślną warstwę dostępu podczas tworzenia konta
+- **Istniejące konta**: Zmień domyślną warstwę dostępu do blobów na inteligentną
+
+Obiekty mniejsze niż 128 KiB pozostają w hot i nie ponoszą opłaty monitoringowej.
+
+
+---
+## Gdzie Hostować Agenty AI na Azure? Praktyczny Przewodnik po Decyzjach
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/azure-ai-agent-hosting-options-guide/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, ai, agents, containers, microsoft-foundry, cloud-native, aks
+- **Reading time**: 1 min
+
+> Azure oferuje sześć sposobów hostowania agentów AI — od surowych kontenerów po w pełni zarządzane Foundry Hosted Agents. Oto jak wybrać odpowiedni dla swojego obciążenia .NET.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "azure-ai-agent-hosting-options-guide" >}}).*
+
+Jeśli teraz budujesz agenty AI z .NET, pewnie zauważyłeś: jest *wiele* sposobów na hostowanie ich na Azure. Container Apps, AKS, Functions, App Service, Foundry Agents, Foundry Hosted Agents.
+
+Microsoft opublikował [kompleksowy przewodnik po hostowaniu agentów Azure AI](https://devblogs.microsoft.com/all-things-azure/hostedagent/).
+
+## Sześć opcji na pierwszy rzut oka
+
+| Opcja | Najlepsza dla | Zarządzasz |
+|-------|-------------|------------|
+| **Container Apps** | Pełna kontrola kontenera bez K8s | Obserwowalność, stan, cykl życia |
+| **AKS** | Enterprise compliance, multi-cluster | Wszystkim |
+| **Azure Functions** | Sterowane zdarzeniami, krótkotrwałe zadania | Prawie niczym |
+| **App Service** | Prosty agent HTTP | Wdrożeniem, skalowaniem |
+| **Foundry Agents** | Agenty bez kodu | Prawie niczym |
+| **Foundry Hosted Agents** | Agenty z własnym frameworkiem | Tylko kodem agenta |
+
+## Foundry Hosted Agents — słodkie miejsce dla deweloperów agentów .NET
+
+Wdrożenie jest naprawdę proste:
+
+```bash
+azd ext install azure.ai.agents
+azd ai agent init
+azd up
+```
+
+To pojedyncze `azd up` buduje kontener, wypycha go do ACR, provisionuje projekt Foundry i uruchamia agenta.
+
+## Mój framework decyzyjny
+
+1. **Potrzebujesz zero infrastruktury?** → Foundry Agents
+2. **Masz własny kod agenta ale chcesz zarządzanego hostingu?** → Foundry Hosted Agents
+3. **Sterowane zdarzeniami, krótkotrwałe zadania?** → Azure Functions
+4. **Maksymalna kontrola kontenera?** → Container Apps
+5. **Ścisła zgodność i multi-cluster?** → AKS
+
+## Podsumowanie
+
+Dla większości deweloperów .NET budujących z Semantic Kernel lub Microsoft Agent Framework, Hosted Agents to prawdopodobnie właściwy punkt startowy. Sprawdź [pełny przewodnik Microsoftu](https://devblogs.microsoft.com/all-things-azure/hostedagent/).
+
+
+---
+## Umiejętności agentów w .NET stały się naprawdę elastyczne
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/
+- **Date**: April 14, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: .NET, Agent Framework, AI, Semantic Kernel, Azure
+- **Reading time**: 5 min
+
+> Microsoft Agent Framework obsługuje teraz trzy sposoby tworzenia umiejętności — na podstawie plików, klas i kodu inline — wszystkie komponowane przez jeden dostawca. Oto dlaczego to ważne i jak używać każdego z nich.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "agent-skills-dotnet-three-authoring-patterns" >}}).*
+
+Jeśli budujesz agenty z Microsoft Agent Framework, znasz schemat: definiujesz umiejętności, podłączasz je do dostawcy i pozwalasz agentowi zdecydować, którą wywołać. Co nowego to *sposób* tworzenia tych umiejętności — a skok elastyczności jest znaczący.
+
+Najnowsza aktualizacja wprowadza trzy odmienne wzorce tworzenia umiejętności agentów: **oparty na plikach**, **oparty na klasach** i **zdefiniowany w kodzie inline**. Wszystkie trzy podłączają się do jednego `AgentSkillsProviderBuilder`, co oznacza, że możesz je mieszać i dopasowywać bez żadnej logiki routingu ani specjalnego kodu spinającego. Przeprowadzę cię przez każdy z nich i kiedy po który sięgać.
+
+## Umiejętności oparte na plikach: punkt startowy
+
+Umiejętności oparte na plikach to dokładnie to, na co wskazuje nazwa — katalog na dysku z plikiem `SKILL.md`, opcjonalnymi skryptami i dokumentami referencyjnymi. Pomyśl o tym jako o najprostszym sposobie na danie agentowi nowych możliwości:
+
+```
+skills/
+└── onboarding-guide/
+    ├── SKILL.md
+    ├── scripts/
+    │   └── check-provisioning.py
+    └── references/
+        └── onboarding-checklist.md
+```
+
+Metadane w `SKILL.md` deklarują nazwę i opis umiejętności, a sekcja instrukcji mówi agentowi, jak używać skryptów i referencji:
+
+```markdown
+---
+name: onboarding-guide
+description: >-
+  Walk new hires through their first-week setup checklist.
+---
+
+## Instructions
+
+1. Ask for the employee's name and start date.
+2. Run `scripts/check-provisioning.py` to verify accounts.
+3. Walk through `references/onboarding-checklist.md`.
+4. Follow up on incomplete items.
+```
+
+Następnie podłączasz to za pomocą `SubprocessScriptRunner.RunAsync` do wykonania skryptów:
+
+```csharp
+var skillsProvider = new AgentSkillsProvider(
+    Path.Combine(AppContext.BaseDirectory, "skills"),
+    SubprocessScriptRunner.RunAsync);
+
+AIAgent agent = new AzureOpenAIClient(new Uri(endpoint), new DefaultAzureCredential())
+    .GetResponsesClient()
+    .AsAIAgent(new ChatClientAgentOptions
+    {
+        Name = "HRAgent",
+        ChatOptions = new() { Instructions = "You are a helpful HR assistant." },
+        AIContextProviders = [skillsProvider],
+    },
+    model: deploymentName);
+```
+
+Agent automatycznie wykrywa umiejętność i wywołuje skrypt sprawdzania uprawnień, gdy jest to potrzebne. Czyste i proste.
+
+## Umiejętności oparte na klasach: dostarcz przez NuGet
+
+Tu robi się interesująco dla zespołów. Umiejętności oparte na klasach dziedziczą z `AgentClassSkill<T>` i używają atrybutów takich jak `[AgentSkillResource]` i `[AgentSkillScript]`, dzięki czemu framework odkrywa wszystko przez refleksję:
+
+```csharp
+public sealed class BenefitsEnrollmentSkill : AgentClassSkill<BenefitsEnrollmentSkill>
+{
+    public override AgentSkillFrontmatter Frontmatter { get; } = new(
+        "benefits-enrollment",
+        "Enroll an employee in health, dental, or vision plans.");
+
+    protected override string Instructions => """
+        1. Read the available-plans resource.
+        2. Confirm the plan the employee wants.
+        3. Use the enroll script to complete enrollment.
+        """;
+
+    [AgentSkillResource("available-plans")]
+    [Description("Plan options with monthly pricing.")]
+    public string AvailablePlans => """
+        ## Available Plans (2026)
+        - Health: Basic HMO ($0/month), Premium PPO ($45/month)
+        - Dental: Standard ($12/month), Enhanced ($25/month)
+        - Vision: Basic ($8/month)
+        """;
+
+    [AgentSkillScript("enroll")]
+    [Description("Enrolls employee in the specified benefit plan.")]
+    private static string Enroll(string employeeId, string planCode)
+    {
+        bool success = HrClient.EnrollInPlan(employeeId, planCode);
+        return JsonSerializer.Serialize(new { success, employeeId, planCode });
+    }
+}
+```
+
+Piękno polega na tym, że zespół może spakować to jako pakiet NuGet. Dodajesz go do projektu, wrzucasz do buildera i działa obok umiejętności opartych na plikach bez żadnej koordynacji:
+
+```csharp
+var skillsProvider = new AgentSkillsProviderBuilder()
+    .UseFileSkill(Path.Combine(AppContext.BaseDirectory, "skills"))
+    .UseSkill(new BenefitsEnrollmentSkill())
+    .UseFileScriptRunner(SubprocessScriptRunner.RunAsync)
+    .Build();
+```
+
+Obie umiejętności pojawiają się w prompcie systemowym agenta. Agent decyduje, którą użyć na podstawie rozmowy — bez kodu routingu.
+
+## Umiejętności inline: szybki pomost
+
+Znasz ten moment, gdy inny zespół buduje dokładnie tę umiejętność, której potrzebujesz, ale nie wyda jej przez sprint? `AgentInlineSkill` to twój pomost:
+
+```csharp
+var timeOffSkill = new AgentInlineSkill(
+    name: "time-off-balance",
+    description: "Calculate remaining vacation and sick days.",
+    instructions: """
+        1. Ask for the employee ID if not provided.
+        2. Use calculate-balance to get the remaining balance.
+        3. Present used and remaining days clearly.
+        """)
+    .AddScript("calculate-balance", (string employeeId, string leaveType) =>
+    {
+        int totalDays = HrDatabase.GetAnnualAllowance(employeeId, leaveType);
+        int daysUsed = HrDatabase.GetDaysUsed(employeeId, leaveType);
+        int remaining = totalDays - daysUsed;
+        return JsonSerializer.Serialize(new { employeeId, leaveType, totalDays, daysUsed, remaining });
+    });
+```
+
+Dodajesz ją do buildera tak samo jak pozostałe:
+
+```csharp
+var skillsProvider = new AgentSkillsProviderBuilder()
+    .UseFileSkill(Path.Combine(AppContext.BaseDirectory, "skills"))
+    .UseSkill(new BenefitsEnrollmentSkill())
+    .UseSkill(timeOffSkill)
+    .UseFileScriptRunner(SubprocessScriptRunner.RunAsync)
+    .Build();
+```
+
+Gdy pakiet NuGet w końcu się pojawi, wymieniasz umiejętność inline na opartą na klasach. Agent nie zna różnicy.
+
+Ale umiejętności inline nie są tylko dla pomostów. Są też właściwym wyborem, gdy musisz dynamicznie generować umiejętności w czasie działania — pomyśl jedna umiejętność na jednostkę biznesową ładowaną z konfiguracji — albo gdy skrypt musi zamykać się na lokalnym stanie, który nie należy do kontenera DI.
+
+## Zatwierdzanie skryptów: człowiek w pętli
+
+Dla nas, programistów .NET, budujących agenty produkcyjne, to jest część, która naprawdę odblokowuje rozmowy o wdrożeniu. Niektóre skrypty mają realne konsekwencje — rejestrowanie kogoś w świadczeniach, zapytania do infrastruktury produkcyjnej. Włącz `UseScriptApproval` i agent wstrzymuje się przed wykonaniem jakiegokolwiek skryptu:
+
+```csharp
+var skillsProvider = new AgentSkillsProviderBuilder()
+    .UseFileSkill(Path.Combine(AppContext.BaseDirectory, "skills"))
+    .UseSkill(new BenefitsEnrollmentSkill())
+    .UseSkill(timeOffSkill)
+    .UseFileScriptRunner(SubprocessScriptRunner.RunAsync)
+    .UseScriptApproval(true)
+    .Build();
+```
+
+Gdy agent chce uruchomić skrypt, zamiast tego zwraca żądanie zatwierdzenia. Twoja aplikacja zbiera decyzję — zatwierdź lub odrzuć — i agent kontynuuje odpowiednio. W regulowanych środowiskach to jest różnica między "możemy to wdrożyć" a "dział prawny mówi nie".
+
+## Dlaczego ta kombinacja ma znaczenie
+
+Prawdziwa moc nie leży w żadnym pojedynczym wzorcu tworzenia — to w kompozycji. Możesz:
+
+- **Zacząć mało** z umiejętnością opartą na plikach, iterować instrukcje i dostarczyć bez pisania C#
+- **Dostarczać umiejętności wielokrotnego użytku** jako pakiety NuGet, które inne zespoły mogą dodać jedną linijką
+- **Pomost luk** z umiejętnościami inline, gdy potrzebujesz czegoś *teraz*
+- **Filtrować współdzielone katalogi umiejętności** za pomocą predykatów, by agent ładował tylko to, co powinien
+- **Dodawać nadzór ludzki** dla skryptów dotykających systemów produkcyjnych
+
+Wszystko to komponuje się przez `AgentSkillsProviderBuilder`. Żadnego specjalnego routingu, żadnej logiki warunkowej, żadnych sprawdzeń typów umiejętności.
+
+## Podsumowanie
+
+Umiejętności agentów w .NET mają teraz naprawdę elastyczny model tworzenia. Czy jesteś samotnym programistą szkicującym prototyp z umiejętnościami opartymi na plikach, czy zespołem enterprise dostarczającym spakowane możliwości przez NuGet — wzorce się dopasowują. A mechanizm zatwierdzania skryptów sprawia, że jest gotowe do produkcji dla środowisk, gdzie potrzebujesz tego ludzkiego punktu kontrolnego.
+
+Sprawdź [oryginalne ogłoszenie](https://devblogs.microsoft.com/agent-framework/agent-skills-in-net-three-ways-to-author-one-provider-to-run-them/) po pełny przewodnik, [dokumentację Agent Skills](https://learn.microsoft.com/en-us/agent-framework/agents/skills) na Microsoft Learn i [przykłady .NET na GitHub](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/02-agents/AgentSkills), by zacząć pracę.
+
+
+---
+## Azure MCP Server 2.0 Właśnie Wylądował — Samodzielnie Hostowana Agentic Cloud Automation Jest Tutaj
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/azure-mcp-server-2-self-hosted-agentic-cloud/
+- **Date**: April 11, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: mcp, azure, ai, agents, azure-sdk, dotnet
+- **Reading time**: 1 min
+
+> Azure MCP Server 2.0 osiąga stabilność z samodzielnie hostowanymi zdalnymi wdrożeniami, 276 narzędziami w 57 usługach Azure i zabezpieczeniami klasy enterprise.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "azure-mcp-server-2-self-hosted-agentic-cloud" >}}).*
+
+Jeśli ostatnio budowałeś cokolwiek z MCP i Azure, pewnie wiesz, że lokalne doświadczenie działa dobrze. Ale gdy musisz udostępnić tę konfigurację całemu zespołowi? Tam rzeczy się komplikowały.
+
+Już nie. Azure MCP Server [osiągnął stabilną wersję 2.0](https://devblogs.microsoft.com/azure-sdk/announcing-azure-mcp-server-2-0-stable-release/), a główna funkcja to dokładnie to, o co prosiły zespoły enterprise: **obsługa samodzielnie hostowanego zdalnego serwera MCP**.
+
+## Co to jest Azure MCP Server?
+
+Azure MCP Server implementuje specyfikację [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) i ujawnia możliwości Azure jako ustrukturyzowane, odkrywalne narzędzia. Liczby mówią same za siebie: **276 narzędzi MCP w 57 usługach Azure**.
+
+## Wielka sprawa: samodzielnie hostowane zdalne wdrożenia
+
+W prawdziwym scenariuszu zespołowym potrzebujesz:
+- Wspólny dostęp dla deweloperów i wewnętrznych systemów agentów
+- Scentralizowana konfiguracja
+- Granice sieci i polityk enterprise
+- Integracja z pipeline'ami CI/CD
+
+Azure MCP Server 2.0 rozwiązuje to wszystko. Do autoryzacji masz dwie opcje:
+1. **Managed Identity** — przy pracy z [Microsoft Foundry](https://aka.ms/azmcp/self-host/foundry)
+2. **Przepływ On-Behalf-Of (OBO)** — delegacja OpenID Connect z rzeczywistymi uprawnieniami użytkownika
+
+## Wzmocnienie bezpieczeństwa
+
+Wersja 2.0 dodaje silniejszą walidację punktów końcowych, ochronę przed wzorcami injection i ściślejsze kontrole izolacji.
+
+## Pierwsze kroki
+
+- **[GitHub Repo](https://aka.ms/azmcp)** — kod źródłowy, dokumenty
+- **[Docker Image](https://aka.ms/azmcp/download/docker)** — wdrożenie w kontenerze
+- **[Rozszerzenie VS Code](https://aka.ms/azmcp/download/vscode)** — integracja IDE
+- **[Przewodnik self-hosting](https://aka.ms/azmcp/self-host)** — flagowa funkcja 2.0
+
+
+---
+## .NET Aspire 13.2 Chce Być Najlepszym Przyjacielem Twojego Agenta AI
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: aspire, dotnet, ai, cli, telemetry, developer-tools
+- **Reading time**: 2 min
+
+> Aspire 13.2 stawia wszystko na agentic development — ustrukturyzowane wyjście CLI, izolowane uruchomienia, środowiska samoleczące i pełne dane OpenTelemetry, żeby agenci AI mogli faktycznie budować, uruchamiać i obserwować twoje aplikacje.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "aspire-agentic-development-build-run-observe" >}}).*
+
+Znasz ten moment, kiedy twój agent kodowania AI pisze świetny kod, ekscytujesz się, a potem wszystko się sypie, kiedy próbuje to *uruchomić*? Konflikty portów, phantom processes, złe zmienne środowiskowe — nagle agent spala tokeny na rozwiązywanie problemów ze startem zamiast budować funkcje.
+
+Zespół Aspire opublikował [bardzo przemyślany post](https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/) dokładnie o tym problemie, a ich odpowiedź jest przekonująca: Aspire 13.2 jest zaprojektowany nie tylko dla ludzi, ale dla agentów AI.
+
+## Aspire jako infrastruktura agentów
+
+Oto co Aspire 13.2 wnosi do stołu agentic development:
+
+**Cały stos w typowanym kodzie.** AppHost definiuje pełną topologię — w kompilowanym TypeScript lub C#:
+
+```typescript
+import { createBuilder } from './.modules/aspire.js';
+
+const builder = await createBuilder();
+
+const postgres = await builder.addPostgres("pg").addDatabase("catalog");
+const cache = await builder.addRedis("cache");
+
+const api = await builder
+  .addNodeApp("api", "./api", "src/index.ts")
+  .withHttpEndpoint({ env: "PORT" })
+  .withReference(postgres)
+  .withReference(cache);
+
+await builder
+  .addViteApp("frontend", "./frontend")
+  .withReference(api)
+  .waitFor(api);
+
+await builder.build().run();
+```
+
+**Jedno polecenie do wszystkiego.** Zamiast żonglowania `docker compose up`, `npm run dev` i skryptami startowymi bazy danych — wszystko to po prostu `aspire start`.
+
+**Izolowany tryb dla równoległych agentów.** Z `--isolated`, każde uruchomienie Aspire dostaje własne losowe porty i oddzielne sekrety użytkownika.
+
+**Oczy agenta przez telemetrię.** CLI Aspire eksponuje pełne dane OpenTelemetry podczas developmentu — ślady, metryki, ustrukturyzowane logi.
+
+## Analogia do kul w kręglach
+
+Zespół Aspire używa świetnej analogii: pomyśl o Aspire jak o odbojnikach toru do kręgli dla agentów AI. Jeśli agent nie jest doskonały (a nie będzie), odbojniki nie pozwolą mu rzucać na rynsztok.
+
+## Podsumowanie
+
+Aspire 13.2 to nie tylko framework dla aplikacji rozproszonych — staje się niezbędną infrastrukturą agentów. Przeczytaj [pełny post](https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/) od zespołu Aspire.
+
+
+---
+## Agentic Platform Engineering Staje Się Rzeczywistością — Git-APE Pokazuje Jak
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, github-copilot, platform-engineering, agents, mcp, devops
+- **Reading time**: 2 min
+
+> Projekt Git-APE Microsoftu wdraża agentic platform engineering w praktyce — używając agentów GitHub Copilot i Azure MCP do zamiany żądań w języku naturalnym na zwalidowaną infrastrukturę chmurową.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "agentic-platform-engineering-git-ape" >}}).*
+
+Platform engineering to jeden z tych terminów, które świetnie brzmią na konferencjach, ale zazwyczaj oznaczają "zbudowaliśmy portal wewnętrzny i wrapper Terraform." Prawdziwa obietnica — self-service infrastruktura, która jest bezpieczna, zarządzana i szybka — zawsze była o kilka kroków za daleko.
+
+Zespół Azure właśnie opublikował [Part 2 swojej serii agentic platform engineering](https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/). Nazywają to **Git-APE** — projekt open-source, który używa agentów GitHub Copilot i serwerów Azure MCP do zamiany żądań w języku naturalnym na zwalidowaną, wdrożoną infrastrukturę.
+
+## Co faktycznie robi Git-APE
+
+Podstawowy pomysł: zamiast uczyć się modułów Terraform, deweloperzy rozmawiają z agentem Copilot. Agent interpretuje intencje, generuje Infrastructure-as-Code, waliduje wobec zasad i wdraża — wszystko w VS Code.
+
+```bash
+git clone https://github.com/Azure/git-ape
+cd git-ape
+```
+
+Otwórz obszar roboczy w VS Code, a pliki konfiguracji agenta są automatycznie odkrywane przez GitHub Copilot:
+
+```
+@git-ape deploy a function app with storage in West Europe
+```
+
+Czyszczenie jest równie proste:
+
+```
+@git-ape destroy my-resource-group
+```
+
+## Dlaczego to ważne
+
+Dla tych z nas budujących na Azure, przesuwa to rozmowę z "jak zbudować portal" na "jak opisać nasze guardrails jako API."
+
+Jako deweloper .NET: Azure MCP Server i agenty GitHub Copilot działają z dowolnym obciążeniem Azure — Twoje ASP.NET Core API, .NET Aspire — wszystko może być celem agentic deployment flow.
+
+## Podsumowanie
+
+Git-APE to wczesne, ale konkretne spojrzenie na agentic platform engineering w praktyce. Sklonuj [repozytorium](https://github.com/Azure/git-ape) i przeczytaj [pełny post](https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/).
+
+
+---
+## Aplikacje MCP Dostają Fluent API — Buduj Bogate UI Narzędzi AI w .NET w Trzech Krokach
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/mcp-fluent-api-azure-functions-dotnet/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: mcp, dotnet, azure-functions, ai, azure-sdk
+- **Reading time**: 1 min
+
+> Nowe płynne API konfiguracji dla aplikacji MCP na Azure Functions pozwala zamienić dowolne narzędzie MCP .NET w pełną aplikację z widokami, uprawnieniami i politykami CSP.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "mcp-fluent-api-azure-functions-dotnet" >}}).*
+
+Narzędzia MCP świetnie nadają się do dawania agentom AI możliwości. Ale co jeśli Twoje narzędzie musi coś pokazać użytkownikowi?
+
+Lilian Kasem z zespołu Azure SDK [przedstawiła nowe płynne API konfiguracji](https://devblogs.microsoft.com/azure-sdk/mcp-as-easy-as-1-2-3-introducing-the-fluent-api-for-mcp-apps/).
+
+## Płynne API w trzech krokach
+
+**Krok 1: Zdefiniuj swoją funkcję:**
+
+```csharp
+[Function(nameof(HelloApp))]
+public string HelloApp(
+    [McpToolTrigger("HelloApp", "A simple MCP App that says hello.")]
+    ToolInvocationContext context)
+{
+    return "Hello from app";
+}
+```
+
+**Krok 2: Promuj ją do aplikacji MCP:**
+
+```csharp
+builder.ConfigureMcpTool("HelloApp")
+    .AsMcpApp(app => app
+        .WithView("assets/hello-app.html")
+        .WithTitle("Hello App")
+        .WithPermissions(McpAppPermissions.ClipboardWrite | McpAppPermissions.ClipboardRead)
+        .WithCsp(csp =>
+        {
+            csp.AllowBaseUri("https://www.microsoft.com")
+               .ConnectTo("https://www.microsoft.com");
+        }));
+```
+
+**Krok 3: Dodaj swój widok HTML.**
+
+Dodaj pakiet:
+
+```bash
+dotnet add package Microsoft.Azure.Functions.Worker.Extensions.Mcp --version 1.5.0-preview.1
+```
+
+Przeczytaj [pełny post](https://devblogs.microsoft.com/azure-sdk/mcp-as-easy-as-1-2-3-introducing-the-fluent-api-for-mcp-apps/).
+
+
+---
+## Microsoft Foundry Marzec 2026 — GPT-5.4, Agent Service GA i Odświeżenie SDK, Które Zmienia Wszystko
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/microsoft-foundry-march-2026-whats-new/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: foundry, ai, azure, gpt-5-4, agents, sdk
+- **Reading time**: 1 min
+
+> Aktualizacja Foundry z marca 2026 jest ogromna: Agent Service osiąga GA, GPT-5.4 przynosi niezawodne rozumowanie, SDK azure-ai-projects stabilizuje się we wszystkich językach.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "microsoft-foundry-march-2026-whats-new" >}}).*
+
+Miesięczne posty "Co nowego w Microsoft Foundry" to zazwyczaj mieszanka drobnych ulepszeń. [Edycja z marca 2026](https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-mar-2026/)? To prawie same główne funkcje.
+
+## Foundry Agent Service jest gotowy do produkcji
+
+Środowisko uruchomieniowe agentów nowej generacji jest ogólnie dostępne — zbudowane na OpenAI Responses API, kompatybilne przewodowo z agentami OpenAI.
+
+Kluczowe dodatki: kompleksowe prywatne sieci, rozszerzenie auth MCP, podgląd Voice Live i hosted agents w 6 nowych regionach.
+
+## GPT-5.4 — niezawodność ponad surową inteligencję
+
+GPT-5.4 nie chodzi o bycie mądrzejszym. Chodzi o bycie bardziej niezawodnym.
+
+| Model | Cena (za M tokenów) | Najlepszy dla |
+|-------|----------------------|----------|
+| GPT-5.4 (≤272K) | $2.50 / $15 output | Agenty produkcyjne |
+| GPT-5.4 Pro | $30 / $180 output | Głęboka analiza |
+| GPT-5.4 Mini | Opłacalny | Klasyfikacja, ekstrakcja |
+
+## SDK jest w końcu stabilny
+
+SDK `azure-ai-projects` opublikował stabilne wersje we wszystkich językach — w tym .NET 2.0.0.
+
+## Fireworks AI przynosi otwarte modele na Azure
+
+DeepSeek V3.2, gpt-oss-120b, Kimi K2.5 przy uruchomieniu.
+
+Przeczytaj [pełne podsumowanie](https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-mar-2026/).
+
+
+---
+## Ocena Modernizacji GitHub Copilot To Najlepsze Narzędzie Migracji, Którego Jeszcze Nie Używasz
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet, azure, github-copilot, modernization, migration, aspnet-core
+- **Reading time**: 1 min
+
+> Rozszerzenie modernizacji GitHub Copilot nie tylko sugeruje zmiany kodu — produkuje pełną ocenę migracji z wykonalnymi problemami, porównaniami celów Azure i współpracującym przepływem pracy.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "dotnet-modernization-assessment-github-copilot" >}}).*
+
+Migrowanie starszej aplikacji .NET Framework do nowoczesnego .NET to jedno z tych zadań, które wszyscy wiedzą, że powinni wykonać, ale nikt nie chce zaczynać.
+
+Jeffrey Fritz właśnie opublikował [dogłębną analizę oceny modernizacji GitHub Copilot](https://devblogs.microsoft.com/dotnet/your-migrations-source-of-truth-the-modernization-assessment/).
+
+## To nie jest tylko silnik sugestii kodu
+
+Rozszerzenie VS Code podąża za modelem **Oceń → Planuj → Wykonaj**. Faza oceny analizuje całą bazę kodu i produkuje ustrukturyzowany dokument, który wszystko przechwytuje.
+
+Ocena jest przechowywana pod `.github/modernize/assessment/`. Każde uruchomienie produkuje niezależny raport.
+
+## Dwa sposoby na start
+
+**Zalecana ocena** — szybka ścieżka. Wybierz z kuratorowanych domenach (Java/.NET Upgrade, Cloud Readiness, Security).
+
+**Niestandardowa ocena** — ścieżka ukierunkowana. Skonfiguruj dokładnie co analizować: docelowe obliczenia (App Service, AKS, Container Apps), docelowy system operacyjny, analiza konteneryzacji.
+
+## Podział problemów jest wykonalny
+
+Każdy problem ma poziom krytyczności:
+
+- **Obowiązkowy** — musi być naprawiony lub migracja się nie powiedzie
+- **Potencjalny** — może wpłynąć na migrację, wymaga ludzkiego osądu
+- **Opcjonalny** — zalecane ulepszenia, nie blokuje migracji
+
+## Moje zdanie
+
+Jeśli masz starsze aplikacje .NET Framework, to jest *najlepsze* narzędzie do rozpoczęcia. Sam dokument oceny jest wart poświęconego czasu.
+
+Przeczytaj [pełny przewodnik](https://devblogs.microsoft.com/dotnet/your-migrations-source-of-truth-the-modernization-assessment/) i pobierz [rozszerzenie VS Code](https://aka.ms/ghcp-appmod/vscode-ext).
+
+
+---
+## Połącz Swoje Serwery MCP na Azure Functions z Agentami Foundry — Oto Jak
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/foundry-agents-mcp-servers-azure-functions/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: mcp, azure-functions, foundry, ai, azure, dotnet
+- **Reading time**: 1 min
+
+> Zbuduj swój serwer MCP raz, wdróż go na Azure Functions i połącz z agentami Microsoft Foundry z właściwym uwierzytelnianiem.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "foundry-agents-mcp-servers-azure-functions" >}}).*
+
+Jest jedna rzecz, którą kocham w ekosystemie MCP: budujesz swój serwer raz i działa wszędzie.
+
+Lily Ma z Azure SDK team [opublikowała praktyczny przewodnik](https://devblogs.microsoft.com/azure-sdk/give-your-foundry-agent-custom-tools-with-mcp-servers-on-azure-functions/) dotyczący łączenia serwerów MCP wdrożonych na Azure Functions z agentami Microsoft Foundry.
+
+## Dlaczego ta kombinacja ma sens
+
+Azure Functions daje ci skalowalną infrastrukturę, wbudowane uwierzytelnianie i bezserwerowe rozliczenia. Microsoft Foundry daje ci agentów AI, którzy mogą rozumować i działać. Połączenie obu oznacza, że twoje narzędzia stają się możliwościami agentów AI.
+
+## Opcje uwierzytelniania
+
+| Metoda | Przypadek użycia |
+|--------|----------|
+| **Key-based** | Programowanie lub serwery bez Entra auth |
+| **Microsoft Entra** | Produkcja z zarządzanymi tożsamościami |
+| **OAuth identity passthrough** | Produkcja z kontekstem użytkownika |
+| **Nieuwierzytelnione** | Dev/testowanie lub dane publiczne |
+
+## Konfiguracja
+
+1. **Wdróż serwer MCP na Azure Functions** — próbki dla [.NET](https://github.com/Azure-Samples/remote-mcp-functions-dotnet)
+2. **Włącz wbudowane uwierzytelnianie MCP**
+3. **Pobierz URL endpoint** — `https://<FUNCTION_APP_NAME>.azurewebsites.net/runtime/webhooks/mcp`
+4. **Dodaj serwer MCP jako narzędzie w Foundry**
+
+Przeczytaj [pełny przewodnik](https://devblogs.microsoft.com/azure-sdk/give-your-foundry-agent-custom-tools-with-mcp-servers-on-azure-functions/).
+
+
+---
+## SQL MCP Server — Właściwy Sposób na Danie Agentom AI Dostępu do Bazy Danych
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure-sql, mcp, data-api-builder, ai, azure, databases
+- **Reading time**: 1 min
+
+> SQL MCP Server z Data API builder daje agentom AI bezpieczny, deterministyczny dostęp do bazy danych bez ujawniania schematów lub polegania na NL2SQL.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "sql-mcp-server-data-api-builder" >}}).*
+
+Będąc szczerym: większość dostępnych dziś serwerów MCP dla baz danych jest przerażająca. Biorą zapytanie w języku naturalnym, generują SQL w locie i uruchamiają go na twoich danych produkcyjnych.
+
+Zespół Azure SQL właśnie [przedstawił SQL MCP Server](https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/), i przyjmuje fundamentalnie inne podejście.
+
+## Dlaczego nie NL2SQL?
+
+Modele nie są deterministyczne. SQL MCP Server używa podejścia **NL2DAB**. Agent pracuje z warstwą abstrakcji encji Data API builder, aby deterministycznie produkować dokładne T-SQL.
+
+## Siedem narzędzi, nie siedemset
+
+SQL MCP Server udostępnia dokładnie siedem narzędzi DML:
+
+- `describe_entities` — odkryj dostępne encje
+- `create_record` — wstawiaj wiersze
+- `read_records` — zapytuj tabele i widoki
+- `update_record` — modyfikuj wiersze
+- `delete_record` — usuń wiersze
+- `execute_entity` — uruchamiaj procedury składowane
+- `aggregate_records` — zapytania agregujące
+
+## Pierwsze kroki w trzech poleceniach
+
+```bash
+dab init   --database-type mssql   --connection-string "@env('sql_connection_string')"
+
+dab add Customers   --source dbo.Customers   --permissions "anonymous:*"
+
+dab start
+```
+
+## Historia bezpieczeństwa jest solidna
+
+RBAC na każdej warstwie, integracja Azure Key Vault, Microsoft Entra + niestandardowy OAuth.
+
+Sprawdź [pełny post](https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/) i [dokumentację](https://aka.ms/sql/mcp).
+
+
+---
+## To ustawienie Visual Studio dla pływających okien, o którym nie wiedziałeś (a powinieneś)
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: visual-studio, developer-tools, productivity, powertoys
+- **Reading time**: 2 min
+
+> Ukryte ustawienie Visual Studio daje ci pełną kontrolę nad pływającymi oknami — niezależne wpisy na pasku zadań, prawidłowe zachowanie na wielu monitorach i idealna integracja z FancyZones. Jedna lista rozwijana zmienia wszystko.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "visual-studio-floating-windows-powertoys" >}}).*
+
+Jeśli używasz wielu monitorów z Visual Studio (a szczerze, kto tego nie robi w dzisiejszych czasach), prawdopodobnie doświadczyłeś irytacji: pływające okna narzędziowe znikają po zminimalizowaniu głównego IDE, zawsze pozostają na wierzchu wszystkiego innego i nie pojawiają się jako oddzielne przyciski na pasku zadań. To działa w niektórych przepływach pracy, ale przy konfiguracji wielomonitorowej jest frustrujące.
+
+Mads Kristensen z zespołu Visual Studio [podzielił się mało znanum ustawieniem](https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/), które całkowicie zmienia sposób zachowania pływających okien. Jedna lista rozwijana. To wszystko.
+
+## Ustawienie
+
+**Narzędzia > Opcje > Środowisko > Okna > Pływające okna**
+
+Lista rozwijana "Te pływające okna należą do głównego okna" ma trzy opcje:
+
+- **Żadne** — pełna niezależność. Każde pływające okno dostaje własny wpis na pasku zadań i zachowuje się jak normalne okno Windows.
+- **Okna narzędziowe** (domyślne) — dokumenty pływają swobodnie, okna narzędziowe pozostają powiązane z IDE.
+- **Dokumenty i okna narzędziowe** — klasyczne zachowanie Visual Studio, wszystko powiązane z głównym oknem.
+
+## Dlaczego "Żadne" to właściwy wybór przy konfiguracji wielomonitorowej
+
+Ustaw na **Żadne** i nagle wszystkie twoje pływające okna narzędziowe i dokumenty zachowują się jak prawdziwe aplikacje Windows. Pojawiają się na pasku zadań, pozostają widoczne po zminimalizowaniu głównego okna Visual Studio i przestają wymuszać się na pierwszym planie.
+
+Połącz to z **PowerToys FancyZones** i to jest zmiana zasad gry. Twórz niestandardowe układy na swoich monitorach, przyciągaj Eksploratora rozwiązań do jednej strefy, debugger do innej i pliki kodu gdzie chcesz. Wszystko pozostaje na swoim miejscu, wszystko jest niezależnie dostępne, a przestrzeń robocza wydaje się zorganizowana zamiast chaotyczna.
+
+## Szybkie rekomendacje
+
+- **Użytkownicy wielomonitorowi**: Ustaw na **Żadne**, połącz z FancyZones
+- **Okazjonalni użytkownicy pływających okien**: **Okna narzędziowe** (domyślne) to solidny kompromis
+- **Tradycyjny przepływ pracy**: **Dokumenty i okna narzędziowe** zachowuje wszystko klasycznie
+
+Wskazówka: **Ctrl + dwukliknięcie** na pasku tytułu dowolnego okna narzędziowego, by natychmiast pływać lub zadokować. Po zmianie ustawienia nie jest wymagane ponowne uruchomienie.
+
+## Podsumowanie
+
+To jedno z tych ustawień "nie mogę uwierzyć, że o tym nie wiedziałem". Jeśli kiedykolwiek pływające okna w Visual Studio cię irytowały, idź i zmień to teraz.
+
+Przeczytaj [pełny post](https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/) po szczegóły i zrzuty ekranu.
+
+
+
+---
+## Tryb Izolowany Aspire Rozwiązuje Problem Konfliktów Portów w Równoległym Programowaniu
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: aspire, dotnet, cli, developer-tools, parallel-development
+- **Reading time**: 1 min
+
+> Aspire 13.2 wprowadza tryb --isolated: losowe porty, oddzielne sekrety i zero kolizji przy uruchamianiu wielu instancji tego samego AppHosta. Idealne dla agentów AI, worktrees i równoległych przepływów pracy.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "aspire-isolated-mode-parallel-instances" >}}).*
+
+Jeśli próbowałeś uruchomić dwie instancje tego samego projektu jednocześnie, znasz ten ból. Port 8080 jest już zajęty.
+
+Aspire 13.2 naprawia to jedną flagą. James Newton-King [opisał pełne szczegóły](https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/).
+
+## Rozwiązanie: `--isolated`
+
+```bash
+aspire run --isolated
+```
+
+Każde uruchomienie dostaje:
+- **Losowe porty** — brak kolizji między instancjami
+- **Izolowane sekrety użytkownika** — ciągi połączeń i klucze API zostają oddzielne dla każdej instancji
+
+## Prawdziwe scenariusze gdzie to błyszczy
+
+**Wiele checkoutów:**
+
+```bash
+# Terminal 1
+cd ~/projects/my-app-feature
+aspire run --isolated
+
+# Terminal 2
+cd ~/projects/my-app-bugfix
+aspire run --isolated
+```
+
+Oba działają bez konfliktów.
+
+**Agenty w tle w VS Code.** Gdy agent w tle Copilot Chat tworzy git worktree, tryb izolowany zapewnia, że obie instancje po prostu działają.
+
+## Jak to działa pod maską
+
+Gdy przekażesz `--isolated`, CLI generuje unikalny identyfikator instancji dla uruchomienia, który napędza randomizację portów i izolację sekretów.
+
+## Podsumowanie
+
+Tryb izolowany to mała funkcja, która rozwiązuje prawdziwy, coraz bardziej powszechny problem. Zdobądź 13.2 z `aspire update --self`.
+
+
+---
+## Tworzenie interfejsów użytkownika dla multi-agentowych systemów w czasie rzeczywistym — bez efektu czarnej skrzynki
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/ag-ui-real-time-multi-agent-ui-maf/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: agent-framework, ai, ag-ui, multi-agent, azure, sse
+- **Reading time**: 3 min
+
+> AG-UI i Microsoft Agent Framework łączą siły, by zapewnić multi-agentowym przepływom pracy właściwy frontend — ze streamingiem w czasie rzeczywistym, zatwierdzeniami przez człowieka i pełną widocznością działań agentów.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "ag-ui-real-time-multi-agent-ui-maf" >}}).*
+
+Oto rzecz o systemach wieloagentowych: w demonstracjach wyglądają niesamowicie. Trzy agenty przekazują sobie pracę, rozwiązują problemy, podejmują decyzje. Potem próbujesz pokazać to prawdziwym użytkownikom i... cisza. Kręcący się wskaźnik. Nikt nie wie, który agent co robi ani dlaczego system jest wstrzymany. To nie jest produkt — to problem zaufania.
+
+Zespół Microsoft Agent Framework właśnie opublikował [świetny przewodnik](https://devblogs.microsoft.com/agent-framework/ag-ui-multi-agent-workflow-demo/) dotyczący łączenia przepływów pracy MAF z [AG-UI](https://github.com/ag-ui-protocol/ag-ui) — otwartym protokołem do strumieniowania zdarzeń wykonania agentów do frontendu przez Server-Sent Events. I szczerze? To jest właśnie ten most, którego nam brakowało.
+
+## Dlaczego to ważne dla programistów .NET
+
+Jeśli budujesz aplikacje oparte na AI, prawdopodobnie trafiłeś już na tę ścianę. Twoja orkiestracja backendowa działa świetnie — agenty przekazują sobie zadania, narzędzia się uruchamiają, decyzje są podejmowane. Ale frontend nie ma pojęcia, co dzieje się za kulisami. AG-UI rozwiązuje to, definiując standardowy protokół do strumieniowania zdarzeń agentów (takich jak `RUN_STARTED`, `STEP_STARTED`, `TOOL_CALL_*`, `TEXT_MESSAGE_*`) bezpośrednio do warstwy interfejsu przez SSE.
+
+Demonstracja, którą zbudowali, to przepływ pracy obsługi klienta z trzema agentami: agent triaży kierujący żądaniami, agent zwrotów obsługujący pieniądze i agent zamówień zarządzający wymianami. Każdy agent ma własne narzędzia, a topologia przekazywania jest jawnie zdefiniowana — żadnego "wyczuj to z kontekstu prompta".
+
+## Topologia przekazywania to prawdziwa gwiazda
+
+Zwróciło moją uwagę to, jak `HandoffBuilder` pozwala zadeklarować skierowany graf routingu między agentami:
+
+```python
+builder = HandoffBuilder(
+    name="ag_ui_handoff_workflow_demo",
+    participants=[triage, refund, order],
+    termination_condition=termination_condition,
+)
+
+(
+    builder
+    .add_handoff(triage, [refund], description="Refunds, damaged-item claims...")
+    .add_handoff(triage, [order], description="Replacement, exchange...")
+    .add_handoff(refund, [order], description="Replacement logistics needed after refund.")
+    .add_handoff(order, [triage], description="After replacement/shipping tasks complete.")
+)
+```
+
+Każde `add_handoff` tworzy skierowaną krawędź z opisem w języku naturalnym. Framework generuje narzędzia przekazywania dla każdego agenta na podstawie tej topologii. Decyzje dotyczące routingu są zakorzenione w strukturze orkiestracji, a nie w tym, na co ma ochotę LLM. To ogromna rzecz dla niezawodności produkcji.
+
+## Człowiek w pętli, który naprawdę działa
+
+Demonstracja prezentuje dwa wzorce przerwań, które są potrzebne w każdej prawdziwej aplikacji agentowej:
+
+**Przerwania zatwierdzania narzędzi** — gdy agent wywołuje narzędzie oznaczone jako `approval_mode="always_require"`, przepływ pracy wstrzymuje się i emituje zdarzenie. Frontend renderuje modal zatwierdzenia z nazwą narzędzia i argumentami. Żadnych pętli ponownych prób — tylko czysty przepływ wstrzymaj-zatwierdź-wznów.
+
+**Przerwania żądania informacji** — gdy agent potrzebuje więcej kontekstu od użytkownika (jak numer zamówienia), wstrzymuje się i pyta. Frontend wyświetla pytanie, użytkownik odpowiada, a wykonanie wznawia się dokładnie tam, gdzie się zatrzymało.
+
+Oba wzorce są strumieniowane jako standardowe zdarzenia AG-UI, więc frontend nie potrzebuje niestandardowej logiki dla każdego agenta — po prostu renderuje to, co przychodzi przez połączenie SSE.
+
+## Podłączenie jest zaskakująco proste
+
+Integracja między MAF a AG-UI to jedno wywołanie funkcji:
+
+```python
+from agent_framework.ag_ui import (
+    AgentFrameworkWorkflow,
+    add_agent_framework_fastapi_endpoint,
+)
+
+app = FastAPI()
+
+demo_workflow = AgentFrameworkWorkflow(
+    workflow_factory=lambda _thread_id: create_handoff_workflow(),
+    name="ag_ui_handoff_workflow_demo",
+)
+
+add_agent_framework_fastapi_endpoint(
+    app=app, agent=demo_workflow, path="/handoff_demo",
+)
+```
+
+`workflow_factory` tworzy nowy przepływ pracy dla każdego wątku, więc każda rozmowa otrzymuje izolowany stan. Endpoint automatycznie obsługuje całe "hydrauliczne" SSE. Jeśli już używasz FastAPI (lub możesz dodać go jako lekką warstwę), to właściwie zerowe tarcie.
+
+## Moje zdanie
+
+Dla nas, programistów .NET, natychmiastowe pytanie brzmi: "Czy mogę to zrobić w C#?" Agent Framework jest dostępny zarówno dla .NET, jak i Python, a protokół AG-UI jest niezależny od języka (to po prostu SSE). Więc choć ta konkretna demonstracja używa Python i FastAPI, wzorzec przekłada się bezpośrednio. Możesz podpiąć minimalne API ASP.NET Core z endpointami SSE zgodnie z tym samym schematem zdarzeń AG-UI.
+
+Ważniejszy wniosek: interfejsy użytkownika dla wielu agentów stają się pierwszoklasowym zagadnieniem, a nie przemyśleniem. Jeśli budujesz cokolwiek, gdzie agenty wchodzą w interakcje z ludźmi — obsługa klienta, przepływy zatwierdzeń, przetwarzanie dokumentów — ta kombinacja orkiestracji MAF i przejrzystości AG-UI to wzorzec do naśladowania.
+
+## Podsumowanie
+
+AG-UI + Microsoft Agent Framework zapewnia to, co najlepsze z obu światów: solidną orkiestrację wieloagentową na backendzie i widoczność w czasie rzeczywistym na frontendzie. Koniec z interakcjami agentów jako czarną skrzynką.
+
+Sprawdź [pełny przewodnik](https://devblogs.microsoft.com/agent-framework/ag-ui-multi-agent-workflow-demo/) i [repozytorium protokołu AG-UI](https://github.com/ag-ui-protocol/ag-ui), by zagłębić się w temat.
+
+
+---
+## VS Code 1.116 — aplikacja Agents otrzymuje nawigację klawiaturową i uzupełnienia kontekstu pliku
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: vscode, developer-tools, agents, accessibility
+- **Reading time**: 2 min
+
+> VS Code 1.116 skupia się na dopracowaniu aplikacji Agents — dedykowane skróty klawiaturowe, ulepszenia dostępności, uzupełnienia kontekstu pliku i rozpoznawanie linków @import CSS.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "vscode-1-116-agents-app-updates" >}}).*
+
+VS Code 1.116 to wydanie z kwietnia 2026, i choć jest lżejsze niż niektóre ostatnie aktualizacje, zmiany są skoncentrowane i znaczące — szczególnie jeśli codziennie używasz aplikacji Agents.
+
+Oto co wylądowało, na podstawie [oficjalnych notatek wydania](https://code.visualstudio.com/updates/v1_116).
+
+## Ulepszenia aplikacji Agents
+
+Aplikacja Agents nadal dojrzewa z dopracowaniem użyteczności, które robi realną różnicę w codziennych przepływach pracy:
+
+**Dedykowane skróty klawiaturowe** — możesz teraz skupić widok Changes, drzewo plików w Changes i widok Chat Customizations za pomocą dedykowanych poleceń i skrótów klawiaturowych. Jeśli klikałeś po aplikacji Agents, by nawigować, to przynosi pełne przepływy pracy oparte na klawiaturze.
+
+**Dialog pomocy dostępności** — naciśnięcie `Alt+F1` w polu wejściowym czatu teraz otwiera dialog pomocy dostępności pokazujący dostępne polecenia i skróty klawiaturowe. Użytkownicy czytników ekranu mogą też kontrolować szczegółowość ogłoszeń. Dobra dostępność przynosi korzyści wszystkim.
+
+**Uzupełnienia kontekstu pliku** — wpisz `#` w czacie aplikacji Agents, by wywołać uzupełnienia kontekstu pliku ograniczone do twojego bieżącego obszaru roboczego. To jedno z tych małych ulepszeń komfortu pracy, które przyspiesza każdą interakcję — nie trzeba już wpisywać pełnych ścieżek pliku przy odwoływaniu się do kodu.
+
+## Rozpoznawanie linków `@import` CSS
+
+Miłe dla programistów frontend: VS Code teraz rozpoznaje odwołania CSS `@import` używające ścieżek node_modules. Możesz `Ctrl+kliknąć` przez importy jak `@import "some-module/style.css"` przy używaniu bundlerów. Mała rzecz, ale eliminuje punkt tarcia w przepływach pracy CSS.
+
+## Podsumowanie
+
+VS Code 1.116 dotyczy dopracowania — sprawia, że aplikacja Agents jest bardziej nawigowalna, bardziej dostępna i bardziej przyjazna dla klawiatury. Jeśli spędzasz znaczny czas w aplikacji Agents (a podejrzewam, że wielu z nas tak), te zmiany sumują się.
+
+Sprawdź [pełne notatki wydania](https://code.visualstudio.com/updates/v1_116) po kompletną listę.
+
+
+---
+## VS Code 1.115 — powiadomienia terminala w tle, tryb agenta przez SSH i więcej
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/
+- **Date**: April 06, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: vscode, developer-tools, copilot, ai, remote-development
+- **Reading time**: 3 min
+
+> VS Code 1.115 przynosi powiadomienia terminala w tle dla agentów, zdalne hostowanie agentów przez SSH, wklejanie plików do terminali i śledzenie edycji uwzględniające sesje. Oto co ważne dla programistów .NET.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "vscode-1-115-agent-improvements" >}}).*
+
+VS Code 1.115 właśnie [wyszedł](https://code.visualstudio.com/updates/v1_115) i choć jest to lżejsze wydanie pod względem nagłówkowych funkcji, ulepszenia związane z agentami są naprawdę przydatne, jeśli codziennie pracujesz z asystentami AI.
+
+Pozwól, że wyróżnię to, co naprawdę warto wiedzieć.
+
+## Terminale w tle informują agentów
+
+To jest wyróżniająca się funkcja. Terminale w tle teraz automatycznie powiadamiają agentów o zakończeniu poleceń, w tym o kodzie wyjścia i wyjściu terminala. Monity wejściowe w terminalach w tle są również wykrywane i udostępniane użytkownikowi.
+
+Dlaczego to ważne? Jeśli używałeś trybu agenta Copilot do uruchamiania poleceń kompilacji lub zestawów testów w tle, znasz ból "czy to już skończyło?" — terminale w tle były praktycznie na zasadzie "odpal i zapomnij". Teraz agent dostaje powiadomienie, gdy twoje `dotnet build` lub `dotnet test` zakończy się, widzi wyjście i może odpowiednio zareagować. To mała zmiana, która sprawia, że przepływy pracy oparte na agentach są znacznie bardziej niezawodne.
+
+Jest też nowe narzędzie `send_to_terminal`, które pozwala agentom wysyłać polecenia do terminali w tle z potwierdzeniem użytkownika, naprawiając problem gdzie `run_in_terminal` z limitem czasu przenosiło terminale do tła i czyniło je tylko do odczytu.
+
+## Zdalne hostowanie agentów przez SSH
+
+VS Code obsługuje teraz połączenie ze zdalnymi maszynami przez SSH, automatycznie instalując CLI i uruchamiając go w trybie hosta agenta. Oznacza to, że twoje sesje agenta AI mogą bezpośrednio celować w zdalne środowiska — przydatne dla programistów .NET, którzy kompilują i testują na serwerach Linux lub maszynach wirtualnych w chmurze.
+
+## Śledzenie edycji w sesjach agenta
+
+Edycje plików dokonane podczas sesji agenta są teraz śledzone i przywracane, z diff, cofnij/ponów i przywróceniem stanu. Jeśli agent wprowadza zmiany do twojego kodu i coś pójdzie nie tak, możesz zobaczyć dokładnie co się zmieniło i to cofnąć. Spokój ducha przy pozwalaniu agentom modyfikować twoją bazę kodu.
+
+## Świadomość kart przeglądarki i inne ulepszenia
+
+Kilka kolejnych ulepszeń komfortu pracy:
+
+- **Śledzenie kart przeglądarki** — czat może teraz śledzić i linkować do kart przeglądarki otwartych podczas sesji, by agenty mogły odwoływać się do stron internetowych, na które patrzysz
+- **Wklejanie plików do terminala** — wklej pliki (w tym obrazy) do terminala przez Ctrl+V, przeciągnij i upuść lub kliknij prawym przyciskiem
+- **Pokrycie testów w minimapie** — wskaźniki pokrycia testów są teraz widoczne w minimapie dla szybkiego przeglądu wizualnego
+- **Szczypanie do powiększenia na Mac** — zintegrowana przeglądarka obsługuje gesty szczypania do powiększenia
+- **Uprawnienia Copilot w sesjach** — pasek stanu pokazuje informacje o użyciu w widoku Sesji
+- **Favicon w Przejdź do pliku** — otwarte strony internetowe pokazują favicon na liście szybkiego wyboru
+
+## Podsumowanie
+
+VS Code 1.115 to wydanie przyrostowe, ale ulepszenia agentów — powiadomienia terminala w tle, zdalne hostowanie agentów przez SSH i śledzenie edycji — składają się na zauważalnie płynniejsze doświadczenie przy programowaniu wspomaganym przez AI. Jeśli używasz trybu agenta Copilot dla projektów .NET, to właśnie takie poprawki komfortu pracy redukują codzienne tarcie.
+
+Sprawdź [pełne notatki wydania](https://code.visualstudio.com/updates/v1_115) po każdy szczegół.
+
+
+---
+## C# 15 Dostaje Typy Unii — I Są Dokładnie Tym, O Co Prosiliśmy
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/csharp-15-union-types-exhaustive-matching/
+- **Date**: April 05, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: csharp, dotnet, union-types, pattern-matching, dotnet-11, language-features
+- **Reading time**: 1 min
+
+> C# 15 wprowadza słowo kluczowe `union` — dyskryminowane unie egzekwowane przez kompilator z wyczerpującym dopasowaniem wzorców. Oto jak wyglądają, dlaczego mają znaczenie i jak je wypróbować.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "csharp-15-union-types-exhaustive-matching" >}}).*
+
+Na to czekałem. C# 15 wprowadza słowo kluczowe `union` — właściwe dyskryminowane unie z wyczerpującym dopasowaniem wzorców egzekwowanym przez kompilator.
+
+Bill Wagner [opublikował głębokie omówienie](https://devblogs.microsoft.com/dotnet/csharp-15-union-types/).
+
+## Problem rozwiązywany przez unie
+
+Przed C# 15, zwracanie "jednego z kilku możliwych typów" było zawsze kompromisem. Nigdy nie dostawałeś tego, czego naprawdę chcesz: zamkniętego zbioru typów, gdzie kompilator gwarantuje, że obsłużyłeś każdy przypadek.
+
+## Składnia jest pięknie prosta
+
+```csharp
+public record class Cat(string Name);
+public record class Dog(string Name);
+public record class Bird(string Name);
+
+public union Pet(Cat, Dog, Bird);
+```
+
+A oto magia — kompilator egzekwuje wyczerpujące dopasowanie:
+
+```csharp
+string name = pet switch
+{
+    Dog d => d.Name,
+    Cat c => c.Name,
+    Bird b => b.Name,
+};
+```
+
+Nie potrzeba `_`. Jeśli później dodasz czwarty typ do unii, każde wyrażenie switch, które go nie obsługuje, generuje ostrzeżenie.
+
+## Zastosowanie praktyczne
+
+```csharp
+public union ApiResult<T>(T, ApiError, ValidationFailure);
+```
+
+Teraz każdy konsument jest zmuszony obsłużyć sukces, błąd i niepowodzenie walidacji.
+
+## Wypróbuj już dziś
+
+Typy unii są dostępne w .NET 11 Preview 2. Sprawdź [pełną dokumentację](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/union).
+
+
+---
+## Aspire 13.2 Dostarcza CLI do Dokumentacji — i Twój Agent AI Też Może Go Używać
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/
+- **Date**: April 04, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: aspire, dotnet, cli, ai, developer-tools, documentation
+- **Reading time**: 1 min
+
+> .NET Aspire 13.2 dodaje aspire docs — CLI do wyszukiwania, przeglądania i czytania oficjalnej dokumentacji bez opuszczania terminala. Działa też jako narzędzie dla agentów AI.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "aspire-docs-cli-ai-skills" >}}).*
+
+Znasz ten moment, kiedy siedzisz głęboko w Aspire AppHost, łączysz integracje i musisz sprawdzić dokładnie, jakich parametrów oczekuje integracja Redis? Alt-tab do przeglądarki, szukasz na aspire.dev. Kontekst utracony.
+
+Aspire 13.2 właśnie [dostarczył rozwiązanie](https://devblogs.microsoft.com/aspire/aspire-docs-in-your-terminal/). CLI `aspire docs` pozwala wyszukiwać, przeglądać i czytać oficjalną dokumentację Aspire bezpośrednio z terminala.
+
+## Trzy polecenia, zero kart przeglądarki
+
+```bash
+# Lista wszystkich dokumentów
+aspire docs list
+
+# Szukaj tematu
+aspire docs search "redis"
+
+# Przeczytaj pełną stronę
+aspire docs get redis-integration
+
+# Tylko jedna sekcja
+aspire docs get redis-integration --section "Add Redis resource"
+```
+
+## Kąt agentów AI
+
+To samo sprawia, że jest to interesujące dla deweloperów budujących z narzędziami AI. Te same polecenia `aspire docs` działają jako narzędzia dla agentów AI.
+
+Zamiast halucynować Aspire API na podstawie przestarzałych danych treningowych, agent może wywołać `aspire docs search "postgres"`, znaleźć oficjalne dokumenty integracji i przeczytać właściwą stronę.
+
+## Podsumowanie
+
+`aspire docs` to mała funkcja, która czysto rozwiązuje prawdziwy problem. Zobacz [deep dive Davida Pine'a](https://davidpine.dev/posts/aspire-docs-mcp-tools/).
+
+
+---
+## Microsoft Agent Framework osiąga wersję 1.0 — co naprawdę ważne dla programistów .NET
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/agent-framework-1-0-production-ready/
+- **Date**: April 03, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: agent-framework, dotnet, ai, semantic-kernel, azure-openai, multi-agent
+- **Reading time**: 4 min
+
+> Microsoft Agent Framework 1.0 jest gotowy do produkcji ze stabilnym API, orkiestracją wieloagentową i łącznikami dla każdego głównego dostawcy AI. Oto co musisz wiedzieć jako programista .NET.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "agent-framework-1-0-production-ready" >}}).*
+
+Jeśli śledzisz historię Agent Framework od wczesnych dni Semantic Kernel i AutoGen, ta wiadomość jest znacząca. Microsoft Agent Framework właśnie [osiągnął wersję 1.0](https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/) — gotowy do produkcji, stabilne API, zobowiązanie do długoterminowego wsparcia. Jest dostępny zarówno dla .NET, jak i Python i naprawdę gotowy na prawdziwe obciążenia.
+
+Pominę hałas ogłoszenia i skupię się na tym, co ważne, jeśli budujesz aplikacje oparte na AI w .NET.
+
+## Krótka wersja
+
+Agent Framework 1.0 łączy to, co kiedyś było Semantic Kernel i AutoGen, w jeden otwarty SDK. Jedna abstrakcja agenta. Jeden silnik orkiestracji. Wielu dostawców AI. Jeśli skakałeś między Semantic Kernel dla wzorców enterprise i AutoGen dla przepływów pracy wieloagentowych klasy badawczej, możesz przestać. To jest teraz jeden SDK.
+
+## Pierwsze kroki są niemal wstydliwie proste
+
+Oto działający agent w .NET:
+
+```csharp
+// dotnet add package Microsoft.Agents.AI.OpenAI --prerelease
+using Microsoft.Agents.AI;
+using Microsoft.Agents.AI.Foundry;
+using Azure.Identity;
+
+var agent = new AIProjectClient(endpoint: "https://your-project.services.ai.azure.com")
+    .GetResponsesClient("gpt-5.3")
+    .AsAIAgent(
+        name: "HaikuBot",
+        instructions: "You are an upbeat assistant that writes beautifully."
+    );
+
+Console.WriteLine(await agent.RunAsync("Write a haiku about shipping 1.0."));
+```
+
+To wszystko. Kilka linii i masz agenta AI działającego przeciwko Azure Foundry. Odpowiednik w Python jest równie zwięzły. Dodawaj narzędzia funkcji, rozmowy wieloturowe i streaming w miarę potrzeb — powierzchnia API skaluje się bez dziwactw.
+
+## Orkiestracja wieloagentowa — to jest prawdziwa sprawa
+
+Pojedynczy agent jest w porządku dla demonstracji, ale scenariusze produkcyjne zazwyczaj wymagają koordynacji. Agent Framework 1.0 dostarcza przetestowane w boju wzorce orkiestracji prosto z Microsoft Research i AutoGen:
+
+- **Sekwencyjne** — agenty przetwarzają po kolei (autor → recenzent → redaktor)
+- **Współbieżne** — rozgałęź do wielu agentów równolegle, zbierz wyniki
+- **Przekazywanie** — jeden agent deleguje do innego na podstawie intencji
+- **Czat grupowy** — wielu agentów dyskutuje i dochodzi do rozwiązania
+- **Magentic-One** — wzorzec wieloagentowy klasy badawczej z MSR
+
+Wszystkie wspierają streaming, punkty kontrolne, zatwierdzenia przez człowieka w pętli oraz wstrzymanie/wznowienie. Część dotycząca punktów kontrolnych jest kluczowa — długo działające przepływy pracy przeżywają ponowne uruchomienie procesu. Dla nas, programistów .NET, którzy budowali trwałe przepływy pracy z Azure Functions, to brzmi znajomo.
+
+## Funkcje, które mają największe znaczenie
+
+Oto moja lista tego, co warto znać:
+
+**Haki middleware.** Wiesz, jak ASP.NET Core ma potoki middleware? Ten sam koncept, ale dla wykonania agenta. Przechwytuj każdy etap — dodawaj bezpieczeństwo treści, logowanie, zasady zgodności — bez dotykania promptów agenta. To właśnie sprawia, że agenty są gotowe na środowisko enterprise.
+
+**Podłączalna pamięć.** Historia rozmów, trwały stan klucz-wartość, wyszukiwanie wektorowe. Wybierz backend: Foundry Agent Service, Mem0, Redis, Neo4j lub własny. Pamięć to właśnie to, co zmienia bezstanowe wywołanie LLM w agenta, który naprawdę zapamiętuje kontekst.
+
+**Deklaratywne agenty YAML.** Zdefiniuj instrukcje, narzędzia, pamięć i topologię orkiestracji agenta w wersjonowanych plikach YAML. Ładuj i uruchamiaj jednym wywołaniem API. To zmienia zasady gry dla zespołów, które chcą iterować zachowanie agentów bez ponownego wdrażania kodu.
+
+**Wsparcie A2A i MCP.** MCP (Model Context Protocol) pozwala agentom dynamicznie odkrywać i wywoływać zewnętrzne narzędzia. A2A (protokół Agent-to-Agent) umożliwia współpracę między różnymi środowiskami uruchomieniowymi — twoje agenty .NET mogą koordynować z agentami działającymi w innych frameworkach. Wsparcie A2A 1.0 pojawi się wkrótce.
+
+## Funkcje podglądowe warte obserwowania
+
+Niektóre funkcje zostały dostarczone jako podgląd w 1.0 — działające, ale API może się ewoluować:
+
+- **DevUI** — lokalny debugger w przeglądarce do wizualizacji wykonania agenta, przepływów wiadomości i wywołań narzędzi w czasie rzeczywistym. Pomyśl Application Insights, ale dla rozumowania agenta.
+- **GitHub Copilot SDK i Claude Code SDK** — używaj Copilot lub Claude jako narzędzia agenta bezpośrednio z kodu orkiestracji. Skomponuj agenta zdolnego do kodowania obok innych agentów w tym samym przepływie pracy.
+- **Agent Harness** — konfigurowalne lokalne środowisko uruchomieniowe dające agentom dostęp do powłoki, systemu plików i pętli wiadomości. Pomyśl agenty kodujące i wzorce automatyzacji.
+- **Skills** — pakiety wielokrotnego użytku z możliwościami domeny, które od razu dają agentom ustrukturyzowane umiejętności.
+
+## Migracja z Semantic Kernel lub AutoGen
+
+Jeśli masz istniejący kod Semantic Kernel lub AutoGen, dostępne są dedykowane asystenty migracji, które analizują kod i generują plany migracji krok po kroku. [Przewodnik migracji z Semantic Kernel](https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-semantic-kernel) i [przewodnik migracji z AutoGen](https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-autogen) prowadzą przez wszystko.
+
+Jeśli korzystałeś z pakietów RC, uaktualnienie do 1.0 to tylko zmiana wersji.
+
+## Podsumowanie
+
+Agent Framework 1.0 to kamień milowy produkcji, na który czekały zespoły enterprise. Stabilne API, wsparcie dla wielu dostawców, wzorce orkiestracji działające w skali i ścieżki migracji zarówno z Semantic Kernel, jak i AutoGen.
+
+Framework jest [w pełni open source na GitHub](https://github.com/microsoft/agent-framework), a możesz zacząć już dziś z `dotnet add package Microsoft.Agents.AI`. Sprawdź [przewodnik szybkiego startu](https://learn.microsoft.com/en-us/agent-framework/get-started/) i [przykłady](https://github.com/microsoft/agent-framework), by zabrać się do pracy.
+
+Jeśli czekałeś na sygnał "bezpieczne do użycia w produkcji" — to jest właśnie ten moment.
+
+
+---
+## Aktualizacja Visual Studio z marca pozwala budować własne agenty Copilot — a narzędzie find_symbol to poważna sprawa
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/
+- **Date**: April 02, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: visual-studio, github-copilot, dotnet, ai, developer-tools, profiling
+- **Reading time**: 4 min
+
+> Aktualizacja Visual Studio z marca 2026 dostarcza własne agenty Copilot, wielokrotnego użytku umiejętności agentów, świadome języka narzędzie find_symbol i profilowanie wspomagane przez Copilot z Test Explorer. Oto co ważne.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "visual-studio-march-2026-custom-copilot-agents" >}}).*
+
+Visual Studio właśnie otrzymało swoją najważniejszą aktualizację Copilot do tej pory. Mark Downie [ogłosił wydanie marcowe](https://devblogs.microsoft.com/visualstudio/visual-studio-march-update-build-your-own-custom-agents/), a nagłówek to własne agenty — ale szczerze, narzędzie `find_symbol` zakopane głębiej może być funkcją, która najbardziej zmieni twój przepływ pracy.
+
+Pozwól, że rozbiję to, co tu faktycznie jest.
+
+## Własne agenty Copilot w twoim repozytorium
+
+Chcesz, by Copilot przestrzegał standardów kodowania twojego zespołu, uruchamiał twój potok kompilacji lub odpytywał wewnętrzną dokumentację? Teraz możesz zbudować dokładnie to.
+
+Własne agenty są definiowane jako pliki `.agent.md`, które wrzucasz do `.github/agents/` w swoim repozytorium. Każdy agent ma pełny dostęp do świadomości przestrzeni roboczej, zrozumienia kodu, narzędzi, preferowanego modelu i połączeń MCP z zewnętrznymi usługami. Pojawiają się w selektorze agentów obok wbudowanych.
+
+To ten sam wzorzec, który VS Code wspierał — i wspaniale zobaczyć, że Visual Studio nadrabia. Dla zespołów, które już zbudowały agenty dla VS Code, twoje pliki `.agent.md` powinny działać w obu IDE (choć nazwy narzędzi mogą się różnić, więc testuj).
+
+Repozytorium [awesome-copilot](https://github.com/github/awesome-copilot) ma konfiguracje agentów dostarczane przez społeczność, których możesz użyć jako punktów startowych.
+
+## Umiejętności agentów: wielokrotnego użytku pakiety instrukcji
+
+Umiejętności są automatycznie wykrywane z `.github/skills/` w twoim repozytorium lub `~/.copilot/skills/` w twoim profilu. Każda umiejętność to plik `SKILL.md` zgodny ze [specyfikacją Agent Skills](https://agentskills.io/specification).
+
+Pomyśl o umiejętnościach jak o modułowej wiedzy specjalistycznej, którą możesz mieszać i dopasowywać. Możesz mieć umiejętność dla konwencji API, inną dla wzorców testowania i jeszcze inną dla przepływu wdrożenia. Gdy umiejętność jest aktywowana, pojawia się w czacie, abyś wiedział, że jest stosowana.
+
+Jeśli używasz umiejętności w VS Code, działają one tak samo w Visual Studio teraz.
+
+## find_symbol: nawigacja z wiedzą o języku dla agentów
+
+Tu robi się naprawdę interesująco. Nowe narzędzie `find_symbol` daje trybowi agenta Copilot faktyczną nawigację po symbolach zasilaną przez usługi językowe. Zamiast przeszukiwać kod jak tekst, agent może:
+
+- Znaleźć wszystkie odwołania do symbolu w twoim projekcie
+- Uzyskać informacje o typach, deklaracje i metadane zakresu
+- Nawigować po miejscach wywołania z pełną świadomością językową
+
+Co to oznacza w praktyce: gdy pytasz Copilot o refaktoryzację metody lub aktualizację sygnatury parametru w miejscach wywołania, może faktycznie zobaczyć strukturę twojego kodu. Koniec z sytuacjami "agent zmienił metodę, ale pominął trzy miejsca wywołania".
+
+Obsługiwane języki to C#, C++, Razor, TypeScript i wszystko z obsługiwanym rozszerzeniem LSP. Dla programistów .NET to ogromna poprawa — bazy kodu C# z głębokimi hierarchiami typów i interfejsami ogromnie korzystają z nawigacji świadomej symboli.
+
+## Profilowanie testów z Copilot
+
+W menu kontekstowym Test Explorer jest teraz polecenie **Profiluj z Copilot**. Wybierz test, kliknij profiluj, a Agent Profilowania automatycznie go uruchamia i analizuje wydajność — łącząc dane użycia CPU i instrumentacji, by dostarczyć praktycznych spostrzeżeń.
+
+Koniec z ręcznym konfigurowaniem sesji profilera, uruchamianiem testu, eksportowaniem wyników i próbą odczytania wykresu płomieni. Agent robi analizę i mówi ci, co jest wolne i dlaczego. Aktualnie tylko dla .NET, co ma sens, biorąc pod uwagę głęboką integrację diagnostyki .NET w Visual Studio.
+
+## Wskazówki dotyczące wydajności podczas debugowania na żywo
+
+Optymalizacja wydajności dzieje się teraz podczas debugowania, a nie po. Gdy przechodzisz przez kod, Visual Studio wyświetla czas wykonania i sygnały wydajności inline. Widzisz wolną linię? Kliknij Wskazówkę Wydajności i poproś Copilot o sugestie optymalizacji zaraz tam.
+
+Agent Profilowania automatycznie przechwytuje dane czasu działania — czas, użycie CPU, zachowanie pamięci — a Copilot używa ich do wskazania gorących miejsc. Dzięki temu praca z wydajnością jest częścią twojego przepływu debugowania, a nie osobnym zadaniem, które ciągle odkładasz.
+
+## Naprawianie luk bezpieczeństwa NuGet z Eksploratora rozwiązań
+
+Gdy zostanie wykryta luka w pakiecie NuGet, zobaczysz teraz powiadomienie z linkiem **Napraw z GitHub Copilot** bezpośrednio w Eksploratorze rozwiązań. Kliknij i Copilot analizuje lukę, rekomenduje odpowiednie aktualizacje pakietów i je implementuje.
+
+Dla zespołów, które mają problem z utrzymywaniem aktualnych zależności (a to właściwie wszyscy), usuwa to tarcie "wiem, że jest luka, ale wypracowanie właściwej ścieżki aktualizacji to projekt sam w sobie."
+
+## Podsumowanie
+
+Własne agenty i umiejętności to nagłówek, ale `find_symbol` to ukryty hit — fundamentalnie zmienia dokładność Copilot przy refaktoryzacji kodu .NET. W połączeniu z integracją profilowania na żywo i naprawianiem luk bezpieczeństwa, ta aktualizacja sprawia, że funkcje AI Visual Studio wydają się naprawdę praktyczne, a nie tylko gotowe do demonstracji.
+
+Pobierz [Visual Studio 2026 Insiders](https://visualstudio.microsoft.com/downloads/), by wypróbować wszystko.
+
+
+
+---
+## azd Pozwala Teraz Uruchamiać i Debugować Agenty AI Lokalnie — Co Zmieniło Się w Marcu 2026
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/
+- **Date**: April 02, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, azd, ai, agents, dotnet, developer-tools, containers
+- **Reading time**: 1 min
+
+> Azure Developer CLI wypuścił siedem wydań w marcu 2026. Najważniejsze: lokalna pętla uruchamiania i debugowania dla agentów AI, integracja GitHub Copilot w konfiguracji projektu i obsługa Container App Jobs.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "azd-march-2026-local-ai-agent-debugging" >}}).*
+
+Siedem wydań w jednym miesiącu. To co zespół Azure Developer CLI (`azd`) wypchnął w marcu 2026, a główna funkcja to ta, na którą czekałem: **lokalna pętla uruchamiania i debugowania dla agentów AI**.
+
+## Uruchamiaj i debuguj agenty AI bez wdrażania
+
+To jest ta duża. Nowe rozszerzenie `azure.ai.agents` dodaje zestaw poleceń:
+
+- `azd ai agent run` — uruchamia agenta lokalnie
+- `azd ai agent invoke` — wysyła do niego wiadomości (lokalnie lub wdrożone)
+- `azd ai agent show` — wyświetla status kontenera i zdrowie
+- `azd ai agent monitor` — strumieniuje logi kontenera w czasie rzeczywistym
+
+Wcześniej testowanie agenta AI oznaczało wdrożenie do Microsoft Foundry za każdym razem. Teraz możesz iterować lokalnie.
+
+## GitHub Copilot szkieletuje Twój projekt azd
+
+`azd init` oferuje teraz opcję "Set up with GitHub Copilot (Preview)". Agent Copilot tworzy szkielet konfiguracji dla Twojej struktury projektu.
+
+## Container App Jobs i ulepszenia wdrażania
+
+- **Container App Jobs**: `azd` teraz wdraża `Microsoft.App/jobs` przez istniejącą konfigurację `host: containerapp`
+- **Konfigurowalne limity czasu wdrażania**: Nowa flaga `--timeout` na `azd deploy`
+- **Automatyczny fallback do lokalnego buildu**: Gdy zdalny build ACR zawiedzie
+- **Lokalna walidacja preflightowa**: Parametry Bicep są walidowane lokalnie przed wdrożeniem
+
+## Podsumowanie
+
+Lokalna pętla debugowania agentów AI to gwiazda tego wydania. Sprawdź [pełne notatki wydania](https://devblogs.microsoft.com/azure-sdk/azure-developer-cli-azd-march-2026/).
+
+
+---
+## Azure DevOps W Końcu Naprawia UX Edytora Markdown, na Który Wszyscy Narzekali
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/
+- **Date**: April 02, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure-devops, devops, productivity, developer-tools
+- **Reading time**: 1 min
+
+> Edytor Markdown Azure DevOps dla elementów roboczych zyskuje wyraźniejsze rozróżnienie między trybem podglądu a trybem edycji. To mała zmiana, która naprawia naprawdę irytujący problem w przepływie pracy.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "azure-devops-markdown-editor-work-items" >}}).*
+
+Jeśli używasz Azure Boards, pewnie już to przeżyłeś: czytasz opis elementu roboczego, może przeglądasz kryteria akceptacji, i przypadkowo klikasz dwa razy. Bum — jesteś w trybie edycji. Nie chciałeś niczego edytować. Po prostu czytałeś.
+
+Dan Hellem [ogłosił poprawkę](https://devblogs.microsoft.com/devops/improving-the-markdown-editor-for-work-items/), i to jedna z tych zmian, która brzmi banalnie, ale faktycznie usuwa prawdziwe tarcie z codziennego przepływu pracy.
+
+## Co się zmieniło
+
+Edytor Markdown dla pól tekstowych elementów roboczych otwiera się teraz domyślnie w **trybie podglądu**. Możesz czytać i wchodzić w interakcje z treścią — śledzić linki, przeglądać formatowanie — bez obaw o przypadkowe wejście w tryb edycji.
+
+Kiedy faktycznie chcesz edytować, klikasz ikonę edycji na górze pola. Kiedy skończyłeś, explicite wychodzisz z powrotem do trybu podglądu.
+
+## Dlaczego to ważne bardziej niż brzmi
+
+[Wątek opinii społeczności](https://developercommunity.visualstudio.com/t/Markdown-editor-for-work-item-multi-line/10935496) na ten temat był długi. Zachowanie podwójnego kliknięcia-do-edycji zostało wprowadzone z edytorem Markdown w lipcu 2025, a skargi zaczęły się niemal natychmiast.
+
+Nowe domyślne zachowanie respektuje najbardziej powszechny wzorzec interakcji: czytasz elementy robocze znacznie częściej niż je edytujesz.
+
+## Status wdrożenia
+
+To jest już wdrażane dla podzbioru klientów i rozszerzy się na wszystkich w ciągu najbliższych dwóch do trzech tygodni.
+
+
+---
+## Bookmark Studio Wprowadza Nawigację Opartą na Slotach i Udostępnianie do Zakładek Visual Studio
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/
+- **Date**: April 02, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: visual-studio, extensions, productivity, developer-tools
+- **Reading time**: 1 min
+
+> Nowe rozszerzenie Bookmark Studio Madsa Kristensena dodaje do zakładek Visual Studio nawigację po slotach za pomocą klawiatury, menedżer zakładek, kolory, etykiety i możliwości eksportu/udostępniania.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "bookmark-studio-visual-studio-extension" >}}).*
+
+Zakładki w Visual Studio zawsze były... w porządku. Ustawiasz jedną, przechodzisz do następnej, zapominasz która jest która.
+
+Mads Kristensen właśnie [wydał Bookmark Studio](https://devblogs.microsoft.com/visualstudio/bookmark-studio-evolving-bookmarks-in-visual-studio/), eksperymentalne rozszerzenie wypełniające luki, na które pewnie natknąłeś się regularnie używając zakładek.
+
+## Nawigacja oparta na slotach
+
+Główna nowość: zakładki można teraz przypisywać do slotów 1–9 i bezpośrednio do nich skakać za pomocą `Alt+Shift+1` do `Alt+Shift+9`. To zmienia zakładki z "mam gdzieś jakieś zakładki" na "Slot 3 to mój kontroler API, Slot 5 to warstwa serwisów, Slot 7 to testy."
+
+## Menedżer zakładek
+
+Nowe okno narzędziowe pokazuje wszystkie zakładki w jednym miejscu z filtrowaniem po nazwie, pliku, lokalizacji, kolorze lub slocie.
+
+## Organizacja z etykietami, kolorami i folderami
+
+Zakładki mogą opcjonalnie mieć etykiety i kolory oraz być grupowane w foldery. Wszystkie metadane są przechowywane per solucja.
+
+## Eksport i udostępnianie
+
+Bookmark Studio pozwala eksportować zakładki jako zwykły tekst, Markdown lub CSV:
+- Dołączanie ścieżek zakładek do opisów pull requestów
+- Udostępnianie śladów dochodzenia współpracownikom
+- Przenoszenie zestawów zakładek między repozytoriami
+
+Pobierz ze [sklepu Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BookmarkStudio).
+
+
+---
+## Dashboard Aspire 13.2 Właśnie Dostał Telemetry API — i To Zmienia Wszystko
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/
+- **Date**: April 02, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: aspire, dotnet, opentelemetry, dashboard, observability, ai
+- **Reading time**: 1 min
+
+> .NET Aspire 13.2 dostarcza mądrzejszy eksport telemetrii, programowalny API dla śladów i logów oraz ulepszenia wizualizacji GenAI. Oto dlaczego ma to znaczenie dla twojego przepływu debugowania.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "aspire-132-dashboard-export-telemetry" >}}).*
+
+Jeśli budujesz rozproszone aplikacje z .NET Aspire, wiesz już, że dashboard jest najlepszą częścią całego doświadczenia. Aspire 13.2 znacznie go poprawił.
+
+## Eksportowanie telemetrii jak normalna osoba
+
+Aspire 13.2 dodaje odpowiedni dialog **Zarządzaj logami i telemetrią**, gdzie możesz:
+- Wyczyścić całą telemetrię
+- Wyeksportować wybraną telemetrię do pliku ZIP w standardowym formacie OTLP/JSON
+- Zaimportować ten ZIP do dowolnego dashboardu Aspire później
+
+Ta ostatnia część to kluczowa funkcja. Reprodukujesz błąd, eksportujesz telemetrię, dołączasz do elementu pracy, a twój kolega może zaimportować go do własnego dashboardu.
+
+## Telemetry API to prawdziwy przełom
+
+Dashboard udostępnia teraz HTTP API pod `/api/telemetry`:
+- `GET /api/telemetry/resources` — lista zasobów z telemetrią
+- `GET /api/telemetry/spans` — zapytania o spany z filtrami
+- `GET /api/telemetry/logs` — zapytania o logi z filtrami
+- `GET /api/telemetry/traces` — lista śladów
+
+To zasila nowe polecenia CLI `aspire agent mcp` i `aspire otel`.
+
+## Telemetria GenAI staje się praktyczna
+
+VS Code Copilot chat i Copilot CLI obsługują konfigurowanie `OTEL_EXPORTER_OTLP_ENDPOINT` — wskaż je na dashboard Aspire i możesz obserwować, jak twoje agenty AI myślą w czasie rzeczywistym.
+
+## Podsumowanie
+
+Aspire 13.2 zamienia dashboard z "ładnego UI do debugowania" w "programowalną platformę obserwowalności". Sprawdź [aspire.dev](https://aspire.dev).
+
+
+---
+## KubeCon Europe 2026: Na Czym Powinni Naprawdę Zależeć Deweloperom .NET
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/kubecon-2026-aks-updates-dotnet-developers/
+- **Date**: March 29, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: kubernetes, aks, azure, dotnet, cloud-native, ai
+- **Reading time**: 1 min
+
+> Microsoft zrzucił ścianę ogłoszeń Kubernetes na KubeCon Europe 2026. Oto przefiltrowana wersja — tylko aktualizacje AKS i cloud-native, które mają znaczenie.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "kubecon-2026-aks-updates-dotnet-developers" >}}).*
+
+Znasz to uczucie, gdy spada ogromny post z ogłoszeniami i przewijasz go myśląc "fajne, ale co to dla mnie znaczy"?
+
+Microsoft właśnie opublikował [swoje pełne podsumowanie KubeCon Europe 2026](https://opensource.microsoft.com/blog/2026/03/24/whats-new-with-microsoft-in-open-source-and-kubernetes-at-kubecon-cloudnativecon-europe-2026/).
+
+## mTLS bez podatku service mesh
+
+[Azure Kubernetes Application Network](https://aka.ms/aks/application-network) daje ci wzajemne TLS, autoryzację świadomą aplikacji i telemetrię ruchu — bez wdrażania pełnej siatki z sidecarami. Twoje API ASP.NET Core rozmawiające z robotnikami w tle — wszystko zaszyfrowane na poziomie sieci, bez żadnych zmian kodu aplikacji.
+
+## Obserwowalność GPU
+
+[AKS teraz ujawnia metryki GPU natywnie](https://aka.ms/aks/managed-gpu-metrics) do zarządzanego Prometheus i Grafana. Bez niestandardowych eksporterów.
+
+## Wieloklasterowa sieć
+
+Azure Kubernetes Fleet Manager dostarcza teraz [sieciowanie między klastrami](https://aka.ms/kubernetes-fleet/networking/cross-cluster) przez zarządzaną siatkę Cilium — unified connectivity, globalny rejestr usług.
+
+## Bezpieczniejsze ulepszenia
+
+**Ulepszenia niebiesko-zielone** tworzą równoległy pool węzłów. **Wycofanie puli agentów** pozwala ci cofnąć się do poprzedniej wersji.
+
+## Gdzie zacząć
+
+1. **Obserwowalność najpierw** — włącz metryki GPU i logi przepływu sieci
+2. **Wypróbuj ulepszenia niebiesko-zielone** — przetestuj przepływ pracy wycofywania
+3. **Pilot sieci świadomej tożsamości** — włącz mTLS dla jednej ścieżki usługi
+
+
+---
+## SQL MCP Server, Copilot w SSMS i centrum baz danych z agentami AI: co naprawdę ważne z SQLCon 2026
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/agentic-ai-microsoft-databases-what-matters/
+- **Date**: March 28, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, ai, sql, databases, mcp
+- **Reading time**: 4 min
+
+> Microsoft zaprezentował stos ogłoszeń dotyczących baz danych na SQLCon 2026. Oto rzeczy, które naprawdę mają znaczenie, jeśli budujesz aplikacje oparte na AI na Azure SQL.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "agentic-ai-microsoft-databases-what-matters" >}}).*
+
+Microsoft właśnie zainaugurował [SQLCon 2026 razem z FabCon w Atlancie](https://www.microsoft.com/en-us/sql-server/blog/2026/03/18/advancing-agentic-ai-with-microsoft-databases-across-a-unified-data-estate/) i jest wiele do omówienia. Oryginalne ogłoszenie obejmuje wszystko od planów oszczędnościowych po funkcje zgodności dla przedsiębiorstw. Pominę slajdy z cenami dla enterprise i skupię się na kawałkach, które mają znaczenie, jeśli jesteś programistą budującym na Azure SQL i AI.
+
+## SQL MCP Server jest w publicznym podglądzie
+
+To jest dla mnie nagłówek. Azure SQL Database Hyperscale ma teraz **SQL MCP Server** w publicznym podglądzie, który pozwala bezpiecznie połączyć dane SQL z agentami AI i Copilotami za pomocą [Model Context Protocol](https://modelcontextprotocol.io/).
+
+Jeśli śledziłeś falę MCP — a szczerze, trudno ją przeoczyć — to jest poważna sprawa. Zamiast budować niestandardowe potoki danych, by dostarczać kontekst z bazy danych do agentów AI, masz standardowy protokół do bezpośredniego eksponowania danych SQL. Twoje agenty mogą odpytywać, analizować i działać na żywych danych bazy danych.
+
+Dla tych z nas budujących agenty AI z Semantic Kernel lub Microsoft Agent Framework, otwiera to czystą ścieżkę integracji. Agent musi sprawdzić stan magazynu? Wyszukać rekord klienta? Zweryfikować zamówienie? MCP daje mu ustrukturyzowany sposób na zrobienie tego bez pisania niestandardowego kodu pobierania danych dla każdego scenariusza.
+
+## GitHub Copilot w SSMS 22 jest teraz ogólnie dostępny
+
+Jeśli spędzasz czas w SQL Server Management Studio — a bądźmy szczerzy, większość z nas nadal to robi — GitHub Copilot jest teraz ogólnie dostępny w SSMS 22. To samo doświadczenie Copilot, którego już używasz w VS Code i Visual Studio, ale dla T-SQL.
+
+Praktyczna wartość jest prosta: pomoc oparta na czacie do pisania zapytań, refaktoryzacji procedur składowanych, rozwiązywania problemów z wydajnością i obsługi zadań administracyjnych. Nic rewolucyjnego w koncepcji, ale mając to bezpośrednio w SSMS, nie musisz przełączać kontekstu do innego edytora tylko po to, by uzyskać pomoc AI przy pracy z bazą danych.
+
+## Indeksy wektorowe otrzymały poważną aktualizację
+
+Azure SQL Database ma teraz szybsze i bardziej wydajne indeksy wektorowe z pełnym wsparciem wstawiania, aktualizacji i usuwania. To oznacza, że dane wektorowe pozostają aktualne w czasie rzeczywistym — bez wsadowego ponownego indeksowania.
+
+Co nowego:
+- **Kwantyzacja** dla mniejszych rozmiarów indeksów bez zbytniej utraty dokładności
+- **Filtrowanie iteracyjne** dla precyzyjniejszych wyników
+- **Ściślejsza integracja z optymalizatorem zapytań** dla przewidywalnej wydajności
+
+Jeśli robisz generowanie wspomagane pobieraniem (RAG) z Azure SQL jako magazynem wektorów, te ulepszenia są bezpośrednio przydatne. Możesz trzymać wektory obok danych relacyjnych w tej samej bazie danych, co znacznie upraszcza architekturę w porównaniu do osobnej bazy wektorowej.
+
+Te same ulepszenia wektorów są również dostępne w SQL database w Fabric, ponieważ oba działają na tym samym silniku SQL.
+
+## Database Hub w Fabric: zarządzanie agentyczne
+
+Ten jest bardziej perspektywiczny, ale interesujący. Microsoft ogłosił **Database Hub w Microsoft Fabric** (wczesny dostęp), który daje jeden widok na Azure SQL, Cosmos DB, PostgreSQL, MySQL i SQL Server przez Arc.
+
+Interesujący kąt nie polega tylko na ujednoliconym widoku — to agentyczne podejście do zarządzania. Agenty AI ciągłe monitorują twoją infrastrukturę baz danych, wyświetlają zmiany, wyjaśniają dlaczego mają znaczenie i sugerują co zrobić dalej. To model z człowiekiem w pętli, gdzie agent wykonuje ciężką pracę, a ty podejmujesz decyzje.
+
+Dla zespołów zarządzających więcej niż garścią baz danych, może to naprawdę zmniejszyć operacyjny szum. Zamiast skakać między portalami i ręcznie sprawdzać metryki, agent przynosi sygnał do ciebie.
+
+## Co to oznacza dla programistów .NET
+
+Wątek łączący wszystkie te ogłoszenia jest jasny: Microsoft wbudowuje agenty AI w każdą warstwę stosu baz danych. Nie jako gadżet, ale jako praktyczną warstwę narzędziową.
+
+Jeśli budujesz aplikacje .NET wspierane przez Azure SQL, oto co bym faktycznie zrobił:
+
+1. **Wypróbuj SQL MCP Server** jeśli budujesz agenty AI. To najczystszy sposób, by dać agentom dostęp do bazy danych bez niestandardowej hydrauliki.
+2. **Włącz Copilot w SSMS** jeśli jeszcze tego nie zrobiłeś — bezpłatne zwiększenie produktywności przy codziennej pracy z SQL.
+3. **Przyjrzyj się indeksom wektorowym** jeśli robisz RAG i obecnie używasz osobnego magazynu wektorów. Konsolidacja do Azure SQL oznacza jedną usługę mniej do zarządzania.
+
+## Podsumowanie
+
+Pełne ogłoszenie ma więcej — plany oszczędnościowe, asystentów migracji, funkcje zgodności — ale historia dla programistów jest w MCP Server, ulepszeniach wektorowych i agentycznej warstwie zarządzania. To są kawałki, które zmieniają sposób budowania, a nie tylko budżetowania.
+
+Sprawdź [pełne ogłoszenie od Shireesha Thoty](https://www.microsoft.com/en-us/sql-server/blog/2026/03/18/advancing-agentic-ai-with-microsoft-databases-across-a-unified-data-estate/) po pełny obraz i [zarejestruj się na wczesny dostęp do Database Hub](https://aka.ms/database-hub) jeśli chcesz wypróbować nowe doświadczenie zarządzania.
+
+
+
+---
+## Azure DevOps MCP Server Trafia do Microsoft Foundry: Co To Oznacza dla Twoich Agentów AI
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/
+- **Date**: March 26, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, devops, ai, mcp, foundry
+- **Reading time**: 2 min
+
+> Azure DevOps MCP Server jest teraz dostępny w Microsoft Foundry. Połącz swoje agenty AI bezpośrednio z przepływami pracy DevOps — elementy robocze, repozytoria, potoki — za pomocą kilku kliknięć.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "azure-devops-mcp-server-microsoft-foundry" >}}).*
+
+MCP (Model Context Protocol) ma swój moment. Jeśli śledzisz ekosystem agentów AI, pewnie zauważyłeś, że serwery MCP pojawiają się wszędzie — dając agentom możliwość interakcji z zewnętrznymi narzędziami i usługami przez standaryzowany protokół.
+
+Teraz [Azure DevOps MCP Server jest dostępny w Microsoft Foundry](https://devblogs.microsoft.com/devops/remote-mcp-server-preview-in-microsoft-foundry/), i jest to jedna z tych integracji, która skłania do myślenia o praktycznych możliwościach.
+
+## Co się faktycznie dzieje
+
+Microsoft już wydał Azure DevOps MCP Server jako [publiczny podgląd](https://devblogs.microsoft.com/devops/azure-devops-remote-mcp-server-public-preview). Co nowego, to integracja z Foundry. Możesz teraz dodawać Azure DevOps MCP Server do swoich agentów Foundry bezpośrednio z katalogu narzędzi.
+
+## Konfiguracja
+
+Konfiguracja jest zaskakująco prosta:
+
+1. W swoim agencie Foundry przejdź do **Dodaj narzędzia** > **Katalog**
+2. Wyszukaj "Azure DevOps"
+3. Wybierz Azure DevOps MCP Server (podgląd) i kliknij **Utwórz**
+4. Podaj nazwę swojej organizacji i połącz
+
+## Kontrolowanie dostępu agenta
+
+Możesz określić, które narzędzia są dostępne dla Twojego agenta. Jeśli chcesz, żeby tylko czytał elementy robocze, ale nie dotykał potoków, możesz to skonfigurować. Zasada najmniejszego przywileju, zastosowana do agentów AI.
+
+## Dlaczego to interesujące dla zespołów .NET
+
+- **Asystenci planowania sprintów** — agenty, które mogą pobierać elementy robocze i sugerować pojemność sprintu
+- **Boty code review** — agenty rozumiejące kontekst PR
+- **Reagowanie na incydenty** — agenty tworzące elementy robocze i korelujące błędy
+- **Wdrażanie deweloperów** — "Co powinienem teraz zrobić?" z realną odpowiedzią
+
+## Podsumowanie
+
+Sprawdź [pełne ogłoszenie](https://devblogs.microsoft.com/devops/remote-mcp-server-preview-in-microsoft-foundry/) po szczegóły.
+
+
+---
+## Foundry Agent Service jest GA: Co Naprawdę Ważne dla Budowniczych Agentów .NET
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/foundry-agent-service-ga-what-matters/
+- **Date**: March 26, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, ai, foundry, agents, dotnet
+- **Reading time**: 1 min
+
+> Usługa Foundry Agent firmy Microsoft właśnie osiągnęła GA z prywatną siecią, Voice Live, ocenami produkcyjnymi i otwartym środowiskiem uruchomieniowym wielu modeli.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "foundry-agent-service-ga-what-matters" >}}).*
+
+Bądźmy szczerzy — budowanie prototypu agenta AI to łatwa część. Trudna część to wszystko potem.
+
+[Foundry Agent Service właśnie osiągnął GA](https://devblogs.microsoft.com/foundry/foundry-agent-service-ga/), a to wydanie jest skupione na tej luce "wszystko potem".
+
+## Zbudowany na Responses API
+
+Nowej generacji Foundry Agent Service jest zbudowany na OpenAI Responses API. Architektura jest celowo otwarta — nie jesteś przywiązany do jednego dostawcy modeli.
+
+## Prywatna sieć: blokada enterprise usunięta
+
+- **Brak publicznego wyjścia** — ruch agenta nigdy nie dotyka publicznego internetu
+- **Iniekcja kontenera/podsieci** do Twojej sieci
+- **Łączność narzędzi** — serwery MCP, Azure AI Search działają przez prywatne ścieżki
+
+## Uwierzytelnianie MCP
+
+| Metoda auth | Kiedy używać |
+|-------------|-------------|
+| Key-based | Prosty wspólny dostęp |
+| Entra Agent Identity | Service-to-service |
+| Entra Managed Identity | Izolacja per-projekt |
+| OAuth Identity Passthrough | Delegowany dostęp użytkownika |
+
+## Voice Live
+
+Voice Live składa STT, LLM i TTS w jedno zarządzane API.
+
+## Oceny
+
+1. **Wbudowane ewaluatory** — spójność, trafność, uziemienie
+2. **Niestandardowe ewaluatory** — Twoja własna logika biznesowa
+3. **Ciągła ocena** — próbkowanie żywego ruchu produkcyjnego
+
+Sprawdź [przewodnik quickstart](https://learn.microsoft.com/azure/foundry/quickstarts/get-started-code) i [ogłoszenie GA](https://devblogs.microsoft.com/foundry/foundry-agent-service-ga/).
+
+
+---
+## Od Laptopa do Produkcji: Wdrażanie Agentów AI do Microsoft Foundry Dwoma Poleceniami
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/deploy-ai-agents-foundry-azd-two-commands/
+- **Date**: March 26, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, ai, foundry, developer-tools, azd
+- **Reading time**: 1 min
+
+> Azure Developer CLI ma teraz polecenia 'azd ai agent', które przenoszą Twojego agenta AI z lokalnego dev do żywego endpoint Foundry w minuty.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "deploy-ai-agents-foundry-azd-two-commands" >}}).*
+
+Znasz tę lukę między "działa na mojej maszynie" a "jest wdrożone i obsługuje ruch"? Dla agentów AI ta luka była boleśnie szeroka.
+
+Azure Developer CLI właśnie uczyniło to [sprawą dwóch poleceń](https://devblogs.microsoft.com/azure-sdk/azd-ai-agent-end-to-end/).
+
+## Nowy workflow `azd ai agent`
+
+```bash
+azd ai agent init
+azd up
+```
+
+To wszystko. `azd ai agent init` tworzy scaffolding infrastruktury-jako-kod w Twoim repozytorium, a `azd up` provisionuje wszystko na Azure i publikuje Twojego agenta.
+
+## Co się dzieje pod maską
+
+Polecenie `init` generuje prawdziwe, inspekowalne szablony Bicep w Twoim repo — Foundry Resource, Foundry Project, konfiguracja wdrożenia modelu, zarządzana tożsamość z RBAC.
+
+## Dev inner loop
+
+```bash
+azd ai agent run    # uruchom agenta lokalnie
+azd ai agent invoke # wyślij testowe prompty
+azd ai agent monitor --follow  # streamuj logi w czasie rzeczywistym
+```
+
+## Pełny zestaw poleceń
+
+| Polecenie | Co robi |
+|---------|-------------|
+| `azd ai agent init` | Scaffold projektu agenta Foundry z IaC |
+| `azd up` | Provisionuj zasoby i wdrożyj agenta |
+| `azd ai agent invoke` | Wyślij prompty do zdalnego lub lokalnego agenta |
+| `azd ai agent run` | Uruchom agenta lokalnie |
+| `azd ai agent monitor` | Streamuj logi w czasie rzeczywistym |
+| `azd down` | Wyczyść wszystkie zasoby Azure |
+
+Sprawdź [pełny przewodnik](https://devblogs.microsoft.com/azure-sdk/azd-ai-agent-end-to-end/).
+
+
+---
+## Odpowiedzi w Tle w Microsoft Agent Framework: Koniec z Lękiem Przed Timeoutem
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/background-responses-agent-framework-long-running-tasks/
+- **Date**: March 26, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet, ai, agent-framework, azure
+- **Reading time**: 2 min
+
+> Microsoft Agent Framework umożliwia teraz odciążanie długotrwałych zadań AI za pomocą tokenów kontynuacji. Oto jak działają odpowiedzi w tle i dlaczego mają znaczenie dla Twoich agentów .NET.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "background-responses-agent-framework-long-running-tasks" >}}).*
+
+Jeśli budowałeś cokolwiek z modelami rozumowania jak o3 lub GPT-5.2, znasz ten ból. Twój agent zaczyna przetwarzać złożone zadanie, klient czeka, a gdzieś między "to jest w porządku" a "czy to się zawiesiło?" połączenie przekracza czas.
+
+Microsoft Agent Framework właśnie dostarczył [odpowiedzi w tle](https://devblogs.microsoft.com/agent-framework/handling-long-running-operations-with-background-responses/) — i szczerze mówiąc, to jedna z tych funkcji, która powinna istnieć od pierwszego dnia.
+
+## Problem z blokującymi wywołaniami
+
+W tradycyjnym wzorcu żądanie-odpowiedź klient blokuje się do momentu zakończenia przez agenta. Odpowiedzi w tle odwracają to do góry nogami.
+
+## Jak działają tokeny kontynuacji
+
+Zamiast blokować, uruchamiasz zadanie agenta i otrzymujesz z powrotem **token kontynuacji**. Pomyśl o tym jak o numerku w garderob. Przepływ jest prosty:
+
+1. Wyślij żądanie z `AllowBackgroundResponses = true`
+2. Jeśli agent obsługuje przetwarzanie w tle, otrzymujesz token kontynuacji
+3. Odpytuj według harmonogramu, aż token wróci jako `null`
+
+```csharp
+AgentRunOptions options = new()
+{
+    AllowBackgroundResponses = true
+};
+
+AgentSession session = await agent.CreateSessionAsync();
+AgentResponse response = await agent.RunAsync(
+    "Write a detailed market analysis for the Q4 product launch.", session, options);
+
+while (response.ContinuationToken is not null)
+{
+    await Task.Delay(TimeSpan.FromSeconds(2));
+    options.ContinuationToken = response.ContinuationToken;
+    response = await agent.RunAsync(session, options);
+}
+
+Console.WriteLine(response.Text);
+```
+
+## Kiedy faktycznie tego używać
+
+- **Złożone zadania rozumowania** — wieloetapowe analizy, głębokie badania
+- **Długa generacja treści** — szczegółowe raporty, wieloczęściowe dokumenty
+- **Nierezualne sieci** — klienci mobilni, wdrożenia brzegowe
+- **Asynchroniczne wzorce UX** — prześlij zadanie, zrób coś innego, wróć po wyniki
+
+Sprawdź [pełną dokumentację](https://devblogs.microsoft.com/agent-framework/handling-long-running-operations-with-background-responses/) po kompletny opis API.
+
+
+---
+## VS Code 1.112: co programiści .NET powinni naprawdę wiedzieć
+
+- **URL**: https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/vscode-1-112-dotnet-developers/
+- **Date**: March 26, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet, visual-studio, tooling, productivity, ai
+- **Reading time**: 5 min
+
+> VS Code 1.112 właśnie wyszedł i jest pełen ulepszeń agentów, zintegrowanego debuggera przeglądarki, piaskownicy MCP i wsparcia dla monorepo. Oto co naprawdę ważne dla programistów .NET.
+
+
+
+> *Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, [kliknij tutaj]({{< ref "vscode-1-112-dotnet-developers" >}}).*
+
+VS Code 1.112 właśnie wylądował i szczerze? Ten uderza inaczej, jeśli spędzasz dni w krainie .NET. Jest wiele w [oficjalnych notatkach wydania](https://code.visualstudio.com/updates/v1_112), ale pozwól, że oszczędzę ci przewijania i skupię się na tym, co naprawdę ważne dla nas.
+
+## Copilot CLI stał się znacznie bardziej użyteczny
+
+Główny temat tego wydania to **autonomia agentów** — danie Copilot więcej przestrzeni do działania bez nadzorowania każdego kroku.
+
+### Kierowanie wiadomościami i kolejkowanie
+
+Znasz ten moment, gdy Copilot CLI jest w połowie zadania i zdajesz sobie sprawę, że zapomniałeś czegoś wspomnieć? Wcześniej musiałeś czekać. Teraz możesz po prostu wysyłać wiadomości, gdy żądanie jest jeszcze w toku — albo by sterować bieżącą odpowiedzią, albo kolejkować kolejne instrukcje.
+
+To ogromne dla dłuższych zadań szkieletowania `dotnet`, gdzie obserwujesz Copilot konfigurujący projekt i myślisz "och, poczekaj, potrzebuję też MassTransit tam".
+
+### Poziomy uprawnień
+
+To jest to, na czym mi najbardziej zależy. Sesje Copilot CLI obsługują teraz trzy poziomy uprawnień:
+
+- **Domyślne uprawnienia** — zwykły przepływ, gdzie narzędzia proszą o potwierdzenie przed uruchomieniem
+- **Pomiń zatwierdzenia** — automatycznie zatwierdza wszystko i ponawia przy błędach
+- **Autopilot** — pełna autonomia: zatwierdza narzędzia, odpowiada na własne pytania i kontynuuje aż do zakończenia zadania
+
+Jeśli robisz coś jak szkieletowanie nowego API ASP.NET Core z Entity Framework, migracjami i konfiguracją Docker — tryb Autopilot oznacza, że opisujesz co chcesz i idziesz po kawę. Samo to rozgryzie.
+
+Możesz włączyć Autopilot z ustawieniem `chat.autopilot.enabled`.
+
+### Podgląd zmian przed delegowaniem
+
+Gdy delegujesz zadanie do Copilot CLI, tworzy on worktree. Wcześniej, jeśli miałeś niezatwierdzone zmiany, musiałeś sprawdzić Kontrolę źródła, by zobaczyć co zostanie dotknięte. Teraz widok Chat pokazuje oczekujące zmiany tam, zanim zdecydujesz czy je skopiować, przenieść czy zignorować.
+
+Mała rzecz, ale oszczędza ten moment "poczekaj, co miałem w stanie staging?"
+
+## Debuguj aplikacje webowe bez wychodzenia z VS Code
+
+Zintegrowana przeglądarka obsługuje teraz **pełne debugowanie**. Możesz ustawiać punkty przerwania, przechodzić przez kod i inspekcjonować zmienne — wszystko wewnątrz VS Code. Koniec z przełączaniem się do Edge DevTools.
+
+Jest nowy typ debugowania `editor-browser`, a jeśli masz już istniejące konfiguracje uruchamiania `msedge` lub `chrome`, migracja jest tak prosta jak zmiana pola `type` w `launch.json`:
+
+```json
+{
+  "type": "editor-browser",
+  "request": "launch",
+  "name": "Debug Blazor App",
+  "url": "https://localhost:5001"
+}
+```
+
+Dla programistów Blazor to zmiana zasad gry. Już uruchamiasz `dotnet watch` w terminalu — teraz debugowanie też pozostaje w tym samym oknie.
+
+Przeglądarka otrzymała też niezależne poziomy powiększenia (wreszcie), właściwe menu kontekstowe prawym przyciskiem i powiększenie jest zapamiętywane dla każdej witryny.
+
+## Piaskownica serwerów MCP
+
+Ta kwestia ma większe znaczenie niż mogłoby się wydawać. Jeśli używasz serwerów MCP — może skonfigurowałeś własny dla zasobów Azure lub zapytań do bazy danych — działały one z tymi samymi uprawnieniami co twój proces VS Code. To oznacza pełny dostęp do systemu plików, sieci, wszystkiego.
+
+Teraz możesz je piaskownicować. W twoim `mcp.json`:
+
+```json
+{
+  "servers": {
+    "my-azure-tools": {
+      "command": "node",
+      "args": ["./mcp-server.js"],
+      "sandboxEnabled": true
+    }
+  }
+}
+```
+
+Gdy piaskownicowany serwer potrzebuje dostępu do czegoś, czego nie ma, VS Code prosi o przyznanie uprawnień. Znacznie lepsze niż podejście "mam nadzieję, że nikt nic dziwnego nie zrobi".
+
+> **Uwaga:** Piaskownicowanie jest dostępne na macOS i Linux. Wsparcie dla Windows jest w planach — zdalne scenariusze jak WSL jednak działają.
+
+## Odkrywanie dostosowań monorepo
+
+Jeśli pracujesz w monorepo (a szczerze, wiele rozwiązań enterprise .NET kończy się jako jedno), to rozwiązuje realny problem.
+
+Wcześniej, jeśli otwierałeś podfolder repozytorium, VS Code nie znajdował `copilot-instructions.md`, `AGENTS.md` ani własnych umiejętności siedzących w katalogu głównym repozytorium. Teraz z ustawieniem `chat.useCustomizationsInParentRepositories` chodzi w górę do korzenia `.git` i odkrywa wszystko.
+
+To oznacza, że twój zespół może współdzielić instrukcje agenta, pliki promptów i własne narzędzia we wszystkich projektach w monorepo bez konieczności otwierania przez wszystkich folderu głównego.
+
+## /troubleshoot do debugowania agentów
+
+Kiedyś konfigurowałeś własne instrukcje lub umiejętności i zastanawiałeś się, dlaczego nie są wykrywane? Nowa umiejętność `/troubleshoot` czyta logi debugowania agenta i mówi ci co się stało — które narzędzia były użyte lub pominięte, dlaczego instrukcje się nie załadowały i co powoduje wolne odpowiedzi.
+
+Włącz ją z:
+
+```json
+{
+  "github.copilot.chat.agentDebugLog.enabled": true,
+  "github.copilot.chat.agentDebugLog.fileLogging.enabled": true
+}
+```
+
+Następnie po prostu wpisz `/troubleshoot dlaczego moja własna umiejętność się nie ładuje?` w czacie.
+
+Możesz też teraz eksportować i importować te logi debugowania, co jest świetne do dzielenia się z zespołem, gdy coś nie działa zgodnie z oczekiwaniami.
+
+## Wsparcie dla obrazów i plików binarnych
+
+Agenty mogą teraz czytać pliki obrazów z dysku i pliki binarne natywnie. Pliki binarne są prezentowane w formacie hexdump, a wyjścia obrazów (jak zrzuty ekranu z zintegrowanej przeglądarki) pojawiają się w widoku karuzeli.
+
+Dla programistów .NET, pomyśl: wklej zrzut ekranu błędu interfejsu do czatu i pozwól agentowi zrozumieć, co jest nie tak, lub każ mu przeanalizować wyjście renderowania komponentu Blazor.
+
+## Automatyczne odwołania do symboli
+
+Małe ulepszenie komfortu pracy: gdy kopiujesz nazwę symbolu (klasy, metody itp.) i wklejasz ją do czatu, VS Code teraz automatycznie konwertuje ją na odwołanie `#sym:Nazwa`. Daje to agentowi pełny kontekst dotyczący tego symbolu bez konieczności ręcznego dodawania go.
+
+Jeśli chcesz zwykłego tekstu zamiast, użyj `Ctrl+Shift+V`.
+
+## Wtyczki można teraz włączać/wyłączać
+
+Wcześniej wyłączenie serwera MCP lub wtyczki oznaczało jej odinstalowanie. Teraz możesz je przełączać — globalnie i dla każdego obszaru roboczego. Kliknij prawym przyciskiem w widoku Extensions lub Customizations i gotowe.
+
+Wtyczki z npm i pypi mogą też teraz się automatycznie aktualizować, choć poproszą o zatwierdzenie najpierw, ponieważ aktualizacje oznaczają uruchomienie nowego kodu na twoim komputerze.
+
+## Podsumowanie
+
+VS Code 1.112 wyraźnie mocno napiera na doświadczenie agentów — większa autonomia, lepsze debugowanie, ściślejsze bezpieczeństwo. Dla programistów .NET, zintegrowane debugowanie przeglądarki i ulepszenia Copilot CLI to wyróżniające się funkcje.
+
+Jeśli jeszcze nie próbowałeś pełnej sesji Copilot CLI w trybie Autopilot dla projektu .NET, to wydanie jest dobrym momentem na start. Pamiętaj tylko, by ustawić uprawnienia i pozwolić mu działać.
+
+[Pobierz VS Code 1.112](https://code.visualstudio.com/updates/v1_112) lub zaktualizuj z poziomu VS Code przez **Pomoc > Sprawdź dostępność aktualizacji**.
+
+
+---
+
+## Events
+- No events published yet.
+
+---
+
+## Authors
+### Emiliano Montesdeoca
+
+- **URL**: https://thedotnetblog.com/pl/authors/emiliano-montesdeoca/
+- **Role**: Microsoft MVP i Team Lead ds. Rozwiązań Chmurowych
+- **Bio**: Emiliano jest urugwajsko-hiszpańskim programistą, Microsoft MVP w kategorii Developer Technologies i orędownikiem społeczności, mieszkającym w Teneryfie na Wyspach Kanaryjskich.
+
+Specjalizuje się w projektowaniu skalowalnych rozwiązań chmurowych przy użyciu technologii Microsoft i obecnie pełni funkcję Team Leada Zespołu Rozwiązań Chmurowych w Intelequia Technologies.
+
+Częsty prelegent na konferencjach międzynarodowych i pasjonat dzielenia się wiedzą, przekłada rozwiązywanie problemów z rzeczywistego świata na praktyczne wskazówki dla programistów.
+
+
+---

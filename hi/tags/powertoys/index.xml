@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Powertoys | The .NET Blog</title><link>https://thedotnetblog.com/hi/tags/powertoys/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>hi</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/hi/tags/powertoys/index.xml" rel="self" type="application/rss+xml"/><item><title>Visual Studio की वो Floating Windows सेटिंग जो आप नहीं जानते थे (लेकिन जाननी चाहिए)</title><link>https://thedotnetblog.com/hi/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/hi/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/</guid><description>Visual Studio की एक छुपी सेटिंग आपको floating windows पर पूरा नियंत्रण देती है — independent taskbar entries, सही multi-monitor behavior, और FancyZones के साथ बेहतरीन integration। एक dropdown सब कुछ बदल देता है।</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;यह पोस्ट स्वचालित रूप से अनुवादित है। मूल के लिए, &lt;a href="https://thedotnetblog.com/hi/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/"&gt;यहाँ क्लिक करें&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;अगर आप Visual Studio के साथ multiple monitors इस्तेमाल करते हैं (और सच कहें तो आजकल कौन नहीं करता), तो आपने यह परेशानी जरूर झेली होगी: floating tool windows मुख्य IDE minimize करते ही गायब हो जाती हैं, वे हमेशा बाकी सब चीज़ों के ऊपर रहती हैं, और taskbar में अलग बटन के रूप में नहीं दिखतीं। कुछ workflows के लिए यह ठीक है, लेकिन multi-monitor setups के लिए यह बहुत frustrating है।&lt;/p&gt;
+&lt;p&gt;Visual Studio टीम के Mads Kristensen ने &lt;a href="https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/"&gt;एक कम-जानी-मानी सेटिंग share की&lt;/a&gt; जो floating windows के व्यवहार को पूरी तरह बदल देती है। बस एक dropdown। बस।&lt;/p&gt;
+&lt;h2 id="सटग-कह-ह"&gt;सेटिंग कहाँ है&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Tools &amp;gt; Options &amp;gt; Environment &amp;gt; Windows &amp;gt; Floating Windows&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;These floating windows are owned by the main window&amp;rdquo; dropdown में तीन विकल्प हैं:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;None&lt;/strong&gt; — पूरी स्वतंत्रता। हर floating window को अपना taskbar entry मिलता है और यह एक सामान्य Windows window की तरह व्यवहार करती है।&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tool Windows&lt;/strong&gt; (default) — documents स्वतंत्र रूप से float होते हैं, tool windows IDE से जुड़ी रहती हैं।&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Documents and Tool Windows&lt;/strong&gt; — Visual Studio का classic व्यवहार, सब कुछ main window से बंधा रहता है।&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="multi-monitor-setups-क-लए-none-ह-सह-वकलप-ह"&gt;Multi-monitor setups के लिए &amp;ldquo;None&amp;rdquo; ही सही विकल्प है&lt;/h2&gt;
+&lt;p&gt;इसे &lt;strong&gt;None&lt;/strong&gt; पर सेट करें और अचानक आपकी सभी floating tool windows और documents असली Windows applications की तरह व्यवहार करने लगती हैं। वे taskbar में दिखती हैं, main Visual Studio window minimize करने पर भी visible रहती हैं, और खुद को बाकी सब चीज़ों के आगे नहीं रखतीं।&lt;/p&gt;
+&lt;p&gt;इसे &lt;strong&gt;PowerToys FancyZones&lt;/strong&gt; के साथ combine करें और यह game changer साबित होता है। अपने monitors पर custom layouts बनाएं, Solution Explorer को एक zone में snap करें, debugger को दूसरे में, और code files जहाँ चाहें। सब कुछ अपनी जगह रहता है, सब कुछ independently accessible है, और आपका workspace अव्यवस्थित की बजाय organised लगता है।&lt;/p&gt;
+&lt;h2 id="तवरत-सझव"&gt;त्वरित सुझाव&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Multi-monitor power users&lt;/strong&gt;: &lt;strong&gt;None&lt;/strong&gt; सेट करें, FancyZones के साथ जोड़ें&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;कभी-कभार float करने वाले&lt;/strong&gt;: &lt;strong&gt;Tool Windows&lt;/strong&gt; (default) एक अच्छा middle ground है&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;पारंपरिक workflow&lt;/strong&gt;: &lt;strong&gt;Documents and Tool Windows&lt;/strong&gt; सब कुछ classic रखता है&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Pro tip: किसी भी tool window title bar पर &lt;strong&gt;Ctrl + double-click&lt;/strong&gt; करके तुरंत float या dock करें। सेटिंग बदलने के बाद restart की जरूरत नहीं।&lt;/p&gt;
+&lt;h2 id="अतम-बत"&gt;अंतिम बात&lt;/h2&gt;
+&lt;p&gt;यह उन सेटिंग्स में से एक है जिनके बारे में सोचकर आप कहते हैं &amp;ldquo;मुझे यह पहले क्यों नहीं पता था&amp;rdquo;। अगर Visual Studio में floating windows ने कभी आपको परेशान किया है, तो अभी जाकर यह बदलें।&lt;/p&gt;
+&lt;p&gt;विवरण और screenshots के लिए &lt;a href="https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/"&gt;पूरी पोस्ट&lt;/a&gt; पढ़ें।&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Devops | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/devops/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Wed, 15 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/devops/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure DevOps Server Patch April 2026 — Perbaikan Penyelesaian PR dan Pembaruan Keamanan</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/</link><pubDate>Wed, 15 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/</guid><description>Azure DevOps Server mendapatkan Patch 3 dengan perbaikan kegagalan penyelesaian PR, validasi keluar yang ditingkatkan, dan koneksi PAT GitHub Enterprise Server yang dipulihkan.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Info cepat untuk tim yang menjalankan Azure DevOps Server sendiri: Microsoft merilis &lt;a href="https://devblogs.microsoft.com/devops/april-patches-for-azure-devops-server/"&gt;Patch 3 untuk April 2026&lt;/a&gt; dengan tiga perbaikan terarah.&lt;/p&gt;
+&lt;h2 id="yang-diperbaiki"&gt;Yang diperbaiki&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Kegagalan penyelesaian pull request&lt;/strong&gt; — pengecualian null reference selama penyelesaian otomatis item kerja dapat menyebabkan penggabungan PR gagal&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Validasi pengalihan saat keluar&lt;/strong&gt; — validasi yang ditingkatkan untuk mencegah pengalihan berbahaya&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Koneksi PAT GitHub Enterprise Server&lt;/strong&gt; — membuat koneksi Personal Access Token dipulihkan&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="cara-memperbarui"&gt;Cara memperbarui&lt;/h2&gt;
+&lt;p&gt;Unduh &lt;a href="https://aka.ms/devopsserverpatch3"&gt;Patch 3&lt;/a&gt; dan jalankan installer. Untuk memverifikasi patch diterapkan:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;patch-installer&amp;gt;.exe CheckInstall
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Microsoft sangat merekomendasikan untuk selalu menggunakan patch terbaru demi keamanan dan keandalan.&lt;/p&gt;</content:encoded></item><item><title>Agentic Platform Engineering Menjadi Nyata — Git-APE Menunjukkan Caranya</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/</guid><description>Proyek Git-APE Microsoft mempraktikkan agentic platform engineering — menggunakan agen GitHub Copilot dan Azure MCP untuk mengubah permintaan bahasa alami menjadi infrastruktur cloud yang tervalidasi.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Platform engineering telah menjadi salah satu istilah yang terdengar hebat di konferensi tetapi biasanya berarti &amp;ldquo;kami membangun portal internal dan wrapper Terraform.&amp;rdquo; Janji sebenarnya — self-service infrastruktur yang benar-benar aman, terkendali, dan cepat — selalu beberapa langkah menjauh.&lt;/p&gt;
+&lt;p&gt;Tim Azure baru saja menerbitkan &lt;a href="https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/"&gt;Bagian 2 dari seri agentic platform engineering mereka&lt;/a&gt;. Mereka menyebutnya &lt;strong&gt;Git-APE&lt;/strong&gt; — sebuah proyek open-source yang menggunakan agen GitHub Copilot dan server Azure MCP untuk mengubah permintaan bahasa alami menjadi infrastruktur yang tervalidasi dan ter-deploy.&lt;/p&gt;
+&lt;h2 id="apa-yang-sebenarnya-dilakukan-git-ape"&gt;Apa yang sebenarnya dilakukan Git-APE&lt;/h2&gt;
+&lt;p&gt;Ide inti: alih-alih mempelajari modul Terraform, developer berbicara dengan agen Copilot. Agen menginterpretasikan niat, menghasilkan Infrastructure-as-Code, memvalidasi terhadap kebijakan, dan mendeploy — semuanya dalam VS Code.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/Azure/git-ape
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; git-ape
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Buka workspace di VS Code, dan file konfigurasi agen ditemukan otomatis oleh GitHub Copilot:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;@git-ape deploy a function app with storage in West Europe
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Pembersihan sama mudahnya:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;@git-ape destroy my-resource-group
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="mengapa-ini-penting"&gt;Mengapa ini penting&lt;/h2&gt;
+&lt;p&gt;Bagi yang membangun di Azure, ini menggeser percakapan platform engineering dari &amp;ldquo;bagaimana kami membangun portal&amp;rdquo; menjadi &amp;ldquo;bagaimana kami mendeskripsikan guardrail kami sebagai API.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Sebagai developer .NET: Azure MCP Server dan agen GitHub Copilot bekerja dengan semua workload Azure — ASP.NET Core API Anda, tumpukan .NET Aspire — semuanya bisa menjadi target alur deployment agentik.&lt;/p&gt;
+&lt;h2 id="kesimpulan"&gt;Kesimpulan&lt;/h2&gt;
+&lt;p&gt;Git-APE adalah pandangan awal tetapi konkret tentang agentic platform engineering dalam praktik. Clone &lt;a href="https://github.com/Azure/git-ape"&gt;repositorinya&lt;/a&gt; dan baca &lt;a href="https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/"&gt;postingan lengkap&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title>Azure DevOps Akhirnya Memperbaiki UX Editor Markdown yang Dikeluhkan Semua Orang</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/</guid><description>Editor Markdown Azure DevOps untuk item kerja mendapatkan perbedaan yang lebih jelas antara mode pratinjau dan mode edit. Ini perubahan kecil yang memperbaiki masalah alur kerja yang benar-benar mengganggu.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Jika Anda menggunakan Azure Boards, Anda mungkin pernah mengalami ini: Anda sedang membaca deskripsi item kerja, mungkin meninjau kriteria penerimaan, dan secara tidak sengaja mengklik dua kali. Boom — Anda dalam mode edit. Anda tidak ingin mengedit apa pun. Anda hanya membaca.&lt;/p&gt;
+&lt;p&gt;Dan Hellem &lt;a href="https://devblogs.microsoft.com/devops/improving-the-markdown-editor-for-work-items/"&gt;mengumumkan perbaikannya&lt;/a&gt;, dan ini adalah salah satu perubahan yang terdengar kecil tetapi sebenarnya menghilangkan gesekan nyata dari alur kerja harian Anda.&lt;/p&gt;
+&lt;h2 id="apa-yang-berubah"&gt;Apa yang berubah&lt;/h2&gt;
+&lt;p&gt;Editor Markdown untuk bidang teks item kerja sekarang dibuka dalam &lt;strong&gt;mode pratinjau secara default&lt;/strong&gt;. Anda dapat membaca dan berinteraksi dengan konten — mengikuti tautan, meninjau pemformatan — tanpa khawatir secara tidak sengaja masuk ke mode edit.&lt;/p&gt;
+&lt;p&gt;Saat Anda benar-benar ingin mengedit, Anda mengklik ikon edit di bagian atas bidang. Setelah selesai, Anda keluar kembali ke mode pratinjau secara eksplisit.&lt;/p&gt;
+&lt;h2 id="mengapa-ini-lebih-penting-dari-kedengarannya"&gt;Mengapa ini lebih penting dari kedengarannya&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://developercommunity.visualstudio.com/t/Markdown-editor-for-work-item-multi-line/10935496"&gt;Thread umpan balik komunitas&lt;/a&gt; tentang ini panjang. Perilaku klik-dua-kali-untuk-edit diperkenalkan dengan editor Markdown pada Juli 2025, dan keluhan dimulai hampir seketika.&lt;/p&gt;
+&lt;h2 id="status-peluncuran"&gt;Status peluncuran&lt;/h2&gt;
+&lt;p&gt;Ini sudah diluncurkan ke sebagian pelanggan dan akan diperluas ke semua orang dalam dua hingga tiga minggu ke depan.&lt;/p&gt;</content:encoded></item><item><title>Azure DevOps MCP Server Hadir di Microsoft Foundry: Apa Artinya untuk Agen AI Anda</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/</link><pubDate>Thu, 26 Mar 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/</guid><description>Azure DevOps MCP Server kini tersedia di Microsoft Foundry. Hubungkan agen AI Anda langsung ke alur kerja DevOps — item kerja, repo, pipeline — dengan beberapa klik.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;MCP (Model Context Protocol) sedang naik daun. Jika Anda mengikuti ekosistem agen AI, Anda mungkin sudah melihat server MCP bermunculan di mana-mana.&lt;/p&gt;
+&lt;p&gt;Kini &lt;a href="https://devblogs.microsoft.com/devops/remote-mcp-server-preview-in-microsoft-foundry/"&gt;Azure DevOps MCP Server tersedia di Microsoft Foundry&lt;/a&gt;, dan ini adalah salah satu integrasi yang membuat Anda berpikir tentang kemungkinan praktisnya.&lt;/p&gt;
+&lt;h2 id="yang-sebenarnya-terjadi"&gt;Yang sebenarnya terjadi&lt;/h2&gt;
+&lt;p&gt;Microsoft sudah merilis Azure DevOps MCP Server sebagai &lt;a href="https://devblogs.microsoft.com/devops/azure-devops-remote-mcp-server-public-preview"&gt;pratinjau publik&lt;/a&gt;. Yang baru adalah integrasi Foundry. Anda sekarang dapat menambahkan Azure DevOps MCP Server ke agen Foundry Anda langsung dari katalog alat.&lt;/p&gt;
+&lt;h2 id="cara-menyiapkannya"&gt;Cara menyiapkannya&lt;/h2&gt;
+&lt;p&gt;Penyiapannya cukup mudah:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Di agen Foundry Anda, buka &lt;strong&gt;Tambah Alat&lt;/strong&gt; &amp;gt; &lt;strong&gt;Katalog&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Cari &amp;ldquo;Azure DevOps&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Pilih Azure DevOps MCP Server (pratinjau) dan klik &lt;strong&gt;Buat&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Masukkan nama organisasi Anda dan hubungkan&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="mengontrol-apa-yang-dapat-diakses-agen-anda"&gt;Mengontrol apa yang dapat diakses agen Anda&lt;/h2&gt;
+&lt;p&gt;Anda dapat menentukan alat mana yang tersedia untuk agen Anda. Prinsip hak akses minimum, diterapkan ke agen AI Anda.&lt;/p&gt;
+&lt;h2 id="mengapa-ini-menarik-untuk-tim-net"&gt;Mengapa ini menarik untuk tim .NET&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Asisten perencanaan sprint&lt;/strong&gt; — agen yang dapat menarik item kerja dan menyarankan kapasitas sprint&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bot code review&lt;/strong&gt; — agen yang memahami konteks PR&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Respons insiden&lt;/strong&gt; — agen yang membuat item kerja dan mengkorelasikan bug&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Orientasi developer&lt;/strong&gt; — jawaban nyata berdasarkan data proyek aktual&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="kesimpulan"&gt;Kesimpulan&lt;/h2&gt;
+&lt;p&gt;Lihat &lt;a href="https://devblogs.microsoft.com/devops/remote-mcp-server-preview-in-microsoft-foundry/"&gt;pengumuman lengkap&lt;/a&gt; untuk detail lebih lanjut.&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Coding-Agents | The .NET Blog</title><link>https://thedotnetblog.com/ca/tags/coding-agents/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ca</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 17 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ca/tags/coding-agents/index.xml" rel="self" type="application/rss+xml"/><item><title>Deixeu de fer de cangur al vostre terminal: el mode desconnectat d'Aspire canvia el flux de treball</title><link>https://thedotnetblog.com/ca/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</link><pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ca/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</guid><description>Aspire 13.2 us permet executar el vostre AppHost en segon pla i recuperar el vostre terminal. Combinat amb les noves ordres de la CLI i el suport d'agents, això és més gran del que sembla.</description><content:encoded>&lt;p&gt;Cada vegada que executeu un Aspire AppHost, el vostre terminal desapareixerà. Tancat. Ocupat fins que en feu Ctrl+C. Necessites executar una comanda ràpida? Obre una altra pestanya. Voleu comprovar els registres? Una altra pestanya. És una petita fricció que s&amp;rsquo;acumula ràpidament.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 soluciona això. James Newton-King &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;va escriure tots els detalls&lt;/a&gt;, i sincerament, aquesta és una d&amp;rsquo;aquestes característiques que canvia immediatament la manera de treballar.&lt;/p&gt;
+&lt;h2 id="mode-desconnectat-una-comanda-terminal-enrere"&gt;Mode desconnectat: una comanda, terminal enrere&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Aquesta és l&amp;rsquo;abreviatura de &lt;code&gt;aspire run --detach&lt;/code&gt;. El vostre AppHost s&amp;rsquo;inicia en segon pla i recupereu el terminal immediatament. Sense pestanyes addicionals. Sense multiplexor de terminals. Només la teva indicació, llest per començar.&lt;/p&gt;
+&lt;h2 id="gestionant-el-que-sestà-executant"&gt;Gestionant el que s&amp;rsquo;està executant&lt;/h2&gt;
+&lt;p&gt;Aquesta és la qüestió: executar-se en segon pla només és útil si realment podeu gestionar el que hi ha. Aspire 13.2 ofereix un conjunt complet d&amp;rsquo;ordres CLI per exactament això:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# List all running AppHosts&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire ps
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Inspect the state of a specific AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire describe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stream logs from a running AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire logs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stop a specific AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire stop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Això converteix l&amp;rsquo;Aspire CLI en un gestor de processos adequat. Podeu iniciar diversos AppHosts, comprovar el seu estat, seguir els seus registres i tancar-los, tot des d&amp;rsquo;una única sessió de terminal.&lt;/p&gt;
+&lt;h2 id="combina-ho-amb-el-mode-aïllat"&gt;Combina-ho amb el mode aïllat&lt;/h2&gt;
+&lt;p&gt;El mode separat es combina de manera natural amb el mode aïllat. Voleu executar dues instàncies del mateix projecte en segon pla sense conflictes de ports?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Cadascun obté ports aleatoris, secrets separats i el seu propi cicle de vida. Utilitzeu &lt;code&gt;aspire ps&lt;/code&gt; per veure tots dos, &lt;code&gt;aspire stop&lt;/code&gt; per matar el que hàgiu acabat.&lt;/p&gt;
+&lt;h2 id="per-què-això-és-enorme-per-als-agents-de-codificació"&gt;Per què això és enorme per als agents de codificació&lt;/h2&gt;
+&lt;p&gt;Aquí és on es posa realment interessant. Un agent de codificació que treballa al vostre terminal ara pot:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Inicieu l&amp;rsquo;aplicació amb &lt;code&gt;aspire start&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Consulta el seu estat amb &lt;code&gt;aspire describe&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Comproveu els registres amb &lt;code&gt;aspire logs&lt;/code&gt; per diagnosticar problemes&lt;/li&gt;
+&lt;li&gt;Atureu-ho amb &lt;code&gt;aspire stop&lt;/code&gt; quan estigui acabat&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Tot sense perdre la sessió del terminal. Abans del mode desconnectat, un agent que executava el vostre AppHost es bloquejaria fora del seu propi terminal. Ara pot començar, observar, iterar i netejar, exactament com voldríeu que funcionés un agent autònom.&lt;/p&gt;
+&lt;p&gt;L&amp;rsquo;equip d&amp;rsquo;Aspire es va inclinar en això. L&amp;rsquo;execució de &lt;code&gt;aspire agent init&lt;/code&gt; configura un fitxer d&amp;rsquo;habilitats d&amp;rsquo;Aspire que ensenya als agents aquestes ordres. Així, eines com l&amp;rsquo;agent de codificació de Copilot poden gestionar les vostres càrregues de treball d&amp;rsquo;Aspire des de la caixa.&lt;/p&gt;
+&lt;h2 id="tancant"&gt;Tancant&lt;/h2&gt;
+&lt;p&gt;El mode desconnectat és una actualització del flux de treball disfressada com una simple bandera. Atureu el canvi de context entre terminals, els agents deixen de bloquejar-se i les noves ordres CLI us ofereixen una visibilitat real del que s&amp;rsquo;està executant. És pràctic, és net i fa que el cicle de desenvolupament diari sigui notablement més suau.&lt;/p&gt;
+&lt;p&gt;Llegiu la &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;publicació completa&lt;/a&gt; per obtenir tots els detalls i agafeu Aspire 13.2 amb &lt;code&gt;aspire update --self&lt;/code&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

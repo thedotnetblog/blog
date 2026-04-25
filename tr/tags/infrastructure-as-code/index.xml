@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Infrastructure as Code | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/infrastructure-as-code/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 21 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/infrastructure-as-code/index.xml" rel="self" type="application/rss+xml"/><item><title>azd + GitHub Copilot: Yapay Zeka Destekli Proje Kurulumu ve Akıllı Hata Çözümü</title><link>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</link><pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</guid><description>Azure Developer CLI artık GitHub Copilot ile entegre olarak proje altyapısını oluşturuyor ve dağıtım hatalarını çözüyor — terminal'den çıkmadan.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Bu makale otomatik olarak çevrilmiştir. Orijinal İngilizce sürüm için &lt;a href="https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/"&gt;buraya tıklayın&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Mevcut bir uygulamayı Azure&amp;rsquo;a dağıtmak isteyip boş bir &lt;code&gt;azure.yaml&lt;/code&gt; dosyasına bakarak Express API&amp;rsquo;nizin Container Apps mı yoksa App Service mi kullanması gerektiğini hatırlamaya çalıştığınız o anı biliyor musunuz? O an artık çok daha kısa.&lt;/p&gt;
+&lt;p&gt;Azure Developer CLI (&lt;code&gt;azd&lt;/code&gt;) artık GitHub Copilot ile iki somut şekilde entegre: &lt;code&gt;azd init&lt;/code&gt; sırasında AI destekli proje iskele kurma ve dağıtımlar başarısız olduğunda akıllı hata giderme. Her iki özellik de tamamen terminalde kalıyor.&lt;/p&gt;
+&lt;h2 id="azd-init-sırasında-copilot-ile-kurulum"&gt;azd init Sırasında Copilot ile Kurulum&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;azd init&lt;/code&gt; çalıştırıldığında artık &amp;ldquo;Set up with GitHub Copilot (Preview)&amp;rdquo; seçeneği görünüyor. Seçin ve Copilot, gerçek kodunuzu temel alarak &lt;code&gt;azure.yaml&lt;/code&gt;, altyapı şablonları ve Bicep modülleri oluşturmak için kod tabanınızı analiz eder.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd init
+# Seçin: &amp;#34;Set up with GitHub Copilot (Preview)&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Gereksinimler:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;azd 1.23.11 veya üzeri&lt;/strong&gt; — &lt;code&gt;azd version&lt;/code&gt; ile kontrol edin veya &lt;code&gt;azd update&lt;/code&gt; ile güncelleyin&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Aktif GitHub Copilot aboneliği&lt;/strong&gt; (Bireysel, İş veya Kurumsal)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub CLI (&lt;code&gt;gh&lt;/code&gt;)&lt;/strong&gt; — gerekirse &lt;code&gt;azd&lt;/code&gt; oturum açmanızı isteyecek&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Gerçekten faydalı bulduğum şey: her iki yönde de çalışıyor. Sıfırdan mı inşa ediyorsunuz? Copilot doğru Azure hizmetlerini başından itibaren yapılandırmanıza yardımcı olur. Dağıtmak istediğiniz mevcut bir uygulamanız mı var? Copilot&amp;rsquo;u ona yöneltin — kodu yeniden yapılandırmadan konfigürasyon oluşturulur.&lt;/p&gt;
+&lt;h3 id="gerçekte-ne-yapar"&gt;Gerçekte Ne Yapar&lt;/h3&gt;
+&lt;p&gt;PostgreSQL bağımlılığına sahip bir Node.js Express API&amp;rsquo;niz olduğunu varsayalım. Container Apps ile App Service arasında manuel seçim yapmak ve ardından sıfırdan Bicep yazmak yerine, Copilot yığınınızı algılar ve şunları oluşturur:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Doğru &lt;code&gt;language&lt;/code&gt;, &lt;code&gt;host&lt;/code&gt; ve &lt;code&gt;build&lt;/code&gt; ayarlarına sahip &lt;code&gt;azure.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Azure Container Apps için Bicep modülü&lt;/li&gt;
+&lt;li&gt;Azure Database for PostgreSQL için Bicep modülü&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ve herhangi bir şeyi değiştirmeden önce ön kontroller yapar — git çalışma dizininin temiz olduğunu doğrular, MCP sunucu araç iznini önceden sorar. Her şey bilginiz dahilinde gerçekleşir.&lt;/p&gt;
+&lt;h2 id="copilot-ile-hata-giderme"&gt;Copilot ile Hata Giderme&lt;/h2&gt;
+&lt;p&gt;Dağıtım hataları kaçınılmazdır. Eksik parametreler, izin sorunları, SKU kullanılabilirlik sorunları — ve hata mesajı nadiren gerçekten bilmeniz gereken tek şeyi söyler: &lt;em&gt;nasıl düzeltilir&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Copilot olmadan döngü şöyle görünür: hatayı kopyala → belgelerden ara → ilgisiz üç Stack Overflow cevabı oku → birkaç &lt;code&gt;az&lt;/code&gt; CLI komutu çalıştır → tekrar dene ve umut et. &lt;code&gt;azd&lt;/code&gt;&amp;lsquo;de Copilot ile bu döngü çöküyor. Herhangi bir &lt;code&gt;azd&lt;/code&gt; komutu başarısız olduğunda anında dört seçenek sunuluyor:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Explain&lt;/strong&gt; — ne yanlış gittiğinin anlaşılır dilde açıklaması&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Guidance&lt;/strong&gt; — sorunu gidermek için adım adım talimatlar&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Diagnose and Guide&lt;/strong&gt; — tam analiz + Copilot düzeltmeyi uygular (onayınızla) + isteğe bağlı yeniden deneme&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skip&lt;/strong&gt; — kendiniz halledin&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Kritik nokta: Copilot&amp;rsquo;un projeniz, başarısız olan komut ve hata detayları hakkında zaten bağlamı var. Önerileri &lt;em&gt;sizin durumunuza&lt;/em&gt; özeldir.&lt;/p&gt;
+&lt;h3 id="varsayılan-davranışı-ayarlama"&gt;Varsayılan Davranışı Ayarlama&lt;/h3&gt;
+&lt;p&gt;Her zaman aynı seçeneği seçiyorsanız etkileşimli istemi atlayın:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.category troubleshoot
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Değerler: &lt;code&gt;explain&lt;/code&gt;, &lt;code&gt;guidance&lt;/code&gt;, &lt;code&gt;troubleshoot&lt;/code&gt;, &lt;code&gt;fix&lt;/code&gt;, &lt;code&gt;skip&lt;/code&gt;. Otomatik düzeltme ve yeniden denemeyi de etkinleştirebilirsiniz:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.fix allow
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;İstediğiniz zaman etkileşimli moda geri dönün:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config unset copilot.errorHandling.category
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="sonuç"&gt;Sonuç&lt;/h2&gt;
+&lt;p&gt;En son sürümü edinmek için &lt;code&gt;azd update&lt;/code&gt; çalıştırın ve bir sonraki projenizde &lt;code&gt;azd init&lt;/code&gt; deneyin.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-copilot-integration/"&gt;Orijinal duyuruyu buradan okuyun&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

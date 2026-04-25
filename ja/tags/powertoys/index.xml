@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Powertoys | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/powertoys/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/powertoys/index.xml" rel="self" type="application/rss+xml"/><item><title>知らなかったVisual Studioのフローティングウィンドウ設定（でも知るべき）</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/</guid><description>Visual Studioの隠れた設定でフローティングウィンドウを完全にコントロール — 独立したタスクバーエントリ、適切なマルチモニター動作、そして完璧なFancyZones統合。ドロップダウン一つですべてが変わります。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されました。原文は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Visual Studioで複数モニターを使っている方（正直に言って、今どきそうじゃない人っていますか？）は、おそらくこの煩わしさを経験したことがあるでしょう：フローティングツールウィンドウがメインIDEを最小化すると消えてしまう、常に他のすべての上に表示される、そしてタスクバーに別々のボタンとして表示されない。一部のワークフローには機能しますが、マルチモニター環境では苛立たしいものです。&lt;/p&gt;
+&lt;p&gt;Visual Studioチームの Mads Kristensen が、フローティングウィンドウの動作を完全に変える&lt;a href="https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/"&gt;あまり知られていない設定を共有しました&lt;/a&gt;。ドロップダウン一つ。それだけです。&lt;/p&gt;
+&lt;h2 id="設定"&gt;設定&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Tools &amp;gt; Options &amp;gt; Environment &amp;gt; Windows &amp;gt; Floating Windows&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;ドロップダウン「These floating windows are owned by the main window」には3つのオプションがあります：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;None&lt;/strong&gt; — 完全な独立性。すべてのフローティングウィンドウが独自のタスクバーエントリを持ち、通常のWindowsウィンドウとして動作します。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tool Windows&lt;/strong&gt;（デフォルト）— ドキュメントは自由にフロート、ツールウィンドウはIDEに紐づけられます。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Documents and Tool Windows&lt;/strong&gt; — クラシックなVisual Studioの動作、すべてがメインウィンドウに紐づけられます。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="マルチモニター環境でnoneが最適な理由"&gt;マルチモニター環境で「None」が最適な理由&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;None&lt;/strong&gt;に設定すると、すべてのフローティングツールウィンドウとドキュメントが本物のWindowsアプリケーションのように動作します。タスクバーに表示され、Visual Studioのメインウィンドウを最小化しても表示され続け、すべての前面に無理やり表示されることがなくなります。&lt;/p&gt;
+&lt;p&gt;これを&lt;strong&gt;PowerToys FancyZones&lt;/strong&gt;と組み合わせると、まさにゲームチェンジャーです。モニター全体にカスタムレイアウトを作成し、ソリューションエクスプローラーを一つのゾーンに、デバッガーを別のゾーンに、コードファイルを好きな場所に配置できます。すべてがその場に留まり、すべてが独立してアクセスでき、ワークスペースが混沌ではなく整理されたものに感じられます。&lt;/p&gt;
+&lt;h2 id="クイック推奨事項"&gt;クイック推奨事項&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;マルチモニターのパワーユーザー&lt;/strong&gt;：&lt;strong&gt;None&lt;/strong&gt;に設定し、FancyZonesと組み合わせる&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;たまにフロートする方&lt;/strong&gt;：&lt;strong&gt;Tool Windows&lt;/strong&gt;（デフォルト）が良いバランス&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;従来のワークフロー&lt;/strong&gt;：&lt;strong&gt;Documents and Tool Windows&lt;/strong&gt;でクラシックな動作を維持&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;プロのコツ：ツールウィンドウのタイトルバーを&lt;strong&gt;Ctrl + ダブルクリック&lt;/strong&gt;で即座にフロートまたはドッキングできます。設定変更後の再起動は不要です。&lt;/p&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;これは典型的な「なんで今まで知らなかったんだ」系の設定です。Visual Studioのフローティングウィンドウに少しでも苛立ちを感じたことがあるなら、今すぐ変更しに行きましょう。&lt;/p&gt;
+&lt;p&gt;詳細とスクリーンショットは&lt;a href="https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/"&gt;完全な記事&lt;/a&gt;をご覧ください。&lt;/p&gt;</content:encoded></item></channel></rss>

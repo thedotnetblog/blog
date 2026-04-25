@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Powertoys | The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/powertoys/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ko</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/powertoys/index.xml" rel="self" type="application/rss+xml"/><item><title>몰랐던 Visual Studio 플로팅 윈도우 설정 (하지만 알아야 할)</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/</guid><description>Visual Studio의 숨겨진 설정으로 플로팅 윈도우를 완벽하게 제어하세요 — 독립적인 작업 표시줄 항목, 적절한 멀티 모니터 동작, 그리고 완벽한 FancyZones 통합. 드롭다운 하나로 모든 것이 바뀝니다.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;이 글은 자동 번역되었습니다. 원문은 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/"&gt;여기&lt;/a&gt;에서 확인하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Visual Studio에서 여러 모니터를 사용한다면 (솔직히 요즘 누가 안 쓰겠어요?), 아마 이런 불편함을 경험했을 겁니다: 플로팅 도구 창이 메인 IDE를 최소화하면 사라지고, 항상 다른 모든 것 위에 표시되며, 작업 표시줄에 별도의 버튼으로 나타나지 않습니다. 일부 워크플로에서는 괜찮지만 멀티 모니터 설정에서는 정말 답답합니다.&lt;/p&gt;
+&lt;p&gt;Visual Studio 팀의 Mads Kristensen이 플로팅 윈도우의 동작을 완전히 바꾸는 &lt;a href="https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/"&gt;잘 알려지지 않은 설정을 공유했습니다&lt;/a&gt;. 드롭다운 하나. 그게 전부입니다.&lt;/p&gt;
+&lt;h2 id="설정"&gt;설정&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Tools &amp;gt; Options &amp;gt; Environment &amp;gt; Windows &amp;gt; Floating Windows&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;드롭다운 &amp;ldquo;These floating windows are owned by the main window&amp;quot;에는 세 가지 옵션이 있습니다:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;None&lt;/strong&gt; — 완전한 독립. 모든 플로팅 윈도우가 자체 작업 표시줄 항목을 가지며 일반 Windows 창처럼 동작합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tool Windows&lt;/strong&gt; (기본값) — 문서는 자유롭게 플로팅, 도구 창은 IDE에 연결됩니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Documents and Tool Windows&lt;/strong&gt; — 클래식 Visual Studio 동작, 모든 것이 메인 창에 연결됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="멀티-모니터-설정에서-none이-최적인-이유"&gt;멀티 모니터 설정에서 &amp;ldquo;None&amp;quot;이 최적인 이유&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;None&lt;/strong&gt;으로 설정하면 갑자기 모든 플로팅 도구 창과 문서가 진짜 Windows 애플리케이션처럼 동작합니다. 작업 표시줄에 나타나고, Visual Studio 메인 창을 최소화해도 보이며, 더 이상 모든 것 앞으로 강제되지 않습니다.&lt;/p&gt;
+&lt;p&gt;이것을 &lt;strong&gt;PowerToys FancyZones&lt;/strong&gt;와 결합하면 완전히 달라집니다. 모니터 전체에 커스텀 레이아웃을 만들고, 솔루션 탐색기를 한 존에, 디버거를 다른 존에, 코드 파일을 원하는 곳에 배치하세요. 모든 것이 제자리에 있고, 모든 것이 독립적으로 접근 가능하며, 작업 공간이 혼란스럽지 않고 정돈된 느낌입니다.&lt;/p&gt;
+&lt;h2 id="빠른-추천"&gt;빠른 추천&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;멀티 모니터 파워 유저&lt;/strong&gt;: &lt;strong&gt;None&lt;/strong&gt;으로 설정하고 FancyZones와 함께 사용&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;가끔 플로팅하는 분&lt;/strong&gt;: &lt;strong&gt;Tool Windows&lt;/strong&gt; (기본값)가 좋은 중간 지점&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;전통적인 워크플로&lt;/strong&gt;: &lt;strong&gt;Documents and Tool Windows&lt;/strong&gt;가 클래식한 방식 유지&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;프로 팁: 아무 도구 창의 제목 표시줄에서 &lt;strong&gt;Ctrl + 더블 클릭&lt;/strong&gt;으로 즉시 플로팅 또는 도킹할 수 있습니다. 설정 변경 후 재시작이 필요 없습니다.&lt;/p&gt;
+&lt;h2 id="마무리"&gt;마무리&lt;/h2&gt;
+&lt;p&gt;전형적인 &amp;ldquo;이걸 왜 몰랐지&amp;rdquo; 설정입니다. Visual Studio의 플로팅 윈도우가 한 번이라도 불편했다면, 지금 바로 바꾸러 가세요.&lt;/p&gt;
+&lt;p&gt;자세한 내용과 스크린샷은 &lt;a href="https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/"&gt;전체 포스트&lt;/a&gt;에서 확인하세요.&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure Boards | The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/azure-boards/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ko</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 27 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/azure-boards/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure DevOps MCP 서버 4월 업데이트: WIQL 쿼리, PAT 인증, 실험적 MCP Apps</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-devops-mcp-server-april-2026-wiql-pat-apps/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-devops-mcp-server-april-2026-wiql-pat-apps/</guid><description>Azure DevOps MCP 서버가 WIQL 기반 work item 쿼리, Personal Access Token 인증, MCP 어노테이션, 그리고 일반 워크플로우를 재사용 가능한 도구로 패키징하는 실험적 MCP Apps 기능을 받았습니다.</description><content:encoded>&lt;p&gt;&lt;em&gt;이 게시물은 자동 번역되었습니다. 원본 버전은 &lt;a href="https://thedotnetblog.com/posts/emiliano-montesdeoca/azure-devops-mcp-server-april-2026-wiql-pat-apps/"&gt;여기를 클릭&lt;/a&gt;하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Azure DevOps MCP 서버가 계속 개선되고 있습니다. Dan Hellem의 4월 업데이트는 로컬 및 원격 서버 모두를 다룹니다.&lt;/p&gt;
+&lt;h2 id="wiql-쿼리-지원"&gt;WIQL 쿼리 지원&lt;/h2&gt;
+&lt;p&gt;새로운 &lt;code&gt;wit_query_by_wiql&lt;/code&gt; 도구로 MCP 클라이언트에서 직접 Work Item Query Language 쿼리를 실행할 수 있습니다.&lt;/p&gt;
+&lt;h2 id="personal-access-tokens"&gt;Personal Access Tokens&lt;/h2&gt;
+&lt;p&gt;로컬 서버에서 PAT 인증 — 대화형 인증이 불가능한 통합 시나리오에 중요합니다.&lt;/p&gt;
+&lt;h2 id="mcp-어노테이션"&gt;MCP 어노테이션&lt;/h2&gt;
+&lt;p&gt;읽기 전용, 파괴적, 오픈 월드 도구를 위한 메타데이터 태그 — 에이전트 신뢰성의 기반.&lt;/p&gt;
+&lt;h2 id="wiki-도구-통합"&gt;Wiki 도구 통합&lt;/h2&gt;
+&lt;p&gt;5개의 별도 wiki 도구 → 2개의 더 강력한 도구. 도구가 적을수록 LLM 성능이 향상됩니다.&lt;/p&gt;
+&lt;h2 id="실험적-mcp-apps"&gt;실험적: MCP Apps&lt;/h2&gt;
+&lt;p&gt;MCP 서버 환경 내의 패키징된 워크플로우. 방향은 맞습니다.&lt;/p&gt;
+&lt;p&gt;Dan Hellem의 원본 포스트: &lt;a href="https://devblogs.microsoft.com/devops/azure-devops-mcp-server-april-update/"&gt;Azure DevOps MCP Server April Update&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

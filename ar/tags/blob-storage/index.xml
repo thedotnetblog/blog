@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Blob-Storage | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/blob-storage/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Wed, 15 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/blob-storage/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure Smart Tier متاح للعموم — تحسين تكاليف تخزين Blob تلقائياً بدون قواعد دورة الحياة</title><link>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/</link><pubDate>Wed, 15 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/</guid><description>أصبح Smart Tier في Azure Blob Storage متاحاً للعموم، حيث ينقل الكائنات تلقائياً بين الطبقات الساخنة والباردة والمتجمدة بناءً على أنماط الوصول الفعلية — دون الحاجة إلى قواعد دورة الحياة.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;تمت ترجمة هذا المقال تلقائياً. للنسخة الأصلية، &lt;a href="https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/"&gt;انقر هنا&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;إذا قضيت وقتاً في ضبط سياسات دورة حياة Azure Blob Storage ثم شاهدتها تنهار عندما تتغير أنماط الوصول، فهذا المقال يخصك. أعلنت Microsoft للتو عن &lt;a href="https://azure.microsoft.com/en-us/blog/optimize-object-storage-costs-automatically-with-smart-tier-now-generally-available/"&gt;التوافر العام لـ smart tier&lt;/a&gt; لـ Azure Blob وData Lake Storage — قدرة تدرّج مُدارة بالكامل تنقل الكائنات تلقائياً بين الطبقات الساخنة والباردة والمتجمدة بناءً على الاستخدام الفعلي.&lt;/p&gt;
+&lt;h2 id="ما-الذي-يفعله-smart-tier-فعلا"&gt;ما الذي يفعله smart tier فعلاً&lt;/h2&gt;
+&lt;p&gt;المفهوم واضح: يقيّم smart tier باستمرار وقت آخر وصول لكل كائن في حساب التخزين الخاص بك. البيانات التي يُوصل إليها بشكل متكرر تبقى في الطبقة الساخنة، وتنتقل البيانات غير النشطة إلى الطبقة الباردة بعد 30 يوماً، ثم إلى الطبقة المتجمدة بعد 60 يوماً أخرى. عند الوصول إلى البيانات مجدداً، تُرقَّى فوراً إلى الطبقة الساخنة. تبدأ الدورة من جديد.&lt;/p&gt;
+&lt;p&gt;لا قواعد دورة حياة للضبط. لا تنبؤات بأنماط الوصول. لا ضبط يدوي.&lt;/p&gt;
+&lt;p&gt;خلال فترة المعاينة، أفادت Microsoft بأن &lt;strong&gt;أكثر من 50% من السعة المُدارة بـ smart tier انتقلت تلقائياً إلى طبقات أبرد&lt;/strong&gt; بناءً على أنماط الوصول الفعلية. هذا تخفيض ذو معنى في التكاليف لحسابات التخزين الكبيرة.&lt;/p&gt;
+&lt;h2 id="لماذا-هذا-مهم-لمطوري-net"&gt;لماذا هذا مهم لمطوري .NET&lt;/h2&gt;
+&lt;p&gt;إذا كنت تبني تطبيقات تولّد سجلات أو بيانات قياس أو بيانات تحليلية أو أي نوع من ممتلكات البيانات المتنامية — وبصراحة، من لا يفعل — فتكاليف التخزين تتراكم بسرعة. النهج التقليدي كان كتابة سياسات إدارة دورة الحياة واختبارها وإعادة ضبطها عندما تتغير أنماط الوصول في تطبيقك. يزيل smart tier سير العمل بأكمله.&lt;/p&gt;
+&lt;p&gt;بعض السيناريوهات العملية التي يساعد فيها هذا:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;بيانات القياس والسجلات&lt;/strong&gt; — ساخنة أثناء تصحيح الأخطاء، نادراً ما يُوصل إليها بعد أسابيع قليلة&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;مسارات البيانات ومخرجات ETL&lt;/strong&gt; — يُوصل إليها بكثافة أثناء المعالجة، ثم تبرد في معظمها&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;المحتوى الذي ينشئه المستخدمون&lt;/strong&gt; — التحميلات الحديثة ساخنة، والمحتوى الأقدم يبرد تدريجياً&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;بيانات النسخ الاحتياطي والأرشفة&lt;/strong&gt; — يُوصل إليها أحياناً للامتثال، في الغالب خاملة&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="كيفية-الإعداد"&gt;كيفية الإعداد&lt;/h2&gt;
+&lt;p&gt;تفعيل smart tier إعداد لمرة واحدة:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;الحسابات الجديدة&lt;/strong&gt;: اختر smart tier كطبقة الوصول الافتراضية أثناء إنشاء حساب التخزين (يُشترط التكرار المنطقي)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;الحسابات القائمة&lt;/strong&gt;: بدّل طبقة الوصول للـ blob من افتراضيتك الحالية إلى smart tier&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;الكائنات الأصغر من 128 كيلوبايت تبقى في الطبقة الساخنة ولا تتحمل رسوم المراقبة. لكل شيء آخر، تدفع أسعار السعة القياسية للطبقات الساخنة والباردة والمتجمدة بدون رسوم انتقال الطبقات، ولا رسوم حذف مبكر، ولا تكاليف استرداد البيانات. رسوم مراقبة شهرية لكل كائن تغطي التنسيق.&lt;/p&gt;
+&lt;h2 id="المقايضة-التي-يجب-معرفتها"&gt;المقايضة التي يجب معرفتها&lt;/h2&gt;
+&lt;p&gt;قواعد التدرّج في smart tier ثابتة (30 يوماً إلى بارد، 90 يوماً إلى متجمد). إذا احتجت إلى عتبات مخصصة — مثلاً الانتقال إلى البارد بعد 7 أيام لحمل عمل محدد — فقواعد دورة الحياة هي الحل المناسب. ولا تخلط بينهما: تجنب استخدام قواعد دورة الحياة على الكائنات المُدارة بـ smart tier، إذ يمكن أن تتعارض.&lt;/p&gt;
+&lt;h2 id="خلاصة-القول"&gt;خلاصة القول&lt;/h2&gt;
+&lt;p&gt;هذا ليس ثورياً، لكنه يحل صداعاً تشغيلياً حقيقياً. إذا كنت تدير حسابات blob storage متنامية وتعبت من صيانة سياسات دورة الحياة، &lt;a href="https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-smart"&gt;فعّل smart tier&lt;/a&gt; ودع Azure يتولى الأمر. إنه متاح اليوم في جميع مناطق السحابة العامة المنطقية تقريباً.&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fine-Tuning | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/fine-tuning/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/fine-tuning/index.xml" rel="self" type="application/rss+xml"/><item><title>Foundry的RFT更便宜、更智能了 — 看看有什么变化</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</guid><description>Microsoft Foundry本月发布了三项RFT更新：o4-mini的全球训练、新的GPT-4.1模型评分器，以及一份能为你节省数小时调试时间的最佳实践指南。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原文请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果你正在开发依赖微调模型的.NET应用，这个月的Foundry更新值得关注。Reinforcement Fine-Tuning变得更易获取，价格也大幅降低。&lt;/p&gt;
+&lt;p&gt;完整详情请参阅&lt;a href="https://devblogs.microsoft.com/foundry/whats-new-in-foundry-finetune-april-2026/"&gt;官方公告&lt;/a&gt;，这里是实用要点总结。&lt;/p&gt;
+&lt;h2 id="o4-mini的全球训练"&gt;o4-mini的全球训练&lt;/h2&gt;
+&lt;p&gt;o4-mini是推理密集型和智能体工作负载的首选模型。重大消息：你现在可以从13+个Azure区域启动微调任务，与Standard训练相比，每token的训练费率更低。相同的基础设施，相同的质量，更广的覆盖范围。&lt;/p&gt;
+&lt;p&gt;如果你的团队分布在不同地区，这很重要。你不再局限于少数几个区域来进行训练。&lt;/p&gt;
+&lt;p&gt;以下是启动全球训练任务的REST API调用：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://&amp;lt;your-resource&amp;gt;.openai.azure.com/openai/fine_tuning/jobs?api-version=2025-04-01-preview&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;api-key: &lt;/span&gt;&lt;span class="nv"&gt;$AZURE_OPENAI_API_KEY&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s1"&gt;&amp;#39;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;model&amp;#34;: &amp;#34;o4-mini&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;training_file&amp;#34;: &amp;#34;&amp;lt;your-training-file-id&amp;gt;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;method&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;reinforcement&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reinforcement&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;grader&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;string_check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;name&amp;#34;: &amp;#34;answer-check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;input&amp;#34;: &amp;#34;{{sample.output_text}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reference&amp;#34;: &amp;#34;{{item.reference_answer}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;operation&amp;#34;: &amp;#34;eq&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;hyperparameters&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;n_epochs&amp;#34;: 2,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;compute_multiplier&amp;#34;: 1.0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;trainingType&amp;#34;: &amp;#34;globalstandard&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;那个&lt;code&gt;trainingType: globalstandard&lt;/code&gt;标志就是关键区别。&lt;/p&gt;
+&lt;h2 id="新模型评分器gpt-41系列"&gt;新模型评分器：GPT-4.1系列&lt;/h2&gt;
+&lt;p&gt;评分器定义了模型优化所针对的奖励信号。此前，基于模型的评分器仅限于较少的模型集合。现在你有三个新选项：GPT-4.1、GPT-4.1-mini和GPT-4.1-nano。&lt;/p&gt;
+&lt;p&gt;什么时候应该使用模型评分器而不是确定性评分器？当你的任务输出是开放式的，当你需要在多个维度上进行部分评分，或者当你在构建智能体工作流且工具调用的正确性取决于语义上下文时。&lt;/p&gt;
+&lt;p&gt;关键在于，分层策略很实用：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-nano&lt;/strong&gt; 用于初始迭代。低成本，快速反馈循环。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-mini&lt;/strong&gt; 当你的评分标准稳定并需要更高保真度时使用。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1&lt;/strong&gt; 用于生产环境评分或每个评分决策都至关重要的复杂标准。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;你甚至可以在单个RFT任务中混合使用评分器类型。用string-match来评判&amp;quot;正确答案&amp;quot;维度，用模型评分器来评估推理质量。说实话，这种灵活性才是它对实际工作负载真正有用的地方。&lt;/p&gt;
+&lt;h2 id="rft数据格式的陷阱"&gt;RFT数据格式的陷阱&lt;/h2&gt;
+&lt;p&gt;这是很多人会踩的坑。RFT的数据格式与SFT不同。每行的最后一条消息必须是User或Developer角色——不是Assistant。期望的答案放在顶层键中，如&lt;code&gt;reference_answer&lt;/code&gt;，评分器会直接引用它。&lt;/p&gt;
+&lt;p&gt;如果你之前一直在做监督微调并想切换到RFT，你需要重新组织训练数据。不要跳过这一步，否则你的任务会静默失败。&lt;/p&gt;
+&lt;h2 id="为什么这对net开发者很重要"&gt;为什么这对.NET开发者很重要&lt;/h2&gt;
+&lt;p&gt;如果你通过Azure OpenAI SDK从.NET应用中调用微调模型，更便宜的训练意味着你可以更积极地迭代。模型评分器选项意味着你可以针对细微的任务进行微调——不仅仅是精确匹配场景。&lt;a href="https://github.com/microsoft-foundry/fine-tuning/blob/main/Demos/Agentic_RFT_PrivatePreview/RFT_Best_Practice.md"&gt;GitHub&lt;/a&gt;上的最佳实践指南将为你节省真正的调试时间。&lt;/p&gt;
+&lt;p&gt;从小处开始。十到一百个样本。简单的评分器。验证循环。然后扩展。&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Coding-Agents | The .NET Blog</title><link>https://thedotnetblog.com/ru/tags/coding-agents/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ru</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 17 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ru/tags/coding-agents/index.xml" rel="self" type="application/rss+xml"/><item><title>Хватит нянчить терминал: отсоединённый режим Aspire меняет рабочий процесс</title><link>https://thedotnetblog.com/ru/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</link><pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ru/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</guid><description>Aspire 13.2 позволяет запускать AppHost в фоновом режиме и освобождать терминал. В сочетании с новыми командами CLI и поддержкой агентов это значит больше, чем кажется.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Этот пост был переведён автоматически. Оригинал можно прочитать &lt;a href="https://thedotnetblog.com/ru/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/"&gt;здесь&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Каждый раз, когда вы запускаете Aspire AppHost, ваш терминал пропадает. Заблокирован. Занят, пока вы не нажмёте Ctrl+C. Нужно быстро выполнить команду? Откройте ещё одну вкладку. Хотите проверить логи? Ещё одна вкладка. Мелкое неудобство, которое быстро накапливается.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 решает эту проблему. James Newton-King &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;описал все подробности&lt;/a&gt;, и, честно говоря, это одна из тех фич, которая сразу меняет подход к работе.&lt;/p&gt;
+&lt;h2 id="отсоединённый-режим-одна-команда--терминал-свободен"&gt;Отсоединённый режим: одна команда — терминал свободен&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Это сокращение для &lt;code&gt;aspire run --detach&lt;/code&gt;. Ваш AppHost запускается в фоне, и терминал сразу возвращается к вам. Никаких лишних вкладок. Никаких мультиплексоров терминала. Просто ваш промпт, готовый к работе.&lt;/p&gt;
+&lt;h2 id="управление-запущенными-процессами"&gt;Управление запущенными процессами&lt;/h2&gt;
+&lt;p&gt;Суть в том, что запуск в фоне полезен только тогда, когда вы можете управлять тем, что работает. Aspire 13.2 поставляется с полным набором CLI-команд именно для этого:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# List all running AppHosts&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire ps
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Inspect the state of a specific AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire describe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stream logs from a running AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire logs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stop a specific AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire stop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Это превращает Aspire CLI в полноценный менеджер процессов. Вы можете запускать несколько AppHost, проверять их статус, отслеживать логи и останавливать их — всё из одной сессии терминала.&lt;/p&gt;
+&lt;h2 id="сочетание-с-изолированным-режимом"&gt;Сочетание с изолированным режимом&lt;/h2&gt;
+&lt;p&gt;Отсоединённый режим естественно сочетается с изолированным. Хотите запустить два экземпляра одного проекта в фоне без конфликтов портов?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Каждый получает случайные порты, отдельные секреты и собственный жизненный цикл. Используйте &lt;code&gt;aspire ps&lt;/code&gt;, чтобы увидеть оба, &lt;code&gt;aspire stop&lt;/code&gt;, чтобы остановить ненужный.&lt;/p&gt;
+&lt;h2 id="почему-это-важно-для-агентов-кода"&gt;Почему это важно для агентов кода&lt;/h2&gt;
+&lt;p&gt;Вот тут становится по-настоящему интересно. Агент кода, работающий в вашем терминале, теперь может:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Запустить приложение с помощью &lt;code&gt;aspire start&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Запросить его состояние через &lt;code&gt;aspire describe&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Проверить логи через &lt;code&gt;aspire logs&lt;/code&gt; для диагностики проблем&lt;/li&gt;
+&lt;li&gt;Остановить его командой &lt;code&gt;aspire stop&lt;/code&gt; по завершении&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Всё это без потери сессии терминала. До появления отсоединённого режима агент, запустивший ваш AppHost, блокировал сам себя в собственном терминале. Теперь он может запускать, наблюдать, итерировать и очищать — именно так, как должен работать автономный агент.&lt;/p&gt;
+&lt;p&gt;Команда Aspire серьёзно вложилась в это. Запуск &lt;code&gt;aspire agent init&lt;/code&gt; настраивает файл навыков Aspire, который обучает агентов этим командам. Таким образом, инструменты вроде агента кода Copilot могут управлять вашими рабочими нагрузками Aspire из коробки.&lt;/p&gt;
+&lt;h2 id="подводя-итог"&gt;Подводя итог&lt;/h2&gt;
+&lt;p&gt;Отсоединённый режим — это улучшение рабочего процесса, замаскированное под простой флаг. Вы перестаёте переключаться между терминалами, агенты перестают блокировать сами себя, а новые CLI-команды дают реальную видимость того, что запущено. Это практично, это чисто, и это делает ежедневный цикл разработки заметно более плавным.&lt;/p&gt;
+&lt;p&gt;Прочитайте &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;полный пост&lt;/a&gt; для всех подробностей и установите Aspire 13.2 командой &lt;code&gt;aspire update --self&lt;/code&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

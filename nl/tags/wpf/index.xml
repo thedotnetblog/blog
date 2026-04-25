@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Wpf | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/wpf/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/wpf/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows App Dev CLI v0.3: F5 vanuit de terminal en UI Automation voor agenten</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</guid><description>Windows App Development CLI v0.3 brengt winapp run voor debug-launches vanuit de terminal, winapp ui voor UI-automatisering en een nieuw NuGet-pakket dat dotnet run laat werken met gepackagede apps.</description><content:encoded>&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor de originele versie, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;De F5-ervaring in Visual Studio is fantastisch. Maar VS openen alleen om een gepackagede Windows-app te starten en te debuggen — of dat nu in een CI-pipeline is, een geautomatiseerde workflow, of wanneer een AI-agent de tests uitvoert — is te veel gevraagd.&lt;/p&gt;
+&lt;p&gt;Windows App Development CLI v0.3 is &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;net uitgekomen&lt;/a&gt; en pakt dit direct aan met twee hoofdfuncties: &lt;code&gt;winapp run&lt;/code&gt; en &lt;code&gt;winapp ui&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="winapp-run-f5-vanuit-overal"&gt;winapp run: F5 vanuit overal&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;winapp run&lt;/code&gt; neemt een ongepackagede app-map en een manifest, en doet alles wat VS doet bij een debug-launch: registreert een loose package, start de app op en bewaart de &lt;code&gt;LocalState&lt;/code&gt; tussen re-deploys.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Bouw de app, voer hem dan uit als gepackagede app&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp run ./bin/Debug
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Werkt voor WinUI, WPF, WinForms, Console, Avalonia en meer. De modi zijn ontworpen voor zowel developers als geautomatiseerde workflows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--detach&lt;/code&gt;&lt;/strong&gt;: Start op en geeft meteen de controle terug aan de terminal. Perfect voor CI.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--unregister-on-exit&lt;/code&gt;&lt;/strong&gt;: Ruimt het geregistreerde package op bij het sluiten van de app.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--debug-output&lt;/code&gt;&lt;/strong&gt;: Legt &lt;code&gt;OutputDebugString&lt;/code&gt;-berichten en uitzonderingen real-time vast.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="nieuw-nuget-pakket-dotnet-run-voor-gepackagede-apps"&gt;Nieuw NuGet-pakket: dotnet run voor gepackagede apps&lt;/h2&gt;
+&lt;p&gt;Voor .NET-developers is er een nieuw NuGet-pakket: &lt;code&gt;Microsoft.Windows.SDK.BuildTools.WinApp&lt;/code&gt;. Na installatie beheert &lt;code&gt;dotnet run&lt;/code&gt; de gehele inner loop: bouwen, een loose-layout package voorbereiden, registreren bij Windows en starten — alles in één stap.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp init
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# of&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet add package Microsoft.Windows.SDK.BuildTools.WinApp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="winapp-ui-ui-automation-vanuit-de-commandoregel"&gt;winapp ui: UI Automation vanuit de commandoregel&lt;/h2&gt;
+&lt;p&gt;Dit is de functie die agentische scenario&amp;rsquo;s mogelijk maakt. &lt;code&gt;winapp ui&lt;/code&gt; biedt volledige UI Automation-toegang tot elke actieve Windows-app — WPF, WinForms, Win32, Electron, WinUI3 — direct vanuit de terminal.&lt;/p&gt;
+&lt;p&gt;Wat mogelijk is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Alle vensters op het hoogste niveau weergeven&lt;/li&gt;
+&lt;li&gt;De volledige UI Automation-boom van een venster doorlopen&lt;/li&gt;
+&lt;li&gt;Elementen zoeken op naam, type of automatiserings-ID&lt;/li&gt;
+&lt;li&gt;Klikken, aanroepen en waarden instellen&lt;/li&gt;
+&lt;li&gt;Screenshots maken&lt;/li&gt;
+&lt;li&gt;Wachten op het verschijnen van elementen — ideaal voor testsynchronisatie&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;winapp ui&lt;/code&gt; combineren met &lt;code&gt;winapp run&lt;/code&gt; geeft een complete build → starten → verifiëren workflow vanuit de terminal. Een agent kan de app uitvoeren, de UI-status inspecteren, programmatisch interageren en het resultaat valideren.&lt;/p&gt;
+&lt;h2 id="andere-nieuwigheden"&gt;Andere nieuwigheden&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp unregister&lt;/code&gt;&lt;/strong&gt;: Verwijdert een sideloaded package na gebruik.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp manifest add-alias&lt;/code&gt;&lt;/strong&gt;: Voegt een alias toe om de app op naam te starten vanuit de terminal.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tab-aanvulling&lt;/strong&gt;: Configureer PowerShell-aanvulling met één commando.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="hoe-te-verkrijgen"&gt;Hoe te verkrijgen&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winget install Microsoft.WinAppCli
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# of&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npm install -g @microsoft/winappcli
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;De CLI is in publieke preview. Bekijk de &lt;a href="https://github.com/microsoft/WinAppCli"&gt;GitHub-repository&lt;/a&gt; voor volledige documentatie en de &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;originele aankondiging&lt;/a&gt; voor alle details.&lt;/p&gt;</content:encoded></item></channel></rss>

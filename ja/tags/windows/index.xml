@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Windows | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/windows/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows App Dev CLI v0.3: ターミナルからF5デバッグとエージェント向けUIオートメーション</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</guid><description>Windows App Development CLI v0.3では、ターミナルからデバッグ起動できるwinapp run、UIオートメーション機能のwinapp ui、そしてパッケージアプリでdotnet runを使えるNuGetパッケージが追加されました。</description><content:encoded>&lt;p&gt;&lt;em&gt;この投稿は自動翻訳されました。元の記事は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/"&gt;こちら&lt;/a&gt;をクリックしてください。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Visual StudioのF5体験は素晴らしいです。しかし、パッケージ化されたWindowsアプリを起動してデバッグするためだけにVSを開くのは、CIパイプライン、自動化ワークフロー、またはAIエージェントがテストを実行しているときには過剰です。&lt;/p&gt;
+&lt;p&gt;Windows App Development CLI v0.3が&lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;リリースされ&lt;/a&gt;、2つの主要機能でこれに直接対応します：&lt;code&gt;winapp run&lt;/code&gt;と&lt;code&gt;winapp ui&lt;/code&gt;です。&lt;/p&gt;
+&lt;h2 id="winapp-run-どこからでもf5"&gt;winapp run: どこからでもF5&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;winapp run&lt;/code&gt;はアンパッケージのアプリフォルダーとマニフェストを受け取り、VSがデバッグ起動時に行うすべてを実行します：ルーズパッケージを登録し、アプリを起動し、再デプロイ間で&lt;code&gt;LocalState&lt;/code&gt;を保持します。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# アプリをビルドし、パッケージアプリとして実行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp run ./bin/Debug
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;WinUI、WPF、WinForms、コンソール、Avaloniaなどで動作します。各モードは開発者と自動化ワークフローの両方を想定しています：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--detach&lt;/code&gt;&lt;/strong&gt;: 起動後すぐにターミナルに制御を返します。CI/自動化に最適です。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--unregister-on-exit&lt;/code&gt;&lt;/strong&gt;: アプリ終了時に登録済みパッケージを削除します。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--debug-output&lt;/code&gt;&lt;/strong&gt;: &lt;code&gt;OutputDebugString&lt;/code&gt;メッセージと例外をリアルタイムでキャプチャします。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="新しいnugetパッケージ-パッケージアプリ向けdotnet-run"&gt;新しいNuGetパッケージ: パッケージアプリ向けdotnet run&lt;/h2&gt;
+&lt;p&gt;.NET開発者向けに新しいNuGetパッケージが登場しました：&lt;code&gt;Microsoft.Windows.SDK.BuildTools.WinApp&lt;/code&gt;。インストール後は、&lt;code&gt;dotnet run&lt;/code&gt;がインナーループ全体を処理します：ビルド、ルーズレイアウトパッケージの準備、Windowsへの登録、起動 — すべて1ステップで。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp init
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# または&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet add package Microsoft.Windows.SDK.BuildTools.WinApp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="winapp-ui-コマンドラインからuiオートメーション"&gt;winapp ui: コマンドラインからUIオートメーション&lt;/h2&gt;
+&lt;p&gt;エージェント型シナリオを切り開くのがこの機能です。&lt;code&gt;winapp ui&lt;/code&gt;はターミナルから、実行中のあらゆるWindowsアプリ（WPF、WinForms、Win32、Electron、WinUI3）への完全なUIオートメーションアクセスを提供します。&lt;/p&gt;
+&lt;p&gt;できること：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;すべてのトップレベルウィンドウを一覧表示&lt;/li&gt;
+&lt;li&gt;ウィンドウの完全なUIオートメーションツリーをナビゲート&lt;/li&gt;
+&lt;li&gt;名前、タイプ、オートメーションIDで要素を検索&lt;/li&gt;
+&lt;li&gt;クリック、呼び出し、値の設定&lt;/li&gt;
+&lt;li&gt;スクリーンショットの取得&lt;/li&gt;
+&lt;li&gt;要素の表示を待機 — テスト同期に最適&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;winapp ui&lt;/code&gt;と&lt;code&gt;winapp run&lt;/code&gt;を組み合わせると、ターミナルから完全なビルド→起動→検証ワークフローが実現します。エージェントがアプリを実行し、UIの状態を検査し、プログラムで操作して結果を検証できます。&lt;/p&gt;
+&lt;h2 id="その他の新機能"&gt;その他の新機能&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp unregister&lt;/code&gt;&lt;/strong&gt;: テスト終了後にサイドロードされたパッケージを削除します。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp manifest add-alias&lt;/code&gt;&lt;/strong&gt;: ターミナルからアプリ名で起動できるエイリアスを追加します。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;タブ補完&lt;/strong&gt;: 1つのコマンドでPowerShell補完を設定します。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="インストール方法"&gt;インストール方法&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winget install Microsoft.WinAppCli
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# または&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npm install -g @microsoft/winappcli
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;CLIはパブリックプレビュー中です。完全なドキュメントは&lt;a href="https://github.com/microsoft/WinAppCli"&gt;GitHubリポジトリ&lt;/a&gt;を、すべての詳細は&lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;元のアナウンス&lt;/a&gt;をご覧ください。&lt;/p&gt;</content:encoded></item></channel></rss>

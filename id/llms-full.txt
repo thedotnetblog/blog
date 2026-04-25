@@ -1,0 +1,2974 @@
+# The .NET Blog — Full Content
+
+> Articles, tutorials and insights from the .NET community.
+
+The .NET Blog is a community-driven publication featuring articles, tutorials, and deep dives on .NET, ASP.NET Core, C#, cloud architecture, and software engineering. Written by developers, for developers.
+
+## Metadata
+
+- **URL**: https://thedotnetblog.com/
+- **Language**: id
+- **Last Updated**: 2026-04-25
+
+---
+## .NET 10 Hadir Bersama Ubuntu 26.04 LTS — Ini yang Baru
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/
+- **Date**: April 25, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: .NET, Linux, Ubuntu, Containers, Docker, Native AOT, .NET 10
+- **Reading time**: 1 min
+
+> Ubuntu 26.04 LTS (Resolute Raccoon) hadir dengan .NET 10 sebagai toolchain kelas satu. Native AOT, Chiseled container, Linux 7.0.
+
+
+
+*Posting ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "index.md" >}}).*
+
+Ini hari Ubuntu LTS. [Ubuntu 26.04 (Resolute Raccoon)](https://canonical.com/blog/canonical-releases-ubuntu-26-04-lts-resolute-raccoon) diluncurkan hari ini dengan [.NET 10](https://devblogs.microsoft.com/dotnet/whats-new-for-dotnet-in-ubuntu-2604/).
+
+## Instal .NET 10 dengan Dua Perintah
+
+```bash
+sudo apt update
+sudo apt install dotnet-sdk-10.0
+```
+
+## Container: Perbarui `-noble` ke `-resolute`
+
+```bash
+sed -i "s/noble/resolute/g" Dockerfile
+```
+
+## Native AOT: Startup 3ms, Binary 1,4MB
+
+```bash
+apt install -y dotnet-sdk-aot-10.0 clang
+dotnet publish app.cs
+# binary native 1,4MB, startup 3ms
+```
+
+Untuk beban kerja cloud-native di mana waktu cold-start penting — Functions, container, serverless — ini pengubah permainan nyata.
+
+## Butuh .NET 8 atau 9?
+
+```bash
+apt install -y software-properties-common
+add-apt-repository ppa:dotnet/backports
+apt install -y dotnet-sdk-8.0
+```
+
+[Posting lengkap](https://devblogs.microsoft.com/dotnet/whats-new-for-dotnet-in-ubuntu-2604/) memiliki lebih banyak detail.
+
+
+---
+## Azure MCP Server Kini .mcpb — Instal Tanpa Runtime Apapun
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-mcp-server-mcpb-no-runtime-install/
+- **Date**: April 25, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: MCP, Azure, AI, Developer Tools, Azure SDK
+- **Reading time**: 1 min
+
+> Azure MCP Server kini tersedia sebagai MCP Bundle (.mcpb) — unduh, seret ke Claude Desktop, selesai. Tidak perlu Node.js, Python, atau .NET.
+
+
+
+*Posting ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "index.md" >}}).*
+
+Tahu apa yang menjengkelkan dari pengaturan server MCP? Anda memerlukan runtime. Node.js untuk versi npm, Python untuk pip/uvx, .NET SDK untuk varian dotnet.
+
+[Azure MCP Server baru saja mengubah itu](https://devblogs.microsoft.com/azure-sdk/azure-mcp-server-mcpb-support/). Kini tersedia sebagai `.mcpb` — MCP Bundle — dan pengaturannya adalah seret-dan-lepas.
+
+## Apa itu MCP Bundle?
+
+Bayangkan seperti ekstensi VS Code (`.vsix`) atau ekstensi browser (`.crx`), tetapi untuk server MCP. File `.mcpb` adalah arsip ZIP mandiri yang menyertakan biner server dan semua dependensinya.
+
+## Cara Menginstal
+
+**1. Unduh bundle untuk platform Anda**
+
+Buka [halaman GitHub Releases](https://github.com/microsoft/mcp/releases?q=Azure.Mcp.Server) dan unduh file `.mcpb` untuk OS dan arsitektur Anda.
+
+**2. Instal di Claude Desktop**
+
+Cara termudah: seret dan lepas file `.mcpb` ke jendela Claude Desktop saat Anda berada di halaman pengaturan Extensions (`☰ → File → Settings → Extensions`). Tinjau detail server, klik Install, konfirmasi.
+
+**3. Autentikasi ke Azure**
+
+```bash
+az login
+```
+
+Selesai. Azure MCP Server menggunakan kredensial Azure Anda yang ada.
+
+## Untuk Memulai
+
+- **Unduhan**: [GitHub Releases](https://github.com/microsoft/mcp/releases?q=Azure.Mcp.Server-)
+- **Repo**: [aka.ms/azmcp](https://aka.ms/azmcp)
+- **Docs**: [aka.ms/azmcp/docs](https://aka.ms/azmcp/docs)
+
+Baca [posting lengkap](https://devblogs.microsoft.com/azure-sdk/azure-mcp-server-mcpb-support/).
+
+
+---
+## CodeAct di Agent Framework: Cara Memotong Latensi Agen Anda Setengahnya
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/codeact-agent-framework-hyperlight-50-percent-faster/
+- **Date**: April 25, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: Agent Framework, AI, Agents, Hyperlight, Python, MCP
+- **Reading time**: 2 min
+
+> CodeAct menyatukan rantai alat multi-langkah menjadi satu blok kode yang disandbox — memangkas latensi 52% dan penggunaan token 64%.
+
+
+
+*Posting ini telah diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "index.md" >}}).*
+
+Ada momen dalam setiap proyek agen di mana Anda melihat trace dan berpikir: "kenapa ini lama sekali?" Model tidak masalah. Alat-alat bekerja. Tapi ada tujuh round trip untuk mendapatkan hasil yang bisa dihitung dalam satu langkah.
+
+Itulah persis masalah yang dipecahkan CodeAct — dan [tim Agent Framework baru saja merilis dukungan alpha](https://devblogs.microsoft.com/agent-framework/codeact-with-hyperlight/) melalui paket baru `agent-framework-hyperlight`.
+
+## Apa itu CodeAct?
+
+[Pola CodeAct](https://arxiv.org/abs/2402.01030) secara elegan sederhana: alih-alih memberi model daftar alat untuk dipanggil satu per satu, Anda memberinya satu alat `execute_code` dan membiarkannya mengekspresikan *seluruh rencana* sebagai program Python singkat.
+
+| Pendekatan | Waktu | Token |
+|--------|------|--------|
+| Tradisional | 27,81d | 6.890 |
+| CodeAct | 13,23d | 2.489 |
+| **Peningkatan** | **52,4%** | **63,9%** |
+
+## Keamanan: Micro-VM Hyperlight
+
+Paket `agent-framework-hyperlight` menggunakan micro-VM [Hyperlight](https://github.com/hyperlight-dev/hyperlight). Setiap pemanggilan `execute_code` mendapat micro-VM baru yang baru dibuat. Startup diukur dalam milidetik. Isolasi hampir gratis.
+
+Alat Anda tetap berjalan di host. Kode lem yang dihasilkan model berjalan di sandbox. Itulah pembagian yang benar.
+
+## Pengaturan Minimal
+
+```python
+from agent_framework import Agent, tool
+from agent_framework_hyperlight import HyperlightCodeActProvider
+
+codeact = HyperlightCodeActProvider(
+    tools=[get_weather],
+    approval_mode="never_require",
+)
+
+agent = Agent(
+    client=client,
+    name="CodeActAgent",
+    instructions="You are a helpful assistant.",
+    context_providers=[codeact],
+)
+```
+
+## Kapan Menggunakan CodeAct (dan Kapan Tidak)
+
+**Gunakan CodeAct ketika:**
+- Tugas merantai banyak pemanggilan alat kecil (pencarian, penggabungan, perhitungan)
+- Latensi dan biaya token penting
+- Anda ingin isolasi kuat per pemanggilan untuk kode yang dihasilkan model
+
+**Tetap gunakan tool-calling tradisional ketika:**
+- Agen hanya melakukan satu atau dua pemanggilan alat per giliran
+- Setiap pemanggilan memiliki efek samping yang perlu disetujui secara individual
+
+## Coba Sekarang
+
+```bash
+pip install agent-framework-hyperlight --pre
+```
+
+Baca [posting lengkap di blog Agent Framework](https://devblogs.microsoft.com/agent-framework/codeact-with-hyperlight/).
+
+
+---
+## Di Mana Agen Anda Mengingat Hal-hal? Panduan Praktis Penyimpanan Riwayat Obrolan
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/chat-history-storage-patterns-agent-framework/
+- **Date**: April 25, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: Agent Framework, AI, Agents, Architecture, CSharp, Python
+- **Reading time**: 2 min
+
+> Dikelola layanan atau klien? Linear atau percabangan? Keputusan arsitektur yang menentukan apa yang benar-benar bisa dilakukan agen AI Anda — dengan contoh kode C# dan Python.
+
+
+
+*Posting ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "index.md" >}}).*
+
+Saat membangun agen AI, Anda menghabiskan sebagian besar energi pada model, alat, dan prompt. Pertanyaan *di mana riwayat percakapan disimpan* tampak seperti detail implementasi — tetapi itu adalah salah satu keputusan arsitektur terpenting yang akan Anda buat.
+
+Hal ini menentukan apakah pengguna dapat memisahkan percakapan, membatalkan jawaban, melanjutkan sesi setelah restart, dan apakah data Anda pernah meninggalkan infrastruktur Anda. [Tim Agent Framework menerbitkan analisis mendalam](https://devblogs.microsoft.com/agent-framework/chat-history-storage-patterns-in-microsoft-agent-framework/).
+
+## Dua pola mendasar
+
+**Dikelola layanan**: Layanan AI menyimpan status percakapan. Aplikasi Anda menyimpan referensi dan layanan secara otomatis menyertakan riwayat yang relevan dalam setiap permintaan.
+
+**Dikelola klien**: Aplikasi Anda mempertahankan riwayat lengkap dan mengirim pesan yang relevan dengan setiap permintaan. Layanan tidak memiliki status. Anda mengontrol segalanya.
+
+## Cara Agent Framework mengabstraksi ini
+
+```csharp
+AgentSession session = await agent.CreateSessionAsync();
+var first = await agent.RunAsync("Nama saya Alice.", session);
+var second = await agent.RunAsync("Siapa nama saya?", session);
+```
+
+```python
+session = agent.create_session()
+first = await agent.run("Nama saya Alice.", session=session)
+second = await agent.run("Siapa nama saya?", session=session)
+```
+
+## Referensi cepat penyedia
+
+| Penyedia | Penyimpanan | Model | Kompaksi |
+|----------|---------|-------|------------|
+| OpenAI/Azure Chat Completions | Klien | N/A | Anda |
+| Foundry Agent Service | Layanan | Linear | Layanan |
+| Responses API (default) | Layanan | Percabangan | Layanan |
+| Anthropic Claude, Ollama | Klien | N/A | Anda |
+
+## Cara memilih
+
+1. **Butuh percabangan atau "batalkan"?** → Responses API dikelola layanan
+2. **Butuh kedaulatan data?** → Dikelola klien dengan backend database
+3. **Chatbot sederhana?** → Linear dikelola layanan sudah cukup
+
+Baca [posting lengkap](https://devblogs.microsoft.com/agent-framework/chat-history-storage-patterns-in-microsoft-agent-framework/) untuk pohon keputusan lengkap.
+
+
+---
+## GPT-5.5 Hadir di Azure Foundry — Yang Perlu Diketahui Developer .NET
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/gpt-55-foundry-ga-what-dotnet-developers-need-to-know/
+- **Date**: April 25, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: AI, Foundry, Azure, Agent Framework, GPT-5
+- **Reading time**: 1 min
+
+> GPT-5.5 tersedia umum di Microsoft Foundry. Evolusi dari GPT-5 ke 5.5, apa yang benar-benar meningkat dan cara mulai menggunakannya di agent Anda hari ini.
+
+
+
+*Posting ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "index.md" >}}).*
+
+Microsoft baru saja mengumumkan bahwa [GPT-5.5 tersedia umum di Microsoft Foundry](https://azure.microsoft.com/en-us/blog/openais-gpt-5-5-in-microsoft-foundry-frontier-intelligence-on-an-enterprise-ready-platform/). Jika Anda membangun agent di Azure, inilah pembaruan yang Anda tunggu.
+
+## Evolusi GPT-5
+
+- **GPT-5**: menyatukan penalaran dan kecepatan dalam satu sistem
+- **GPT-5.4**: penalaran multi-langkah yang lebih kuat, kemampuan agentik awal untuk enterprise
+- **GPT-5.5**: penalaran konteks panjang yang lebih dalam, eksekusi agentik yang lebih andal, efisiensi token yang lebih baik
+
+## Yang Benar-benar Berubah
+
+**Pengkodean agentik yang ditingkatkan**: GPT-5.5 mempertahankan konteks di seluruh basis kode besar, mendiagnosis kegagalan tingkat arsitektur, dan mengantisipasi persyaratan pengujian. Model bernalar tentang *apa lagi* yang dipengaruhi perbaikan sebelum bertindak.
+
+**Efisiensi token**: Output berkualitas lebih tinggi dengan lebih sedikit token dan lebih sedikit percobaan ulang. Biaya dan latensi langsung lebih rendah untuk deployment produksi.
+
+## Harga
+
+| Model | Input ($/M token) | Input Cache | Output ($/M token) |
+|-------|-------------------|--------------|---------------------|
+| GPT-5.5 | $5,00 | $0,50 | $30,00 |
+| GPT-5.5 Pro | $30,00 | $3,00 | $180,00 |
+
+## Mengapa Foundry Penting
+
+Foundry Agent Service memungkinkan Anda mendefinisikan agent dalam YAML atau menghubungkannya dengan Microsoft Agent Framework, GitHub Copilot SDK, LangGraph, atau OpenAI Agents SDK — dan menjalankannya sebagai agent yang di-host secara terisolasi dengan sistem file persisten, identitas Microsoft Entra tersendiri, dan harga scale-to-zero.
+
+```csharp
+AIAgent agent = aiProjectClient
+    .AsAIAgent("gpt-5.5", instructions: "Anda adalah asisten yang membantu.", name: "AgentSaya");
+```
+
+Lihat [pengumuman lengkap](https://azure.microsoft.com/en-us/blog/openais-gpt-5-5-in-microsoft-foundry-frontier-intelligence-on-an-enterprise-ready-platform/) untuk semua detail.
+
+
+---
+## VS Code 1.118: Copilot CLI Mendapat Nama Sesi, Lencana Model, dan TypeScript 7.0 Nightly
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/vscode-1-118-copilot-cli-session-names-model-badge/
+- **Date**: April 25, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: VS Code, GitHub Copilot, Developer Tools, TypeScript
+- **Reading time**: 1 min
+
+> Visual Studio Code 1.118 adalah rilis terfokus pada peningkatan Copilot CLI — penamaan sesi, lencana model, pemilihan model otomatis, dan opt-in TypeScript 7.0 Nightly.
+
+
+
+*Posting ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "index.md" >}}).*
+
+[Visual Studio Code 1.118](https://code.visualstudio.com/updates/v1_118) adalah rilis kecil yang terfokus — sebagian besar penyempurnaan Copilot CLI.
+
+## Copilot CLI: Sesi Mendapat Nama Nyata
+
+API judul sesi SDK Copilot CLI kini digunakan sebagai sumber kebenaran untuk nama sesi. Alih-alih label yang dibuat otomatis, sesi menampilkan nama asli dari SDK.
+
+## Beralih Sesi Lebih Cepat
+
+Aplikasi Agents kini memiliki `Ctrl+1`, `Ctrl+2`, dll. untuk beralih cepat antar sesi.
+
+## Lencana Model di Chat
+
+Respons Copilot CLI di panel chat kini menampilkan lencana model — Anda bisa melihat sekilas model mana yang menangani setiap permintaan.
+
+## Pemilihan Model Otomatis di Copilot CLI
+
+Fitur pemilihan model otomatis kini juga berfungsi di agen Copilot CLI.
+
+## Opt-in TypeScript 7.0 Nightly
+
+Anda kini bisa memilih untuk menguji TypeScript 7.0 nightly langsung dari pengaturan VS Code. TypeScript 7.0 adalah rilis besar ([beta dirilis beberapa hari lalu](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0-beta/)).
+
+Lihat [catatan rilis lengkap](https://code.visualstudio.com/updates/v1_118).
+
+
+---
+## Foundry Toolboxes: Satu Endpoint untuk Semua Alat Agen AI
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/foundry-toolboxes-curate-manage-tools-ai-agents/
+- **Date**: April 23, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: microsoft-foundry, ai, agents, mcp, azure, developer-tools
+- **Reading time**: 2 min
+
+> Microsoft Foundry meluncurkan Toolboxes dalam preview publik — cara untuk mengelola dan mengekspos alat agen AI melalui satu endpoint yang kompatibel dengan MCP.
+
+
+
+*Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "index.md" >}}).*
+
+Ada masalah yang terlihat sepele sampai benar-benar dihadapi: organisasi membangun beberapa agen AI, masing-masing butuh alat, dan setiap tim mengonfigurasinya dari awal. Integrasi pencarian web yang sama, konfigurasi Azure AI Search yang sama, koneksi server GitHub MCP yang sama — tapi di repositori berbeda, oleh tim berbeda, dengan kredensial berbeda, tanpa tata kelola bersama.
+
+Microsoft Foundry baru saja meluncurkan [Toolboxes](https://devblogs.microsoft.com/foundry/introducing-toolboxes-in-foundry/) dalam preview publik, dan ini adalah jawaban langsung atas masalah tersebut.
+
+## Apa itu Toolbox?
+
+Toolbox adalah bundel alat bernama yang dapat digunakan kembali, didefinisikan sekali di Foundry dan diekspos melalui satu endpoint yang kompatibel dengan MCP. Runtime agen apa pun yang berbicara MCP dapat mengonsumsinya — tidak ada lock-in ke Foundry Agents.
+
+Janjinya sederhana: **build once, consume anywhere**. Definisikan alat, konfigurasikan autentikasi secara terpusat (OAuth passthrough, identitas terkelola Entra), terbitkan endpoint. Setiap agen yang membutuhkan alat tersebut terhubung ke endpoint dan mendapatkan semuanya.
+
+## Empat pilar (dua tersedia hari ini)
+
+| Pilar | Status | Apa yang dilakukan |
+|-------|--------|-------------------|
+| **Discover** | Segera hadir | Temukan alat yang disetujui tanpa pencarian manual |
+| **Build** | Tersedia | Kelompokkan alat ke dalam bundel yang dapat digunakan kembali |
+| **Consume** | Tersedia | Satu endpoint MCP mengekspos semua alat |
+| **Govern** | Segera hadir | Autentikasi terpusat + observabilitas untuk semua panggilan alat |
+
+## Contoh praktis
+
+```python
+from azure.identity import DefaultAzureCredential
+from azure.ai.projects import AIProjectClient
+import os
+
+client = AIProjectClient(
+    endpoint=os.environ["FOUNDRY_PROJECT_ENDPOINT"],
+    credential=DefaultAzureCredential()
+)
+
+toolbox_version = client.beta.toolboxes.create_toolbox_version(
+    toolbox_name="customer-feedback-triaging-toolbox",
+    description="Cari dokumentasi dan respons issues GitHub.",
+    tools=[
+        {"type": "web_search", "description": "Cari dokumentasi publik"},
+        {"type": "azure_ai_search", "index_name": "internal-docs"},
+        {"type": "mcp_server", "server_url": "https://your-github-mcp-server.com"}
+    ]
+)
+```
+
+Setelah diterbitkan, Foundry menyediakan endpoint terpadu. Satu koneksi, semua alat.
+
+## Tidak terkunci di Foundry Agents
+
+Toolboxes **dibuat dan dikelola** di Foundry, tapi permukaan konsumsinya adalah protokol MCP yang terbuka. Bisa digunakan dari agen kustom (Microsoft Agent Framework, LangGraph), GitHub Copilot dan IDE lain yang mendukung MCP.
+
+## Mengapa penting sekarang
+
+Gelombang multi-agen sedang tiba di produksi. Setiap agen baru adalah permukaan baru untuk konfigurasi duplikat, kredensial usang, dan perilaku tidak konsisten. Fondasi Build + Consume cukup untuk mulai sentralisasi. Ketika pilar Govern tiba, akan ada lapisan alat yang sepenuhnya dapat diamati dan dikontrol secara terpusat untuk seluruh armada agen.
+
+## Penutup
+
+Ini masih awal — preview publik, Python SDK dulu, Discover dan Govern masih akan datang. Tapi modelnya kokoh dan desain MCP-native berarti bekerja dengan alat yang sudah dibangun. Cek [pengumuman resmi](https://devblogs.microsoft.com/foundry/introducing-toolboxes-in-foundry/) untuk memulai.
+
+
+---
+## Hooks azd dengan Python, TypeScript, dan .NET: Selamat Tinggal Shell Script
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azd-hooks-python-javascript-typescript-dotnet/
+- **Date**: April 23, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure-developer-cli, azd, dotnet, python, typescript, developer-tools, cloud-native
+- **Reading time**: 2 min
+
+> Azure Developer CLI kini mendukung hooks dalam Python, JavaScript, TypeScript, dan .NET. Tidak perlu lagi beralih ke Bash hanya untuk menjalankan script migrasi.
+
+
+
+*Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "index.md" >}}).*
+
+Jika pernah memiliki proyek yang sepenuhnya ditulis dalam .NET namun tetap harus menulis script Bash untuk hooks azd, rasa frustrasi itu sudah pasti familiar. Mengapa harus beralih ke sintaks shell di langkah pre-provisioning ketika seluruh proyek menggunakan C#?
+
+Masalah ini kini memiliki solusi resmi. Azure Developer CLI [baru saja meluncurkan dukungan multi-bahasa untuk hooks](https://devblogs.microsoft.com/azure-sdk/azd-multi-language-hooks/), dan hasilnya sesuai ekspektasi.
+
+## Apa itu hooks
+
+Hooks adalah script yang berjalan di titik-titik penting dalam siklus hidup `azd` — sebelum provisioning, setelah deployment, dan lainnya. Didefinisikan di `azure.yaml`, mereka memungkinkan injeksi logika kustom tanpa memodifikasi CLI.
+
+Sebelumnya hanya Bash dan PowerShell yang didukung. Kini bisa menggunakan **Python, JavaScript, TypeScript, atau .NET** — dan `azd` menangani sisanya secara otomatis.
+
+## Cara kerja deteksi bahasa
+
+Cukup arahkan hook ke sebuah file dan `azd` akan menyimpulkan bahasa dari ekstensinya:
+
+```yaml
+hooks:
+  preprovision:
+    run: ./hooks/setup.py
+  postdeploy:
+    run: ./hooks/seed.ts
+  postprovision:
+    run: ./hooks/migrate.cs
+```
+
+Tanpa konfigurasi tambahan. Jika ekstensinya ambigu, bisa menambahkan `kind: python` (atau bahasa yang sesuai) secara eksplisit.
+
+## Detail penting per bahasa
+
+### Python
+
+Letakkan `requirements.txt` atau `pyproject.toml` di samping script (atau direktori induknya). `azd` akan otomatis membuat virtual environment, menginstal dependensi, dan menjalankan script.
+
+### JavaScript dan TypeScript
+
+Pola yang sama — letakkan `package.json` dekat script dan `azd` akan menjalankan `npm install` terlebih dahulu. Untuk TypeScript, menggunakan `npx tsx` tanpa langkah kompilasi dan tanpa `tsconfig.json`.
+
+### .NET
+
+Dua mode tersedia:
+
+- **Mode project**: Jika ada `.csproj` di samping script, `azd` otomatis menjalankan `dotnet restore` dan `dotnet build`.
+- **Mode single-file**: Di .NET 10+, file `.cs` mandiri dapat dijalankan langsung via `dotnet run script.cs`. Tidak perlu file project.
+
+## Konfigurasi per executor
+
+Setiap bahasa mendukung blok `config` opsional:
+
+```yaml
+hooks:
+  preprovision:
+    run: ./hooks/setup.ts
+    config:
+      packageManager: pnpm
+  postprovision:
+    run: ./hooks/migrate.cs
+    config:
+      configuration: Release
+      framework: net10.0
+```
+
+## Mengapa ini penting bagi developer .NET
+
+Hooks adalah tempat terakhir dalam proyek berbasis azd yang memaksa pergantian bahasa. Sekarang seluruh deployment pipeline — dari kode aplikasi hingga lifecycle hooks — bisa hidup dalam satu bahasa. Utility .NET yang sudah ada bisa digunakan kembali di hooks, shared library bisa direferensikan, dan pemeliharaan shell script pun berakhir.
+
+## Penutup
+
+Salah satu perubahan yang terlihat kecil namun benar-benar mengurangi gesekan dalam workflow azd sehari-hari. Dukungan multi-bahasa untuk hooks sudah tersedia sekarang — cek [post resmi](https://devblogs.microsoft.com/azure-sdk/azd-multi-language-hooks/) untuk dokumentasi lengkap.
+
+
+---
+## Windows App Dev CLI v0.3: F5 dari Terminal dan UI Automation untuk Agen AI
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/
+- **Date**: April 23, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: windows, dotnet, winui, wpf, developer-tools, cli, ai
+- **Reading time**: 2 min
+
+> Windows App Development CLI v0.3 menghadirkan winapp run untuk peluncuran debug dari terminal, winapp ui untuk otomasi antarmuka, dan paket NuGet baru yang membuat dotnet run bekerja dengan aplikasi yang dikemas.
+
+
+
+*Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "index.md" >}}).*
+
+Pengalaman F5 di Visual Studio sangat bagus. Tapi harus membuka VS hanya untuk menjalankan dan men-debug aplikasi Windows yang dikemas — baik di pipeline CI, workflow otomatis, atau saat agen AI menjalankan pengujian — terlalu berlebihan.
+
+Windows App Development CLI v0.3 baru saja [dirilis](https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/) dan menangani hal ini secara langsung dengan dua fitur utama: `winapp run` dan `winapp ui`.
+
+## winapp run: F5 dari Mana Saja
+
+`winapp run` menerima folder aplikasi yang tidak dikemas dan sebuah manifest, lalu melakukan semua yang VS lakukan saat debug launch: mendaftarkan loose package, menjalankan aplikasi, dan mempertahankan `LocalState` antar re-deploy.
+
+```bash
+# Build aplikasi, lalu jalankan sebagai aplikasi yang dikemas
+winapp run ./bin/Debug
+```
+
+Bekerja untuk WinUI, WPF, WinForms, Console, Avalonia, dan lainnya. Mode dirancang untuk developer maupun workflow otomatis:
+
+- **`--detach`**: Meluncurkan dan segera mengembalikan kontrol ke terminal. Sempurna untuk CI.
+- **`--unregister-on-exit`**: Membersihkan package yang terdaftar saat aplikasi ditutup.
+- **`--debug-output`**: Menangkap pesan `OutputDebugString` dan exception secara real-time.
+
+## Paket NuGet Baru: dotnet run untuk Aplikasi yang Dikemas
+
+Untuk developer .NET ada paket NuGet baru: `Microsoft.Windows.SDK.BuildTools.WinApp`. Setelah diinstal, `dotnet run` menangani seluruh inner loop: build, menyiapkan loose-layout package, mendaftar di Windows, dan meluncurkan — semuanya dalam satu langkah.
+
+```bash
+winapp init
+# atau
+dotnet add package Microsoft.Windows.SDK.BuildTools.WinApp
+```
+
+## winapp ui: UI Automation dari Command Line
+
+Inilah fitur yang membuka skenario agentik. `winapp ui` memberikan akses UI Automation penuh ke aplikasi Windows mana pun yang sedang berjalan — WPF, WinForms, Win32, Electron, WinUI3 — langsung dari terminal.
+
+Yang bisa dilakukan:
+
+- Menampilkan semua jendela tingkat teratas
+- Menelusuri pohon UI Automation lengkap dari sebuah jendela
+- Mencari elemen berdasarkan nama, tipe, atau ID otomasi
+- Klik, invoke, dan set nilai
+- Mengambil screenshot
+- Menunggu elemen muncul — ideal untuk sinkronisasi pengujian
+
+Menggabungkan `winapp ui` dengan `winapp run` menghasilkan workflow build → jalankan → verifikasi yang lengkap dari terminal. Agen dapat menjalankan aplikasi, memeriksa status UI, berinteraksi secara programatik, dan memvalidasi hasilnya.
+
+## Fitur Lainnya
+
+- **`winapp unregister`**: Menghapus package yang sideloaded setelah selesai.
+- **`winapp manifest add-alias`**: Menambahkan alias untuk menjalankan aplikasi berdasarkan nama dari terminal.
+- **Tab completion**: Satu perintah untuk mengatur tab completion PowerShell.
+
+## Cara Mendapatkannya
+
+```bash
+winget install Microsoft.WinAppCli
+# atau
+npm install -g @microsoft/winappcli
+```
+
+CLI dalam public preview. Lihat [repositori GitHub](https://github.com/microsoft/WinAppCli) untuk dokumentasi lengkap dan [pengumuman asli](https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/) untuk semua detailnya.
+
+
+---
+## azd + GitHub Copilot: Penyiapan Proyek Berbantuan AI dan Pemecahan Masalah Error Cerdas
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/
+- **Date**: April 21, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: Azure, azd, GitHub Copilot, Azure Developer CLI, Bicep, Infrastructure as Code, Developer Tooling
+- **Reading time**: 3 min
+
+> Azure Developer CLI kini terintegrasi dengan GitHub Copilot untuk membuat infrastruktur proyek dan menyelesaikan error deployment — tanpa keluar dari terminal.
+
+
+
+> *Artikel ini diterjemahkan secara otomatis. Untuk versi asli dalam bahasa Inggris, [klik di sini]({{< ref "index.md" >}}).*
+
+Kamu pasti pernah mengalami momen ketika ingin men-deploy aplikasi yang sudah ada ke Azure, lalu menatap file `azure.yaml` yang kosong sambil mencoba mengingat apakah Express API-mu harus menggunakan Container Apps atau App Service? Momen itu kini jauh lebih singkat.
+
+Azure Developer CLI (`azd`) kini terintegrasi dengan GitHub Copilot dalam dua cara yang nyata: scaffolding proyek berbantuan AI selama `azd init`, dan pemecahan masalah error cerdas ketika deployment gagal. Kedua fitur ini sepenuhnya berjalan di dalam terminal.
+
+## Setup dengan Copilot selama azd init
+
+Saat menjalankan `azd init`, kini ada opsi "Set up with GitHub Copilot (Preview)". Pilih itu dan Copilot akan menganalisis codebase-mu untuk menghasilkan `azure.yaml`, template infrastruktur, dan modul Bicep — berdasarkan kode aslimu.
+
+```
+azd init
+# Pilih: "Set up with GitHub Copilot (Preview)"
+```
+
+Prasyarat:
+
+- **azd 1.23.11 atau lebih baru** — cek dengan `azd version` atau perbarui dengan `azd update`
+- **Langganan GitHub Copilot aktif** (Individual, Business, atau Enterprise)
+- **GitHub CLI (`gh`)** — `azd` akan meminta login jika diperlukan
+
+Yang menurutku benar-benar berguna: ini bekerja dua arah. Membangun dari nol? Copilot membantu mengonfigurasi layanan Azure yang tepat sejak awal. Punya aplikasi yang ingin di-deploy? Arahkan Copilot ke sana dan konfigurasi akan dibuat tanpa perlu restrukturisasi kode apapun.
+
+### Yang sebenarnya dilakukan
+
+Katakanlah kamu punya Node.js Express API dengan dependensi PostgreSQL. Daripada memutuskan manual antara Container Apps dan App Service, lalu menulis Bicep dari nol, Copilot mendeteksi stack-mu dan menghasilkan:
+
+- `azure.yaml` dengan pengaturan `language`, `host`, dan `build` yang tepat
+- Modul Bicep untuk Azure Container Apps
+- Modul Bicep untuk Azure Database for PostgreSQL
+
+Dan menjalankan pemeriksaan awal sebelum mengubah apapun — memverifikasi direktori git bersih, meminta persetujuan alat server MCP di awal. Tidak ada yang terjadi tanpa kamu tahu persis apa yang akan berubah.
+
+## Pemecahan Masalah Error dengan Copilot
+
+Error deployment adalah hal yang tak terhindarkan. Parameter yang hilang, masalah izin, ketersediaan SKU — dan pesan error jarang memberitahumu satu hal yang benar-benar perlu kamu ketahui: *cara memperbaikinya*.
+
+Tanpa Copilot, siklusnya terlihat seperti: salin error → cari di docs → baca tiga jawaban Stack Overflow yang tidak relevan → jalankan beberapa perintah `az` CLI → coba lagi dan berharap. Dengan Copilot terintegrasi di `azd`, siklus ini runtuh. Saat perintah `azd` apapun gagal, langsung ditawarkan empat pilihan:
+
+- **Explain** — penjelasan dalam bahasa sederhana tentang apa yang salah
+- **Guidance** — instruksi langkah demi langkah untuk memperbaiki masalah
+- **Diagnose and Guide** — analisis lengkap + Copilot menerapkan perbaikan (dengan persetujuanmu) + retry opsional
+- **Skip** — tangani sendiri
+
+Poin kuncinya: Copilot sudah memiliki konteks tentang proyekmu, perintah yang gagal, dan detail error. Sarannya spesifik untuk *situasimu*.
+
+### Mengatur Perilaku Default
+
+Jika selalu memilih opsi yang sama, lewati prompt interaktif:
+
+```
+azd config set copilot.errorHandling.category troubleshoot
+```
+
+Nilai: `explain`, `guidance`, `troubleshoot`, `fix`, `skip`. Kamu juga bisa mengaktifkan auto-fix dan retry:
+
+```
+azd config set copilot.errorHandling.fix allow
+```
+
+Kembali ke mode interaktif kapan saja:
+
+```
+azd config unset copilot.errorHandling.category
+```
+
+## Kesimpulan
+
+Jalankan `azd update` untuk mendapatkan versi terbaru dan coba `azd init` di proyek berikutnya.
+
+Baca [pengumuman aslinya di sini](https://devblogs.microsoft.com/azure-sdk/azd-copilot-integration/).
+
+
+---
+## Menulis Native Addon Node.js dalam C# dengan .NET Native AOT
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/nodejs-addons-csharp-native-aot/
+- **Date**: April 21, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: .NET, C#, Native AOT, Node.js, VS Code, Interop, Developer Tooling
+- **Reading time**: 2 min
+
+> Tim C# Dev Kit mengganti addon Node.js berbasis C++ dengan .NET Native AOT — hasilnya lebih bersih, lebih aman, dan hanya butuh .NET SDK.
+
+
+
+> *Artikel ini diterjemahkan secara otomatis. Untuk versi asli dalam bahasa Inggris, [klik di sini]({{< ref "index.md" >}}).*
+
+Ini skenario yang saya suka: sebuah tim yang mengerjakan tooling .NET memiliki native addon Node.js yang ditulis dalam C++ dan dikompilasi via `node-gyp`. Berhasil. Tapi itu mengharuskan Python terinstall di setiap mesin developer — versi Python yang lama, perlu dicatat — hanya untuk membangun sebuah paket yang tidak akan pernah disentuh langsung oleh siapapun di tim.
+
+Jadi mereka mengajukan pertanyaan yang sangat masuk akal: kita sudah punya .NET SDK terinstall, kenapa kita masih menulis C++?
+
+Jawabannya adalah Native AOT, dan hasilnya sungguh elegan. Drew Noakes dari tim C# Dev Kit menulis bagaimana mereka melakukannya.
+
+## Ide dasarnya
+
+Native addon Node.js adalah shared library (`.dll` di Windows, `.so` di Linux, `.dylib` di macOS) yang bisa dimuat Node.js saat runtime. Antarmukanya disebut [N-API](https://nodejs.org/api/n-api.html) — C API yang stabil dan kompatibel dengan ABI. N-API tidak peduli bahasa apa yang menghasilkan library tersebut, hanya bahwa ia mengekspor simbol yang tepat.
+
+.NET Native AOT bisa menghasilkan tepat itu. Ia mengkompilasi kode C# kamu ahead-of-time menjadi shared library native dengan entry point sembarang.
+
+## Konfigurasi proyek
+
+File proyek sangat minimal:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <PublishAot>true</PublishAot>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+</Project>
+```
+
+`PublishAot` memberitahu SDK untuk menghasilkan shared library saat `dotnet publish`.
+
+## Mengekspor entry point
+
+Node.js mengharapkan library kamu mengekspor `napi_register_module_v1`. Dalam C#, `[UnmanagedCallersOnly]` melakukan persis itu:
+
+```csharp
+[UnmanagedCallersOnly(
+    EntryPoint = "napi_register_module_v1",
+    CallConvs = [typeof(CallConvCdecl)])]
+public static nint Init(nint env, nint exports)
+{
+    Initialize();
+    RegisterFunction(env, exports, "readStringValue"u8, &ReadStringValue);
+    return exports;
+}
+```
+
+Sufiks `u8` menghasilkan `ReadOnlySpan<byte>` dengan string literal UTF-8, diteruskan langsung ke N-API tanpa alokasi encoding apapun.
+
+## Resolving N-API terhadap proses host
+
+Fungsi N-API diekspor oleh `node.exe` sendiri, bukan library terpisah. Jadi alih-alih melakukan linking, kamu me-resolve-nya terhadap proses yang berjalan saat startup:
+
+```csharp
+NativeLibrary.SetDllImportResolver(
+    System.Reflection.Assembly.GetExecutingAssembly(),
+    ResolveDllImport);
+```
+
+Dengan itu, deklarasi P/Invoke bekerja dengan bersih:
+
+```csharp
+[LibraryImport("node", EntryPoint = "napi_create_string_utf8")]
+internal static partial Status CreateStringUtf8(
+    nint env, ReadOnlySpan<byte> str, nuint length, out nint result);
+```
+
+## Memanggil dari TypeScript
+
+`dotnet publish` menghasilkan native library spesifik platform kamu. Ganti namanya menjadi `.node` dan gunakan dengan `require()` standar:
+
+```typescript
+const registry = require('./native/win32-x64/RegistryAddon.node') as RegistryAddon;
+const sdkPath = registry.readStringValue(
+    'SOFTWARE\\dotnet\\Setup\\InstalledVersions\\x64\\sdk',
+    'InstallLocation'
+);
+```
+
+Itu saja. TypeScript ke C#, tanpa Python, tanpa C++.
+
+## Kesimpulan
+
+Tim C# Dev Kit mengganti overhead Python/C++ dengan kode C# yang bersih yang sudah bisa ditulis dan di-debug oleh semua orang di tim. Polanya tidak rumit setelah kamu melihatnya, dan ini adalah contoh bagus dari Native AOT yang memecahkan masalah nyata yang jarang dibicarakan.
+
+Baca [posting aslinya di blog .NET](https://devblogs.microsoft.com/dotnet/writing-nodejs-addons-with-dotnet-native-aot/).
+
+
+---
+## VS Code 1.117: Agen Mendapatkan Cabang Git Sendiri dan Saya Sangat Setuju
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/vscode-1-117-agents-autopilot-worktrees/
+- **Date**: April 19, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: vscode, developer-tools, ai, github-copilot, agents
+- **Reading time**: 2 min
+
+> VS Code 1.117 menghadirkan isolasi worktree untuk sesi agen, mode Autopilot yang persisten, dan dukungan subagen. Alur kerja coding agentik semakin nyata.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "vscode-1-117-agents-autopilot-worktrees" >}}).*
+
+Garis antara "asisten AI" dan "rekan tim AI" terus menipis. VS Code 1.117 baru saja mendarat dan [catatan rilis lengkap](https://code.visualstudio.com/updates/v1_117) penuh, tapi ceritanya jelas: agen menjadi warga kelas satu dalam alur kerjamu.
+
+Inilah yang sebenarnya penting.
+
+## Mode Autopilot akhirnya mengingat preferensimu
+
+Sebelumnya, kamu harus mengaktifkan kembali Autopilot setiap kali memulai sesi baru. Menjengkelkan. Sekarang mode izinmu persisten antar sesi, dan kamu bisa mengonfigurasi defaultnya.
+
+Agent Host mendukung tiga konfigurasi sesi:
+
+- **Default** — alat meminta konfirmasi sebelum berjalan
+- **Bypass** — menyetujui segalanya secara otomatis
+- **Autopilot** — sepenuhnya otonom, menjawab pertanyaannya sendiri dan terus berjalan
+
+Jika kamu membuat scaffold proyek .NET baru dengan migrasi, Docker, dan CI — atur ke Autopilot sekali dan lupakan. Preferensi itu bertahan.
+
+## Isolasi Worktree dan git untuk sesi agen
+
+Ini yang besar. Sesi agen sekarang mendukung isolasi worktree dan git penuh. Artinya ketika agen mengerjakan tugas, ia mendapatkan cabang dan direktori kerja sendiri. Cabang utamamu tetap tidak tersentuh.
+
+Bahkan lebih baik — Copilot CLI menghasilkan nama cabang yang bermakna untuk sesi worktree ini. Tidak ada lagi `agent-session-abc123`. Kamu mendapatkan sesuatu yang benar-benar mendeskripsikan apa yang dilakukan agen.
+
+Untuk developer .NET yang menjalankan beberapa cabang fitur atau memperbaiki bug sementara tugas scaffolding panjang berjalan, ini adalah perubahan besar.
+
+## Subagen dan tim agen
+
+Agent Host Protocol sekarang mendukung subagen. Agen bisa menjalankan agen lain untuk menangani bagian dari sebuah tugas. Agen utama berkoordinasi, dan agen khusus menangani bagian-bagiannya.
+
+## Output terminal otomatis disertakan saat agen mengirim input
+
+Kecil tapi bermakna. Ketika agen mengirim input ke terminal, output terminal sekarang secara otomatis disertakan dalam konteks. Jika kamu pernah melihat agen menjalankan `dotnet build`, gagal, dan kemudian membutuhkan giliran ekstra hanya untuk melihat kesalahan — gesekan itu hilang.
+
+## Aplikasi Agen yang memperbarui dirinya sendiri di macOS
+
+Aplikasi Agen mandiri di macOS sekarang memperbarui dirinya sendiri. Tidak perlu lagi mengunduh versi baru secara manual.
+
+## Kesimpulan
+
+VS Code 1.117 adalah infrastruktur. Isolasi worktree, izin persisten, protokol subagen — ini adalah blok bangunan untuk alur kerja di mana agen menangani tugas nyata dan paralel tanpa mengganggu kodemu. Jika kamu membangun dengan .NET dan belum menyelami alur kerja agentik, sejujurnya, sekarang adalah waktu yang tepat untuk mulai.
+
+
+---
+## Eksperimen AI Anda di Azure Membakar Uang — Inilah Cara Memperbaikinya
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/
+- **Date**: April 18, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, cloud, cost-optimization, ai, finops
+- **Reading time**: 1 min
+
+> Beban kerja AI di Azure bisa cepat mahal. Mari bicara tentang apa yang sebenarnya berhasil untuk mengontrol biaya tanpa memperlambat pengembangan.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "cloud-cost-optimization-ai-workloads-azure" >}}).*
+
+Jika Anda sedang membangun aplikasi bertenaga AI di Azure sekarang, Anda mungkin sudah menyadari sesuatu: tagihan cloud Anda terlihat berbeda. Bukan hanya lebih tinggi — lebih aneh. Lonjakan. Sulit diprediksi.
+
+Microsoft baru saja menerbitkan artikel bagus tentang [prinsip optimasi biaya cloud yang masih penting](https://azure.microsoft.com/en-us/blog/cloud-cost-optimization-principles-that-still-matter/).
+
+## Mengapa beban kerja AI berbeda
+
+Beban kerja .NET tradisional relatif dapat diprediksi. Beban kerja AI? Tidak sama sekali. Anda menguji beberapa model, menjalankan infrastruktur berbasis GPU, dan membuat panggilan API Azure OpenAI di mana konsumsi token bervariasi drastis.
+
+## Manajemen vs. optimasi — ketahui perbedaannya
+
+- **Manajemen**: pelacakan dan pelaporan.
+- **Optimasi**: membuat keputusan nyata. Apakah Anda benar-benar membutuhkan tingkat S3? Apakah instance yang selalu menyala itu duduk menganggur di akhir pekan?
+
+## Yang benar-benar berhasil
+
+- **Beri tag sumber daya Anda** — jika tidak bisa tahu proyek mana yang menghabiskan anggaran, tidak bisa mengoptimalkan apa pun
+- **Pasang perlindungan sebelum bereksperimen** — gunakan Azure Policy untuk membatasi SKU mahal
+- **Sesuaikan ukuran secara terus-menerus** — periksa rekomendasi Azure Advisor
+- **Pikirkan siklus hidup** — sumber daya dev harus dimatikan saat tidak digunakan
+- **Ukur nilai, bukan hanya biaya** — model yang lebih mahal tetapi menghasilkan hasil jauh lebih baik mungkin pilihan yang tepat
+
+
+---
+## RFT Foundry Menjadi Lebih Murah dan Lebih Pintar — Inilah yang Berubah
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/
+- **Date**: April 18, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: ai, azure, foundry, fine-tuning, machine-learning
+- **Reading time**: 1 min
+
+> Microsoft Foundry mengirimkan tiga pembaruan RFT bulan ini: pelatihan global untuk o4-mini, penilai model GPT-4.1 baru, dan panduan praktik terbaik.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "foundry-fine-tuning-april-2026-rft-graders" >}}).*
+
+Jika Anda membangun aplikasi .NET yang mengandalkan model yang disetel halus, pembaruan Foundry bulan ini layak diperhatikan.
+
+Detail lengkap ada di [pengumuman resmi](https://devblogs.microsoft.com/foundry/whats-new-in-foundry-finetune-april-2026/).
+
+## Pelatihan Global untuk o4-mini
+
+o4-mini adalah model yang digunakan untuk beban kerja penalaran berat dan agentik. Anda kini dapat meluncurkan pekerjaan penyetelan halus dari 13+ region Azure dengan tarif pelatihan per-token yang lebih rendah.
+
+```bash
+"trainingType": "globalstandard"
+```
+
+## Penilai Model Baru: Keluarga GPT-4.1
+
+Tiga opsi baru: GPT-4.1, GPT-4.1-mini, dan GPT-4.1-nano.
+
+Strategi pengelompokan:
+- **GPT-4.1-nano** untuk iterasi awal. Biaya rendah, loop umpan balik cepat.
+- **GPT-4.1-mini** setelah rubrik penilaian stabil.
+- **GPT-4.1** untuk penilaian produksi.
+
+## Jebakan Format Data RFT
+
+Format data RFT berbeda dari SFT. Pesan terakhir di setiap baris harus berperan User atau Developer — bukan Assistant.
+
+## Mengapa ini penting bagi pengembang .NET
+
+Pelatihan yang lebih murah berarti Anda dapat melakukan iterasi lebih agresif. [Panduan praktik terbaik di GitHub](https://github.com/microsoft-foundry/fine-tuning/blob/main/Demos/Agentic_RFT_PrivatePreview/RFT_Best_Practice.md) akan menghemat waktu debugging.
+
+
+---
+## Berhenti Mengawasi Terminal: Mode Terpisah Aspire Mengubah Alur Kerja
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/
+- **Date**: April 17, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: aspire, dotnet, cli, developer-tools, coding-agents
+- **Reading time**: 2 min
+
+> Aspire 13.2 memungkinkan Anda menjalankan AppHost di background dan mengambil kembali terminal Anda. Dikombinasikan dengan perintah CLI baru dan dukungan agen, ini lebih besar dari yang terlihat.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "aspire-detached-mode-free-your-terminal" >}}).*
+
+Setiap kali Anda menjalankan Aspire AppHost, terminal Anda hilang. Terkunci. Terpakai hingga Ctrl+C. Perlu menjalankan perintah cepat? Buka tab baru. Ingin memeriksa log? Tab lain. Gesekan kecil ini menumpuk dengan cepat.
+
+Aspire 13.2 memperbaiki ini. James Newton-King [menulis semua detailnya](https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/), dan jujur, ini adalah salah satu fitur yang segera mengubah cara Anda bekerja.
+
+## Mode terpisah: satu perintah, terminal kembali
+
+```bash
+aspire start
+```
+
+Ini singkatan dari `aspire run --detach`. AppHost Anda boot di background dan Anda mendapatkan terminal kembali segera.
+
+## Mengelola yang sedang berjalan
+
+Berjalan di background hanya berguna jika Anda bisa mengelola apa yang berjalan. Aspire 13.2 menyertakan set lengkap perintah CLI:
+
+```bash
+# Daftar semua AppHost yang berjalan
+aspire ps
+
+# Periksa state AppHost tertentu
+aspire describe
+
+# Stream log dari AppHost yang berjalan
+aspire logs
+
+# Hentikan AppHost tertentu
+aspire stop
+```
+
+## Gabungkan dengan mode terisolasi
+
+Mode terpisah secara alami berpasangan dengan mode terisolasi:
+
+```bash
+aspire start --isolated
+aspire start --isolated
+```
+
+Setiap instance mendapat port acak, rahasia terpisah, dan siklus hidupnya sendiri.
+
+## Mengapa ini besar untuk agen coding
+
+Agen coding yang bekerja di terminal Anda sekarang dapat:
+
+1. Memulai aplikasi dengan `aspire start`
+2. Mengkueri statusnya dengan `aspire describe`
+3. Memeriksa log dengan `aspire logs` untuk mendiagnosis masalah
+4. Menghentikannya dengan `aspire stop` saat selesai
+
+Menjalankan `aspire agent init` menyiapkan file skill Aspire yang mengajarkan agen perintah-perintah ini.
+
+## Kesimpulan
+
+Mode terpisah adalah peningkatan alur kerja yang menyamar sebagai flag sederhana. Baca [postingan lengkap](https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/) dan dapatkan Aspire 13.2 dengan `aspire update --self`.
+
+
+---
+## Docker Sandbox Memungkinkan Agen Copilot Melakukan Refaktor Kode Tanpa Membahayakan Mesin Anda
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/
+- **Date**: April 17, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: github-copilot, docker, modernization, developer-tools, ai
+- **Reading time**: 1 min
+
+> Docker Sandbox memberi agen GitHub Copilot microVM yang aman untuk melakukan refaktor sesuka hati — tanpa prompt izin, tanpa risiko ke host. Inilah mengapa itu mengubah segalanya untuk modernisasi .NET skala besar.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "copilot-docker-sandbox-agentic-refactoring" >}}).*
+
+Jika Anda menggunakan mode agen Copilot untuk sesuatu selain pengeditan kecil, Anda tahu rasa sakitnya. Setiap penulisan file, setiap perintah terminal — prompt izin lainnya.
+
+Tim Azure baru saja menerbitkan postingan tentang [Docker Sandbox untuk agen GitHub Copilot](https://devblogs.microsoft.com/all-things-azure/best-of-both-worlds-for-agentic-refactoring-github-copilot-microvms-via-docker-sandbox/).
+
+## Yang sebenarnya diberikan Docker Sandbox
+
+Ide dasarnya sederhana: jalankan microVM ringan dengan lingkungan Linux penuh, sinkronkan workspace Anda ke dalamnya, dan biarkan agen Copilot beroperasi bebas di dalam.
+
+Ini lebih dari sekadar "jalankan sesuatu dalam container":
+- **Sinkronisasi workspace dua arah** yang mempertahankan jalur absolut
+- **Docker daemon privat** yang berjalan di dalam microVM
+- **Proxy penyaringan HTTP/HTTPS** yang mengontrol akses jaringan
+- **Mode YOLO** — agen berjalan tanpa prompt izin
+
+## Mengapa developer .NET harus peduli
+
+Dengan Docker Sandbox, Anda dapat mengarahkan agen Copilot ke proyek, membiarkannya melakukan refaktor dengan bebas di dalam microVM, menjalankan `dotnet build` dan `dotnet test` untuk validasi, dan hanya menerima perubahan yang benar-benar berfungsi.
+
+## Kesimpulan
+
+Docker Sandbox memecahkan ketegangan fundamental dalam agentic coding: agen membutuhkan kebebasan untuk berguna, tetapi kebebasan di mesin host Anda berbahaya. MicroVM memberi Anda keduanya.
+
+
+---
+## Alat Azure MCP Kini Tertanam di Visual Studio 2022 — Tanpa Ekstensi
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-mcp-tools-built-into-visual-studio-2022/
+- **Date**: April 16, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: visual-studio, azure, mcp, copilot, developer-tools
+- **Reading time**: 1 min
+
+> Alat Azure MCP dikirim sebagai bagian dari workload pengembangan Azure di Visual Studio 2022. Lebih dari 230 alat, 45 layanan Azure, nol ekstensi untuk dipasang.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "azure-mcp-tools-built-into-visual-studio-2022" >}}).*
+
+Jika Anda menggunakan alat Azure MCP di Visual Studio melalui ekstensi terpisah, Anda tahu prosesnya — instal VSIX, restart, berharap tidak rusak, kelola ketidakcocokan versi. Gesekan itu hilang.
+
+Yun Jung Choi [mengumumkan](https://devblogs.microsoft.com/visualstudio/azure-mcp-tools-now-ship-built-into-visual-studio-2022-no-extension-required/) bahwa alat Azure MCP kini dikirim langsung sebagai bagian dari workload pengembangan Azure di Visual Studio 2022. Tanpa ekstensi. Tanpa VSIX.
+
+## Cara mengaktifkannya
+
+1. Perbarui ke Visual Studio 2022 **17.14.30** atau lebih tinggi
+2. Pastikan workload **Azure development** terinstal
+3. Buka GitHub Copilot Chat
+4. Klik tombol **Pilih alat** (ikon dua kunci pas)
+5. Aktifkan **Azure MCP Server**
+
+Tetap aktif di antara sesi.
+
+## Catatan
+
+Alat dinonaktifkan secara default — Anda perlu mengaktifkannya. Bagi developer .NET yang tinggal di Visual Studio, ini mengurangi alasan untuk beralih konteks ke portal Azure.
+
+
+---
+## Pin Clustering Akhirnya Hadir di .NET MAUI Maps — Satu Properti, Nol Rasa Sakit
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/maui-maps-pin-clustering-finally/
+- **Date**: April 16, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet, maui, mobile, maps, dotnet-11
+- **Reading time**: 1 min
+
+> .NET MAUI 11 Preview 3 menambahkan pengelompokan pin native ke kontrol Map. Satu properti, grup clustering terpisah, dan penanganan ketukan — semuanya bawaan.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "maui-maps-pin-clustering-finally" >}}).*
+
+Anda tahu momen ketika memuat peta dengan seratus pin dan semuanya menjadi gumpalan yang tidak terbaca? Itulah pengalaman .NET MAUI Maps — sampai sekarang.
+
+David Ortinau [baru saja mengumumkan](https://devblogs.microsoft.com/dotnet/pin-clustering-in-dotnet-maui-maps/) bahwa .NET MAUI 11 Preview 3 hadir dengan pin clustering bawaan di Android dan iOS/Mac Catalyst.
+
+## Satu properti untuk menguasai semuanya
+
+```xml
+<maps:Map IsClusteringEnabled="True" />
+```
+
+Itu saja. Pin yang berdekatan dikelompokkan ke dalam cluster dengan lencana hitungan.
+
+## Grup clustering independen
+
+Properti `ClusteringIdentifier` memungkinkan Anda memisahkan pin ke dalam grup independen:
+
+```csharp
+map.Pins.Add(new Pin
+{
+    Label = "Pike Place Coffee",
+    Location = new Location(47.6097, -122.3331),
+    ClusteringIdentifier = "coffee"
+});
+```
+
+## Menangani ketukan cluster
+
+```csharp
+map.ClusterClicked += async (sender, e) =>
+{
+    string names = string.Join("\n", e.Pins.Select(p => p.Label));
+    await DisplayAlert($"Cluster ({e.Pins.Count} pins)", names, "OK");
+};
+```
+
+## Mulai
+
+Instal [.NET 11 Preview 3](https://dotnet.microsoft.com/download/dotnet/11.0) dan perbarui workload .NET MAUI.
+
+
+---
+## .NET April 2026 Servicing — Patch Keamanan yang Harus Anda Terapkan Hari Ini
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/dotnet-april-2026-servicing-security-patches/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet, security, servicing, dotnet-framework
+- **Reading time**: 1 min
+
+> Rilis servicing April 2026 menambal 6 CVE di .NET 10, .NET 9, .NET 8, dan .NET Framework — termasuk dua kerentanan eksekusi kode jarak jauh.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "dotnet-april-2026-servicing-security-patches" >}}).*
+
+[Pembaruan servicing April 2026](https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-april-2026-servicing-updates/) untuk .NET dan .NET Framework sudah tersedia, dan versi ini mencakup perbaikan keamanan yang ingin Anda terapkan segera. Enam CVE ditambal, termasuk dua kerentanan eksekusi kode jarak jauh (RCE).
+
+## Yang ditambal
+
+| CVE | Tipe | Mempengaruhi |
+|-----|------|---------|
+| CVE-2026-26171 | Bypass Fitur Keamanan | .NET 10, 9, 8 + .NET Framework |
+| CVE-2026-32178 | **Eksekusi Kode Jarak Jauh** | .NET 10, 9, 8 + .NET Framework |
+| CVE-2026-33116 | **Eksekusi Kode Jarak Jauh** | .NET 10, 9, 8 |
+| CVE-2026-32203 | Penolakan Layanan | .NET 10, 9, 8 + .NET Framework |
+| CVE-2026-23666 | Penolakan Layanan | .NET Framework 3.0–4.8.1 |
+| CVE-2026-32226 | Penolakan Layanan | .NET Framework 2.0–4.8.1 |
+
+## Versi yang diperbarui
+
+- **.NET 10**: 10.0.6
+- **.NET 9**: 9.0.15
+- **.NET 8**: 8.0.26
+
+## Yang harus dilakukan
+
+Perbarui proyek dan pipeline CI/CD Anda ke versi patch terbaru. Dua kerentanan RCE bukan sesuatu yang Anda tunda.
+
+
+---
+## Aspire 13.2 Mendapatkan MongoDB EF Core dan Azure Data Lake — Dua Integrasi yang Patut Dicoba
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-132-mongodb-efcore-data-lake/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet-aspire, efcore, mongodb, azure, data-lake, cloud-native
+- **Reading time**: 1 min
+
+> Aspire 13.2 menambahkan integrasi MongoDB Entity Framework Core dan Azure Data Lake Storage dengan health check otomatis dan service discovery. Inilah tampilannya dalam praktik.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "aspire-132-mongodb-efcore-data-lake" >}}).*
+
+Aspire 13.2 hadir dengan dua integrasi database baru yang patut diperhatikan: MongoDB Entity Framework Core dan Azure Data Lake Storage.
+
+## MongoDB bertemu EF Core di Aspire
+
+Aspire telah mendukung MongoDB untuk sementara, tapi selalu driver mentah — tidak ada EF Core, tidak ada DbContext, tidak ada kueri LINQ. Sekarang Anda mendapatkan pengalaman EF Core penuh dengan MongoDB, beserta health check otomatis dan service discovery dari Aspire.
+
+Pengaturan di AppHost:
+
+```csharp
+var mongodb = builder.AddMongoDB("mongodb")
+    .WithDataVolume()
+    .WithLifetime(ContainerLifetime.Persistent);
+
+var apiService = builder.AddProject<Projects.ApiService>("api")
+    .WithReference(mongodb);
+```
+
+Di proyek yang menggunakan:
+
+```bash
+dotnet add package Aspire.MongoDB.EntityFrameworkCore
+```
+
+Daftarkan DbContext Anda:
+
+```csharp
+builder.AddMongoDbContext<MyDbContext>("mongodb", "mydb");
+```
+
+Integrasi menangani connection pooling, trace OpenTelemetry, dan health check di belakang layar.
+
+## Azure Data Lake Storage bergabung
+
+Di AppHost:
+
+```csharp
+var storage = builder.AddAzureStorage("azure-storage");
+var dataLake = storage.AddDataLake("data-lake");
+var fileSystem = storage.AddDataLakeFileSystem("data-lake-file-system");
+
+var analyticsService = builder.AddProject<Projects.AnalyticsService>("analytics")
+    .WithReference(dataLake)
+    .WithReference(fileSystem);
+```
+
+Di proyek yang menggunakan:
+
+```csharp
+builder.AddAzureDataLakeServiceClient("data-lake");
+builder.AddAzureDataLakeFileSystemClient("data-lake-file-system");
+```
+
+Tidak ada manajemen connection string manual, tidak ada pencarian kredensial.
+
+## Kesimpulan
+
+Aspire 13.2 adalah rilis inkremental, tapi integrasi MongoDB EF Core dan Data Lake mengisi celah nyata. [Upgrade ke 13.2](https://get.aspire.dev) dan coba.
+
+
+---
+## azd update — Satu Perintah untuk Semua Package Manager Anda
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, azd, developer-tools, cli
+- **Reading time**: 1 min
+
+> Azure Developer CLI kini memiliki perintah pembaruan universal yang bekerja terlepas dari cara Anda menginstalnya — winget, Homebrew, Chocolatey, atau skrip instalasi.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "azd-update-universal-upgrade-command" >}}).*
+
+Anda tahu pesan "Versi baru azd tersedia" yang muncul setiap beberapa minggu? Yang Anda abaikan karena tidak ingat apakah Anda menginstal `azd` melalui winget, Homebrew, atau skrip curl enam bulan lalu? Ini akhirnya diperbaiki.
+
+Microsoft baru saja merilis [`azd update`](https://devblogs.microsoft.com/azure-sdk/azd-update/) — perintah tunggal yang memperbarui Azure Developer CLI ke versi terbaru terlepas dari cara asli Anda menginstalnya.
+
+## Cara kerjanya
+
+```bash
+azd update
+```
+
+Itu saja. Untuk akses awal ke fitur baru:
+
+```bash
+azd update --channel daily
+azd update --channel stable
+```
+
+Perintah mendeteksi metode instalasi Anda saat ini dan menggunakan mekanisme pembaruan yang sesuai di balik layar.
+
+## Catatan kecil
+
+`azd update` hadir mulai versi 1.23.x. Jika Anda menggunakan versi lebih lama, Anda perlu melakukan satu pembaruan manual terakhir. Setelah itu, `azd update` menangani semuanya.
+
+## Mengapa ini penting
+
+Ini adalah peningkatan kualitas hidup yang kecil, tetapi bagi yang menggunakan `azd` setiap hari untuk men-deploy agen AI dan aplikasi Aspire ke Azure, tetap terkini itu penting.
+
+Baca [pengumuman lengkap](https://devblogs.microsoft.com/azure-sdk/azd-update/).
+
+
+---
+## Azure DevOps Server Patch April 2026 — Perbaikan Penyelesaian PR dan Pembaruan Keamanan
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-devops-server-april-2026-patch/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure-devops, devops, patches
+- **Reading time**: 1 min
+
+> Azure DevOps Server mendapatkan Patch 3 dengan perbaikan kegagalan penyelesaian PR, validasi keluar yang ditingkatkan, dan koneksi PAT GitHub Enterprise Server yang dipulihkan.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "azure-devops-server-april-2026-patch" >}}).*
+
+Info cepat untuk tim yang menjalankan Azure DevOps Server sendiri: Microsoft merilis [Patch 3 untuk April 2026](https://devblogs.microsoft.com/devops/april-patches-for-azure-devops-server/) dengan tiga perbaikan terarah.
+
+## Yang diperbaiki
+
+- **Kegagalan penyelesaian pull request** — pengecualian null reference selama penyelesaian otomatis item kerja dapat menyebabkan penggabungan PR gagal
+- **Validasi pengalihan saat keluar** — validasi yang ditingkatkan untuk mencegah pengalihan berbahaya
+- **Koneksi PAT GitHub Enterprise Server** — membuat koneksi Personal Access Token dipulihkan
+
+## Cara memperbarui
+
+Unduh [Patch 3](https://aka.ms/devopsserverpatch3) dan jalankan installer. Untuk memverifikasi patch diterapkan:
+
+```bash
+<patch-installer>.exe CheckInstall
+```
+
+Microsoft sangat merekomendasikan untuk selalu menggunakan patch terbaru demi keamanan dan keandalan.
+
+
+---
+## Azure Smart Tier Kini GA — Optimasi Biaya Blob Storage Otomatis Tanpa Aturan Siklus Hidup
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-smart-tier-blob-storage-ga/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, storage, blob-storage, cost-optimization, cloud-native
+- **Reading time**: 1 min
+
+> Tingkat cerdas Azure Blob Storage kini tersedia secara umum, secara otomatis memindahkan objek antara tingkat hot, cool, dan cold berdasarkan pola akses aktual.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "azure-smart-tier-blob-storage-ga" >}}).*
+
+Jika Anda pernah menghabiskan waktu menyetel kebijakan siklus hidup Azure Blob Storage dan kemudian menyaksikannya runtuh ketika pola akses berubah, ini untuk Anda. Microsoft baru saja mengumumkan [ketersediaan umum smart tier](https://azure.microsoft.com/en-us/blog/optimize-object-storage-costs-automatically-with-smart-tier-now-generally-available/) untuk Azure Blob dan Data Lake Storage.
+
+## Yang sebenarnya dilakukan smart tier
+
+Smart tier terus mengevaluasi waktu akses terakhir setiap objek di akun penyimpanan Anda. Data yang sering diakses tetap di hot, data tidak aktif pindah ke cool setelah 30 hari, lalu ke cold setelah 60 hari lagi. Saat data diakses lagi, langsung dipromosikan kembali ke hot.
+
+Tidak ada aturan siklus hidup yang perlu dikonfigurasi. Tidak ada penyesuaian manual.
+
+Selama pratinjau, Microsoft melaporkan bahwa **lebih dari 50% kapasitas yang dikelola smart tier secara otomatis berpindah ke tingkat lebih dingin**.
+
+## Mengapa ini penting untuk developer .NET
+
+Skenario praktis:
+- **Telemetri dan log aplikasi** — panas saat debugging, jarang diakses setelah beberapa minggu
+- **Pipeline data dan output ETL** — akses intensif saat pemrosesan, lalu sebagian besar dingin
+- **Konten yang dibuat pengguna** — unggahan terbaru panas, konten lama mendingin secara bertahap
+
+## Pertukaran yang perlu diketahui
+
+Aturan peringkatan smart tier bersifat statis (30 hari → cool, 90 hari → cold). Jika Anda membutuhkan ambang batas kustom, aturan siklus hidup masih berlaku.
+
+
+---
+## Di Mana Anda Harus Meng-host Agen AI di Azure? Panduan Keputusan Praktis
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-ai-agent-hosting-options-guide/
+- **Date**: April 15, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, ai, agents, containers, microsoft-foundry, cloud-native, aks
+- **Reading time**: 2 min
+
+> Azure menawarkan enam cara untuk meng-host agen AI — dari kontainer mentah hingga Foundry Hosted Agents yang sepenuhnya dikelola. Inilah cara memilih yang tepat untuk workload .NET Anda.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "azure-ai-agent-hosting-options-guide" >}}).*
+
+Jika Anda sedang membangun agen AI dengan .NET sekarang, Anda mungkin sudah memperhatikan: ada *banyak* cara untuk meng-host-nya di Azure. Container Apps, AKS, Functions, App Service, Foundry Agents, Foundry Hosted Agents.
+
+Microsoft baru saja menerbitkan [panduan komprehensif untuk hosting agen Azure AI](https://devblogs.microsoft.com/all-things-azure/hostedagent/).
+
+## Enam opsi sekilas
+
+| Opsi | Terbaik untuk | Anda kelola |
+|------|-------------|------------|
+| **Container Apps** | Kontrol container penuh tanpa kerumitan K8s | Observabilitas, state, siklus hidup |
+| **AKS** | Kepatuhan enterprise, multi-cluster | Semuanya |
+| **Azure Functions** | Tugas singkat berbasis event | Hampir tidak ada |
+| **App Service** | Agen HTTP sederhana | Deployment, scaling |
+| **Foundry Agents** | Agen opsional kode | Hampir tidak ada |
+| **Foundry Hosted Agents** | Agen framework kustom | Hanya kode agen Anda |
+
+## Foundry Hosted Agents — titik manis untuk developer agen .NET
+
+Deployment benar-benar sederhana:
+
+```bash
+azd ext install azure.ai.agents
+azd ai agent init
+azd up
+```
+
+Satu perintah `azd up` membangun container, mendorongnya ke ACR, menyediakan proyek Foundry, dan memulai agen.
+
+## Kerangka keputusan saya
+
+1. **Butuh infrastruktur nol?** → Foundry Agents
+2. **Punya kode agen kustom tapi ingin hosting terkelola?** → Foundry Hosted Agents
+3. **Tugas singkat berbasis event?** → Azure Functions
+4. **Kontrol container maksimum?** → Container Apps
+5. **Kepatuhan ketat dan multi-cluster?** → AKS
+
+## Kesimpulan
+
+Untuk sebagian besar developer .NET yang membangun dengan Semantic Kernel atau Microsoft Agent Framework, Hosted Agents kemungkinan adalah titik awal yang tepat. Cek [panduan lengkap dari Microsoft](https://devblogs.microsoft.com/all-things-azure/hostedagent/).
+
+
+---
+## Agent Skills di .NET Kini Benar-Benar Fleksibel
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/agent-skills-dotnet-three-authoring-patterns/
+- **Date**: April 14, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: .NET, Agent Framework, AI, Semantic Kernel, Azure
+- **Reading time**: 2 min
+
+> Microsoft Agent Framework kini mendukung tiga cara penulisan skill — file, kelas, dan kode inline — semuanya disusun melalui satu provider. Inilah alasannya penting dan cara menggunakan masing-masing.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "agent-skills-dotnet-three-authoring-patterns" >}}).*
+
+Jika Anda membangun agen dengan Microsoft Agent Framework, Anda sudah tahu caranya: Anda mendefinisikan skill, menghubungkannya ke provider, dan membiarkan agen menentukan mana yang harus dipanggil. Yang baru adalah *bagaimana* Anda menulis skill tersebut — dan lompatan fleksibilitasnya signifikan.
+
+Pembaruan terbaru memperkenalkan tiga pola authoring berbeda untuk agent skill: **berbasis file**, **berbasis kelas**, dan **didefinisikan kode inline**. Ketiganya terhubung ke satu `AgentSkillsProviderBuilder`, artinya Anda bisa mix and match tanpa logika routing.
+
+## Skill berbasis file: titik awal
+
+Skill berbasis file persis seperti namanya — direktori di disk dengan file `SKILL.md`, skrip opsional, dan dokumen referensi:
+
+```
+skills/
+└── onboarding-guide/
+    ├── SKILL.md
+    ├── scripts/
+    │   └── check-provisioning.py
+    └── references/
+        └── onboarding-checklist.md
+```
+
+Frontmatter `SKILL.md` mendeklarasikan nama dan deskripsi skill, dan bagian instruksi memberi tahu agen cara menggunakan skrip dan referensi.
+
+Kemudian Anda menghubungkannya dengan `SubprocessScriptRunner.RunAsync`:
+
+```csharp
+var skillsProvider = new AgentSkillsProvider(
+    Path.Combine(AppContext.BaseDirectory, "skills"),
+    SubprocessScriptRunner.RunAsync);
+```
+
+## Skill berbasis kelas: kirim via NuGet
+
+Di sinilah yang menarik bagi tim. Skill berbasis kelas mewarisi dari `AgentClassSkill<T>` dan menggunakan atribut seperti `[AgentSkillResource]` dan `[AgentSkillScript]`:
+
+```csharp
+public sealed class BenefitsEnrollmentSkill : AgentClassSkill<BenefitsEnrollmentSkill>
+{
+    public override AgentSkillFrontmatter Frontmatter { get; } = new(
+        "benefits-enrollment",
+        "Enroll an employee in health, dental, or vision plans.");
+
+    [AgentSkillScript("enroll")]
+    private static string Enroll(string employeeId, string planCode)
+    {
+        bool success = HrClient.EnrollInPlan(employeeId, planCode);
+        return JsonSerializer.Serialize(new { success, employeeId, planCode });
+    }
+}
+```
+
+Sebuah tim bisa mengemas ini sebagai paket NuGet. Tambahkan ke proyek, masukkan ke builder, dan bekerja bersama skill berbasis file Anda.
+
+## Skill inline: jembatan cepat
+
+Saat tim lain membangun skill yang persis Anda butuhkan tapi tidak akan siap dalam satu sprint? `AgentInlineSkill` adalah jembatan Anda:
+
+```csharp
+var timeOffSkill = new AgentInlineSkill(
+    name: "time-off-balance",
+    description: "Calculate remaining vacation and sick days.",
+    instructions: "1. Minta ID karyawan. 2. Gunakan calculate-balance. 3. Sajikan hasilnya.")
+    .AddScript("calculate-balance", (string employeeId, string leaveType) =>
+    {
+        int remaining = HrDatabase.GetAnnualAllowance(employeeId, leaveType)
+                      - HrDatabase.GetDaysUsed(employeeId, leaveType);
+        return JsonSerializer.Serialize(new { employeeId, leaveType, remaining });
+    });
+```
+
+Ketika paket NuGet akhirnya dikirim, Anda mengganti skill inline dengan yang berbasis kelas. Agen tidak tahu perbedaannya.
+
+## Persetujuan skrip: human-in-the-loop
+
+Bagi developer .NET yang membangun agen produksi, inilah bagian yang benar-benar membuka percakapan deployment. Aktifkan `UseScriptApproval` dan agen berhenti sebelum menjalankan skrip apapun:
+
+```csharp
+var skillsProvider = new AgentSkillsProviderBuilder()
+    .UseFileSkill(Path.Combine(AppContext.BaseDirectory, "skills"))
+    .UseSkill(new BenefitsEnrollmentSkill())
+    .UseSkill(timeOffSkill)
+    .UseFileScriptRunner(SubprocessScriptRunner.RunAsync)
+    .UseScriptApproval(true)
+    .Build();
+```
+
+## Kesimpulan
+
+Agent skills di .NET kini memiliki model authoring yang benar-benar fleksibel. Baik Anda membuat prototip dengan skill berbasis file atau mengirim kemampuan yang dikemas via NuGet, semua pola disusun melalui `AgentSkillsProviderBuilder`.
+
+Lihat [pengumuman asli](https://devblogs.microsoft.com/agent-framework/agent-skills-in-net-three-ways-to-author-one-provider-to-run-them/) dan [contoh GitHub](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/02-agents/AgentSkills).
+
+
+---
+## Azure MCP Server 2.0 Baru Dirilis — Otomasi Cloud Agentic Self-Hosted Sudah Ada
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-mcp-server-2-self-hosted-agentic-cloud/
+- **Date**: April 11, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: mcp, azure, ai, agents, azure-sdk, dotnet
+- **Reading time**: 1 min
+
+> Azure MCP Server 2.0 mencapai stabilitas dengan deployment remote self-hosted, 276 alat di 57 layanan Azure, dan keamanan tingkat enterprise.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "azure-mcp-server-2-self-hosted-agentic-cloud" >}}).*
+
+Jika Anda baru-baru ini membangun sesuatu dengan MCP dan Azure, Anda mungkin sudah tahu bahwa pengalaman lokal bekerja dengan baik. Tapi ketika Anda perlu berbagi pengaturan itu ke seluruh tim? Di situlah hal-hal menjadi rumit.
+
+Tidak lagi. Azure MCP Server [baru saja mencapai 2.0 stabil](https://devblogs.microsoft.com/azure-sdk/announcing-azure-mcp-server-2-0-stable-release/), dan fitur utamanya adalah persis yang telah diminta tim enterprise: **dukungan server MCP remote self-hosted**.
+
+## Apa itu Azure MCP Server?
+
+Azure MCP Server mengimplementasikan spesifikasi [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) dan mengekspos kemampuan Azure sebagai alat terstruktur dan dapat ditemukan. Angkanya berbicara sendiri: **276 alat MCP di 57 layanan Azure**.
+
+## Hal besar: deployment remote self-hosted
+
+Dalam skenario tim nyata, Anda membutuhkan:
+- Akses bersama untuk developer dan sistem agen internal
+- Konfigurasi terpusat
+- Batas jaringan dan kebijakan enterprise
+- Integrasi ke pipeline CI/CD
+
+Azure MCP Server 2.0 mengatasi semua ini. Untuk autentikasi, ada dua opsi:
+1. **Managed Identity** — saat berjalan bersama [Microsoft Foundry](https://aka.ms/azmcp/self-host/foundry)
+2. **Alur On-Behalf-Of (OBO)** — delegasi OpenID Connect dengan izin pengguna yang sebenarnya
+
+## Pengerasan keamanan
+
+Rilis 2.0 menambahkan validasi endpoint yang lebih kuat, perlindungan terhadap pola injection, dan kontrol isolasi yang lebih ketat.
+
+## Memulai
+
+- **[GitHub Repo](https://aka.ms/azmcp)** — kode sumber, dokumentasi
+- **[Docker Image](https://aka.ms/azmcp/download/docker)** — deployment dalam container
+- **[Ekstensi VS Code](https://aka.ms/azmcp/download/vscode)** — integrasi IDE
+- **[Panduan self-hosting](https://aka.ms/azmcp/self-host)** — fitur unggulan 2.0
+
+
+---
+## .NET Aspire 13.2 Ingin Menjadi Sahabat Terbaik Agen AI Anda
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: aspire, dotnet, ai, cli, telemetry, developer-tools
+- **Reading time**: 2 min
+
+> Aspire 13.2 all-in pada pengembangan agentik — output CLI terstruktur, eksekusi terisolasi, lingkungan yang menyembuhkan sendiri, dan data OpenTelemetry penuh agar agen AI Anda benar-benar dapat membangun, menjalankan, dan mengamati aplikasi Anda.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "aspire-agentic-development-build-run-observe" >}}).*
+
+Anda tahu momen ketika agen coding AI Anda menulis kode yang solid, Anda bersemangat, kemudian semuanya berantakan saat mencoba *menjalankannya*? Konflik port, phantom process, variabel lingkungan yang salah — tiba-tiba agen Anda membakar token untuk men-debug masalah startup alih-alih membangun fitur.
+
+Tim Aspire baru saja merilis [post yang sangat bijaksana](https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/) tentang masalah ini, dan jawaban mereka menarik: Aspire 13.2 dirancang tidak hanya untuk manusia, tetapi untuk agen AI.
+
+## Aspire sebagai infrastruktur agen
+
+Inilah yang dibawa Aspire 13.2 ke meja pengembangan agentik:
+
+**Seluruh stack dalam kode bertipe.** AppHost mendefinisikan topologi lengkap — dalam TypeScript atau C# yang dapat dikompilasi:
+
+```typescript
+import { createBuilder } from './.modules/aspire.js';
+
+const builder = await createBuilder();
+
+const postgres = await builder.addPostgres("pg").addDatabase("catalog");
+const cache = await builder.addRedis("cache");
+
+const api = await builder
+  .addNodeApp("api", "./api", "src/index.ts")
+  .withHttpEndpoint({ env: "PORT" })
+  .withReference(postgres)
+  .withReference(cache);
+
+await builder
+  .addViteApp("frontend", "./frontend")
+  .withReference(api)
+  .waitFor(api);
+
+await builder.build().run();
+```
+
+**Satu perintah untuk semuanya.** Alih-alih menyulap `docker compose up`, `npm run dev`, dan skrip startup database — semuanya hanya `aspire start`.
+
+**Mode terisolasi untuk agen paralel.** Dengan `--isolated`, setiap jalankan Aspire mendapat port acak sendiri dan rahasia pengguna terpisah.
+
+**Mata agen melalui telemetri.** Aspire CLI mengekspos data OpenTelemetry penuh selama development — trace, metrik, log terstruktur.
+
+## Analogi bowling bumper
+
+Tim Aspire menggunakan analogi yang bagus: pikirkan Aspire sebagai bumper jalur bowling untuk agen AI. Jika agennya tidak sempurna (dan memang tidak akan), bumper mencegahnya melempar ke selokan.
+
+## Kesimpulan
+
+Aspire 13.2 bukan hanya framework aplikasi terdistribusi — ini menjadi infrastruktur agen yang esensial. Baca [post lengkap](https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/) dari tim Aspire.
+
+
+---
+## Agentic Platform Engineering Menjadi Nyata — Git-APE Menunjukkan Caranya
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, github-copilot, platform-engineering, agents, mcp, devops
+- **Reading time**: 2 min
+
+> Proyek Git-APE Microsoft mempraktikkan agentic platform engineering — menggunakan agen GitHub Copilot dan Azure MCP untuk mengubah permintaan bahasa alami menjadi infrastruktur cloud yang tervalidasi.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "agentic-platform-engineering-git-ape" >}}).*
+
+Platform engineering telah menjadi salah satu istilah yang terdengar hebat di konferensi tetapi biasanya berarti "kami membangun portal internal dan wrapper Terraform." Janji sebenarnya — self-service infrastruktur yang benar-benar aman, terkendali, dan cepat — selalu beberapa langkah menjauh.
+
+Tim Azure baru saja menerbitkan [Bagian 2 dari seri agentic platform engineering mereka](https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/). Mereka menyebutnya **Git-APE** — sebuah proyek open-source yang menggunakan agen GitHub Copilot dan server Azure MCP untuk mengubah permintaan bahasa alami menjadi infrastruktur yang tervalidasi dan ter-deploy.
+
+## Apa yang sebenarnya dilakukan Git-APE
+
+Ide inti: alih-alih mempelajari modul Terraform, developer berbicara dengan agen Copilot. Agen menginterpretasikan niat, menghasilkan Infrastructure-as-Code, memvalidasi terhadap kebijakan, dan mendeploy — semuanya dalam VS Code.
+
+```bash
+git clone https://github.com/Azure/git-ape
+cd git-ape
+```
+
+Buka workspace di VS Code, dan file konfigurasi agen ditemukan otomatis oleh GitHub Copilot:
+
+```
+@git-ape deploy a function app with storage in West Europe
+```
+
+Pembersihan sama mudahnya:
+
+```
+@git-ape destroy my-resource-group
+```
+
+## Mengapa ini penting
+
+Bagi yang membangun di Azure, ini menggeser percakapan platform engineering dari "bagaimana kami membangun portal" menjadi "bagaimana kami mendeskripsikan guardrail kami sebagai API."
+
+Sebagai developer .NET: Azure MCP Server dan agen GitHub Copilot bekerja dengan semua workload Azure — ASP.NET Core API Anda, tumpukan .NET Aspire — semuanya bisa menjadi target alur deployment agentik.
+
+## Kesimpulan
+
+Git-APE adalah pandangan awal tetapi konkret tentang agentic platform engineering dalam praktik. Clone [repositorinya](https://github.com/Azure/git-ape) dan baca [postingan lengkap](https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/).
+
+
+---
+## Aplikasi MCP Mendapatkan Fluent API — Buat UI Alat AI Kaya di .NET dalam Tiga Langkah
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/mcp-fluent-api-azure-functions-dotnet/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: mcp, dotnet, azure-functions, ai, azure-sdk
+- **Reading time**: 1 min
+
+> API konfigurasi fluent baru untuk Aplikasi MCP di Azure Functions memungkinkan Anda mengubah alat MCP .NET mana pun menjadi aplikasi lengkap dengan tampilan, izin, dan kebijakan CSP.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "mcp-fluent-api-azure-functions-dotnet" >}}).*
+
+Alat MCP sangat bagus untuk memberikan kemampuan kepada agen AI. Tapi bagaimana jika alat Anda perlu menampilkan sesuatu kepada pengguna?
+
+Lilian Kasem dari tim Azure SDK [memperkenalkan API konfigurasi fluent baru](https://devblogs.microsoft.com/azure-sdk/mcp-as-easy-as-1-2-3-introducing-the-fluent-api-for-mcp-apps/).
+
+## Fluent API dalam tiga langkah
+
+**Langkah 1: Definisikan fungsi Anda:**
+
+```csharp
+[Function(nameof(HelloApp))]
+public string HelloApp(
+    [McpToolTrigger("HelloApp", "A simple MCP App that says hello.")]
+    ToolInvocationContext context)
+{
+    return "Hello from app";
+}
+```
+
+**Langkah 2: Promosikan ke Aplikasi MCP:**
+
+```csharp
+builder.ConfigureMcpTool("HelloApp")
+    .AsMcpApp(app => app
+        .WithView("assets/hello-app.html")
+        .WithTitle("Hello App")
+        .WithPermissions(McpAppPermissions.ClipboardWrite | McpAppPermissions.ClipboardRead)
+        .WithCsp(csp =>
+        {
+            csp.AllowBaseUri("https://www.microsoft.com")
+               .ConnectTo("https://www.microsoft.com");
+        }));
+```
+
+**Langkah 3: Tambahkan tampilan HTML Anda.**
+
+Tambahkan paket:
+
+```bash
+dotnet add package Microsoft.Azure.Functions.Worker.Extensions.Mcp --version 1.5.0-preview.1
+```
+
+Baca [posting lengkap](https://devblogs.microsoft.com/azure-sdk/mcp-as-easy-as-1-2-3-introducing-the-fluent-api-for-mcp-apps/).
+
+
+---
+## Hubungkan Server MCP Anda di Azure Functions ke Agen Foundry — Begini Caranya
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/foundry-agents-mcp-servers-azure-functions/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: mcp, azure-functions, foundry, ai, azure, dotnet
+- **Reading time**: 1 min
+
+> Bangun server MCP Anda sekali, deploy ke Azure Functions, dan hubungkan ke agen Microsoft Foundry dengan autentikasi yang tepat.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "foundry-agents-mcp-servers-azure-functions" >}}).*
+
+Ada satu hal yang saya sukai tentang ekosistem MCP: Anda membangun server sekali dan bekerja di mana saja.
+
+Lily Ma dari tim Azure SDK [menerbitkan panduan praktis](https://devblogs.microsoft.com/azure-sdk/give-your-foundry-agent-custom-tools-with-mcp-servers-on-azure-functions/) tentang menghubungkan server MCP yang di-deploy ke Azure Functions dengan agen Microsoft Foundry.
+
+## Mengapa kombinasi ini masuk akal
+
+Azure Functions memberi Anda infrastruktur yang dapat diskalakan, autentikasi bawaan, dan penagihan tanpa server. Microsoft Foundry memberi Anda agen AI yang dapat bernalar dan bertindak. Menghubungkan keduanya berarti alat kustom Anda menjadi kemampuan agen AI perusahaan.
+
+## Opsi autentikasi
+
+| Metode | Kasus Penggunaan |
+|--------|----------|
+| **Berbasis kunci** | Pengembangan atau server tanpa Entra auth |
+| **Microsoft Entra** | Produksi dengan managed identity |
+| **OAuth identity passthrough** | Produksi dengan konteks pengguna |
+| **Tanpa autentikasi** | Dev/pengujian atau data publik saja |
+
+## Pengaturan
+
+1. **Deploy server MCP ke Azure Functions** — sampel tersedia untuk [.NET](https://github.com/Azure-Samples/remote-mcp-functions-dotnet)
+2. **Aktifkan autentikasi MCP bawaan**
+3. **Dapatkan URL endpoint** — `https://<FUNCTION_APP_NAME>.azurewebsites.net/runtime/webhooks/mcp`
+4. **Tambahkan server MCP sebagai alat di Foundry**
+
+Baca [panduan lengkap](https://devblogs.microsoft.com/azure-sdk/give-your-foundry-agent-custom-tools-with-mcp-servers-on-azure-functions/).
+
+
+---
+## Membangun UI Multi-Agen Real-Time yang Tidak Terasa Seperti Kotak Hitam
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/ag-ui-real-time-multi-agent-ui-maf/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: agent-framework, ai, ag-ui, multi-agent, azure, sse
+- **Reading time**: 4 min
+
+> AG-UI dan Microsoft Agent Framework bergabung untuk memberikan alur kerja multi-agen frontend yang layak — dengan streaming real-time, persetujuan manusia, dan visibilitas penuh atas apa yang dilakukan agen Anda.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "ag-ui-real-time-multi-agent-ui-maf" >}}).*
+
+Begini kenyataan tentang sistem multi-agen: tampilannya luar biasa dalam demo. Tiga agen saling mengoper pekerjaan, memecahkan masalah, mengambil keputusan. Lalu Anda mencoba menampilkannya kepada pengguna nyata dan... sunyi. Indikator yang berputar. Tidak ada yang tahu agen mana yang melakukan apa atau mengapa sistem berhenti. Ini bukan produk — ini masalah kepercayaan.
+
+Tim Microsoft Agent Framework baru saja menerbitkan [panduan yang luar biasa](https://devblogs.microsoft.com/agent-framework/ag-ui-multi-agent-workflow-demo/) tentang cara memadukan alur kerja MAF dengan [AG-UI](https://github.com/ag-ui-protocol/ag-ui), protokol terbuka untuk mengalirkan peristiwa eksekusi agen ke frontend melalui Server-Sent Events. Dan jujur saja? Inilah jembatan yang selama ini kita butuhkan.
+
+## Mengapa ini penting bagi developer .NET
+
+Jika Anda membangun aplikasi bertenaga AI, Anda mungkin sudah pernah menabrak dinding ini. Orkestrasi backend Anda bekerja dengan baik — agen saling meneruskan pekerjaan, alat berjalan, keputusan dibuat. Tapi frontend tidak tahu apa yang terjadi di balik layar. AG-UI mengatasi ini dengan mendefinisikan protokol standar untuk mengalirkan peristiwa agen (`RUN_STARTED`, `STEP_STARTED`, `TOOL_CALL_*`, `TEXT_MESSAGE_*`) langsung ke lapisan UI Anda melalui SSE.
+
+Demo yang mereka bangun adalah alur kerja dukungan pelanggan dengan tiga agen: agen triase yang merutekan permintaan, agen pengembalian dana yang menangani urusan keuangan, dan agen pesanan yang mengelola penggantian. Setiap agen memiliki alat-alatnya sendiri, dan topologi handoff didefinisikan secara eksplisit — tidak ada nuansa "cari tahu dari prompt".
+
+## Topologi handoff adalah bintang sesungguhnya
+
+Yang menarik perhatian saya adalah bagaimana `HandoffBuilder` memungkinkan Anda mendeklarasikan graf perutean berarah antar agen:
+
+```python
+builder = HandoffBuilder(
+    name="ag_ui_handoff_workflow_demo",
+    participants=[triage, refund, order],
+    termination_condition=termination_condition,
+)
+
+(
+    builder
+    .add_handoff(triage, [refund], description="Refunds, damaged-item claims...")
+    .add_handoff(triage, [order], description="Replacement, exchange...")
+    .add_handoff(refund, [order], description="Replacement logistics needed after refund.")
+    .add_handoff(order, [triage], description="After replacement/shipping tasks complete.")
+)
+```
+
+Setiap `add_handoff` membuat sisi berarah dengan deskripsi bahasa alami. Framework menghasilkan alat handoff untuk setiap agen berdasarkan topologi ini. Jadi keputusan perutean didasarkan pada struktur orkestrasi Anda, bukan pada apa yang ingin dilakukan LLM. Ini sangat penting untuk keandalan produksi.
+
+## Human-in-the-loop yang benar-benar bekerja
+
+Demo ini memperlihatkan dua pola interupsi yang dibutuhkan oleh aplikasi agen mana pun di dunia nyata:
+
+**Interupsi persetujuan alat** — ketika agen memanggil alat yang ditandai dengan `approval_mode="always_require"`, alur kerja dijeda dan mengeluarkan peristiwa. Frontend merender modal persetujuan dengan nama alat dan argumennya. Tidak ada loop percobaan ulang yang membakar token — hanya alur jeda-setujui-lanjutkan yang bersih.
+
+**Interupsi permintaan informasi** — ketika agen membutuhkan lebih banyak konteks dari pengguna (seperti ID pesanan), agen berhenti dan bertanya. Frontend menampilkan pertanyaan, pengguna merespons, dan eksekusi dilanjutkan dari tepat di mana ia berhenti.
+
+Kedua pola dialirkan sebagai peristiwa AG-UI standar, sehingga frontend Anda tidak memerlukan logika khusus per agen — cukup merender peristiwa apa pun yang masuk melalui koneksi SSE.
+
+## Menghubungkannya sangat sederhana
+
+Integrasi antara MAF dan AG-UI adalah satu panggilan fungsi:
+
+```python
+from agent_framework.ag_ui import (
+    AgentFrameworkWorkflow,
+    add_agent_framework_fastapi_endpoint,
+)
+
+app = FastAPI()
+
+demo_workflow = AgentFrameworkWorkflow(
+    workflow_factory=lambda _thread_id: create_handoff_workflow(),
+    name="ag_ui_handoff_workflow_demo",
+)
+
+add_agent_framework_fastapi_endpoint(
+    app=app, agent=demo_workflow, path="/handoff_demo",
+)
+```
+
+`workflow_factory` membuat alur kerja baru per thread, sehingga setiap percakapan mendapat status yang terisolasi. Endpoint menangani semua plumbing SSE secara otomatis. Jika Anda sudah menggunakan FastAPI (atau bisa menambahkannya sebagai lapisan ringan), ini hampir tanpa gesekan.
+
+## Pandangan saya
+
+Bagi developer .NET, pertanyaan langsung adalah: "Bisakah saya melakukan ini di C#?" Agent Framework tersedia untuk .NET dan Python, dan protokol AG-UI bersifat language-agnostic (ini hanyalah SSE). Jadi meskipun demo ini menggunakan Python dan FastAPI, polanya langsung dapat diterapkan. Anda bisa menghubungkan ASP.NET Core minimal API dengan endpoint SSE mengikuti skema peristiwa AG-UI yang sama.
+
+Kesimpulan yang lebih besar adalah bahwa UI multi-agen menjadi perhatian kelas satu, bukan renungan. Jika Anda membangun apa pun di mana agen berinteraksi dengan manusia — dukungan pelanggan, alur kerja persetujuan, pemrosesan dokumen — kombinasi orkestrasi MAF dan transparansi AG-UI adalah pola yang harus diikuti.
+
+## Kesimpulan
+
+AG-UI + Microsoft Agent Framework memberi Anda yang terbaik dari kedua dunia: orkestrasi multi-agen yang kuat di backend dan visibilitas real-time di frontend. Tidak ada lagi interaksi agen sebagai kotak hitam.
+
+Lihat [panduan lengkap](https://devblogs.microsoft.com/agent-framework/ag-ui-multi-agent-workflow-demo/) dan [repositori protokol AG-UI](https://github.com/ag-ui-protocol/ag-ui) untuk mendalami lebih jauh.
+
+
+---
+## Microsoft Foundry Maret 2026 — GPT-5.4, Agent Service GA, dan SDK Refresh yang Mengubah Segalanya
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/microsoft-foundry-march-2026-whats-new/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: foundry, ai, azure, gpt-5-4, agents, sdk
+- **Reading time**: 1 min
+
+> Pembaruan Foundry Maret 2026 sangat besar: Agent Service mencapai GA, GPT-5.4 menghadirkan penalaran yang andal, SDK azure-ai-projects stabil di semua bahasa.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "microsoft-foundry-march-2026-whats-new" >}}).*
+
+Posting bulanan "Yang Baru di Microsoft Foundry" biasanya merupakan campuran peningkatan bertahap. [Edisi Maret 2026](https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-mar-2026/)? Hampir semuanya adalah fitur utama.
+
+## Foundry Agent Service siap untuk produksi
+
+Runtime agen generasi berikutnya tersedia secara umum — dibangun di atas OpenAI Responses API, kompatibel secara wire dengan agen OpenAI.
+
+Penambahan utama: jaringan privat end-to-end, ekspansi auth MCP, pratinjau Voice Live, dan hosted agents di 6 region baru.
+
+## GPT-5.4 — keandalan di atas kecerdasan mentah
+
+GPT-5.4 bukan tentang menjadi lebih pintar. Ini tentang menjadi lebih andal.
+
+| Model | Harga (per M token) | Terbaik untuk |
+|-------|----------------------|----------|
+| GPT-5.4 (≤272K) | $2.50 / $15 output | Agen produksi |
+| GPT-5.4 Pro | $30 / $180 output | Analisis mendalam |
+| GPT-5.4 Mini | Hemat biaya | Klasifikasi, ekstraksi |
+
+## SDK akhirnya stabil
+
+SDK `azure-ai-projects` merilis versi stabil di semua bahasa — termasuk .NET 2.0.0.
+
+## Fireworks AI membawa model terbuka ke Azure
+
+DeepSeek V3.2, gpt-oss-120b, Kimi K2.5 tersedia saat peluncuran.
+
+Baca [ringkasan lengkap](https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-mar-2026/).
+
+
+---
+## Mode Terisolasi Aspire Memperbaiki Mimpi Buruk Konflik Port dalam Pengembangan Paralel
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: aspire, dotnet, cli, developer-tools, parallel-development
+- **Reading time**: 1 min
+
+> Aspire 13.2 memperkenalkan mode --isolated: port acak, rahasia terpisah, dan nol tabrakan saat menjalankan beberapa instans AppHost yang sama. Sempurna untuk agen AI, worktree, dan alur kerja paralel.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "aspire-isolated-mode-parallel-instances" >}}).*
+
+Jika Anda pernah mencoba menjalankan dua instans proyek yang sama secara bersamaan, Anda tahu rasa sakitnya. Port 8080 sudah digunakan.
+
+Aspire 13.2 memperbaiki ini dengan satu flag. James Newton-King [menulis semua detailnya](https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/).
+
+## Perbaikan: `--isolated`
+
+```bash
+aspire run --isolated
+```
+
+Setiap run mendapat:
+- **Port acak** — tidak ada tabrakan antar instans
+- **User secrets terisolasi** — connection string dan API key tetap terpisah per instans
+
+## Skenario nyata
+
+**Beberapa checkout:**
+
+```bash
+# Terminal 1
+cd ~/projects/my-app-feature
+aspire run --isolated
+
+# Terminal 2
+cd ~/projects/my-app-bugfix
+aspire run --isolated
+```
+
+Keduanya berjalan tanpa konflik.
+
+**Agen latar belakang di VS Code.** Ketika agen latar belakang Copilot Chat membuat git worktree untuk bekerja secara independen, mode terisolasi memastikan kedua instans berfungsi.
+
+## Kesimpulan
+
+Mode terisolasi adalah fitur kecil yang memecahkan masalah nyata yang semakin umum. Dapatkan 13.2 dengan `aspire update --self`.
+
+
+---
+## Pengaturan Floating Windows Visual Studio yang Tidak Kamu Ketahui (Tapi Harus Tahu)
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: visual-studio, developer-tools, productivity, powertoys
+- **Reading time**: 2 min
+
+> Pengaturan tersembunyi di Visual Studio memberi kendali penuh atas floating windows — entri taskbar mandiri, perilaku multi-monitor yang benar, dan integrasi FancyZones yang sempurna. Satu dropdown mengubah segalanya.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "visual-studio-floating-windows-powertoys" >}}).*
+
+Jika kamu menggunakan beberapa monitor dengan Visual Studio (dan jujur saja, siapa yang tidak zaman sekarang), kamu mungkin pernah merasakan frustrasi ini: floating tool windows menghilang saat kamu meminimalkan IDE utama, selalu berada di atas segalanya, dan tidak muncul sebagai tombol taskbar terpisah. Ini mungkin berhasil untuk beberapa alur kerja, tapi untuk setup multi-monitor sangat menjengkelkan.
+
+Mads Kristensen dari tim Visual Studio [berbagi pengaturan yang kurang dikenal](https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/) yang sepenuhnya mengubah cara floating windows berperilaku. Satu dropdown. Itu saja.
+
+## Pengaturannya
+
+**Tools > Options > Environment > Windows > Floating Windows**
+
+Dropdown "These floating windows are owned by the main window" memiliki tiga opsi:
+
+- **None** — independensi penuh. Setiap floating window mendapat entri taskbar sendiri dan berperilaku seperti jendela Windows biasa.
+- **Tool Windows** (default) — dokumen mengapung bebas, tool windows tetap terikat ke IDE.
+- **Documents and Tool Windows** — perilaku Visual Studio klasik, semuanya terikat ke jendela utama.
+
+## Mengapa "None" adalah Pilihan Terbaik untuk Setup Multi-Monitor
+
+Atur ke **None** dan tiba-tiba semua floating tool windows dan dokumen berperilaku seperti aplikasi Windows nyata. Mereka muncul di taskbar, tetap terlihat saat kamu meminimalkan jendela Visual Studio utama, dan berhenti memaksa diri ke depan segalanya.
+
+Kombinasikan ini dengan **PowerToys FancyZones** dan itu mengubah segalanya. Buat tata letak kustom di seluruh monitormu, snap Solution Explorer ke satu zona, debugger ke zona lain, dan file kode di mana pun kamu mau. Semuanya tetap di tempat, semuanya dapat diakses secara mandiri.
+
+## Rekomendasi Cepat
+
+- **Pengguna multi-monitor**: Atur ke **None**, pasangkan dengan FancyZones
+- **Floating windows sesekali**: **Tool Windows** (default) adalah jalan tengah yang solid
+- **Alur kerja tradisional**: **Documents and Tool Windows** mempertahankan gaya klasik
+
+Tips: **Ctrl + double-click** pada title bar tool window mana pun untuk langsung memfloat atau mendocknya. Tidak perlu restart setelah mengubah pengaturan.
+
+## Kesimpulan
+
+Ini salah satu pengaturan "Saya tidak percaya saya tidak tahu tentang ini". Jika floating windows di Visual Studio pernah membuatmu kesal, pergi ubah ini sekarang.
+
+Baca [postingan lengkapnya](https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/) untuk detail dan screenshot.
+
+
+---
+## Penilaian Modernisasi GitHub Copilot Adalah Alat Migrasi Terbaik yang Belum Anda Gunakan
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet, azure, github-copilot, modernization, migration, aspnet-core
+- **Reading time**: 1 min
+
+> Ekstensi modernisasi GitHub Copilot tidak hanya menyarankan perubahan kode — melainkan menghasilkan penilaian migrasi lengkap dengan masalah yang dapat ditindaklanjuti, perbandingan target Azure, dan alur kerja kolaboratif.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "dotnet-modernization-assessment-github-copilot" >}}).*
+
+Memigrasikan aplikasi .NET Framework lama ke .NET modern adalah salah satu tugas yang semua orang tahu harus dilakukan tapi tidak ada yang ingin memulainya.
+
+Jeffrey Fritz baru saja menerbitkan [analisis mendalam tentang penilaian modernisasi GitHub Copilot](https://devblogs.microsoft.com/dotnet/your-migrations-source-of-truth-the-modernization-assessment/).
+
+## Ini bukan sekadar mesin saran kode
+
+Ekstensi VS Code mengikuti model **Nilai → Rencanakan → Eksekusi**. Fase penilaian menganalisis seluruh basis kode dan menghasilkan dokumen terstruktur yang menangkap semuanya.
+
+Penilaian disimpan di bawah `.github/modernize/assessment/`. Setiap run menghasilkan laporan independen.
+
+## Dua cara untuk memulai
+
+**Penilaian yang Direkomendasikan** — jalur cepat. Pilih dari domain yang dikurasi (Peningkatan Java/.NET, Kesiapan Cloud, Keamanan).
+
+**Penilaian Kustom** — jalur terarah. Konfigurasikan apa yang akan dianalisis: komputasi target (App Service, AKS, Container Apps), OS target, analisis kontainerisasi.
+
+## Rincian masalah dapat ditindaklanjuti
+
+Setiap masalah dilengkapi level kritis:
+
+- **Wajib** — harus diperbaiki atau migrasi akan gagal
+- **Potensial** — mungkin berdampak pada migrasi, memerlukan penilaian manusia
+- **Opsional** — perbaikan yang direkomendasikan, tidak akan memblokir migrasi
+
+## Pendapat saya
+
+Jika Anda memiliki aplikasi .NET Framework lama, ini adalah alat *terbaik* untuk memulai. Dokumen penilaian saja sudah sepadan dengan waktunya.
+
+Baca [panduan lengkap](https://devblogs.microsoft.com/dotnet/your-migrations-source-of-truth-the-modernization-assessment/) dan unduh [ekstensi VS Code](https://aka.ms/ghcp-appmod/vscode-ext).
+
+
+---
+## SQL MCP Server — Cara yang Tepat untuk Memberi Agen AI Akses Database
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure-sql, mcp, data-api-builder, ai, azure, databases
+- **Reading time**: 1 min
+
+> SQL MCP Server dari Data API builder memberi agen AI akses database yang aman dan deterministik tanpa mengekspos skema atau mengandalkan NL2SQL.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "sql-mcp-server-data-api-builder" >}}).*
+
+Jujur saja: sebagian besar server MCP database yang tersedia saat ini sangat menakutkan. Mereka mengambil kueri bahasa alami, menghasilkan SQL secara langsung, dan menjalankannya pada data produksi Anda.
+
+Tim Azure SQL baru saja [memperkenalkan SQL MCP Server](https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/), dan mengambil pendekatan yang secara fundamental berbeda.
+
+## Mengapa tidak NL2SQL?
+
+Model tidak deterministik. SQL MCP Server menggunakan pendekatan **NL2DAB**. Agen bekerja dengan lapisan abstraksi entitas Data API builder untuk menghasilkan T-SQL yang akurat secara deterministik.
+
+## Tujuh alat, bukan tujuh ratus
+
+SQL MCP Server mengekspos tepat tujuh alat DML:
+
+- `describe_entities` — temukan entitas yang tersedia
+- `create_record` — sisipkan baris
+- `read_records` — kueri tabel dan view
+- `update_record` — modifikasi baris
+- `delete_record` — hapus baris
+- `execute_entity` — jalankan stored procedure
+- `aggregate_records` — kueri agregasi
+
+## Mulai dalam tiga perintah
+
+```bash
+dab init   --database-type mssql   --connection-string "@env('sql_connection_string')"
+
+dab add Customers   --source dbo.Customers   --permissions "anonymous:*"
+
+dab start
+```
+
+## Cerita keamanan solid
+
+RBAC di setiap lapisan, integrasi Azure Key Vault, Microsoft Entra + OAuth kustom.
+
+Lihat [posting lengkap](https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/) dan [dokumentasi](https://aka.ms/sql/mcp).
+
+
+---
+## VS Code 1.116 — Aplikasi Agen Mendapatkan Navigasi Keyboard dan Penyelesaian Konteks File
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/vscode-1-116-agents-app-updates/
+- **Date**: April 10, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: vscode, developer-tools, agents, accessibility
+- **Reading time**: 1 min
+
+> VS Code 1.116 berfokus pada polesan aplikasi Agen — keybinding khusus, peningkatan aksesibilitas, penyelesaian konteks file, dan resolusi tautan CSS @import.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "vscode-1-116-agents-app-updates" >}}).*
+
+VS Code 1.116 adalah rilis April 2026, dan meskipun lebih ringan dari beberapa pembaruan terbaru, perubahannya fokus dan bermakna — terutama jika kamu menggunakan aplikasi Agen setiap hari.
+
+Inilah yang mendarat, berdasarkan [catatan rilis resmi](https://code.visualstudio.com/updates/v1_116).
+
+## Peningkatan aplikasi Agen
+
+Aplikasi Agen terus matang dengan polesan kegunaan yang membuat perbedaan nyata dalam alur kerja sehari-hari:
+
+**Keybinding khusus** — kamu sekarang bisa memfokuskan tampilan Changes, pohon file dalam Changes, dan tampilan Chat Customizations dengan perintah dan pintasan keyboard khusus.
+
+**Dialog bantuan aksesibilitas** — menekan `Alt+F1` di kotak input chat sekarang membuka dialog bantuan aksesibilitas yang menampilkan perintah dan keybinding yang tersedia.
+
+**Penyelesaian konteks file** — ketik `#` di chat aplikasi Agen untuk memicu penyelesaian konteks file yang dicakup ke workspace saat ini.
+
+## Resolusi tautan CSS `@import`
+
+Sesuatu yang bagus untuk developer frontend: VS Code sekarang menyelesaikan referensi CSS `@import` yang menggunakan jalur node_modules. Kamu bisa `Ctrl+klik` melalui import seperti `@import "some-module/style.css"` saat menggunakan bundler.
+
+## Kesimpulan
+
+VS Code 1.116 tentang penyempurnaan — membuat aplikasi Agen lebih mudah dinavigasi, lebih mudah diakses, dan lebih ramah keyboard. Lihat [catatan rilis lengkapnya](https://code.visualstudio.com/updates/v1_116) untuk daftar lengkap.
+
+
+---
+## VS Code 1.115 — Notifikasi Terminal Latar Belakang, Mode Agen SSH, dan Lainnya
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/
+- **Date**: April 06, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: vscode, developer-tools, copilot, ai, remote-development
+- **Reading time**: 2 min
+
+> VS Code 1.115 menghadirkan notifikasi terminal latar belakang untuk agen, hosting agen jarak jauh SSH, tempel file di terminal, dan pelacakan edit sadar sesi. Inilah yang penting untuk developer .NET.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "vscode-1-115-agent-improvements" >}}).*
+
+VS Code 1.115 baru saja [rilis](https://code.visualstudio.com/updates/v1_115), dan meskipun ini adalah rilis yang lebih ringan dalam hal fitur utama, peningkatan terkait agen benar-benar berguna jika kamu bekerja dengan asisten coding AI setiap hari.
+
+Biarkan aku menyoroti apa yang sebenarnya layak diketahui.
+
+## Terminal latar belakang berkomunikasi kembali ke agen
+
+Ini adalah fitur unggulan. Terminal latar belakang sekarang secara otomatis memberi tahu agen ketika perintah selesai, termasuk kode keluar dan output terminal.
+
+Mengapa ini penting? Jika kamu menggunakan mode agen Copilot untuk menjalankan perintah build atau suite test di latar belakang, kamu tahu rasa sakit "apakah itu sudah selesai?" — terminal latar belakang pada dasarnya adalah tembak dan lupakan. Sekarang agen mendapat pemberitahuan ketika `dotnet build` atau `dotnet test`mu selesai, melihat output, dan dapat bereaksi sesuai. Ini adalah perubahan kecil yang membuat alur kerja yang digerakkan agen jauh lebih andal.
+
+Ada juga alat `send_to_terminal` baru yang memungkinkan agen mengirim perintah ke terminal latar belakang dengan konfirmasi pengguna.
+
+## Hosting agen jarak jauh SSH
+
+VS Code sekarang mendukung koneksi ke mesin jarak jauh melalui SSH, secara otomatis menginstal CLI dan memulainya dalam mode host agen.
+
+## Pelacakan edit dalam sesi agen
+
+Edit file yang dibuat selama sesi agen sekarang dilacak dan dipulihkan, dengan diff, undo/redo, dan pemulihan state.
+
+## Kesadaran tab browser dan peningkatan lainnya
+
+Beberapa tambahan kualitas hidup lainnya:
+
+- **Pelacakan tab browser** — chat sekarang bisa melacak dan menautkan ke tab browser yang dibuka selama sesi
+- **Tempel file di terminal** — tempel file (termasuk gambar) ke terminal dengan Ctrl+V
+- **Cakupan tes di minimap** — indikator cakupan tes sekarang muncul di minimap
+- **Pinch-to-zoom di Mac** — browser terintegrasi mendukung gestur pinch-to-zoom
+
+## Kesimpulan
+
+VS Code 1.115 adalah rilis inkremental, tapi peningkatan agen — notifikasi terminal latar belakang, hosting agen SSH, dan pelacakan edit — menambah pengalaman yang terasa lebih lancar secara keseluruhan. Lihat [catatan rilis lengkapnya](https://code.visualstudio.com/updates/v1_115) untuk setiap detail.
+
+
+---
+## C# 15 Mendapatkan Tipe Union — Dan Itu Persis Yang Kita Minta
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/csharp-15-union-types-exhaustive-matching/
+- **Date**: April 05, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: csharp, dotnet, union-types, pattern-matching, dotnet-11, language-features
+- **Reading time**: 1 min
+
+> C# 15 memperkenalkan kata kunci `union` — union diskriminasi yang dipaksakan kompiler dengan pencocokan pola yang lengkap. Seperti apa tampilannya, mengapa penting, dan cara mencobanya hari ini.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "csharp-15-union-types-exhaustive-matching" >}}).*
+
+Inilah yang saya tunggu-tunggu. C# 15 memperkenalkan kata kunci `union` — union diskriminasi yang tepat dengan pencocokan pola lengkap yang dipaksakan kompiler.
+
+Bill Wagner [menerbitkan analisis mendalam](https://devblogs.microsoft.com/dotnet/csharp-15-union-types/).
+
+## Masalah yang diselesaikan union
+
+Sebelum C# 15, mengembalikan "salah satu dari beberapa tipe yang mungkin" dari metode selalu merupakan kompromi. Anda tidak pernah mendapatkan apa yang sebenarnya Anda inginkan: kumpulan tipe tertutup di mana kompiler menjamin Anda telah menangani setiap kasus.
+
+## Sintaksnya sederhana dengan indah
+
+```csharp
+public record class Cat(string Name);
+public record class Dog(string Name);
+public record class Bird(string Name);
+
+public union Pet(Cat, Dog, Bird);
+```
+
+Dan inilah keajaibannya — kompiler memaksakan pencocokan lengkap:
+
+```csharp
+string name = pet switch
+{
+    Dog d => d.Name,
+    Cat c => c.Name,
+    Bird b => b.Name,
+};
+```
+
+Tidak perlu `_`. Jika Anda nanti menambahkan tipe keempat ke union, setiap ekspresi switch yang tidak menanganinya menghasilkan peringatan.
+
+## Di mana ini menjadi praktis
+
+```csharp
+public union ApiResult<T>(T, ApiError, ValidationFailure);
+```
+
+Sekarang setiap konsumen dipaksa untuk menangani sukses, error, dan kegagalan validasi.
+
+## Coba hari ini
+
+Tipe union tersedia di .NET 11 Preview 2. Lihat [referensi bahasa lengkap](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/union).
+
+
+---
+## Aspire 13.2 Memiliki CLI Dokumentasi — dan Agen AI Anda Bisa Menggunakannya Juga
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/
+- **Date**: April 04, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: aspire, dotnet, cli, ai, developer-tools, documentation
+- **Reading time**: 1 min
+
+> .NET Aspire 13.2 menambahkan aspire docs — CLI untuk mencari, menelusuri, dan membaca dokumentasi resmi tanpa meninggalkan terminal. Juga berfungsi sebagai alat untuk agen AI.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "aspire-docs-cli-ai-skills" >}}).*
+
+Anda tahu momen ketika Anda sedang dalam Aspire AppHost, menghubungkan integrasi, dan perlu memeriksa parameter apa yang diharapkan integrasi Redis? Anda alt-tab ke browser, berburu di aspire.dev. Konteks hilang.
+
+Aspire 13.2 baru saja [mengirimkan perbaikan untuk itu](https://devblogs.microsoft.com/aspire/aspire-docs-in-your-terminal/). CLI `aspire docs` memungkinkan Anda mencari, menelusuri, dan membaca dokumentasi Aspire resmi langsung dari terminal.
+
+## Tiga perintah, nol tab browser
+
+```bash
+# Daftar semua dokumen
+aspire docs list
+
+# Cari topik
+aspire docs search "redis"
+
+# Baca halaman penuh
+aspire docs get redis-integration
+
+# Hanya satu bagian
+aspire docs get redis-integration --section "Add Redis resource"
+```
+
+## Sudut agen AI
+
+Perintah `aspire docs` yang sama berfungsi sebagai alat untuk agen AI. Alih-alih mengarang API Aspire berdasarkan data pelatihan lama, agen bisa memanggil `aspire docs search "postgres"`, menemukan dokumen integrasi resmi, dan membaca halaman yang tepat.
+
+## Kesimpulan
+
+`aspire docs` adalah fitur kecil yang memecahkan masalah nyata dengan bersih. Lihat [deep dive David Pine](https://davidpine.dev/posts/aspire-docs-mcp-tools/).
+
+
+---
+## Microsoft Agent Framework Mencapai Versi 1.0 — Inilah yang Benar-Benar Penting bagi Developer .NET
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/agent-framework-1-0-production-ready/
+- **Date**: April 03, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: agent-framework, dotnet, ai, semantic-kernel, azure-openai, multi-agent
+- **Reading time**: 3 min
+
+> Microsoft Agent Framework 1.0 siap produksi dengan API stabil, orkestrasi multi-agen, dan konektor untuk setiap penyedia AI utama. Inilah yang perlu Anda ketahui sebagai developer .NET.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "agent-framework-1-0-production-ready" >}}).*
+
+Jika Anda telah mengikuti perjalanan Agent Framework dari hari-hari awal Semantic Kernel dan AutoGen, ini adalah momen yang berarti. Microsoft Agent Framework baru saja [mencapai versi 1.0](https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/) — siap produksi, API stabil, komitmen dukungan jangka panjang. Tersedia untuk .NET dan Python, dan benar-benar siap untuk beban kerja nyata.
+
+Mari kita potong kebisingan pengumuman dan fokus pada apa yang penting jika Anda membangun aplikasi bertenaga AI dengan .NET.
+
+## Versi singkat
+
+Agent Framework 1.0 menyatukan apa yang dulu Semantic Kernel dan AutoGen menjadi satu SDK open-source. Satu abstraksi agen. Satu mesin orkestrasi. Beberapa penyedia AI. Jika Anda bolak-balik antara Semantic Kernel untuk pola enterprise dan AutoGen untuk alur kerja multi-agen tingkat penelitian, Anda bisa berhenti. Inilah satu SDK-nya sekarang.
+
+## Memulai hampir terlalu mudah
+
+Berikut agen yang berfungsi di .NET:
+
+```csharp
+// dotnet add package Microsoft.Agents.AI.OpenAI --prerelease
+using Microsoft.Agents.AI;
+using Microsoft.Agents.AI.Foundry;
+using Azure.Identity;
+
+var agent = new AIProjectClient(endpoint: "https://your-project.services.ai.azure.com")
+    .GetResponsesClient("gpt-5.3")
+    .AsAIAgent(
+        name: "HaikuBot",
+        instructions: "You are an upbeat assistant that writes beautifully."
+    );
+
+Console.WriteLine(await agent.RunAsync("Write a haiku about shipping 1.0."));
+```
+
+Hanya itu. Beberapa baris dan Anda memiliki agen AI yang berjalan di Azure Foundry. Padanannya dalam Python sama singkatnya. Tambahkan function tools, percakapan multi-turn, dan streaming seiring kemajuan Anda — permukaan API berkembang tanpa menjadi aneh.
+
+## Orkestrasi multi-agen — inilah yang nyata
+
+Agen tunggal cocok untuk demo, tapi skenario produksi biasanya membutuhkan koordinasi. Agent Framework 1.0 hadir dengan pola orkestrasi yang telah teruji langsung dari Microsoft Research dan AutoGen:
+
+- **Sequential** — agen memproses secara berurutan (penulis → reviewer → editor)
+- **Concurrent** — fan out ke beberapa agen secara paralel, konvergensi hasil
+- **Handoff** — satu agen mendelegasikan ke agen lain berdasarkan intent
+- **Group chat** — beberapa agen berdiskusi dan berkonvergensi pada solusi
+- **Magentic-One** — pola multi-agen tingkat penelitian dari MSR
+
+Semuanya mendukung streaming, checkpointing, persetujuan human-in-the-loop, dan pause/resume. Bagian checkpointing sangat penting — alur kerja yang berjalan lama bertahan dari restart proses.
+
+## Fitur yang paling penting
+
+**Hook Middleware.** Tahu pipeline middleware di ASP.NET Core? Konsep yang sama, tapi untuk eksekusi agen. Cegat setiap tahap — tambahkan keamanan konten, logging, kebijakan kepatuhan — tanpa menyentuh prompt agen.
+
+**Memori yang dapat dicolokkan.** Riwayat percakapan, status key-value persisten, pengambilan berbasis vektor. Pilih backend Anda: Foundry Agent Service, Mem0, Redis, Neo4j, atau buat sendiri.
+
+**Agen YAML deklaratif.** Definisikan instruksi, alat, memori, dan topologi orkestrasi agen Anda dalam file YAML yang dikontrol versi. Muat dan jalankan dengan satu panggilan API.
+
+**Dukungan A2A dan MCP.** MCP (Model Context Protocol) memungkinkan agen menemukan dan memanggil alat eksternal secara dinamis. A2A (Agent-to-Agent protocol) memungkinkan kolaborasi lintas runtime.
+
+## Fitur preview yang layak ditonton
+
+- **DevUI** — debugger lokal berbasis browser untuk memvisualisasikan eksekusi agen, aliran pesan, dan panggilan alat secara real-time.
+- **GitHub Copilot SDK dan Claude Code SDK** — gunakan Copilot atau Claude sebagai harness agen langsung dari kode orkestrasi Anda.
+- **Agent Harness** — runtime lokal yang dapat dikustomisasi yang memberi agen akses ke shell, sistem file, dan loop pesan.
+- **Skills** — paket kemampuan domain yang dapat digunakan kembali.
+
+## Migrasi dari Semantic Kernel atau AutoGen
+
+Jika Anda memiliki kode Semantic Kernel atau AutoGen yang ada, tersedia asisten migrasi khusus yang menganalisis kode Anda dan menghasilkan rencana migrasi langkah demi langkah.
+
+## Kesimpulan
+
+Agent Framework 1.0 adalah tonggak produksi yang telah ditunggu oleh tim enterprise. API stabil, dukungan multi-penyedia, dan pola orkestrasi yang benar-benar bekerja pada skala besar.
+
+Framework ini [sepenuhnya open source di GitHub](https://github.com/microsoft/agent-framework). Jika Anda menunggu sinyal "aman digunakan di produksi" — inilah saatnya.
+
+
+---
+## azd Kini Memungkinkan Anda Menjalankan dan Men-debug Agen AI Secara Lokal — Apa yang Berubah di Maret 2026
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/
+- **Date**: April 02, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, azd, ai, agents, dotnet, developer-tools, containers
+- **Reading time**: 1 min
+
+> Azure Developer CLI merilis tujuh rilis di Maret 2026. Highlight: loop jalankan-dan-debug lokal untuk agen AI, integrasi GitHub Copilot dalam pengaturan proyek, dan dukungan Container App Jobs.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "azd-march-2026-local-ai-agent-debugging" >}}).*
+
+Tujuh rilis dalam satu bulan. Itulah yang didorong oleh tim Azure Developer CLI (`azd`) di Maret 2026, dan fitur unggulan adalah yang sudah saya tunggu: **loop jalankan-dan-debug lokal untuk agen AI**.
+
+## Jalankan dan debug agen AI tanpa deploy
+
+Ini yang besar. Ekstensi `azure.ai.agents` baru menambahkan serangkaian perintah:
+
+- `azd ai agent run` — memulai agen Anda secara lokal
+- `azd ai agent invoke` — mengirim pesan ke agen (lokal atau ter-deploy)
+- `azd ai agent show` — menampilkan status dan kesehatan container
+- `azd ai agent monitor` — streaming log container secara real time
+
+Sebelumnya, menguji agen AI berarti deploy ke Microsoft Foundry setiap kali ada perubahan. Sekarang Anda bisa beriterasi secara lokal.
+
+## GitHub Copilot men-scaffold proyek azd Anda
+
+`azd init` kini menawarkan opsi "Set up with GitHub Copilot (Preview)". Agen Copilot men-scaffold konfigurasi untuk struktur proyek Anda.
+
+## Container App Jobs dan peningkatan deployment
+
+- **Container App Jobs**: `azd` kini men-deploy `Microsoft.App/jobs` melalui konfigurasi `host: containerapp` yang ada
+- **Timeout deployment yang dapat dikonfigurasi**: Flag `--timeout` baru pada `azd deploy`
+- **Fallback build lokal**: Ketika remote ACR build gagal, `azd` otomatis beralih ke Docker/Podman lokal
+- **Validasi preflight lokal**: Parameter Bicep divalidasi secara lokal sebelum deploy
+
+## Kesimpulan
+
+Loop debugging agen AI lokal adalah bintang rilis ini. Cek [catatan rilis lengkap](https://devblogs.microsoft.com/azure-sdk/azure-developer-cli-azd-march-2026/).
+
+
+---
+## Azure DevOps Akhirnya Memperbaiki UX Editor Markdown yang Dikeluhkan Semua Orang
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-devops-markdown-editor-work-items/
+- **Date**: April 02, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure-devops, devops, productivity, developer-tools
+- **Reading time**: 1 min
+
+> Editor Markdown Azure DevOps untuk item kerja mendapatkan perbedaan yang lebih jelas antara mode pratinjau dan mode edit. Ini perubahan kecil yang memperbaiki masalah alur kerja yang benar-benar mengganggu.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "azure-devops-markdown-editor-work-items" >}}).*
+
+Jika Anda menggunakan Azure Boards, Anda mungkin pernah mengalami ini: Anda sedang membaca deskripsi item kerja, mungkin meninjau kriteria penerimaan, dan secara tidak sengaja mengklik dua kali. Boom — Anda dalam mode edit. Anda tidak ingin mengedit apa pun. Anda hanya membaca.
+
+Dan Hellem [mengumumkan perbaikannya](https://devblogs.microsoft.com/devops/improving-the-markdown-editor-for-work-items/), dan ini adalah salah satu perubahan yang terdengar kecil tetapi sebenarnya menghilangkan gesekan nyata dari alur kerja harian Anda.
+
+## Apa yang berubah
+
+Editor Markdown untuk bidang teks item kerja sekarang dibuka dalam **mode pratinjau secara default**. Anda dapat membaca dan berinteraksi dengan konten — mengikuti tautan, meninjau pemformatan — tanpa khawatir secara tidak sengaja masuk ke mode edit.
+
+Saat Anda benar-benar ingin mengedit, Anda mengklik ikon edit di bagian atas bidang. Setelah selesai, Anda keluar kembali ke mode pratinjau secara eksplisit.
+
+## Mengapa ini lebih penting dari kedengarannya
+
+[Thread umpan balik komunitas](https://developercommunity.visualstudio.com/t/Markdown-editor-for-work-item-multi-line/10935496) tentang ini panjang. Perilaku klik-dua-kali-untuk-edit diperkenalkan dengan editor Markdown pada Juli 2025, dan keluhan dimulai hampir seketika.
+
+## Status peluncuran
+
+Ini sudah diluncurkan ke sebagian pelanggan dan akan diperluas ke semua orang dalam dua hingga tiga minggu ke depan.
+
+
+---
+## Bookmark Studio Menghadirkan Navigasi Berbasis Slot dan Berbagi ke Bookmark Visual Studio
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/bookmark-studio-visual-studio-extension/
+- **Date**: April 02, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: visual-studio, extensions, productivity, developer-tools
+- **Reading time**: 1 min
+
+> Ekstensi Bookmark Studio baru dari Mads Kristensen menambahkan navigasi slot berbasis keyboard, manajer bookmark, warna, label, dan kemampuan ekspor/berbagi ke bookmark Visual Studio.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "bookmark-studio-visual-studio-extension" >}}).*
+
+Bookmark di Visual Studio selalu... cukup baik. Anda mengaturnya, menavigasi ke yang berikutnya, lupa mana yang mana.
+
+Mads Kristensen baru saja [merilis Bookmark Studio](https://devblogs.microsoft.com/visualstudio/bookmark-studio-evolving-bookmarks-in-visual-studio/), ekstensi eksperimental yang mengisi kesenjangan yang mungkin Anda temui jika menggunakan bookmark secara teratur.
+
+## Navigasi berbasis slot
+
+Tambahan utama: bookmark sekarang dapat ditetapkan ke slot 1–9 dan langsung melompat dengan `Alt+Shift+1` hingga `Alt+Shift+9`. Ini mengubah bookmark dari "saya punya beberapa bookmark di suatu tempat" menjadi "Slot 3 adalah controller API saya, Slot 5 adalah lapisan layanan."
+
+## Manajer Bookmark
+
+Jendela alat baru menampilkan semua bookmark Anda di satu tempat dengan pemfilteran berdasarkan nama, file, lokasi, warna, atau slot.
+
+## Organisasi dengan label, warna, dan folder
+
+Bookmark secara opsional dapat memiliki label dan warna serta dikelompokkan ke dalam folder. Semua metadata disimpan per solusi.
+
+## Ekspor dan berbagi
+
+Bookmark Studio memungkinkan Anda mengekspor bookmark sebagai teks biasa, Markdown, atau CSV:
+- Sertakan jalur bookmark dalam deskripsi pull request
+- Bagikan jejak investigasi dengan rekan tim
+
+Ambil dari [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BookmarkStudio).
+
+
+---
+## Dashboard Aspire 13.2 Kini Memiliki Telemetry API — dan Ini Mengubah Segalanya
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/
+- **Date**: April 02, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: aspire, dotnet, opentelemetry, dashboard, observability, ai
+- **Reading time**: 1 min
+
+> .NET Aspire 13.2 hadir dengan ekspor telemetri yang lebih cerdas, API yang dapat diprogram untuk trace dan log, dan peningkatan visualisasi GenAI. Inilah mengapa ini penting untuk alur kerja debugging Anda.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "aspire-132-dashboard-export-telemetry" >}}).*
+
+Jika Anda membangun aplikasi terdistribusi dengan .NET Aspire, Anda sudah tahu bahwa dashboard adalah bagian terbaik dari seluruh pengalaman. Aspire 13.2 membuatnya jauh lebih baik.
+
+## Mengekspor telemetri dengan cara yang masuk akal
+
+Aspire 13.2 menambahkan dialog **Kelola log dan telemetri** yang tepat di mana Anda dapat:
+- Menghapus semua telemetri
+- Mengekspor telemetri yang dipilih ke file ZIP dalam format OTLP/JSON standar
+- Mengimpor ulang ZIP tersebut ke dashboard Aspire mana pun nanti
+
+Bagian terakhir adalah fitur unggulan. Reproduksi bug, ekspor telemetri, lampirkan ke item kerja, dan rekan tim Anda dapat mengimpornya ke dashboard mereka sendiri.
+
+## Telemetry API adalah pengubah permainan sesungguhnya
+
+Dashboard kini mengekspos HTTP API di bawah `/api/telemetry`:
+- `GET /api/telemetry/resources` — daftar sumber daya dengan telemetri
+- `GET /api/telemetry/spans` — kueri span dengan filter
+- `GET /api/telemetry/logs` — kueri log dengan filter
+- `GET /api/telemetry/traces` — daftar trace
+
+Ini mendukung perintah CLI `aspire agent mcp` dan `aspire otel` yang baru.
+
+## Telemetri GenAI menjadi praktis
+
+VS Code Copilot chat dan Copilot CLI mendukung konfigurasi `OTEL_EXPORTER_OTLP_ENDPOINT` — arahkan ke dashboard Aspire dan Anda bisa melihat agen AI Anda berpikir secara real-time melalui telemetri.
+
+## Kesimpulan
+
+Aspire 13.2 mengubah dashboard dari "UI debugging yang bagus" menjadi "platform observabilitas yang dapat diprogram". Kunjungi [aspire.dev](https://aspire.dev).
+
+
+---
+## Pembaruan Maret Visual Studio Memungkinkan Kamu Membangun Agen Copilot Kustom — dan Alat find_symbol Adalah Hal Besar
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/
+- **Date**: April 02, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: visual-studio, github-copilot, dotnet, ai, developer-tools, profiling
+- **Reading time**: 2 min
+
+> Pembaruan Maret 2026 Visual Studio menghadirkan agen Copilot kustom, skill agen yang dapat digunakan ulang, alat find_symbol yang sadar bahasa, dan profiling bertenaga Copilot dari Test Explorer. Inilah yang penting.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "visual-studio-march-2026-custom-copilot-agents" >}}).*
+
+Visual Studio baru saja mendapatkan pembaruan Copilot paling signifikan hingga saat ini. Mark Downie [mengumumkan rilis Maret](https://devblogs.microsoft.com/visualstudio/visual-studio-march-update-build-your-own-custom-agents/), dan judul utamanya adalah agen kustom — tapi jujur saja, alat `find_symbol` yang tersembunyi lebih jauh mungkin adalah fitur yang paling mengubah alur kerjamu.
+
+Mari saya uraikan apa yang sebenarnya ada di sini.
+
+## Agen Copilot kustom di repo kamu
+
+Ingin Copilot mengikuti standar pengkodean timmu, menjalankan pipeline build, atau mengquery dokumen internal? Sekarang kamu bisa membangun persis itu.
+
+Agen kustom didefinisikan sebagai file `.agent.md` yang kamu letakkan di `.github/agents/` di repositorimu. Setiap agen mendapatkan akses penuh ke kesadaran workspace, pemahaman kode, alat, model pilihanmu, dan koneksi MCP ke layanan eksternal.
+
+Ini adalah pola yang sama yang sudah didukung VS Code — dan sangat menyenangkan melihat Visual Studio menyusul.
+
+## Skill agen: paket instruksi yang dapat digunakan ulang
+
+Skill secara otomatis diambil dari `.github/skills/` di repositorimu atau `~/.copilot/skills/` di profilmu.
+
+## find_symbol: navigasi sadar bahasa untuk agen
+
+Di sinilah hal-hal menjadi sangat menarik. Alat `find_symbol` baru memberikan mode agen Copilot navigasi simbol yang benar-benar didukung oleh layanan bahasa. Alih-alih mencari kode sebagai teks, agen dapat:
+
+- Menemukan semua referensi ke simbol di seluruh proyekmu
+- Mengakses informasi tipe, deklarasi, dan metadata cakupan
+- Menavigasi situs panggilan dengan kesadaran bahasa penuh
+
+Artinya dalam praktik: ketika kamu meminta Copilot untuk refaktor metode atau memperbarui tanda tangan parameter di seluruh situs panggilan, ia benar-benar dapat melihat struktur kodemu.
+
+## Profil tes dengan Copilot
+
+Sekarang ada perintah **Profile with Copilot** di menu konteks Test Explorer. Pilih tes, klik profil, dan Profiling Agent secara otomatis menjalankannya dan menganalisis performa.
+
+## Kesimpulan
+
+Agen kustom dan skill adalah judul utama, tapi `find_symbol` adalah pahlawan diam-diam — ini secara fundamental mengubah seberapa akurat Copilot bisa dalam merefaktor kode .NET. Unduh [Visual Studio 2026 Insiders](https://visualstudio.microsoft.com/downloads/) untuk mencoba semuanya.
+
+
+---
+## KubeCon Europe 2026: Yang Sebenarnya Perlu Diperhatikan Pengembang .NET
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/kubecon-2026-aks-updates-dotnet-developers/
+- **Date**: March 29, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: kubernetes, aks, azure, dotnet, cloud-native, ai
+- **Reading time**: 1 min
+
+> Microsoft menjatuhkan tembok pengumuman Kubernetes di KubeCon Europe 2026. Inilah versi tersaringnya — hanya pembaruan AKS dan cloud-native yang penting jika Anda mengekspedisi aplikasi .NET.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "kubecon-2026-aks-updates-dotnet-developers" >}}).*
+
+Microsoft baru saja menerbitkan [rekap lengkap KubeCon Europe 2026 mereka](https://opensource.microsoft.com/blog/2026/03/24/whats-new-with-microsoft-in-open-source-and-kubernetes-at-kubecon-cloudnativecon-europe-2026/).
+
+## mTLS tanpa pajak service mesh
+
+[Azure Kubernetes Application Network](https://aka.ms/aks/application-network) memberi Anda mutual TLS, otorisasi berbasis aplikasi, dan telemetri traffic — tanpa menerapkan mesh sidecar berat. API ASP.NET Core yang berkomunikasi dengan background worker — semua terenkripsi di tingkat jaringan, tanpa perubahan kode aplikasi.
+
+## Observabilitas GPU
+
+[AKS kini menampilkan metrik GPU secara native](https://aka.ms/aks/managed-gpu-metrics) ke Prometheus dan Grafana terkelola. Tanpa exporter kustom.
+
+## Jaringan lintas kluster
+
+Azure Kubernetes Fleet Manager kini mengirimkan [jaringan lintas kluster](https://aka.ms/kubernetes-fleet/networking/cross-cluster) — konektivitas terpadu, registri layanan global.
+
+## Upgrade yang lebih aman
+
+**Upgrade agent pool biru-hijau** membuat node pool paralel. **Rollback agent pool** memungkinkan Anda kembali ke versi sebelumnya.
+
+## Dari mana memulai
+
+1. **Observabilitas dulu** — aktifkan metrik GPU dan log aliran jaringan
+2. **Coba upgrade biru-hijau** — uji alur kerja rollback
+3. **Pilot jaringan berbasis identitas** — aktifkan mTLS untuk satu jalur layanan
+
+
+---
+## SQL MCP Server, Copilot di SSMS, dan Database Hub dengan AI Agent: Yang Benar-Benar Penting dari SQLCon 2026
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/agentic-ai-microsoft-databases-what-matters/
+- **Date**: March 28, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, ai, sql, databases, mcp
+- **Reading time**: 2 min
+
+> Microsoft merilis serangkaian pengumuman database di SQLCon 2026. Inilah yang benar-benar penting jika Anda membangun aplikasi bertenaga AI di Azure SQL.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "agentic-ai-microsoft-databases-what-matters" >}}).*
+
+Microsoft baru saja meluncurkan [SQLCon 2026 bersamaan dengan FabCon di Atlanta](https://www.microsoft.com/en-us/sql-server/blog/2026/03/18/advancing-agentic-ai-with-microsoft-databases-across-a-unified-data-estate/). Saya akan melewati slide harga enterprise dan fokus pada hal-hal yang penting bagi developer yang membangun dengan Azure SQL dan AI.
+
+## SQL MCP Server kini dalam pratinjau publik
+
+Ini adalah headline bagi saya. Azure SQL Database Hyperscale kini memiliki **SQL MCP Server** dalam pratinjau publik yang memungkinkan Anda menghubungkan data SQL dengan aman ke agen AI dan Copilot menggunakan [Model Context Protocol](https://modelcontextprotocol.io/).
+
+Bagi developer .NET yang membangun agen AI dengan Semantic Kernel atau Microsoft Agent Framework, ini membuka jalur integrasi yang bersih. Agen Anda perlu memeriksa inventaris? Mencari catatan pelanggan? Memvalidasi pesanan? MCP memberinya cara terstruktur untuk melakukan itu tanpa menulis kode pengambilan data khusus.
+
+## GitHub Copilot di SSMS 22 Kini GA
+
+Jika Anda menghabiskan waktu di SQL Server Management Studio, GitHub Copilot kini tersedia secara umum di SSMS 22. Pengalaman Copilot yang sama yang sudah Anda gunakan di VS Code dan Visual Studio, tapi untuk T-SQL.
+
+Nilai praktisnya langsung: bantuan berbasis obrolan untuk menulis query, merestrukturisasi stored procedure, menyelesaikan masalah performa, dan tugas admin.
+
+## Indeks vektor mendapat peningkatan serius
+
+Azure SQL Database kini memiliki indeks vektor yang lebih cepat dan lebih mampu dengan dukungan insert, update, dan delete penuh. Artinya data vektor Anda tetap terkini secara real time — tidak perlu pengindeksan ulang batch.
+
+Yang baru:
+- **Kuantisasi** untuk ukuran indeks lebih kecil tanpa kehilangan banyak akurasi
+- **Pemfilteran iteratif** untuk hasil yang lebih tepat
+- **Integrasi pengoptimal query yang lebih ketat** untuk performa yang dapat diprediksi
+
+Jika Anda melakukan RAG dengan Azure SQL sebagai penyimpan vektor, peningkatan ini berguna secara langsung.
+
+## Database Hub di Fabric: manajemen agentik
+
+Microsoft mengumumkan **Database Hub di Microsoft Fabric** (akses awal), yang memberikan panel tunggal di seluruh Azure SQL, Cosmos DB, PostgreSQL, MySQL, dan SQL Server via Arc.
+
+Agen AI terus-menerus memantau estate database Anda, menampilkan apa yang berubah, menjelaskan mengapa itu penting, dan menyarankan langkah selanjutnya.
+
+## Artinya bagi developer .NET
+
+1. **Coba SQL MCP Server** jika Anda membangun agen AI — cara paling bersih memberi agen akses database.
+2. **Aktifkan Copilot di SSMS** jika belum — kemenangan produktivitas gratis.
+3. **Tinjau indeks vektor** jika Anda melakukan RAG dan menjalankan penyimpan vektor terpisah.
+
+Lihat [pengumuman lengkap dari Shireesh Thota](https://www.microsoft.com/en-us/sql-server/blog/2026/03/18/advancing-agentic-ai-with-microsoft-databases-across-a-unified-data-estate/) dan [daftar untuk akses awal Database Hub](https://aka.ms/database-hub).
+
+
+---
+## Azure DevOps MCP Server Hadir di Microsoft Foundry: Apa Artinya untuk Agen AI Anda
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azure-devops-mcp-server-microsoft-foundry/
+- **Date**: March 26, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, devops, ai, mcp, foundry
+- **Reading time**: 1 min
+
+> Azure DevOps MCP Server kini tersedia di Microsoft Foundry. Hubungkan agen AI Anda langsung ke alur kerja DevOps — item kerja, repo, pipeline — dengan beberapa klik.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "azure-devops-mcp-server-microsoft-foundry" >}}).*
+
+MCP (Model Context Protocol) sedang naik daun. Jika Anda mengikuti ekosistem agen AI, Anda mungkin sudah melihat server MCP bermunculan di mana-mana.
+
+Kini [Azure DevOps MCP Server tersedia di Microsoft Foundry](https://devblogs.microsoft.com/devops/remote-mcp-server-preview-in-microsoft-foundry/), dan ini adalah salah satu integrasi yang membuat Anda berpikir tentang kemungkinan praktisnya.
+
+## Yang sebenarnya terjadi
+
+Microsoft sudah merilis Azure DevOps MCP Server sebagai [pratinjau publik](https://devblogs.microsoft.com/devops/azure-devops-remote-mcp-server-public-preview). Yang baru adalah integrasi Foundry. Anda sekarang dapat menambahkan Azure DevOps MCP Server ke agen Foundry Anda langsung dari katalog alat.
+
+## Cara menyiapkannya
+
+Penyiapannya cukup mudah:
+
+1. Di agen Foundry Anda, buka **Tambah Alat** > **Katalog**
+2. Cari "Azure DevOps"
+3. Pilih Azure DevOps MCP Server (pratinjau) dan klik **Buat**
+4. Masukkan nama organisasi Anda dan hubungkan
+
+## Mengontrol apa yang dapat diakses agen Anda
+
+Anda dapat menentukan alat mana yang tersedia untuk agen Anda. Prinsip hak akses minimum, diterapkan ke agen AI Anda.
+
+## Mengapa ini menarik untuk tim .NET
+
+- **Asisten perencanaan sprint** — agen yang dapat menarik item kerja dan menyarankan kapasitas sprint
+- **Bot code review** — agen yang memahami konteks PR
+- **Respons insiden** — agen yang membuat item kerja dan mengkorelasikan bug
+- **Orientasi developer** — jawaban nyata berdasarkan data proyek aktual
+
+## Kesimpulan
+
+Lihat [pengumuman lengkap](https://devblogs.microsoft.com/devops/remote-mcp-server-preview-in-microsoft-foundry/) untuk detail lebih lanjut.
+
+
+---
+## Dari Laptop ke Produksi: Deploy Agen AI ke Microsoft Foundry dengan Dua Perintah
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/deploy-ai-agents-foundry-azd-two-commands/
+- **Date**: March 26, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, ai, foundry, developer-tools, azd
+- **Reading time**: 1 min
+
+> Azure Developer CLI kini memiliki perintah 'azd ai agent' yang membawa agen AI Anda dari pengembangan lokal ke endpoint Foundry langsung dalam hitungan menit.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "deploy-ai-agents-foundry-azd-two-commands" >}}).*
+
+Anda tahu kesenjangan antara "berfungsi di mesin saya" dan "sudah di-deploy dan melayani traffic"? Untuk agen AI, kesenjangan itu sangat lebar.
+
+Azure Developer CLI baru saja menjadikan ini [urusan dua perintah](https://devblogs.microsoft.com/azure-sdk/azd-ai-agent-end-to-end/).
+
+## Alur kerja `azd ai agent` baru
+
+```bash
+azd ai agent init
+azd up
+```
+
+Itu saja. `azd ai agent init` membuat scaffolding infrastruktur-sebagai-kode di repo Anda, dan `azd up` menyediakan semua hal di Azure dan menerbitkan agen Anda.
+
+## Yang terjadi di balik layar
+
+Perintah `init` menghasilkan template Bicep yang nyata dan dapat diperiksa di repo Anda — Foundry Resource, Foundry Project, konfigurasi deployment model, managed identity dengan RBAC.
+
+## Dev inner loop
+
+```bash
+azd ai agent run    # jalankan agen secara lokal
+azd ai agent invoke # kirim prompt uji
+azd ai agent monitor --follow  # stream log real-time
+```
+
+## Set perintah lengkap
+
+| Perintah | Yang dilakukan |
+|---------|-------------|
+| `azd ai agent init` | Scaffold proyek agen Foundry dengan IaC |
+| `azd up` | Provisioning sumber daya dan deploy agen |
+| `azd ai agent invoke` | Kirim prompt ke agen remote atau lokal |
+| `azd ai agent run` | Jalankan agen secara lokal |
+| `azd ai agent monitor` | Stream log real-time |
+| `azd down` | Bersihkan semua sumber daya Azure |
+
+Lihat [panduan lengkap](https://devblogs.microsoft.com/azure-sdk/azd-ai-agent-end-to-end/).
+
+
+---
+## Foundry Agent Service Sudah GA: Yang Benar-benar Penting untuk Pengembang Agen .NET
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/foundry-agent-service-ga-what-matters/
+- **Date**: March 26, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: azure, ai, foundry, agents, dotnet
+- **Reading time**: 1 min
+
+> Foundry Agent Service Microsoft baru saja mencapai GA dengan jaringan privat, Voice Live, evaluasi produksi, dan runtime multi-model terbuka.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "foundry-agent-service-ga-what-matters" >}}).*
+
+Mari jujur — membangun prototipe agen AI adalah bagian yang mudah. Bagian sulitnya adalah semua yang datang setelah itu.
+
+[Foundry Agent Service baru saja GA](https://devblogs.microsoft.com/foundry/foundry-agent-service-ga/), dan rilis ini sangat fokus pada kesenjangan "semua yang datang setelah itu".
+
+## Dibangun di atas Responses API
+
+Foundry Agent Service generasi berikutnya dibangun di atas OpenAI Responses API. Arsitekturnya sengaja terbuka — Anda tidak terkunci pada satu penyedia model.
+
+## Jaringan privat: hambatan enterprise dihilangkan
+
+- **Tanpa egress publik** — traffic agen tidak pernah menyentuh internet publik
+- **Injeksi container/subnet** ke jaringan Anda
+- **Konektivitas alat disertakan** — server MCP, Azure AI Search melalui jalur privat
+
+## Autentikasi MCP
+
+| Metode auth | Kapan digunakan |
+|-------------|-------------|
+| Berbasis kunci | Akses bersama sederhana |
+| Identitas Agen Entra | Service-to-service |
+| Identitas Terkelola Entra | Isolasi per-proyek |
+| Passthrough identitas OAuth | Akses yang didelegasikan pengguna |
+
+## Voice Live
+
+Voice Live menggabungkan STT, LLM, dan TTS menjadi satu API terkelola.
+
+## Evaluasi
+
+1. **Evaluator siap pakai** — koherensi, relevansi, keterpancaran
+2. **Evaluator kustom** — logika bisnis Anda sendiri
+3. **Evaluasi berkelanjutan** — pengambilan sampel traffic produksi langsung
+
+Lihat [panduan quickstart](https://learn.microsoft.com/azure/foundry/quickstarts/get-started-code) dan [pengumuman GA](https://devblogs.microsoft.com/foundry/foundry-agent-service-ga/).
+
+
+---
+## Respons Latar Belakang di Microsoft Agent Framework: Tidak Ada Lagi Kecemasan Timeout
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/background-responses-agent-framework-long-running-tasks/
+- **Date**: March 26, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet, ai, agent-framework, azure
+- **Reading time**: 1 min
+
+> Microsoft Agent Framework kini memungkinkan Anda membongkar tugas AI yang berjalan lama dengan token kelanjutan. Begini cara respons latar belakang bekerja dan mengapa itu penting untuk agen .NET Anda.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "background-responses-agent-framework-long-running-tasks" >}}).*
+
+Jika Anda pernah membangun sesuatu dengan model penalaran seperti o3 atau GPT-5.2, Anda tahu rasa sakitnya. Agen Anda mulai memproses tugas yang kompleks, klien menunggu, dan di suatu titik koneksi habis waktu.
+
+Microsoft Agent Framework baru saja merilis [respons latar belakang](https://devblogs.microsoft.com/agent-framework/handling-long-running-operations-with-background-responses/) — dan sejujurnya, ini adalah salah satu fitur yang seharusnya ada sejak hari pertama.
+
+## Cara token kelanjutan bekerja
+
+Alih-alih memblokir, Anda memulai tugas agen dan mendapatkan kembali **token kelanjutan**. Anggap seperti klaim tiket di bengkel reparasi:
+
+1. Kirim permintaan Anda dengan `AllowBackgroundResponses = true`
+2. Jika agen mendukung pemrosesan latar belakang, Anda mendapat token kelanjutan
+3. Poll sesuai jadwal Anda hingga token kembali `null`
+
+```csharp
+AgentRunOptions options = new()
+{
+    AllowBackgroundResponses = true
+};
+
+AgentSession session = await agent.CreateSessionAsync();
+AgentResponse response = await agent.RunAsync(
+    "Write a detailed market analysis for the Q4 product launch.", session, options);
+
+while (response.ContinuationToken is not null)
+{
+    await Task.Delay(TimeSpan.FromSeconds(2));
+    options.ContinuationToken = response.ContinuationToken;
+    response = await agent.RunAsync(session, options);
+}
+
+Console.WriteLine(response.Text);
+```
+
+## Kapan sebenarnya menggunakan ini
+
+- **Tugas penalaran kompleks** — analisis multi-langkah, penelitian mendalam
+- **Pembuatan konten panjang** — laporan terperinci, dokumen multi-bagian
+- **Jaringan tidak dapat diandalkan** — klien mobile, deployment edge
+- **Pola UX asinkron** — kirim tugas, lakukan hal lain, kembali untuk hasil
+
+Lihat [dokumentasi lengkap](https://devblogs.microsoft.com/agent-framework/handling-long-running-operations-with-background-responses/).
+
+
+---
+## VS Code 1.112: Apa yang Benar-benar Perlu Diperhatikan Developer .NET
+
+- **URL**: https://thedotnetblog.com/id/posts/emiliano-montesdeoca/vscode-1-112-dotnet-developers/
+- **Date**: March 26, 2026
+- **Author**: Emiliano Montesdeoca
+- **Tags**: dotnet, visual-studio, tooling, productivity, ai
+- **Reading time**: 2 min
+
+> VS Code 1.112 baru saja rilis dan penuh dengan peningkatan agen, debugger browser terintegrasi, sandboxing MCP, dan dukungan monorepo. Inilah yang sebenarnya penting jika kamu membangun dengan .NET.
+
+
+
+> *Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "vscode-1-112-dotnet-developers" >}}).*
+
+VS Code 1.112 baru saja mendarat, dan jujur saja? Yang satu ini terasa berbeda jika kamu menghabiskan hari-harimu di dunia .NET. Ada banyak hal di [catatan rilis resmi](https://code.visualstudio.com/updates/v1_112), tapi biarkan aku menghemat scrolling dan fokus pada apa yang sebenarnya penting bagi kita.
+
+## Copilot CLI menjadi jauh lebih berguna
+
+Tema besar rilis ini adalah **otonomi agen** — memberi Copilot lebih banyak ruang untuk bekerja tanpa kamu mengawasi setiap langkah.
+
+### Steering pesan dan antrian
+
+Kamu tahu momen saat Copilot CLI sedang di tengah-tengah tugas dan kamu menyadari lupa menyebutkan sesuatu? Sebelumnya, kamu harus menunggu. Sekarang kamu bisa mengirim pesan saat permintaan masih berjalan — baik untuk mengarahkan respons saat ini atau mengantri instruksi tindak lanjut.
+
+### Tingkat izin
+
+Ini yang paling bikin saya antusias. Sesi Copilot CLI sekarang mendukung tiga tingkat izin:
+
+- **Default Permissions** — alur biasa di mana alat meminta konfirmasi sebelum berjalan
+- **Bypass Approvals** — menyetujui segalanya secara otomatis dan mencoba ulang saat kesalahan
+- **Autopilot** — berjalan sepenuhnya otonom: menyetujui alat, menjawab pertanyaannya sendiri, dan terus berjalan sampai tugas selesai
+
+Kamu bisa mengaktifkan Autopilot dengan pengaturan `chat.autopilot.enabled`.
+
+## Debug aplikasi web tanpa meninggalkan VS Code
+
+Browser terintegrasi sekarang mendukung **debugging penuh**. Kamu bisa menetapkan breakpoint, melangkah melalui kode, dan memeriksa variabel — semua di dalam VS Code.
+
+```json
+{
+  "type": "editor-browser",
+  "request": "launch",
+  "name": "Debug Blazor App",
+  "url": "https://localhost:5001"
+}
+```
+
+Untuk developer Blazor, ini adalah perubahan besar.
+
+## Sandboxing server MCP
+
+Jika kamu menggunakan server MCP, sekarang kamu bisa mem-sandbox-nya:
+
+```json
+{
+  "servers": {
+    "my-azure-tools": {
+      "command": "node",
+      "args": ["./mcp-server.js"],
+      "sandboxEnabled": true
+    }
+  }
+}
+```
+
+## Penemuan kustomisasi monorepo
+
+Jika kamu bekerja di monorepo, dengan pengaturan `chat.useCustomizationsInParentRepositories`, VS Code berjalan naik ke root `.git` dan menemukan segalanya.
+
+## /troubleshoot untuk debugging agen
+
+Pernah menyiapkan instruksi atau skill kustom dan bertanya-tanya mengapa tidak terpilih? Aktifkan skill `/troubleshoot` baru dengan:
+
+```json
+{
+  "github.copilot.chat.agentDebugLog.enabled": true,
+  "github.copilot.chat.agentDebugLog.fileLogging.enabled": true
+}
+```
+
+## Kesimpulan
+
+VS Code 1.112 jelas mendorong keras pengalaman agen — lebih banyak otonomi, debugging yang lebih baik, keamanan yang lebih ketat. [Unduh VS Code 1.112](https://code.visualstudio.com/updates/v1_112) atau perbarui dari dalam VS Code melalui **Help > Check for Updates**.
+
+
+---
+
+## Events
+- No events published yet.
+
+---
+
+## Authors
+### Emiliano Montesdeoca
+
+- **URL**: https://thedotnetblog.com/id/authors/emiliano-montesdeoca/
+- **Role**: Microsoft MVP & Team Lead Cloud Solutions
+- **Bio**: Emiliano adalah pengembang perangkat lunak Uruguay-Spanyol, Microsoft MVP dalam Developer Technologies, dan advokat komunitas yang berbasis di Tenerife, Kepulauan Canary.
+
+Ia berspesialisasi dalam merancang solusi cloud yang skalabel menggunakan teknologi Microsoft dan saat ini menjabat sebagai Team Lead untuk Tim Cloud Solutions di Intelequia Technologies.
+
+Pembicara konferensi internasional yang sering tampil dan bersemangat berbagi pengetahuan, ia menerjemahkan pemecahan masalah dunia nyata menjadi wawasan yang dapat ditindaklanjuti oleh para developer.
+
+
+---

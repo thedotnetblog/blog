@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Coding-Agents | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/coding-agents/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 17 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/coding-agents/index.xml" rel="self" type="application/rss+xml"/><item><title>توقف عن حراسة طرفيتك: الوضع المنفصل في Aspire يغير سير العمل</title><link>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</link><pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</guid><description>يتيح لك Aspire 13.2 تشغيل AppHost في الخلفية واسترداد طرفيتك. مقرون بأوامر CLI الجديدة ودعم الوكلاء، هذا أمر أكبر مما يبدو.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;تمت ترجمة هذا المقال تلقائياً. للنسخة الأصلية، &lt;a href="https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/"&gt;انقر هنا&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;في كل مرة تشغّل فيها Aspire AppHost، تختفي طرفيتك. مقفلة. مشغولة حتى Ctrl+C. تريد تشغيل أمر سريع؟ افتح تبويبًا جديدًا. تريد التحقق من السجلات؟ تبويب آخر. هذا الاحتكاك الصغير يتراكم بسرعة.&lt;/p&gt;
+&lt;p&gt;يحل Aspire 13.2 هذا. كتب James Newton-King &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;تفاصيل كاملة&lt;/a&gt;، وبصراحة، هذه إحدى تلك الميزات التي تُغيّر طريقة عملك فوراً.&lt;/p&gt;
+&lt;h2 id="الوضع-المنفصل-أمر-واحد-الطرفية-تعود"&gt;الوضع المنفصل: أمر واحد، الطرفية تعود&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;هذا اختصار لـ &lt;code&gt;aspire run --detach&lt;/code&gt;. يعمل AppHost الخاص بك في الخلفية وتستعيد طرفيتك فوراً.&lt;/p&gt;
+&lt;h2 id="إدارة-ما-يعمل"&gt;إدارة ما يعمل&lt;/h2&gt;
+&lt;p&gt;التشغيل في الخلفية مفيد فقط إذا كنت تستطيع إدارة ما هو جارٍ. يأتي Aspire 13.2 بمجموعة كاملة من أوامر CLI:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# قائمة جميع AppHost العاملة&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire ps
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# فحص حالة AppHost محدد&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire describe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# بث السجلات من AppHost العامل&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire logs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# إيقاف AppHost محدد&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire stop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="دمجه-مع-الوضع-المعزول"&gt;دمجه مع الوضع المعزول&lt;/h2&gt;
+&lt;p&gt;الوضع المنفصل يتزاوج طبيعياً مع الوضع المعزول:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;كل مثيل يحصل على منافذ عشوائية وأسرار منفصلة ودورة حياة خاصة به.&lt;/p&gt;
+&lt;h2 id="لماذا-هذا-ضخم-لوكلاء-البرمجة"&gt;لماذا هذا ضخم لوكلاء البرمجة&lt;/h2&gt;
+&lt;p&gt;وكيل البرمجة الذي يعمل في طرفيتك يمكنه الآن:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;تشغيل التطبيق بـ &lt;code&gt;aspire start&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;الاستعلام عن حالته بـ &lt;code&gt;aspire describe&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;التحقق من السجلات بـ &lt;code&gt;aspire logs&lt;/code&gt; لتشخيص المشكلات&lt;/li&gt;
+&lt;li&gt;إيقافه بـ &lt;code&gt;aspire stop&lt;/code&gt; عند الانتهاء&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;تشغيل &lt;code&gt;aspire agent init&lt;/code&gt; يهيّئ ملف مهارات Aspire الذي يعلّم الوكلاء هذه الأوامر.&lt;/p&gt;
+&lt;h2 id="خلاصة"&gt;خلاصة&lt;/h2&gt;
+&lt;p&gt;الوضع المنفصل هو ترقية لسير العمل متنكرة كعلامة بسيطة. اقرأ &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;المقال كاملاً&lt;/a&gt; واحصل على Aspire 13.2 مع &lt;code&gt;aspire update --self&lt;/code&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

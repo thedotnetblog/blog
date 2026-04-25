@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Infrastructure as Code | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/infrastructure-as-code/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 21 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/infrastructure-as-code/index.xml" rel="self" type="application/rss+xml"/><item><title>azd + GitHub Copilot: Penyiapan Proyek Berbantuan AI dan Pemecahan Masalah Error Cerdas</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</link><pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</guid><description>Azure Developer CLI kini terintegrasi dengan GitHub Copilot untuk membuat infrastruktur proyek dan menyelesaikan error deployment — tanpa keluar dari terminal.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Artikel ini diterjemahkan secara otomatis. Untuk versi asli dalam bahasa Inggris, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Kamu pasti pernah mengalami momen ketika ingin men-deploy aplikasi yang sudah ada ke Azure, lalu menatap file &lt;code&gt;azure.yaml&lt;/code&gt; yang kosong sambil mencoba mengingat apakah Express API-mu harus menggunakan Container Apps atau App Service? Momen itu kini jauh lebih singkat.&lt;/p&gt;
+&lt;p&gt;Azure Developer CLI (&lt;code&gt;azd&lt;/code&gt;) kini terintegrasi dengan GitHub Copilot dalam dua cara yang nyata: scaffolding proyek berbantuan AI selama &lt;code&gt;azd init&lt;/code&gt;, dan pemecahan masalah error cerdas ketika deployment gagal. Kedua fitur ini sepenuhnya berjalan di dalam terminal.&lt;/p&gt;
+&lt;h2 id="setup-dengan-copilot-selama-azd-init"&gt;Setup dengan Copilot selama azd init&lt;/h2&gt;
+&lt;p&gt;Saat menjalankan &lt;code&gt;azd init&lt;/code&gt;, kini ada opsi &amp;ldquo;Set up with GitHub Copilot (Preview)&amp;rdquo;. Pilih itu dan Copilot akan menganalisis codebase-mu untuk menghasilkan &lt;code&gt;azure.yaml&lt;/code&gt;, template infrastruktur, dan modul Bicep — berdasarkan kode aslimu.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd init
+# Pilih: &amp;#34;Set up with GitHub Copilot (Preview)&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Prasyarat:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;azd 1.23.11 atau lebih baru&lt;/strong&gt; — cek dengan &lt;code&gt;azd version&lt;/code&gt; atau perbarui dengan &lt;code&gt;azd update&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Langganan GitHub Copilot aktif&lt;/strong&gt; (Individual, Business, atau Enterprise)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub CLI (&lt;code&gt;gh&lt;/code&gt;)&lt;/strong&gt; — &lt;code&gt;azd&lt;/code&gt; akan meminta login jika diperlukan&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Yang menurutku benar-benar berguna: ini bekerja dua arah. Membangun dari nol? Copilot membantu mengonfigurasi layanan Azure yang tepat sejak awal. Punya aplikasi yang ingin di-deploy? Arahkan Copilot ke sana dan konfigurasi akan dibuat tanpa perlu restrukturisasi kode apapun.&lt;/p&gt;
+&lt;h3 id="yang-sebenarnya-dilakukan"&gt;Yang sebenarnya dilakukan&lt;/h3&gt;
+&lt;p&gt;Katakanlah kamu punya Node.js Express API dengan dependensi PostgreSQL. Daripada memutuskan manual antara Container Apps dan App Service, lalu menulis Bicep dari nol, Copilot mendeteksi stack-mu dan menghasilkan:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;azure.yaml&lt;/code&gt; dengan pengaturan &lt;code&gt;language&lt;/code&gt;, &lt;code&gt;host&lt;/code&gt;, dan &lt;code&gt;build&lt;/code&gt; yang tepat&lt;/li&gt;
+&lt;li&gt;Modul Bicep untuk Azure Container Apps&lt;/li&gt;
+&lt;li&gt;Modul Bicep untuk Azure Database for PostgreSQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Dan menjalankan pemeriksaan awal sebelum mengubah apapun — memverifikasi direktori git bersih, meminta persetujuan alat server MCP di awal. Tidak ada yang terjadi tanpa kamu tahu persis apa yang akan berubah.&lt;/p&gt;
+&lt;h2 id="pemecahan-masalah-error-dengan-copilot"&gt;Pemecahan Masalah Error dengan Copilot&lt;/h2&gt;
+&lt;p&gt;Error deployment adalah hal yang tak terhindarkan. Parameter yang hilang, masalah izin, ketersediaan SKU — dan pesan error jarang memberitahumu satu hal yang benar-benar perlu kamu ketahui: &lt;em&gt;cara memperbaikinya&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Tanpa Copilot, siklusnya terlihat seperti: salin error → cari di docs → baca tiga jawaban Stack Overflow yang tidak relevan → jalankan beberapa perintah &lt;code&gt;az&lt;/code&gt; CLI → coba lagi dan berharap. Dengan Copilot terintegrasi di &lt;code&gt;azd&lt;/code&gt;, siklus ini runtuh. Saat perintah &lt;code&gt;azd&lt;/code&gt; apapun gagal, langsung ditawarkan empat pilihan:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Explain&lt;/strong&gt; — penjelasan dalam bahasa sederhana tentang apa yang salah&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Guidance&lt;/strong&gt; — instruksi langkah demi langkah untuk memperbaiki masalah&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Diagnose and Guide&lt;/strong&gt; — analisis lengkap + Copilot menerapkan perbaikan (dengan persetujuanmu) + retry opsional&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skip&lt;/strong&gt; — tangani sendiri&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Poin kuncinya: Copilot sudah memiliki konteks tentang proyekmu, perintah yang gagal, dan detail error. Sarannya spesifik untuk &lt;em&gt;situasimu&lt;/em&gt;.&lt;/p&gt;
+&lt;h3 id="mengatur-perilaku-default"&gt;Mengatur Perilaku Default&lt;/h3&gt;
+&lt;p&gt;Jika selalu memilih opsi yang sama, lewati prompt interaktif:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.category troubleshoot
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Nilai: &lt;code&gt;explain&lt;/code&gt;, &lt;code&gt;guidance&lt;/code&gt;, &lt;code&gt;troubleshoot&lt;/code&gt;, &lt;code&gt;fix&lt;/code&gt;, &lt;code&gt;skip&lt;/code&gt;. Kamu juga bisa mengaktifkan auto-fix dan retry:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.fix allow
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Kembali ke mode interaktif kapan saja:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config unset copilot.errorHandling.category
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="kesimpulan"&gt;Kesimpulan&lt;/h2&gt;
+&lt;p&gt;Jalankan &lt;code&gt;azd update&lt;/code&gt; untuk mendapatkan versi terbaru dan coba &lt;code&gt;azd init&lt;/code&gt; di proyek berikutnya.&lt;/p&gt;
+&lt;p&gt;Baca &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-copilot-integration/"&gt;pengumuman aslinya di sini&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

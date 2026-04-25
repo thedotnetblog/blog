@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fine-Tuning | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/fine-tuning/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/fine-tuning/index.xml" rel="self" type="application/rss+xml"/><item><title>Foundry RFT Is Goedkoper en Slimmer Geworden — Dit Is Wat Er Veranderd Is</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</guid><description>Microsoft Foundry stuurde deze maand drie RFT-updates: globale training voor o4-mini, nieuwe GPT-4.1-modelbeoordelaars en een best practices-gids.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Als je .NET-apps bouwt die op fijnafgestelde modellen vertrouwen, zijn de Foundry-updates van deze maand de moeite waard.&lt;/p&gt;
+&lt;p&gt;De volledige details staan in de &lt;a href="https://devblogs.microsoft.com/foundry/whats-new-in-foundry-finetune-april-2026/"&gt;officiële aankondiging&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="globale-training-voor-o4-mini"&gt;Globale training voor o4-mini&lt;/h2&gt;
+&lt;p&gt;o4-mini is het go-to-model voor redeneerwerk en agentische workloads. Je kunt nu fine-tuning-taken starten vanuit 13+ Azure-regio&amp;rsquo;s met lagere per-token-trainingstarieven.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;trainingType&amp;#34;&lt;/span&gt;: &lt;span class="s2"&gt;&amp;#34;globalstandard&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="nieuwe-modelbeoordelaars-gpt-41-familie"&gt;Nieuwe modelbeoordelaars: GPT-4.1-familie&lt;/h2&gt;
+&lt;p&gt;Drie nieuwe opties: GPT-4.1, GPT-4.1-mini en GPT-4.1-nano.&lt;/p&gt;
+&lt;p&gt;Indelingsstrategie:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-nano&lt;/strong&gt; voor eerste iteraties. Lage kosten, snelle feedbacklussen.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-mini&lt;/strong&gt; zodra de beoordelingsrubric stabiel is.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1&lt;/strong&gt; voor productiebeoordeling.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="de-rft-gegevensformaatval"&gt;De RFT-gegevensformaatval&lt;/h2&gt;
+&lt;p&gt;RFT-gegevensformaat verschilt van SFT. Het laatste bericht in elke rij moet de rol User of Developer hebben — niet Assistant.&lt;/p&gt;
+&lt;h2 id="waarom-dit-belangrijk-is-voor-net-ontwikkelaars"&gt;Waarom dit belangrijk is voor .NET-ontwikkelaars&lt;/h2&gt;
+&lt;p&gt;Goedkopere training betekent agressiever kunnen itereren. De &lt;a href="https://github.com/microsoft-foundry/fine-tuning/blob/main/Demos/Agentic_RFT_PrivatePreview/RFT_Best_Practice.md"&gt;best practices-gids op GitHub&lt;/a&gt; bespaart echte debugging-tijd.&lt;/p&gt;</content:encoded></item></channel></rss>

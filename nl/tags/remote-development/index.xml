@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Remote-Development | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/remote-development/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 06 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/remote-development/index.xml" rel="self" type="application/rss+xml"/><item><title>VS Code 1.115 — Achtergrondterminalnotificaties, SSH-agentmodus en Meer</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/</link><pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/</guid><description>VS Code 1.115 brengt achtergrondterminalnotificaties voor agenten, SSH-remote agenthosting, bestandsplakken in terminals en sessiegebonden bewerkingentracking. Dit is wat er toe doet voor .NET-ontwikkelaars.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;VS Code 1.115 is zojuist &lt;a href="https://code.visualstudio.com/updates/v1_115"&gt;verschenen&lt;/a&gt;, en hoewel het een lichtere release is wat betreft hoofdfuncties, zijn de agentgerelateerde verbeteringen echt nuttig als je dagelijks met AI-codeassistenten werkt.&lt;/p&gt;
+&lt;p&gt;Laat me uitlichten wat er echt de moeite waard is om te weten.&lt;/p&gt;
+&lt;h2 id="achtergrondterminals-praten-terug-naar-agenten"&gt;Achtergrondterminals praten terug naar agenten&lt;/h2&gt;
+&lt;p&gt;Dit is de uitgelichte functie. Achtergrondterminals informeren agenten nu automatisch wanneer opdrachten zijn voltooid, inclusief de exitcode en terminaluitvoer.&lt;/p&gt;
+&lt;p&gt;Waarom is dit belangrijk? Als je de agentmodus van Copilot hebt gebruikt om build-opdrachten of testsuites op de achtergrond uit te voeren, ken je de pijn van &amp;ldquo;is dat al klaar?&amp;rdquo; — achtergrondterminals waren in wezen vuur en vergeet. Nu krijgt de agent een melding wanneer je &lt;code&gt;dotnet build&lt;/code&gt; of &lt;code&gt;dotnet test&lt;/code&gt; is voltooid, ziet de uitvoer en kan dienovereenkomstig reageren.&lt;/p&gt;
+&lt;p&gt;Er is ook een nieuwe &lt;code&gt;send_to_terminal&lt;/code&gt;-tool waarmee agenten opdrachten naar achtergrondterminals kunnen sturen met gebruikersbevestiging.&lt;/p&gt;
+&lt;h2 id="ssh-remote-agenthosting"&gt;SSH-remote agenthosting&lt;/h2&gt;
+&lt;p&gt;VS Code ondersteunt nu verbinding maken met externe machines via SSH, waarbij de CLI automatisch wordt geïnstalleerd en in agenthost-modus wordt gestart.&lt;/p&gt;
+&lt;h2 id="bewerkingentracking-in-agentsessies"&gt;Bewerkingentracking in agentsessies&lt;/h2&gt;
+&lt;p&gt;Bestandsbewerkingen die tijdens agentsessies zijn gemaakt, worden nu bijgehouden en hersteld, met diffs, ongedaan maken/opnieuw uitvoeren en staatsherstel.&lt;/p&gt;
+&lt;h2 id="browsertabbladbewustzijn-en-andere-verbeteringen"&gt;Browsertabbladbewustzijn en andere verbeteringen&lt;/h2&gt;
+&lt;p&gt;Nog een paar kwaliteitsverbeteringen:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Browsertabbladtracking&lt;/strong&gt; — chat kan nu tabbladen bijhouden die tijdens een sessie zijn geopend en er links naar maken&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bestanden plakken in terminal&lt;/strong&gt; — plak bestanden (inclusief afbeeldingen) in de terminal met Ctrl+V&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Testdekking in minimap&lt;/strong&gt; — testdekkingsindicatoren verschijnen nu in de minimap&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Knijpzoom op Mac&lt;/strong&gt; — geïntegreerde browser ondersteunt knijpzoomgebaren&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="afsluiting"&gt;Afsluiting&lt;/h2&gt;
+&lt;p&gt;VS Code 1.115 is een incrementele release, maar de agentverbeteringen — achtergrondterminalnotificaties, SSH-agenthosting en bewerkingentracking — zorgen voor een merkbaar soepelere ervaring voor AI-ondersteunde ontwikkeling. Bekijk de &lt;a href="https://code.visualstudio.com/updates/v1_115"&gt;volledige releasenotes&lt;/a&gt; voor elk detail.&lt;/p&gt;</content:encoded></item></channel></rss>

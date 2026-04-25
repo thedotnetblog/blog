@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Cloud | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/cloud/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/cloud/index.xml" rel="self" type="application/rss+xml"/><item><title>Eksperimen AI Anda di Azure Membakar Uang — Inilah Cara Memperbaikinya</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/</guid><description>Beban kerja AI di Azure bisa cepat mahal. Mari bicara tentang apa yang sebenarnya berhasil untuk mengontrol biaya tanpa memperlambat pengembangan.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/cloud-cost-optimization-ai-workloads-azure/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Jika Anda sedang membangun aplikasi bertenaga AI di Azure sekarang, Anda mungkin sudah menyadari sesuatu: tagihan cloud Anda terlihat berbeda. Bukan hanya lebih tinggi — lebih aneh. Lonjakan. Sulit diprediksi.&lt;/p&gt;
+&lt;p&gt;Microsoft baru saja menerbitkan artikel bagus tentang &lt;a href="https://azure.microsoft.com/en-us/blog/cloud-cost-optimization-principles-that-still-matter/"&gt;prinsip optimasi biaya cloud yang masih penting&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="mengapa-beban-kerja-ai-berbeda"&gt;Mengapa beban kerja AI berbeda&lt;/h2&gt;
+&lt;p&gt;Beban kerja .NET tradisional relatif dapat diprediksi. Beban kerja AI? Tidak sama sekali. Anda menguji beberapa model, menjalankan infrastruktur berbasis GPU, dan membuat panggilan API Azure OpenAI di mana konsumsi token bervariasi drastis.&lt;/p&gt;
+&lt;h2 id="manajemen-vs-optimasi--ketahui-perbedaannya"&gt;Manajemen vs. optimasi — ketahui perbedaannya&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Manajemen&lt;/strong&gt;: pelacakan dan pelaporan.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Optimasi&lt;/strong&gt;: membuat keputusan nyata. Apakah Anda benar-benar membutuhkan tingkat S3? Apakah instance yang selalu menyala itu duduk menganggur di akhir pekan?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="yang-benar-benar-berhasil"&gt;Yang benar-benar berhasil&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Beri tag sumber daya Anda&lt;/strong&gt; — jika tidak bisa tahu proyek mana yang menghabiskan anggaran, tidak bisa mengoptimalkan apa pun&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pasang perlindungan sebelum bereksperimen&lt;/strong&gt; — gunakan Azure Policy untuk membatasi SKU mahal&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sesuaikan ukuran secara terus-menerus&lt;/strong&gt; — periksa rekomendasi Azure Advisor&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pikirkan siklus hidup&lt;/strong&gt; — sumber daya dev harus dimatikan saat tidak digunakan&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ukur nilai, bukan hanya biaya&lt;/strong&gt; — model yang lebih mahal tetapi menghasilkan hasil jauh lebih baik mungkin pilihan yang tepat&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item></channel></rss>

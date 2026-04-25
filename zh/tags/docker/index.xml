@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Docker | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/docker/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 25 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET 10 随 Ubuntu 26.04 LTS 发布 — 新特性概览</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/</link><pubDate>Sat, 25 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/</guid><description>Ubuntu 26.04 LTS (Resolute Raccoon) 携 .NET 10 作为一等工具链发布。Native AOT、Chiseled 容器、Linux 7.0。</description><content:encoded>&lt;p&gt;&lt;em&gt;本文已自动翻译。如需查看原文，请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/"&gt;点击此处&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Ubuntu LTS 发布日。&lt;a href="https://canonical.com/blog/canonical-releases-ubuntu-26-04-lts-resolute-raccoon"&gt;Ubuntu 26.04 (Resolute Raccoon)&lt;/a&gt; 今天发布，与每个 Ubuntu LTS 一样，携带最新的 .NET LTS — 这次是 &lt;a href="https://devblogs.microsoft.com/dotnet/whats-new-for-dotnet-in-ubuntu-2604/"&gt;.NET 10&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id="两条命令安装-net-10"&gt;两条命令安装 .NET 10&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt install dotnet-sdk-10.0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;.NET 是 &lt;a href="https://ubuntu.com/toolchains"&gt;Ubuntu 官方支持的工具链&lt;/a&gt;之一，不是第三方附加组件。&lt;/p&gt;
+&lt;h2 id="容器将--noble-更新为--resolute"&gt;容器：将 &lt;code&gt;-noble&lt;/code&gt; 更新为 &lt;code&gt;-resolute&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sed -i &lt;span class="s2"&gt;&amp;#34;s/noble/resolute/g&amp;#34;&lt;/span&gt; Dockerfile
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;包括 &lt;a href="https://devblogs.microsoft.com/dotnet/announcing-dotnet-chiseled-containers/"&gt;Chiseled&lt;/a&gt; 在内的所有现有镜像变体均可用。&lt;/p&gt;
+&lt;h2 id="native-aot3ms-启动14mb-二进制文件"&gt;Native AOT：3ms 启动，1.4MB 二进制文件&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y dotnet-sdk-aot-10.0 clang
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet publish app.cs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 1.4MB 原生二进制文件，启动时间 3ms&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;对于冷启动时间至关重要的云原生工作负载——Functions、容器、Serverless——这是真正的游戏规则改变者。&lt;/p&gt;
+&lt;h2 id="需要-net-8-或-9"&gt;需要 .NET 8 或 9？&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y software-properties-common
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;add-apt-repository ppa:dotnet/backports
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y dotnet-sdk-8.0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/dotnet/whats-new-for-dotnet-in-ubuntu-2604/"&gt;完整文章&lt;/a&gt;包含有关 cgroup v2、后量子密码学和 Linux 7.0 的更多详情。&lt;/p&gt;</content:encoded></item><item><title>Docker Sandbox 让 Copilot 代理重构你的代码而不危及你的机器</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/</link><pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/</guid><description>Docker Sandbox 为 GitHub Copilot 代理提供安全的微型虚拟机，让它们可以自由重构——无需权限提示，不会对主机造成风险。这就是它为什么会改变大规模 .NET 现代化的一切。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原文请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果你用过 Copilot 的代理模式做一些超出小修改范围的事情，你一定知道那种痛苦。每次写文件，每个终端命令——又一个权限提示。现在想象一下在 50 个项目上这样操作。一点都不好玩。&lt;/p&gt;
+&lt;p&gt;Azure 团队刚发布了一篇关于 &lt;a href="https://devblogs.microsoft.com/all-things-azure/best-of-both-worlds-for-agentic-refactoring-github-copilot-microvms-via-docker-sandbox/"&gt;GitHub Copilot 代理的 Docker Sandbox&lt;/a&gt; 的文章，说实话，这是我见过的最实用的代理工具改进之一。它使用微型虚拟机为 Copilot 提供一个完全隔离的环境，让它可以随意操作——安装包、运行构建、执行测试——而不会触及你的主机系统。&lt;/p&gt;
+&lt;h2 id="docker-sandbox-实际给你带来什么"&gt;Docker Sandbox 实际给你带来什么&lt;/h2&gt;
+&lt;p&gt;核心思路很简单：启动一个带有完整 Linux 环境的轻量级微型虚拟机，将你的工作区同步进去，然后让 Copilot 代理在里面自由操作。完成后，更改会同步回来。&lt;/p&gt;
+&lt;p&gt;以下是让它不仅仅是&amp;quot;在容器里运行东西&amp;quot;的特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;双向工作区同步&lt;/strong&gt;，保留绝对路径。你的项目结构在沙箱内看起来完全一样。不会有路径相关的构建失败。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;私有 Docker 守护进程&lt;/strong&gt;在微型虚拟机内运行。代理可以构建和运行容器，而无需挂载你主机的 Docker socket。这对安全性来说意义重大。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP/HTTPS 过滤代理&lt;/strong&gt;控制代理在网络上可以访问什么。你来决定允许哪些注册表和端点。沙箱内恶意 &lt;code&gt;npm install&lt;/code&gt; 带来的供应链攻击？已封锁。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;YOLO 模式&lt;/strong&gt;——是的，他们就是这么叫的。代理运行时无需权限提示，因为它根本无法损坏你的主机。每一个破坏性操作都被隔离了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="为什么-net-开发者应该关注"&gt;为什么 .NET 开发者应该关注&lt;/h2&gt;
+&lt;p&gt;想想现在有多少团队正在面对现代化工作。你有一个包含 30 个项目的 .NET Framework 解决方案，需要迁移到 .NET 9。那是数百个文件的更改——项目文件、命名空间更新、API 替换、NuGet 迁移。&lt;/p&gt;
+&lt;p&gt;使用 Docker Sandbox，你可以将 Copilot 代理指向一个项目，让它在微型虚拟机内自由重构，运行 &lt;code&gt;dotnet build&lt;/code&gt; 和 &lt;code&gt;dotnet test&lt;/code&gt; 进行验证，然后只接受那些真正有效的更改。不用担心它在实验过程中意外破坏你的本地开发环境。&lt;/p&gt;
+&lt;p&gt;文章还描述了运行&lt;strong&gt;并行代理舰队&lt;/strong&gt;的场景——每个代理在自己的沙箱中——同时处理不同的项目。对于大型 .NET 解决方案或微服务架构来说，这是一个巨大的时间节省。每个服务一个代理，全部隔离运行，全部独立验证。&lt;/p&gt;
+&lt;h2 id="安全角度很重要"&gt;安全角度很重要&lt;/h2&gt;
+&lt;p&gt;大多数人忽略的一点是：当你让 AI 代理执行任意命令时，你是在把整台机器都托付给它。Docker Sandbox 翻转了这个模型。代理在一次性环境中获得完全自主权。网络代理确保它只能从已批准的来源下载。你的主机文件系统、Docker 守护进程和凭据完好无损。&lt;/p&gt;
+&lt;p&gt;对于有合规要求的团队——这是大多数企业级 .NET 公司的情况——这就是&amp;quot;我们不能使用代理式 AI&amp;quot;和&amp;quot;我们可以安全地采用它&amp;quot;之间的区别。&lt;/p&gt;
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;p&gt;Docker Sandbox 解决了代理式编程的根本矛盾：代理需要自由才能发挥作用，但在你的主机上拥有自由是危险的。微型虚拟机两者兼得。如果你正在规划任何大规模的 .NET 重构或现代化，现在就值得设置起来。Copilot 的代码智能与安全执行环境的结合，正是生产团队一直在等待的。&lt;/p&gt;</content:encoded></item></channel></rss>

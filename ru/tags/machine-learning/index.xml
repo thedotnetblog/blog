@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Machine-Learning | The .NET Blog</title><link>https://thedotnetblog.com/ru/tags/machine-learning/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ru</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ru/tags/machine-learning/index.xml" rel="self" type="application/rss+xml"/><item><title>RFT в Foundry стал дешевле и умнее — Вот что изменилось</title><link>https://thedotnetblog.com/ru/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ru/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</guid><description>Microsoft Foundry выпустил три обновления RFT в этом месяце: глобальное обучение для o4-mini, новые модельные грейдеры GPT-4.1 и руководство по лучшим практикам, которое сэкономит вам часы отладки.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Этот пост был переведён автоматически. Оригинал можно прочитать &lt;a href="https://thedotnetblog.com/ru/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/"&gt;здесь&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Если вы разрабатываете .NET-приложения, которые зависят от дообученных моделей, обновления Foundry этого месяца заслуживают внимания. Reinforcement Fine-Tuning стал более доступным и значительно дешевле.&lt;/p&gt;
+&lt;p&gt;Полные подробности — в &lt;a href="https://devblogs.microsoft.com/foundry/whats-new-in-foundry-finetune-april-2026/"&gt;официальном анонсе&lt;/a&gt;, а здесь — практическая выжимка.&lt;/p&gt;
+&lt;h2 id="глобальное-обучение-для-o4-mini"&gt;Глобальное обучение для o4-mini&lt;/h2&gt;
+&lt;p&gt;o4-mini — это основная модель для задач, требующих рассуждений, и агентных нагрузок. Главная новость: теперь вы можете запускать задачи файнтюнинга из 13+ регионов Azure с более низкими тарифами за токен по сравнению со Standard-обучением. Та же инфраструктура, то же качество, более широкий охват.&lt;/p&gt;
+&lt;p&gt;Если ваша команда распределена по разным географиям, это важно. Вы больше не привязаны к нескольким регионам для обучения.&lt;/p&gt;
+&lt;p&gt;Вот REST API вызов для запуска глобальной задачи обучения:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://&amp;lt;your-resource&amp;gt;.openai.azure.com/openai/fine_tuning/jobs?api-version=2025-04-01-preview&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;api-key: &lt;/span&gt;&lt;span class="nv"&gt;$AZURE_OPENAI_API_KEY&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s1"&gt;&amp;#39;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;model&amp;#34;: &amp;#34;o4-mini&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;training_file&amp;#34;: &amp;#34;&amp;lt;your-training-file-id&amp;gt;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;method&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;reinforcement&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reinforcement&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;grader&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;string_check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;name&amp;#34;: &amp;#34;answer-check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;input&amp;#34;: &amp;#34;{{sample.output_text}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reference&amp;#34;: &amp;#34;{{item.reference_answer}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;operation&amp;#34;: &amp;#34;eq&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;hyperparameters&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;n_epochs&amp;#34;: 2,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;compute_multiplier&amp;#34;: 1.0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;trainingType&amp;#34;: &amp;#34;globalstandard&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Флаг &lt;code&gt;trainingType: globalstandard&lt;/code&gt; — это ключевое отличие.&lt;/p&gt;
+&lt;h2 id="новые-модельные-грейдеры-семейство-gpt-41"&gt;Новые модельные грейдеры: семейство GPT-4.1&lt;/h2&gt;
+&lt;p&gt;Грейдеры определяют сигнал вознаграждения, под который оптимизируется ваша модель. До сих пор модельные грейдеры были ограничены небольшим набором моделей. Теперь у вас есть три новых варианта: GPT-4.1, GPT-4.1-mini и GPT-4.1-nano.&lt;/p&gt;
+&lt;p&gt;Когда стоит использовать модельные грейдеры вместо детерминированных? Когда вывод вашей задачи открытый, когда вам нужна частичная оценка по нескольким измерениям, или когда вы строите агентные рабочие процессы, где корректность вызовов инструментов зависит от семантического контекста.&lt;/p&gt;
+&lt;p&gt;Суть в том, что стратегия уровней практична:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-nano&lt;/strong&gt; для начальных итераций. Низкая стоимость, быстрые циклы обратной связи.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-mini&lt;/strong&gt; когда ваша рубрика оценки стабильна и нужна более высокая точность.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1&lt;/strong&gt; для продакшен-оценки или сложных рубрик, где важно каждое решение по оценке.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Вы даже можете комбинировать типы грейдеров в одной задаче RFT. Используйте string-match для измерения «правильный ответ» и модельный грейдер для оценки качества рассуждений. Честно говоря, именно эта гибкость делает его полезным для реальных нагрузок.&lt;/p&gt;
+&lt;h2 id="подводный-камень-формата-данных-rft"&gt;Подводный камень формата данных RFT&lt;/h2&gt;
+&lt;p&gt;На этом многие спотыкаются. Формат данных RFT отличается от SFT. Последнее сообщение в каждой строке должно иметь роль User или Developer — не Assistant. Ожидаемый ответ помещается в ключ верхнего уровня, например &lt;code&gt;reference_answer&lt;/code&gt;, на который грейдер ссылается напрямую.&lt;/p&gt;
+&lt;p&gt;Если вы занимались supervised fine-tuning и хотите перейти на RFT, вам нужно перестроить обучающие данные. Не пропускайте этот шаг, иначе ваши задачи будут молча завершаться с ошибкой.&lt;/p&gt;
+&lt;h2 id="почему-это-важно-для-net-разработчиков"&gt;Почему это важно для .NET-разработчиков&lt;/h2&gt;
+&lt;p&gt;Если вы вызываете дообученные модели из .NET-приложений через Azure OpenAI SDK, более дешёвое обучение означает, что вы можете итерировать более агрессивно. Варианты модельных грейдеров означают, что вы можете файнтюнить для нюансированных задач — не только для сценариев точного совпадения. А руководство по лучшим практикам на &lt;a href="https://github.com/microsoft-foundry/fine-tuning/blob/main/Demos/Agentic_RFT_PrivatePreview/RFT_Best_Practice.md"&gt;GitHub&lt;/a&gt; сэкономит вам реальное время отладки.&lt;/p&gt;
+&lt;p&gt;Начните с малого. От десяти до ста примеров. Простой грейдер. Проверьте цикл. Затем масштабируйте.&lt;/p&gt;</content:encoded></item></channel></rss>

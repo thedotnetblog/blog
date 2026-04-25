@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Machine-Learning | The .NET Blog</title><link>https://thedotnetblog.com/hi/tags/machine-learning/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>hi</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/hi/tags/machine-learning/index.xml" rel="self" type="application/rss+xml"/><item><title>Foundry का RFT सस्ता और स्मार्ट हो गया — यहाँ जानिए क्या बदला</title><link>https://thedotnetblog.com/hi/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/hi/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</guid><description>Microsoft Foundry ने इस महीने तीन RFT updates ship किए: o4-mini के लिए global training, नए GPT-4.1 model graders, और एक best practices guide जो आपके debugging के घंटे बचाएगी।</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;यह पोस्ट स्वचालित रूप से अनुवादित है। मूल के लिए, &lt;a href="https://thedotnetblog.com/hi/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/"&gt;यहाँ क्लिक करें&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;अगर आप fine-tuned models पर निर्भर .NET apps बना रहे हैं, तो इस महीने के Foundry updates पर ध्यान देने लायक हैं। Reinforcement Fine-Tuning अब और accessible और काफी सस्ती हो गई है।&lt;/p&gt;
+&lt;p&gt;पूरी जानकारी &lt;a href="https://devblogs.microsoft.com/foundry/whats-new-in-foundry-finetune-april-2026/"&gt;official announcement&lt;/a&gt; में है, लेकिन यहाँ practical breakdown है।&lt;/p&gt;
+&lt;h2 id="o4-mini-क-लए-global-training"&gt;o4-mini के लिए Global Training&lt;/h2&gt;
+&lt;p&gt;o4-mini reasoning-heavy और agentic workloads के लिए go-to model है। बड़ी खबर: अब आप Standard training की तुलना में कम per-token training rates के साथ 13+ Azure regions से fine-tuning jobs launch कर सकते हैं। वही infrastructure, वही quality, व्यापक पहुँच।&lt;/p&gt;
+&lt;p&gt;अगर आपकी team geographies में फैली हुई है, तो यह मायने रखता है। अब आप training के लिए कुछ ही regions तक सीमित नहीं हैं।&lt;/p&gt;
+&lt;p&gt;Global training job शुरू करने के लिए REST API call यहाँ है:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://&amp;lt;your-resource&amp;gt;.openai.azure.com/openai/fine_tuning/jobs?api-version=2025-04-01-preview&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;api-key: &lt;/span&gt;&lt;span class="nv"&gt;$AZURE_OPENAI_API_KEY&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s1"&gt;&amp;#39;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;model&amp;#34;: &amp;#34;o4-mini&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;training_file&amp;#34;: &amp;#34;&amp;lt;your-training-file-id&amp;gt;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;method&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;reinforcement&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reinforcement&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;grader&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;string_check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;name&amp;#34;: &amp;#34;answer-check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;input&amp;#34;: &amp;#34;{{sample.output_text}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reference&amp;#34;: &amp;#34;{{item.reference_answer}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;operation&amp;#34;: &amp;#34;eq&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;hyperparameters&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;n_epochs&amp;#34;: 2,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;compute_multiplier&amp;#34;: 1.0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;trainingType&amp;#34;: &amp;#34;globalstandard&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;वह &lt;code&gt;trainingType: globalstandard&lt;/code&gt; flag ही मुख्य अंतर है।&lt;/p&gt;
+&lt;h2 id="नए-model-graders-gpt-41-family"&gt;नए Model Graders: GPT-4.1 Family&lt;/h2&gt;
+&lt;p&gt;Graders वह reward signal define करते हैं जिसके आधार पर आपका model optimize करता है। अब तक, model-based graders models के एक छोटे set तक सीमित थे। अब आपको तीन नए विकल्प मिलते हैं: GPT-4.1, GPT-4.1-mini, और GPT-4.1-nano।&lt;/p&gt;
+&lt;p&gt;Deterministic graders की बजाय model graders कब use करें? जब आपका task output open-ended हो, जब आपको कई dimensions में partial credit scoring चाहिए, या जब आप ऐसे agentic workflows बना रहे हों जहाँ tool-call correctness semantic context पर निर्भर करती है।&lt;/p&gt;
+&lt;p&gt;बात यह है — tiering strategy practical है:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-nano&lt;/strong&gt; शुरुआती iterations के लिए। कम cost, fast feedback loops।&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-mini&lt;/strong&gt; जब आपका grading rubric stable हो और आपको higher fidelity चाहिए।&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1&lt;/strong&gt; production grading या complex rubrics के लिए जहाँ हर scoring decision मायने रखती है।&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;आप एक ही RFT job में grader types भी mix कर सकते हैं। &amp;ldquo;correct answer&amp;rdquo; dimension के लिए string-match और reasoning quality evaluate करने के लिए model grader। यह flexibility ही इसे real workloads के लिए उपयोगी बनाती है।&lt;/p&gt;
+&lt;h2 id="rft-data-format-क-समसय"&gt;RFT Data Format की समस्या&lt;/h2&gt;
+&lt;p&gt;यह लोगों को अटकाती है। RFT data format SFT से अलग है। हर row का आखिरी message User या Developer role का होना चाहिए — Assistant का नहीं। Expected answer एक top-level key जैसे &lt;code&gt;reference_answer&lt;/code&gt; में जाता है जिसे grader directly reference करता है।&lt;/p&gt;
+&lt;p&gt;अगर आप supervised fine-tuning कर रहे हैं और RFT पर switch करना चाहते हैं, तो आपको अपना training data restructure करना होगा। यह step skip न करें वरना आपके jobs silently fail होंगे।&lt;/p&gt;
+&lt;h2 id="net-developers-क-लए-यह-कय-मयन-रखत-ह"&gt;.NET Developers के लिए यह क्यों मायने रखता है&lt;/h2&gt;
+&lt;p&gt;अगर आप Azure OpenAI SDK के ज़रिए .NET apps से fine-tuned models call कर रहे हैं, तो सस्ती training का मतलब है कि आप अधिक aggressively iterate कर सकते हैं। Model grader options का मतलब है कि आप nuanced tasks के लिए fine-tune कर सकते हैं — सिर्फ exact-match scenarios नहीं। और &lt;a href="https://github.com/microsoft-foundry/fine-tuning/blob/main/Demos/Agentic_RFT_PrivatePreview/RFT_Best_Practice.md"&gt;GitHub&lt;/a&gt; पर best practices guide आपका real debugging time बचाएगी।&lt;/p&gt;
+&lt;p&gt;छोटे से शुरू करें। दस से सौ samples। Simple grader। Loop validate करें। फिर scale करें।&lt;/p&gt;</content:encoded></item></channel></rss>

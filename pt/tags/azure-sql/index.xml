@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure-Sql | The .NET Blog</title><link>https://thedotnetblog.com/pt/tags/azure-sql/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>pt</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sun, 26 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/pt/tags/azure-sql/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL Server 2025 como Banco de Dados Pronto para Agentes: Segurança, Backup e MCP em Um Motor</title><link>https://thedotnetblog.com/pt/posts/emiliano-montesdeoca/sql-server-2025-agent-ready-security-mcp/</link><pubDate>Sun, 26 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/pt/posts/emiliano-montesdeoca/sql-server-2025-agent-ready-security-mcp/</guid><description>A parte final da série Polyglot Tax aborda os problemas difíceis de produção: Row-Level Security unificada sobre dados relacionais, JSON, grafos e vetores, mais integração MCP.</description><content:encoded>&lt;p&gt;&lt;em&gt;Esta postagem foi traduzida automaticamente. Para a versão original, &lt;a href="https://thedotnetblog.com/posts/emiliano-montesdeoca/sql-server-2025-agent-ready-security-mcp/"&gt;clique aqui&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Acompanhei a série Polyglot Tax de Aditya Badramraju com muito interesse. A parte 4 fecha a série com as partes que realmente determinam se você confiaria nessa arquitetura em produção.&lt;/p&gt;
+&lt;h2 id="um-modelo-de-segurança-para-todos-os-modelos-de-dados"&gt;Um Modelo de Segurança para Todos os Modelos de Dados&lt;/h2&gt;
+&lt;p&gt;Uma única política de Row-Level Security que cobre todos os modelos de dados. Uma política, uma prova para o auditor.&lt;/p&gt;
+&lt;h2 id="backup-unificado--recuperação-atômica"&gt;Backup Unificado = Recuperação Atômica&lt;/h2&gt;
+&lt;p&gt;Em um stack poliglota, recuperação point-in-time em cinco bancos de dados é um pesadelo de consistência. Com um banco, é atômica por definição.&lt;/p&gt;
+&lt;h2 id="integração-mcp-agentes-sem-middleware"&gt;Integração MCP: Agentes Sem Middleware&lt;/h2&gt;
+&lt;p&gt;SQL Server 2025 suporta o SQL MCP Server diretamente. Agentes chamam ferramentas, o motor impõe isolamento de tenant e mascaramento de colunas automaticamente.&lt;/p&gt;
+&lt;p&gt;Post original de Aditya Badramraju: &lt;a href="https://devblogs.microsoft.com/azure-sql/the-polyglot-tax-part-4/"&gt;The Polyglot Tax – Part 4&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title>SQL MCP Server — A forma certa de dar acesso a bancos de dados para agentes de IA</title><link>https://thedotnetblog.com/pt/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/pt/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>SQL MCP Server do Data API builder dá aos agentes de IA acesso seguro e determinístico a bancos de dados sem expor esquemas ou depender de NL2SQL. RBAC, cache, suporte multi-banco — tudo incluído.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Este post foi traduzido automaticamente. Para a versão original, &lt;a href="https://thedotnetblog.com/pt/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;clique aqui&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Vamos ser honestos: a maioria dos servidores MCP de banco de dados disponíveis hoje são assustadores. Eles pegam uma consulta em linguagem natural, geram SQL na hora e executam contra seus dados de produção. O que poderia dar errado? (Tudo. Tudo poderia dar errado.)&lt;/p&gt;
+&lt;p&gt;O time do Azure SQL acabou de &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;apresentar o SQL MCP Server&lt;/a&gt;, e ele adota uma abordagem fundamentalmente diferente. Construído como uma funcionalidade do Data API builder (DAB) 2.0, dá aos agentes de IA acesso estruturado e determinístico a operações de banco de dados — sem NL2SQL, sem expor seu esquema, e com RBAC completo em cada etapa.&lt;/p&gt;
+&lt;h2 id="por-que-não-nl2sql"&gt;Por que não NL2SQL?&lt;/h2&gt;
+&lt;p&gt;Essa é a decisão de design mais interessante. Modelos não são determinísticos, e consultas complexas são as mais propensas a produzir erros sutis. As consultas exatas que os usuários esperam que a IA gere são também as que precisam de mais escrutínio quando produzidas de forma não determinística.&lt;/p&gt;
+&lt;p&gt;Em vez disso, o SQL MCP Server usa uma abordagem &lt;strong&gt;NL2DAB&lt;/strong&gt;. O agente trabalha com a camada de abstração de entidades do Data API builder e seu construtor de consultas integrado para produzir T-SQL preciso e bem formado de maneira determinística. Mesmo resultado para o usuário, mas sem o risco de JOINs alucinados ou exposição acidental de dados.&lt;/p&gt;
+&lt;h2 id="sete-ferramentas-não-setecentas"&gt;Sete ferramentas, não setecentas&lt;/h2&gt;
+&lt;p&gt;O SQL MCP Server expõe exatamente sete ferramentas DML, independentemente do tamanho do banco de dados:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — descobrir entidades e operações disponíveis&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — inserir linhas&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — consultar tabelas e views&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — modificar linhas&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — remover linhas&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — executar stored procedures&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — consultas de agregação&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Isso é inteligente porque janelas de contexto são o espaço de pensamento do agente. Inundá-las com centenas de definições de ferramentas deixa menos espaço para raciocínio. Sete ferramentas fixas mantêm o agente focado em &lt;em&gt;pensar&lt;/em&gt; em vez de &lt;em&gt;navegar&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Cada ferramenta pode ser habilitada ou desabilitada individualmente:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;runtime&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;path&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dml-tools&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;describe-entities&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;create-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;read-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;update-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;delete-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;execute-entity&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;aggregate-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="começando-em-três-comandos"&gt;Começando em três comandos&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --database-type mssql &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --source dbo.Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Isso é um SQL MCP Server rodando e expondo sua tabela Customers. A camada de abstração de entidades significa que você pode criar aliases para nomes e colunas, limitar campos por papel, e controlar exatamente o que os agentes veem — sem expor detalhes internos do esquema.&lt;/p&gt;
+&lt;h2 id="a-história-de-segurança-é-sólida"&gt;A história de segurança é sólida&lt;/h2&gt;
+&lt;p&gt;É aqui que a maturidade do Data API builder compensa:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;RBAC em cada camada&lt;/strong&gt; — cada entidade define quais papéis podem ler, criar, atualizar ou deletar, e quais campos são visíveis&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Integração com Azure Key Vault&lt;/strong&gt; — strings de conexão e segredos gerenciados com segurança&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Microsoft Entra + OAuth personalizado&lt;/strong&gt; — autenticação de nível de produção&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Content Security Policy&lt;/strong&gt; — agentes interagem através de um contrato controlado, não SQL cru&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A abstração de esquema é particularmente importante. Seus nomes internos de tabelas e colunas nunca são expostos ao agente. Você define entidades, aliases e descrições que fazem sentido para a interação com IA — não seu diagrama ERD do banco de dados.&lt;/p&gt;
+&lt;h2 id="multi-banco-e-multi-protocolo"&gt;Multi-banco e multi-protocolo&lt;/h2&gt;
+&lt;p&gt;O SQL MCP Server suporta Microsoft SQL, PostgreSQL, Azure Cosmos DB e MySQL. E como é uma funcionalidade do DAB, você obtém endpoints REST, GraphQL e MCP simultaneamente da mesma configuração. Mesmas definições de entidades, mesmas regras RBAC, mesma segurança — nos três protocolos.&lt;/p&gt;
+&lt;p&gt;A auto-configuração no DAB 2.0 pode até inspecionar seu banco de dados e construir a configuração dinamicamente, se você estiver confortável com menos abstração para prototipagem rápida.&lt;/p&gt;
+&lt;h2 id="minha-opinião"&gt;Minha opinião&lt;/h2&gt;
+&lt;p&gt;É assim que o acesso empresarial a bancos de dados para agentes de IA deveria funcionar. Não &amp;ldquo;ei LLM, escreve SQL pra mim e YOLO contra produção.&amp;rdquo; Em vez disso: uma camada de entidades bem definida, geração determinística de consultas, RBAC em cada etapa, cache, monitoramento e telemetria. É chato da melhor maneira possível.&lt;/p&gt;
+&lt;p&gt;Para desenvolvedores .NET, a história de integração é limpa — DAB é uma ferramenta .NET, o MCP Server roda como contêiner, e funciona com Azure SQL, que a maioria de nós já está usando. Se você está construindo agentes de IA que precisam de acesso a dados, comece aqui.&lt;/p&gt;
+&lt;h2 id="finalizando"&gt;Finalizando&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server é gratuito, open-source e roda em qualquer lugar. É a abordagem prescritiva da Microsoft para dar aos agentes de IA acesso seguro a bancos de dados. Confira o &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;post completo&lt;/a&gt; e a &lt;a href="https://aka.ms/sql/mcp"&gt;documentação&lt;/a&gt; para começar.&lt;/p&gt;</content:encoded></item></channel></rss>

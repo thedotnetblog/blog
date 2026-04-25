@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Data-Api-Builder | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/data-api-builder/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/data-api-builder/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL MCP Server — AI Ajanlarına Veritabanı Erişimi Vermenin Doğru Yolu</title><link>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>Data API builder'dan SQL MCP Server, AI ajanlara şema açıklamadan ve NL2SQL'e dayanmadan güvenli, deterministik veritabanı erişimi sağlar. RBAC, önbellekleme, çoklu veritabanı desteği — hepsi yerleşik.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Bu yazı otomatik olarak çevrilmiştir. Orijinal için &lt;a href="https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;buraya tıklayın&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Dürüst olalım: bugün mevcut veritabanı MCP sunucularının çoğu gerçekten ürkütücü. Doğal dil sorgusu alıyor, anında SQL üretiyor ve bunu üretim verinize karşı çalıştırıyor. Ne yanlış gidebilir ki? (Her şey. Her şey yanlış gidebilir.)&lt;/p&gt;
+&lt;p&gt;Azure SQL ekibi az önce &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;SQL MCP Server&amp;rsquo;ı tanıttı&lt;/a&gt; ve bu yaklaşım temelden farklı. Data API builder (DAB) 2.0&amp;rsquo;ın bir özelliği olarak geliştirilen bu araç, AI ajanlarına NL2SQL olmadan, şemanızı açıklamadan ve her adımda tam RBAC ile veritabanı işlemlerine yapılandırılmış, deterministik erişim sağlıyor.&lt;/p&gt;
+&lt;h2 id="neden-nl2sql-yok"&gt;Neden NL2SQL yok?&lt;/h2&gt;
+&lt;p&gt;Bu, en ilginç tasarım kararı. Modeller deterministik değil ve karmaşık sorgular en büyük hata riskini taşıyan yapılar. AI&amp;rsquo;ın üretmesini umduğunuz tam sorgular da deterministik olmayan şekilde üretildiğinde en dikkatli incelenmesi gereken sorgular oluyor.&lt;/p&gt;
+&lt;p&gt;Bunun yerine SQL MCP Server bir &lt;strong&gt;NL2DAB&lt;/strong&gt; yaklaşımı benimsiyor. Ajan, Data API builder&amp;rsquo;ın varlık soyutlama katmanı ve yerleşik sorgu oluşturucu ile birlikte çalışarak doğru ve düzgün biçimlendirilmiş T-SQL deterministik olarak üretiyor. Kullanıcı için aynı sonuç, ancak hayali JOIN&amp;rsquo;ler veya kazara veri ifşası riski olmadan.&lt;/p&gt;
+&lt;h2 id="yedi-araç-yedi-yüz-değil"&gt;Yedi araç, yedi yüz değil&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server, veritabanının büyüklüğünden bağımsız olarak tam olarak yedi DML aracı sunuyor:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — mevcut varlıkları ve işlemleri keşfet&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — satır ekle&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — tablolar ve görünümleri sorgula&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — satırları değiştir&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — satırları sil&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — saklı yordamları çalıştır&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — toplama sorguları&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bu akıllıca bir tasarım çünkü bağlam pencereleri ajanın düşünme alanıdır. Yüzlerce araç tanımıyla doldurmak, muhakeme için daha az alan bırakır. Yedi sabit araç, ajanın &lt;em&gt;gezinmek&lt;/em&gt; yerine &lt;em&gt;düşünmeye&lt;/em&gt; odaklanmasını sağlar.&lt;/p&gt;
+&lt;p&gt;Her araç ayrı ayrı etkinleştirilebilir veya devre dışı bırakılabilir:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;runtime&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;path&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dml-tools&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;describe-entities&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;create-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;read-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;update-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;delete-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;execute-entity&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;aggregate-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="üç-komutla-başlangıç"&gt;Üç komutla başlangıç&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --database-type mssql &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --source dbo.Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Bu kadar. Customers tablonuzu açığa çıkaran çalışan bir SQL MCP Server&amp;rsquo;ınız var. Varlık soyutlama katmanı, adları ve sütunları takma adla kullanmanıza, rol başına alanları sınırlamanıza ve iç şema ayrıntılarını açıklamadan ajanların tam olarak neyi göreceğini kontrol etmenize olanak tanıyor.&lt;/p&gt;
+&lt;h2 id="güvenlik-hikayesi-sağlam"&gt;Güvenlik hikayesi sağlam&lt;/h2&gt;
+&lt;p&gt;Data API builder&amp;rsquo;ın olgunluğu burada meyvesini veriyor:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Her katmanda RBAC&lt;/strong&gt; — her varlık hangi rollerin okuyabileceğini, oluşturabileceğini, güncelleyebileceğini veya silebileceğini ve hangi alanların görünür olduğunu tanımlıyor&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Azure Key Vault entegrasyonu&lt;/strong&gt; — bağlantı dizeleri ve gizli anahtarlar güvenli şekilde yönetiliyor&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Microsoft Entra + özel OAuth&lt;/strong&gt; — üretim düzeyinde kimlik doğrulama&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Content Security Policy&lt;/strong&gt; — ajanlar ham SQL değil, denetimli bir sözleşme üzerinden etkileşim kuruyor&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Şema soyutlaması özellikle önemli. İç tablo ve sütun adlarınız asla ajana açıklanmıyor. Veritabanı ERD&amp;rsquo;nize göre değil, AI etkileşimi için mantıklı olan varlıkları, takma adları ve açıklamaları siz tanımlıyorsunuz.&lt;/p&gt;
+&lt;h2 id="çok-veritabanı-ve-çok-protokol"&gt;Çok veritabanı ve çok protokol&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server, Microsoft SQL, PostgreSQL, Azure Cosmos DB ve MySQL&amp;rsquo;i destekliyor. Ve bir DAB özelliği olduğundan, aynı yapılandırmadan eş zamanlı olarak REST, GraphQL ve MCP endpoint&amp;rsquo;leri elde ediyorsunuz. Aynı varlık tanımları, aynı RBAC kuralları, aynı güvenlik — üç protokol genelinde.&lt;/p&gt;
+&lt;p&gt;DAB 2.0&amp;rsquo;daki otomatik yapılandırma, hızlı prototipleme için daha az soyutlamaya razıysanız veritabanınızı inceleyebilir ve yapılandırmayı dinamik olarak oluşturabilir.&lt;/p&gt;
+&lt;h2 id="kişisel-görüşüm"&gt;Kişisel görüşüm&lt;/h2&gt;
+&lt;p&gt;AI ajanları için kurumsal veritabanı erişimi işte böyle çalışmalı. &amp;ldquo;Hey LLM, biraz SQL yaz da üretime at bakalım&amp;rdquo; değil. Bunun yerine: iyi tanımlanmış bir varlık katmanı, deterministik sorgu üretimi, her adımda RBAC, önbellekleme, izleme ve telemetri. En iyi anlamda sıkıcı.&lt;/p&gt;
+&lt;p&gt;.NET geliştiricileri için entegrasyon hikayesi temiz — DAB bir .NET aracıdır, MCP Server bir container olarak çalışır ve çoğumuzun zaten kullandığı Azure SQL ile çalışır. Veri erişimine ihtiyaç duyan AI ajanları geliştiriyorsanız buradan başlayın.&lt;/p&gt;
+&lt;h2 id="sonuç"&gt;Sonuç&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server ücretsiz, açık kaynaklı ve her yerde çalışır. AI ajanlarına güvenli veritabanı erişimi sağlamak için Microsoft&amp;rsquo;un öngörülü yaklaşımıdır. Başlamak için &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;tam yazıyı&lt;/a&gt; ve &lt;a href="https://aka.ms/sql/mcp"&gt;dokümantasyonu&lt;/a&gt; inceleyin.&lt;/p&gt;</content:encoded></item></channel></rss>

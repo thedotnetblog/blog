@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Aspire | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/aspire/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 17 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/aspire/index.xml" rel="self" type="application/rss+xml"/><item><title>Berhenti Mengawasi Terminal: Mode Terpisah Aspire Mengubah Alur Kerja</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</link><pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</guid><description>Aspire 13.2 memungkinkan Anda menjalankan AppHost di background dan mengambil kembali terminal Anda. Dikombinasikan dengan perintah CLI baru dan dukungan agen, ini lebih besar dari yang terlihat.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Setiap kali Anda menjalankan Aspire AppHost, terminal Anda hilang. Terkunci. Terpakai hingga Ctrl+C. Perlu menjalankan perintah cepat? Buka tab baru. Ingin memeriksa log? Tab lain. Gesekan kecil ini menumpuk dengan cepat.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 memperbaiki ini. James Newton-King &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;menulis semua detailnya&lt;/a&gt;, dan jujur, ini adalah salah satu fitur yang segera mengubah cara Anda bekerja.&lt;/p&gt;
+&lt;h2 id="mode-terpisah-satu-perintah-terminal-kembali"&gt;Mode terpisah: satu perintah, terminal kembali&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ini singkatan dari &lt;code&gt;aspire run --detach&lt;/code&gt;. AppHost Anda boot di background dan Anda mendapatkan terminal kembali segera.&lt;/p&gt;
+&lt;h2 id="mengelola-yang-sedang-berjalan"&gt;Mengelola yang sedang berjalan&lt;/h2&gt;
+&lt;p&gt;Berjalan di background hanya berguna jika Anda bisa mengelola apa yang berjalan. Aspire 13.2 menyertakan set lengkap perintah CLI:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Daftar semua AppHost yang berjalan&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire ps
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Periksa state AppHost tertentu&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire describe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stream log dari AppHost yang berjalan&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire logs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Hentikan AppHost tertentu&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire stop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="gabungkan-dengan-mode-terisolasi"&gt;Gabungkan dengan mode terisolasi&lt;/h2&gt;
+&lt;p&gt;Mode terpisah secara alami berpasangan dengan mode terisolasi:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Setiap instance mendapat port acak, rahasia terpisah, dan siklus hidupnya sendiri.&lt;/p&gt;
+&lt;h2 id="mengapa-ini-besar-untuk-agen-coding"&gt;Mengapa ini besar untuk agen coding&lt;/h2&gt;
+&lt;p&gt;Agen coding yang bekerja di terminal Anda sekarang dapat:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Memulai aplikasi dengan &lt;code&gt;aspire start&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Mengkueri statusnya dengan &lt;code&gt;aspire describe&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Memeriksa log dengan &lt;code&gt;aspire logs&lt;/code&gt; untuk mendiagnosis masalah&lt;/li&gt;
+&lt;li&gt;Menghentikannya dengan &lt;code&gt;aspire stop&lt;/code&gt; saat selesai&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Menjalankan &lt;code&gt;aspire agent init&lt;/code&gt; menyiapkan file skill Aspire yang mengajarkan agen perintah-perintah ini.&lt;/p&gt;
+&lt;h2 id="kesimpulan"&gt;Kesimpulan&lt;/h2&gt;
+&lt;p&gt;Mode terpisah adalah peningkatan alur kerja yang menyamar sebagai flag sederhana. Baca &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;postingan lengkap&lt;/a&gt; dan dapatkan Aspire 13.2 dengan &lt;code&gt;aspire update --self&lt;/code&gt;.&lt;/p&gt;</content:encoded></item><item><title>.NET Aspire 13.2 Ingin Menjadi Sahabat Terbaik Agen AI Anda</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/</guid><description>Aspire 13.2 all-in pada pengembangan agentik — output CLI terstruktur, eksekusi terisolasi, lingkungan yang menyembuhkan sendiri, dan data OpenTelemetry penuh agar agen AI Anda benar-benar dapat membangun, menjalankan, dan mengamati aplikasi Anda.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Anda tahu momen ketika agen coding AI Anda menulis kode yang solid, Anda bersemangat, kemudian semuanya berantakan saat mencoba &lt;em&gt;menjalankannya&lt;/em&gt;? Konflik port, phantom process, variabel lingkungan yang salah — tiba-tiba agen Anda membakar token untuk men-debug masalah startup alih-alih membangun fitur.&lt;/p&gt;
+&lt;p&gt;Tim Aspire baru saja merilis &lt;a href="https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/"&gt;post yang sangat bijaksana&lt;/a&gt; tentang masalah ini, dan jawaban mereka menarik: Aspire 13.2 dirancang tidak hanya untuk manusia, tetapi untuk agen AI.&lt;/p&gt;
+&lt;h2 id="aspire-sebagai-infrastruktur-agen"&gt;Aspire sebagai infrastruktur agen&lt;/h2&gt;
+&lt;p&gt;Inilah yang dibawa Aspire 13.2 ke meja pengembangan agentik:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Seluruh stack dalam kode bertipe.&lt;/strong&gt; AppHost mendefinisikan topologi lengkap — dalam TypeScript atau C# yang dapat dikompilasi:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;createBuilder&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;./.modules/aspire.js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;createBuilder&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addPostgres&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;pg&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;addDatabase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;catalog&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;cache&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addRedis&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;cache&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;api&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addNodeApp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;api&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;./api&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;src/index.ts&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withHttpEndpoint&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="nx"&gt;env&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;PORT&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withReference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;postgres&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withReference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addViteApp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;frontend&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;./frontend&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withReference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;waitFor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;build&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nx"&gt;run&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Satu perintah untuk semuanya.&lt;/strong&gt; Alih-alih menyulap &lt;code&gt;docker compose up&lt;/code&gt;, &lt;code&gt;npm run dev&lt;/code&gt;, dan skrip startup database — semuanya hanya &lt;code&gt;aspire start&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Mode terisolasi untuk agen paralel.&lt;/strong&gt; Dengan &lt;code&gt;--isolated&lt;/code&gt;, setiap jalankan Aspire mendapat port acak sendiri dan rahasia pengguna terpisah.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Mata agen melalui telemetri.&lt;/strong&gt; Aspire CLI mengekspos data OpenTelemetry penuh selama development — trace, metrik, log terstruktur.&lt;/p&gt;
+&lt;h2 id="analogi-bowling-bumper"&gt;Analogi bowling bumper&lt;/h2&gt;
+&lt;p&gt;Tim Aspire menggunakan analogi yang bagus: pikirkan Aspire sebagai bumper jalur bowling untuk agen AI. Jika agennya tidak sempurna (dan memang tidak akan), bumper mencegahnya melempar ke selokan.&lt;/p&gt;
+&lt;h2 id="kesimpulan"&gt;Kesimpulan&lt;/h2&gt;
+&lt;p&gt;Aspire 13.2 bukan hanya framework aplikasi terdistribusi — ini menjadi infrastruktur agen yang esensial. Baca &lt;a href="https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/"&gt;post lengkap&lt;/a&gt; dari tim Aspire.&lt;/p&gt;</content:encoded></item><item><title>Mode Terisolasi Aspire Memperbaiki Mimpi Buruk Konflik Port dalam Pengembangan Paralel</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</guid><description>Aspire 13.2 memperkenalkan mode --isolated: port acak, rahasia terpisah, dan nol tabrakan saat menjalankan beberapa instans AppHost yang sama. Sempurna untuk agen AI, worktree, dan alur kerja paralel.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Jika Anda pernah mencoba menjalankan dua instans proyek yang sama secara bersamaan, Anda tahu rasa sakitnya. Port 8080 sudah digunakan.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 memperbaiki ini dengan satu flag. James Newton-King &lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;menulis semua detailnya&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="perbaikan---isolated"&gt;Perbaikan: &lt;code&gt;--isolated&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Setiap run mendapat:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Port acak&lt;/strong&gt; — tidak ada tabrakan antar instans&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;User secrets terisolasi&lt;/strong&gt; — connection string dan API key tetap terpisah per instans&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="skenario-nyata"&gt;Skenario nyata&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Beberapa checkout:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-feature
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-bugfix
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Keduanya berjalan tanpa konflik.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Agen latar belakang di VS Code.&lt;/strong&gt; Ketika agen latar belakang Copilot Chat membuat git worktree untuk bekerja secara independen, mode terisolasi memastikan kedua instans berfungsi.&lt;/p&gt;
+&lt;h2 id="kesimpulan"&gt;Kesimpulan&lt;/h2&gt;
+&lt;p&gt;Mode terisolasi adalah fitur kecil yang memecahkan masalah nyata yang semakin umum. Dapatkan 13.2 dengan &lt;code&gt;aspire update --self&lt;/code&gt;.&lt;/p&gt;</content:encoded></item><item><title>Aspire 13.2 Memiliki CLI Dokumentasi — dan Agen AI Anda Bisa Menggunakannya Juga</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/</link><pubDate>Sat, 04 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/</guid><description>.NET Aspire 13.2 menambahkan aspire docs — CLI untuk mencari, menelusuri, dan membaca dokumentasi resmi tanpa meninggalkan terminal. Juga berfungsi sebagai alat untuk agen AI.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Anda tahu momen ketika Anda sedang dalam Aspire AppHost, menghubungkan integrasi, dan perlu memeriksa parameter apa yang diharapkan integrasi Redis? Anda alt-tab ke browser, berburu di aspire.dev. Konteks hilang.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 baru saja &lt;a href="https://devblogs.microsoft.com/aspire/aspire-docs-in-your-terminal/"&gt;mengirimkan perbaikan untuk itu&lt;/a&gt;. CLI &lt;code&gt;aspire docs&lt;/code&gt; memungkinkan Anda mencari, menelusuri, dan membaca dokumentasi Aspire resmi langsung dari terminal.&lt;/p&gt;
+&lt;h2 id="tiga-perintah-nol-tab-browser"&gt;Tiga perintah, nol tab browser&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Daftar semua dokumen&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs list
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Cari topik&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs search &lt;span class="s2"&gt;&amp;#34;redis&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Baca halaman penuh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs get redis-integration
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Hanya satu bagian&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs get redis-integration --section &lt;span class="s2"&gt;&amp;#34;Add Redis resource&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="sudut-agen-ai"&gt;Sudut agen AI&lt;/h2&gt;
+&lt;p&gt;Perintah &lt;code&gt;aspire docs&lt;/code&gt; yang sama berfungsi sebagai alat untuk agen AI. Alih-alih mengarang API Aspire berdasarkan data pelatihan lama, agen bisa memanggil &lt;code&gt;aspire docs search &amp;quot;postgres&amp;quot;&lt;/code&gt;, menemukan dokumen integrasi resmi, dan membaca halaman yang tepat.&lt;/p&gt;
+&lt;h2 id="kesimpulan"&gt;Kesimpulan&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;aspire docs&lt;/code&gt; adalah fitur kecil yang memecahkan masalah nyata dengan bersih. Lihat &lt;a href="https://davidpine.dev/posts/aspire-docs-mcp-tools/"&gt;deep dive David Pine&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title>Dashboard Aspire 13.2 Kini Memiliki Telemetry API — dan Ini Mengubah Segalanya</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/</guid><description>.NET Aspire 13.2 hadir dengan ekspor telemetri yang lebih cerdas, API yang dapat diprogram untuk trace dan log, dan peningkatan visualisasi GenAI. Inilah mengapa ini penting untuk alur kerja debugging Anda.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Jika Anda membangun aplikasi terdistribusi dengan .NET Aspire, Anda sudah tahu bahwa dashboard adalah bagian terbaik dari seluruh pengalaman. Aspire 13.2 membuatnya jauh lebih baik.&lt;/p&gt;
+&lt;h2 id="mengekspor-telemetri-dengan-cara-yang-masuk-akal"&gt;Mengekspor telemetri dengan cara yang masuk akal&lt;/h2&gt;
+&lt;p&gt;Aspire 13.2 menambahkan dialog &lt;strong&gt;Kelola log dan telemetri&lt;/strong&gt; yang tepat di mana Anda dapat:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Menghapus semua telemetri&lt;/li&gt;
+&lt;li&gt;Mengekspor telemetri yang dipilih ke file ZIP dalam format OTLP/JSON standar&lt;/li&gt;
+&lt;li&gt;Mengimpor ulang ZIP tersebut ke dashboard Aspire mana pun nanti&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bagian terakhir adalah fitur unggulan. Reproduksi bug, ekspor telemetri, lampirkan ke item kerja, dan rekan tim Anda dapat mengimpornya ke dashboard mereka sendiri.&lt;/p&gt;
+&lt;h2 id="telemetry-api-adalah-pengubah-permainan-sesungguhnya"&gt;Telemetry API adalah pengubah permainan sesungguhnya&lt;/h2&gt;
+&lt;p&gt;Dashboard kini mengekspos HTTP API di bawah &lt;code&gt;/api/telemetry&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;GET /api/telemetry/resources&lt;/code&gt; — daftar sumber daya dengan telemetri&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GET /api/telemetry/spans&lt;/code&gt; — kueri span dengan filter&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GET /api/telemetry/logs&lt;/code&gt; — kueri log dengan filter&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GET /api/telemetry/traces&lt;/code&gt; — daftar trace&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ini mendukung perintah CLI &lt;code&gt;aspire agent mcp&lt;/code&gt; dan &lt;code&gt;aspire otel&lt;/code&gt; yang baru.&lt;/p&gt;
+&lt;h2 id="telemetri-genai-menjadi-praktis"&gt;Telemetri GenAI menjadi praktis&lt;/h2&gt;
+&lt;p&gt;VS Code Copilot chat dan Copilot CLI mendukung konfigurasi &lt;code&gt;OTEL_EXPORTER_OTLP_ENDPOINT&lt;/code&gt; — arahkan ke dashboard Aspire dan Anda bisa melihat agen AI Anda berpikir secara real-time melalui telemetri.&lt;/p&gt;
+&lt;h2 id="kesimpulan"&gt;Kesimpulan&lt;/h2&gt;
+&lt;p&gt;Aspire 13.2 mengubah dashboard dari &amp;ldquo;UI debugging yang bagus&amp;rdquo; menjadi &amp;ldquo;platform observabilitas yang dapat diprogram&amp;rdquo;. Kunjungi &lt;a href="https://aspire.dev"&gt;aspire.dev&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

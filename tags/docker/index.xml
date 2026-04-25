@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Docker | The .NET Blog</title><link>https://thedotnetblog.com/tags/docker/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>en</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 25 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tags/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET 10 Ships with Ubuntu 26.04 LTS — Here's What's New</title><link>https://thedotnetblog.com/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/</link><pubDate>Sat, 25 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/</guid><description>Ubuntu 26.04 LTS (Resolute Raccoon) launched today with .NET 10 as a first-class supported toolchain. Native AOT, chiseled containers, Linux 7.0 — here's what you need to know.</description><content:encoded>&lt;p&gt;It&amp;rsquo;s Ubuntu LTS day. &lt;a href="https://canonical.com/blog/canonical-releases-ubuntu-26-04-lts-resolute-raccoon"&gt;Ubuntu 26.04 (Resolute Raccoon)&lt;/a&gt; launched today, and as with every Ubuntu LTS, it ships with the latest .NET LTS — in this case, &lt;a href="https://devblogs.microsoft.com/dotnet/whats-new-for-dotnet-in-ubuntu-2604/"&gt;.NET 10&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you deploy .NET apps on Linux, this is the release cycle you care about. LTS on LTS — five years of support for the OS, matching .NET 10&amp;rsquo;s own long-term support window.&lt;/p&gt;
+&lt;h2 id="install-net-10-in-two-commands"&gt;Install .NET 10 in two commands&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt install dotnet-sdk-10.0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;That&amp;rsquo;s it. .NET is one of the &lt;a href="https://ubuntu.com/toolchains"&gt;officially supported toolchains on Ubuntu&lt;/a&gt; — not a third-party add-on. Microsoft and Canonical work together to make sure it works on day one.&lt;/p&gt;
+&lt;h2 id="try-it-immediately"&gt;Try it immediately&lt;/h2&gt;
+&lt;p&gt;Here&amp;rsquo;s the thing I love about this: you can pull an &lt;code&gt;ubuntu:resolute&lt;/code&gt; container image and be running C# in under a minute.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --rm -it ubuntu:resolute
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y dotnet-sdk-10.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet run - &lt;span class="s"&gt;&amp;lt;&amp;lt; &amp;#39;EOF&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt;using System.Runtime.InteropServices;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt;Console.WriteLine($&amp;#34;Hello {RuntimeInformation.OSDescription} from .NET {RuntimeInformation.FrameworkDescription}&amp;#34;);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;That &lt;code&gt;dotnet run -&lt;/code&gt; with a heredoc is a file-based app pattern — no project file, no directory, just C# piped to stdin. Honest, if you haven&amp;rsquo;t tried file-based apps yet, it&amp;rsquo;s worth a look.&lt;/p&gt;
+&lt;h2 id="containers-update--noble-to--resolute"&gt;Containers: update &lt;code&gt;-noble&lt;/code&gt; to &lt;code&gt;-resolute&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;The new container images use the &lt;code&gt;resolute&lt;/code&gt; tag. Migration is a one-liner:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sed -i &lt;span class="s2"&gt;&amp;#34;s/noble/resolute/g&amp;#34;&lt;/span&gt; Dockerfile
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All existing image flavors — including &lt;a href="https://devblogs.microsoft.com/dotnet/announcing-dotnet-chiseled-containers/"&gt;Chiseled&lt;/a&gt; — are available. The Chiseled images are still my go-to for production: minimal attack surface, no shell, no package manager, just the runtime. Update the tag and rebuild.&lt;/p&gt;
+&lt;h2 id="native-aot-3ms-startup-14mb-binary"&gt;Native AOT: 3ms startup, 1.4MB binary&lt;/h2&gt;
+&lt;p&gt;Ubuntu 26.04 ships a dedicated AOT package:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y dotnet-sdk-aot-10.0 clang
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Here&amp;rsquo;s what you get when you publish a simple app:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet publish app.cs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# artifacts/app/app — 1.4MB native binary&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Startup time:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;real 0m0.003s
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;3 milliseconds. For a full ASP.NET Core web service, the self-contained binary is around 13MB. That&amp;rsquo;s a completely self-contained deployable with no runtime dependency whatsoever.&lt;/p&gt;
+&lt;p&gt;For cloud-native workloads where cold-start time matters — Functions, containers, serverless — this is a legitimate game changer.&lt;/p&gt;
+&lt;h2 id="what-changed-in-ubuntu-2604-that-affects-net"&gt;What changed in Ubuntu 26.04 that affects .NET&lt;/h2&gt;
+&lt;p&gt;Three things worth knowing:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Linux 7.0&lt;/strong&gt; — The .NET team will start Linux 7.0 testing once they get 26.04 VMs in the lab. No breaking changes expected, but they&amp;rsquo;ll verify.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Post-quantum cryptography&lt;/strong&gt; — Ubuntu 26.04 introduces PQC support, and .NET 10 &lt;a href="https://devblogs.microsoft.com/dotnet/post-quantum-cryptography-in-dotnet/"&gt;added post-quantum cryptography APIs&lt;/a&gt; as well. Good alignment.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;cgroup v1 removed&lt;/strong&gt; — Ubuntu 26.04 drops cgroup v1. .NET added cgroup v2 support years ago, so this is a non-event. But if you&amp;rsquo;re on an older runtime, double-check.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="need-net-8-or-9"&gt;Need .NET 8 or 9?&lt;/h2&gt;
+&lt;p&gt;Those are available via the &lt;a href="https://launchpad.net/~dotnet/&amp;#43;archive/ubuntu/backports"&gt;dotnet-backports PPA&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y software-properties-common
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;add-apt-repository ppa:dotnet/backports
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y dotnet-sdk-8.0 &lt;span class="c1"&gt;# or dotnet-sdk-9.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Support is &amp;ldquo;best-effort&amp;rdquo; — not the same guarantee as the LTS package in the main archive — but the packages are there and they work.&lt;/p&gt;
+&lt;h2 id="wrapping-up"&gt;Wrapping up&lt;/h2&gt;
+&lt;p&gt;Every two years, the Ubuntu LTS + .NET LTS alignment gives you a solid, long-support foundation for production workloads. Ubuntu 26.04 with .NET 10 is that foundation for the next cycle.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re containerizing .NET apps, update your Dockerfiles. If you&amp;rsquo;re deploying on bare metal or VMs, &lt;code&gt;apt install dotnet-sdk-10.0&lt;/code&gt; and you&amp;rsquo;re done.&lt;/p&gt;
+&lt;p&gt;Read the &lt;a href="https://devblogs.microsoft.com/dotnet/whats-new-for-dotnet-in-ubuntu-2604/"&gt;full post from Richard Lander&lt;/a&gt; for the complete installation walkthrough and container details.&lt;/p&gt;</content:encoded></item><item><title>Docker Sandbox Lets Copilot Agents Refactor Your Code Without Risking Your Machine</title><link>https://thedotnetblog.com/posts/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/</link><pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/posts/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/</guid><description>Docker Sandbox gives GitHub Copilot agents a secure microVM to run wild with refactoring — no permission prompts, no risk to your host. Here's why that changes everything for large-scale .NET modernization.</description><content:encoded>&lt;p&gt;If you&amp;rsquo;ve used Copilot&amp;rsquo;s agent mode for anything beyond small edits, you know the pain. Every file write, every terminal command — another permission prompt. Now imagine running that across 50 projects. Not fun.&lt;/p&gt;
+&lt;p&gt;The Azure team just dropped a post about &lt;a href="https://devblogs.microsoft.com/all-things-azure/best-of-both-worlds-for-agentic-refactoring-github-copilot-microvms-via-docker-sandbox/"&gt;Docker Sandbox for GitHub Copilot agents&lt;/a&gt;, and honestly, this is one of the most practical agentic tooling improvements I&amp;rsquo;ve seen. It uses microVMs to give Copilot a fully isolated environment where it can go wild — install packages, run builds, execute tests — without touching your host system.&lt;/p&gt;
+&lt;h2 id="what-docker-sandbox-actually-gives-you"&gt;What Docker Sandbox actually gives you&lt;/h2&gt;
+&lt;p&gt;The core idea is simple: spin up a lightweight microVM with a full Linux environment, sync your workspace into it, and let the Copilot agent operate freely inside. When it&amp;rsquo;s done, changes sync back.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s what makes it more than just &amp;ldquo;run stuff in a container&amp;rdquo;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Bidirectional workspace sync&lt;/strong&gt; that preserves absolute paths. Your project structure looks identical inside the sandbox. No path-related build failures.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Private Docker daemon&lt;/strong&gt; running inside the microVM. The agent can build and run containers without ever mounting your host&amp;rsquo;s Docker socket. That&amp;rsquo;s a big deal for security.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP/HTTPS filtering proxies&lt;/strong&gt; that control what the agent can reach on the network. You decide which registries and endpoints are allowed. Supply chain attacks from a rogue &lt;code&gt;npm install&lt;/code&gt; inside the sandbox? Blocked.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;YOLO mode&lt;/strong&gt; — yes, that&amp;rsquo;s what they call it. The agent runs without permission prompts because it literally cannot damage your host. Every destructive action is contained.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="why-net-developers-should-care"&gt;Why .NET developers should care&lt;/h2&gt;
+&lt;p&gt;Think about the modernization work so many teams are facing right now. You have a .NET Framework solution with 30 projects, and you need to move it to .NET 9. That&amp;rsquo;s hundreds of file changes — project files, namespace updates, API replacements, NuGet migrations.&lt;/p&gt;
+&lt;p&gt;With Docker Sandbox, you can point a Copilot agent at a project, let it refactor freely inside the microVM, run &lt;code&gt;dotnet build&lt;/code&gt; and &lt;code&gt;dotnet test&lt;/code&gt; to validate, and only accept the changes that actually work. No risk of it accidentally nuking your local dev environment while experimenting.&lt;/p&gt;
+&lt;p&gt;The post also describes running a &lt;strong&gt;fleet of parallel agents&lt;/strong&gt; — each in its own sandbox — tackling different projects simultaneously. For large .NET solutions or microservice architectures, that&amp;rsquo;s a massive time saver. One agent per service, all running isolated, all validated independently.&lt;/p&gt;
+&lt;h2 id="the-security-angle-matters"&gt;The security angle matters&lt;/h2&gt;
+&lt;p&gt;Here&amp;rsquo;s the thing most people skip over: when you let an AI agent execute arbitrary commands, you&amp;rsquo;re trusting it with your entire machine. Docker Sandbox flips that model. The agent gets full autonomy inside a throwaway environment. The network proxy ensures it can only pull from approved sources. Your host filesystem, Docker daemon, and credentials stay untouched.&lt;/p&gt;
+&lt;p&gt;For teams with compliance requirements — and that&amp;rsquo;s most enterprise .NET shops — this is the difference between &amp;ldquo;we can&amp;rsquo;t use agentic AI&amp;rdquo; and &amp;ldquo;we can adopt it safely.&amp;rdquo;&lt;/p&gt;
+&lt;h2 id="takeaway"&gt;Takeaway&lt;/h2&gt;
+&lt;p&gt;Docker Sandbox solves the fundamental tension of agentic coding: agents need freedom to be useful, but freedom on your host machine is dangerous. MicroVMs give you both. If you&amp;rsquo;re planning any large-scale .NET refactoring or modernization, this is worth setting up now. The combination of Copilot&amp;rsquo;s code intelligence with a safe execution environment is exactly what production teams have been waiting for.&lt;/p&gt;</content:encoded></item></channel></rss>

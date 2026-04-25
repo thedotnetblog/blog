@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Wpf | The .NET Blog</title><link>https://thedotnetblog.com/ru/tags/wpf/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ru</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ru/tags/wpf/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows App Dev CLI v0.3: F5 из терминала и UI-автоматизация для агентов</title><link>https://thedotnetblog.com/ru/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ru/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</guid><description>Windows App Development CLI v0.3 принес winapp run для отладочного запуска из терминала, winapp ui для автоматизации интерфейса и новый NuGet-пакет, позволяющий dotnet run работать с упакованными приложениями.</description><content:encoded>&lt;p&gt;&lt;em&gt;Этот пост был автоматически переведён. Оригинал можно найти &lt;a href="https://thedotnetblog.com/ru/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/"&gt;здесь&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Опыт F5 в Visual Studio великолепен. Но открывать VS только для запуска и отладки упакованного Windows-приложения — это лишнее, особенно в CI-пайплайне, автоматизированном воркфлоу или когда AI-агент прогоняет тесты.&lt;/p&gt;
+&lt;p&gt;Windows App Development CLI v0.3 только что &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;вышел&lt;/a&gt; и решает это напрямую с двумя ключевыми функциями: &lt;code&gt;winapp run&lt;/code&gt; и &lt;code&gt;winapp ui&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="winapp-run-f5-из-любого-места"&gt;winapp run: F5 из любого места&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;winapp run&lt;/code&gt; принимает папку распакованного приложения и манифест, выполняя всё то, что VS делает при отладочном запуске: регистрирует loose-пакет, запускает приложение и сохраняет &lt;code&gt;LocalState&lt;/code&gt; между повторными деплоями.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Собери приложение, затем запусти как упакованное&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp run ./bin/Debug
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Работает для WinUI, WPF, WinForms, Console, Avalonia и других. Режимы рассчитаны как на разработчиков, так и на автоматизированные воркфлоу:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--detach&lt;/code&gt;&lt;/strong&gt;: Запускает и немедленно возвращает управление терминалу. Идеально для CI.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--unregister-on-exit&lt;/code&gt;&lt;/strong&gt;: Удаляет зарегистрированный пакет при закрытии приложения.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--debug-output&lt;/code&gt;&lt;/strong&gt;: Захватывает сообщения &lt;code&gt;OutputDebugString&lt;/code&gt; и исключения в реальном времени.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="новый-nuget-пакет-dotnet-run-для-упакованных-приложений"&gt;Новый NuGet-пакет: dotnet run для упакованных приложений&lt;/h2&gt;
+&lt;p&gt;Для .NET-разработчиков появился новый NuGet-пакет: &lt;code&gt;Microsoft.Windows.SDK.BuildTools.WinApp&lt;/code&gt;. После установки &lt;code&gt;dotnet run&lt;/code&gt; берёт на себя весь inner loop: сборка, подготовка loose-layout-пакета, регистрация в Windows и запуск — всё в один шаг.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp init
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# или&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet add package Microsoft.Windows.SDK.BuildTools.WinApp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="winapp-ui-ui-автоматизация-из-командной-строки"&gt;winapp ui: UI-автоматизация из командной строки&lt;/h2&gt;
+&lt;p&gt;Это функция, открывающая агентные сценарии. &lt;code&gt;winapp ui&lt;/code&gt; предоставляет полный доступ UI Automation к любому запущенному Windows-приложению — WPF, WinForms, Win32, Electron, WinUI3 — прямо из терминала.&lt;/p&gt;
+&lt;p&gt;Что можно делать:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Перечислить все окна верхнего уровня&lt;/li&gt;
+&lt;li&gt;Обходить полное дерево UI Automation любого окна&lt;/li&gt;
+&lt;li&gt;Искать элементы по имени, типу или ID автоматизации&lt;/li&gt;
+&lt;li&gt;Кликать, вызывать и устанавливать значения&lt;/li&gt;
+&lt;li&gt;Делать снимки экрана&lt;/li&gt;
+&lt;li&gt;Ждать появления элементов — идеально для синхронизации тестов&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Сочетание &lt;code&gt;winapp ui&lt;/code&gt; с &lt;code&gt;winapp run&lt;/code&gt; создаёт полный воркфлоу build → запуск → проверка из терминала. Агент может запустить приложение, проверить состояние UI, программно взаимодействовать с ним и валидировать результат.&lt;/p&gt;
+&lt;h2 id="другие-нововведения"&gt;Другие нововведения&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp unregister&lt;/code&gt;&lt;/strong&gt;: Удаляет sideloaded-пакет после завершения работы.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp manifest add-alias&lt;/code&gt;&lt;/strong&gt;: Добавляет алиас для запуска приложения по имени из терминала.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Автодополнение&lt;/strong&gt;: Одна команда для настройки дополнения в PowerShell.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="как-получить"&gt;Как получить&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winget install Microsoft.WinAppCli
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# или&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npm install -g @microsoft/winappcli
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;CLI находится в публичном превью. Полная документация — в &lt;a href="https://github.com/microsoft/WinAppCli"&gt;репозитории на GitHub&lt;/a&gt;, все подробности — в &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;оригинальном анонсе&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

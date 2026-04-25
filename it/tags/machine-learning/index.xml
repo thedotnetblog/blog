@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Machine-Learning | The .NET Blog</title><link>https://thedotnetblog.com/it/tags/machine-learning/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>it</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/it/tags/machine-learning/index.xml" rel="self" type="application/rss+xml"/><item><title>L'RFT di Foundry è ora più economico e intelligente — Ecco cosa è cambiato</title><link>https://thedotnetblog.com/it/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/it/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/</guid><description>Microsoft Foundry ha rilasciato tre aggiornamenti RFT questo mese: addestramento globale per o4-mini, nuovi valutatori di modello GPT-4.1 e una guida alle best practice che vi farà risparmiare ore di debugging.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Questo post è stato tradotto automaticamente. Per la versione originale, &lt;a href="https://thedotnetblog.com/it/posts/emiliano-montesdeoca/foundry-fine-tuning-april-2026-rft-graders/"&gt;clicca qui&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Se state sviluppando app .NET che si basano su modelli fine-tunati, gli aggiornamenti Foundry di questo mese meritano la vostra attenzione. Il Reinforcement Fine-Tuning è diventato più accessibile e significativamente più economico.&lt;/p&gt;
+&lt;p&gt;I dettagli completi sono nell&amp;rsquo;&lt;a href="https://devblogs.microsoft.com/foundry/whats-new-in-foundry-finetune-april-2026/"&gt;annuncio ufficiale&lt;/a&gt;, ma ecco il riassunto pratico.&lt;/p&gt;
+&lt;h2 id="addestramento-globale-per-o4-mini"&gt;Addestramento Globale per o4-mini&lt;/h2&gt;
+&lt;p&gt;o4-mini è il modello di riferimento per workload pesanti in ragionamento e agentici. La grande notizia: ora potete lanciare job di fine-tuning da più di 13 regioni Azure con tariffe di addestramento per token più basse rispetto all&amp;rsquo;addestramento Standard. Stessa infrastruttura, stessa qualità, maggiore copertura.&lt;/p&gt;
+&lt;p&gt;Se il vostro team è distribuito geograficamente, questo conta. Non siete più vincolati a un pugno di regioni per addestrare.&lt;/p&gt;
+&lt;p&gt;Ecco la chiamata API REST per avviare un job di addestramento globale:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://&amp;lt;your-resource&amp;gt;.openai.azure.com/openai/fine_tuning/jobs?api-version=2025-04-01-preview&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;api-key: &lt;/span&gt;&lt;span class="nv"&gt;$AZURE_OPENAI_API_KEY&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s1"&gt;&amp;#39;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;model&amp;#34;: &amp;#34;o4-mini&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;training_file&amp;#34;: &amp;#34;&amp;lt;your-training-file-id&amp;gt;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;method&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;reinforcement&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reinforcement&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;grader&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;type&amp;#34;: &amp;#34;string_check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;name&amp;#34;: &amp;#34;answer-check&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;input&amp;#34;: &amp;#34;{{sample.output_text}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;reference&amp;#34;: &amp;#34;{{item.reference_answer}}&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;operation&amp;#34;: &amp;#34;eq&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;hyperparameters&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;n_epochs&amp;#34;: 2,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;compute_multiplier&amp;#34;: 1.0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; &amp;#34;trainingType&amp;#34;: &amp;#34;globalstandard&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s1"&gt; }&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Quel flag &lt;code&gt;trainingType: globalstandard&lt;/code&gt; è la differenza chiave.&lt;/p&gt;
+&lt;h2 id="nuovi-valutatori-di-modello-famiglia-gpt-41"&gt;Nuovi Valutatori di Modello: Famiglia GPT-4.1&lt;/h2&gt;
+&lt;p&gt;I valutatori definiscono il segnale di ricompensa contro cui il vostro modello ottimizza. Finora, i valutatori basati su modello erano limitati a un insieme più ristretto di modelli. Ora avete tre nuove opzioni: GPT-4.1, GPT-4.1-mini e GPT-4.1-nano.&lt;/p&gt;
+&lt;p&gt;Quando dovreste usare valutatori di modello invece di quelli deterministici? Quando l&amp;rsquo;output del vostro task è aperto, quando avete bisogno di punteggio parziale su più dimensioni, o quando state costruendo workflow agentici dove la correttezza delle chiamate agli strumenti dipende dal contesto semantico.&lt;/p&gt;
+&lt;p&gt;Il punto è che la strategia a livelli è pratica:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-nano&lt;/strong&gt; per le iterazioni iniziali. Basso costo, cicli di feedback rapidi.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1-mini&lt;/strong&gt; una volta che la vostra rubrica di valutazione è stabile e avete bisogno di maggiore fedeltà.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT-4.1&lt;/strong&gt; per la valutazione in produzione o rubriche complesse dove ogni decisione di punteggio conta.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Potete persino mescolare tipi di valutatori in un singolo job RFT. Usate string-match per la dimensione &amp;ldquo;risposta corretta&amp;rdquo; e un valutatore di modello per valutare la qualità del ragionamento. Questa flessibilità è onestamente ciò che lo rende utile per workload reali.&lt;/p&gt;
+&lt;h2 id="la-trappola-del-formato-dati-rft"&gt;La Trappola del Formato Dati RFT&lt;/h2&gt;
+&lt;p&gt;Questo fa inciampare molti. Il formato dati RFT è diverso da SFT. L&amp;rsquo;ultimo messaggio in ogni riga deve avere il ruolo User o Developer — non Assistant. La risposta attesa va in una chiave di livello superiore come &lt;code&gt;reference_answer&lt;/code&gt; che il valutatore referenzia direttamente.&lt;/p&gt;
+&lt;p&gt;Se stavate facendo supervised fine-tuning e volete passare a RFT, dovete ristrutturare i vostri dati di addestramento. Non saltate questo passaggio o i vostri job falliranno silenziosamente.&lt;/p&gt;
+&lt;h2 id="perché-questo-è-importante-per-gli-sviluppatori-net"&gt;Perché Questo È Importante per gli Sviluppatori .NET&lt;/h2&gt;
+&lt;p&gt;Se state chiamando modelli fine-tunati dalle vostre app .NET tramite l&amp;rsquo;SDK Azure OpenAI, un addestramento più economico significa che potete iterare in modo più aggressivo. Le opzioni dei valutatori di modello significano che potete fare fine-tuning per task sfumati — non solo scenari di corrispondenza esatta. E la guida alle best practice su &lt;a href="https://github.com/microsoft-foundry/fine-tuning/blob/main/Demos/Agentic_RFT_PrivatePreview/RFT_Best_Practice.md"&gt;GitHub&lt;/a&gt; vi farà risparmiare tempo reale di debugging.&lt;/p&gt;
+&lt;p&gt;Iniziate in piccolo. Da dieci a cento campioni. Valutatore semplice. Validate il ciclo. Poi scalate.&lt;/p&gt;</content:encoded></item></channel></rss>

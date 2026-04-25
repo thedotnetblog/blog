@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Parallel-Development | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/parallel-development/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/parallel-development/index.xml" rel="self" type="application/rss+xml"/><item><title>الوضع المعزول في Aspire يحلّ كابوس تعارض المنافذ في التطوير المتوازي</title><link>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</guid><description>يُقدّم Aspire 13.2 وضع --isolated: منافذ عشوائية، وأسرار منفصلة، وانعدام كامل للتعارضات عند تشغيل نسخ متعددة من AppHost. مثالي للوكلاء والـ worktrees والسير المتوازية.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;تمت ترجمة هذا المقال تلقائياً. للنسخة الأصلية، &lt;a href="https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/"&gt;انقر هنا&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;إن سبق لك أن حاولت تشغيل نسختين من المشروع ذاته في الوقت نفسه، فأنت تعرف معاناة ذلك. المنفذ 8080 مشغول بالفعل. المنفذ 17370 محجوز. أوقف شيئاً، وأعد التشغيل، وتعامل مع متغيرات البيئة — إنه مُدمِّر للإنتاجية.&lt;/p&gt;
+&lt;p&gt;هذه المشكلة تزداد سوءاً لا تحسّناً. وكلاء الذكاء الاصطناعي تُنشئ worktrees في Git للعمل بشكل مستقل. وكلاء الخلفية تُطلق بيئات منفصلة. المطورون يستنسخون المستودع ذاته مرتين لفروع الميزات. كل هذه السيناريوهات تصطدم بالحائط نفسه: نسختان من التطبيق ذاته تتصارعان على المنافذ ذاتها.&lt;/p&gt;
+&lt;p&gt;يُعالج Aspire 13.2 هذا بخيار واحد. كتب James Newton-King من فريق Aspire &lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;التفاصيل الكاملة&lt;/a&gt;، وهي إحدى تلك الميزات التي تجعلك تتساءل &amp;ldquo;لماذا لم يكن هذا موجوداً من قبل؟&amp;rdquo;.&lt;/p&gt;
+&lt;h2 id="الحل---isolated"&gt;الحل: &lt;code&gt;--isolated&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;هذا كل شيء. تحصل كل عملية تشغيل على:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;منافذ عشوائية&lt;/strong&gt; — لا مزيد من التعارضات بين النسخ&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;أسرار مستخدم معزولة&lt;/strong&gt; — سلاسل الاتصال ومفاتيح API تبقى منفصلة لكل نسخة&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;لا إعادة تعيين يدوية للمنافذ. لا تعامل مع متغيرات البيئة. تحصل كل عملية تشغيل على بيئة نظيفة خالية من التعارضات تلقائياً.&lt;/p&gt;
+&lt;h2 id="سيناريوهات-حقيقية-تبرز-فيها-هذه-الميزة"&gt;سيناريوهات حقيقية تبرز فيها هذه الميزة&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;نسخ متعددة.&lt;/strong&gt; لديك فرع ميزة في دليل ما وإصلاح خطأ في آخر:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# الطرفية 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-feature
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# الطرفية 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-bugfix
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;يعمل كلاهما دون تعارضات. تُظهر لوحة التحكم ما يعمل وأين.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;وكلاء الخلفية في VS Code.&lt;/strong&gt; حين ينشئ وكيل الخلفية في Copilot Chat worktree في Git للعمل على كودك بشكل مستقل، قد يحتاج إلى تشغيل AppHost في Aspire. دون &lt;code&gt;--isolated&lt;/code&gt;، سيحدث تعارض في المنافذ مع worktree الرئيسية. معه، تعمل كلتا النسختين ببساطة.&lt;/p&gt;
+&lt;p&gt;مهارة Aspire التي تشحن مع &lt;code&gt;aspire agent init&lt;/code&gt; تُوجّه الوكلاء تلقائياً لاستخدام &lt;code&gt;--isolated&lt;/code&gt; عند العمل في worktrees. لذا يجب أن يتعامل وكيل الخلفية في Copilot مع هذا مباشرةً.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;اختبارات التكامل جنباً إلى جنب مع التطوير.&lt;/strong&gt; تحتاج إلى تشغيل الاختبارات مقابل AppHost حيّ أثناء مواصلة بناء الميزات؟ الوضع المعزول يمنح كل سياق منافذه وإعداداته الخاصة.&lt;/p&gt;
+&lt;h2 id="كيف-يعمل-داخليا"&gt;كيف يعمل داخلياً&lt;/h2&gt;
+&lt;p&gt;حين تُمرّر &lt;code&gt;--isolated&lt;/code&gt;، تُولّد واجهة CLI مُعرِّفاً فريداً للنسخة. يُشغّل هذا سلوكين:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;عشوائية المنافذ&lt;/strong&gt; — بدلاً من الارتباط بمنافذ محددة مسبقاً في إعداد AppHost، يختار الوضع المعزول منافذ عشوائية متاحة لكل شيء — لوحة التحكم، ونقاط نهاية الخدمة، وكل ذلك. يتكيّف اكتشاف الخدمات تلقائياً، فتجد الخدمات بعضها بصرف النظر عن المنافذ المخصصة.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;عزل الأسرار&lt;/strong&gt; — تحصل كل نسخة معزولة على مخزن أسرار مستخدم خاص بها، مُفهرس بالمُعرِّف الفريد للنسخة. سلاسل الاتصال ومفاتيح API من نسخة ما لا تتسرّب إلى أخرى.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;لا يحتاج كودك إلى أي تغييرات. اكتشاف خدمات Aspire يحلّ نقاط النهاية في وقت التشغيل، لذا يتصل كل شيء بشكل صحيح بصرف النظر عن تعيين المنافذ.&lt;/p&gt;
+&lt;h2 id="متى-تستخدمه"&gt;متى تستخدمه&lt;/h2&gt;
+&lt;p&gt;استخدم &lt;code&gt;--isolated&lt;/code&gt; عند تشغيل نسخ متعددة من AppHost ذاته في الوقت نفسه — سواء كان ذلك تطويراً متوازياً، أو اختبارات آلية، أو وكلاء ذكاء اصطناعي، أو worktrees في Git. للتطوير بنسخة واحدة حيث تفضّل منافذ محددة، يظل &lt;code&gt;aspire run&lt;/code&gt; العادي يعمل بشكل جيد.&lt;/p&gt;
+&lt;h2 id="خلاصة-القول"&gt;خلاصة القول&lt;/h2&gt;
+&lt;p&gt;الوضع المعزول ميزة صغيرة تحلّ مشكلة حقيقية ومتزايدة الشيوع. مع دفع التطوير بمساعدة الذكاء الاصطناعي نحو سير عمل أكثر توازياً — وكلاء متعددة، وworktrees متعددة، وسياقات متعددة — أصبحت القدرة على تشغيل نسخة أخرى ببساطة دون التصارع على المنافذ أمراً ضرورياً.&lt;/p&gt;
+&lt;p&gt;اقرأ &lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;المنشور الكامل&lt;/a&gt; للاطلاع على جميع التفاصيل التقنية وجرّبه بـ &lt;code&gt;aspire update --self&lt;/code&gt; للحصول على الإصدار 13.2.&lt;/p&gt;</content:encoded></item></channel></rss>

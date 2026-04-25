@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Documentation | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/documentation/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 04 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/documentation/index.xml" rel="self" type="application/rss+xml"/><item><title>Aspire 13.2 Memiliki CLI Dokumentasi — dan Agen AI Anda Bisa Menggunakannya Juga</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/</link><pubDate>Sat, 04 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/</guid><description>.NET Aspire 13.2 menambahkan aspire docs — CLI untuk mencari, menelusuri, dan membaca dokumentasi resmi tanpa meninggalkan terminal. Juga berfungsi sebagai alat untuk agen AI.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Anda tahu momen ketika Anda sedang dalam Aspire AppHost, menghubungkan integrasi, dan perlu memeriksa parameter apa yang diharapkan integrasi Redis? Anda alt-tab ke browser, berburu di aspire.dev. Konteks hilang.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 baru saja &lt;a href="https://devblogs.microsoft.com/aspire/aspire-docs-in-your-terminal/"&gt;mengirimkan perbaikan untuk itu&lt;/a&gt;. CLI &lt;code&gt;aspire docs&lt;/code&gt; memungkinkan Anda mencari, menelusuri, dan membaca dokumentasi Aspire resmi langsung dari terminal.&lt;/p&gt;
+&lt;h2 id="tiga-perintah-nol-tab-browser"&gt;Tiga perintah, nol tab browser&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Daftar semua dokumen&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs list
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Cari topik&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs search &lt;span class="s2"&gt;&amp;#34;redis&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Baca halaman penuh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs get redis-integration
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Hanya satu bagian&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs get redis-integration --section &lt;span class="s2"&gt;&amp;#34;Add Redis resource&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="sudut-agen-ai"&gt;Sudut agen AI&lt;/h2&gt;
+&lt;p&gt;Perintah &lt;code&gt;aspire docs&lt;/code&gt; yang sama berfungsi sebagai alat untuk agen AI. Alih-alih mengarang API Aspire berdasarkan data pelatihan lama, agen bisa memanggil &lt;code&gt;aspire docs search &amp;quot;postgres&amp;quot;&lt;/code&gt;, menemukan dokumen integrasi resmi, dan membaca halaman yang tepat.&lt;/p&gt;
+&lt;h2 id="kesimpulan"&gt;Kesimpulan&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;aspire docs&lt;/code&gt; adalah fitur kecil yang memecahkan masalah nyata dengan bersih. Lihat &lt;a href="https://davidpine.dev/posts/aspire-docs-mcp-tools/"&gt;deep dive David Pine&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

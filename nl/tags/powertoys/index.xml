@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Powertoys | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/powertoys/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/powertoys/index.xml" rel="self" type="application/rss+xml"/><item><title>Die Visual Studio Zwevende Vensters Instelling die Je Niet Kende (Maar Zou Moeten Kennen)</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/</guid><description>Een verborgen Visual Studio-instelling geeft je volledige controle over zwevende vensters — onafhankelijke taakbalkitems, correct gedrag op meerdere monitoren en perfecte FancyZones-integratie. Één dropdown verandert alles.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Als je meerdere monitoren gebruikt met Visual Studio (en eerlijk gezegd, wie doet dat tegenwoordig niet), heb je waarschijnlijk de ergernis ervaren: zwevende toolvensters verdwijnen als je de hoofd-IDE minimaliseert, ze blijven altijd bovenop alles staan, en ze verschijnen niet als aparte taakbalkknoppen. Het werkt voor sommige workflows, maar voor multi-monitoropstellingen is het frustrerend.&lt;/p&gt;
+&lt;p&gt;Mads Kristensen van het Visual Studio-team &lt;a href="https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/"&gt;deelde een weinig bekende instelling&lt;/a&gt; die volledig verandert hoe zwevende vensters zich gedragen. Één dropdown. Dat is alles.&lt;/p&gt;
+&lt;h2 id="de-instelling"&gt;De instelling&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Tools &amp;gt; Options &amp;gt; Environment &amp;gt; Windows &amp;gt; Floating Windows&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;De dropdown &amp;ldquo;These floating windows are owned by the main window&amp;rdquo; heeft drie opties:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;None&lt;/strong&gt; — volledige onafhankelijkheid. Elk zwevend venster krijgt zijn eigen taakbalkvermelding en gedraagt zich als een normaal Windows-venster.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tool Windows&lt;/strong&gt; (standaard) — documenten zweven vrij, toolvensters blijven gebonden aan de IDE.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Documents and Tool Windows&lt;/strong&gt; — klassiek Visual Studio-gedrag, alles gebonden aan het hoofdvenster.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="waarom-none-de-juiste-keuze-is-voor-multi-monitoropstellingen"&gt;Waarom &amp;ldquo;None&amp;rdquo; de juiste keuze is voor multi-monitoropstellingen&lt;/h2&gt;
+&lt;p&gt;Stel het in op &lt;strong&gt;None&lt;/strong&gt; en plotseling gedragen al je zwevende toolvensters en documenten zich als echte Windows-applicaties. Ze verschijnen in de taakbalk, blijven zichtbaar als je het hoofd-Visual Studio-venster minimaliseert, en dringen zich niet meer naar voren.&lt;/p&gt;
+&lt;p&gt;Combineer dit met &lt;strong&gt;PowerToys FancyZones&lt;/strong&gt; en het is een game changer. Maak aangepaste indelingen over je monitoren, snap je Solution Explorer naar één zone, debugger naar een andere, en codebestanden waar je wilt. Alles blijft op zijn plek, alles is onafhankelijk toegankelijk.&lt;/p&gt;
+&lt;h2 id="snelle-aanbevelingen"&gt;Snelle aanbevelingen&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Multi-monitor power users&lt;/strong&gt;: Stel in op &lt;strong&gt;None&lt;/strong&gt;, combineer met FancyZones&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Occasionele zwevende vensters&lt;/strong&gt;: &lt;strong&gt;Tool Windows&lt;/strong&gt; (standaard) is een solide middenweg&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Traditionele workflow&lt;/strong&gt;: &lt;strong&gt;Documents and Tool Windows&lt;/strong&gt; houdt alles klassiek&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Pro tip: &lt;strong&gt;Ctrl + dubbelklikken&lt;/strong&gt; op de titelbalk van een toolvenster om het direct te laten zweven of te docken. Geen herstart nodig na het wijzigen van de instelling.&lt;/p&gt;
+&lt;h2 id="afronding"&gt;Afronding&lt;/h2&gt;
+&lt;p&gt;Het is een van die &amp;ldquo;Ik kan niet geloven dat ik dit niet wist&amp;rdquo; instellingen. Als zwevende vensters in Visual Studio je ooit hebben geërgerd, ga dit nu wijzigen.&lt;/p&gt;
+&lt;p&gt;Lees het &lt;a href="https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/"&gt;volledige bericht&lt;/a&gt; voor details en screenshots.&lt;/p&gt;</content:encoded></item></channel></rss>

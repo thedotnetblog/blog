@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Bicep | The .NET Blog</title><link>https://thedotnetblog.com/ca/tags/bicep/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ca</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 21 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ca/tags/bicep/index.xml" rel="self" type="application/rss+xml"/><item><title>azd + GitHub Copilot: Configuració de projecte amb IA i resolució intel·ligent d'errors</title><link>https://thedotnetblog.com/ca/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</link><pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ca/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</guid><description>L'Azure Developer CLI ara s'integra amb GitHub Copilot per generar la infraestructura del teu projecte i resoldre errors de desplegament — sense sortir del terminal.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Aquest article ha estat traduït automàticament. Per veure la versió original en anglès, &lt;a href="https://thedotnetblog.com/ca/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/"&gt;fes clic aquí&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Coneixes aquell moment en què vols desplegar una aplicació existent a Azure i et quedes mirant un &lt;code&gt;azure.yaml&lt;/code&gt; en blanc, intentant recordar si la teva API Express hauria d&amp;rsquo;usar Container Apps o App Service? Aquell moment acaba de ser molt més curt.&lt;/p&gt;
+&lt;p&gt;L&amp;rsquo;Azure Developer CLI (&lt;code&gt;azd&lt;/code&gt;) ara s&amp;rsquo;integra amb GitHub Copilot de dues maneres concretes: scaffolding assistit per IA durant &lt;code&gt;azd init&lt;/code&gt;, i resolució intel·ligent d&amp;rsquo;errors quan els desplegaments fallen. Les dues funcions es queden completament al terminal — exactament on vull que siguin.&lt;/p&gt;
+&lt;h2 id="configuració-amb-copilot-durant-azd-init"&gt;Configuració amb Copilot durant azd init&lt;/h2&gt;
+&lt;p&gt;Quan executes &lt;code&gt;azd init&lt;/code&gt;, ara apareix l&amp;rsquo;opció &amp;ldquo;Set up with GitHub Copilot (Preview)&amp;rdquo;. Selecciona-la i Copilot analitza el teu codebase per generar l&amp;rsquo;&lt;code&gt;azure.yaml&lt;/code&gt;, les plantilles d&amp;rsquo;infraestructura i els mòduls Bicep — basant-se en el teu codi real.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd init
+# Selecciona: &amp;#34;Set up with GitHub Copilot (Preview)&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Requisits:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;azd 1.23.11 o superior&lt;/strong&gt; — comprova amb &lt;code&gt;azd version&lt;/code&gt; o actualitza amb &lt;code&gt;azd update&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Una subscripció activa de GitHub Copilot&lt;/strong&gt; (Individual, Business o Enterprise)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub CLI (&lt;code&gt;gh&lt;/code&gt;)&lt;/strong&gt; — &lt;code&gt;azd&lt;/code&gt; demanarà login si cal&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;El que trobo genuïnament útil és que funciona en els dos sentits. Construint des de zero? Copilot t&amp;rsquo;ajuda a configurar els serveis Azure correctes des del principi. Tens una app existent que vols desplegar? Apunta Copilot cap a ella i genera la configuració sense haver de reestructurar res.&lt;/p&gt;
+&lt;h3 id="el-que-fa-realment"&gt;El que fa realment&lt;/h3&gt;
+&lt;p&gt;Imagina que tens una API Express en Node.js amb dependència de PostgreSQL. En lloc de decidir manualment entre Container Apps i App Service, i després escriure Bicep des de zero, Copilot detecta el teu stack i genera:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Un &lt;code&gt;azure.yaml&lt;/code&gt; amb els ajustaments correctes de &lt;code&gt;language&lt;/code&gt;, &lt;code&gt;host&lt;/code&gt; i &lt;code&gt;build&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Un mòdul Bicep per a Azure Container Apps&lt;/li&gt;
+&lt;li&gt;Un mòdul Bicep per a Azure Database for PostgreSQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I fa comprovacions prèvies abans de tocar res — verifica que el teu directori git estigui net, demana consentiment per a les eines del servidor MCP. Res no passa sense que sàpigues exactament què canviarà.&lt;/p&gt;
+&lt;h2 id="resolució-derrors-amb-copilot"&gt;Resolució d&amp;rsquo;errors amb Copilot&lt;/h2&gt;
+&lt;p&gt;Els errors de desplegament són inevitables. Paràmetres que falten, problemes de permisos, disponibilitat de SKUs — i el missatge d&amp;rsquo;error rarament et diu l&amp;rsquo;única cosa que realment necessites saber: &lt;em&gt;com solucionar-ho&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Sense Copilot, el cicle és: copiar l&amp;rsquo;error → buscar als docs → llegir tres respostes irrellevants de Stack Overflow → executar alguns comandos &lt;code&gt;az&lt;/code&gt; CLI → tornar-ho a intentar i rezar. Amb Copilot integrat a &lt;code&gt;azd&lt;/code&gt;, aquest cicle s&amp;rsquo;esfondra. Quan qualsevol comandament &lt;code&gt;azd&lt;/code&gt; falla, ofereix immediatament quatre opcions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Explain&lt;/strong&gt; — descripció en llenguatge natural del que ha anat malament&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Guidance&lt;/strong&gt; — instruccions pas a pas per solucionar-ho&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Diagnose and Guide&lt;/strong&gt; — anàlisi completa + Copilot aplica la solució (amb la teva aprovació) + reintent opcional&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skip&lt;/strong&gt; — gestionar-ho tu mateix&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;El punt clau: Copilot ja té context sobre el teu projecte, el comandament que ha fallat i la sortida de l&amp;rsquo;error. Les seves suggerències són específiques per a &lt;em&gt;la teva situació&lt;/em&gt;.&lt;/p&gt;
+&lt;h3 id="configurar-un-comportament-predeterminat"&gt;Configurar un comportament predeterminat&lt;/h3&gt;
+&lt;p&gt;Si sempre tries la mateixa opció, salta el prompt interactiu:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.category troubleshoot
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Valors: &lt;code&gt;explain&lt;/code&gt;, &lt;code&gt;guidance&lt;/code&gt;, &lt;code&gt;troubleshoot&lt;/code&gt;, &lt;code&gt;fix&lt;/code&gt;, &lt;code&gt;skip&lt;/code&gt;. També pots habilitar auto-fix i reintent:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.fix allow
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Torna al mode interactiu en qualsevol moment:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config unset copilot.errorHandling.category
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="conclusió"&gt;Conclusió&lt;/h2&gt;
+&lt;p&gt;Executa &lt;code&gt;azd update&lt;/code&gt; per obtenir la versió més recent i usa &lt;code&gt;azd init&lt;/code&gt; en el teu proper projecte. És exactament el tipus d&amp;rsquo;integració de Copilot que aporta valor real.&lt;/p&gt;
+&lt;p&gt;Llegeix l&amp;rsquo;&lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-copilot-integration/"&gt;anunci original aquí&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

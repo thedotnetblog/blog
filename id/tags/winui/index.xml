@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Winui | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/winui/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/winui/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows App Dev CLI v0.3: F5 dari Terminal dan UI Automation untuk Agen AI</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</guid><description>Windows App Development CLI v0.3 menghadirkan winapp run untuk peluncuran debug dari terminal, winapp ui untuk otomasi antarmuka, dan paket NuGet baru yang membuat dotnet run bekerja dengan aplikasi yang dikemas.</description><content:encoded>&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Pengalaman F5 di Visual Studio sangat bagus. Tapi harus membuka VS hanya untuk menjalankan dan men-debug aplikasi Windows yang dikemas — baik di pipeline CI, workflow otomatis, atau saat agen AI menjalankan pengujian — terlalu berlebihan.&lt;/p&gt;
+&lt;p&gt;Windows App Development CLI v0.3 baru saja &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;dirilis&lt;/a&gt; dan menangani hal ini secara langsung dengan dua fitur utama: &lt;code&gt;winapp run&lt;/code&gt; dan &lt;code&gt;winapp ui&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="winapp-run-f5-dari-mana-saja"&gt;winapp run: F5 dari Mana Saja&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;winapp run&lt;/code&gt; menerima folder aplikasi yang tidak dikemas dan sebuah manifest, lalu melakukan semua yang VS lakukan saat debug launch: mendaftarkan loose package, menjalankan aplikasi, dan mempertahankan &lt;code&gt;LocalState&lt;/code&gt; antar re-deploy.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Build aplikasi, lalu jalankan sebagai aplikasi yang dikemas&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp run ./bin/Debug
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Bekerja untuk WinUI, WPF, WinForms, Console, Avalonia, dan lainnya. Mode dirancang untuk developer maupun workflow otomatis:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--detach&lt;/code&gt;&lt;/strong&gt;: Meluncurkan dan segera mengembalikan kontrol ke terminal. Sempurna untuk CI.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--unregister-on-exit&lt;/code&gt;&lt;/strong&gt;: Membersihkan package yang terdaftar saat aplikasi ditutup.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--debug-output&lt;/code&gt;&lt;/strong&gt;: Menangkap pesan &lt;code&gt;OutputDebugString&lt;/code&gt; dan exception secara real-time.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="paket-nuget-baru-dotnet-run-untuk-aplikasi-yang-dikemas"&gt;Paket NuGet Baru: dotnet run untuk Aplikasi yang Dikemas&lt;/h2&gt;
+&lt;p&gt;Untuk developer .NET ada paket NuGet baru: &lt;code&gt;Microsoft.Windows.SDK.BuildTools.WinApp&lt;/code&gt;. Setelah diinstal, &lt;code&gt;dotnet run&lt;/code&gt; menangani seluruh inner loop: build, menyiapkan loose-layout package, mendaftar di Windows, dan meluncurkan — semuanya dalam satu langkah.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp init
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# atau&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet add package Microsoft.Windows.SDK.BuildTools.WinApp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="winapp-ui-ui-automation-dari-command-line"&gt;winapp ui: UI Automation dari Command Line&lt;/h2&gt;
+&lt;p&gt;Inilah fitur yang membuka skenario agentik. &lt;code&gt;winapp ui&lt;/code&gt; memberikan akses UI Automation penuh ke aplikasi Windows mana pun yang sedang berjalan — WPF, WinForms, Win32, Electron, WinUI3 — langsung dari terminal.&lt;/p&gt;
+&lt;p&gt;Yang bisa dilakukan:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Menampilkan semua jendela tingkat teratas&lt;/li&gt;
+&lt;li&gt;Menelusuri pohon UI Automation lengkap dari sebuah jendela&lt;/li&gt;
+&lt;li&gt;Mencari elemen berdasarkan nama, tipe, atau ID otomasi&lt;/li&gt;
+&lt;li&gt;Klik, invoke, dan set nilai&lt;/li&gt;
+&lt;li&gt;Mengambil screenshot&lt;/li&gt;
+&lt;li&gt;Menunggu elemen muncul — ideal untuk sinkronisasi pengujian&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Menggabungkan &lt;code&gt;winapp ui&lt;/code&gt; dengan &lt;code&gt;winapp run&lt;/code&gt; menghasilkan workflow build → jalankan → verifikasi yang lengkap dari terminal. Agen dapat menjalankan aplikasi, memeriksa status UI, berinteraksi secara programatik, dan memvalidasi hasilnya.&lt;/p&gt;
+&lt;h2 id="fitur-lainnya"&gt;Fitur Lainnya&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp unregister&lt;/code&gt;&lt;/strong&gt;: Menghapus package yang sideloaded setelah selesai.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp manifest add-alias&lt;/code&gt;&lt;/strong&gt;: Menambahkan alias untuk menjalankan aplikasi berdasarkan nama dari terminal.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tab completion&lt;/strong&gt;: Satu perintah untuk mengatur tab completion PowerShell.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="cara-mendapatkannya"&gt;Cara Mendapatkannya&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winget install Microsoft.WinAppCli
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# atau&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npm install -g @microsoft/winappcli
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;CLI dalam public preview. Lihat &lt;a href="https://github.com/microsoft/WinAppCli"&gt;repositori GitHub&lt;/a&gt; untuk dokumentasi lengkap dan &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;pengumuman asli&lt;/a&gt; untuk semua detailnya.&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Remote-Development | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/remote-development/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 06 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/remote-development/index.xml" rel="self" type="application/rss+xml"/><item><title>VS Code 1.115 — 后台终端通知、SSH Agent 模式及更多</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/</link><pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/</guid><description>VS Code 1.115 带来了面向 Agent 的后台终端通知、SSH 远程 Agent 托管、终端文件粘贴以及会话感知的编辑追踪。以下是对 .NET 开发者重要的内容。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。如需查看原文，&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/vscode-1-115-agent-improvements/"&gt;请点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;VS Code 1.115 刚刚&lt;a href="https://code.visualstudio.com/updates/v1_115"&gt;发布&lt;/a&gt;了，虽然从主要功能来看这是一个较轻量的版本，但如果你每天都在使用 AI 编程助手，那么与 Agent 相关的改进确实非常实用。&lt;/p&gt;
+&lt;p&gt;让我来重点介绍一下真正值得了解的内容。&lt;/p&gt;
+&lt;h2 id="后台终端与-agent-通信"&gt;后台终端与 Agent 通信&lt;/h2&gt;
+&lt;p&gt;这是本次最突出的功能。后台终端现在会在命令完成时自动通知 Agent，包括退出代码和终端输出。后台终端中的输入提示也会被检测并展示给用户。&lt;/p&gt;
+&lt;p&gt;这为什么重要？如果你用过 Copilot 的 Agent 模式在后台运行构建命令或测试套件，你肯定知道&amp;quot;那个跑完了没？&amp;ldquo;的痛苦——后台终端基本上就是发射后不管。现在 Agent 会在你的 &lt;code&gt;dotnet build&lt;/code&gt; 或 &lt;code&gt;dotnet test&lt;/code&gt; 完成时收到通知，看到输出，并相应地做出反应。这是一个小改动，但让 Agent 驱动的工作流程变得更加可靠。&lt;/p&gt;
+&lt;p&gt;还有一个新的 &lt;code&gt;send_to_terminal&lt;/code&gt; 工具，允许 Agent 在用户确认后向后台终端发送命令，解决了 &lt;code&gt;run_in_terminal&lt;/code&gt; 带超时参数时会将终端移到后台并使其变为只读的问题。&lt;/p&gt;
+&lt;h2 id="ssh-远程-agent-托管"&gt;SSH 远程 Agent 托管&lt;/h2&gt;
+&lt;p&gt;VS Code 现在支持通过 SSH 连接到远程机器，自动安装 CLI 并以 Agent 主机模式启动。这意味着你的 AI Agent 会话可以直接针对远程环境——对于在 Linux 服务器或云虚拟机上构建和测试的 .NET 开发者来说非常有用。&lt;/p&gt;
+&lt;h2 id="agent-会话中的编辑追踪"&gt;Agent 会话中的编辑追踪&lt;/h2&gt;
+&lt;p&gt;Agent 会话期间进行的文件编辑现在会被追踪和恢复，支持差异对比、撤销/重做和状态恢复。如果 Agent 修改了你的代码并且出了问题，你可以准确地看到哪些内容发生了变化并将其回滚。让 Agent 修改代码库时更加安心。&lt;/p&gt;
+&lt;h2 id="浏览器标签页感知及其他改进"&gt;浏览器标签页感知及其他改进&lt;/h2&gt;
+&lt;p&gt;还有一些生活质量方面的提升：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;浏览器标签页追踪&lt;/strong&gt; — 聊天现在可以追踪和链接会话期间打开的浏览器标签页，这样 Agent 可以引用你正在查看的网页&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;终端文件粘贴&lt;/strong&gt; — 使用 Ctrl+V、拖放或右键点击将文件（包括图片）粘贴到终端&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;小地图中的测试覆盖率&lt;/strong&gt; — 测试覆盖率指示器现在显示在小地图中，提供快速的视觉概览&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mac 上的双指缩放&lt;/strong&gt; — 集成浏览器支持双指缩放手势&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;会话中的 Copilot 使用权限&lt;/strong&gt; — 状态栏在会话视图中显示使用信息&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;转到文件中的网站图标&lt;/strong&gt; — 打开的网页在快速选择列表中显示网站图标&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;p&gt;VS Code 1.115 是一个渐进式版本，但 Agent 改进——后台终端通知、SSH Agent 托管和编辑追踪——加在一起为 AI 辅助开发带来了明显更流畅的体验。如果你在 .NET 项目中使用 Copilot 的 Agent 模式，这些正是每天减少摩擦的生活质量改进。&lt;/p&gt;
+&lt;p&gt;查看&lt;a href="https://code.visualstudio.com/updates/v1_115"&gt;完整的发行说明&lt;/a&gt;了解所有细节。&lt;/p&gt;</content:encoded></item></channel></rss>

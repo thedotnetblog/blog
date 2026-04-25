@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Parallel-Development | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/parallel-development/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/parallel-development/index.xml" rel="self" type="application/rss+xml"/><item><title>Aspire's Geïsoleerde Modus Lost de Port-Conflict Nachtmerrie op voor Parallelle Ontwikkeling</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</guid><description>Aspire 13.2 introduceert --isolated modus: willekeurige poorten, afzonderlijke geheimen en nul botsingen bij het uitvoeren van meerdere instanties van dezelfde AppHost. Perfect voor AI-agents, worktrees en parallelle workflows.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Als je ooit twee instanties van hetzelfde project tegelijkertijd hebt geprobeerd uit te voeren, ken je de pijn. Poort 8080 is al in gebruik.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 lost dit op met één vlag. James Newton-King heeft &lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;alle details opgeschreven&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="de-oplossing---isolated"&gt;De oplossing: &lt;code&gt;--isolated&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Elke run krijgt:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Willekeurige poorten&lt;/strong&gt; — geen botsingen tussen instanties&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Geïsoleerde gebruikersgeheimen&lt;/strong&gt; — verbindingsstrings en API-sleutels blijven afzonderlijk per instantie&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="echte-scenarios"&gt;Echte scenario&amp;rsquo;s&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Meerdere checkouts:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-feature
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-bugfix
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Beide draaien zonder conflicten.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Achtergrondagents in VS Code.&lt;/strong&gt; Wanneer de achtergrondagent van Copilot Chat een git worktree aanmaakt om onafhankelijk te werken, zorgt de geïsoleerde modus ervoor dat beide instanties gewoon werken.&lt;/p&gt;
+&lt;h2 id="samenvatting"&gt;Samenvatting&lt;/h2&gt;
+&lt;p&gt;Geïsoleerde modus is een kleine functie die een reëel, steeds vaker voorkomend probleem oplost. Haal 13.2 op met &lt;code&gt;aspire update --self&lt;/code&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

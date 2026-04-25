@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Cli | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/cli/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/cli/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows App Dev CLI v0.3: ターミナルからF5デバッグとエージェント向けUIオートメーション</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</guid><description>Windows App Development CLI v0.3では、ターミナルからデバッグ起動できるwinapp run、UIオートメーション機能のwinapp ui、そしてパッケージアプリでdotnet runを使えるNuGetパッケージが追加されました。</description><content:encoded>&lt;p&gt;&lt;em&gt;この投稿は自動翻訳されました。元の記事は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/"&gt;こちら&lt;/a&gt;をクリックしてください。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Visual StudioのF5体験は素晴らしいです。しかし、パッケージ化されたWindowsアプリを起動してデバッグするためだけにVSを開くのは、CIパイプライン、自動化ワークフロー、またはAIエージェントがテストを実行しているときには過剰です。&lt;/p&gt;
+&lt;p&gt;Windows App Development CLI v0.3が&lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;リリースされ&lt;/a&gt;、2つの主要機能でこれに直接対応します：&lt;code&gt;winapp run&lt;/code&gt;と&lt;code&gt;winapp ui&lt;/code&gt;です。&lt;/p&gt;
+&lt;h2 id="winapp-run-どこからでもf5"&gt;winapp run: どこからでもF5&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;winapp run&lt;/code&gt;はアンパッケージのアプリフォルダーとマニフェストを受け取り、VSがデバッグ起動時に行うすべてを実行します：ルーズパッケージを登録し、アプリを起動し、再デプロイ間で&lt;code&gt;LocalState&lt;/code&gt;を保持します。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# アプリをビルドし、パッケージアプリとして実行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp run ./bin/Debug
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;WinUI、WPF、WinForms、コンソール、Avaloniaなどで動作します。各モードは開発者と自動化ワークフローの両方を想定しています：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--detach&lt;/code&gt;&lt;/strong&gt;: 起動後すぐにターミナルに制御を返します。CI/自動化に最適です。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--unregister-on-exit&lt;/code&gt;&lt;/strong&gt;: アプリ終了時に登録済みパッケージを削除します。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--debug-output&lt;/code&gt;&lt;/strong&gt;: &lt;code&gt;OutputDebugString&lt;/code&gt;メッセージと例外をリアルタイムでキャプチャします。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="新しいnugetパッケージ-パッケージアプリ向けdotnet-run"&gt;新しいNuGetパッケージ: パッケージアプリ向けdotnet run&lt;/h2&gt;
+&lt;p&gt;.NET開発者向けに新しいNuGetパッケージが登場しました：&lt;code&gt;Microsoft.Windows.SDK.BuildTools.WinApp&lt;/code&gt;。インストール後は、&lt;code&gt;dotnet run&lt;/code&gt;がインナーループ全体を処理します：ビルド、ルーズレイアウトパッケージの準備、Windowsへの登録、起動 — すべて1ステップで。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp init
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# または&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet add package Microsoft.Windows.SDK.BuildTools.WinApp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="winapp-ui-コマンドラインからuiオートメーション"&gt;winapp ui: コマンドラインからUIオートメーション&lt;/h2&gt;
+&lt;p&gt;エージェント型シナリオを切り開くのがこの機能です。&lt;code&gt;winapp ui&lt;/code&gt;はターミナルから、実行中のあらゆるWindowsアプリ（WPF、WinForms、Win32、Electron、WinUI3）への完全なUIオートメーションアクセスを提供します。&lt;/p&gt;
+&lt;p&gt;できること：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;すべてのトップレベルウィンドウを一覧表示&lt;/li&gt;
+&lt;li&gt;ウィンドウの完全なUIオートメーションツリーをナビゲート&lt;/li&gt;
+&lt;li&gt;名前、タイプ、オートメーションIDで要素を検索&lt;/li&gt;
+&lt;li&gt;クリック、呼び出し、値の設定&lt;/li&gt;
+&lt;li&gt;スクリーンショットの取得&lt;/li&gt;
+&lt;li&gt;要素の表示を待機 — テスト同期に最適&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;winapp ui&lt;/code&gt;と&lt;code&gt;winapp run&lt;/code&gt;を組み合わせると、ターミナルから完全なビルド→起動→検証ワークフローが実現します。エージェントがアプリを実行し、UIの状態を検査し、プログラムで操作して結果を検証できます。&lt;/p&gt;
+&lt;h2 id="その他の新機能"&gt;その他の新機能&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp unregister&lt;/code&gt;&lt;/strong&gt;: テスト終了後にサイドロードされたパッケージを削除します。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp manifest add-alias&lt;/code&gt;&lt;/strong&gt;: ターミナルからアプリ名で起動できるエイリアスを追加します。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;タブ補完&lt;/strong&gt;: 1つのコマンドでPowerShell補完を設定します。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="インストール方法"&gt;インストール方法&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winget install Microsoft.WinAppCli
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# または&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npm install -g @microsoft/winappcli
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;CLIはパブリックプレビュー中です。完全なドキュメントは&lt;a href="https://github.com/microsoft/WinAppCli"&gt;GitHubリポジトリ&lt;/a&gt;を、すべての詳細は&lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;元のアナウンス&lt;/a&gt;をご覧ください。&lt;/p&gt;</content:encoded></item><item><title>ターミナルの見張り番はもう終わり：Aspireのデタッチモードがワークフローを変える</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</link><pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</guid><description>Aspire 13.2ではAppHostをバックグラウンドで実行してターミナルを取り戻せます。新しいCLIコマンドやエージェントサポートと組み合わせると、思った以上に大きな変化です。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されています。原文は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;AspireのAppHostを実行するたびに、ターミナルが奪われます。ロックされて、Ctrl+Cを押すまで占有されたまま。ちょっとしたコマンドを実行したい？別のタブを開く。ログを確認したい？もう一つタブを開く。小さなストレスですが、積み重なると大きくなります。&lt;/p&gt;
+&lt;p&gt;Aspire 13.2がこれを解決します。James Newton-Kingが&lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;詳細を書いています&lt;/a&gt;が、正直なところ、これは使い始めた瞬間にワークフローが変わる機能の一つです。&lt;/p&gt;
+&lt;h2 id="デタッチモードコマンド一つでターミナルが戻る"&gt;デタッチモード：コマンド一つでターミナルが戻る&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;これは&lt;code&gt;aspire run --detach&lt;/code&gt;のショートカットです。AppHostがバックグラウンドで起動し、ターミナルがすぐに戻ってきます。余計なタブは不要。ターミナルマルチプレクサも不要。プロンプトがそのまま使える状態です。&lt;/p&gt;
+&lt;h2 id="実行中のプロセスを管理する"&gt;実行中のプロセスを管理する&lt;/h2&gt;
+&lt;p&gt;ポイントはこうです — バックグラウンド実行は、実行中のものを管理できて初めて意味があります。Aspire 13.2はまさにそのためのCLIコマンド一式を提供します：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# List all running AppHosts&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire ps
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Inspect the state of a specific AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire describe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stream logs from a running AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire logs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stop a specific AppHost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire stop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;これによりAspire CLIが本格的なプロセスマネージャーになります。複数のAppHostを起動し、ステータスを確認し、ログを追跡し、シャットダウンできます — すべて一つのターミナルセッションから。&lt;/p&gt;
+&lt;h2 id="分離モードと組み合わせる"&gt;分離モードと組み合わせる&lt;/h2&gt;
+&lt;p&gt;デタッチモードは分離モードと自然に組み合わせられます。同じプロジェクトの2つのインスタンスをポート競合なしにバックグラウンドで実行したい場合は？&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;それぞれがランダムなポート、個別のシークレット、独自のライフサイクルを持ちます。&lt;code&gt;aspire ps&lt;/code&gt;で両方を確認し、&lt;code&gt;aspire stop&lt;/code&gt;で不要な方を停止できます。&lt;/p&gt;
+&lt;h2 id="コーディングエージェントにとってなぜこれが重要か"&gt;コーディングエージェントにとってなぜこれが重要か&lt;/h2&gt;
+&lt;p&gt;ここからが本当に面白いところです。ターミナルで作業するコーディングエージェントが以下のことをできるようになります：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;aspire start&lt;/code&gt;でアプリを起動&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aspire describe&lt;/code&gt;で状態を確認&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aspire logs&lt;/code&gt;でログをチェックして問題を診断&lt;/li&gt;
+&lt;li&gt;完了したら&lt;code&gt;aspire stop&lt;/code&gt;で停止&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;すべてターミナルセッションを失うことなく実行できます。デタッチモード以前は、AppHostを実行したエージェントは自分自身のターミナルをロックしてしまいました。今では起動、観察、反復、クリーンアップが可能です — 自律エージェントに期待する動作そのものです。&lt;/p&gt;
+&lt;p&gt;Aspireチームはこれに本気で取り組みました。&lt;code&gt;aspire agent init&lt;/code&gt;を実行すると、エージェントにこれらのコマンドを教えるAspireスキルファイルが設定されます。これにより、CopilotのコーディングエージェントなどのツールがすぐにAspireワークロードを管理できます。&lt;/p&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;デタッチモードはシンプルなフラグに見せかけたワークフローのアップグレードです。ターミナル間のコンテキスト切り替えがなくなり、エージェントが自分自身をブロックしなくなり、新しいCLIコマンドで実行中のものをリアルに把握できます。実用的で、クリーンで、日々の開発サイクルが明らかにスムーズになります。&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;完全な記事&lt;/a&gt;で詳細を確認し、&lt;code&gt;aspire update --self&lt;/code&gt;でAspire 13.2を入手してください。&lt;/p&gt;</content:encoded></item><item><title>azd update — すべてのパッケージマネージャーを統べる一つのコマンド</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/</link><pubDate>Wed, 15 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/</guid><description>Azure Developer CLIに、インストール方法を問わず動作するユニバーサルなアップデートコマンドが追加されました — winget、Homebrew、Chocolatey、インストールスクリプトのいずれでも対応。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されています。オリジナル版は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azd-update-universal-upgrade-command/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;数週間ごとに表示される「azdの新しいバージョンが利用可能です」というメッセージ、知っていますか？ &lt;code&gt;azd&lt;/code&gt;をwingetでインストールしたのか、Homebrewなのか、それとも半年前に実行したcurlスクリプトなのか思い出せなくて、つい無視してしまうあのメッセージです。ついに解決しました。&lt;/p&gt;
+&lt;p&gt;Microsoftが&lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-update/"&gt;&lt;code&gt;azd update&lt;/code&gt;&lt;/a&gt;をリリースしました — 元々のインストール方法に関係なく、Azure Developer CLIを最新バージョンにアップデートできる単一のコマンドです。Windows、macOS、Linux — 関係ありません。コマンド一つで完了です。&lt;/p&gt;
+&lt;h2 id="仕組み"&gt;仕組み&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd update
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;これだけです。新機能に早くアクセスしたい場合は、デイリーのInsidersビルドに切り替えることもできます：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd update --channel daily
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd update --channel stable
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;このコマンドは現在のインストール方法を自動検出し、裏側で適切なアップデートメカニズムを使用します。もう「この PC では winget を使ったっけ、choco だったっけ？」と悩む必要はありません。&lt;/p&gt;
+&lt;h2 id="一つだけ注意点"&gt;一つだけ注意点&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;azd update&lt;/code&gt;はバージョン1.23.x以降で利用可能です。それより古いバージョンを使っている場合は、元のインストール方法で最後の手動アップデートを行う必要があります。その後は&lt;code&gt;azd update&lt;/code&gt;がすべてのアップデートを引き受けてくれます。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;azd version&lt;/code&gt;で現在のバージョンを確認してください。新規インストールが必要な場合は、&lt;a href="https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd"&gt;インストールドキュメント&lt;/a&gt;を参照してください。&lt;/p&gt;
+&lt;h2 id="なぜ重要なのか"&gt;なぜ重要なのか&lt;/h2&gt;
+&lt;p&gt;これは小さなQOL改善ですが、AIエージェントやAspireアプリをAzureにデプロイするために&lt;code&gt;azd&lt;/code&gt;を毎日使っている私たちにとって、最新の状態を保つことは「そのバグは最新バージョンで修正済みでした」という場面を減らすことを意味します。考えることが一つ減るのです。&lt;/p&gt;
+&lt;p&gt;詳細は&lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-update/"&gt;公式アナウンス&lt;/a&gt;とJon Gallantの&lt;a href="https://blog.jongallant.com/2026/04/azd-update"&gt;詳しい解説&lt;/a&gt;をご覧ください。&lt;/p&gt;</content:encoded></item><item><title>.NET Aspire 13.2はあなたのAIエージェントの親友になりたがっている</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/</guid><description>Aspire 13.2がエージェンティック開発に全力投球 — 構造化されたCLI出力、分離実行、自動修復環境、そして完全なOpenTelemetryデータにより、AIエージェントがアプリを実際にビルド、実行、観察できるようになります。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されました。原文は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-agentic-development-build-run-observe/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;AIコーディングエージェントがしっかりしたコードを書いて興奮した後、実際にそれを&lt;em&gt;実行&lt;/em&gt;しようとした途端に全てが崩壊する瞬間、知っていますか？ポート競合、ゴーストプロセス、間違った環境変数 — 突然エージェントが機能を構築する代わりに起動トラブルシューティングにトークンを消費し始めます。&lt;/p&gt;
+&lt;p&gt;Aspireチームがまさにこの問題について&lt;a href="https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/"&gt;非常によく考えられた記事&lt;/a&gt;を公開しました。彼らの答えは説得力があります：Aspire 13.2は人間だけでなく、AIエージェントのためにも設計されています。&lt;/p&gt;
+&lt;h2 id="問題は現実のもの"&gt;問題は現実のもの&lt;/h2&gt;
+&lt;p&gt;AIエージェントはコードを書くのに驚異的です。しかし、動作するフルスタックアプリを出荷するには、ファイルを生成する以上のことが必要です。正しい順序でサービスを起動し、ポートを管理し、環境変数を設定し、データベースを接続し、何かが壊れた時にフィードバックを得る必要があります。現在、ほとんどのエージェントはこれらすべてを試行錯誤で処理しています — コマンドを実行し、エラー出力を読み、再試行します。&lt;/p&gt;
+&lt;p&gt;Markdownの指示、カスタムスキル、プロンプトを重ねてガイドしようとしますが、それらは予測不可能で、コンパイルできず、パースするだけでトークンがかかります。Aspireチームは本質的な洞察を突きました：エージェントには&lt;strong&gt;コンパイラと構造化されたAPI&lt;/strong&gt;が必要であり、もっとMarkdownではありません。&lt;/p&gt;
+&lt;h2 id="エージェントインフラとしてのaspire"&gt;エージェントインフラとしてのAspire&lt;/h2&gt;
+&lt;p&gt;Aspire 13.2がエージェンティック開発にもたらすもの：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;スタック全体を型付きコードで。&lt;/strong&gt; AppHostがアプリの完全なトポロジー — API、フロントエンド、データベース、キャッシュ — をコンパイル可能なTypeScriptまたはC#で定義します：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;createBuilder&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;./.modules/aspire.js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;createBuilder&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addPostgres&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;pg&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;addDatabase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;catalog&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;cache&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addRedis&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;cache&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;api&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addNodeApp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;api&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;./api&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;src/index.ts&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withHttpEndpoint&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="nx"&gt;env&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;PORT&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withReference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;postgres&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withReference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addViteApp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;frontend&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;./frontend&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withReference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;waitFor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;build&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nx"&gt;run&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;エージェントはこれを読んでアプリのトポロジーを理解し、リソースを追加し、接続を配線し、&lt;em&gt;検証のためにビルド&lt;/em&gt;できます。コンパイラが何か間違っていればすぐに教えてくれます。推測不要、設定ファイルでの試行錯誤不要です。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;すべてを支配する一つのコマンド。&lt;/strong&gt; エージェントが&lt;code&gt;docker compose up&lt;/code&gt;、&lt;code&gt;npm run dev&lt;/code&gt;、データベース起動スクリプトをジャグリングする代わりに、すべてが&lt;code&gt;aspire start&lt;/code&gt;だけ。すべてのリソースが正しい順序で、正しいポートで、正しい設定で起動します。長時間実行プロセスもエージェントをハングさせません — Aspireが管理します。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;並列エージェント用の分離モード。&lt;/strong&gt; &lt;code&gt;--isolated&lt;/code&gt;を使えば、各Aspire実行が独自のランダムポートと分離されたユーザーシークレットを取得します。複数のエージェントがgit worktreeで作業している？衝突しません。これはVS Codeのバックグラウンドエージェントのような並列環境を立ち上げるツールにとって非常に重要です。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;テレメトリによるエージェントの目。&lt;/strong&gt; ここが本当に強力になるところです。Aspire CLIは開発中に完全なOpenTelemetryデータを公開します — トレース、メトリクス、構造化ログ。エージェントはコンソール出力を読んで最善を祈るだけではありません。サービス間で失敗したリクエストをトレースし、遅いエンドポイントをプロファイリングし、問題の正確な箇所を特定できます。開発ループにプロダクショングレードの可観測性があるのです。&lt;/p&gt;
+&lt;h2 id="ボウリングのバンパーの例え"&gt;ボウリングのバンパーの例え&lt;/h2&gt;
+&lt;p&gt;Aspireチームは素晴らしい例えを使っています：AspireをAIエージェントのためのボウリングレーンのバンパーだと思ってください。エージェントが完璧でない場合（そして完璧にはなりません）、バンパーがガーターに落ちるのを防ぎます。スタック定義が誤設定を防ぎ、コンパイラがエラーをキャッチし、CLIがプロセス管理を行い、テレメトリがフィードバックループを提供します。&lt;/p&gt;
+&lt;p&gt;これをPlaywright CLIのようなものと組み合わせれば、エージェントは実際にアプリを&lt;em&gt;使う&lt;/em&gt;ことができます — フローをクリックし、DOMをチェックし、テレメトリで壊れた箇所を見つけ、コードを修正し、再起動してテストし直す。ビルド、実行、観察、修正。これが私たちが追い求めてきた自律的な開発ループです。&lt;/p&gt;
+&lt;h2 id="始め方"&gt;始め方&lt;/h2&gt;
+&lt;p&gt;Aspire初心者？&lt;a href="https://get.aspire.dev"&gt;get.aspire.dev&lt;/a&gt;からCLIをインストールし、&lt;a href="https://aspire.dev/get-started/first-app"&gt;入門ガイド&lt;/a&gt;に従ってください。&lt;/p&gt;
+&lt;p&gt;すでにAspireを使っている？&lt;code&gt;aspire update --self&lt;/code&gt;で13.2を取得し、お気に入りのコーディングエージェントをリポジトリに向けてください。Aspireのガードレールがあることで、エージェントがどれだけ先まで進めるか驚くかもしれません。&lt;/p&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;Aspire 13.2はもはや単なる分散アプリフレームワークではありません — 不可欠なエージェントインフラになりつつあります。構造化されたスタック定義、ワンコマンド起動、分離された並列実行、リアルタイムテレメトリが、AIエージェントにコードを書くことからアプリを出荷することへ移行するために必要なものを提供します。&lt;/p&gt;
+&lt;p&gt;Aspireチームの&lt;a href="https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/"&gt;完全な記事&lt;/a&gt;ですべての詳細とデモ動画をご覧ください。&lt;/p&gt;</content:encoded></item><item><title>Aspireの分離モードが並列開発のポート競合の悪夢を解決する</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</guid><description>Aspire 13.2が--isolatedモードを導入：ランダムポート、分離されたシークレット、同じAppHostの複数インスタンス実行時のゼロコリジョン。AIエージェント、ワークツリー、並列ワークフローに最適。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されました。原文は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;同じプロジェクトの2つのインスタンスを同時に実行しようとしたことがあるなら、あの苦痛を知っているでしょう。ポート8080は既に使用中。ポート17370は取られている。何かをkillして、再起動して、環境変数をジャグリングする — 生産性のキラーです。&lt;/p&gt;
+&lt;p&gt;この問題は改善ではなく悪化しています。AIエージェントは独立して作業するためにgit worktreeを作成します。バックグラウンドエージェントは別々の環境を立ち上げます。開発者はフィーチャーブランチのために同じリポジトリを2回チェックアウトします。これらのシナリオはすべて同じ壁にぶつかります：同じアプリの2つのインスタンスが同じポートを奪い合うのです。&lt;/p&gt;
+&lt;p&gt;Aspire 13.2はたった一つのフラグでこれを解決します。AspireチームのJames Newton-Kingが&lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;詳細を書いています&lt;/a&gt;。「なぜこれがもっと早くなかったの？」という機能の一つです。&lt;/p&gt;
+&lt;h2 id="解決策--isolated"&gt;解決策：&lt;code&gt;--isolated&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;これだけです。各実行は以下を取得します：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ランダムポート&lt;/strong&gt; — インスタンス間のコリジョンなし&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;分離されたユーザーシークレット&lt;/strong&gt; — 接続文字列とAPIキーがインスタンスごとに分離&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;手動のポート再割り当ては不要。環境変数のジャグリングも不要。各実行は自動的にクリーンでコリジョンフリーの環境を取得します。&lt;/p&gt;
+&lt;h2 id="これが輝く実際のシナリオ"&gt;これが輝く実際のシナリオ&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;複数チェックアウト。&lt;/strong&gt; あるディレクトリにフィーチャーブランチ、別のディレクトリにバグフィックスがある場合：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-feature
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-bugfix
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;両方とも競合なしで実行されます。ダッシュボードで何がどこで実行されているか確認できます。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;VS Codeのバックグラウンドエージェント。&lt;/strong&gt; Copilot Chatのバックグラウンドエージェントがコードに独立して作業するためにgit worktreeを作成する場合、Aspire AppHostを実行する必要があるかもしれません。&lt;code&gt;--isolated&lt;/code&gt;なしでは、プライマリworktreeとのポート競合が発生します。これがあれば、両方のインスタンスが問題なく動作します。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;aspire agent init&lt;/code&gt;に付属するAspireスキルは、worktreeで作業する際に&lt;code&gt;--isolated&lt;/code&gt;を使うようエージェントに自動的に指示します。そのため、Copilotのバックグラウンドエージェントはこれをネイティブに処理するはずです。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;開発と並行した統合テスト。&lt;/strong&gt; 機能の構築を続けながらライブのAppHostに対してテストを実行する必要がありますか？分離モードは各コンテキストに独自のポートと設定を提供します。&lt;/p&gt;
+&lt;h2 id="内部の仕組み"&gt;内部の仕組み&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;--isolated&lt;/code&gt;を渡すと、CLIはその実行のためにユニークなインスタンスIDを生成します。これにより2つの動作が駆動されます：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;ポートのランダム化&lt;/strong&gt; — AppHost設定で定義された予測可能なポートにバインドする代わりに、分離モードはすべてに対して利用可能なランダムポートを選択します — ダッシュボード、サービスエンドポイント、すべて。サービスディスカバリが自動的に調整されるため、どのポートに割り当てられても、サービスは互いを見つけることができます。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;シークレットの分離&lt;/strong&gt; — 各分離実行はインスタンスIDでキー付けされた独自のユーザーシークレットストアを取得します。ある実行の接続文字列やAPIキーが別の実行に漏れることはありません。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;コードの変更は不要です。Aspireのサービスディスカバリがランタイムでエンドポイントを解決するため、ポートの割り当てに関係なくすべてが正しく接続されます。&lt;/p&gt;
+&lt;h2 id="いつ使うべきか"&gt;いつ使うべきか&lt;/h2&gt;
+&lt;p&gt;同じAppHostの複数インスタンスを同時に実行する場合に&lt;code&gt;--isolated&lt;/code&gt;を使用してください — 並列開発、自動テスト、AIエージェント、git worktreeのいずれの場合でも。予測可能なポートを好む単一インスタンス開発では、通常の&lt;code&gt;aspire run&lt;/code&gt;で問題ありません。&lt;/p&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;分離モードは、現実の、ますます一般的になる問題を解決する小さな機能です。AI支援開発がより多くの並列ワークフロー — 複数のエージェント、複数のworktree、複数のコンテキスト — に向かって推し進める中、ポートを奪い合うことなく別のインスタンスを立ち上げる能力は不可欠です。&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;完全な記事&lt;/a&gt;ですべての技術的詳細を確認し、&lt;code&gt;aspire update --self&lt;/code&gt;で13.2を試してみてください。&lt;/p&gt;</content:encoded></item><item><title>Aspire 13.2にドキュメントCLIが搭載 — AIエージェントも使えます</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/</link><pubDate>Sat, 04 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/</guid><description>.NET Aspire 13.2にaspire docsが追加されました。ターミナルを離れずに公式ドキュメントを検索、閲覧、読むためのCLIです。AIエージェントのツールとしても動作します。なぜこれが重要なのかをお伝えします。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されています。原文は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/aspire-docs-cli-ai-skills/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Aspire AppHostの奥深くでインテグレーションを接続していて、Redisインテグレーションが正確にどのパラメータを期待しているかを確認する必要がある、あの瞬間を知っていますか？ブラウザにAlt-Tabして、aspire.devを探し回り、APIドキュメントに目を細め、エディタに戻る。コンテキストが失われて、フローが途切れる。&lt;/p&gt;
+&lt;p&gt;Aspire 13.2がまさに&lt;a href="https://devblogs.microsoft.com/aspire/aspire-docs-in-your-terminal/"&gt;その解決策をリリースしました&lt;/a&gt;。&lt;code&gt;aspire docs&lt;/code&gt; CLIを使えば、ターミナルから直接Aspireの公式ドキュメントを検索、閲覧、そして読むことができます。そして再利用可能なサービスに支えられているため、AIエージェントやスキルも同じコマンドを使ってドキュメントを参照できます。存在しないAPIを幻覚する代わりに。&lt;/p&gt;
+&lt;h2 id="これが本当に解決する問題"&gt;これが本当に解決する問題&lt;/h2&gt;
+&lt;p&gt;David Pineがオリジナルの記事で的確に指摘しています：AIエージェントはAspireアプリの構築を支援する点で&lt;em&gt;ひどい&lt;/em&gt;ものでした。&lt;code&gt;aspire run&lt;/code&gt;の代わりに&lt;code&gt;dotnet run&lt;/code&gt;を推奨し、aspire.devにあるドキュメントに対してlearn.microsoft.comを参照し、古いNuGetパッケージを提案し、そして——個人的に一番のお気に入り——存在しないAPIを幻覚していました。&lt;/p&gt;
+&lt;p&gt;なぜか？Aspireがポリグロットになるよりもはるかに長い間.NET専用だったからです。そしてLLMは最新機能よりも前のトレーニングデータで動作しています。AIエージェントに現在のドキュメントを実際に検索する能力を与えると、推測をやめて役に立つようになります。&lt;/p&gt;
+&lt;h2 id="3つのコマンドブラウザタブはゼロ"&gt;3つのコマンド、ブラウザタブはゼロ&lt;/h2&gt;
+&lt;p&gt;CLIは爽快なほどシンプルです：&lt;/p&gt;
+&lt;h3 id="すべてのドキュメントを一覧表示"&gt;すべてのドキュメントを一覧表示&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;aspire.devで利用可能なすべてのドキュメントページを返します。マシンリーダブルな出力が必要ですか？&lt;code&gt;--format Json&lt;/code&gt;を追加してください。&lt;/p&gt;
+&lt;h3 id="トピックを検索"&gt;トピックを検索&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs search &lt;span class="s2"&gt;&amp;#34;redis&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;タイトルとコンテンツの両方を重み付けされた関連性スコアリングで検索します。内部的にドキュメントツールを支えているのと同じ検索エンジンです。タイトル、スラグ、関連性スコアを含むランク付けされた結果が得られます。&lt;/p&gt;
+&lt;h3 id="ページ全体を読むまたはセクションだけ"&gt;ページ全体を読む（またはセクションだけ）&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs get redis-integration
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ページ全体をマークダウンとしてターミナルにストリーミングします。セクションだけ必要ですか？&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs get redis-integration --section &lt;span class="s2"&gt;&amp;#34;Add Redis resource&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;外科的精度。500行をスクロールする必要はありません。必要な部分だけ。&lt;/p&gt;
+&lt;h2 id="aiエージェントの視点"&gt;AIエージェントの視点&lt;/h2&gt;
+&lt;p&gt;ここからがAIツールで開発している私たち開発者にとって面白くなるところです。同じ&lt;code&gt;aspire docs&lt;/code&gt;コマンドが、スキル、MCPサーバー、またはシンプルなCLIラッパーを通じて、AIエージェントのツールとして機能します。&lt;/p&gt;
+&lt;p&gt;あなたのAIアシスタントが古いトレーニングデータに基づいてAspire APIを捏造する代わりに、&lt;code&gt;aspire docs search &amp;quot;postgres&amp;quot;&lt;/code&gt;を呼び出して、公式のインテグレーションドキュメントを見つけ、正しいページを読み、ドキュメントに記載されたアプローチを提供できます。リアルタイムで最新のドキュメント——モデルが6ヶ月前に記憶したものではありません。&lt;/p&gt;
+&lt;p&gt;この背後のアーキテクチャは意図的なものです。Aspireチームは一回限りのインテグレーションではなく、再利用可能なサービス（&lt;code&gt;IDocsIndexService&lt;/code&gt;、&lt;code&gt;IDocsSearchService&lt;/code&gt;、&lt;code&gt;IDocsFetcher&lt;/code&gt;、&lt;code&gt;IDocsCache&lt;/code&gt;）を構築しました。つまり、同じ検索エンジンがターミナルの人間、エディタのAIエージェント、CIパイプラインの自動化のために機能します。&lt;/p&gt;
+&lt;h2 id="実世界のシナリオ"&gt;実世界のシナリオ&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;ターミナルでの素早い検索：&lt;/strong&gt; 3ファイルの深さに入っていて、Redisの設定パラメータが必要。2つのコマンド、90秒、仕事に戻る：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs search &lt;span class="s2"&gt;&amp;#34;redis&amp;#34;&lt;/span&gt; --limit &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs get redis-integration --section &lt;span class="s2"&gt;&amp;#34;Configuration&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;AI支援開発：&lt;/strong&gt; VS CodeスキルがCLIコマンドをラップします。「AppHostにPostgreSQLデータベースを追加して」と聞くと、エージェントが回答する前に実際のドキュメントを参照します。幻覚なし。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CI/CDバリデーション：&lt;/strong&gt; パイプラインがAppHost設定を公式ドキュメントに対してプログラム的に検証します。&lt;code&gt;--format Json&lt;/code&gt;の出力は&lt;code&gt;jq&lt;/code&gt;やその他のツールにきれいにパイプできます。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;カスタムナレッジベース：&lt;/strong&gt; 独自のAIツールを構築していますか？構造化されたJSON出力をナレッジベースに直接パイプ：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire docs search &lt;span class="s2"&gt;&amp;#34;monitoring&amp;#34;&lt;/span&gt; --format Json &lt;span class="p"&gt;|&lt;/span&gt; jq &lt;span class="s1"&gt;&amp;#39;[.[] | {slug, title, summary}]&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Webスクレイピングなし。APIキーなし。内部的にドキュメントツールが使用しているのと同じ構造化データ。&lt;/p&gt;
+&lt;h2 id="ドキュメントは常に最新"&gt;ドキュメントは常に最新&lt;/h2&gt;
+&lt;p&gt;これが私が最も評価している部分です。CLIはスナップショットをダウンロードしません——ETagベースのキャッシュでaspire.devにクエリを実行します。ドキュメントが更新された瞬間、あなたのCLIとその上に構築されたすべてのスキルがそれを反映します。古いコピーも、「でもwikiには書いてあった&amp;hellip;」という瞬間もありません。&lt;/p&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;aspire docs&lt;/code&gt;は、実際の問題をきれいに解決する、そんな小さな機能の一つです。人間はターミナルネイティブなドキュメントアクセスを得ます。AIエージェントは推測をやめて実際のドキュメントを参照する方法を得ます。そしてすべてが同じ信頼の源に支えられています。&lt;/p&gt;
+&lt;p&gt;.NET Aspireで構築していてまだCLIを試していないなら、&lt;code&gt;aspire docs search &amp;quot;あなたのトピック&amp;quot;&lt;/code&gt; を実行して、どう感じるか確かめてください。そして、使っているAIスキルや自動化セットアップにそれらのコマンドをラップすることを検討してください——あなたのエージェントが感謝するでしょう。&lt;/p&gt;
+&lt;p&gt;ドキュメントツールがどのように構築されたかについての&lt;a href="https://davidpine.dev/posts/aspire-docs-mcp-tools/"&gt;David Pineの詳細記事&lt;/a&gt;と、すべての詳細が記載された&lt;a href="https://aspire.dev/reference/cli/commands/aspire-docs/"&gt;公式CLIリファレンス&lt;/a&gt;をチェックしてください。&lt;/p&gt;</content:encoded></item></channel></rss>

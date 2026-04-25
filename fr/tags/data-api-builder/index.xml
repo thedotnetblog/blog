@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Data-Api-Builder | The .NET Blog</title><link>https://thedotnetblog.com/fr/tags/data-api-builder/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>fr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/fr/tags/data-api-builder/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL MCP Server — La bonne façon de donner accès aux bases de données aux agents IA</title><link>https://thedotnetblog.com/fr/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/fr/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>SQL MCP Server de Data API builder donne aux agents IA un accès sécurisé et déterministe aux bases de données sans exposer les schémas ni dépendre de NL2SQL. RBAC, cache, support multi-bases — tout est intégré.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Cet article a été traduit automatiquement. Pour la version originale, &lt;a href="https://thedotnetblog.com/fr/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;cliquez ici&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Soyons honnêtes : la plupart des serveurs MCP de bases de données disponibles aujourd&amp;rsquo;hui sont effrayants. Ils prennent une requête en langage naturel, génèrent du SQL à la volée et l&amp;rsquo;exécutent contre vos données de production. Qu&amp;rsquo;est-ce qui pourrait mal tourner ? (Tout. Absolument tout.)&lt;/p&gt;
+&lt;p&gt;L&amp;rsquo;équipe Azure SQL vient de &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;présenter SQL MCP Server&lt;/a&gt;, et il adopte une approche fondamentalement différente. Construit comme une fonctionnalité de Data API builder (DAB) 2.0, il donne aux agents IA un accès structuré et déterministe aux opérations de base de données — sans NL2SQL, sans exposer votre schéma, et avec un RBAC complet à chaque étape.&lt;/p&gt;
+&lt;h2 id="pourquoi-pas-de-nl2sql-"&gt;Pourquoi pas de NL2SQL ?&lt;/h2&gt;
+&lt;p&gt;C&amp;rsquo;est la décision de conception la plus intéressante. Les modèles ne sont pas déterministes, et les requêtes complexes sont les plus susceptibles de produire des erreurs subtiles. Les requêtes exactes que les utilisateurs espèrent que l&amp;rsquo;IA peut générer sont aussi celles qui nécessitent le plus de vérification quand elles sont produites de manière non déterministe.&lt;/p&gt;
+&lt;p&gt;À la place, SQL MCP Server utilise une approche &lt;strong&gt;NL2DAB&lt;/strong&gt;. L&amp;rsquo;agent travaille avec la couche d&amp;rsquo;abstraction d&amp;rsquo;entités de Data API builder et son constructeur de requêtes intégré pour produire du T-SQL précis et bien formé de manière déterministe. Même résultat pour l&amp;rsquo;utilisateur, mais sans le risque de JOINs hallucinés ou d&amp;rsquo;exposition accidentelle de données.&lt;/p&gt;
+&lt;h2 id="sept-outils-pas-sept-cents"&gt;Sept outils, pas sept cents&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server expose exactement sept outils DML, quelle que soit la taille de la base de données :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — découvrir les entités et opérations disponibles&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — insérer des lignes&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — interroger des tables et vues&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — modifier des lignes&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — supprimer des lignes&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — exécuter des procédures stockées&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — requêtes d&amp;rsquo;agrégation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;C&amp;rsquo;est malin, car les fenêtres de contexte sont l&amp;rsquo;espace de réflexion de l&amp;rsquo;agent. Les inonder de centaines de définitions d&amp;rsquo;outils laisse moins de place au raisonnement. Sept outils fixes gardent l&amp;rsquo;agent concentré sur la &lt;em&gt;réflexion&lt;/em&gt; plutôt que la &lt;em&gt;navigation&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Chaque outil peut être activé ou désactivé individuellement :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;runtime&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;path&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dml-tools&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;describe-entities&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;create-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;read-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;update-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;delete-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;execute-entity&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;aggregate-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="démarrage-en-trois-commandes"&gt;Démarrage en trois commandes&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --database-type mssql &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --source dbo.Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Voilà un SQL MCP Server en fonctionnement qui expose votre table Customers. La couche d&amp;rsquo;abstraction d&amp;rsquo;entités vous permet de créer des alias pour les noms et colonnes, de limiter les champs par rôle et de contrôler exactement ce que les agents voient — sans exposer les détails internes du schéma.&lt;/p&gt;
+&lt;h2 id="laspect-sécurité-est-solide"&gt;L&amp;rsquo;aspect sécurité est solide&lt;/h2&gt;
+&lt;p&gt;C&amp;rsquo;est là que la maturité de Data API builder porte ses fruits :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;RBAC à chaque couche&lt;/strong&gt; — chaque entité définit quels rôles peuvent lire, créer, mettre à jour ou supprimer, et quels champs sont visibles&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Intégration Azure Key Vault&lt;/strong&gt; — chaînes de connexion et secrets gérés de manière sécurisée&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Microsoft Entra + OAuth personnalisé&lt;/strong&gt; — authentification de niveau production&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Content Security Policy&lt;/strong&gt; — les agents interagissent via un contrat contrôlé, pas du SQL brut&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;L&amp;rsquo;abstraction du schéma est particulièrement importante. Vos noms internes de tables et colonnes ne sont jamais exposés à l&amp;rsquo;agent. Vous définissez des entités, des alias et des descriptions qui ont du sens pour l&amp;rsquo;interaction IA — pas votre diagramme ERD de base de données.&lt;/p&gt;
+&lt;h2 id="multi-bases-et-multi-protocoles"&gt;Multi-bases et multi-protocoles&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server supporte Microsoft SQL, PostgreSQL, Azure Cosmos DB et MySQL. Et comme c&amp;rsquo;est une fonctionnalité de DAB, vous obtenez des endpoints REST, GraphQL et MCP simultanément depuis la même configuration. Mêmes définitions d&amp;rsquo;entités, mêmes règles RBAC, même sécurité — sur les trois protocoles.&lt;/p&gt;
+&lt;p&gt;L&amp;rsquo;auto-configuration dans DAB 2.0 peut même inspecter votre base de données et construire la configuration dynamiquement, si vous êtes à l&amp;rsquo;aise avec moins d&amp;rsquo;abstraction pour du prototypage rapide.&lt;/p&gt;
+&lt;h2 id="mon-avis"&gt;Mon avis&lt;/h2&gt;
+&lt;p&gt;C&amp;rsquo;est ainsi que l&amp;rsquo;accès base de données d&amp;rsquo;entreprise pour les agents IA devrait fonctionner. Pas « hey LLM, écris-moi du SQL et YOLO sur la prod ». À la place : une couche d&amp;rsquo;entités bien définie, une génération de requêtes déterministe, RBAC à chaque étape, cache, monitoring et télémétrie. C&amp;rsquo;est ennuyeux de la meilleure façon possible.&lt;/p&gt;
+&lt;p&gt;Pour les développeurs .NET, l&amp;rsquo;histoire d&amp;rsquo;intégration est propre — DAB est un outil .NET, le MCP Server tourne en conteneur, et il fonctionne avec Azure SQL, que la plupart d&amp;rsquo;entre nous utilisent déjà. Si vous construisez des agents IA qui ont besoin d&amp;rsquo;accéder aux données, commencez ici.&lt;/p&gt;
+&lt;h2 id="pour-conclure"&gt;Pour conclure&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server est gratuit, open-source et tourne partout. C&amp;rsquo;est l&amp;rsquo;approche prescriptive de Microsoft pour donner aux agents IA un accès sécurisé aux bases de données. Consultez le &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;post complet&lt;/a&gt; et la &lt;a href="https://aka.ms/sql/mcp"&gt;documentation&lt;/a&gt; pour commencer.&lt;/p&gt;</content:encoded></item></channel></rss>

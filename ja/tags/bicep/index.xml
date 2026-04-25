@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Bicep | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/bicep/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 21 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/bicep/index.xml" rel="self" type="application/rss+xml"/><item><title>azd + GitHub Copilot: AIによるプロジェクトセットアップとスマートなエラー解決</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</link><pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</guid><description>Azure Developer CLIがGitHub Copilotと統合され、プロジェクトのスキャフォールディングとデプロイエラーの解決をターミナルから直接できるようになりました。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されました。英語の原文は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/"&gt;こちら&lt;/a&gt;からご覧いただけます。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;既存のアプリをAzureにデプロイしようとして、空の &lt;code&gt;azure.yaml&lt;/code&gt; を眺めながら「Express APIにはContainer AppsとApp Serviceのどちらを使えばいいんだっけ？」と頭を抱えた経験はありませんか？そんな場面が、これからは格段に短くなります。&lt;/p&gt;
+&lt;p&gt;Azure Developer CLI（&lt;code&gt;azd&lt;/code&gt;）がGitHub Copilotと2つの形で統合されました。&lt;code&gt;azd init&lt;/code&gt; 実行時のAIによるプロジェクトスキャフォールディングと、デプロイ失敗時のインテリジェントなエラートラブルシューティングです。どちらの機能もターミナル内で完結します。&lt;/p&gt;
+&lt;h2 id="azd-init-でのcopilotセットアップ"&gt;azd init でのCopilotセットアップ&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;azd init&lt;/code&gt; を実行すると、「Set up with GitHub Copilot (Preview)」という選択肢が表示されます。選択すると、Copilotがコードベースを分析し、実際のコードに基づいて &lt;code&gt;azure.yaml&lt;/code&gt;、インフラテンプレート、Bicepモジュールを生成します。&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd init
+# 選択: &amp;#34;Set up with GitHub Copilot (Preview)&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;必要なもの：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;azd 1.23.11以降&lt;/strong&gt; — &lt;code&gt;azd version&lt;/code&gt; で確認、&lt;code&gt;azd update&lt;/code&gt; で更新&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;有効なGitHub Copilotサブスクリプション&lt;/strong&gt;（Individual、Business、またはEnterprise）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub CLI（&lt;code&gt;gh&lt;/code&gt;）&lt;/strong&gt; — 必要に応じてログインを求められます&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;この機能の優れた点は双方向に機能することです。ゼロから構築する場合はAzureサービスの適切なセットアップを支援し、既存のアプリをデプロイしたい場合はコードを分析して設定を生成します。構造を変更する必要はありません。&lt;/p&gt;
+&lt;h3 id="実際に何をするのか"&gt;実際に何をするのか&lt;/h3&gt;
+&lt;p&gt;Node.js ExpressのAPIにPostgreSQLの依存関係がある場合を例にしましょう。Container AppsかApp Serviceかを手動で決め、BicepをゼロからT書く代わりに、Copilotはスタックを検出して以下を生成します：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;適切な &lt;code&gt;language&lt;/code&gt;、&lt;code&gt;host&lt;/code&gt;、&lt;code&gt;build&lt;/code&gt; 設定を持つ &lt;code&gt;azure.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Azure Container Apps用のBicepモジュール&lt;/li&gt;
+&lt;li&gt;Azure Database for PostgreSQL用のBicepモジュール&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;変更前に事前チェックも実行されます。gitの作業ディレクトリがクリーンかどうか確認し、MCPサーバーツールへの同意を事前に求めます。何が変わるか把握した上でのみ処理が進みます。&lt;/p&gt;
+&lt;h2 id="copilotによるエラートラブルシューティング"&gt;Copilotによるエラートラブルシューティング&lt;/h2&gt;
+&lt;p&gt;デプロイエラーは避けられません。パラメーターの欠落、権限の問題、SKUの可用性問題など。エラーメッセージが修正方法を教えてくれることはほとんどありません。&lt;/p&gt;
+&lt;p&gt;Copilotなしの場合のループ：エラーをコピー → ドキュメントを検索 → 関係ないStack Overflowの回答を3つ読む → &lt;code&gt;az&lt;/code&gt; CLIコマンドを実行 → 再試行して祈る。&lt;code&gt;azd&lt;/code&gt; にCopilotが統合されると、このループが消えます。&lt;code&gt;azd&lt;/code&gt; コマンドが失敗すると、即座に4つの選択肢が提示されます：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Explain&lt;/strong&gt; — 何が起きたかをわかりやすく説明&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Guidance&lt;/strong&gt; — 修正のステップバイステップの手順&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Diagnose and Guide&lt;/strong&gt; — 完全な分析 + Copilotが修正を適用（承認後）+ 再試行オプション&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skip&lt;/strong&gt; — 自分で対処&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;重要な点：Copilotはすでにプロジェクト、失敗したコマンド、エラー出力のコンテキストを持っています。提案は &lt;em&gt;あなたの状況&lt;/em&gt; に特化したものです。&lt;/p&gt;
+&lt;h3 id="デフォルト動作の設定"&gt;デフォルト動作の設定&lt;/h3&gt;
+&lt;p&gt;常に同じオプションを選ぶなら、インタラクティブなプロンプトをスキップできます：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.category troubleshoot
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;値：&lt;code&gt;explain&lt;/code&gt;、&lt;code&gt;guidance&lt;/code&gt;、&lt;code&gt;troubleshoot&lt;/code&gt;、&lt;code&gt;fix&lt;/code&gt;、&lt;code&gt;skip&lt;/code&gt;。自動修正と再試行も有効にできます：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.fix allow
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;いつでもインタラクティブモードに戻せます：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config unset copilot.errorHandling.category
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;azd update&lt;/code&gt; で最新バージョンに更新し、次のプロジェクトで &lt;code&gt;azd init&lt;/code&gt; を試してみてください。本当に価値のあるCopilot統合です。&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-copilot-integration/"&gt;元の発表はこちら&lt;/a&gt;をご覧ください。&lt;/p&gt;</content:encoded></item></channel></rss>

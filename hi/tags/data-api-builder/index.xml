@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Data-Api-Builder | The .NET Blog</title><link>https://thedotnetblog.com/hi/tags/data-api-builder/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>hi</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/hi/tags/data-api-builder/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL MCP Server — AI एजेंट्स को डेटाबेस एक्सेस देने का सही तरीका</title><link>https://thedotnetblog.com/hi/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/hi/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>Data API builder का SQL MCP Server AI एजेंट्स को सुरक्षित, निर्धारित डेटाबेस एक्सेस देता है — बिना schema उजागर किए या NL2SQL पर निर्भर हुए। RBAC, caching, multi-database support — सब कुछ built-in।</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;यह पोस्ट स्वचालित रूप से अनुवादित है। मूल के लिए, &lt;a href="https://thedotnetblog.com/hi/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;यहाँ क्लिक करें&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;सच बात करें तो: आज उपलब्ध अधिकांश database MCP servers डरावने हैं। वे एक natural language query लेते हैं, तुरंत SQL generate करते हैं, और उसे आपके production data पर चला देते हैं। क्या गलत हो सकता है? (सब कुछ। सब कुछ गलत हो सकता है।)&lt;/p&gt;
+&lt;p&gt;Azure SQL टीम ने अभी &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;SQL MCP Server पेश किया&lt;/a&gt;, और यह एक मौलिक रूप से अलग दृष्टिकोण अपनाता है। Data API builder (DAB) 2.0 की एक feature के रूप में बना, यह AI एजेंट्स को database operations तक structured, निर्धारित access देता है — NL2SQL के बिना, आपका schema उजागर किए बिना, और हर कदम पर पूरे RBAC के साथ।&lt;/p&gt;
+&lt;h2 id="nl2sql-कय-नह"&gt;NL2SQL क्यों नहीं?&lt;/h2&gt;
+&lt;p&gt;यह सबसे दिलचस्प design निर्णय है। Models निर्धारित नहीं होते, और complex queries में सूक्ष्म त्रुटियाँ पैदा होने की सबसे अधिक संभावना होती है। जो queries उपयोगकर्ता AI से generate करवाना चाहते हैं, वही non-deterministic तरीके से produce होने पर सबसे अधिक जाँच की माँग करती हैं।&lt;/p&gt;
+&lt;p&gt;इसके बजाय, SQL MCP Server एक &lt;strong&gt;NL2DAB&lt;/strong&gt; दृष्टिकोण अपनाता है। एजेंट Data API builder की entity abstraction layer और built-in query builder के साथ काम करता है ताकि accurate, well-formed T-SQL निर्धारित रूप से produce की जा सके। उपयोगकर्ता के लिए परिणाम वही रहता है, लेकिन hallucinated JOINs या accidental data exposure का जोखिम नहीं रहता।&lt;/p&gt;
+&lt;h2 id="सत-tools-सत-स-नह"&gt;सात tools, सात सौ नहीं&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server database के आकार चाहे जो हो, ठीक सात DML tools expose करता है:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — उपलब्ध entities और operations खोजें&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — rows insert करें&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — tables और views query करें&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — rows modify करें&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — rows हटाएं&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — stored procedures चलाएं&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — aggregation queries&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;यह समझदारी है क्योंकि context windows एजेंट की सोचने की जगह हैं। सैकड़ों tool definitions से भर देने पर reasoning के लिए कम जगह बचती है। सात fixed tools एजेंट को &lt;em&gt;navigate करने&lt;/em&gt; की बजाय &lt;em&gt;सोचने&lt;/em&gt; पर केंद्रित रखते हैं।&lt;/p&gt;
+&lt;p&gt;प्रत्येक tool को individually enable या disable किया जा सकता है:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;runtime&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;path&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dml-tools&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;describe-entities&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;create-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;read-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;update-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;delete-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;execute-entity&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;aggregate-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="तन-commands-म-शरआत"&gt;तीन commands में शुरुआत&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --database-type mssql &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --source dbo.Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;बस, आपका SQL MCP Server आपकी Customers table expose कर के चल पड़ा। Entity abstraction layer का मतलब है कि आप नाम और columns को alias कर सकते हैं, प्रत्येक role के लिए fields सीमित कर सकते हैं, और ठीक वही नियंत्रित कर सकते हैं जो एजेंट देखता है — बिना internal schema की जानकारी उजागर किए।&lt;/p&gt;
+&lt;h2 id="security-क-कहन-पकक-ह"&gt;Security की कहानी पक्की है&lt;/h2&gt;
+&lt;p&gt;यहीं Data API builder की परिपक्वता काम आती है:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;हर layer पर RBAC&lt;/strong&gt; — प्रत्येक entity परिभाषित करती है कि कौन से roles read, create, update, या delete कर सकते हैं, और कौन से fields दिखते हैं&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Azure Key Vault integration&lt;/strong&gt; — connection strings और secrets सुरक्षित रूप से manage होते हैं&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Microsoft Entra + custom OAuth&lt;/strong&gt; — production-grade authentication&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Content Security Policy&lt;/strong&gt; — एजेंट raw SQL के बजाय एक controlled contract के माध्यम से interact करते हैं&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Schema abstraction विशेष रूप से महत्वपूर्ण है। आपके internal table और column names एजेंट को कभी नहीं दिखते। आप entities, aliases, और descriptions परिभाषित करते हैं जो AI interaction के लिए उचित हों — आपके database ERD के लिए नहीं।&lt;/p&gt;
+&lt;h2 id="multi-database-और-multi-protocol"&gt;Multi-database और multi-protocol&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server Microsoft SQL, PostgreSQL, Azure Cosmos DB, और MySQL को support करता है। और क्योंकि यह एक DAB feature है, आपको एक ही configuration से REST, GraphQL, और MCP endpoints एक साथ मिलते हैं। वही entity definitions, वही RBAC rules, वही security — तीनों protocols में।&lt;/p&gt;
+&lt;p&gt;DAB 2.0 में auto-configuration आपके database को inspect करके dynamically configuration बना सकती है, अगर आप rapid prototyping के लिए कम abstraction से comfortable हैं।&lt;/p&gt;
+&lt;h2 id="मर-नजरय"&gt;मेरा नजरिया&lt;/h2&gt;
+&lt;p&gt;AI एजेंट्स के लिए enterprise database access इसी तरह काम करनी चाहिए। &amp;ldquo;अरे LLM, मेरे लिए कुछ SQL लिखो और production पर चला दो&amp;rdquo; वाला तरीका नहीं। बल्कि: एक well-defined entity layer, deterministic query generation, हर कदम पर RBAC, caching, monitoring, और telemetry। यह सबसे अच्छे अर्थ में उबाऊ है।&lt;/p&gt;
+&lt;p&gt;.NET डेवलपर्स के लिए, integration की कहानी साफ है — DAB एक .NET tool है, MCP Server एक container के रूप में चलता है, और यह Azure SQL के साथ काम करता है, जिसे हम में से अधिकांश पहले से उपयोग कर रहे हैं। अगर आप ऐसे AI एजेंट्स बना रहे हैं जिन्हें data access चाहिए, तो यहाँ से शुरू करें।&lt;/p&gt;
+&lt;h2 id="अतम-बत"&gt;अंतिम बात&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server मुफ्त, open-source है, और कहीं भी चलता है। यह Microsoft की तरफ से AI एजेंट्स को सुरक्षित database access देने का prescriptive तरीका है। शुरुआत करने के लिए &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;पूरी पोस्ट&lt;/a&gt; और &lt;a href="https://aka.ms/sql/mcp"&gt;documentation&lt;/a&gt; देखें।&lt;/p&gt;</content:encoded></item></channel></rss>

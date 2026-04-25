@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Opentelemetry | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/opentelemetry/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 02 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/opentelemetry/index.xml" rel="self" type="application/rss+xml"/><item><title>Het Dashboard van Aspire 13.2 Heeft Nu een Telemetry API — en Dat Verandert Alles</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/</guid><description>.NET Aspire 13.2 brengt slimmere telemetrie-export, een programmeerbare API voor traces en logs, en GenAI-visualisatieverbeteringen. Dit is waarom het uitmaakt voor je debugging-workflow.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/aspire-132-dashboard-export-telemetry/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Als je gedistribueerde apps bouwt met .NET Aspire, weet je al dat het dashboard het beste deel van de hele ervaring is. Aspire 13.2 heeft het aanzienlijk verbeterd.&lt;/p&gt;
+&lt;h2 id="telemetrie-exporteren-zoals-een-normaal-persoon"&gt;Telemetrie exporteren zoals een normaal persoon&lt;/h2&gt;
+&lt;p&gt;Aspire 13.2 voegt een proper &lt;strong&gt;Beheer logs en telemetrie&lt;/strong&gt;-dialoogvenster toe waar je kunt:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Alle telemetrie wissen&lt;/li&gt;
+&lt;li&gt;Geselecteerde telemetrie exporteren naar een ZIP-bestand in standaard OTLP/JSON-indeling&lt;/li&gt;
+&lt;li&gt;Die ZIP later importeren in een willekeurig Aspire-dashboard&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Dat laatste deel is de killer-feature. Reproduceer een bug, exporteer de telemetrie, voeg het toe aan je werkitem, en je teamgenoot kan het importeren in hun eigen dashboard.&lt;/p&gt;
+&lt;h2 id="de-telemetrie-api-is-de-echte-game-changer"&gt;De telemetrie-API is de echte game changer&lt;/h2&gt;
+&lt;p&gt;Het dashboard stelt nu een HTTP API bloot onder &lt;code&gt;/api/telemetry&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;GET /api/telemetry/resources&lt;/code&gt; — lijst van resources met telemetrie&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GET /api/telemetry/spans&lt;/code&gt; — spans opvragen met filters&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GET /api/telemetry/logs&lt;/code&gt; — logs opvragen met filters&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GET /api/telemetry/traces&lt;/code&gt; — traces weergeven&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Dit ondersteunt de nieuwe CLI-opdrachten &lt;code&gt;aspire agent mcp&lt;/code&gt; en &lt;code&gt;aspire otel&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="genai-telemetrie-wordt-praktisch"&gt;GenAI-telemetrie wordt praktisch&lt;/h2&gt;
+&lt;p&gt;VS Code Copilot chat en Copilot CLI ondersteunen het configureren van een &lt;code&gt;OTEL_EXPORTER_OTLP_ENDPOINT&lt;/code&gt; — wijs ze naar het Aspire-dashboard en je kunt je AI-agents in real-time zien denken via telemetrie.&lt;/p&gt;
+&lt;h2 id="samenvatting"&gt;Samenvatting&lt;/h2&gt;
+&lt;p&gt;Aspire 13.2 transformeert het dashboard van &amp;ldquo;prettige debugging-UI&amp;rdquo; naar &amp;ldquo;programmeerbaar observabiliteitsplatform&amp;rdquo;. Ga naar &lt;a href="https://aspire.dev"&gt;aspire.dev&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

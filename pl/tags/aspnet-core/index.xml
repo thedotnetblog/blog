@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Aspnet-Core | The .NET Blog</title><link>https://thedotnetblog.com/pl/tags/aspnet-core/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>pl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/pl/tags/aspnet-core/index.xml" rel="self" type="application/rss+xml"/><item><title>Ocena Modernizacji GitHub Copilot To Najlepsze Narzędzie Migracji, Którego Jeszcze Nie Używasz</title><link>https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/</guid><description>Rozszerzenie modernizacji GitHub Copilot nie tylko sugeruje zmiany kodu — produkuje pełną ocenę migracji z wykonalnymi problemami, porównaniami celów Azure i współpracującym przepływem pracy.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Ten post został automatycznie przetłumaczony. Aby przejść do oryginału, &lt;a href="https://thedotnetblog.com/pl/posts/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/"&gt;kliknij tutaj&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Migrowanie starszej aplikacji .NET Framework do nowoczesnego .NET to jedno z tych zadań, które wszyscy wiedzą, że powinni wykonać, ale nikt nie chce zaczynać.&lt;/p&gt;
+&lt;p&gt;Jeffrey Fritz właśnie opublikował &lt;a href="https://devblogs.microsoft.com/dotnet/your-migrations-source-of-truth-the-modernization-assessment/"&gt;dogłębną analizę oceny modernizacji GitHub Copilot&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="to-nie-jest-tylko-silnik-sugestii-kodu"&gt;To nie jest tylko silnik sugestii kodu&lt;/h2&gt;
+&lt;p&gt;Rozszerzenie VS Code podąża za modelem &lt;strong&gt;Oceń → Planuj → Wykonaj&lt;/strong&gt;. Faza oceny analizuje całą bazę kodu i produkuje ustrukturyzowany dokument, który wszystko przechwytuje.&lt;/p&gt;
+&lt;p&gt;Ocena jest przechowywana pod &lt;code&gt;.github/modernize/assessment/&lt;/code&gt;. Każde uruchomienie produkuje niezależny raport.&lt;/p&gt;
+&lt;h2 id="dwa-sposoby-na-start"&gt;Dwa sposoby na start&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Zalecana ocena&lt;/strong&gt; — szybka ścieżka. Wybierz z kuratorowanych domenach (Java/.NET Upgrade, Cloud Readiness, Security).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Niestandardowa ocena&lt;/strong&gt; — ścieżka ukierunkowana. Skonfiguruj dokładnie co analizować: docelowe obliczenia (App Service, AKS, Container Apps), docelowy system operacyjny, analiza konteneryzacji.&lt;/p&gt;
+&lt;h2 id="podział-problemów-jest-wykonalny"&gt;Podział problemów jest wykonalny&lt;/h2&gt;
+&lt;p&gt;Każdy problem ma poziom krytyczności:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Obowiązkowy&lt;/strong&gt; — musi być naprawiony lub migracja się nie powiedzie&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Potencjalny&lt;/strong&gt; — może wpłynąć na migrację, wymaga ludzkiego osądu&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Opcjonalny&lt;/strong&gt; — zalecane ulepszenia, nie blokuje migracji&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="moje-zdanie"&gt;Moje zdanie&lt;/h2&gt;
+&lt;p&gt;Jeśli masz starsze aplikacje .NET Framework, to jest &lt;em&gt;najlepsze&lt;/em&gt; narzędzie do rozpoczęcia. Sam dokument oceny jest wart poświęconego czasu.&lt;/p&gt;
+&lt;p&gt;Przeczytaj &lt;a href="https://devblogs.microsoft.com/dotnet/your-migrations-source-of-truth-the-modernization-assessment/"&gt;pełny przewodnik&lt;/a&gt; i pobierz &lt;a href="https://aka.ms/ghcp-appmod/vscode-ext"&gt;rozszerzenie VS Code&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

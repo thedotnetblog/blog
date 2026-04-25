@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Winui | The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/winui/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ko</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/winui/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows App Dev CLI v0.3: 터미널에서 F5 디버그와 에이전트를 위한 UI 자동화</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/</guid><description>Windows App Development CLI v0.3는 터미널에서 디버그 실행을 위한 winapp run, UI 자동화를 위한 winapp ui, 그리고 패키지 앱에서 dotnet run을 동작하게 하는 NuGet 패키지를 제공합니다.</description><content:encoded>&lt;p&gt;&lt;em&gt;이 게시물은 자동으로 번역되었습니다. 원본을 보려면 &lt;a href="https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/windows-app-dev-cli-v03-run-ui-automation/"&gt;여기를 클릭하세요&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Visual Studio의 F5 경험은 훌륭합니다. 하지만 CI 파이프라인, 자동화 워크플로우, 또는 AI 에이전트가 테스트를 수행할 때 패키지된 Windows 앱을 시작하고 디버그하기 위해 VS를 열어야 한다면 너무 번거롭습니다.&lt;/p&gt;
+&lt;p&gt;Windows App Development CLI v0.3이 &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;출시&lt;/a&gt;되었으며, 두 가지 핵심 기능으로 이를 직접 해결합니다: &lt;code&gt;winapp run&lt;/code&gt;과 &lt;code&gt;winapp ui&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="winapp-run-어디서나-f5"&gt;winapp run: 어디서나 F5&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;winapp run&lt;/code&gt;은 언패키지된 앱 폴더와 매니페스트를 받아, VS가 디버그 시작 시 수행하는 모든 작업을 실행합니다: 루스 패키지 등록, 앱 시작, 재배포 간 &lt;code&gt;LocalState&lt;/code&gt; 보존.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 앱을 빌드한 다음 패키지 앱으로 실행&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp run ./bin/Debug
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;WinUI, WPF, WinForms, Console, Avalonia 등에서 동작합니다. 모드는 개발자와 자동화 워크플로우 모두를 위해 설계되었습니다:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--detach&lt;/code&gt;&lt;/strong&gt;: 시작 후 즉시 터미널에 제어권을 반환합니다. CI/자동화에 적합합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--unregister-on-exit&lt;/code&gt;&lt;/strong&gt;: 앱 종료 시 등록된 패키지를 정리합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;--debug-output&lt;/code&gt;&lt;/strong&gt;: &lt;code&gt;OutputDebugString&lt;/code&gt; 메시지와 예외를 실시간으로 캡처합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="새로운-nuget-패키지-패키지-앱을-위한-dotnet-run"&gt;새로운 NuGet 패키지: 패키지 앱을 위한 dotnet run&lt;/h2&gt;
+&lt;p&gt;.NET 개발자를 위한 새로운 NuGet 패키지가 있습니다: &lt;code&gt;Microsoft.Windows.SDK.BuildTools.WinApp&lt;/code&gt;. 설치 후 &lt;code&gt;dotnet run&lt;/code&gt;이 전체 이너 루프를 처리합니다: 빌드, 루스 레이아웃 패키지 준비, Windows 등록 및 시작 — 모두 한 단계로.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winapp init
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 또는&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet add package Microsoft.Windows.SDK.BuildTools.WinApp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="winapp-ui-커맨드-라인에서-ui-자동화"&gt;winapp ui: 커맨드 라인에서 UI 자동화&lt;/h2&gt;
+&lt;p&gt;이것이 에이전트 시나리오를 여는 기능입니다. &lt;code&gt;winapp ui&lt;/code&gt;는 터미널에서 실행 중인 모든 Windows 앱(WPF, WinForms, Win32, Electron, WinUI3)에 대한 완전한 UI 자동화 액세스를 제공합니다.&lt;/p&gt;
+&lt;p&gt;가능한 작업:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;모든 최상위 창 나열&lt;/li&gt;
+&lt;li&gt;창의 전체 UI 자동화 트리 탐색&lt;/li&gt;
+&lt;li&gt;이름, 유형 또는 자동화 ID로 요소 검색&lt;/li&gt;
+&lt;li&gt;클릭, 호출 및 값 설정&lt;/li&gt;
+&lt;li&gt;스크린샷 캡처&lt;/li&gt;
+&lt;li&gt;요소 나타날 때까지 대기 — 테스트 동기화에 이상적&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;winapp ui&lt;/code&gt;와 &lt;code&gt;winapp run&lt;/code&gt;을 결합하면 터미널에서 완전한 빌드 → 시작 → 검증 워크플로우가 가능합니다. 에이전트가 앱을 실행하고, UI 상태를 검사하고, 프로그래밍 방식으로 상호작용하여 결과를 검증할 수 있습니다.&lt;/p&gt;
+&lt;h2 id="기타-새로운-기능"&gt;기타 새로운 기능&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp unregister&lt;/code&gt;&lt;/strong&gt;: 완료 후 사이드로드된 패키지를 제거합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;winapp manifest add-alias&lt;/code&gt;&lt;/strong&gt;: 터미널에서 이름으로 앱을 시작하는 별칭을 추가합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;탭 자동완성&lt;/strong&gt;: 단일 명령으로 PowerShell 완성을 구성합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="설치-방법"&gt;설치 방법&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winget install Microsoft.WinAppCli
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 또는&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npm install -g @microsoft/winappcli
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;CLI는 공개 미리 보기 중입니다. 전체 문서는 &lt;a href="https://github.com/microsoft/WinAppCli"&gt;GitHub 저장소&lt;/a&gt;를, 모든 세부 정보는 &lt;a href="https://devblogs.microsoft.com/ifdef-windows/windows-app-development-cli-v0-3-new-run-and-ui-commands-plus-dotnet-run-support-for-packaged-apps/"&gt;원본 발표&lt;/a&gt;를 참조하세요.&lt;/p&gt;</content:encoded></item></channel></rss>

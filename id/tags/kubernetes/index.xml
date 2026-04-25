@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Kubernetes | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/kubernetes/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sun, 29 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/kubernetes/index.xml" rel="self" type="application/rss+xml"/><item><title>KubeCon Europe 2026: Yang Sebenarnya Perlu Diperhatikan Pengembang .NET</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/kubecon-2026-aks-updates-dotnet-developers/</link><pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/kubecon-2026-aks-updates-dotnet-developers/</guid><description>Microsoft menjatuhkan tembok pengumuman Kubernetes di KubeCon Europe 2026. Inilah versi tersaringnya — hanya pembaruan AKS dan cloud-native yang penting jika Anda mengekspedisi aplikasi .NET.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/kubecon-2026-aks-updates-dotnet-developers/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Microsoft baru saja menerbitkan &lt;a href="https://opensource.microsoft.com/blog/2026/03/24/whats-new-with-microsoft-in-open-source-and-kubernetes-at-kubecon-cloudnativecon-europe-2026/"&gt;rekap lengkap KubeCon Europe 2026 mereka&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="mtls-tanpa-pajak-service-mesh"&gt;mTLS tanpa pajak service mesh&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://aka.ms/aks/application-network"&gt;Azure Kubernetes Application Network&lt;/a&gt; memberi Anda mutual TLS, otorisasi berbasis aplikasi, dan telemetri traffic — tanpa menerapkan mesh sidecar berat. API ASP.NET Core yang berkomunikasi dengan background worker — semua terenkripsi di tingkat jaringan, tanpa perubahan kode aplikasi.&lt;/p&gt;
+&lt;h2 id="observabilitas-gpu"&gt;Observabilitas GPU&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://aka.ms/aks/managed-gpu-metrics"&gt;AKS kini menampilkan metrik GPU secara native&lt;/a&gt; ke Prometheus dan Grafana terkelola. Tanpa exporter kustom.&lt;/p&gt;
+&lt;h2 id="jaringan-lintas-kluster"&gt;Jaringan lintas kluster&lt;/h2&gt;
+&lt;p&gt;Azure Kubernetes Fleet Manager kini mengirimkan &lt;a href="https://aka.ms/kubernetes-fleet/networking/cross-cluster"&gt;jaringan lintas kluster&lt;/a&gt; — konektivitas terpadu, registri layanan global.&lt;/p&gt;
+&lt;h2 id="upgrade-yang-lebih-aman"&gt;Upgrade yang lebih aman&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Upgrade agent pool biru-hijau&lt;/strong&gt; membuat node pool paralel. &lt;strong&gt;Rollback agent pool&lt;/strong&gt; memungkinkan Anda kembali ke versi sebelumnya.&lt;/p&gt;
+&lt;h2 id="dari-mana-memulai"&gt;Dari mana memulai&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Observabilitas dulu&lt;/strong&gt; — aktifkan metrik GPU dan log aliran jaringan&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Coba upgrade biru-hijau&lt;/strong&gt; — uji alur kerja rollback&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pilot jaringan berbasis identitas&lt;/strong&gt; — aktifkan mTLS untuk satu jalur layanan&lt;/li&gt;
+&lt;/ol&gt;</content:encoded></item></channel></rss>

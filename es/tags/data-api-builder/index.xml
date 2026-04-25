@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Data-Api-Builder | The .NET Blog</title><link>https://thedotnetblog.com/es/tags/data-api-builder/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>es</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/es/tags/data-api-builder/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL MCP Server — La forma correcta de darle acceso a bases de datos a los agentes de IA</title><link>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/es/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>SQL MCP Server de Data API builder da a los agentes de IA acceso seguro y determinista a bases de datos sin exponer esquemas ni depender de NL2SQL. RBAC, caché, soporte multi-base de datos — todo incluido.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Este post fue traducido automáticamente. Para la versión original, &lt;a href="https://thedotnetblog.com/es/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;haz clic aquí&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Seamos honestos: la mayoría de los servidores MCP de bases de datos disponibles hoy son aterradores. Toman una consulta en lenguaje natural, generan SQL al vuelo y lo ejecutan contra tus datos de producción. ¿Qué podría salir mal? (Todo. Todo podría salir mal.)&lt;/p&gt;
+&lt;p&gt;El equipo de Azure SQL acaba de &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;presentar SQL MCP Server&lt;/a&gt;, y toma un enfoque fundamentalmente diferente. Construido como una característica de Data API builder (DAB) 2.0, da a los agentes de IA acceso estructurado y determinista a operaciones de base de datos — sin NL2SQL, sin exponer tu esquema, y con RBAC completo en cada paso.&lt;/p&gt;
+&lt;h2 id="por-qué-no-nl2sql"&gt;¿Por qué no NL2SQL?&lt;/h2&gt;
+&lt;p&gt;Esta es la decisión de diseño más interesante. Los modelos no son deterministas, y las consultas complejas son las más propensas a producir errores sutiles. Las consultas exactas que los usuarios esperan que la IA genere son también las que necesitan más escrutinio cuando se producen de forma no determinista.&lt;/p&gt;
+&lt;p&gt;En su lugar, SQL MCP Server usa un enfoque &lt;strong&gt;NL2DAB&lt;/strong&gt;. El agente trabaja con la capa de abstracción de entidades de Data API builder y su constructor de consultas integrado para producir T-SQL preciso y bien formado de manera determinista. Mismo resultado para el usuario, pero sin el riesgo de JOINs alucinados o exposición accidental de datos.&lt;/p&gt;
+&lt;h2 id="siete-herramientas-no-setecientas"&gt;Siete herramientas, no setecientas&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server expone exactamente siete herramientas DML, sin importar el tamaño de la base de datos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — descubrir entidades y operaciones disponibles&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — insertar filas&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — consultar tablas y vistas&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — modificar filas&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — eliminar filas&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — ejecutar procedimientos almacenados&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — consultas de agregación&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Esto es inteligente porque las ventanas de contexto son el espacio de pensamiento del agente. Inundarlas con cientos de definiciones de herramientas deja menos espacio para el razonamiento. Siete herramientas fijas mantienen al agente enfocado en &lt;em&gt;pensar&lt;/em&gt; en lugar de &lt;em&gt;navegar&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Cada herramienta puede habilitarse o deshabilitarse individualmente:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;runtime&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;path&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dml-tools&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;describe-entities&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;create-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;read-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;update-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;delete-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;execute-entity&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;aggregate-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="empezando-en-tres-comandos"&gt;Empezando en tres comandos&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --database-type mssql &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --source dbo.Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Eso es un SQL MCP Server funcionando y exponiendo tu tabla Customers. La capa de abstracción de entidades significa que puedes crear alias para nombres y columnas, limitar campos por rol, y controlar exactamente lo que ven los agentes — sin exponer detalles internos del esquema.&lt;/p&gt;
+&lt;h2 id="la-historia-de-seguridad-es-sólida"&gt;La historia de seguridad es sólida&lt;/h2&gt;
+&lt;p&gt;Aquí es donde la madurez de Data API builder da frutos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;RBAC en cada capa&lt;/strong&gt; — cada entidad define qué roles pueden leer, crear, actualizar o eliminar, y qué campos son visibles&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Integración con Azure Key Vault&lt;/strong&gt; — cadenas de conexión y secretos gestionados de forma segura&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Microsoft Entra + OAuth personalizado&lt;/strong&gt; — autenticación de nivel producción&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Content Security Policy&lt;/strong&gt; — los agentes interactúan a través de un contrato controlado, no SQL crudo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;La abstracción del esquema es particularmente importante. Los nombres internos de tus tablas y columnas nunca se exponen al agente. Defines entidades, alias y descripciones que tienen sentido para la interacción con IA — no tu diagrama ERD de la base de datos.&lt;/p&gt;
+&lt;h2 id="multi-base-de-datos-y-multi-protocolo"&gt;Multi-base de datos y multi-protocolo&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server soporta Microsoft SQL, PostgreSQL, Azure Cosmos DB y MySQL. Y como es una característica de DAB, obtienes endpoints REST, GraphQL y MCP simultáneamente desde la misma configuración. Mismas definiciones de entidades, mismas reglas RBAC, misma seguridad — en los tres protocolos.&lt;/p&gt;
+&lt;p&gt;La auto-configuración en DAB 2.0 puede incluso inspeccionar tu base de datos y construir la configuración dinámicamente, si te resulta cómodo menos abstracción para prototipado rápido.&lt;/p&gt;
+&lt;h2 id="mi-opinión"&gt;Mi opinión&lt;/h2&gt;
+&lt;p&gt;Así es como debería funcionar el acceso empresarial a bases de datos para agentes de IA. No &amp;ldquo;hey LLM, escríbeme algo de SQL y YOLO contra producción.&amp;rdquo; En su lugar: una capa de entidades bien definida, generación determinista de consultas, RBAC en cada paso, caché, monitoreo y telemetría. Es aburrido de la mejor manera posible.&lt;/p&gt;
+&lt;p&gt;Para desarrolladores .NET, la historia de integración es limpia — DAB es una herramienta .NET, el MCP Server se ejecuta como contenedor, y funciona con Azure SQL, que la mayoría ya estamos usando. Si estás construyendo agentes de IA que necesitan acceso a datos, empieza aquí.&lt;/p&gt;
+&lt;h2 id="para-cerrar"&gt;Para cerrar&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server es gratuito, de código abierto y se ejecuta en cualquier lugar. Es el enfoque prescriptivo de Microsoft para dar acceso seguro a bases de datos a los agentes de IA. Consulta el &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;post completo&lt;/a&gt; y la &lt;a href="https://aka.ms/sql/mcp"&gt;documentación&lt;/a&gt; para empezar.&lt;/p&gt;</content:encoded></item></channel></rss>

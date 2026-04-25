@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>NuGet | The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/nuget/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ko</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 25 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/nuget/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure SDK 2026년 4월: AI Foundry 2.0과 .NET 개발자가 알아야 할 것들</title><link>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-sdk-april-2026-ai-foundry-2-stable/</link><pubDate>Sat, 25 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/posts/emiliano-montesdeoca/azure-sdk-april-2026-ai-foundry-2-stable/</guid><description>2026년 4월 Azure SDK 릴리스는 중요한 breaking changes가 포함된 Azure.AI.Projects 2.0.0 안정 버전, Cosmos DB 치명적 보안 수정, 그리고 .NET을 위한 새로운 Provisioning 라이브러리를 제공합니다.</description><content:encoded>&lt;p&gt;&lt;em&gt;이 게시물은 자동 번역되었습니다. 원본 버전은 &lt;a href="https://thedotnetblog.com/posts/emiliano-montesdeoca/azure-sdk-april-2026-ai-foundry-2-stable/"&gt;여기를 클릭&lt;/a&gt;하세요.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;월간 SDK 릴리스는 종종 무시하기 쉽습니다. 이번에는 주목할 몇 가지가 있습니다.&lt;/p&gt;
+&lt;h2 id="azureaiprojects-200--의미있는-breaking-changes"&gt;Azure.AI.Projects 2.0.0 — 의미있는 Breaking Changes&lt;/h2&gt;
+&lt;p&gt;네임스페이스 분리, 타입 이름 변경, 불리언 속성의 일관된 &lt;code&gt;Is*&lt;/code&gt; 규칙.&lt;/p&gt;
+&lt;h2 id="cosmos-db-java-치명적-보안-수정-rce"&gt;Cosmos DB Java: 치명적 보안 수정 (RCE)&lt;/h2&gt;
+&lt;p&gt;버전 4.79.0에서 &lt;strong&gt;원격 코드 실행 취약점 (CWE-502)&lt;/strong&gt; 치명적 수정. 즉시 업데이트하세요.&lt;/p&gt;
+&lt;h2 id="net을-위한-새-provisioning-라이브러리"&gt;.NET을 위한 새 Provisioning 라이브러리&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.nuget.org/packages/Azure.Provisioning.Network/1.0.0"&gt;Azure.Provisioning.Network 1.0.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.nuget.org/packages/Azure.Provisioning.PrivateDns/1.0.0"&gt;Azure.Provisioning.PrivateDns 1.0.0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;원본 포스트: &lt;a href="https://devblogs.microsoft.com/azure-sdk/azure-sdk-release-april-2026/"&gt;Azure SDK Release (April 2026)&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

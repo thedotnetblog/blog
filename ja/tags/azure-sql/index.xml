@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure-Sql | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/azure-sql/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sun, 26 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/azure-sql/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL Server 2025 エージェント対応データベース：1つのエンジンでセキュリティ、バックアップ、MCP</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/sql-server-2025-agent-ready-security-mcp/</link><pubDate>Sun, 26 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/sql-server-2025-agent-ready-security-mcp/</guid><description>Polyglot Taxシリーズの最終回は、本番環境の難しい問題に取り組みます：リレーショナル、JSON、グラフ、ベクターデータ全体での統一Row-Level Security、そしてMCP統合。</description><content:encoded>&lt;p&gt;&lt;em&gt;この投稿は自動翻訳されています。オリジナル版は&lt;a href="https://thedotnetblog.com/posts/emiliano-montesdeoca/sql-server-2025-agent-ready-security-mcp/"&gt;こちら&lt;/a&gt;をクリックしてください。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Aditya BadramrajuのPolyglot Taxシリーズを興味深く読んできました。パート4はシリーズを締めくくり、この架構を本番環境で信頼できるかどうかを実際に決める部分に取り組みます。&lt;/p&gt;
+&lt;h2 id="すべてのデータモデルに対する1つのセキュリティモデル"&gt;すべてのデータモデルに対する1つのセキュリティモデル&lt;/h2&gt;
+&lt;p&gt;1つのRow-Level Securityポリシーがすべてのデータモデルをカバー。監査人への証明が1つで済む。&lt;/p&gt;
+&lt;h2 id="統一バックアップ--アトミックリカバリ"&gt;統一バックアップ = アトミックリカバリ&lt;/h2&gt;
+&lt;p&gt;ポリグロットスタックでは、5つのデータベースのPoint-in-Timeリカバリを協調させることは一貫性の悪夢です。1つのデータベースなら、定義上アトミックです。&lt;/p&gt;
+&lt;h2 id="mcp統合ハンドコードされたミドルウェア不要"&gt;MCP統合：ハンドコードされたミドルウェア不要&lt;/h2&gt;
+&lt;p&gt;SQL Server 2025はSQL MCPサーバーを直接サポート。エージェントはツールを呼び出し、エンジンが自動的にテナント分離とカラムマスキングを強制します。&lt;/p&gt;
+&lt;p&gt;オリジナルポスト（Aditya Badramraju著）: &lt;a href="https://devblogs.microsoft.com/azure-sql/the-polyglot-tax-part-4/"&gt;The Polyglot Tax – Part 4&lt;/a&gt;。&lt;/p&gt;</content:encoded></item><item><title>SQL MCP Server — AIエージェントにデータベースアクセスを与える正しい方法</title><link>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>Data API builderのSQL MCP Serverは、スキーマを公開したりNL2SQLに頼ることなく、AIエージェントに安全で決定的なデータベースアクセスを提供します。RBAC、キャッシュ、マルチデータベース対応 — すべて組み込み済み。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されました。原文は&lt;a href="https://thedotnetblog.com/ja/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;正直に言いましょう：今日利用可能なほとんどのデータベースMCPサーバーは恐ろしいものです。自然言語のクエリを受け取り、その場でSQLを生成し、本番データに対して実行します。何がうまくいかないでしょうか？（全部です。全部うまくいかない可能性があります。）&lt;/p&gt;
+&lt;p&gt;Azure SQLチームが&lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;SQL MCP Serverを発表&lt;/a&gt;しましたが、根本的に異なるアプローチを取っています。Data API builder（DAB）2.0の機能として構築され、AIエージェントに構造化された決定的なデータベース操作アクセスを提供します — NL2SQLなし、スキーマの公開なし、そしてすべてのステップで完全なRBAC付き。&lt;/p&gt;
+&lt;h2 id="なぜnl2sqlを使わないのか"&gt;なぜNL2SQLを使わないのか？&lt;/h2&gt;
+&lt;p&gt;これが最も興味深い設計判断です。モデルは決定的ではなく、複雑なクエリは微妙なエラーを生み出す可能性が最も高いです。ユーザーがAIに生成してほしいと思う正にそのクエリが、非決定的に生成された場合に最も精査が必要なものでもあります。&lt;/p&gt;
+&lt;p&gt;代わりに、SQL MCP Serverは&lt;strong&gt;NL2DAB&lt;/strong&gt;アプローチを使用します。エージェントはData API builderのエンティティ抽象化レイヤーと組み込みのクエリビルダーで作業し、正確で整形されたT-SQLを決定的に生成します。ユーザーにとっては同じ結果ですが、幻覚されたJOINや偶発的なデータ漏洩のリスクがありません。&lt;/p&gt;
+&lt;h2 id="7つのツール700ではなく"&gt;7つのツール、700ではなく&lt;/h2&gt;
+&lt;p&gt;SQL MCP Serverは、データベースのサイズに関係なく、正確に7つのDMLツールを公開します：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — 利用可能なエンティティと操作を発見&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — 行を挿入&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — テーブルとビューをクエリ&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — 行を変更&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — 行を削除&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — ストアドプロシージャを実行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — 集計クエリ&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これは賢明です。コンテキストウィンドウはエージェントの思考空間だからです。何百ものツール定義で氾濫させると、推論のための空間が減ります。7つの固定ツールは、エージェントを&lt;em&gt;ナビゲーション&lt;/em&gt;ではなく&lt;em&gt;思考&lt;/em&gt;に集中させ続けます。&lt;/p&gt;
+&lt;p&gt;各ツールは個別に有効化・無効化できます：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;runtime&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;path&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dml-tools&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;describe-entities&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;create-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;read-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;update-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;delete-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;execute-entity&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;aggregate-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="3つのコマンドで開始"&gt;3つのコマンドで開始&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --database-type mssql &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --source dbo.Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;これでCustomersテーブルを公開するSQL MCP Serverが稼働します。エンティティ抽象化レイヤーにより、名前やカラムにエイリアスを設定し、ロールごとにフィールドを制限し、エージェントが見るものを正確に制御できます — 内部スキーマの詳細を公開することなく。&lt;/p&gt;
+&lt;h2 id="セキュリティストーリーは堅実"&gt;セキュリティストーリーは堅実&lt;/h2&gt;
+&lt;p&gt;ここがData API builderの成熟さが活きるところです：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;あらゆるレイヤーでRBAC&lt;/strong&gt; — 各エンティティがどのロールが読み取り、作成、更新、削除できるか、どのフィールドが表示されるかを定義&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Azure Key Vault統合&lt;/strong&gt; — 接続文字列とシークレットを安全に管理&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Microsoft Entra + カスタムOAuth&lt;/strong&gt; — 本番グレードの認証&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Content Security Policy&lt;/strong&gt; — エージェントは生のSQLではなく、制御されたコントラクトを通じてやり取り&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;スキーマの抽象化は特に重要です。内部テーブル名やカラム名はエージェントに露出しません。AI対話に意味のあるエンティティ、エイリアス、説明を定義します — データベースのERD図ではなく。&lt;/p&gt;
+&lt;h2 id="マルチデータベースとマルチプロトコル"&gt;マルチデータベースとマルチプロトコル&lt;/h2&gt;
+&lt;p&gt;SQL MCP ServerはMicrosoft SQL、PostgreSQL、Azure Cosmos DB、MySQLをサポートします。そしてDABの機能であるため、同じ設定からREST、GraphQL、MCPのエンドポイントを同時に取得できます。同じエンティティ定義、同じRBACルール、同じセキュリティ — 3つのプロトコルすべてで。&lt;/p&gt;
+&lt;p&gt;DAB 2.0の自動設定は、データベースを検査して設定を動的に構築することもできます。迅速なプロトタイピングのために抽象化を減らしても良い場合に便利です。&lt;/p&gt;
+&lt;h2 id="私の見解"&gt;私の見解&lt;/h2&gt;
+&lt;p&gt;これがAIエージェント向けのエンタープライズデータベースアクセスのあるべき姿です。「ねぇLLM、SQLを書いてプロダクションにYOLO」ではなく。代わりに：明確に定義されたエンティティレイヤー、決定的なクエリ生成、各ステップでのRBAC、キャッシュ、モニタリング、テレメトリ。最高の意味で退屈です。&lt;/p&gt;
+&lt;p&gt;.NET開発者にとって、統合ストーリーはクリーンです — DABは.NETツールで、MCP Serverはコンテナとして動作し、ほとんどの人がすでに使っているAzure SQLで機能します。データアクセスが必要なAIエージェントを構築しているなら、ここから始めましょう。&lt;/p&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;SQL MCP Serverは無料、オープンソースで、どこでも動作します。AIエージェントに安全なデータベースアクセスを提供するためのMicrosoftの規範的アプローチです。始めるには&lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;完全な記事&lt;/a&gt;と&lt;a href="https://aka.ms/sql/mcp"&gt;ドキュメント&lt;/a&gt;をご覧ください。&lt;/p&gt;</content:encoded></item></channel></rss>

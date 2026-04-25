@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Coding-Agents | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/coding-agents/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 17 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/coding-agents/index.xml" rel="self" type="application/rss+xml"/><item><title>Berhenti Mengawasi Terminal: Mode Terpisah Aspire Mengubah Alur Kerja</title><link>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</link><pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/</guid><description>Aspire 13.2 memungkinkan Anda menjalankan AppHost di background dan mengambil kembali terminal Anda. Dikombinasikan dengan perintah CLI baru dan dukungan agen, ini lebih besar dari yang terlihat.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/posts/emiliano-montesdeoca/aspire-detached-mode-free-your-terminal/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Setiap kali Anda menjalankan Aspire AppHost, terminal Anda hilang. Terkunci. Terpakai hingga Ctrl+C. Perlu menjalankan perintah cepat? Buka tab baru. Ingin memeriksa log? Tab lain. Gesekan kecil ini menumpuk dengan cepat.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 memperbaiki ini. James Newton-King &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;menulis semua detailnya&lt;/a&gt;, dan jujur, ini adalah salah satu fitur yang segera mengubah cara Anda bekerja.&lt;/p&gt;
+&lt;h2 id="mode-terpisah-satu-perintah-terminal-kembali"&gt;Mode terpisah: satu perintah, terminal kembali&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ini singkatan dari &lt;code&gt;aspire run --detach&lt;/code&gt;. AppHost Anda boot di background dan Anda mendapatkan terminal kembali segera.&lt;/p&gt;
+&lt;h2 id="mengelola-yang-sedang-berjalan"&gt;Mengelola yang sedang berjalan&lt;/h2&gt;
+&lt;p&gt;Berjalan di background hanya berguna jika Anda bisa mengelola apa yang berjalan. Aspire 13.2 menyertakan set lengkap perintah CLI:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Daftar semua AppHost yang berjalan&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire ps
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Periksa state AppHost tertentu&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire describe
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Stream log dari AppHost yang berjalan&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire logs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Hentikan AppHost tertentu&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire stop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="gabungkan-dengan-mode-terisolasi"&gt;Gabungkan dengan mode terisolasi&lt;/h2&gt;
+&lt;p&gt;Mode terpisah secara alami berpasangan dengan mode terisolasi:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire start --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Setiap instance mendapat port acak, rahasia terpisah, dan siklus hidupnya sendiri.&lt;/p&gt;
+&lt;h2 id="mengapa-ini-besar-untuk-agen-coding"&gt;Mengapa ini besar untuk agen coding&lt;/h2&gt;
+&lt;p&gt;Agen coding yang bekerja di terminal Anda sekarang dapat:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Memulai aplikasi dengan &lt;code&gt;aspire start&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Mengkueri statusnya dengan &lt;code&gt;aspire describe&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Memeriksa log dengan &lt;code&gt;aspire logs&lt;/code&gt; untuk mendiagnosis masalah&lt;/li&gt;
+&lt;li&gt;Menghentikannya dengan &lt;code&gt;aspire stop&lt;/code&gt; saat selesai&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Menjalankan &lt;code&gt;aspire agent init&lt;/code&gt; menyiapkan file skill Aspire yang mengajarkan agen perintah-perintah ini.&lt;/p&gt;
+&lt;h2 id="kesimpulan"&gt;Kesimpulan&lt;/h2&gt;
+&lt;p&gt;Mode terpisah adalah peningkatan alur kerja yang menyamar sebagai flag sederhana. Baca &lt;a href="https://devblogs.microsoft.com/aspire/aspire-detached-mode-and-process-management/"&gt;postingan lengkap&lt;/a&gt; dan dapatkan Aspire 13.2 dengan &lt;code&gt;aspire update --self&lt;/code&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

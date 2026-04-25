@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Parallel-Development | The .NET Blog</title><link>https://thedotnetblog.com/tags/parallel-development/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>en</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tags/parallel-development/index.xml" rel="self" type="application/rss+xml"/><item><title>Aspire's Isolated Mode Fixes the Port Conflict Nightmare for Parallel Development</title><link>https://thedotnetblog.com/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/posts/emiliano-montesdeoca/aspire-isolated-mode-parallel-instances/</guid><description>Aspire 13.2 introduces --isolated mode: random ports, separate secrets, and zero collisions when running multiple instances of the same AppHost. Perfect for AI agents, worktrees, and parallel workflows.</description><content:encoded>&lt;p&gt;If you&amp;rsquo;ve ever tried running two instances of the same project at the same time, you know the pain. Port 8080 is already in use. Port 17370 is taken. Kill something, restart, juggle environment variables — it&amp;rsquo;s a productivity killer.&lt;/p&gt;
+&lt;p&gt;This problem is getting worse, not better. AI agents create git worktrees to work independently. Background agents spin up separate environments. Developers checkout the same repo twice for feature branches. Every one of these scenarios hits the same wall: two instances of the same app fighting over the same ports.&lt;/p&gt;
+&lt;p&gt;Aspire 13.2 fixes this with a single flag. James Newton-King from the Aspire team &lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;wrote up the full details&lt;/a&gt;, and it&amp;rsquo;s one of those &amp;ldquo;why didn&amp;rsquo;t we have this sooner&amp;rdquo; features.&lt;/p&gt;
+&lt;h2 id="the-fix---isolated"&gt;The fix: &lt;code&gt;--isolated&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;That&amp;rsquo;s it. Each run gets:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Random ports&lt;/strong&gt; — no more collisions between instances&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Isolated user secrets&lt;/strong&gt; — connection strings and API keys stay separate per instance&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;No manual port reassignment. No environment variable juggling. Each run gets a fresh, collision-free environment automatically.&lt;/p&gt;
+&lt;h2 id="real-scenarios-where-this-shines"&gt;Real scenarios where this shines&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Multiple checkouts.&lt;/strong&gt; You&amp;rsquo;ve got a feature branch in one directory and a bugfix in another:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-feature
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Terminal 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/projects/my-app-bugfix
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aspire run --isolated
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Both run without conflicts. The dashboard shows what&amp;rsquo;s running and where.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Background agents in VS Code.&lt;/strong&gt; When Copilot Chat&amp;rsquo;s background agent creates a git worktree to work on your code independently, it may need to run your Aspire AppHost. Without &lt;code&gt;--isolated&lt;/code&gt;, that&amp;rsquo;s a port collision with your primary worktree. With it, both instances just work.&lt;/p&gt;
+&lt;p&gt;The Aspire skill that ships with &lt;code&gt;aspire agent init&lt;/code&gt; automatically instructs agents to use &lt;code&gt;--isolated&lt;/code&gt; when working in worktrees. So Copilot&amp;rsquo;s background agent should handle this out of the box.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Integration tests alongside development.&lt;/strong&gt; Need to run tests against a live AppHost while continuing to build features? Isolated mode gives each context its own ports and config.&lt;/p&gt;
+&lt;h2 id="how-it-works-under-the-hood"&gt;How it works under the hood&lt;/h2&gt;
+&lt;p&gt;When you pass &lt;code&gt;--isolated&lt;/code&gt;, the CLI generates a unique instance ID for the run. This drives two behaviors:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Port randomization&lt;/strong&gt; — instead of binding to predictable ports defined in your AppHost config, isolated mode picks random available ports for everything — the dashboard, service endpoints, all of it. Service discovery adjusts automatically, so services find each other regardless of which ports they land on.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Secret isolation&lt;/strong&gt; — each isolated run gets its own user secrets store, keyed by the instance ID. Connection strings and API keys from one run don&amp;rsquo;t leak into another.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Your code doesn&amp;rsquo;t need any changes. Aspire&amp;rsquo;s service discovery resolves endpoints at runtime, so everything connects correctly regardless of port assignment.&lt;/p&gt;
+&lt;h2 id="when-to-use-it"&gt;When to use it&lt;/h2&gt;
+&lt;p&gt;Use &lt;code&gt;--isolated&lt;/code&gt; when running multiple instances of the same AppHost simultaneously — whether that&amp;rsquo;s parallel development, automated tests, AI agents, or git worktrees. For single-instance development where you prefer predictable ports, regular &lt;code&gt;aspire run&lt;/code&gt; still works fine.&lt;/p&gt;
+&lt;h2 id="wrapping-up"&gt;Wrapping up&lt;/h2&gt;
+&lt;p&gt;Isolated mode is a small feature that solves a real, increasingly common problem. As AI-assisted development pushes us toward more parallel workflows — multiple agents, multiple worktrees, multiple contexts — the ability to just spin up another instance without fighting over ports is essential.&lt;/p&gt;
+&lt;p&gt;Read the &lt;a href="https://devblogs.microsoft.com/aspire/aspire-isolated-mode-parallel-development/"&gt;full post&lt;/a&gt; for all the technical details and try it out with &lt;code&gt;aspire update --self&lt;/code&gt; to get 13.2.&lt;/p&gt;</content:encoded></item></channel></rss>

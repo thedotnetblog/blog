@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Containers | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/containers/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 25 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/containers/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET 10 wordt Geleverd met Ubuntu 26.04 LTS — Dit Is Nieuw</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/</link><pubDate>Sat, 25 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/</guid><description>Ubuntu 26.04 LTS (Resolute Raccoon) is uitgebracht met .NET 10 als eersteklas toolchain. Native AOT, Chiseled containers, Linux 7.0.</description><content:encoded>&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Klik &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/"&gt;hier&lt;/a&gt; voor de originele versie.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Het is Ubuntu LTS-dag. &lt;a href="https://canonical.com/blog/canonical-releases-ubuntu-26-04-lts-resolute-raccoon"&gt;Ubuntu 26.04 (Resolute Raccoon)&lt;/a&gt; is vandaag uitgebracht met &lt;a href="https://devblogs.microsoft.com/dotnet/whats-new-for-dotnet-in-ubuntu-2604/"&gt;.NET 10&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="net-10-in-twee-commandos-installeren"&gt;.NET 10 in twee commando&amp;rsquo;s installeren&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt install dotnet-sdk-10.0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;.NET is een van de &lt;a href="https://ubuntu.com/toolchains"&gt;officieel ondersteunde toolchains op Ubuntu&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="containers--noble-bijwerken-naar--resolute"&gt;Containers: &lt;code&gt;-noble&lt;/code&gt; bijwerken naar &lt;code&gt;-resolute&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sed -i &lt;span class="s2"&gt;&amp;#34;s/noble/resolute/g&amp;#34;&lt;/span&gt; Dockerfile
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="native-aot-3ms-opstart-14mb-binair-bestand"&gt;Native AOT: 3ms opstart, 1,4MB binair bestand&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y dotnet-sdk-aot-10.0 clang
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet publish app.cs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# native binair bestand van 1,4MB, opstart in 3ms&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Voor cloud-native workloads waarbij koude starttijd belangrijk is — Functions, containers, serverless — een echte gamechanger.&lt;/p&gt;
+&lt;h2 id="net-8-of-9-nodig"&gt;.NET 8 of 9 nodig?&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y software-properties-common
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;add-apt-repository ppa:dotnet/backports
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y dotnet-sdk-8.0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Het &lt;a href="https://devblogs.microsoft.com/dotnet/whats-new-for-dotnet-in-ubuntu-2604/"&gt;volledige bericht&lt;/a&gt; bevat meer details.&lt;/p&gt;</content:encoded></item><item><title>Waar Moet Je je AI-Agents op Azure Hosten? Een Praktische Beslissingswijzer</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azure-ai-agent-hosting-options-guide/</link><pubDate>Wed, 15 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azure-ai-agent-hosting-options-guide/</guid><description>Azure biedt zes manieren om AI-agents te hosten — van ruwe containers tot volledig beheerde Foundry Hosted Agents. Zo kies je de juiste voor je .NET-workload.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azure-ai-agent-hosting-options-guide/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Als je momenteel AI-agents bouwt met .NET, heb je waarschijnlijk iets opgemerkt: er zijn &lt;em&gt;veel&lt;/em&gt; manieren om ze te hosten op Azure. Container Apps, AKS, Functions, App Service, Foundry Agents, Foundry Hosted Agents.&lt;/p&gt;
+&lt;p&gt;Microsoft heeft zojuist een &lt;a href="https://devblogs.microsoft.com/all-things-azure/hostedagent/"&gt;uitgebreide gids voor Azure AI agent-hosting&lt;/a&gt; gepubliceerd.&lt;/p&gt;
+&lt;h2 id="de-zes-opties-in-één-oogopslag"&gt;De zes opties in één oogopslag&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Optie&lt;/th&gt;
+&lt;th&gt;Beste voor&lt;/th&gt;
+&lt;th&gt;Je beheert&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Container Apps&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Volledige containercontrole zonder K8s&lt;/td&gt;
+&lt;td&gt;Observabiliteit, staat, levenscyclus&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;AKS&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Enterprise-naleving, multi-cluster&lt;/td&gt;
+&lt;td&gt;Alles&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Azure Functions&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Event-gedreven, korte taken&lt;/td&gt;
+&lt;td&gt;Bijna niets&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;App Service&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Eenvoudige HTTP-agents&lt;/td&gt;
+&lt;td&gt;Implementatie, schaling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Foundry Agents&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Optionele code-agents&lt;/td&gt;
+&lt;td&gt;Bijna niets&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Foundry Hosted Agents&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Aangepaste framework-agents&lt;/td&gt;
+&lt;td&gt;Alleen je agentcode&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="foundry-hosted-agents--het-juiste-midden-voor-net-agentdevelopers"&gt;Foundry Hosted Agents — het juiste midden voor .NET agentdevelopers&lt;/h2&gt;
+&lt;p&gt;Implementatie is echt eenvoudig:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd ext install azure.ai.agents
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd ai agent init
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;azd up
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Die ene &lt;code&gt;azd up&lt;/code&gt; bouwt je container, stuurt hem naar ACR, richt het Foundry-project in en start je agent.&lt;/p&gt;
+&lt;h2 id="mijn-beslissingsraamwerk"&gt;Mijn beslissingsraamwerk&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Nul infrastructuur nodig?&lt;/strong&gt; → Foundry Agents&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Eigen agentcode maar beheerde hosting gewenst?&lt;/strong&gt; → Foundry Hosted Agents&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Event-gedreven, korte taken?&lt;/strong&gt; → Azure Functions&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Maximale containercontrole?&lt;/strong&gt; → Container Apps&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Strikte naleving en multi-cluster?&lt;/strong&gt; → AKS&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="samenvatting"&gt;Samenvatting&lt;/h2&gt;
+&lt;p&gt;Voor de meeste .NET-ontwikkelaars die bouwen met Semantic Kernel of Microsoft Agent Framework, is Hosted Agents waarschijnlijk het juiste startpunt. Bekijk de &lt;a href="https://devblogs.microsoft.com/all-things-azure/hostedagent/"&gt;volledige gids van Microsoft&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title>azd Laat Je Nu AI-Agents Lokaal Uitvoeren en Debuggen — Dit Veranderde in Maart 2026</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/</guid><description>Azure Developer CLI bracht in maart 2026 zeven releases uit. Highlights: een lokale loop voor uitvoeren en debuggen van AI-agents, GitHub Copilot-integratie in projectopstelling en ondersteuning voor Container App Jobs.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/azd-march-2026-local-ai-agent-debugging/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Zeven releases in één maand. Dat is wat het Azure Developer CLI (&lt;code&gt;azd&lt;/code&gt;)-team in maart 2026 uitbracht, en de hoofdfunctie is waar ik op wachtte: &lt;strong&gt;een lokale loop voor uitvoeren en debuggen van AI-agents&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id="ai-agents-uitvoeren-en-debuggen-zonder-implementeren"&gt;AI-agents uitvoeren en debuggen zonder implementeren&lt;/h2&gt;
+&lt;p&gt;Dit is de grote. De nieuwe extensie &lt;code&gt;azure.ai.agents&lt;/code&gt; voegt een reeks opdrachten toe:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;azd ai agent run&lt;/code&gt; — start je agent lokaal&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;azd ai agent invoke&lt;/code&gt; — stuurt berichten naar hem (lokaal of geïmplementeerd)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;azd ai agent show&lt;/code&gt; — toont containerstatus en gezondheid&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;azd ai agent monitor&lt;/code&gt; — streamt containerlogs in real-time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Voorheen betekende het testen van een AI-agent telkens implementeren naar Microsoft Foundry. Nu kun je lokaal itereren.&lt;/p&gt;
+&lt;h2 id="github-copilot-maakt-je-azd-project-aan"&gt;GitHub Copilot maakt je azd-project aan&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;azd init&lt;/code&gt; biedt nu een optie &amp;ldquo;Set up with GitHub Copilot (Preview)&amp;rdquo;. Een Copilot-agent maakt de configuratie voor je projectstructuur.&lt;/p&gt;
+&lt;h2 id="container-app-jobs-en-implementatieverbeteringen"&gt;Container App Jobs en implementatieverbeteringen&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Container App Jobs&lt;/strong&gt;: &lt;code&gt;azd&lt;/code&gt; implementeert nu &lt;code&gt;Microsoft.App/jobs&lt;/code&gt; via de bestaande &lt;code&gt;host: containerapp&lt;/code&gt;-config&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Configureerbare implementatie-time-outs&lt;/strong&gt;: Nieuwe &lt;code&gt;--timeout&lt;/code&gt;-vlag op &lt;code&gt;azd deploy&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Lokale build-fallback&lt;/strong&gt;: Wanneer remote ACR-build mislukt, schakelt &lt;code&gt;azd&lt;/code&gt; automatisch terug naar lokale Docker/Podman&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Lokale preflight-validatie&lt;/strong&gt;: Bicep-parameters worden lokaal gevalideerd vóór implementatie&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="samenvatting"&gt;Samenvatting&lt;/h2&gt;
+&lt;p&gt;De lokale AI-agent debuggingloop is de ster van deze release. Bekijk de &lt;a href="https://devblogs.microsoft.com/azure-sdk/azure-developer-cli-azd-march-2026/"&gt;volledige releasenotes&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

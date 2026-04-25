@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure-Sql | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/azure-sql/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sun, 26 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/azure-sql/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL Server 2025作为代理就绪数据库：一个引擎中的安全、备份和MCP</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/sql-server-2025-agent-ready-security-mcp/</link><pubDate>Sun, 26 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/sql-server-2025-agent-ready-security-mcp/</guid><description>Polyglot Tax系列的最终篇解决了生产环境中的难题：跨关系、JSON、图形和向量数据的统一行级安全，加上使SQL Server 2025真正代理就绪的MCP集成。</description><content:encoded>&lt;p&gt;&lt;em&gt;本文已自动翻译。要查看原始版本，请&lt;a href="https://thedotnetblog.com/posts/emiliano-montesdeoca/sql-server-2025-agent-ready-security-mcp/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;我一直饶有兴趣地关注Aditya Badramraju的Polyglot Tax系列。第4部分用实际决定你是否会在生产环境中信任这种架构的部分来结束系列。&lt;/p&gt;
+&lt;h2 id="所有数据模型的单一安全模型"&gt;所有数据模型的单一安全模型&lt;/h2&gt;
+&lt;p&gt;一个行级安全策略覆盖所有数据模型。对审计员来说，一个策略，一个证明。&lt;/p&gt;
+&lt;h2 id="统一备份--原子恢复"&gt;统一备份 = 原子恢复&lt;/h2&gt;
+&lt;p&gt;在多语言堆栈中，跨五个数据库的时间点恢复是一场一致性噩梦。只有一个数据库时，恢复在定义上就是原子的。&lt;/p&gt;
+&lt;h2 id="mcp集成无需手动编写中间件"&gt;MCP集成：无需手动编写中间件&lt;/h2&gt;
+&lt;p&gt;SQL Server 2025直接支持SQL MCP服务器。代理调用工具，引擎自动强制租户隔离和列掩码。&lt;/p&gt;
+&lt;p&gt;原始文章（Aditya Badramraju著）：&lt;a href="https://devblogs.microsoft.com/azure-sql/the-polyglot-tax-part-4/"&gt;The Polyglot Tax – Part 4&lt;/a&gt;。&lt;/p&gt;</content:encoded></item><item><title>SQL MCP Server — 给 AI 代理数据库访问的正确方式</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>Data API builder 的 SQL MCP Server 为 AI 代理提供安全、确定性的数据库访问，无需暴露架构或依赖 NL2SQL。RBAC、缓存、多数据库支持 — 全部内置。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原文请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;说实话：今天市面上大多数数据库 MCP 服务器都很可怕。它们接受自然语言查询，即时生成 SQL，然后在你的生产数据上执行。有什么可能出错的？（一切。一切都可能出错。）&lt;/p&gt;
+&lt;p&gt;Azure SQL 团队刚刚&lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;发布了 SQL MCP Server&lt;/a&gt;，它采用了一种根本不同的方法。作为 Data API builder（DAB）2.0 的功能构建，它为 AI 代理提供结构化、确定性的数据库操作访问 — 没有 NL2SQL，不暴露你的架构，每一步都有完整的 RBAC。&lt;/p&gt;
+&lt;h2 id="为什么不用-nl2sql"&gt;为什么不用 NL2SQL？&lt;/h2&gt;
+&lt;p&gt;这是最有趣的设计决策。模型不是确定性的，复杂查询最容易产生微妙的错误。用户希望 AI 能生成的那些查询，恰恰也是在非确定性生成时最需要审查的查询。&lt;/p&gt;
+&lt;p&gt;相反，SQL MCP Server 使用 &lt;strong&gt;NL2DAB&lt;/strong&gt; 方法。代理使用 Data API builder 的实体抽象层和内置查询构建器来确定性地生成准确、格式良好的 T-SQL。对用户来说结果相同，但没有幻觉 JOIN 或意外数据泄露的风险。&lt;/p&gt;
+&lt;h2 id="七个工具不是七百个"&gt;七个工具，不是七百个&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server 精确暴露七个 DML 工具，与数据库大小无关：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — 发现可用实体和操作&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — 插入行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — 查询表和视图&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — 修改行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — 删除行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — 运行存储过程&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — 聚合查询&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这很聪明，因为上下文窗口是代理的思考空间。用数百个工具定义淹没它们会减少推理空间。七个固定工具让代理专注于&lt;em&gt;思考&lt;/em&gt;而不是&lt;em&gt;导航&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;每个工具可以单独启用或禁用：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;runtime&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;path&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dml-tools&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;describe-entities&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;create-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;read-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;update-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;delete-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;execute-entity&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;aggregate-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="三条命令开始"&gt;三条命令开始&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --database-type mssql &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --source dbo.Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这就是一个运行中的 SQL MCP Server，暴露你的 Customers 表。实体抽象层意味着你可以为名称和列创建别名、按角色限制字段，并精确控制代理看到的内容 — 而不暴露内部架构细节。&lt;/p&gt;
+&lt;h2 id="安全故事很扎实"&gt;安全故事很扎实&lt;/h2&gt;
+&lt;p&gt;这是 Data API builder 成熟度发挥价值的地方：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;每一层都有 RBAC&lt;/strong&gt; — 每个实体定义哪些角色可以读取、创建、更新或删除，以及哪些字段可见&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Azure Key Vault 集成&lt;/strong&gt; — 安全管理连接字符串和密钥&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Microsoft Entra + 自定义 OAuth&lt;/strong&gt; — 生产级认证&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内容安全策略&lt;/strong&gt; — 代理通过受控契约交互，而不是原始 SQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;架构抽象特别重要。你的内部表名和列名永远不会暴露给代理。你定义对 AI 交互有意义的实体、别名和描述 — 而不是你的数据库 ERD 图。&lt;/p&gt;
+&lt;h2 id="多数据库和多协议"&gt;多数据库和多协议&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server 支持 Microsoft SQL、PostgreSQL、Azure Cosmos DB 和 MySQL。由于它是 DAB 的功能，你可以从同一配置同时获取 REST、GraphQL 和 MCP 端点。相同的实体定义、相同的 RBAC 规则、相同的安全性 — 跨所有三种协议。&lt;/p&gt;
+&lt;p&gt;DAB 2.0 的自动配置甚至可以检查你的数据库并动态构建配置，如果你愿意为快速原型设计减少抽象的话。&lt;/p&gt;
+&lt;h2 id="我的看法"&gt;我的看法&lt;/h2&gt;
+&lt;p&gt;这就是 AI 代理的企业级数据库访问应该如何工作。不是&amp;quot;嘿 LLM，给我写点 SQL 然后对生产环境 YOLO&amp;quot;。而是：定义良好的实体层、确定性查询生成、每一步的 RBAC、缓存、监控和遥测。以最好的方式无聊着。&lt;/p&gt;
+&lt;p&gt;对于 .NET 开发者，集成故事很清晰 — DAB 是 .NET 工具，MCP Server 作为容器运行，与大多数人已经在用的 Azure SQL 配合工作。如果你正在构建需要数据访问的 AI 代理，从这里开始。&lt;/p&gt;
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server 是免费、开源的，可在任何地方运行。这是微软为给 AI 代理提供安全数据库访问的规范性方法。查看&lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;完整文章&lt;/a&gt;和&lt;a href="https://aka.ms/sql/mcp"&gt;文档&lt;/a&gt;开始使用。&lt;/p&gt;</content:encoded></item></channel></rss>

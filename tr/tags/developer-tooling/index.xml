@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Developer Tooling | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/developer-tooling/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 21 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/developer-tooling/index.xml" rel="self" type="application/rss+xml"/><item><title>azd + GitHub Copilot: Yapay Zeka Destekli Proje Kurulumu ve Akıllı Hata Çözümü</title><link>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</link><pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</guid><description>Azure Developer CLI artık GitHub Copilot ile entegre olarak proje altyapısını oluşturuyor ve dağıtım hatalarını çözüyor — terminal'den çıkmadan.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Bu makale otomatik olarak çevrilmiştir. Orijinal İngilizce sürüm için &lt;a href="https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/"&gt;buraya tıklayın&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Mevcut bir uygulamayı Azure&amp;rsquo;a dağıtmak isteyip boş bir &lt;code&gt;azure.yaml&lt;/code&gt; dosyasına bakarak Express API&amp;rsquo;nizin Container Apps mı yoksa App Service mi kullanması gerektiğini hatırlamaya çalıştığınız o anı biliyor musunuz? O an artık çok daha kısa.&lt;/p&gt;
+&lt;p&gt;Azure Developer CLI (&lt;code&gt;azd&lt;/code&gt;) artık GitHub Copilot ile iki somut şekilde entegre: &lt;code&gt;azd init&lt;/code&gt; sırasında AI destekli proje iskele kurma ve dağıtımlar başarısız olduğunda akıllı hata giderme. Her iki özellik de tamamen terminalde kalıyor.&lt;/p&gt;
+&lt;h2 id="azd-init-sırasında-copilot-ile-kurulum"&gt;azd init Sırasında Copilot ile Kurulum&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;azd init&lt;/code&gt; çalıştırıldığında artık &amp;ldquo;Set up with GitHub Copilot (Preview)&amp;rdquo; seçeneği görünüyor. Seçin ve Copilot, gerçek kodunuzu temel alarak &lt;code&gt;azure.yaml&lt;/code&gt;, altyapı şablonları ve Bicep modülleri oluşturmak için kod tabanınızı analiz eder.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd init
+# Seçin: &amp;#34;Set up with GitHub Copilot (Preview)&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Gereksinimler:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;azd 1.23.11 veya üzeri&lt;/strong&gt; — &lt;code&gt;azd version&lt;/code&gt; ile kontrol edin veya &lt;code&gt;azd update&lt;/code&gt; ile güncelleyin&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Aktif GitHub Copilot aboneliği&lt;/strong&gt; (Bireysel, İş veya Kurumsal)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub CLI (&lt;code&gt;gh&lt;/code&gt;)&lt;/strong&gt; — gerekirse &lt;code&gt;azd&lt;/code&gt; oturum açmanızı isteyecek&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Gerçekten faydalı bulduğum şey: her iki yönde de çalışıyor. Sıfırdan mı inşa ediyorsunuz? Copilot doğru Azure hizmetlerini başından itibaren yapılandırmanıza yardımcı olur. Dağıtmak istediğiniz mevcut bir uygulamanız mı var? Copilot&amp;rsquo;u ona yöneltin — kodu yeniden yapılandırmadan konfigürasyon oluşturulur.&lt;/p&gt;
+&lt;h3 id="gerçekte-ne-yapar"&gt;Gerçekte Ne Yapar&lt;/h3&gt;
+&lt;p&gt;PostgreSQL bağımlılığına sahip bir Node.js Express API&amp;rsquo;niz olduğunu varsayalım. Container Apps ile App Service arasında manuel seçim yapmak ve ardından sıfırdan Bicep yazmak yerine, Copilot yığınınızı algılar ve şunları oluşturur:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Doğru &lt;code&gt;language&lt;/code&gt;, &lt;code&gt;host&lt;/code&gt; ve &lt;code&gt;build&lt;/code&gt; ayarlarına sahip &lt;code&gt;azure.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Azure Container Apps için Bicep modülü&lt;/li&gt;
+&lt;li&gt;Azure Database for PostgreSQL için Bicep modülü&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ve herhangi bir şeyi değiştirmeden önce ön kontroller yapar — git çalışma dizininin temiz olduğunu doğrular, MCP sunucu araç iznini önceden sorar. Her şey bilginiz dahilinde gerçekleşir.&lt;/p&gt;
+&lt;h2 id="copilot-ile-hata-giderme"&gt;Copilot ile Hata Giderme&lt;/h2&gt;
+&lt;p&gt;Dağıtım hataları kaçınılmazdır. Eksik parametreler, izin sorunları, SKU kullanılabilirlik sorunları — ve hata mesajı nadiren gerçekten bilmeniz gereken tek şeyi söyler: &lt;em&gt;nasıl düzeltilir&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Copilot olmadan döngü şöyle görünür: hatayı kopyala → belgelerden ara → ilgisiz üç Stack Overflow cevabı oku → birkaç &lt;code&gt;az&lt;/code&gt; CLI komutu çalıştır → tekrar dene ve umut et. &lt;code&gt;azd&lt;/code&gt;&amp;lsquo;de Copilot ile bu döngü çöküyor. Herhangi bir &lt;code&gt;azd&lt;/code&gt; komutu başarısız olduğunda anında dört seçenek sunuluyor:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Explain&lt;/strong&gt; — ne yanlış gittiğinin anlaşılır dilde açıklaması&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Guidance&lt;/strong&gt; — sorunu gidermek için adım adım talimatlar&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Diagnose and Guide&lt;/strong&gt; — tam analiz + Copilot düzeltmeyi uygular (onayınızla) + isteğe bağlı yeniden deneme&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skip&lt;/strong&gt; — kendiniz halledin&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Kritik nokta: Copilot&amp;rsquo;un projeniz, başarısız olan komut ve hata detayları hakkında zaten bağlamı var. Önerileri &lt;em&gt;sizin durumunuza&lt;/em&gt; özeldir.&lt;/p&gt;
+&lt;h3 id="varsayılan-davranışı-ayarlama"&gt;Varsayılan Davranışı Ayarlama&lt;/h3&gt;
+&lt;p&gt;Her zaman aynı seçeneği seçiyorsanız etkileşimli istemi atlayın:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.category troubleshoot
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Değerler: &lt;code&gt;explain&lt;/code&gt;, &lt;code&gt;guidance&lt;/code&gt;, &lt;code&gt;troubleshoot&lt;/code&gt;, &lt;code&gt;fix&lt;/code&gt;, &lt;code&gt;skip&lt;/code&gt;. Otomatik düzeltme ve yeniden denemeyi de etkinleştirebilirsiniz:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.fix allow
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;İstediğiniz zaman etkileşimli moda geri dönün:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config unset copilot.errorHandling.category
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="sonuç"&gt;Sonuç&lt;/h2&gt;
+&lt;p&gt;En son sürümü edinmek için &lt;code&gt;azd update&lt;/code&gt; çalıştırın ve bir sonraki projenizde &lt;code&gt;azd init&lt;/code&gt; deneyin.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-copilot-integration/"&gt;Orijinal duyuruyu buradan okuyun&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title>Node.js için C# ile .NET Native AOT Kullanarak Yerel Eklenti Yazma</title><link>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/nodejs-addons-csharp-native-aot/</link><pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/nodejs-addons-csharp-native-aot/</guid><description>C# Dev Kit ekibi C++ Node.js eklentilerini .NET Native AOT ile değiştirdi — sonuç daha temiz, daha güvenli ve yalnızca .NET SDK gerektiriyor.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Bu makale otomatik olarak çevrilmiştir. Orijinal İngilizce sürüm için &lt;a href="https://thedotnetblog.com/tr/posts/emiliano-montesdeoca/nodejs-addons-csharp-native-aot/"&gt;buraya tıklayın&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;İşte sevdiğim bir senaryo: .NET araçları üzerinde çalışan bir ekibin &lt;code&gt;node-gyp&lt;/code&gt; ile derlenen C++ ile yazılmış yerel Node.js eklentileri vardı. Çalışıyordu. Ama her geliştiricinin makinesinde Python&amp;rsquo;un yüklü olmasını gerektiriyordu — Python&amp;rsquo;un eski bir sürümü, dahası — sadece ekipten kimsenin hiç doğrudan dokunmayacağı bir paketi derlemek için.&lt;/p&gt;
+&lt;p&gt;Bunun üzerine çok makul bir soru sordular: zaten .NET SDK yüklüyken neden C++ yazıyoruz ki?&lt;/p&gt;
+&lt;p&gt;Cevap Native AOT oldu ve sonuç gerçekten zarif. C# Dev Kit ekibinden Drew Noakes bunu nasıl yaptıklarını anlattı.&lt;/p&gt;
+&lt;h2 id="temel-fikir"&gt;Temel fikir&lt;/h2&gt;
+&lt;p&gt;Node.js yerel eklentisi, Node.js&amp;rsquo;nin çalışma zamanında yükleyebildiği bir paylaşılan kütüphanedir (Windows&amp;rsquo;ta &lt;code&gt;.dll&lt;/code&gt;, Linux&amp;rsquo;ta &lt;code&gt;.so&lt;/code&gt;, macOS&amp;rsquo;ta &lt;code&gt;.dylib&lt;/code&gt;). Arayüze &lt;a href="https://nodejs.org/api/n-api.html"&gt;N-API&lt;/a&gt; denir — kararlı, ABI uyumlu bir C API&amp;rsquo;si. N-API&amp;rsquo;nin kütüphaneyi hangi dilin ürettiğini umursamaz, sadece doğru sembolleri dışa aktarmasını önemser.&lt;/p&gt;
+&lt;p&gt;.NET Native AOT tam olarak bunu yapabilir. C# kodunuzu önceden isteğe bağlı giriş noktalarıyla yerel paylaşılan kütüphaneye derler.&lt;/p&gt;
+&lt;h2 id="proje-kurulumu"&gt;Proje kurulumu&lt;/h2&gt;
+&lt;p&gt;Proje dosyası minimumdur:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-xml" data-lang="xml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;&amp;lt;Project&lt;/span&gt; &lt;span class="na"&gt;Sdk=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Microsoft.NET.Sdk&amp;#34;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;PropertyGroup&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;TargetFramework&amp;gt;&lt;/span&gt;net10.0&lt;span class="nt"&gt;&amp;lt;/TargetFramework&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;PublishAot&amp;gt;&lt;/span&gt;true&lt;span class="nt"&gt;&amp;lt;/PublishAot&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;AllowUnsafeBlocks&amp;gt;&lt;/span&gt;true&lt;span class="nt"&gt;&amp;lt;/AllowUnsafeBlocks&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;/PropertyGroup&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;&amp;lt;/Project&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;PublishAot&lt;/code&gt;, SDK&amp;rsquo;ya &lt;code&gt;dotnet publish&lt;/code&gt;&amp;lsquo;te paylaşılan kütüphane üretmesini söyler.&lt;/p&gt;
+&lt;h2 id="giriş-noktasını-dışa-aktarma"&gt;Giriş noktasını dışa aktarma&lt;/h2&gt;
+&lt;p&gt;Node.js, kütüphanenizin &lt;code&gt;napi_register_module_v1&lt;/code&gt;&amp;lsquo;i dışa aktarmasını bekler. C#&amp;rsquo;ta &lt;code&gt;[UnmanagedCallersOnly]&lt;/code&gt; tam olarak bunu yapar:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;[UnmanagedCallersOnly(
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt; EntryPoint = &amp;#34;napi_register_module_v1&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt; CallConvs = [typeof(CallConvCdecl)]&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;nint&lt;/span&gt; &lt;span class="n"&gt;Init&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nint&lt;/span&gt; &lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nint&lt;/span&gt; &lt;span class="n"&gt;exports&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;Initialize&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;RegisterFunction&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;exports&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;readStringValue&amp;#34;&lt;/span&gt;&lt;span class="n"&gt;u8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;ReadStringValue&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;exports&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;u8&lt;/code&gt; soneki, herhangi bir encoding tahsisi olmadan doğrudan N-API&amp;rsquo;ye geçirilen UTF-8 string literaliyle bir &lt;code&gt;ReadOnlySpan&amp;lt;byte&amp;gt;&lt;/code&gt; üretir.&lt;/p&gt;
+&lt;h2 id="typescriptten-çağırma"&gt;TypeScript&amp;rsquo;ten çağırma&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;dotnet publish&lt;/code&gt;, platforma özgü yerel kütüphanenizi üretir. Onu &lt;code&gt;.node&lt;/code&gt; olarak yeniden adlandırın ve standart &lt;code&gt;require()&lt;/code&gt; ile kullanın:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;registry&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kr"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./native/win32-x64/RegistryAddon.node&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="nx"&gt;RegistryAddon&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;sdkPath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;registry&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;readStringValue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s1"&gt;&amp;#39;SOFTWARE\\dotnet\\Setup\\InstalledVersions\\x64\\sdk&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s1"&gt;&amp;#39;InstallLocation&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;İşte bu kadar. TypeScript&amp;rsquo;ten C#&amp;lsquo;a, Python yok, C++ yok.&lt;/p&gt;
+&lt;h2 id="sonuç"&gt;Sonuç&lt;/h2&gt;
+&lt;p&gt;C# Dev Kit ekibi Python/C++ yükünü, ekipteki herkesin zaten nasıl yazılacağını ve hata ayıklayacağını bildiği temiz C# koduyla değiştirdi. Bu desen göründükten sonra karmaşık değil ve Native AOT&amp;rsquo;nun yeterince konuşulmayan gerçek bir sorunu çözdüğünün harika bir örneği.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/dotnet/writing-nodejs-addons-with-dotnet-native-aot/"&gt;.NET blogundaki orijinal yazıyı okuyun&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

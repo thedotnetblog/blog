@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Powertoys | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/powertoys/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/powertoys/index.xml" rel="self" type="application/rss+xml"/><item><title>إعداد النوافذ العائمة في Visual Studio الذي لم تكن تعرفه (لكنك يجب أن تعرفه)</title><link>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/</guid><description>إعداد خفي في Visual Studio يمنحك تحكماً كاملاً في النوافذ العائمة — إدخالات مستقلة في شريط المهام، وسلوك صحيح مع الشاشات المتعددة، وتكامل مثالي مع FancyZones. قائمة منسدلة واحدة تغير كل شيء.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;تمت ترجمة هذا المقال تلقائياً. للنسخة الأصلية، &lt;a href="https://thedotnetblog.com/ar/posts/emiliano-montesdeoca/visual-studio-floating-windows-powertoys/"&gt;انقر هنا&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;إذا كنت تستخدم شاشات متعددة مع Visual Studio (وصراحةً، من لا يفعل ذلك في هذه الأيام)، فقد اختبرت على الأرجح هذا الإزعاج: نوافذ الأدوات العائمة تختفي عند تصغير بيئة التطوير الرئيسية، وتظل دائماً فوق كل شيء آخر، ولا تظهر كأزرار منفصلة في شريط المهام. يناسب هذا بعض سير العمل، لكنه محبط مع إعدادات الشاشات المتعددة.&lt;/p&gt;
+&lt;p&gt;شارك Mads Kristensen من فريق Visual Studio &lt;a href="https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/"&gt;إعداداً غير معروف&lt;/a&gt; يغير كلياً طريقة تصرف النوافذ العائمة. قائمة منسدلة واحدة. هذا كل شيء.&lt;/p&gt;
+&lt;h2 id="الإعداد"&gt;الإعداد&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Tools &amp;gt; Options &amp;gt; Environment &amp;gt; Windows &amp;gt; Floating Windows&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;تحتوي القائمة المنسدلة &amp;ldquo;These floating windows are owned by the main window&amp;rdquo; على ثلاثة خيارات:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;None&lt;/strong&gt; — استقلالية كاملة. كل نافذة عائمة تحصل على إدخالها الخاص في شريط المهام وتتصرف كنافذة Windows عادية.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tool Windows&lt;/strong&gt; (الافتراضي) — تطفو المستندات بحرية، وتظل نوافذ الأدوات مرتبطة ببيئة التطوير.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Documents and Tool Windows&lt;/strong&gt; — السلوك الكلاسيكي لـ Visual Studio، كل شيء مرتبط بالنافذة الرئيسية.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="لماذا-يعد-none-الخيار-الأمثل-مع-الشاشات-المتعددة"&gt;لماذا يُعدّ &amp;ldquo;None&amp;rdquo; الخيار الأمثل مع الشاشات المتعددة&lt;/h2&gt;
+&lt;p&gt;اضبطه على &lt;strong&gt;None&lt;/strong&gt; وستتصرف جميع نوافذ الأدوات العائمة والمستندات فجأة كتطبيقات Windows حقيقية. تظهر في شريط المهام، وتبقى مرئية عند تصغير نافذة Visual Studio الرئيسية، وتتوقف عن إجبار نفسها إلى مقدمة كل شيء.&lt;/p&gt;
+&lt;p&gt;ادمج هذا مع &lt;strong&gt;PowerToys FancyZones&lt;/strong&gt; ويصبح الأمر مغيّراً لقواعد اللعبة. أنشئ تخطيطات مخصصة عبر شاشاتك، وثبّت Solution Explorer في منطقة، ومنقّح الأخطاء في أخرى، وملفات الكود أينما تريد. كل شيء يبقى في مكانه، وكل شيء يمكن الوصول إليه باستقلالية، ويشعر مساحة عملك بالتنظيم بدلاً من الفوضى.&lt;/p&gt;
+&lt;h2 id="توصيات-سريعة"&gt;توصيات سريعة&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;مستخدمو الشاشات المتعددة&lt;/strong&gt;: اضبط على &lt;strong&gt;None&lt;/strong&gt;، وادمجه مع FancyZones&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;المستخدمون العرضيون للنوافذ العائمة&lt;/strong&gt;: &lt;strong&gt;Tool Windows&lt;/strong&gt; (الافتراضي) خيار وسط جيد&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;سير العمل التقليدي&lt;/strong&gt;: &lt;strong&gt;Documents and Tool Windows&lt;/strong&gt; يحافظ على كل شيء كلاسيكياً&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;نصيحة احترافية: &lt;strong&gt;Ctrl + نقر مزدوج&lt;/strong&gt; على شريط عنوان أي نافذة أداة لتعويمها أو إرسائها فوراً. لا يلزم إعادة تشغيل بعد تغيير الإعداد.&lt;/p&gt;
+&lt;h2 id="خلاصة-القول"&gt;خلاصة القول&lt;/h2&gt;
+&lt;p&gt;إنه أحد تلك الإعدادات التي تجعلك تفكر &amp;ldquo;لا أصدق أنني لم أكن أعرف عن هذا&amp;rdquo;. إذا كانت النوافذ العائمة في Visual Studio قد أزعجتك يوماً، فاذهب وغيّر هذا الإعداد الآن.&lt;/p&gt;
+&lt;p&gt;اقرأ &lt;a href="https://devblogs.microsoft.com/visualstudio/take-full-control-of-your-floating-windows-in-visual-studio/"&gt;المقال الكامل&lt;/a&gt; للتفاصيل ولقطات الشاشة.&lt;/p&gt;</content:encoded></item></channel></rss>

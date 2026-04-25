@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Platform-Engineering | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/platform-engineering/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/platform-engineering/index.xml" rel="self" type="application/rss+xml"/><item><title>智能体平台工程正在成为现实 — Git-APE展示了方法</title><link>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/</guid><description>微软的Git-APE项目将智能体平台工程付诸实践 — 使用GitHub Copilot智能体和Azure MCP将自然语言请求转化为经过验证的云基础设施。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原文请&lt;a href="https://thedotnetblog.com/zh/posts/emiliano-montesdeoca/agentic-platform-engineering-git-ape/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;平台工程一直是那种在技术大会上听起来很棒的术语，但通常意味着&amp;quot;我们搭了一个内部门户和一个Terraform封装器。&amp;ldquo;真正的承诺 — 真正安全、受治理且快速的自助式基础设施 — 总是差那么几步。&lt;/p&gt;
+&lt;p&gt;Azure团队刚刚发布了&lt;a href="https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/"&gt;智能体平台工程系列的第二部分&lt;/a&gt;，这次全是关于动手实现。他们称之为&lt;strong&gt;Git-APE&lt;/strong&gt;（是的，这个缩写是故意的），这是一个开源项目，使用GitHub Copilot智能体加Azure MCP服务器，将自然语言请求转化为经过验证和部署的基础设施。&lt;/p&gt;
+&lt;h2 id="git-ape究竟做什么"&gt;Git-APE究竟做什么&lt;/h2&gt;
+&lt;p&gt;核心思路：开发者不再需要学习Terraform模块、浏览门户UI或向平台团队提交工单，而是直接和Copilot智能体对话。智能体理解意图、生成基础设施即代码、根据策略进行验证并部署 — 全部在VS Code内完成。&lt;/p&gt;
+&lt;p&gt;配置如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/Azure/git-ape
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; git-ape
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在VS Code中打开工作区，GitHub Copilot会自动发现智能体配置文件。你直接与智能体交互：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;@git-ape deploy a function app with storage in West Europe
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;智能体在底层使用Azure MCP Server与Azure服务交互。VS Code设置中的MCP配置启用特定功能：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;azureMcp.serverMode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;namespace&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;azureMcp.enabledServices&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;deploy&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;bestpractices&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;group&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;subscription&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;functionapp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;storage&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;sql&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;monitor&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;azureMcp.readOnly&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="为什么这很重要"&gt;为什么这很重要&lt;/h2&gt;
+&lt;p&gt;对于我们在Azure上构建的人来说，这将平台工程的对话从&amp;quot;如何构建一个门户&amp;quot;转变为&amp;quot;如何将我们的护栏描述为API。&amp;ldquo;当你的平台接口是AI智能体时，你的约束和策略的质量就成了产品本身。&lt;/p&gt;
+&lt;p&gt;第一部分博客阐述了理论：描述良好的API、控制模式和明确的护栏使平台做好了智能体化的准备。第二部分通过交付实际工具证明它确实有效。智能体不会盲目生成资源 — 它会根据最佳实践进行验证、遵守命名约定并应用你组织的策略。&lt;/p&gt;
+&lt;p&gt;清理同样简单：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;@git-ape destroy my-resource-group
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="我的看法"&gt;我的看法&lt;/h2&gt;
+&lt;p&gt;说实话 — 这里更多是关于模式而非具体工具。Git-APE本身是一个演示/参考架构。但底层的理念 — 智能体作为平台的接口、MCP作为协议、GitHub Copilot作为宿主 — 这就是企业开发者体验的前进方向。&lt;/p&gt;
+&lt;p&gt;如果你是一个正在寻找如何让内部工具对智能体友好的平台团队，没有比这更好的起点了。如果你是.NET开发者想知道这和你的世界如何关联：Azure MCP Server和GitHub Copilot智能体可以与任何Azure工作负载配合使用。你的ASP.NET Core API、你的.NET Aspire技术栈、你的容器化微服务 — 都可以成为智能体部署流程的目标。&lt;/p&gt;
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;p&gt;Git-APE是对智能体平台工程实践的一个早期但具体的展示。克隆&lt;a href="https://github.com/Azure/git-ape"&gt;仓库&lt;/a&gt;，试试演示，开始思考你的平台的API和策略需要是什么样子，才能让智能体安全地使用它们。&lt;/p&gt;
+&lt;p&gt;阅读&lt;a href="https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/"&gt;完整文章&lt;/a&gt;获取详细教程和演示视频。&lt;/p&gt;</content:encoded></item></channel></rss>

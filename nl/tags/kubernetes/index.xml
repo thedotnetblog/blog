@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Kubernetes | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/kubernetes/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sun, 29 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/kubernetes/index.xml" rel="self" type="application/rss+xml"/><item><title>KubeCon Europe 2026: Waar .NET-ontwikkelaars Echt Op Moeten Letten</title><link>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/kubecon-2026-aks-updates-dotnet-developers/</link><pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/kubecon-2026-aks-updates-dotnet-developers/</guid><description>Microsoft gooide een muur van Kubernetes-aankondigingen bij KubeCon Europe 2026. Dit is de gefilterde versie — alleen de AKS- en cloud-native-updates die ertoe doen als je .NET-apps levert.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/posts/emiliano-montesdeoca/kubecon-2026-aks-updates-dotnet-developers/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Microsoft publiceerde zojuist hun &lt;a href="https://opensource.microsoft.com/blog/2026/03/24/whats-new-with-microsoft-in-open-source-and-kubernetes-at-kubecon-cloudnativecon-europe-2026/"&gt;volledige KubeCon Europe 2026-samenvatting&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="mtls-zonder-service-mesh-belasting"&gt;mTLS zonder service mesh-belasting&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://aka.ms/aks/application-network"&gt;Azure Kubernetes Application Network&lt;/a&gt; geeft je onderlinge TLS, applicatiebewuste autorisatie en verkeerstelemetrie — zonder een volledige sidecar-mesh. Je ASP.NET Core API&amp;rsquo;s die met achtergrondworkers communiceren — alles versleuteld op netwerkniveau, zonder wijzigingen in applicatiecode.&lt;/p&gt;
+&lt;h2 id="gpu-observeerbaarheid"&gt;GPU-observeerbaarheid&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://aka.ms/aks/managed-gpu-metrics"&gt;AKS toont nu GPU-metrics native&lt;/a&gt; in beheerde Prometheus en Grafana. Geen aangepaste exporteurs.&lt;/p&gt;
+&lt;h2 id="netwerken-over-clusters-heen"&gt;Netwerken over clusters heen&lt;/h2&gt;
+&lt;p&gt;Azure Kubernetes Fleet Manager levert nu &lt;a href="https://aka.ms/kubernetes-fleet/networking/cross-cluster"&gt;cross-cluster-netwerken&lt;/a&gt; — unified connectivity, globaal serviceregister.&lt;/p&gt;
+&lt;h2 id="veiligere-upgrades"&gt;Veiligere upgrades&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Blauw-groene agent pool-upgrades&lt;/strong&gt; maken een parallel knooppuntpool. &lt;strong&gt;Agent pool-terugdraaien&lt;/strong&gt; laat je terugkeren naar de vorige versie.&lt;/p&gt;
+&lt;h2 id="waar-te-beginnen"&gt;Waar te beginnen&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Observeerbaarheid eerst&lt;/strong&gt; — schakel GPU-metrics en netwerkstroomlogboeken in&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Probeer blauw-groene upgrades&lt;/strong&gt; — test de terugdraaiworkflow&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pilot identiteitsbewust netwerken&lt;/strong&gt; — schakel mTLS in voor één servicepad&lt;/li&gt;
+&lt;/ol&gt;</content:encoded></item></channel></rss>
