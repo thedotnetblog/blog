@@ -1,4 +1,4 @@
 ---
 title: "Posts"
-description: "Deep dives, tutorials, and community stories on .NET, Azure, AI, and cloud-native development — written by developers, for developers."
+description: "Behind the scenes of The .NET Blog — milestones, changes, and the story of building this community publication."
 ---

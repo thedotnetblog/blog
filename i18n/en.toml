@@ -54,7 +54,7 @@ other = "Load more posts ↓"
 other = "// posts"
 
 [posts_page_title]
-other = "Blog"
+other = "Posts"
 
 [no_posts]
 other = "// no posts yet — check back soon."
@@ -153,3 +153,32 @@ other = "Write for The .NET Blog"
 
 [contribute_page_desc]
 other = "Share your knowledge with the .NET community."
+
+# ── News ──
+[nav_news]
+other = "news"
+
+[nav_posts]
+other = "posts"
+
+[nav_tutorials]
+other = "tutorials"
+
+[news_page_eyebrow]
+other = "// news"
+
+[news_page_title]
+other = "News"
+
+[no_news]
+other = "// no news yet — check back soon."
+
+# ── Tutorials ──
+[tutorials_page_eyebrow]
+other = "// tutorials"
+
+[tutorials_page_title]
+other = "Tutorials"
+
+[no_tutorials]
+other = "// no tutorials yet — check back soon."

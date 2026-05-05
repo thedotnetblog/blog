@@ -151,3 +151,30 @@ other = "اكتب لـ The .NET Blog"
 
 [contribute_page_desc]
 other = "شارك معرفتك مع مجتمع .NET."
+
+[nav_news]
+other = "أخبار"
+
+[nav_posts]
+other = "مقالات"
+
+[nav_tutorials]
+other = "دروس"
+
+[news_page_eyebrow]
+other = "// أخبار"
+
+[news_page_title]
+other = "أخبار"
+
+[no_news]
+other = "// لا أخبار حتى الآن — تحقق مرة أخرى قريباً."
+
+[tutorials_page_eyebrow]
+other = "// دروس"
+
+[tutorials_page_title]
+other = "دروس"
+
+[no_tutorials]
+other = "// لا دروس حتى الآن — تحقق مرة أخرى قريباً."

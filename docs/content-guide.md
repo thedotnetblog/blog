@@ -6,35 +6,44 @@ Hugo archetypes scaffold new content files with the correct front matter. Always
 
 ## Content Structure
 
-The blog uses Hugo page bundles organized by author:
+The blog uses three content sections, organized by author:
 
 ```
 content/
-  posts/
+  news/                       ← Tech news, updates, article summaries
+    emiliano-montesdeoca/
+      my-news-slug/
+        index.md              # English (default)
+        index.es.md           # Spanish translation
+        ...
+  posts/                      ← Meta-blog: milestones and publication history
     emiliano-montesdeoca/
       my-post-slug/
-        index.md          # English (default)
-        index.es.md       # Spanish translation
-        index.de.md       # German translation
-        index.fr.md       # French
-        index.pt.md       # Portuguese
-        index.it.md       # Italian
-        index.ja.md       # Japanese
-        index.zh.md       # Chinese (Simplified)
-        index.ko.md       # Korean
-        index.ru.md       # Russian
+        index.md
+        index.es.md
+        ...
+  tutorials/                  ← Step-by-step guides for .NET developers
+    emiliano-montesdeoca/
+      my-tutorial-slug/
+        index.md
+        index.es.md
+        ...
   authors/
     emiliano-montesdeoca/
-      index.md          # English (default)
-      index.es.md       # Spanish translation
-      index.de.md       # German translation
-      index.fr.md       # French
+      index.md
+      index.es.md
       ...
   events/
     my-event.md
 ```
 
-Posts live in **leaf bundles** under `content/posts/{author-id}/{post-slug}/`. The URL becomes `/posts/{author-id}/{post-slug}/`.
+Each section uses **leaf bundles** under `content/{section}/{author-id}/{slug}/`. URLs follow the pattern `/{section}/{author-id}/{slug}/`.
+
+| Section | URL prefix | Purpose |
+|---------|-----------|---------|
+| `news` | `/news/` | Tech news, community updates, article summaries |
+| `posts` | `/posts/` | Meta-blog: publication milestones and behind-the-scenes |
+| `tutorials` | `/tutorials/` | Step-by-step how-to guides |
 
 ---
 
@@ -55,16 +64,30 @@ Posts live in **leaf bundles** under `content/posts/{author-id}/{post-slug}/`. T
 
 ---
 
-## Writing a Blog Post
+## Writing Content
 
-Create a post directory and English file:
+### News post
+
+```bash
+mkdir -p content/news/emiliano-montesdeoca/my-news-item
+hugo new news/emiliano-montesdeoca/my-news-item/index.md
+```
+
+### Tutorial
+
+```bash
+mkdir -p content/tutorials/emiliano-montesdeoca/my-tutorial
+hugo new tutorials/emiliano-montesdeoca/my-tutorial/index.md
+```
+
+### Post (meta-blog)
 
 ```bash
 mkdir -p content/posts/emiliano-montesdeoca/my-post
 hugo new posts/emiliano-montesdeoca/my-post/index.md
 ```
 
-Creates `content/posts/emiliano-montesdeoca/my-post/index.md` with this front matter:
+All sections use the same front matter structure:
 
 ```yaml
 ---
