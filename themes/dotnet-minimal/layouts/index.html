@@ -17,8 +17,12 @@
   </section>
 
   {{/* ── Posts + Events Split ─────────────────── */}}
-  {{ $posts := where .Site.RegularPages "Section" "posts" }}
-  {{ $allPosts := $posts | first 9 }}
+  {{ $news := where .Site.RegularPages "Section" "news" }}
+  {{ $blogPosts := where .Site.RegularPages "Section" "posts" }}
+  {{ $tutorials := where .Site.RegularPages "Section" "tutorials" }}
+  {{ $allContent := union $news (union $blogPosts $tutorials) }}
+  {{ $allContent = sort $allContent "Date" "desc" }}
+  {{ $allPosts := $allContent | first 9 }}
   {{ $upcomingEvents := where .Site.RegularPages "Section" "events" }}
   {{ $upcomingEvents = sort $upcomingEvents "Date" }}
   <section style="padding: 3.5rem 0 3.5rem;">
@@ -40,6 +44,11 @@
                   <span class="post-date">{{ .Date | time.Format ":date_medium" }}</span>
                   {{ with .Params.author }}
                   <span class="post-author-tag">{{ . }}</span>
+                  {{ end }}
+                  {{ $section := .Section }}
+                  {{ if eq $section "news" }}<span class="section-badge section-badge--news">News</span>
+                  {{ else if eq $section "tutorials" }}<span class="section-badge section-badge--tutorials">Tutorial</span>
+                  {{ else if eq $section "posts" }}<span class="section-badge section-badge--posts">Post</span>
                   {{ end }}
                 </div>
                 <h2 class="post-card-title">{{ .Title }}</h2>

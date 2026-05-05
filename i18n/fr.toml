@@ -146,3 +146,27 @@ other = "Écris pour The .NET Blog"
 
 [contribute_page_desc]
 other = "Partage tes connaissances avec la communauté .NET."
+
+[nav_news]
+other = "actualités"
+
+[nav_tutorials]
+other = "tutoriels"
+
+[news_page_eyebrow]
+other = "// actualités"
+
+[news_page_title]
+other = "Actualités"
+
+[no_news]
+other = "// pas encore d'actualités — revenez bientôt."
+
+[tutorials_page_eyebrow]
+other = "// tutoriels"
+
+[tutorials_page_title]
+other = "Tutoriels"
+
+[no_tutorials]
+other = "// pas encore de tutoriels — revenez bientôt."

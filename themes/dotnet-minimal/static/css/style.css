@@ -2428,3 +2428,43 @@ hr {
     align-items: flex-end;
   }
 }
+/* ── Section Badges ──────────────────────────────── */
+.section-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding: 2px 7px;
+  border: 1px solid;
+}
+
+.section-badge--news {
+  color: #56d1f0;
+  background: rgba(86, 209, 240, 0.08);
+  border-color: rgba(86, 209, 240, 0.25);
+}
+
+.section-badge--tutorials {
+  color: #5dde8d;
+  background: rgba(93, 222, 141, 0.08);
+  border-color: rgba(93, 222, 141, 0.25);
+}
+
+.section-badge--posts {
+  color: #f0c070;
+  background: rgba(240, 192, 112, 0.08);
+  border-color: rgba(240, 192, 112, 0.25);
+}
+
+/* ── Author Section Groups ───────────────────────── */
+.author-section-group {
+  margin-bottom: 3rem;
+}
+
+.author-section-group-title {
+  margin: 0 0 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}

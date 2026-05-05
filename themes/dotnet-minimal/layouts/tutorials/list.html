@@ -9,8 +9,8 @@
 <div class="container">
 
   <div class="page-header">
-    <p class="eyebrow">{{ i18n "posts_page_eyebrow" }}</p>
-    <h1>{{ i18n "posts_page_title" }}</h1>
+    <p class="eyebrow">{{ i18n "tutorials_page_eyebrow" }}</p>
+    <h1>{{ i18n "tutorials_page_title" }}</h1>
     {{ with .Description }}<p style="color:var(--text-dim);margin-top:.6rem">{{ . }}</p>{{ end }}
   </div>
 
@@ -25,7 +25,7 @@
           {{ with .Params.author }}
           <span class="post-author-tag">{{ . }}</span>
           {{ end }}
-          <span class="section-badge section-badge--posts">Post</span>
+          <span class="section-badge section-badge--tutorials">Tutorial</span>
         </div>
         <h2 class="post-card-title">{{ .Title }}</h2>
         {{ $excerpt := .Summary | plainify }}
@@ -47,7 +47,7 @@
   {{- partial "pagination.html" . -}}
 
   {{ else }}
-  <p class="text-muted font-mono">{{ i18n "no_posts" }}</p>
+  <p class="text-muted font-mono">{{ i18n "no_tutorials" }}</p>
   {{ end }}
 
 </div>

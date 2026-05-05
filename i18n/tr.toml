@@ -151,3 +151,30 @@ other = "The .NET Blog için Yaz"
 
 [contribute_page_desc]
 other = "Bilgini .NET topluluğuyla paylaş."
+
+[nav_news]
+other = "haberler"
+
+[nav_posts]
+other = "yazılar"
+
+[nav_tutorials]
+other = "eğitimler"
+
+[news_page_eyebrow]
+other = "// haberler"
+
+[news_page_title]
+other = "Haberler"
+
+[no_news]
+other = "// henüz haber yok — yakında tekrar kontrol edin."
+
+[tutorials_page_eyebrow]
+other = "// eğitimler"
+
+[tutorials_page_title]
+other = "Eğitimler"
+
+[no_tutorials]
+other = "// henüz eğitim yok — yakında tekrar kontrol edin."

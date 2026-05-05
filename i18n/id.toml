@@ -151,3 +151,30 @@ other = "Tulis untuk The .NET Blog"
 
 [contribute_page_desc]
 other = "Bagikan pengetahuan Anda dengan komunitas .NET."
+
+[nav_news]
+other = "berita"
+
+[nav_posts]
+other = "postingan"
+
+[nav_tutorials]
+other = "tutorial"
+
+[news_page_eyebrow]
+other = "// berita"
+
+[news_page_title]
+other = "Berita"
+
+[no_news]
+other = "// belum ada berita — cek lagi nanti."
+
+[tutorials_page_eyebrow]
+other = "// tutorial"
+
+[tutorials_page_title]
+other = "Tutorial"
+
+[no_tutorials]
+other = "// belum ada tutorial — cek lagi nanti."
