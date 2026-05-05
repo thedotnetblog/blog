@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with Semantic Kernel"
-date: 2024-10-28
+date: 2026-02-10
 author: "Emiliano Montesdeoca"
 description: "A practical first look at Semantic Kernel — the open-source SDK from Microsoft for building AI-powered .NET applications with LLMs, plugins, and memory."
 tags:

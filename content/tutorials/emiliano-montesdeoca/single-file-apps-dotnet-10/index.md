@@ -1,6 +1,6 @@
 ---
 title: "Single-File Apps in .NET 10"
-date: 2024-09-12
+date: 2026-01-15
 author: "Emiliano Montesdeoca"
 description: "How to build, publish, and optimize single-file executables with .NET 10 — from a basic console app to a trimmed, AOT-compiled binary."
 tags:

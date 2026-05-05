@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with Microsoft Agent Framework"
-date: 2025-01-15
+date: 2026-03-05
 author: "Emiliano Montesdeoca"
 description: "Build your first multi-agent workflow with the Microsoft Agent Framework — orchestrate specialized agents, connect tools, and handle human-in-the-loop approvals in .NET."
 tags:
