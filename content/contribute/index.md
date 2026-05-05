@@ -5,6 +5,14 @@ description: "Share your knowledge with the .NET community. Learn how to join as
 
 The .NET Blog is a community-driven publication where developers share insights, tutorials, and stories about .NET, Azure, AI, and cloud-native development. **We welcome contributions from developers of all levels** — whether you're writing your first technical post or you're a seasoned speaker.
 
+The blog has three content sections:
+
+| Section | URL | What belongs here |
+|---------|-----|-------------------|
+| **News** | `/news/` | Tech news, community updates, release summaries |
+| **Tutorials** | `/tutorials/` | Step-by-step how-to guides with code examples |
+| **Posts** | `/posts/` | Meta-blog: about this publication and its history |
+
 ## How to Join
 
 Everything lives on GitHub and follows a pull-request workflow. Here's how to get started:
@@ -34,15 +42,27 @@ socials:
 
 Add your avatar image (square, at least 200×200px) to `static/img/authors/`.
 
-### 3. Write Your Post
+### 3. Write Your Content
 
-Create a new folder at `content/posts/your-username/your-post-slug/` and add an `index.md` file:
+Pick the right section and create a leaf bundle under your author folder:
+
+**News post** — use for tech news, release summaries, community updates:
+```bash
+mkdir -p content/news/your-username/your-post-slug
+```
+
+**Tutorial** — use for step-by-step guides with code examples:
+```bash
+mkdir -p content/tutorials/your-username/your-tutorial-slug
+```
+
+Add an `index.md` inside the folder:
 
 ```yaml
 ---
 title: "Your Post Title"
 date: 2025-01-01
-author: "your-username"
+author: "Your Name"
 description: "A one-sentence description of your post."
 tags: ["dotnet", "azure"]
 ---
@@ -56,10 +76,10 @@ Push your changes to your fork and open a pull request against the `main` branch
 
 ## What We're Looking For
 
+- **News** — timely summaries of .NET ecosystem news and releases
 - **Tutorials** — step-by-step guides on .NET, Azure, AI, Blazor, Aspire, and more
 - **Deep dives** — in-depth explorations of a technology, pattern, or architecture
 - **Community stories** — your experience building with .NET in production
-- **Event recaps** — summaries of conferences, meetups, or webinars
 
 ## Guidelines
 

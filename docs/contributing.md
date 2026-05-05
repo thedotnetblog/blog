@@ -13,6 +13,11 @@ Contributions are welcome — new posts, author profiles, event entries, bug fix
    ```
 3. **Create your content** using Hugo's archetypes (see [Content Guide](content-guide.md)):
    ```bash
+   # News post
+   hugo new news/my-post.md
+   # Tutorial
+   hugo new tutorials/my-tutorial.md
+   # Meta-blog post
    hugo new posts/my-post.md
    ```
 4. **Preview locally:**
@@ -22,7 +27,8 @@ Contributions are welcome — new posts, author profiles, event entries, bug fix
 5. **Commit and push:**
    ```bash
    git add .
-   git commit -m "feat(posts): add my post title"
+   git commit -m "feat(news): add my post title"
+   # or: feat(tutorials): / feat(posts):
    git push origin my-new-post
    ```
 6. **Open a Pull Request** against `main`

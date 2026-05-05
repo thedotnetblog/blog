@@ -151,3 +151,30 @@ other = "Schrijf voor The .NET Blog"
 
 [contribute_page_desc]
 other = "Deel je kennis met de .NET-community."
+
+[nav_news]
+other = "nieuws"
+
+[nav_posts]
+other = "posts"
+
+[nav_tutorials]
+other = "tutorials"
+
+[news_page_eyebrow]
+other = "// nieuws"
+
+[news_page_title]
+other = "Nieuws"
+
+[no_news]
+other = "// nog geen nieuws — kom snel terug."
+
+[tutorials_page_eyebrow]
+other = "// tutorials"
+
+[tutorials_page_title]
+other = "Tutorials"
+
+[no_tutorials]
+other = "// nog geen tutorials — kom snel terug."

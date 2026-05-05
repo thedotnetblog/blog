@@ -151,3 +151,30 @@ other = "The .NET Blog के लिए लिखें"
 
 [contribute_page_desc]
 other = ".NET कम्युनिटी के साथ अपना ज्ञान साझा करें।"
+
+[nav_news]
+other = "समाचार"
+
+[nav_posts]
+other = "पोस्ट"
+
+[nav_tutorials]
+other = "ट्यूटोरियल"
+
+[news_page_eyebrow]
+other = "// समाचार"
+
+[news_page_title]
+other = "समाचार"
+
+[no_news]
+other = "// अभी तक कोई समाचार नहीं — जल्द वापस आएं।"
+
+[tutorials_page_eyebrow]
+other = "// ट्यूटोरियल"
+
+[tutorials_page_title]
+other = "ट्यूटोरियल"
+
+[no_tutorials]
+other = "// अभी तक कोई ट्यूटोरियल नहीं — जल्द वापस आएं।"

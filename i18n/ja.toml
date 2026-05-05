@@ -145,3 +145,27 @@ other = "The .NET Blog に投稿する"
 
 [contribute_page_desc]
 other = ".NET コミュニティにあなたの知識を共有しよう。"
+
+[nav_news]
+other = "ニュース"
+
+[nav_tutorials]
+other = "チュートリアル"
+
+[news_page_eyebrow]
+other = "// ニュース"
+
+[news_page_title]
+other = "ニュース"
+
+[no_news]
+other = "// まだニュースがありません — またご確認ください。"
+
+[tutorials_page_eyebrow]
+other = "// チュートリアル"
+
+[tutorials_page_title]
+other = "チュートリアル"
+
+[no_tutorials]
+other = "// まだチュートリアルがありません — またご確認ください。"

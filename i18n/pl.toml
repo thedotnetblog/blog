@@ -151,3 +151,30 @@ other = "Pisz dla The .NET Blog"
 
 [contribute_page_desc]
 other = "Podziel się swoją wiedzą ze społecznością .NET."
+
+[nav_news]
+other = "aktualności"
+
+[nav_posts]
+other = "posty"
+
+[nav_tutorials]
+other = "samouczki"
+
+[news_page_eyebrow]
+other = "// aktualności"
+
+[news_page_title]
+other = "Aktualności"
+
+[no_news]
+other = "// brak aktualności — wróć wkrótce."
+
+[tutorials_page_eyebrow]
+other = "// samouczki"
+
+[tutorials_page_title]
+other = "Samouczki"
+
+[no_tutorials]
+other = "// brak samouczków — wróć wkrótce."

@@ -145,3 +145,27 @@ other = "The .NET Blog에 기고하기"
 
 [contribute_page_desc]
 other = ".NET 커뮤니티와 당신의 지식을 나눠보세요."
+
+[nav_news]
+other = "뉴스"
+
+[nav_tutorials]
+other = "튜토리얼"
+
+[news_page_eyebrow]
+other = "// 뉴스"
+
+[news_page_title]
+other = "뉴스"
+
+[no_news]
+other = "// 아직 뉴스가 없습니다 — 곧 다시 확인하세요."
+
+[tutorials_page_eyebrow]
+other = "// 튜토리얼"
+
+[tutorials_page_title]
+other = "튜토리얼"
+
+[no_tutorials]
+other = "// 아직 튜토리얼이 없습니다 — 곧 다시 확인하세요."

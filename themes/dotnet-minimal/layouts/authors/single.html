@@ -42,27 +42,45 @@
     <span class="section-title">{{ i18n "posts_by" (dict "Name" .Title) }}</span>
     <span class="text-muted font-mono" style="font-size:.8rem">{{ i18n "posts_count" (len $authorPosts) }}</span>
   </div>
-  <div class="posts-grid">
-    {{ range $authorPosts }}
-    <a href="{{ .RelPermalink }}" class="post-card" data-umami-event="author-post-click" data-umami-event-title="{{ .Title }}">
-      <div class="post-card-main">
-        <div class="post-meta">
-          <span class="post-date">{{ .Date | time.Format ":date_medium" }}</span>
-        </div>
-        <h2 class="post-card-title">{{ .Title }}</h2>
-        {{ $excerpt := .Summary | plainify }}
-        {{ with .Params.description }}{{ $excerpt = . | plainify }}{{ end }}
-        <p class="post-card-excerpt">{{ $excerpt | truncate 280 }}</p>
-        {{ with .Params.tags }}
-        <div class="post-card-tags">
-          {{ range first 4 . }}<span class="tag">{{ . }}</span>{{ end }}
-        </div>
+
+  {{/* Group by section */}}
+  {{ $sectionOrder := slice "news" "tutorials" "posts" }}
+  {{ range $sectionOrder }}
+    {{ $sec := . }}
+    {{ $sectionPosts := where $authorPosts "Section" $sec }}
+    {{ if $sectionPosts }}
+    {{ $sectionLabel := "" }}
+    {{ if eq $sec "news" }}{{ $sectionLabel = "News" }}{{ end }}
+    {{ if eq $sec "tutorials" }}{{ $sectionLabel = "Tutorials" }}{{ end }}
+    {{ if eq $sec "posts" }}{{ $sectionLabel = "Posts" }}{{ end }}
+    <div class="author-section-group">
+      <h3 class="author-section-group-title">
+        <span class="section-badge section-badge--{{ $sec }}">{{ $sectionLabel }}</span>
+      </h3>
+      <div class="posts-grid">
+        {{ range $sectionPosts }}
+        <a href="{{ .RelPermalink }}" class="post-card" data-umami-event="author-post-click" data-umami-event-title="{{ .Title }}">
+          <div class="post-card-main">
+            <div class="post-meta">
+              <span class="post-date">{{ .Date | time.Format ":date_medium" }}</span>
+            </div>
+            <h2 class="post-card-title">{{ .Title }}</h2>
+            {{ $excerpt := .Summary | plainify }}
+            {{ with .Params.description }}{{ $excerpt = . | plainify }}{{ end }}
+            <p class="post-card-excerpt">{{ $excerpt | truncate 280 }}</p>
+            {{ with .Params.tags }}
+            <div class="post-card-tags">
+              {{ range first 4 . }}<span class="tag">{{ . }}</span>{{ end }}
+            </div>
+            {{ end }}
+          </div>
+          <span class="post-card-arrow">→</span>
+        </a>
         {{ end }}
       </div>
-      <span class="post-card-arrow">→</span>
-    </a>
+    </div>
     {{ end }}
-  </div>
+  {{ end }}
   {{ else }}
   <p class="text-muted font-mono" style="padding:2rem 0">{{ i18n "no_author_posts" }}</p>
   {{ end }}
