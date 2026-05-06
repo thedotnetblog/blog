@@ -1,0 +1,31 @@
+---
+title: "Azure Service Bus में All-or-Nothing Batch Processing को ठीक करना"
+date: 2026-05-04
+author: "Emiliano Montesdeoca"
+description: "ऑल-ऑर-नथिंग बैच हैंडलिंग रिलायबिलिटी को क्यों नुकसान पहुँचाती है, और per-message settlement .NET के लिए Service Bus वर्कफ़्लो को कैसे सुधारता है।"
+tags:
+  - .NET
+  - Azure Service Bus
+  - Messaging
+  - Reliability
+---
+
+*यह पोस्ट स्वचालित रूप से अनुवादित है। मूल संस्करण के लिए [यहाँ क्लिक करें]({{< ref "index.md" >}}).*
+
+[Fixing All-or-Nothing Batch Processing in Azure Service Bus](https://devblogs.microsoft.com/azure-sdk/per-message-settlement-azure-service-bus/) पर गौर करना ज़रूरी है अगर आप .NET सिस्टम को बड़े पैमाने पर बना या चला रहे हैं।
+
+मेरे नज़रिए से, मुख्य फ़ीचर उतना ज़रूरी नहीं जितना यह कि एक टीम इसे कितनी जल्दी एक सुरक्षित, दोहराने योग्य इंजीनियरिंग वर्कफ़्लो में बदल सकती है।
+
+## .NET टीमों के लिए यह क्यों मायने रखता है
+
+अधिकांश टीमें डिलीवरी की गति, प्लेटफ़ॉर्म की एकरूपता और गवर्नेंस के बीच संतुलन बनाती हैं। यह अपडेट उपयोगी है क्योंकि यह सब कुछ नए सिरे से लिखे बिना उन बाधाओं में से किसी एक को सुधारने का अधिक ठोस रास्ता देता है।
+
+## व्यावहारिक अगले कदम
+
+1. प्रोडक्शन-जैसे डेटा के साथ एक छोटे .NET पायलट में फ़ीचर की पुष्टि करें।
+2. व्यापक रोलआउट से पहले स्पष्ट रोलबैक और ऑब्ज़र्वेबिलिटी चेकपॉइंट जोड़ें।
+3. इम्प्लीमेंटेशन पैटर्न को अपने इंटरनल टेम्पलेट में कैप्चर करें ताकि दूसरी टीमें इसका पुनः उपयोग कर सकें।
+
+## स्रोत
+
+- मूल लेख: [https://devblogs.microsoft.com/azure-sdk/per-message-settlement-azure-service-bus/](https://devblogs.microsoft.com/azure-sdk/per-message-settlement-azure-service-bus/)
