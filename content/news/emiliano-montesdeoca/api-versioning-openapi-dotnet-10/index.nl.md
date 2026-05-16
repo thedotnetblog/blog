@@ -1,6 +1,6 @@
 ---
 title: "API-versiebeheer combineren met OpenAPI in .NET 10"
-date: 2026-05-04
+date: 2026-05-07
 author: "Emiliano Montesdeoca"
 description: "Een praktische aanpak voor het combineren van API-versiebeheer en OpenAPI in .NET 10 om contracten helder en evolueerbaar te houden."
 tags:

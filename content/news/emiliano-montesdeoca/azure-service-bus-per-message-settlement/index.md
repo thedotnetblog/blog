@@ -1,6 +1,6 @@
 ---
 title: "Fixing All-or-Nothing Batch Processing in Azure Service Bus"
-date: 2026-05-04
+date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "Why all-or-nothing batch handling hurts reliability, and how per-message settlement improves Service Bus workflows for .NET."
 tags:

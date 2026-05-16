@@ -1,6 +1,6 @@
 ---
 title: "Como corrigir o processamento em lote tudo-ou-nada no Azure Service Bus"
-date: 2026-05-04
+date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "Resumo pratico para equipes .NET sobre \"Como corrigir o processamento em lote tudo-ou-nada no Azure Service Bus\", com passos objetivos para avaliar em producao."
 tags:

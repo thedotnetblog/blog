@@ -1,6 +1,6 @@
 ---
 title: "Azure Developer CLI (azd) أبريل 2026: ما يهمّ فرق .NET"
-date: 2026-05-04
+date: 2026-05-08
 author: "Emiliano Montesdeoca"
 description: "التحديثات الرئيسية في Azure Developer CLI لأبريل 2026 التي تهمّ مطوّري .NET الذين يطرحون تطبيقات السحابة والوكلاء."
 tags:

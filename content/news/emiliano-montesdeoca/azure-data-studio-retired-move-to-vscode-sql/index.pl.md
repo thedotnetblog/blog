@@ -1,6 +1,6 @@
 ---
 title: "Azure Data Studio przechodzi na emeryturę: przenieś przepływ pracy Azure SQL do VS Code"
-date: 2026-05-04
+date: 2026-05-09
 author: "Emiliano Montesdeoca"
 description: "Co wycofanie Azure Data Studio oznacza dla zespołów .NET i praktyczna ścieżka migracji przepływów pracy Azure SQL do VS Code."
 tags:

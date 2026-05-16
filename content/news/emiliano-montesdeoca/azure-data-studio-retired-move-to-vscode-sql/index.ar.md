@@ -1,6 +1,6 @@
 ---
 title: "Azure Data Studio متقاعد: انقل سير عمل Azure SQL إلى VS Code"
-date: 2026-05-04
+date: 2026-05-09
 author: "Emiliano Montesdeoca"
 description: "ما يعنيه تقاعد Azure Data Studio لفرق .NET ومسار ترحيل عملي لسير عمل Azure SQL في VS Code."
 tags:

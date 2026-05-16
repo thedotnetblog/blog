@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio Code 1.119 destaques praticos para .NET"
-date: 2026-05-04
+date: 2026-05-15
 author: "Emiliano Montesdeoca"
 description: "Resumo pratico para equipes .NET sobre \"Visual Studio Code 1.119 destaques praticos para .NET\", com passos objetivos para avaliar em producao."
 tags:

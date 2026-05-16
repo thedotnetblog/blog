@@ -1,6 +1,6 @@
 ---
 title: "Agent Governance Toolkit के साथ .NET में MCP Tool Calls को गवर्न करना"
-date: 2026-05-04
+date: 2026-05-11
 author: "Emiliano Montesdeoca"
 description: "MCP-आधारित .NET एजेंट्स के लिए गवर्नेंस, पॉलिसी चेक और सुरक्षित टूल एक्जीक्यूशन कैसे शुरू करें।"
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "Supporto in stile SDK per i progetti di estensione in Visual Studio"
-date: 2026-05-04
+date: 2026-05-13
 author: "Emiliano Montesdeoca"
 description: "Sintesi pratica per team .NET su \"Supporto in stile SDK per i progetti di estensione in Visual Studio\", con passi chiari per valutarlo in produzione."
 tags:

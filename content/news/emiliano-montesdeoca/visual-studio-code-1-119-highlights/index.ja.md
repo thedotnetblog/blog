@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio Code 1.119 .NET muke jissen hailaido"
-date: 2026-05-04
+date: 2026-05-15
 author: "Emiliano Montesdeoca"
 description: "\"Visual Studio Code 1.119 .NET muke jissen hailaido\" ni tsuite .NET chiimu muke ni honban teki kanten de jissen teki ni matomemashita."
 tags:

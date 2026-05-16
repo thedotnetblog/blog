@@ -1,6 +1,6 @@
 ---
 title: ".NET 10 eseo API beojeon gwalliwa OpenAPI hamkke sayong"
-date: 2026-05-04
+date: 2026-05-07
 author: "Emiliano Montesdeoca"
 description: "\".NET 10 eseo API beojeon gwalliwa OpenAPI hamkke sayong\"reul .NET tim gwanjeomeseo silmujeogeuro jeongrihago unyeong geomto dangyereul damassseubnida."
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "Com resoldre el processament per lots de tot o res a Azure Service Bus"
-date: 2026-05-04
+date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "Resum practic per a equips .NET sobre \"Com resoldre el processament per lots de tot o res a Azure Service Bus\", amb passos clars per avaluar-ho en produccio."
 tags:

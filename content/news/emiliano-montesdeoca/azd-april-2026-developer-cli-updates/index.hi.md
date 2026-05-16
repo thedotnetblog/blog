@@ -1,6 +1,6 @@
 ---
 title: "Azure Developer CLI (azd) अप्रैल 2026: .NET टीमों के लिए क्या मायने रखता है"
-date: 2026-05-04
+date: 2026-05-08
 author: "Emiliano Montesdeoca"
 description: "Azure Developer CLI अप्रैल 2026 के प्रमुख अपडेट जो क्लाउड ऐप्स और एजेंट शिप करने वाले .NET डेवलपर्स के लिए मायने रखते हैं।"
 tags:

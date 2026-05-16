@@ -1,6 +1,6 @@
 ---
 title: "Menghilangkan Pekerjaan Berulang dalam Migrasi dengan Agentic Platform Engineering"
-date: 2026-05-04
+date: 2026-05-05
 author: "Emiliano Montesdeoca"
 description: "Tinjauan praktis penggunaan agentic platform engineering untuk mengurangi pekerjaan migrasi berulang dalam program .NET enterprise."
 tags:

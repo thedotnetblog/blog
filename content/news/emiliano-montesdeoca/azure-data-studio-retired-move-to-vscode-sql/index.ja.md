@@ -1,6 +1,6 @@
 ---
 title: "Azure Data Studio wa shuryo Azure SQL waku furo o VS Code e"
-date: 2026-05-04
+date: 2026-05-09
 author: "Emiliano Montesdeoca"
 description: "\"Azure Data Studio wa shuryo Azure SQL waku furo o VS Code e\" ni tsuite .NET chiimu muke ni honban teki kanten de jissen teki ni matomemashita."
 tags:

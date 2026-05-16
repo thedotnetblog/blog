@@ -1,6 +1,6 @@
 ---
 title: "Membangun Aplikasi Konferensi Bertenaga AI dengan Composable Stack .NET"
-date: 2026-05-04
+date: 2026-05-06
 author: "Emiliano Montesdeoca"
 description: "Seperti apa composable stack .NET dalam praktik saat membangun aplikasi konferensi bertenaga AI."
 tags:

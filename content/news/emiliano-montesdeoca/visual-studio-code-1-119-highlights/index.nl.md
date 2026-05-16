@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio Code 1.119: De praktische .NET hoogtepunten"
-date: 2026-05-04
+date: 2026-05-15
 author: "Emiliano Montesdeoca"
 description: "De praktische .NET-kijk op VS Code 1.119: wat eerst te testen en waar het de dagelijkse ontwikkeling kan verbeteren."
 tags:

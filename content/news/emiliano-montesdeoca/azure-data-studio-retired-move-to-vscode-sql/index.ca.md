@@ -1,6 +1,6 @@
 ---
 title: "Azure Data Studio es retira: mou el teu flux d'Azure SQL a VS Code"
-date: 2026-05-04
+date: 2026-05-09
 author: "Emiliano Montesdeoca"
 description: "Resum practic per a equips .NET sobre \"Azure Data Studio es retira: mou el teu flux d'Azure SQL a VS Code\", amb passos clars per avaluar-ho en produccio."
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "yongyu daili yingyong yu RAG de LangChain jia Azure Cosmos DB"
-date: 2026-05-04
+date: 2026-05-12
 author: "Emiliano Montesdeoca"
 description: "Weirao \"yongyu daili yingyong yu RAG de LangChain jia Azure Cosmos DB\" de .NET tuandui shiyong jiedu baohan ke luodi de shengchan pinggu buzhou."
 tags:

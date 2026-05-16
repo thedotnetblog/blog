@@ -1,6 +1,6 @@
 ---
 title: "Memperbaiki Pemrosesan Batch Semua-atau-Tidak Ada di Azure Service Bus"
-date: 2026-05-04
+date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "Mengapa penanganan batch semua-atau-tidak ada merugikan keandalan, dan bagaimana penyelesaian per pesan meningkatkan alur kerja Service Bus untuk .NET."
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "LangChain + Azure Cosmos DB: Agentic Apps और RAG के लिए"
-date: 2026-05-04
+date: 2026-05-12
 author: "Emiliano Montesdeoca"
 description: "LangChain का Azure Cosmos DB के साथ इंटीग्रेशन .NET टीमों को मज़बूत डेटा फ़ाउंडेशन के साथ agentic और RAG सिस्टम डिज़ाइन करने में कैसे मदद करता है।"
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "MCP-toolaanroepen beheren in .NET met de Agent Governance Toolkit"
-date: 2026-05-04
+date: 2026-05-11
 author: "Emiliano Montesdeoca"
 description: "Hoe je governance, beleidscontroles en veiligere tooluitvoering introduceert voor MCP-gebaseerde .NET-agents."
 tags:

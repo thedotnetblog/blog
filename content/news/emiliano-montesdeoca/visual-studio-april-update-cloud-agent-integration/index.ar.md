@@ -1,6 +1,6 @@
 ---
 title: "تحديث Visual Studio لأبريل: تكامل Cloud Agent لسير عمل .NET"
-date: 2026-05-04
+date: 2026-05-14
 author: "Emiliano Montesdeoca"
 description: "جولة تفصيلية في تحديث Visual Studio لأبريل وما يغيّره تكامل Cloud Agent في سير عمل .NET."
 tags:

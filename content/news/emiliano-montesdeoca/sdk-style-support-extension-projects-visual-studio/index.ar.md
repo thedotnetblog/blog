@@ -1,6 +1,6 @@
 ---
 title: "دعم مشاريع الإضافات بأسلوب SDK في Visual Studio"
-date: 2026-05-04
+date: 2026-05-13
 author: "Emiliano Montesdeoca"
 description: "لماذا يُعدّ دعم المشاريع بأسلوب SDK لامتدادات Visual Studio تبسيطاً مهماً لتطوير امتدادات .NET."
 tags:

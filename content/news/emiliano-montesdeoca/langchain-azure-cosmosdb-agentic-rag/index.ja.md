@@ -1,6 +1,6 @@
 ---
 title: "ejento appu to RAG no tame no LangChain to Azure Cosmos DB"
-date: 2026-05-04
+date: 2026-05-12
 author: "Emiliano Montesdeoca"
 description: "\"ejento appu to RAG no tame no LangChain to Azure Cosmos DB\" ni tsuite .NET chiimu muke ni honban teki kanten de jissen teki ni matomemashita."
 tags:

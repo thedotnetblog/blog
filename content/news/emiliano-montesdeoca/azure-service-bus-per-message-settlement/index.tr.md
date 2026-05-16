@@ -1,6 +1,6 @@
 ---
 title: "Azure Service Bus'ta Hepsini-veya-Hiçbirini Toplu İşlemeyi Düzeltme"
-date: 2026-05-04
+date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "Hepsini-veya-hiçbirini toplu işlemenin güvenilirliği neden azalttığı ve mesaj başına uzlaşmanın .NET için Service Bus iş akışlarını nasıl iyileştirdiği."
 tags:

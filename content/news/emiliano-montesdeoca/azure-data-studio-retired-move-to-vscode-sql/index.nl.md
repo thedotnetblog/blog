@@ -1,6 +1,6 @@
 ---
 title: "Azure Data Studio is met pensioen: verplaats je Azure SQL-workflow naar VS Code"
-date: 2026-05-04
+date: 2026-05-09
 author: "Emiliano Montesdeoca"
 description: "Wat de pensionering van Azure Data Studio betekent voor .NET-teams en een praktisch migratiepad voor Azure SQL-workflows in VS Code."
 tags:

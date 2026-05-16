@@ -1,6 +1,6 @@
 ---
 title: "Azure Developer CLI azd avril 2026: ce qui compte pour les equipes .NET"
-date: 2026-05-04
+date: 2026-05-08
 author: "Emiliano Montesdeoca"
 description: "Resume pratique pour les equipes .NET sur \"Azure Developer CLI azd avril 2026: ce qui compte pour les equipes .NET\", avec des etapes concretes pour la production."
 tags:

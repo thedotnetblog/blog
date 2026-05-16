@@ -1,6 +1,6 @@
 ---
 title: "SDK Style Unterstutzung fur Erweiterungsprojekte in Visual Studio"
-date: 2026-05-04
+date: 2026-05-13
 author: "Emiliano Montesdeoca"
 description: "Praktische .NET Zusammenfassung zu \"SDK Style Unterstutzung fur Erweiterungsprojekte in Visual Studio\" mit klaren Schritten fur die Bewertung im Produktiveinsatz."
 tags:

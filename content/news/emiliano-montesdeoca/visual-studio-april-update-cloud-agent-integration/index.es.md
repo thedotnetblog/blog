@@ -1,6 +1,6 @@
 ---
 title: "Actualizacion de abril de Visual Studio: integracion de Cloud Agent para flujos .NET"
-date: 2026-05-04
+date: 2026-05-14
 author: "Emiliano Montesdeoca"
 description: "Resumen practico para equipos .NET sobre \"Actualizacion de abril de Visual Studio: integracion de Cloud Agent para flujos .NET\", con pasos claros para evaluarlo en produccion."
 tags:

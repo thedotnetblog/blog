@@ -1,6 +1,6 @@
 ---
 title: "Come risolvere l'elaborazione batch tutto-o-niente in Azure Service Bus"
-date: 2026-05-04
+date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "Sintesi pratica per team .NET su \"Come risolvere l'elaborazione batch tutto-o-niente in Azure Service Bus\", con passi chiari per valutarlo in produzione."
 tags:

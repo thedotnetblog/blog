@@ -1,6 +1,6 @@
 ---
 title: "LangChain mes Azure Cosmos DB per a aplicacions agentiques i RAG"
-date: 2026-05-04
+date: 2026-05-12
 author: "Emiliano Montesdeoca"
 description: "Resum practic per a equips .NET sobre \"LangChain mes Azure Cosmos DB per a aplicacions agentiques i RAG\", amb passos clars per avaluar-ho en produccio."
 tags:

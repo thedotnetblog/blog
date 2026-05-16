@@ -1,6 +1,6 @@
 ---
 title: "Azure Data Studio снят с поддержки: переносите рабочий процесс Azure SQL в VS Code"
-date: 2026-05-04
+date: 2026-05-09
 author: "Emiliano Montesdeoca"
 description: "Что означает снятие Azure Data Studio с поддержки для .NET-команд и практический путь миграции рабочих процессов Azure SQL в VS Code."
 tags:

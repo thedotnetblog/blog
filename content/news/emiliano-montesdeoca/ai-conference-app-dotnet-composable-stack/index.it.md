@@ -1,6 +1,6 @@
 ---
 title: "Creare un app conferenza con IA con lo stack componibile di .NET"
-date: 2026-05-04
+date: 2026-05-06
 author: "Emiliano Montesdeoca"
 description: "Sintesi pratica per team .NET su \"Creare un app conferenza con IA con lo stack componibile di .NET\", con passi chiari per valutarlo in produzione."
 tags:

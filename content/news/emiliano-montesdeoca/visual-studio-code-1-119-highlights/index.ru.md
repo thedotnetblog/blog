@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio Code 1.119: практические моменты для .NET"
-date: 2026-05-04
+date: 2026-05-15
 author: "Emiliano Montesdeoca"
 description: "Практический взгляд .NET на VS Code 1.119: что тестировать в первую очередь и где это может улучшить повседневную разработку."
 tags:

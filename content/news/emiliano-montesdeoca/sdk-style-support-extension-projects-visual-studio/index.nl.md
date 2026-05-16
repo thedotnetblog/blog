@@ -1,6 +1,6 @@
 ---
 title: "SDK-stijlondersteuning voor extensieprojecten in Visual Studio"
-date: 2026-05-04
+date: 2026-05-13
 author: "Emiliano Montesdeoca"
 description: "Waarom SDK-stijl projectondersteuning voor Visual Studio-extensies een betekenisvolle vereenvoudiging is voor .NET-extensieontwikkeling."
 tags:
