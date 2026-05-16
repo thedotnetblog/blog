@@ -1,8 +1,8 @@
 ---
-title: "Visual Studio April Update: Cloud Agent Integration for .NET Workflows"
+title: "Visual Studio 2026 April Update: Cloud Agent, Custom Agents, and Debugger Agent"
 date: 2026-05-14
 author: "Emiliano Montesdeoca"
-description: "A focused walkthrough of the April Visual Studio update and what Cloud Agent integration changes for .NET workflows."
+description: "Visual Studio 2026 (18.5) April update brings cloud agent integration, user-level custom agents, C++ code tools GA, and a Debugger Agent that validates fixes against live runtime behavior."
 tags:
   - Visual Studio
   - .NET
@@ -10,20 +10,37 @@ tags:
   - Productivity
 ---
 
-[Visual Studio April Update: Cloud Agent Integration for .NET Workflows](https://devblogs.microsoft.com/visualstudio/visual-studio-april-update-cloud-agent-integration/) is worth a close look if you are building or operating .NET systems at scale.
+[Visual Studio 2026 (18.5) April update](https://devblogs.microsoft.com/visualstudio/visual-studio-april-update-cloud-agent-integration/) ships cloud agent integration, user-level custom agents, C++ tools going GA, and a new Debugger Agent.
 
-From my perspective, the important part is not the headline feature but how quickly a team can convert it into a safer, repeatable engineering workflow.
+## Cloud agent: offload work to a remote Copilot session
 
-## Why it matters for .NET teams
+From the Chat window's agent picker, selecting **Cloud** lets you hand off a task to a remote Copilot coding agent. You describe the work, the agent creates a GitHub issue in your repo, then opens a PR when done. You get a notification with "View PR" / "Open in browser" — the whole thing runs while you keep coding, or even with the IDE closed.
 
-Most teams are balancing delivery speed, platform consistency, and governance. This update is useful because it gives you a more concrete path to improve one of those constraints without rewriting everything.
+## Custom agents now travel with you
 
-## Practical next steps
+User-level custom agents stored in `%USERPROFILE%/.github/agents/` are no longer repo-scoped — they follow you across projects. The storage path is configurable under Tools > Options > GitHub > Copilot > Chat. The `+` button in the agent picker lets you create new agents directly. They get the same capabilities as repo-scoped agents: workspace awareness, tools, model selection, and MCP connections.
 
-1. Validate the feature in a small .NET pilot with production-like data.
-2. Add clear rollback and observability checkpoints before broader rollout.
-3. Capture the implementation pattern in your internal templates so other teams can reuse it.
+Built-in agents: Agent, Ask, Copilot CLI, Debugger, Modernize, Profiler.
 
-## Source
+## C++ Code Editing Tools go GA
 
-- Original article: [https://devblogs.microsoft.com/visualstudio/visual-studio-april-update-cloud-agent-integration/](https://devblogs.microsoft.com/visualstudio/visual-studio-april-update-cloud-agent-integration/)
+Two tools — `get_symbol_call_hierarchy` and `get_symbol_class_hierarchy` — are now on by default. They give Copilot language-aware navigation of C++ codebases, covering inheritance hierarchies and function call chains. Enable via the Tools icon in Copilot Chat. Works best with tool-calling models.
+
+## Debugger Agent: fixes validated against real runtime behavior
+
+Start from a GitHub or Azure DevOps issue (or just a natural language description), switch to Debugger mode, and the agent:
+
+1. Creates a minimal reproducer
+2. Generates failure hypotheses
+3. Instruments the app with tracepoints and conditional breakpoints
+4. Runs an actual debug session
+5. Analyzes live telemetry
+6. Suggests a precise fix
+
+You stay in the loop throughout — it's interactive, not fully autonomous.
+
+## IntelliSense priority fix
+
+VS now suppresses Copilot completions while the IntelliSense list is active. One suggestion at a time. This was a frequent friction point and it's now on by default.
+
+Full release notes and download at [devblogs.microsoft.com](https://devblogs.microsoft.com/visualstudio/visual-studio-april-update-cloud-agent-integration/).

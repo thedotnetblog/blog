@@ -1,8 +1,8 @@
 ---
-title: "Visual Studio Code 1.119: .NET için Pratik Öne Çıkanlar"
+title: "VS Code 1.119: Ajan Oturumları için OpenTelemetry, Tarayıcı Entegrasyonu ve Güvenlik"
 date: 2026-05-15
 author: "Emiliano Montesdeoca"
-description: "VS Code 1.119'a .NET pratik bakış açısı: önce neyi test etmeli ve günlük geliştirmeyi nerede iyileştirebilir."
+description: "VS Code 1.119 (Mayıs 2026), ajan oturumları için OpenTelemetry izleme, tarayıcı sekme paylaşımı, güven ve güvenlik iyileştirmeleri ve 1.119.1 güvenlik yaması ekliyor."
 tags:
   - VS Code
   - .NET
@@ -10,22 +10,41 @@ tags:
   - Productivity
 ---
 
-*Bu gönderi otomatik olarak çevrilmiştir. Orijinal sürüm için [buraya tıklayın]({{< ref "index.md" >}}).*
+*Bu gönderi otomatik olarak çevrildi. Orijinal versiyon için [buraya tıklayın]({{< ref "index.md" >}}).*
 
-[Visual Studio Code 1.119: The Practical .NET Highlights](https://code.visualstudio.com/updates/v1_119) .NET sistemlerini büyük ölçekte oluşturuyorsanız veya çalıştırıyorsanız, yakından incelemeye değer.
+[VS Code 1.119](https://code.visualstudio.com/updates/v1_119), 6 Mayıs 2026'da yayınlandı (kısa süre sonra 1.119.1 güvenlik yaması ile). Sürüm; ajan gözlemlenebilirliği, tarayıcı etkileşimi ve kesintileri azaltmaya odaklanıyor.
 
-Benim bakış açıma göre, önemli olan başlık özelliği değil; bir ekibin bunu ne kadar hızlı daha güvenli ve tekrarlanabilir bir mühendislik iş akışına dönüştürebileceğidir.
+## Ajan Oturumları için OpenTelemetry İzleme
 
-## .NET ekipleri için neden önemli
+Bu, ajanları üretimde çalıştıran veya ajan iş akışlarını hata ayıklayan herkes için öne çıkan özellik. İki ayarla etkinleştirin:
 
-Çoğu ekip, teslimat hızı, platform tutarlılığı ve yönetim arasında denge kurmaya çalışmaktadır. Bu güncelleme, her şeyi yeniden yazmadan bu kısıtlamalardan birini iyileştirmek için daha somut bir yol sunduğu için faydalıdır.
+```json
+"github.copilot.chat.otel.enabled": true,
+"github.copilot.chat.otel.otlpEndpoint": "http://localhost:4318"
+```
 
-## Pratik sonraki adımlar
+İzler GenAI semantik kurallarını takip ediyor. Her ajan isteği, iç içe geçmiş alt izlerle birlikte `invoke_agent` kök yayılımı oluşturuyor: `chat`, `execute_tool` ve `execute_hook`. Token kullanımı istek başına raporlanıyor — önbellek okuma ve önbellek oluşturma sayaçları dahil.
 
-1. Özelliği, üretime benzer verilerle küçük bir .NET pilotunda doğrulayın.
-2. Daha geniş bir dağıtımdan önce net geri alma ve gözlemlenebilirlik kontrol noktaları ekleyin.
-3. Uygulama kalıbını iç şablonlarınıza kaydedin, böylece diğer ekipler onu yeniden kullanabilir.
+Yerel ajan, Copilot CLI arka plan ajanı ve Claude ajanıyla çalışıyor. Herhangi bir OTLP uyumlu arka uç izleri kabul ediyor — [bağımsız Aspire panosu](https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/dashboard/standalone) yerel geliştirme için iyi çalışıyor.
 
-## Kaynak
+## Ajanlar Artık Tarayıcı Sekmelerine Erişebiliyor
 
-- Orijinal makale: [https://code.visualstudio.com/updates/v1_119](https://code.visualstudio.com/updates/v1_119)
+Ajanlar yerleşik tarayıcı sekmelerine erişim talep edebilir — ancak otomatik olarak değil. Bir sekmeyi açıkça bağlam seçici, sürükle-bırak veya önerilen bağlam aracılığıyla paylaşmanız gerekiyor. Tarayıcıda erişimi iptal eden bir paylaşım düğmesi var. Bir ajan zaten açık olan (paylaşılmamış) bir sekmeyle aynı etki alanında yeni bir sekme açmaya çalıştığında, VS Code mevcut sekmeyi yeniden kullanmayı öneriyor.
+
+## Token Kullanımı Optimizasyonu
+
+Deneysel bir hafif model artık ajan görev listelerini yönetiyor ve bu rutin iş için ana modeli serbest bırakıyor. Tam akıl yürütme gücü gerektirmeyen görevler için token kullanımını azaltıyor.
+
+## Güven ve Güvenlik
+
+Daha az kesinti: VS Code 1.119, ajanlardan ağ erişimi ve geçici klasörlere yazma isteklerini azaltıyor. 1.119.1 yaması belirli güvenlik sorunlarını ele alıyor — henüz güncellemediyseniz güncellemeye değer.
+
+## Markdown Önizlemeye Hızlı Geçiş
+
+Küçük ama kullanışlı: gezinme olmadan mevcut düzenleyiciyi hızlıca Markdown önizlemesine geçirebilirsiniz.
+
+## VS Code Agents (Insiders Önizlemesi)
+
+Yeniden tasarlanmış ajan oturumu arayüzü — yeni depo seçici (yerel/depolar/uzak), alt oturum iyileştirmeleri, web ve mobil iyileştirmeleri, ilerleme animasyonları — Insiders'ta [insiders.vscode.dev/agents](https://insiders.vscode.dev/agents) adresinde mevcut.
+
+Tam değişiklik günlüğü: [code.visualstudio.com/updates/v1_119](https://code.visualstudio.com/updates/v1_119).

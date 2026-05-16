@@ -1,8 +1,8 @@
 ---
-title: "Visual Studio Code 1.119: De praktische .NET hoogtepunten"
+title: "VS Code 1.119: OpenTelemetry voor agentsessies, browserintegratie en beveiliging"
 date: 2026-05-15
 author: "Emiliano Montesdeoca"
-description: "De praktische .NET-kijk op VS Code 1.119: wat eerst te testen en waar het de dagelijkse ontwikkeling kan verbeteren."
+description: "VS Code 1.119 (mei 2026) voegt OpenTelemetry-tracering voor agentsessies toe, browsertab-deling voor agenten, verbeteringen in vertrouwen en beveiliging, en een beveiligingspatch 1.119.1."
 tags:
   - VS Code
   - .NET
@@ -10,22 +10,41 @@ tags:
   - Productivity
 ---
 
-*Dit bericht is automatisch vertaald. Voor de originele versie [klik hier]({{< ref "index.md" >}}).*
+*Dit bericht is automatisch vertaald. Klik [hier]({{< ref "index.md" >}}) voor de originele versie.*
 
-[Visual Studio Code 1.119: The Practical .NET Highlights](https://code.visualstudio.com/updates/v1_119) is het waard om goed naar te kijken als je .NET-systemen op schaal bouwt of beheert.
+[VS Code 1.119](https://code.visualstudio.com/updates/v1_119) verscheen op 6 mei 2026 (met een beveiligingspatch 1.119.1 kort daarna). De release richt zich op agentobserveerbaarheid, browserinteractie en minder onderbrekingen.
 
-Vanuit mijn perspectief is het niet de hoofdfunctie die telt, maar hoe snel een team die kan omzetten in een veiligere, herhaalbare engineeringworkflow.
+## OpenTelemetry-tracering voor agentsessies
 
-## Waarom dit relevant is voor .NET-teams
+Dit is de uitgelichte functie voor iedereen die agenten in productie draait of agentische workflows debugt. Activeer het met twee instellingen:
 
-De meeste teams balanceren tussen leveringssnelheid, platformconsistentie en governance. Deze update is nuttig omdat het een concretere weg biedt om een van die beperkingen te verbeteren zonder alles opnieuw te schrijven.
+```json
+"github.copilot.chat.otel.enabled": true,
+"github.copilot.chat.otel.otlpEndpoint": "http://localhost:4318"
+```
 
-## Praktische volgende stappen
+Traces volgen de semantische GenAI-conventies. Elk agentverzoek genereert een `invoke_agent` root span met geneste child spans: `chat`, `execute_tool` en `execute_hook`. Tokengebruik wordt per verzoek gerapporteerd — inclusief cache-lees- en aanmaakaantallen.
 
-1. Valideer de functie in een kleine .NET-pilot met productieachtige data.
-2. Voeg duidelijke rollback- en observability-controlepunten toe vóór een bredere uitrol.
-3. Leg het implementatiepatroon vast in je interne sjablonen zodat andere teams het kunnen hergebruiken.
+Werkt met de lokale agent, de Copilot CLI-achtergrondagent en de Claude-agent. Elk OTLP-compatibel backend accepteert de traces — het [Aspire Dashboard standalone](https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/dashboard/standalone) werkt goed voor lokale ontwikkeling.
 
-## Bron
+## Agenten hebben nu toegang tot browsertabbladen
 
-- Origineel artikel: [https://code.visualstudio.com/updates/v1_119](https://code.visualstudio.com/updates/v1_119)
+Agenten kunnen toegang vragen tot uw geïntegreerde browsertabbladen — maar niet automatisch. U moet een tabblad expliciet delen via de contextselection, slepen en neerzetten of voorgestelde context. Er is een deelknop in de browser om toegang in te trekken. Wanneer een agent een nieuw tabblad probeert te openen op hetzelfde domein als een al openstaand (niet-gedeeld) tabblad, vraagt VS Code u het bestaande tabblad te hergebruiken.
+
+## Geoptimaliseerd tokengebruik
+
+Een experimenteel lichtgewicht model beheert nu takenlijsten van agenten, waardoor dit beheerswerk van het duurdere primaire model wordt gescheiden. Vermindert tokenverbruik voor taken die geen volledige redenercapaciteit vereisen.
+
+## Vertrouwen en beveiliging
+
+Minder onderbrekingen: VS Code 1.119 vermindert prompts voor netwerktoegangsverzoeken en schrijfacties naar tijdelijke mappen door agenten. De 1.119.1-patch pakt specifieke beveiligingsproblemen aan — de moeite waard om bij te werken als u dat nog niet heeft gedaan.
+
+## Snel wisselen naar Markdown-voorbeeld
+
+Klein maar handig: u kunt nu snel de huidige editor wisselen naar het Markdown-voorbeeld zonder te navigeren.
+
+## VS Code Agents (Insiders-voorbeeld)
+
+De opnieuw ontworpen agentsessie-UI — nieuwe repositoryselectie (lokaal/repos/remote), verbeteringen aan subsessies, web- en mobiele verfijning, voortgangsanimaties — is beschikbaar in Insiders op [insiders.vscode.dev/agents](https://insiders.vscode.dev/agents).
+
+Volledig changelog: [code.visualstudio.com/updates/v1_119](https://code.visualstudio.com/updates/v1_119).

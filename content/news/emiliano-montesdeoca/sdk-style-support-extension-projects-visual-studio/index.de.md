@@ -1,8 +1,8 @@
 ---
-title: "SDK Style Unterstutzung fur Erweiterungsprojekte in Visual Studio"
+title: "SDK-Stil-Unterstützung für Erweiterungsprojekte in Visual Studio"
 date: 2026-05-13
 author: "Emiliano Montesdeoca"
-description: "Praktische .NET Zusammenfassung zu \"SDK Style Unterstutzung fur Erweiterungsprojekte in Visual Studio\" mit klaren Schritten fur die Bewertung im Produktiveinsatz."
+description: "Visual Studio 18.5 bringt offiziell unterstütztes SDK-Style-Projektformat für VSSDK-Erweiterungen, mit bis zu 75 % kürzerer Build-Zeit und ~20-Zeilen-Projektdateien."
 tags:
   - Visual Studio
   - .NET
@@ -10,22 +10,48 @@ tags:
   - SDK-Style
 ---
 
-*Dieser Beitrag wurde automatisch ubersetzt. Die Originalversion findest du [hier]({{< ref "index.md" >}}).*
+*Dieser Beitrag wurde automatisch übersetzt. Zur Originalversion [hier klicken]({{< ref "index.md" >}}).*
 
-[SDK Style Unterstutzung fur Erweiterungsprojekte in Visual Studio](https://devblogs.microsoft.com/visualstudio/sdk-style-support-for-extension-projects/) ist fur Teams relevant, die .NET Systeme produktiv betreiben.
+[Die SDK-Stil-Unterstützung für VSSDK-basierte Erweiterungsprojekte](https://devblogs.microsoft.com/visualstudio/sdk-style-support-for-extension-projects/) ist jetzt offiziell in Visual Studio 18.5 verfügbar — klassische VSIX-Erweiterungsprojekte können das alte MPF-Style-`.csproj`-Format hinter sich lassen.
 
-Aus meiner Sicht ist nicht nur die neue Funktion wichtig, sondern wie schnell man daraus ein wiederholbares Engineering Muster macht.
+## Was sich in der Projektdatei ändert
 
-## Warum das fur .NET Teams wichtig ist
+Die größte sichtbare Änderung ist, wie viel kleiner die Projektdatei wird. Eine typische VSSDK-Erweiterung sieht jetzt so aus:
 
-Solche Updates helfen beim Ausgleich zwischen Liefergeschwindigkeit, Plattformkonsistenz und Governance.
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <VSSDKBuildToolsAutoSetup>true</VSSDKBuildToolsAutoSetup>
+    <VsixDeployOnDebug>true</VsixDeployOnDebug>
+    <GeneratePkgDefFile>true</GeneratePkgDefFile>
+  </PropertyGroup>
+  <ItemGroup><ProjectCapability Include="CreateVsixContainer" /></ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.14.40265" ExcludeAssets="runtime" />
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="18.5.38461" />
+  </ItemGroup>
+</Project>
+```
 
-## Praktische nachste Schritte
+`VSSDKBuildToolsAutoSetup=true` setzt sinnvolle Standardwerte: `CreateVsixContainer=true` und das veraltete `DeployExtension=false`. Diese einzelne Eigenschaft ersetzt einen erheblichen Teil dessen, was bisher explizit angegeben werden musste.
 
-1. Feature in einem kleinen .NET Pilot mit produktionsnahen Daten validieren.
-2. Vor dem Rollout Observability und Rollback Punkte definieren.
-3. Das Muster intern dokumentieren, damit andere Teams es ubernehmen konnen.
+## Build-Zeit-Verbesserungen
 
-## Quelle
+Fast Up-To-Date Check und Unterstützung für inkrementelle Builds sind enthalten. Bei großen Lösungen mit kleinen Änderungen ergibt sich eine **Build-Zeit-Reduzierung von bis zu 75 %** — bedeutsam, wenn Sie eine Erweiterung innerhalb einer großen Host-Lösung iterativ entwickeln.
 
-- Originalartikel: [https://devblogs.microsoft.com/visualstudio/sdk-style-support-for-extension-projects/](https://devblogs.microsoft.com/visualstudio/sdk-style-support-for-extension-projects/)
+## Neue vs. bestehende Projekte
+
+Neue Erweiterungsprojekte in 18.5 verwenden automatisch den SDK-Stil. Bestehende MPF-Style-Erweiterungen funktionieren weiterhin — die Migration ist optional. Wichtig bei der Migration: `<UseWpf>true</UseWpf>` hinzufügen, falls die Erweiterung XAML verwendet. Außerdem muss die Erweiterung in der `.sln`- oder `.slnx`-Datei als deploybar markiert werden.
+
+Der vsixmanifest-Designer wird standardmäßig durch den XML-Editor ersetzt — Rechtsklick → Öffnen mit, wenn Sie den alten Designer wünschen.
+
+## Agentischer Migrationspfad
+
+Der Modernize-Agent in [vs-agent-plugins](https://github.com/microsoft/vs-agent-plugins) kann die Migration automatisieren. Mehrere echte Erweiterungen wurden bereits auf diesem Weg konvertiert: Mads Kristensens Smart Screen, Command Explorer, Postfix Templates und Whitespace Visualizer.
+
+## Hinweis
+
+VisualStudio.Extensibility (das neuere Erweiterbarkeits-Framework) unterstützte SDK-Style bereits. Dieses Update bringt Parität mit dem klassischen VSSDK-Pfad. Die einzige Voraussetzung ist die Visual Studio-Erweiterungsentwicklungs-Workload.
+
+Vollständige Details im [offiziellen Beitrag](https://devblogs.microsoft.com/visualstudio/sdk-style-support-for-extension-projects/).
