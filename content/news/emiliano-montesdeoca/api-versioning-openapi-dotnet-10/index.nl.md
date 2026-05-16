@@ -2,7 +2,7 @@
 title: "API-versiebeheer combineren met OpenAPI in .NET 10"
 date: 2026-05-07
 author: "Emiliano Montesdeoca"
-description: "Een praktische aanpak voor het combineren van API-versiebeheer en OpenAPI in .NET 10 om contracten helder en evolueerbaar te houden."
+description: "Asp.Versioning v10 is de eerste versie met officiële ondersteuning voor zowel .NET 10 als Microsoft.AspNetCore.OpenApi, met afzonderlijke OpenAPI-documenten per API-versie."
 tags:
   - .NET
   - API Design
@@ -10,22 +10,61 @@ tags:
   - .NET 10
 ---
 
-*Dit bericht is automatisch vertaald. Voor de originele versie [klik hier]({{< ref "index.md" >}}).*
+*Dit bericht is automatisch vertaald. Klik [hier]({{< ref "index.md" >}}) voor de originele versie.*
 
-[Combining API Versioning with OpenAPI in .NET 10](https://devblogs.microsoft.com/dotnet/api-versioning-in-dotnet-10-applications/) is het waard om goed naar te kijken als je .NET-systemen op schaal bouwt of beheert.
+[API-versiebeheer combineren met OpenAPI in .NET 10](https://devblogs.microsoft.com/dotnet/api-versioning-in-dotnet-10-applications/) — gastpost van Microsoft MVP Sander ten Brinke — legt het nieuwe pakket `Asp.Versioning` v10 uit, de eerste versie die specifiek is ontworpen voor .NET 10 en de ingebouwde bibliotheek `Microsoft.AspNetCore.OpenApi` die Swashbuckle als standaard verving in .NET 9.
 
-Vanuit mijn perspectief is het niet de hoofdfunctie die telt, maar hoe snel een team die kan omzetten in een veiligere, herhaalbare engineeringworkflow.
+## Asp.Versioning v10: gebouwd voor de nieuwe OpenAPI-stack
 
-## Waarom dit relevant is voor .NET-teams
+De vorige `Asp.Versioning` v8.x werkt nog steeds op .NET 10 via impliciete roll-forward, maar v10 is de eerste versie die specifiek is ontworpen voor `Microsoft.AspNetCore.OpenApi`. De kerninstelling is een aanroep naar `AddApiVersioning` geketend met `AddApiExplorer`, plus een aparte `AddOpenApi`-aanroep voor elke versie die je wilt blootstellen:
 
-De meeste teams balanceren tussen leveringssnelheid, platformconsistentie en governance. Deze update is nuttig omdat het een concretere weg biedt om een van die beperkingen te verbeteren zonder alles opnieuw te schrijven.
+```csharp
+builder.Services.AddApiVersioning(options => {
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ReportApiVersions = true;
+})
+.AddApiExplorer(options => {
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
+});
 
-## Praktische volgende stappen
+builder.Services.AddOpenApi("v1");
+builder.Services.AddOpenApi("v2");
+```
 
-1. Valideer de functie in een kleine .NET-pilot met productieachtige data.
-2. Voeg duidelijke rollback- en observability-controlepunten toe vóór een bredere uitrol.
-3. Leg het implementatiepatroon vast in je interne sjablonen zodat andere teams het kunnen hergebruiken.
+Dit levert afzonderlijke documenten op bij `/openapi/v1.json` en `/openapi/v2.json`.
 
-## Bron
+## Versiebeheerstrategieën: URL-pad, query string, header, media type
 
-- Origineel artikel: [https://devblogs.microsoft.com/dotnet/api-versioning-in-dotnet-10-applications/](https://devblogs.microsoft.com/dotnet/api-versioning-in-dotnet-10-applications/)
+Het pakket ondersteunt vier strategieën. URL-pad-versiebeheer (`/api/v1/resource`) is het meest voorkomend voor publieke API's. Query string (`?version=1.0`) en aangepaste header (`X-API-Version`) zijn populair voor interne services. Versiebeheer via media type met de `Accept`-header is wat GitHub gebruikt voor zijn REST API.
+
+## Ondersteuning voor Minimal APIs en Controllers
+
+Voor Minimal APIs bouw je een versieset en koppel je elke route aan een specifieke versie:
+
+```csharp
+var versionSet = app.NewApiVersionSet()
+    .HasApiVersion(new ApiVersion(1, 0))
+    .HasApiVersion(new ApiVersion(2, 0))
+    .Build();
+
+app.MapGet("/users", GetUsersV1).WithApiVersionSet(versionSet).MapToApiVersion(1);
+app.MapGet("/users", GetUsersV2).WithApiVersionSet(versionSet).MapToApiVersion(2);
+```
+
+Voor Controllers pas je `[ApiVersion("1.0")]`- en `[MapToApiVersion("1.0")]`-attributen toe op klasse- en actieniveau.
+
+## SwaggerUI en Scalar werken direct
+
+Zowel `Swashbuckle.AspNetCore.SwaggerUI` als `Scalar.AspNetCore` integreren probleemloos — wijs ze naar de versiespecifieke document-URL's en je krijgt een versie-bewuste UI zonder extra configuratie.
+
+## Codevoorbeelden gebruiken .NET 10 bestandsgebaseerde apps
+
+De voorbeelden in het artikel gebruiken de nieuwe bestandsgebaseerde app-functie van C# 14 / .NET 10: je voert één `.cs`-bestand uit met `dotnet <bestandsnaam>.cs`, zonder projectbestand. Hierdoor zijn de snippets op zichzelf staand en gemakkelijk lokaal te proberen.
+
+## Samenvatting
+
+Als je .NET 10 gebruikt en schone, geversioneerde OpenAPI-contracten wilt zonder middleware van derden toe te voegen, is `Asp.Versioning` v10 de officiële weg.
+
+Lees het volledige artikel: [API-versiebeheer combineren met OpenAPI in .NET 10](https://devblogs.microsoft.com/dotnet/api-versioning-in-dotnet-10-applications/)

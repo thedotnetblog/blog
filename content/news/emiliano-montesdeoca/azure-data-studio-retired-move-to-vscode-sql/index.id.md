@@ -1,8 +1,8 @@
 ---
-title: "Azure Data Studio Pensiun: Pindahkan Alur Kerja Azure SQL Anda ke VS Code"
+title: "Azure Data Studio Dihentikan: Pindahkan Alur Kerja Azure SQL Anda ke VS Code"
 date: 2026-05-09
 author: "Emiliano Montesdeoca"
-description: "Apa arti penghentian Azure Data Studio bagi tim .NET dan jalur migrasi praktis untuk alur kerja Azure SQL di VS Code."
+description: "Azure Data Studio dihentikan pada 6 Februari 2025, dengan dukungan berakhir pada 28 Februari 2026. Berikut jalur migrasi lengkap ke VS Code menggunakan ekstensi MSSQL."
 tags:
   - .NET
   - Azure SQL
@@ -12,20 +12,40 @@ tags:
 
 *Posting ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "index.md" >}}).*
 
-[Azure Data Studio Is Retired: Move Your Azure SQL Workflow to VS Code](https://devblogs.microsoft.com/azure-sql/azure-data-studio-is-retired-move-your-azure-sql-workflow-to-vs-code-in-10-minutes/) layak untuk dicermati jika Anda sedang membangun atau mengoperasikan sistem .NET dalam skala besar.
+[Azure Data Studio dihentikan pada 6 Februari 2025](https://devblogs.microsoft.com/azure-sql/azure-data-studio-is-retired-move-your-azure-sql-workflow-to-vs-code-in-10-minutes/), dengan dukungan berakhir pada 28 Februari 2026 — pengganti yang direkomendasikan adalah VS Code dengan ekstensi MSSQL.
 
-Dari sudut pandang saya, yang penting bukan fitur utamanya, melainkan seberapa cepat sebuah tim dapat mengubahnya menjadi alur kerja rekayasa yang lebih aman dan dapat diulang.
+## Yang Perlu Diinstal
 
-## Mengapa ini penting bagi tim .NET
+Tiga hal untuk memulai:
 
-Kebanyakan tim menyeimbangkan antara kecepatan pengiriman, konsistensi platform, dan tata kelola. Pembaruan ini berguna karena memberikan jalur yang lebih konkret untuk meningkatkan salah satu hambatan tersebut tanpa menulis ulang segalanya.
+- **Ekstensi MSSQL** — cari "SQL Server (mssql)" di VS Code Marketplace
+- **Ekstensi SQL Database Projects** — skema sebagai kode, validasi build, penerbitan terpandu
+- **.NET 8 SDK** — diperlukan oleh sistem build; SDK yang tidak ditemukan adalah masalah paling umum saat pertama kali digunakan
 
-## Langkah praktis selanjutnya
+## Migrasi Koneksi dan Pengaturan ADS
 
-1. Validasi fitur dalam pilot .NET kecil dengan data mirip produksi.
-2. Tambahkan titik pemeriksaan rollback dan observabilitas yang jelas sebelum peluncuran yang lebih luas.
-3. Tangkap pola implementasi dalam template internal Anda sehingga tim lain dapat menggunakannya kembali.
+Ekstensi MSSQL menyertakan **ADS Migration Toolkit** yang menangani migrasi satu kali dalam alur terpandu: koneksi tersimpan, grup koneksi, pengaturan, dan key binding semuanya diimpor secara otomatis.
 
-## Sumber
+## Memulihkan Kebiasaan F5
 
-- Artikel asli: [https://devblogs.microsoft.com/azure-sql/azure-data-studio-is-retired-move-your-azure-sql-workflow-to-vs-code-in-10-minutes/](https://devblogs.microsoft.com/azure-sql/azure-data-studio-is-retired-move-your-azure-sql-workflow-to-vs-code-in-10-minutes/)
+Pengguna ADS mengandalkan F5 untuk menjalankan kueri. Instal ekstensi **MSSQL Database Management Keymap** untuk mendapatkan kembali key binding bergaya ADS, termasuk F5.
+
+## SQL Database Projects: Skema sebagai Kode
+
+Klik kanan pada proyek → **Publish** → konfigurasi target → tinjau skrip T-SQL yang dihasilkan → deploy. Pratinjau skrip sebelum deployment adalah fitur keamanan utama. Template item menghasilkan stub untuk tabel, stored procedure, dan view — alur kerja yang sama seperti SSDT.
+
+Masalah umum: **ketidakcocokan platform target** di file `.sqlproj` akan menyebabkan kesalahan build jika proyek dibuat untuk versi SQL Server yang berbeda.
+
+## Schema Compare dan Schema Designer
+
+Ekstensi juga mencakup **Schema Compare** (perbedaan antara proyek Anda dan database yang di-deploy) dan **Schema Designer** (pengeditan skema secara visual tanpa menulis DDL secara manual).
+
+## Pengembang Microsoft Fabric
+
+Pengaturannya identik, tetapi mulailah dari **portal Fabric** dan hubungkan database ke Git terlebih dahulu sebelum membukanya di VS Code. Microsoft memiliki panduan khusus: *Azure Data Studio to VS Code — What it means for SQL database in Fabric developers*.
+
+## Kesimpulan
+
+Migrasi adalah alur terpandu satu kali, bukan pembangunan ulang secara manual. Instal tiga alat, jalankan ADS Migration Toolkit, pulihkan key binding Anda — dan Anda kembali normal dalam waktu kurang dari 10 menit.
+
+Lihat [artikel lengkap](https://devblogs.microsoft.com/azure-sql/azure-data-studio-is-retired-move-your-azure-sql-workflow-to-vs-code-in-10-minutes/) untuk tangkapan layar langkah demi langkah dan panduan khusus Fabric.

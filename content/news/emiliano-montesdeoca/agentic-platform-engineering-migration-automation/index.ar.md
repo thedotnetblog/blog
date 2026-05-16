@@ -1,8 +1,8 @@
 ---
-title: "التخلص من العمل الممل في الترحيل باستخدام هندسة المنصات الذكية"
+title: "إزالة العمل المتكرر في الهجرة باستخدام Agentic Platform Engineering"
 date: 2026-05-05
 author: "Emiliano Montesdeoca"
-description: "نظرة عملية على استخدام هندسة المنصات الذكية لتقليل أعمال الترحيل المتكررة في برامج .NET للمؤسسات."
+description: "يقوم Git-Ape بهجرة مستودع Terraform AWS حقيقي إلى Azure Bicep — باستخراج نية النشر وإعادة رسم المعمارية بدلاً من التحويل الحرفي."
 tags:
   - .NET
   - Azure
@@ -11,22 +11,56 @@ tags:
 dir: rtl
 ---
 
-*تمت ترجمة هذا المنشور تلقائياً. للنسخة الأصلية [انقر هنا]({{< ref "index.md" >}}).*
+*تمت ترجمة هذا المنشور تلقائيًا. للنسخة الأصلية، [انقر هنا]({{< ref "index.md" >}}).*
 
-[Removing the Monkey Work of Migration with Agentic Platform Engineering](https://devblogs.microsoft.com/all-things-azure/removing-the-monkey-work-of-migration-using-agentic-platform-engineering/) يستحق اهتماماً دقيقاً إذا كنت تبني أو تشغّل أنظمة .NET على نطاق واسع.
+[Removing the Monkey Work of Migration with Agentic Platform Engineering](https://devblogs.microsoft.com/all-things-azure/removing-the-monkey-work-of-migration-using-agentic-platform-engineering/) — استعراض لأداة Git-Ape (أداة git للهندسة المنصبية الذكية) لترحيل مستودع Terraform على AWS حقيقي إلى Azure، مع التركيز على استخراج النية بدلاً من التحويل سطراً بسطر.
 
-من وجهة نظري، الأمر المهم ليس الميزة الرئيسية بل كم يمكن لفريق أن يحوّلها بسرعة إلى سير عمل هندسي أكثر أماناً وقابلاً للتكرار.
+## المدخل: contoso-migration
 
-## لماذا يهمّ ذلك لفرق .NET
+المصدر هو مشروع Terraform حقيقي (`contoso-migration`) ينشر تطبيق Next.js على AWS — EC2 للحوسبة، وALB لموازنة التحميل، وS3 للتخزين المؤقت للتوزيع، ومفاتيح IAM للهوية. التكلفة: ~34$/شهرياً. الهدف ليس إعادة إنشاء نفس البنية التحتية على Azure، بل فهم ما تحاول عملية النشر فعله بالفعل، وإعادة بنائه باستخدام الخدمات الأصيلة في Azure.
 
-تُوازن معظم الفرق بين سرعة التسليم، واتساق المنصة، والحوكمة. هذا التحديث مفيد لأنه يمنحك مساراً أكثر تحديداً لتحسين أحد هذه القيود دون إعادة كتابة كل شيء.
+## الخطوة 1: التحقق والمصادقة
 
-## الخطوات العملية التالية
+يبدأ Git-Ape بالتحقق من جميع أدوات CLI المطلوبة — `az`، و`aws`، و`gh`، و`jq`، و`git` — والتأكد من جلسات المصادقة النشطة قبل الشروع في أي إجراء. لا تشغيل جزئي.
 
-1. اختبر الميزة في تجربة .NET صغيرة ببيانات مشابهة للإنتاج.
-2. أضف نقاط تفتيش واضحة للتراجع والمراقبة قبل الطرح الأوسع.
-3. سجّل نمط التنفيذ في قوالبك الداخلية حتى تتمكن الفرق الأخرى من إعادة استخدامه.
+## الخطوة 2: استخراج النية
 
-## المصدر
+يقرأ العامل المستودع المصدر بأكمله عبر GitHub API ويستخرج نية النشر: بيئة التشغيل (Node.js)، ونوع الحوسبة، ونمط الوصول، ومعالجة التوزيع، ونموذج الهوية، والشبكة، والمراقبة. هذه هي الخطوة الأساسية — إنها تبني نموذجاً دلالياً لما يفعله النشر، وليس ما تستخدمه كلمات مفتاح Terraform.
 
-- المقالة الأصلية: [https://devblogs.microsoft.com/all-things-azure/removing-the-monkey-work-of-migration-using-agentic-platform-engineering/](https://devblogs.microsoft.com/all-things-azure/removing-the-monkey-work-of-migration-using-agentic-platform-engineering/)
+## الخطوة 3: رسم الخدمات
+
+تُعيَن خدمات AWS إلى معادلاتها في Azure:
+- EC2 → App Service (Linux، Node 20 LTS)
+- ALB → موازنة تحميل App Service المدمجة
+- أدوار/مفاتيح IAM → Managed Identity
+- Terraform → Bicep + GitHub Actions
+
+## الخطوة 4: عامل النقد
+
+قبل توليد المخرجات، يعمل عامل نقد يرصد مشكلتين مانعتين:
+
+1. **نمط مضاد: البناء عند الإقلاع** — كان Terraform الأصلي يشغّل `npm install && npm run build` على EC2 عند الإقلاع. الحل: البناء في CI ونشر توزيع جاهز.
+2. **Blob Storage غير ضروري** — كان S3 يُستخدم لتدريج التوزيع وكان يمكن التخلص منه مع CI/CD المناسب. أسقطه عامل النقد كلياً.
+
+## الخطوة 5: المخرجات المُولَّدة
+
+النتيجة هي ~80 سطراً من Bicep بدلاً من أكثر من 200 سطر من Terraform الأصلي. أنشأ العامل مستودع GitHub جديداً يحتوي على `infra/main.bicep` و`.github/workflows/deploy.yml` وأزال جميع الملفات الخاصة بـ AWS.
+
+## مقارنة الوضع الأمني
+
+أنتجت الهجرة أيضاً ترقية أمنية ملموسة:
+
+| AWS الأصلي | مخرجات Azure |
+|---|---|
+| HTTP فقط | HTTPS فقط، TLS 1.2 |
+| SSH مفتوح لـ 0.0.0.0/0 | لا كشف SSH |
+| مفاتيح وصول IAM | OIDC + Managed Identity |
+| لا مراقبة | Application Insights |
+
+التكلفة: ~13$/شهرياً مقابل 34$ الأصلية.
+
+## ما الذي يميز هذا عن محوّل صياغة
+
+خطوة عامل النقد هي ما يفصل هذا عن الترجمة الآلية. لقد رصد أنماطاً كانت ستعمل على AWS ولكنها ستكون خاطئة على Azure — وأصلحها بدلاً من تكرارها. المخرج ليس "AWS بصياغة Azure"؛ بل هو نشر أصيل على Azure يحقق نفس الهدف بشكل أنظف.
+
+راجع [الاستعراض الكامل](https://devblogs.microsoft.com/all-things-azure/removing-the-monkey-work-of-migration-using-agentic-platform-engineering/) للاطلاع على تتبع العامل الكامل والملفات المُولَّدة.

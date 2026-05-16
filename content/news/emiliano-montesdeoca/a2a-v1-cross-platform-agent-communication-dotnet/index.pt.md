@@ -1,8 +1,8 @@
 ---
-title: "A2A v1 chegou: comunicacao entre agentes multiplataforma no Microsoft Agent Framework para .NET"
+title: "A2A v1 Chegou: Comunicação Entre Agentes Cross-Platform no Microsoft Agent Framework para .NET"
 date: 2026-05-04
 author: "Emiliano Montesdeoca"
-description: "Resumo pratico para equipes .NET sobre \"A2A v1 chegou: comunicacao entre agentes multiplataforma no Microsoft Agent Framework para .NET\", com passos objetivos para avaliar em producao."
+description: "O Protocolo A2A v1.0 foi lançado e os pacotes Microsoft Agent Framework para .NET estão atualizados — padrão de interoperabilidade estável para conectar e expor agentes de IA entre provedores."
 tags:
   - .NET
   - Agent Framework
@@ -10,22 +10,48 @@ tags:
   - Interoperability
 ---
 
-*Este post foi traduzido automaticamente. Para a versao original, [clique aqui]({{< ref "index.md" >}}).*
+*Esta publicação foi traduzida automaticamente. Para a versão original, [clique aqui]({{< ref "index.md" >}}).*
 
-[A2A v1 chegou: comunicacao entre agentes multiplataforma no Microsoft Agent Framework para .NET](https://devblogs.microsoft.com/agent-framework/a2a-v1-is-here-cross-platform-agent-communication-in-microsoft-agent-framework-for-net/) e relevante para equipes que constroem e operam sistemas .NET em producao.
+[A2A v1 Chegou: Comunicação Entre Agentes Cross-Platform no Microsoft Agent Framework para .NET](https://devblogs.microsoft.com/agent-framework/a2a-v1-is-here-cross-platform-agent-communication-in-microsoft-agent-framework-for-net/) — o Protocolo A2A acaba de atingir v1.0, e os pacotes A2A Agent (cliente) e A2A Hosting (servidor) para .NET foram atualizados.
 
-Na minha leitura, o ponto principal nao e apenas a novidade, e sim a velocidade para transformar isso em um padrao de engenharia repetivel.
+## O que é Realmente A2A v1
 
-## Por que isso importa para times .NET
+A2A é um protocolo de interoperabilidade aberto para agentes de IA apoiado por um comitê diretor técnico com representantes da AWS, Cisco, Google, IBM Research, Microsoft, Salesforce, SAP e ServiceNow. O rótulo v1 significa que agora é um padrão estável e pronto para produção. Os pacotes SDK e Agent Framework que o implementam ainda estão em preview, mas o protocolo em si está bloqueado.
 
-Esse tipo de atualizacao ajuda a equilibrar velocidade de entrega, consistencia de plataforma e governanca.
+v1 melhora v0.3 com suporte multi-tenant, Agent Cards assinadas para identidade criptográfica, fluxos de segurança melhorados e uma arquitetura alinhada com a web.
 
-## Proximos passos praticos
+## Conectar-se a um Agente A2A Remoto
 
-1. Valide a funcionalidade em um piloto .NET pequeno com dados parecidos com producao.
-2. Defina observabilidade e plano de rollback antes de escalar.
-3. Documente o padrao para reutilizacao entre equipes.
+Um agente A2A remoto é simplesmente um `AIAgent` no seu código — mesmo `RunAsync`, mesmo streaming, mesmo gerenciamento de sessões:
 
-## Fonte
+```csharp
+// Descoberta via URI well-known
+A2ACardResolver resolver = new(new Uri("https://a2a-agent.example.com"));
+AIAgent agent = await resolver.GetAIAgentAsync();
+Console.WriteLine(await agent.RunAsync("What's the weather in Seattle?"));
 
-- Artigo original: [https://devblogs.microsoft.com/agent-framework/a2a-v1-is-here-cross-platform-agent-communication-in-microsoft-agent-framework-for-net/](https://devblogs.microsoft.com/agent-framework/a2a-v1-is-here-cross-platform-agent-communication-in-microsoft-agent-framework-for-net/)
+// Configuração direta
+A2AClient a2aClient = new(new Uri("https://a2a-agent.example.com"));
+AIAgent agent = a2aClient.AsAIAgent(name: "my-agent", description: "A helpful assistant.");
+
+// O streaming funciona da mesma forma
+await foreach (var update in agent.RunStreamingAsync("Write a short summary..."))
+    Console.Write(update.Text);
+```
+
+## Expor Seu Agente como Endpoint A2A
+
+Qualquer `AIAgent` que você construiu — no Microsoft Foundry, Azure OpenAI, OpenAI, Anthropic ou AWS Bedrock — pode ser exposto como endpoint A2A com duas linhas no ASP.NET Core:
+
+```csharp
+builder.Services.AddKeyedSingleton<AIAgent>("weather-agent", (sp, _) => ...);
+builder.AddA2AServer("weather-agent");
+```
+
+O cartão do agente é servido automaticamente em `/.well-known/agent-card.json`.
+
+## O que Isso Significa na Prática
+
+O protocolo estável v1 significa que você pode conectar seus agentes .NET com agentes construídos em Python, Java ou qualquer outra linguagem sem se preocupar com mudanças que quebrem compatibilidade. A identidade criptográfica nas Agent Cards assinadas também fornece uma base para verificação de confiança entre agentes.
+
+Veja o [post completo](https://devblogs.microsoft.com/agent-framework/a2a-v1-is-here-cross-platform-agent-communication-in-microsoft-agent-framework-for-net/) para o changelog completo e notas de migração do v0.3.

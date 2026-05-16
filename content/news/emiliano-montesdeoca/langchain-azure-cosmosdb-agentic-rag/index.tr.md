@@ -1,8 +1,8 @@
 ---
-title: "LangChain + Azure Cosmos DB: Agentic Uygulamalar ve RAG için"
+title: "LangChain + Azure Cosmos DB: Ajantik Uygulamalar ve RAG için"
 date: 2026-05-12
 author: "Emiliano Montesdeoca"
-description: "LangChain'in Azure Cosmos DB ile entegrasyonunun .NET ekiplerinin daha güçlü veri temelleriyle ajansal ve RAG sistemleri tasarlamasına nasıl yardımcı olduğu."
+description: "langchain-azure-cosmosdb, vektör araması, sohbet geçmişi, ajan durum kontrol noktası, anlamsal önbellekleme ve uzun süreli belleği tek bir Azure Cosmos DB for NoSQL arka ucunda birleştiren yeni bir Python paketidir."
 tags:
   - .NET
   - Azure Cosmos DB
@@ -10,22 +10,69 @@ tags:
   - RAG
 ---
 
-*Bu gönderi otomatik olarak çevrilmiştir. Orijinal sürüm için [buraya tıklayın]({{< ref "index.md" >}}).*
+*Bu gönderi otomatik olarak çevrildi. Orijinal versiyon için [buraya tıklayın]({{< ref "index.md" >}}).*
 
-[LangChain + Azure Cosmos DB for Agentic Apps and RAG](https://devblogs.microsoft.com/cosmosdb/langchain-azure-cosmos-db-agents-rag/) .NET sistemlerini büyük ölçekte oluşturuyorsanız veya çalıştırıyorsanız, yakından incelemeye değer.
+[`langchain-azure-cosmosdb`](https://devblogs.microsoft.com/cosmosdb/langchain-azure-cosmos-db-agents-rag/) (`pip install langchain-azure-cosmosdb`), LangChain ve LangGraph'ı Azure Cosmos DB for NoSQL'e bağlayan ve vektör depolama, önbellekleme, geçmiş ve bellek için genellikle kullanılan 5+ ayrı hizmeti tek bir veritabanıyla değiştiren yeni bir Python paketidir.
 
-Benim bakış açıma göre, önemli olan başlık özelliği değil; bir ekibin bunu ne kadar hızlı daha güvenli ve tekrarlanabilir bir mühendislik iş akışına dönüştürebileceğidir.
+## Tek pakette altı entegrasyon
 
-## .NET ekipleri için neden önemli
+Paket altı entegrasyon sınıfı içerir (her biri senkron ve asenkron varyantlarla):
 
-Çoğu ekip, teslimat hızı, platform tutarlılığı ve yönetim arasında denge kurmaya çalışmaktadır. Bu güncelleme, her şeyi yeniden yazmadan bu kısıtlamalardan birini iyileştirmek için daha somut bir yol sunduğu için faydalıdır.
+1. **AzureCosmosDBNoSqlVectorSearch** — vektör, tam metin (BM25), hibrit (RRF ile vektör+metin) ve ağırlıklı hibrit arama
+2. **AzureCosmosDBNoSqlSemanticCache** — tekrarlanan sorgularda gecikme ve maliyeti azaltmak için LLM yanıtlarını önbelleğe alma
+3. **CosmosDBChatMessageHistory** — TTL desteğiyle konuşma geçmişini kalıcı hale getirme
+4. **CosmosDBSaverSync / CosmosDBSaver** — LangGraph kontrol noktalayıcısı: çağrılar arasında thread_id başına grafik durumunu kalıcı kılar
+5. **CosmosDBCacheSync / CosmosDBCache** — LangGraph düğüm düzeyinde sonuç önbellekleme
+6. **CosmosDBStore / AsyncCosmosDBStore** — ad alanı organizasyonu ve anlamsal arama ile uzun süreli bellek
 
-## Pratik sonraki adımlar
+Erişim anahtarı ve Yönetilen Kimlik (Entra ID) kimlik doğrulaması tüm entegrasyonlarda desteklenmektedir.
 
-1. Özelliği, üretime benzer verilerle küçük bir .NET pilotunda doğrulayın.
-2. Daha geniş bir dağıtımdan önce net geri alma ve gözlemlenebilirlik kontrol noktaları ekleyin.
-3. Uygulama kalıbını iç şablonlarınıza kaydedin, böylece diğer ekipler onu yeniden kullanabilir.
+## Vektör ve hibrit arama
 
-## Kaynak
+Azure Cosmos DB for NoSQL, binlerden milyarlarca vektöre ölçeklenen DiskANN ve Quantized Flat vektör dizinlerini destekler — OpenAI'de ChatGPT konuşma geçmişlerini ve anılarını destekleyen aynı veritabanı. Hibrit arama kurulumu:
 
-- Orijinal makale: [https://devblogs.microsoft.com/cosmosdb/langchain-azure-cosmos-db-agents-rag/](https://devblogs.microsoft.com/cosmosdb/langchain-azure-cosmos-db-agents-rag/)
+```python
+vectorstore = AzureCosmosDBNoSqlVectorSearch(
+    cosmos_client=...,
+    embedding=AzureOpenAIEmbeddings(...),
+    ...
+)
+results = vectorstore.similarity_search(
+    "distributed database",
+    k=5,
+    search_type="hybrid",
+    full_text_rank_filter=[{"search_field": "text", "search_text": "distributed"}]
+)
+```
+
+## Cosmos kontrol noktalaması ile LangGraph çok turlu ajanlar
+
+`CosmosDBSaverSync` kontrol noktalayıcısı, ajanların ayrı çağrılar arasında bağlamı hatırlaması için LangGraph grafik durumunu kalıcı kılar — bellekte durum tutmaya gerek yoktur:
+
+```python
+checkpointer = CosmosDBSaverSync(
+    database_name="agents-db",
+    container_name="checkpoints",
+    endpoint="..."
+)
+app = graph.compile(checkpointer=checkpointer)
+
+# Tur 1
+app.invoke(
+    {"messages": [("user", "Hi, I'm Alice!")]},
+    config={"configurable": {"thread_id": "user-123"}}
+)
+
+# Tur 2 — tur 1'den durum kalıcı kılındı
+app.invoke(
+    {"messages": [("user", "What's my name?")]},
+    config={"configurable": {"thread_id": "user-123"}}
+)
+# Döndürür: "Your name is Alice!"
+```
+
+## Beş yerine bir veritabanı
+
+Her şeyi Cosmos DB for NoSQL'de birleştirmek, bir bağlantı, bir kimlik bilgisi seti, bir ölçeklendirme düğmesi ve bir şeyler ters gittiğinde bakılacak tek bir yer anlamına gelir. Paket PyPI'da mevcuttur ve kaynak kodu GitHub'da [langchain-ai/langchain-azure](https://github.com/langchain-ai/langchain-azure)'dedir.
+
+Tüm ayrıntılar [devblogs.microsoft.com](https://devblogs.microsoft.com/cosmosdb/langchain-azure-cosmos-db-agents-rag/)'da.

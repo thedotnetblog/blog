@@ -1,8 +1,8 @@
 ---
-title: "A2A v1 Hadir: Komunikasi Agen Lintas Platform di Microsoft Agent Framework untuk .NET"
+title: "A2A v1 Telah Hadir: Komunikasi Antar-Agen Cross-Platform di Microsoft Agent Framework untuk .NET"
 date: 2026-05-04
 author: "Emiliano Montesdeoca"
-description: "Bagaimana A2A v1 dalam Microsoft Agent Framework membantu tim .NET menghubungkan agen di berbagai platform dengan interoperabilitas siap produksi."
+description: "Protokol A2A v1.0 telah dirilis dan paket Microsoft Agent Framework untuk .NET telah diperbarui — standar interoperabilitas stabil untuk menghubungkan dan mengekspos agen AI lintas penyedia."
 tags:
   - .NET
   - Agent Framework
@@ -12,20 +12,46 @@ tags:
 
 *Posting ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "index.md" >}}).*
 
-[A2A v1 Is Here: Cross-Platform Agent Communication in Microsoft Agent Framework for .NET](https://devblogs.microsoft.com/agent-framework/a2a-v1-is-here-cross-platform-agent-communication-in-microsoft-agent-framework-for-net/) layak untuk dicermati jika Anda sedang membangun atau mengoperasikan sistem .NET dalam skala besar.
+[A2A v1 Telah Hadir: Komunikasi Antar-Agen Cross-Platform di Microsoft Agent Framework untuk .NET](https://devblogs.microsoft.com/agent-framework/a2a-v1-is-here-cross-platform-agent-communication-in-microsoft-agent-framework-for-net/) — Protokol A2A baru saja mencapai v1.0, dan paket A2A Agent (klien) dan A2A Hosting (server) untuk .NET telah diperbarui.
 
-Dari sudut pandang saya, yang penting bukan fitur utamanya, melainkan seberapa cepat sebuah tim dapat mengubahnya menjadi alur kerja rekayasa yang lebih aman dan dapat diulang.
+## Apa Sebenarnya A2A v1
 
-## Mengapa ini penting bagi tim .NET
+A2A adalah protokol interoperabilitas terbuka untuk agen AI yang didukung oleh komite pengarah teknis dengan perwakilan dari AWS, Cisco, Google, IBM Research, Microsoft, Salesforce, SAP, dan ServiceNow. Label v1 berarti ini sekarang merupakan standar yang stabil dan siap produksi. Paket SDK dan Agent Framework yang mengimplementasikannya masih dalam preview, tetapi protokolnya sendiri sudah terkunci.
 
-Kebanyakan tim menyeimbangkan antara kecepatan pengiriman, konsistensi platform, dan tata kelola. Pembaruan ini berguna karena memberikan jalur yang lebih konkret untuk meningkatkan salah satu hambatan tersebut tanpa menulis ulang segalanya.
+v1 meningkatkan v0.3 dengan dukungan multi-tenancy, Agent Cards bertanda tangan untuk identitas kriptografis, alur keamanan yang ditingkatkan, dan arsitektur yang selaras dengan web.
 
-## Langkah praktis selanjutnya
+## Menghubungkan ke Agen A2A Jarak Jauh
 
-1. Validasi fitur dalam pilot .NET kecil dengan data mirip produksi.
-2. Tambahkan titik pemeriksaan rollback dan observabilitas yang jelas sebelum peluncuran yang lebih luas.
-3. Tangkap pola implementasi dalam template internal Anda sehingga tim lain dapat menggunakannya kembali.
+Agen A2A jarak jauh hanyalah `AIAgent` dalam kode Anda — `RunAsync` yang sama, streaming yang sama, penanganan sesi yang sama:
 
-## Sumber
+```csharp
+// Penemuan via URI well-known
+A2ACardResolver resolver = new(new Uri("https://a2a-agent.example.com"));
+AIAgent agent = await resolver.GetAIAgentAsync();
+Console.WriteLine(await agent.RunAsync("What's the weather in Seattle?"));
 
-- Artikel asli: [https://devblogs.microsoft.com/agent-framework/a2a-v1-is-here-cross-platform-agent-communication-in-microsoft-agent-framework-for-net/](https://devblogs.microsoft.com/agent-framework/a2a-v1-is-here-cross-platform-agent-communication-in-microsoft-agent-framework-for-net/)
+// Konfigurasi langsung
+A2AClient a2aClient = new(new Uri("https://a2a-agent.example.com"));
+AIAgent agent = a2aClient.AsAIAgent(name: "my-agent", description: "A helpful assistant.");
+
+// Streaming bekerja dengan cara yang sama
+await foreach (var update in agent.RunStreamingAsync("Write a short summary..."))
+    Console.Write(update.Text);
+```
+
+## Mengekspos Agen Anda sebagai Endpoint A2A
+
+Setiap `AIAgent` yang telah Anda buat — di Microsoft Foundry, Azure OpenAI, OpenAI, Anthropic, atau AWS Bedrock — dapat diekspos sebagai endpoint A2A dengan dua baris di ASP.NET Core:
+
+```csharp
+builder.Services.AddKeyedSingleton<AIAgent>("weather-agent", (sp, _) => ...);
+builder.AddA2AServer("weather-agent");
+```
+
+Kartu agen disajikan secara otomatis di `/.well-known/agent-card.json`.
+
+## Apa Artinya Ini dalam Praktik
+
+Protokol v1 yang stabil berarti Anda dapat menghubungkan agen .NET Anda dengan agen yang dibangun dalam Python, Java, atau bahasa lain tanpa khawatir tentang perubahan yang merusak. Identitas kriptografis dalam Agent Cards yang ditandatangani juga memberikan dasar untuk verifikasi kepercayaan antar agen.
+
+Lihat [posting lengkap](https://devblogs.microsoft.com/agent-framework/a2a-v1-is-here-cross-platform-agent-communication-in-microsoft-agent-framework-for-net/) untuk catatan perubahan lengkap dan catatan migrasi dari v0.3.

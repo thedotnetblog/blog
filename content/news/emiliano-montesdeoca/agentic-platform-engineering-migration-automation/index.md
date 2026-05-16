@@ -2,7 +2,7 @@
 title: "Removing the Monkey Work of Migration with Agentic Platform Engineering"
 date: 2026-05-05
 author: "Emiliano Montesdeoca"
-description: "A practical look at using agentic platform engineering to reduce repetitive migration work in enterprise .NET programs."
+description: "Git-Ape walks through migrating a real AWS Terraform deployment to Azure Bicep — extracting deployment intent and remapping architecture rather than doing a 1:1 syntax conversion."
 tags:
   - .NET
   - Azure
@@ -10,20 +10,54 @@ tags:
   - Platform Engineering
 ---
 
-[Removing the Monkey Work of Migration with Agentic Platform Engineering](https://devblogs.microsoft.com/all-things-azure/removing-the-monkey-work-of-migration-using-agentic-platform-engineering/) is worth a close look if you are building or operating .NET systems at scale.
+[Removing the Monkey Work of Migration with Agentic Platform Engineering](https://devblogs.microsoft.com/all-things-azure/removing-the-monkey-work-of-migration-using-agentic-platform-engineering/) — a walkthrough of Git-Ape (git agentic platform engineering tool) migrating a real AWS Terraform repo to Azure, focusing on intent extraction rather than line-by-line conversion.
 
-From my perspective, the important part is not the headline feature but how quickly a team can convert it into a safer, repeatable engineering workflow.
+## The input: contoso-migration
 
-## Why it matters for .NET teams
+The source is a real Terraform project (`contoso-migration`) that deploys a Next.js app on AWS — EC2 for compute, ALB for load balancing, S3 for artifacts, and IAM keys for identity. Cost: ~$34/month. The goal isn't to reproduce the same infrastructure on Azure; it's to figure out what the deployment is actually trying to do and rebuild that on Azure-native services.
 
-Most teams are balancing delivery speed, platform consistency, and governance. This update is useful because it gives you a more concrete path to improve one of those constraints without rewriting everything.
+## Step 1: Validation and auth
 
-## Practical next steps
+Git-Ape starts by validating all required CLI tools — `az`, `aws`, `gh`, `jq`, `git` — and confirming active auth sessions before touching anything. No partial runs.
 
-1. Validate the feature in a small .NET pilot with production-like data.
-2. Add clear rollback and observability checkpoints before broader rollout.
-3. Capture the implementation pattern in your internal templates so other teams can reuse it.
+## Step 2: Intent extraction
 
-## Source
+The agent reads the entire source repo through the GitHub API and extracts the deployment intent: runtime (Node.js), compute type, ingress pattern, artifact handling, identity model, networking, and monitoring. This is the key step — it's building a semantic model of what the deployment does, not what Terraform keywords it uses.
 
-- Original article: [https://devblogs.microsoft.com/all-things-azure/removing-the-monkey-work-of-migration-using-agentic-platform-engineering/](https://devblogs.microsoft.com/all-things-azure/removing-the-monkey-work-of-migration-using-agentic-platform-engineering/)
+## Step 3: Service mapping
+
+AWS services get mapped to Azure equivalents:
+- EC2 → App Service (Linux, Node 20 LTS)
+- ALB → App Service built-in load balancing
+- IAM roles/keys → Managed Identity
+- Terraform → Bicep + GitHub Actions
+
+## Step 4: Critique agent
+
+Before generating output, a critique agent runs and catches two blocking issues:
+
+1. **Build-on-startup anti-pattern** — the original Terraform was running `npm install && npm run build` on EC2 at startup. Fix: build in CI, deploy a ready artifact.
+2. **Unnecessary Blob Storage** — S3 was used for artifact staging that could be eliminated with proper CI/CD. The critique agent dropped it entirely.
+
+## Step 5: Generated output
+
+The result is ~80 lines of Bicep instead of the original 200+ lines of Terraform. The agent created a new GitHub repo with `infra/main.bicep` and `.github/workflows/deploy.yml` and removed all AWS-specific files.
+
+## Security posture comparison
+
+The migration also produced a meaningful security upgrade:
+
+| AWS original | Azure output |
+|---|---|
+| HTTP only | HTTPS only, TLS 1.2 |
+| SSH open to 0.0.0.0/0 | No SSH exposure |
+| IAM access keys | OIDC + Managed Identity |
+| No monitoring | Application Insights |
+
+Cost: ~$13/month vs the original $34/month.
+
+## What makes this different from a syntax converter
+
+The critique agent step is what separates this from a mechanical translation. It caught patterns that would have worked on AWS but would be wrong on Azure — and fixed them instead of replicating them. The output isn't "AWS in Azure syntax"; it's an Azure-native deployment that achieves the same goal more cleanly.
+
+See the [full walkthrough](https://devblogs.microsoft.com/all-things-azure/removing-the-monkey-work-of-migration-using-agentic-platform-engineering/) for the complete agent trace and generated files.

@@ -1,8 +1,8 @@
 ---
-title: "Pembaruan April Visual Studio: Integrasi Cloud Agent untuk Alur Kerja .NET"
+title: "Pembaruan April Visual Studio 2026: Agen Cloud, Agen Kustom, dan Agen Debugger"
 date: 2026-05-14
 author: "Emiliano Montesdeoca"
-description: "Panduan terperinci tentang pembaruan April Visual Studio dan apa yang diubah integrasi Cloud Agent untuk alur kerja .NET."
+description: "Pembaruan April Visual Studio 2026 (18.5) menghadirkan integrasi agen cloud, agen kustom tingkat pengguna, alat C++ menjadi GA, dan Agen Debugger yang memvalidasi perbaikan terhadap perilaku runtime nyata."
 tags:
   - Visual Studio
   - .NET
@@ -12,20 +12,37 @@ tags:
 
 *Posting ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "index.md" >}}).*
 
-[Visual Studio April Update: Cloud Agent Integration for .NET Workflows](https://devblogs.microsoft.com/visualstudio/visual-studio-april-update-cloud-agent-integration/) layak untuk dicermati jika Anda sedang membangun atau mengoperasikan sistem .NET dalam skala besar.
+[Pembaruan April Visual Studio 2026 (18.5)](https://devblogs.microsoft.com/visualstudio/visual-studio-april-update-cloud-agent-integration/) menghadirkan integrasi agen cloud, agen kustom tingkat pengguna, alat C++ yang mencapai GA, dan Agen Debugger baru.
 
-Dari sudut pandang saya, yang penting bukan fitur utamanya, melainkan seberapa cepat sebuah tim dapat mengubahnya menjadi alur kerja rekayasa yang lebih aman dan dapat diulang.
+## Agen cloud: mendelegasikan pekerjaan ke sesi Copilot jarak jauh
 
-## Mengapa ini penting bagi tim .NET
+Dari pemilih agen di jendela Chat, memilih **Cloud** memungkinkan Anda mendelegasikan tugas ke agen coding Copilot jarak jauh. Anda mendeskripsikan pekerjaan, agen membuat issue GitHub di repositori Anda, lalu membuka PR saat selesai. Anda mendapat notifikasi dengan "View PR" / "Open in browser" — semuanya berjalan sementara Anda terus coding, atau bahkan dengan IDE tertutup.
 
-Kebanyakan tim menyeimbangkan antara kecepatan pengiriman, konsistensi platform, dan tata kelola. Pembaruan ini berguna karena memberikan jalur yang lebih konkret untuk meningkatkan salah satu hambatan tersebut tanpa menulis ulang segalanya.
+## Agen kustom kini mengikuti Anda
 
-## Langkah praktis selanjutnya
+Agen kustom tingkat pengguna yang tersimpan di `%USERPROFILE%/.github/agents/` tidak lagi terbatas pada repositori — mereka mengikuti Anda lintas proyek. Jalur penyimpanan dapat dikonfigurasi di Tools > Options > GitHub > Copilot > Chat. Tombol `+` di pemilih agen memungkinkan pembuatan agen baru secara langsung. Mereka mendapat kemampuan yang sama seperti agen berbasis repositori: kesadaran ruang kerja, alat, pemilihan model, dan koneksi MCP.
 
-1. Validasi fitur dalam pilot .NET kecil dengan data mirip produksi.
-2. Tambahkan titik pemeriksaan rollback dan observabilitas yang jelas sebelum peluncuran yang lebih luas.
-3. Tangkap pola implementasi dalam template internal Anda sehingga tim lain dapat menggunakannya kembali.
+Agen bawaan: Agent, Ask, Copilot CLI, Debugger, Modernize, Profiler.
 
-## Sumber
+## Alat Pengeditan Kode C++ menjadi GA
 
-- Artikel asli: [https://devblogs.microsoft.com/visualstudio/visual-studio-april-update-cloud-agent-integration/](https://devblogs.microsoft.com/visualstudio/visual-studio-april-update-cloud-agent-integration/)
+Dua alat — `get_symbol_call_hierarchy` dan `get_symbol_class_hierarchy` — kini aktif secara default. Mereka memberi Copilot navigasi berbasis bahasa dari basis kode C++, mencakup hierarki warisan dan rantai pemanggilan fungsi. Aktifkan melalui ikon Tools di Copilot Chat. Bekerja paling baik dengan model tool-calling.
+
+## Agen Debugger: perbaikan divalidasi terhadap perilaku runtime nyata
+
+Mulai dari issue GitHub atau Azure DevOps (atau deskripsi bahasa alami), beralih ke mode Debugger, dan agen:
+
+1. Membuat reproducer minimal
+2. Menghasilkan hipotesis kegagalan
+3. Menginstrumentasi aplikasi dengan tracepoint dan breakpoint bersyarat
+4. Menjalankan sesi debug nyata
+5. Menganalisis telemetri langsung
+6. Menyarankan perbaikan yang tepat
+
+Anda tetap terlibat selama proses — ini interaktif, tidak sepenuhnya otonom.
+
+## Perbaikan prioritas IntelliSense
+
+VS kini menekan penyelesaian Copilot saat daftar IntelliSense aktif. Satu saran pada satu waktu. Ini adalah titik gesekan yang sering terjadi dan kini aktif secara default.
+
+Catatan rilis lengkap dan unduhan di [devblogs.microsoft.com](https://devblogs.microsoft.com/visualstudio/visual-studio-april-update-cloud-agent-integration/).
