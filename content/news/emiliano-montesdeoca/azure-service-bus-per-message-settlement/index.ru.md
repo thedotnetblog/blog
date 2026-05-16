@@ -2,7 +2,7 @@
 title: "Исправление пакетной обработки «всё или ничего» в Azure Service Bus"
 date: 2026-05-10
 author: "Emiliano Montesdeoca"
-description: "Почему пакетная обработка «всё или ничего» снижает надёжность и как расчёт на уровне отдельных сообщений улучшает рабочие процессы Service Bus для .NET."
+description: "Azure Functions теперь поддерживает расчёт на уровне отдельных сообщений для триггеров Service Bus, позволяя независимо завершать, отклонять, отправлять в очередь недоставленных сообщений или откладывать каждое сообщение в пакете."
 tags:
   - .NET
   - Azure Service Bus
@@ -10,22 +10,85 @@ tags:
   - Reliability
 ---
 
-*Этот пост был переведён автоматически. Оригинальная версия — [здесь]({{< ref "index.md" >}}).*
+*Этот пост был переведён автоматически. Для оригинальной версии [нажмите здесь]({{< ref "index.md" >}}).*
 
-[Fixing All-or-Nothing Batch Processing in Azure Service Bus](https://devblogs.microsoft.com/azure-sdk/per-message-settlement-azure-service-bus/) заслуживает внимания, если вы создаёте или эксплуатируете .NET-системы в масштабе.
+[Расчёт на уровне отдельных сообщений для Azure Service Bus в Azure Functions](https://devblogs.microsoft.com/azure-sdk/per-message-settlement-azure-service-bus/) решает классическую проблему сбоя пакета «всё или ничего»: если одно сообщение из пакета в 50 сообщений не обрабатывается, все 50 возвращаются в очередь.
 
-На мой взгляд, важна не основная функция, а то, как быстро команда может превратить её в более безопасный и воспроизводимый инженерный процесс.
+## Проблема пакетной обработки
 
-## Почему это важно для .NET-команд
+В старой модели Azure Functions обрабатывал сообщения в пакетном режиме с бинарным результатом: либо весь пакет успешно обрабатывался, либо весь пакет завершался сбоем. Одно некорректное сообщение означало, что все 49 исправных сообщений возвращались в очередь, повторно обрабатывались и снова проверялись на идемпотентность — впустую расходуя вычислительные ресурсы, увеличивая расходы и создавая циклы повторных попыток, из которых трудно было выйти.
 
-Большинство команд балансируют между скоростью разработки, согласованностью платформы и управлением. Это обновление полезно, потому что даёт более конкретный путь к улучшению одного из этих аспектов без переписывания всего с нуля.
+## Четыре действия при расчёте на уровне сообщения
 
-## Практические следующие шаги
+Расчёт на уровне сообщения даёт вам четыре независимых действия для каждого сообщения:
 
-1. Проверьте функцию на небольшом .NET-пилоте с данными, близкими к рабочим.
-2. Добавьте чёткие контрольные точки отката и наблюдаемости перед более широким развёртыванием.
-3. Зафиксируйте шаблон реализации во внутренних шаблонах, чтобы другие команды могли им воспользоваться.
+- **Завершить (Complete)** — удалить сообщение из очереди (обработка успешна)
+- **Отклонить (Abandon)** — вернуть для повторной попытки, опционально изменив свойства приложения (полезно при временных ошибках)
+- **Dead-letter** — переместить в очередь недоставленных сообщений (отравленное сообщение, невосстановимое)
+- **Отложить (Defer)** — сохранить, но сделать доступным только по порядковому номеру
 
-## Источник
+В пакете из 50 сообщений теперь можно завершить 47, отклонить 2 с временными ошибками и отправить 1 некорректное сообщение в dead-letter — всё в рамках одного вызова функции.
 
-- Оригинальная статья: [https://devblogs.microsoft.com/azure-sdk/per-message-settlement-azure-service-bus/](https://devblogs.microsoft.com/azure-sdk/per-message-settlement-azure-service-bus/)
+## Примеры кода
+
+**.NET (C#):**
+```csharp
+[Function("ProcessOrderBatch")]
+public async Task Run(
+    [ServiceBusTrigger("orders-queue", IsBatched = true)] ServiceBusReceivedMessage[] messages,
+    ServiceBusMessageActions messageActions)
+{
+    foreach (var message in messages)
+    {
+        try {
+            await messageActions.CompleteMessageAsync(message);
+        } catch {
+            await messageActions.DeadLetterMessageAsync(message);
+        }
+    }
+}
+```
+
+**Node.js/TypeScript:**
+```typescript
+import '@azure/functions-extensions-servicebus';
+export async function processOrderBatch(sbContext, context) {
+    const { messages, actions } = sbContext;
+    for (const message of messages) {
+        try {
+            await processOrder(messageBodyAsJson(message));
+            await actions.complete(message);
+        } catch {
+            await actions.deadletter(message);
+        }
+    }
+}
+app.serviceBusQueue('processOrderBatch', {
+    sdkBinding: true,
+    autoCompleteMessages: false,
+    cardinality: 'many',
+    handler: processOrderBatch
+});
+```
+
+**Python V2:**
+```python
+@app.service_bus_queue_trigger(auto_complete_messages=False, cardinality="many")
+def process_order_batch(messages, message_actions):
+    for message in messages:
+        try:
+            process_order(json.loads(message.body))
+            message_actions.complete(message)
+        except:
+            message_actions.deadletter(message)
+```
+
+## Экспоненциальная задержка без дополнительной инфраструктуры
+
+Сочетание `abandon` с изменёнными свойствами приложения позволяет реализовать экспоненциальную задержку прямо в очереди — без Durable Functions или дополнительных очередей. Сохраните счётчик повторных попыток в свойствах приложения сообщения, прочитайте его при повторной доставке и вычислите задержку. Раньше этот паттерн требовал значительной оркестровки; теперь это несколько строк в обработчике повторных попыток.
+
+## Прирост эффективности пакетной обработки
+
+Старая модель до пакетной обработки отправляла каждое сообщение как отдельный вызов функции: 50 сообщений означали 50 подключений, 50 холодных запусков, 50 завершений. Новая модель обрабатывает все 50 в одном вызове, а расчёт на уровне сообщения означает, что вы не теряете эту эффективность при возникновении ошибок.
+
+Читайте полный пост на [devblogs.microsoft.com](https://devblogs.microsoft.com/azure-sdk/per-message-settlement-azure-service-bus/).
