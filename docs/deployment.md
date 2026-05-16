@@ -6,13 +6,15 @@ The `hugo --gc --minify` command generates a static site in `public/`. The site 
 
 ## How it works
 
-A workflow at `.github/workflows/deploy.yml` runs on every push to `main`. It builds Hugo and force-pushes the static output to the `public` branch (orphan branch containing only the built site).
+A workflow at `.github/workflows/deploy.yml` runs on every push to `main`, on a daily schedule (`0 2 * * *` UTC), and when manually dispatched. It builds Hugo and force-pushes the static output to the `public` branch (orphan branch containing only the built site).
 
 ```yaml
 # .github/workflows/deploy.yml (summary)
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "0 2 * * *"
   workflow_dispatch:
 
 jobs:
