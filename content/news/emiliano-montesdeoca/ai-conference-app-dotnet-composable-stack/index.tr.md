@@ -2,7 +2,7 @@
 title: ".NET'in Birleştirilebilir Stack'i ile Yapay Zeka Destekli Konferans Uygulaması Oluşturma"
 date: 2026-05-06
 author: "Emiliano Montesdeoca"
-description: "Yapay zeka destekli bir konferans uygulaması oluştururken birleştirilebilir .NET stack'inin pratikte nasıl göründüğü."
+description: "Microsoft, ConferencePulse'u oluşturdu — Microsoft.Extensions.AI, DataIngestion, VectorData, MCP ve Agent Framework'ü bir araya getirerek canlı konferans Blazor uygulaması. Parçaların nasıl bir araya geldiğini açıklıyoruz."
 tags:
   - .NET
   - AI
@@ -10,22 +10,45 @@ tags:
   - Developer Productivity
 ---
 
-*Bu gönderi otomatik olarak çevrilmiştir. Orijinal sürüm için [buraya tıklayın]({{< ref "index.md" >}}).*
+*Bu gönderi otomatik olarak çevrildi. Orijinal versiyon için [buraya tıklayın]({{< ref "index.md" >}}).*
 
-[Building an AI-Powered Conference App with .NET's Composable Stack](https://devblogs.microsoft.com/dotnet/building-ai-conference-app-dotnet-composable-stack/) .NET sistemlerini büyük ölçekte oluşturuyorsanız veya çalıştırıyorsanız, yakından incelemeye değer.
+[.NET'in Birleştirilebilir Stack'i ile Yapay Zeka Destekli Konferans Uygulaması Oluşturma](https://devblogs.microsoft.com/dotnet/building-ai-conference-app-dotnet-composable-stack/) — Microsoft, beş .NET uzantı kütüphanesini bir araya getirerek canlı konferans oturumları için bir Blazor Server uygulaması olan ConferencePulse'u oluşturdu. MVP Summit'te kullanıldı.
 
-Benim bakış açıma göre, önemli olan başlık özelliği değil; bir ekibin bunu ne kadar hızlı daha güvenli ve tekrarlanabilir bir mühendislik iş akışına dönüştürebileceğidir.
+## ConferencePulse ne yapar
 
-## .NET ekipleri için neden önemli
+ConferencePulse canlı oturumlar sırasında çalışır ve şunları sağlar: oturum içeriğinden AI tarafından oluşturulan anketler, canlı bir bilgi tabanından RAG pipeline'ı ile dinleyici Soru-Cevap, otomatik oluşturulan içgörüler ve birden fazla eş zamanlı AI ajanı tarafından üretilen oturum özetleri. Stack .NET 10, Blazor Server, Aspire'dan oluşur ve beş projeye bölünmüştür: Web, Core, Ingestion, Agents, Mcp ve AppHost.
 
-Çoğu ekip, teslimat hızı, platform tutarlılığı ve yönetim arasında denge kurmaya çalışmaktadır. Bu güncelleme, her şeyi yeniden yazmadan bu kısıtlamalardan birini iyileştirmek için daha somut bir yol sunduğu için faydalıdır.
+## Microsoft.Extensions.AI: her şey için tek soyutlama
 
-## Pratik sonraki adımlar
+`IChatClient` birleşik soyutlamadır — bir kez yapılandırılır ve aynı arayüz Azure OpenAI, OpenAI, Anthropic veya diğer sağlayıcılar için çalışır. Fonksiyon çağırma, OpenTelemetry izleme ve loglama middleware'i ile tam yapılandırılmış bir istemci için altı satır:
 
-1. Özelliği, üretime benzer verilerle küçük bir .NET pilotunda doğrulayın.
-2. Daha geniş bir dağıtımdan önce net geri alma ve gözlemlenebilirlik kontrol noktaları ekleyin.
-3. Uygulama kalıbını iç şablonlarınıza kaydedin, böylece diğer ekipler onu yeniden kullanabilir.
+```csharp
+services.AddChatClient(new AzureOpenAIClient(...).GetChatClient("gpt-4o"))
+    .UseFunctionInvocation()
+    .UseOpenTelemetry()
+    .UseLogging();
+```
 
-## Kaynak
+Aynı `IChatClient` daha sonra veri alımı zenginleştirme adımı için yeniden kullanılır — bunun için ayrı bir istemciye gerek yoktur.
 
-- Orijinal makale: [https://devblogs.microsoft.com/dotnet/building-ai-conference-app-dotnet-composable-stack/](https://devblogs.microsoft.com/dotnet/building-ai-conference-app-dotnet-composable-stack/)
+## DataIngestion pipeline'ı
+
+Oturum içeriği bir pipeline'dan geçer: `MarkdownReader` → `HeaderChunker` (500 token, 50 token örtüşme) → `SummaryEnricher` + `KeywordEnricher` → `VectorStoreWriter` (Qdrant). Zenginleştiriciler, indeksleme öncesinde özet oluşturmak ve anahtar kelimeleri çıkarmak için aynı `IChatClient`'ı kullanır. Dinleyici soruları, Soru-Cevap çiftleri ve anket sonuçları oturum ilerledikçe gerçek zamanlı olarak alınır — bilgi tabanı konuşma sırasında büyür.
+
+## VectorData: sağlayıcıdan bağımsız arama
+
+`VectorStoreCollection.SearchAsync()`, destekleyici depo Qdrant veya Azure AI Search olsun, aynı şekilde çalışır. Hibrit arama (vektör + tam metin) desteklenmektedir. Dinleyici Soru-Cevap için RAG pipeline'ı bu koleksiyonu sorgular ve sohbet istemcisine bağlam olarak iletmek üzere ilgili parçaları geri alır.
+
+## MCP: araç olarak oturum içeriği
+
+Oturum içeriği, MCP uyumlu herhangi bir istemcinin erişebilmesi için MCP aracılığıyla açığa çıkarılır. Hem sunucu hem de istemci uygulanmıştır — sunucu, oturum bilgisini MCP araçları olarak açığa çıkarır ve istemci, ajan pipeline'ı içinden bu araçların çağrılmasına olanak tanır.
+
+## Agent Framework: paralel çoklu ajan özeti
+
+Oturum özeti, eş zamanlı olarak çalışan üç ajan tarafından oluşturulur — `PollSummaryAgent`, `QuestionSummaryAgent` ve `InsightSummaryAgent` — ardından birleştirilir. Bu, Microsoft Agent Framework'ün grup sohbeti veya paralel yürütme modelini kullanır. Her ajan bir konuyu ele alır; orkestratör çıktıları birleştirir.
+
+## Tasarım ilkesi
+
+Yazı, akılda tutmaya değer bir nokta vurguluyor: en basit uygun aracı kullanın. Basit üretim görevleri için doğrudan `IChatClient` çağrıları. Yapılandırılmış veri çıkarma için araç/fonksiyon çağrısı. Yalnızca özerk çok adımlı akıl yürütmeye ihtiyaç duyulduğunda tam ajanlar. Kütüphane katmanlama bunu zorunlu kılar — tam Agent Framework'ü dahil etmeden `Microsoft.Extensions.AI`'yi kullanabilirsiniz.
+
+Tam proje yapısı ve kaynak bağlantıları için [tam yazıya](https://devblogs.microsoft.com/dotnet/building-ai-conference-app-dotnet-composable-stack/) bakın.
