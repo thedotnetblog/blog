@@ -1,8 +1,8 @@
 ---
-title: "Azure Data Studio Emekli Oldu: Azure SQL İş Akışınızı VS Code'a Taşıyın"
+title: "Azure Data Studio Kullanımdan Kaldırıldı: Azure SQL İş Akışınızı VS Code'a Taşıyın"
 date: 2026-05-09
 author: "Emiliano Montesdeoca"
-description: "Azure Data Studio'nun kullanımdan kaldırılmasının .NET ekipleri için anlamı ve VS Code'da Azure SQL iş akışları için pratik bir geçiş yolu."
+description: "Azure Data Studio 6 Şubat 2025'te kullanımdan kaldırıldı, destek 28 Şubat 2026'da sona eriyor. MSSQL uzantısıyla VS Code'a geçişin tam yolu burada."
 tags:
   - .NET
   - Azure SQL
@@ -10,22 +10,42 @@ tags:
   - Developer Tools
 ---
 
-*Bu gönderi otomatik olarak çevrilmiştir. Orijinal sürüm için [buraya tıklayın]({{< ref "index.md" >}}).*
+*Bu gönderi otomatik olarak çevrildi. Orijinal versiyon için [buraya tıklayın]({{< ref "index.md" >}}).*
 
-[Azure Data Studio Is Retired: Move Your Azure SQL Workflow to VS Code](https://devblogs.microsoft.com/azure-sql/azure-data-studio-is-retired-move-your-azure-sql-workflow-to-vs-code-in-10-minutes/) .NET sistemlerini büyük ölçekte oluşturuyorsanız veya çalıştırıyorsanız, yakından incelemeye değer.
+[Azure Data Studio 6 Şubat 2025'te kullanımdan kaldırıldı](https://devblogs.microsoft.com/azure-sql/azure-data-studio-is-retired-move-your-azure-sql-workflow-to-vs-code-in-10-minutes/), destek 28 Şubat 2026'da sona eriyor — önerilen alternatif MSSQL uzantısıyla VS Code'dur.
 
-Benim bakış açıma göre, önemli olan başlık özelliği değil; bir ekibin bunu ne kadar hızlı daha güvenli ve tekrarlanabilir bir mühendislik iş akışına dönüştürebileceğidir.
+## Ne Kurulacak
 
-## .NET ekipleri için neden önemli
+Başlamak için üç şey:
 
-Çoğu ekip, teslimat hızı, platform tutarlılığı ve yönetim arasında denge kurmaya çalışmaktadır. Bu güncelleme, her şeyi yeniden yazmadan bu kısıtlamalardan birini iyileştirmek için daha somut bir yol sunduğu için faydalıdır.
+- **MSSQL uzantısı** — VS Code Marketplace'te "SQL Server (mssql)" arayın
+- **SQL Database Projects uzantısı** — şema olarak kod, derleme doğrulaması, rehberli yayımlama
+- **.NET 8 SDK** — derleme sistemi tarafından gerekli; SDK eksikliği ilk çalıştırmadaki en yaygın sorundur
 
-## Pratik sonraki adımlar
+## ADS Bağlantılarınızı ve Ayarlarınızı Taşıma
 
-1. Özelliği, üretime benzer verilerle küçük bir .NET pilotunda doğrulayın.
-2. Daha geniş bir dağıtımdan önce net geri alma ve gözlemlenebilirlik kontrol noktaları ekleyin.
-3. Uygulama kalıbını iç şablonlarınıza kaydedin, böylece diğer ekipler onu yeniden kullanabilir.
+MSSQL uzantısı, rehberli bir akışta tek seferlik geçişi yöneten **ADS Migration Toolkit**'i içerir: kaydedilmiş bağlantılar, bağlantı grupları, ayarlar ve tuş bağlamaları otomatik olarak içe aktarılır.
 
-## Kaynak
+## F5 Kas Hafızasını Geri Kazanma
 
-- Orijinal makale: [https://devblogs.microsoft.com/azure-sql/azure-data-studio-is-retired-move-your-azure-sql-workflow-to-vs-code-in-10-minutes/](https://devblogs.microsoft.com/azure-sql/azure-data-studio-is-retired-move-your-azure-sql-workflow-to-vs-code-in-10-minutes/)
+ADS kullanıcıları sorgu çalıştırmak için F5'e güvenir. F5 dahil ADS tarzı tuş bağlamalarını geri almak için **MSSQL Database Management Keymap** uzantısını yükleyin.
+
+## SQL Database Projects: Şema Olarak Kod
+
+Projeye sağ tıklayın → **Yayımla** → hedefi yapılandır → oluşturulan T-SQL betiğini gözden geçir → dağıt. Dağıtım öncesindeki betik önizlemesi temel güvenlik özelliğidir. Öğe şablonları tablolar, saklı yordamlar ve görünümler için taslaklar oluşturur — SSDT ile aynı iş akışı.
+
+Sık karşılaşılan sorun: Proje farklı bir SQL Server sürümü için oluşturulmuşsa `.sqlproj` dosyasındaki **hedef platform uyumsuzluğu** derleme hatalarına yol açar.
+
+## Schema Compare ve Schema Designer
+
+Uzantı ayrıca **Schema Compare** (projenizi dağıtılmış veritabanıyla karşılaştırma) ve **Schema Designer** (DDL yazmadan görsel şema düzenleme) içerir.
+
+## Microsoft Fabric Geliştiricileri
+
+Kurulum aynı, ancak VS Code'da açmadan önce **Fabric portalından** başlayın ve veritabanını önce Git'e bağlayın. Microsoft'un özel bir kılavuzu var: *Azure Data Studio to VS Code — What it means for SQL database in Fabric developers*.
+
+## Sonuç
+
+Geçiş, manuel bir yeniden yapılandırma değil, tek seferlik rehberli bir akıştır. Üç aracı yükleyin, ADS Migration Toolkit'i çalıştırın, tuş bağlamalarınızı geri yükleyin — 10 dakikadan kısa sürede normale dönün.
+
+Adım adım ekran görüntüleri ve Fabric'e özgü kılavuz için [tam makaleye](https://devblogs.microsoft.com/azure-sql/azure-data-studio-is-retired-move-your-azure-sql-workflow-to-vs-code-in-10-minutes/) bakın.
