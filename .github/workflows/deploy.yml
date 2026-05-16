@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  schedule:
+    # Daily rebuild to keep the published branch up to date.
+    - cron: "0 2 * * *"
   workflow_dispatch:
 
 permissions:
