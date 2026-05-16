@@ -2,7 +2,7 @@
 title: "LangChain + Azure Cosmos DB untuk Aplikasi Agentik dan RAG"
 date: 2026-05-12
 author: "Emiliano Montesdeoca"
-description: "Bagaimana integrasi LangChain dengan Azure Cosmos DB membantu tim .NET merancang sistem agentik dan RAG dengan fondasi data yang lebih kuat."
+description: "langchain-azure-cosmosdb adalah paket Python baru yang mengkonsolidasikan pencarian vektor, riwayat obrolan, checkpointing status agen, caching semantik, dan memori jangka panjang ke dalam satu backend Azure Cosmos DB for NoSQL."
 tags:
   - .NET
   - Azure Cosmos DB
@@ -12,20 +12,67 @@ tags:
 
 *Posting ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "index.md" >}}).*
 
-[LangChain + Azure Cosmos DB for Agentic Apps and RAG](https://devblogs.microsoft.com/cosmosdb/langchain-azure-cosmos-db-agents-rag/) layak untuk dicermati jika Anda sedang membangun atau mengoperasikan sistem .NET dalam skala besar.
+[`langchain-azure-cosmosdb`](https://devblogs.microsoft.com/cosmosdb/langchain-azure-cosmos-db-agents-rag/) (`pip install langchain-azure-cosmosdb`) adalah paket Python baru yang menghubungkan LangChain dan LangGraph ke Azure Cosmos DB for NoSQL, menggantikan 5+ layanan terpisah yang biasa digunakan untuk penyimpanan vektor, caching, riwayat, dan memori dengan satu database.
 
-Dari sudut pandang saya, yang penting bukan fitur utamanya, melainkan seberapa cepat sebuah tim dapat mengubahnya menjadi alur kerja rekayasa yang lebih aman dan dapat diulang.
+## Enam integrasi dalam satu paket
 
-## Mengapa ini penting bagi tim .NET
+Paket ini hadir dengan enam kelas integrasi (masing-masing dengan varian sinkron dan asinkron):
 
-Kebanyakan tim menyeimbangkan antara kecepatan pengiriman, konsistensi platform, dan tata kelola. Pembaruan ini berguna karena memberikan jalur yang lebih konkret untuk meningkatkan salah satu hambatan tersebut tanpa menulis ulang segalanya.
+1. **AzureCosmosDBNoSqlVectorSearch** — pencarian vektor, teks lengkap (BM25), hibrid (vektor+teks dengan RRF), dan hibrid berbobot
+2. **AzureCosmosDBNoSqlSemanticCache** — cache respons LLM untuk mengurangi latensi dan biaya pada kueri berulang
+3. **CosmosDBChatMessageHistory** — menyimpan riwayat percakapan dengan dukungan TTL
+4. **CosmosDBSaverSync / CosmosDBSaver** — checkpointer LangGraph: menyimpan status graf per thread_id antar pemanggilan
+5. **CosmosDBCacheSync / CosmosDBCache** — caching hasil tingkat node LangGraph
+6. **CosmosDBStore / AsyncCosmosDBStore** — memori jangka panjang dengan organisasi namespace dan pencarian semantik
 
-## Langkah praktis selanjutnya
+Autentikasi kunci akses dan Managed Identity (Entra ID) didukung di semua integrasi.
 
-1. Validasi fitur dalam pilot .NET kecil dengan data mirip produksi.
-2. Tambahkan titik pemeriksaan rollback dan observabilitas yang jelas sebelum peluncuran yang lebih luas.
-3. Tangkap pola implementasi dalam template internal Anda sehingga tim lain dapat menggunakannya kembali.
+## Pencarian vektor dan hibrid
 
-## Sumber
+Azure Cosmos DB for NoSQL mendukung indeks vektor DiskANN dan Quantized Flat, diskalakan dari ribuan hingga miliaran vektor — database yang sama yang mendukung riwayat percakapan dan memori ChatGPT di OpenAI. Menyiapkan pencarian hibrid:
 
-- Artikel asli: [https://devblogs.microsoft.com/cosmosdb/langchain-azure-cosmos-db-agents-rag/](https://devblogs.microsoft.com/cosmosdb/langchain-azure-cosmos-db-agents-rag/)
+```python
+vectorstore = AzureCosmosDBNoSqlVectorSearch(
+    cosmos_client=...,
+    embedding=AzureOpenAIEmbeddings(...),
+    ...
+)
+results = vectorstore.similarity_search(
+    "distributed database",
+    k=5,
+    search_type="hybrid",
+    full_text_rank_filter=[{"search_field": "text", "search_text": "distributed"}]
+)
+```
+
+## Agen multi-giliran LangGraph dengan checkpointing Cosmos
+
+Checkpointer `CosmosDBSaverSync` menyimpan status graf LangGraph agar agen dapat mengingat konteks di berbagai pemanggilan terpisah — tanpa memerlukan status di memori:
+
+```python
+checkpointer = CosmosDBSaverSync(
+    database_name="agents-db",
+    container_name="checkpoints",
+    endpoint="..."
+)
+app = graph.compile(checkpointer=checkpointer)
+
+# Giliran 1
+app.invoke(
+    {"messages": [("user", "Hi, I'm Alice!")]},
+    config={"configurable": {"thread_id": "user-123"}}
+)
+
+# Giliran 2 — status tersimpan dari giliran 1
+app.invoke(
+    {"messages": [("user", "What's my name?")]},
+    config={"configurable": {"thread_id": "user-123"}}
+)
+# Mengembalikan: "Your name is Alice!"
+```
+
+## Satu database sebagai pengganti lima
+
+Mengkonsolidasikan segalanya ke Cosmos DB for NoSQL berarti satu koneksi, satu set kredensial, satu tombol penskalaan, dan satu tempat untuk dilihat ketika ada yang salah. Paket tersedia di PyPI dan sumbernya ada di [langchain-ai/langchain-azure](https://github.com/langchain-ai/langchain-azure) di GitHub.
+
+Detail lengkap di [devblogs.microsoft.com](https://devblogs.microsoft.com/cosmosdb/langchain-azure-cosmos-db-agents-rag/).
