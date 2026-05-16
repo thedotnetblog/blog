@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio Code 1.119: .NET için Pratik Öne Çıkanlar"
-date: 2026-05-04
+date: 2026-05-15
 author: "Emiliano Montesdeoca"
 description: "VS Code 1.119'a .NET pratik bakış açısı: önce neyi test etmeli ve günlük geliştirmeyi nerede iyileştirebilir."
 tags:

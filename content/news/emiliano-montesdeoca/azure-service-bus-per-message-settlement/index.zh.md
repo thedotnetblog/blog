@@ -1,6 +1,6 @@
 ---
 title: "xiufu Azure Service Bus quan you huo quan wu de pichuli wenti"
-date: 2026-05-04
+date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "Weirao \"xiufu Azure Service Bus quan you huo quan wu de pichuli wenti\" de .NET tuandui shiyong jiedu baohan ke luodi de shengchan pinggu buzhou."
 tags:

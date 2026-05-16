@@ -1,6 +1,6 @@
 ---
 title: "Eliminare il lavoro ripetitivo di migrazione con l'ingegneria di piattaforma agentica"
-date: 2026-05-04
+date: 2026-05-05
 author: "Emiliano Montesdeoca"
 description: "Sintesi pratica per team .NET su \"Eliminare il lavoro ripetitivo di migrazione con l'ingegneria di piattaforma agentica\", con passi chiari per valutarlo in produzione."
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio Code 1.119 punti pratici per .NET"
-date: 2026-05-04
+date: 2026-05-15
 author: "Emiliano Montesdeoca"
 description: "Sintesi pratica per team .NET su \"Visual Studio Code 1.119 punti pratici per .NET\", con passi chiari per valutarlo in produzione."
 tags:

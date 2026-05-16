@@ -1,6 +1,6 @@
 ---
 title: "Budowanie aplikacji konferencyjnej napędzanej AI ze składanym stosem .NET"
-date: 2026-05-04
+date: 2026-05-06
 author: "Emiliano Montesdeoca"
 description: "Jak wygląda w praktyce składany stos .NET podczas budowania aplikacji konferencyjnej napędzanej AI."
 tags:

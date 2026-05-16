@@ -1,6 +1,6 @@
 ---
 title: ".NET keompojeobeul seutaegeuro AI keonpeoreonseu aep mandeulgi"
-date: 2026-05-04
+date: 2026-05-06
 author: "Emiliano Montesdeoca"
 description: "\".NET keompojeobeul seutaegeuro AI keonpeoreonseu aep mandeulgi\"reul .NET tim gwanjeomeseo silmujeogeuro jeongrihago unyeong geomto dangyereul damassseubnida."
 tags:

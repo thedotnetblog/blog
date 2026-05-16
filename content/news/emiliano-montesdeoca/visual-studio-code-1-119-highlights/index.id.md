@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio Code 1.119: Sorotan Praktis untuk .NET"
-date: 2026-05-04
+date: 2026-05-15
 author: "Emiliano Montesdeoca"
 description: "Pandangan .NET praktis tentang VS Code 1.119: apa yang harus diuji terlebih dahulu, dan di mana ia dapat meningkatkan pengembangan sehari-hari."
 tags:

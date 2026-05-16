@@ -1,6 +1,6 @@
 ---
 title: "Pembaruan April Visual Studio: Integrasi Cloud Agent untuk Alur Kerja .NET"
-date: 2026-05-04
+date: 2026-05-14
 author: "Emiliano Montesdeoca"
 description: "Panduan terperinci tentang pembaruan April Visual Studio dan apa yang diubah integrasi Cloud Agent untuk alur kerja .NET."
 tags:

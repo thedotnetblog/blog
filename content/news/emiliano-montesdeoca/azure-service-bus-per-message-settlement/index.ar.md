@@ -1,6 +1,6 @@
 ---
 title: "إصلاح معالجة الدُفعات الكاملة أو لا شيء في Azure Service Bus"
-date: 2026-05-04
+date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "لماذا تضرّ معالجة الدُفعات الكاملة أو لا شيء بالموثوقية، وكيف يُحسّن التسوية لكل رسالة سير عمل Service Bus لـ .NET."
 tags:

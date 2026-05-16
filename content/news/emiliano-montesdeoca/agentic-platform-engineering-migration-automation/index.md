@@ -1,6 +1,6 @@
 ---
 title: "Removing the Monkey Work of Migration with Agentic Platform Engineering"
-date: 2026-05-04
+date: 2026-05-05
 author: "Emiliano Montesdeoca"
 description: "A practical look at using agentic platform engineering to reduce repetitive migration work in enterprise .NET programs."
 tags:

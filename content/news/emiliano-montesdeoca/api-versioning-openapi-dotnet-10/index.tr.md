@@ -1,6 +1,6 @@
 ---
 title: ".NET 10'da API Sürüm Yönetimini OpenAPI ile Birleştirme"
-date: 2026-05-04
+date: 2026-05-07
 author: "Emiliano Montesdeoca"
 description: "Sözleşmeleri açık ve geliştirilebilir tutmak için .NET 10'da API sürüm yönetimini ve OpenAPI'yi birleştirmeye pratik bir yaklaşım."
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "Azure Data Studio foi aposentado: mova seu fluxo de Azure SQL para o VS Code"
-date: 2026-05-04
+date: 2026-05-09
 author: "Emiliano Montesdeoca"
 description: "Resumo pratico para equipes .NET sobre \"Azure Data Studio foi aposentado: mova seu fluxo de Azure SQL para o VS Code\", com passos objetivos para avaliar em producao."
 tags:

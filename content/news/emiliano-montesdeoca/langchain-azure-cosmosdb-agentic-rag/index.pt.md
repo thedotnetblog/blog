@@ -1,6 +1,6 @@
 ---
 title: "LangChain mais Azure Cosmos DB para apps agenticos e RAG"
-date: 2026-05-04
+date: 2026-05-12
 author: "Emiliano Montesdeoca"
 description: "Resumo pratico para equipes .NET sobre \"LangChain mais Azure Cosmos DB para apps agenticos e RAG\", com passos objetivos para avaliar em producao."
 tags:

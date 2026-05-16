@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio April-update: Cloud Agent-integratie voor .NET-workflows"
-date: 2026-05-04
+date: 2026-05-14
 author: "Emiliano Montesdeoca"
 description: "Een gerichte doorloop van de april Visual Studio-update en wat Cloud Agent-integratie verandert voor .NET-workflows."
 tags:

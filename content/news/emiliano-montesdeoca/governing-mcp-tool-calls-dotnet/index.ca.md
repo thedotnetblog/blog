@@ -1,6 +1,6 @@
 ---
 title: "Governar les crides d'eines MCP a .NET amb l'Agent Governance Toolkit"
-date: 2026-05-04
+date: 2026-05-11
 author: "Emiliano Montesdeoca"
 description: "Resum practic per a equips .NET sobre \"Governar les crides d'eines MCP a .NET amb l'Agent Governance Toolkit\", amb passos clars per avaluar-ho en produccio."
 tags:

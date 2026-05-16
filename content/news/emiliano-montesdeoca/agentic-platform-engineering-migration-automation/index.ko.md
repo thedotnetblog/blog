@@ -1,6 +1,6 @@
 ---
 title: "eijeontik peullaetpom enjinieoring euro maigeureisyeon banbok jag-eob juligi"
-date: 2026-05-04
+date: 2026-05-05
 author: "Emiliano Montesdeoca"
 description: "\"eijeontik peullaetpom enjinieoring euro maigeureisyeon banbok jag-eob juligi\"reul .NET tim gwanjeomeseo silmujeogeuro jeongrihago unyeong geomto dangyereul damassseubnida."
 tags:

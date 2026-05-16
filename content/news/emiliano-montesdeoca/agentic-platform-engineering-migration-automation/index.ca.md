@@ -1,6 +1,6 @@
 ---
 title: "Eliminar la feina mecanica de migracio amb enginyeria de plataforma agentica"
-date: 2026-05-04
+date: 2026-05-05
 author: "Emiliano Montesdeoca"
 description: "Resum practic per a equips .NET sobre \"Eliminar la feina mecanica de migracio amb enginyeria de plataforma agentica\", amb passos clars per avaluar-ho en produccio."
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "Obsługa projektów rozszerzeń w stylu SDK dla Visual Studio"
-date: 2026-05-04
+date: 2026-05-13
 author: "Emiliano Montesdeoca"
 description: "Dlaczego wsparcie projektów w stylu SDK dla rozszerzeń Visual Studio jest znaczącym uproszczeniem dla .NET development rozszerzeń."
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "Building an AI-Powered Conference App with .NET's Composable Stack"
-date: 2026-05-04
+date: 2026-05-06
 author: "Emiliano Montesdeoca"
 description: "What the composable .NET stack looks like in practice when building an AI-powered conference application."
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "الجمع بين إدارة إصدارات API وOpenAPI في .NET 10"
-date: 2026-05-04
+date: 2026-05-07
 author: "Emiliano Montesdeoca"
 description: "نهج عملي للجمع بين إدارة إصدارات API وOpenAPI في .NET 10 للحفاظ على عقود واضحة وقابلة للتطور."
 tags:

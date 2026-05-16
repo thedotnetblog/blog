@@ -1,6 +1,6 @@
 ---
 title: "Alles-of-niets batchverwerking oplossen in Azure Service Bus"
-date: 2026-05-04
+date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "Waarom alles-of-niets batchverwerking de betrouwbaarheid schaadt, en hoe afwikkeling per bericht Service Bus-workflows voor .NET verbetert."
 tags:

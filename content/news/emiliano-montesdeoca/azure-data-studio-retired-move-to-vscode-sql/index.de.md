@@ -1,6 +1,6 @@
 ---
 title: "Azure Data Studio wird eingestellt: Azure SQL Workflows nach VS Code umziehen"
-date: 2026-05-04
+date: 2026-05-09
 author: "Emiliano Montesdeoca"
 description: "Praktische .NET Zusammenfassung zu \"Azure Data Studio wird eingestellt: Azure SQL Workflows nach VS Code umziehen\" mit klaren Schritten fur die Bewertung im Produktiveinsatz."
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "Een AI-aangedreven conferentie-app bouwen met de Composable Stack van .NET"
-date: 2026-05-04
+date: 2026-05-06
 author: "Emiliano Montesdeoca"
 description: "Hoe de composable .NET-stack er in de praktijk uitziet bij het bouwen van een AI-aangedreven conferentie-applicatie."
 tags:

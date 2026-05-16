@@ -1,6 +1,6 @@
 ---
 title: "Azure Data Studio Is Retired: Move Your Azure SQL Workflow to VS Code"
-date: 2026-05-04
+date: 2026-05-09
 author: "Emiliano Montesdeoca"
 description: "What Azure Data Studio retirement means for .NET teams and a practical migration path for Azure SQL workflows in VS Code."
 tags:

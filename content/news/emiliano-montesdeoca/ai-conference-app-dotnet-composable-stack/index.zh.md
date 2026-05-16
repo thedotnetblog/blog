@@ -1,6 +1,6 @@
 ---
 title: "shiyong .NET ke zuhe jishu zhan goujian AI huiyi yingyong"
-date: 2026-05-04
+date: 2026-05-06
 author: "Emiliano Montesdeoca"
 description: "Weirao \"shiyong .NET ke zuhe jishu zhan goujian AI huiyi yingyong\" de .NET tuandui shiyong jiedu baohan ke luodi de shengchan pinggu buzhou."
 tags:

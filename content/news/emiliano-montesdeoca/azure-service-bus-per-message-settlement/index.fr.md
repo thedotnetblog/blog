@@ -1,6 +1,6 @@
 ---
 title: "Corriger le traitement par lots tout ou rien dans Azure Service Bus"
-date: 2026-05-04
+date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "Resume pratique pour les equipes .NET sur \"Corriger le traitement par lots tout ou rien dans Azure Service Bus\", avec des etapes concretes pour la production."
 tags:

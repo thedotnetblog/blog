@@ -1,6 +1,6 @@
 ---
 title: "Управление вызовами инструментов MCP в .NET с помощью Agent Governance Toolkit"
-date: 2026-05-04
+date: 2026-05-11
 author: "Emiliano Montesdeoca"
 description: "Как внедрить управление, проверки политик и более безопасное выполнение инструментов для .NET-агентов на основе MCP."
 tags:

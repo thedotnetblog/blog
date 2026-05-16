@@ -1,6 +1,6 @@
 ---
 title: "Construindo um app de conferencia com IA com a stack componivel do .NET"
-date: 2026-05-04
+date: 2026-05-06
 author: "Emiliano Montesdeoca"
 description: "Resumo pratico para equipes .NET sobre \"Construindo um app de conferencia com IA com a stack componivel do .NET\", com passos objetivos para avaliar em producao."
 tags:

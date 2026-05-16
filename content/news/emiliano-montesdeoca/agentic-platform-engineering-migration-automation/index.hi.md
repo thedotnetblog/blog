@@ -1,6 +1,6 @@
 ---
 title: "Agentic Platform Engineering के साथ Migration की रूटीन वर्क हटाना"
-date: 2026-05-04
+date: 2026-05-05
 author: "Emiliano Montesdeoca"
 description: "एंटरप्राइज़ .NET प्रोग्राम में दोहराव वाले माइग्रेशन कार्य को कम करने के लिए agentic platform engineering के उपयोग पर एक व्यावहारिक नज़र।"
 tags:

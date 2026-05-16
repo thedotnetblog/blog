@@ -1,6 +1,6 @@
 ---
 title: "Апрельское обновление Visual Studio: интеграция Cloud Agent для .NET-рабочих процессов"
-date: 2026-05-04
+date: 2026-05-14
 author: "Emiliano Montesdeoca"
 description: "Детальный разбор апрельского обновления Visual Studio и того, что меняет интеграция Cloud Agent в .NET-рабочих процессах."
 tags:

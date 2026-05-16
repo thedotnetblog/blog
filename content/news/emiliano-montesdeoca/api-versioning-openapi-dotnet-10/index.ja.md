@@ -1,6 +1,6 @@
 ---
 title: ".NET 10 de API baajoningu to OpenAPI o kumiawaseru"
-date: 2026-05-04
+date: 2026-05-07
 author: "Emiliano Montesdeoca"
 description: "\".NET 10 de API baajoningu to OpenAPI o kumiawaseru\" ni tsuite .NET chiimu muke ni honban teki kanten de jissen teki ni matomemashita."
 tags:

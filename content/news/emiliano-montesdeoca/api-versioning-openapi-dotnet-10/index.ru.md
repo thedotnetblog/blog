@@ -1,6 +1,6 @@
 ---
 title: "Совмещение версионирования API с OpenAPI в .NET 10"
-date: 2026-05-04
+date: 2026-05-07
 author: "Emiliano Montesdeoca"
 description: "Практический подход к совмещению версионирования API и OpenAPI в .NET 10 для сохранения чётких и развиваемых контрактов."
 tags:

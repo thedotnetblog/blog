@@ -1,6 +1,6 @@
 ---
 title: "Reduire le travail repetitif de migration avec l'ingenierie de plateforme agentique"
-date: 2026-05-04
+date: 2026-05-05
 author: "Emiliano Montesdeoca"
 description: "Resume pratique pour les equipes .NET sur \"Reduire le travail repetitif de migration avec l'ingenierie de plateforme agentique\", avec des etapes concretes pour la production."
 tags:

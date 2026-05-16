@@ -1,6 +1,6 @@
 ---
 title: "Monotone Migrationsarbeit mit agentischer Plattformtechnik reduzieren"
-date: 2026-05-04
+date: 2026-05-05
 author: "Emiliano Montesdeoca"
 description: "Praktische .NET Zusammenfassung zu \"Monotone Migrationsarbeit mit agentischer Plattformtechnik reduzieren\" mit klaren Schritten fur die Bewertung im Produktiveinsatz."
 tags:

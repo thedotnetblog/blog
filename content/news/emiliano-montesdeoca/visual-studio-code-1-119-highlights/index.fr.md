@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio Code 1.119 points pratiques pour .NET"
-date: 2026-05-04
+date: 2026-05-15
 author: "Emiliano Montesdeoca"
 description: "Resume pratique pour les equipes .NET sur \"Visual Studio Code 1.119 points pratiques pour .NET\", avec des etapes concretes pour la production."
 tags:

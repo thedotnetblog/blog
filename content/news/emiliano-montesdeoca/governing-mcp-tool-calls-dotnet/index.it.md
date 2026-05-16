@@ -1,6 +1,6 @@
 ---
 title: "Governare le chiamate agli strumenti MCP in .NET con Agent Governance Toolkit"
-date: 2026-05-04
+date: 2026-05-11
 author: "Emiliano Montesdeoca"
 description: "Sintesi pratica per team .NET su \"Governare le chiamate agli strumenti MCP in .NET con Agent Governance Toolkit\", con passi chiari per valutarlo in produzione."
 tags:

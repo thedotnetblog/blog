@@ -1,6 +1,6 @@
 ---
 title: "Mengatur Panggilan Alat MCP di .NET dengan Agent Governance Toolkit"
-date: 2026-05-04
+date: 2026-05-11
 author: "Emiliano Montesdeoca"
 description: "Cara memperkenalkan tata kelola, pemeriksaan kebijakan, dan eksekusi alat yang lebih aman untuk agen .NET berbasis MCP."
 tags:

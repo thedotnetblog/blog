@@ -1,6 +1,6 @@
 ---
 title: "Como resolver el procesamiento por lotes de todo o nada en Azure Service Bus"
-date: 2026-05-04
+date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "Resumen practico para equipos .NET sobre \"Como resolver el procesamiento por lotes de todo o nada en Azure Service Bus\", con pasos claros para evaluarlo en produccion."
 tags:

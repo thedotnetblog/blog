@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio 4 gatsu appudeeto .NET wakufuro muke Cloud Agent togo"
-date: 2026-05-04
+date: 2026-05-14
 author: "Emiliano Montesdeoca"
 description: "\"Visual Studio 4 gatsu appudeeto .NET wakufuro muke Cloud Agent togo\" ni tsuite .NET chiimu muke ni honban teki kanten de jissen teki ni matomemashita."
 tags:

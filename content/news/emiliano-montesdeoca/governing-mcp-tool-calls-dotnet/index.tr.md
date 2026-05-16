@@ -1,6 +1,6 @@
 ---
 title: "Agent Governance Toolkit ile .NET'te MCP Araç Çağrılarını Yönetme"
-date: 2026-05-04
+date: 2026-05-11
 author: "Emiliano Montesdeoca"
 description: "MCP tabanlı .NET ajanları için yönetişim, ilke denetimleri ve daha güvenli araç yürütmenin nasıl sağlanacağı."
 tags:

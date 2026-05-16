@@ -1,6 +1,6 @@
 ---
 title: "Crear una app de conferencias con IA usando la pila componible de .NET"
-date: 2026-05-04
+date: 2026-05-06
 author: "Emiliano Montesdeoca"
 description: "Resumen practico para equipos .NET sobre \"Crear una app de conferencias con IA usando la pila componible de .NET\", con pasos claros para evaluarlo en produccion."
 tags:

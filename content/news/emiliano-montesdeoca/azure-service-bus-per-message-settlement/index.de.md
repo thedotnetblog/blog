@@ -1,6 +1,6 @@
 ---
 title: "All-oder-Nichts-Batchverarbeitung in Azure Service Bus beheben"
-date: 2026-05-04
+date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "Praktische .NET Zusammenfassung zu \"All-oder-Nichts-Batchverarbeitung in Azure Service Bus beheben\" mit klaren Schritten fur die Bewertung im Produktiveinsatz."
 tags:

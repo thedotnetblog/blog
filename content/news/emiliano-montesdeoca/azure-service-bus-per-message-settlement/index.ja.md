@@ -1,6 +1,6 @@
 ---
 title: "Azure Service Bus no ooru oa nasshingu na batchi shori o kaizen suru"
-date: 2026-05-04
+date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "\"Azure Service Bus no ooru oa nasshingu na batchi shori o kaizen suru\" ni tsuite .NET chiimu muke ni honban teki kanten de jissen teki ni matomemashita."
 tags:

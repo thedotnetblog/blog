@@ -1,6 +1,6 @@
 ---
 title: "Łączenie wersjonowania API z OpenAPI w .NET 10"
-date: 2026-05-04
+date: 2026-05-07
 author: "Emiliano Montesdeoca"
 description: "Praktyczne podejście do łączenia wersjonowania API i OpenAPI w .NET 10, aby zachować przejrzyste i ewoluowalne kontrakty."
 tags:
