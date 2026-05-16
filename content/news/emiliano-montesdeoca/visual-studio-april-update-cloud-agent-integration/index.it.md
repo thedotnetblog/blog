@@ -1,8 +1,8 @@
 ---
-title: "Aggiornamento di aprile di Visual Studio: integrazione Cloud Agent per flussi .NET"
+title: "Aggiornamento di aprile di Visual Studio 2026: agente cloud, agenti personalizzati e agente debugger"
 date: 2026-05-14
 author: "Emiliano Montesdeoca"
-description: "Sintesi pratica per team .NET su \"Aggiornamento di aprile di Visual Studio: integrazione Cloud Agent per flussi .NET\", con passi chiari per valutarlo in produzione."
+description: "L'aggiornamento di aprile di Visual Studio 2026 (18.5) porta l'integrazione dell'agente cloud, agenti personalizzati a livello utente, strumenti C++ in GA e un Agente Debugger che valida le correzioni contro il comportamento runtime reale."
 tags:
   - Visual Studio
   - .NET
@@ -10,22 +10,39 @@ tags:
   - Productivity
 ---
 
-*Questo articolo e stato tradotto automaticamente. Per la versione originale, [clicca qui]({{< ref "index.md" >}}).*
+*Questo post è stato tradotto automaticamente. Per la versione originale, [clicca qui]({{< ref "index.md" >}}).*
 
-[Aggiornamento di aprile di Visual Studio: integrazione Cloud Agent per flussi .NET](https://devblogs.microsoft.com/visualstudio/visual-studio-april-update-cloud-agent-integration/) e rilevante per i team che sviluppano e gestiscono sistemi .NET in produzione.
+[L'aggiornamento di aprile di Visual Studio 2026 (18.5)](https://devblogs.microsoft.com/visualstudio/visual-studio-april-update-cloud-agent-integration/) include l'integrazione dell'agente cloud, agenti personalizzati a livello utente, strumenti C++ che raggiungono la GA e un nuovo Agente Debugger.
 
-Dal mio punto di vista, il valore non e solo nella novita ma nella velocita con cui diventa una pratica ingegneristica ripetibile.
+## Agente cloud: delegare il lavoro a una sessione Copilot remota
 
-## Perche conta per i team .NET
+Dal selettore di agenti nella finestra Chat, selezionando **Cloud** è possibile delegare un'attività a un agente di coding Copilot remoto. Si descrive il lavoro, l'agente crea un issue GitHub nel repository, poi apre una PR quando ha finito. Si riceve una notifica con "View PR" / "Open in browser" — tutto funziona mentre si continua a programmare, o anche con l'IDE chiuso.
 
-Questo tipo di aggiornamento aiuta a bilanciare velocita di delivery, coerenza di piattaforma e governance.
+## Gli agenti personalizzati ora ti seguono ovunque
 
-## Prossimi passi pratici
+Gli agenti personalizzati a livello utente memorizzati in `%USERPROFILE%/.github/agents/` non sono più limitati al repository — ti seguono attraverso i progetti. Il percorso di archiviazione è configurabile in Tools > Options > GitHub > Copilot > Chat. Il pulsante `+` nel selettore di agenti consente di creare nuovi agenti direttamente. Ottengono le stesse capacità degli agenti con scope di repository: consapevolezza dello spazio di lavoro, strumenti, selezione del modello e connessioni MCP.
 
-1. Valida la funzionalita con un piccolo pilota .NET e dati realistici.
-2. Definisci osservabilita e rollback prima del rollout esteso.
-3. Documenta il pattern per renderlo riusabile in altri team.
+Agenti integrati: Agent, Ask, Copilot CLI, Debugger, Modernize, Profiler.
 
-## Fonte
+## Gli strumenti di editing del codice C++ diventano GA
 
-- Articolo originale: [https://devblogs.microsoft.com/visualstudio/visual-studio-april-update-cloud-agent-integration/](https://devblogs.microsoft.com/visualstudio/visual-studio-april-update-cloud-agent-integration/)
+Due strumenti — `get_symbol_call_hierarchy` e `get_symbol_class_hierarchy` — sono ora attivi per impostazione predefinita. Forniscono a Copilot una navigazione consapevole del linguaggio nelle basi di codice C++, coprendo gerarchie di ereditarietà e catene di chiamate di funzioni. Abilitare tramite l'icona Tools in Copilot Chat. Funziona meglio con i modelli di tool-calling.
+
+## Agente Debugger: correzioni validate contro il comportamento runtime reale
+
+Inizia da un issue GitHub o Azure DevOps (o una descrizione in linguaggio naturale), passa alla modalità Debugger, e l'agente:
+
+1. Crea un riproduttore minimo
+2. Genera ipotesi di errore
+3. Strumenta l'app con tracepoint e breakpoint condizionali
+4. Esegue una vera sessione di debug
+5. Analizza la telemetria in tempo reale
+6. Suggerisce una correzione precisa
+
+Si rimane nel ciclo durante tutto il processo — è interattivo, non completamente autonomo.
+
+## Correzione della priorità IntelliSense
+
+VS ora sopprime i completamenti Copilot mentre la lista IntelliSense è attiva. Un solo suggerimento alla volta. Era un punto di attrito frequente e ora è attivo per impostazione predefinita.
+
+Note di rilascio complete e download su [devblogs.microsoft.com](https://devblogs.microsoft.com/visualstudio/visual-studio-april-update-cloud-agent-integration/).

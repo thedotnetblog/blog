@@ -1,8 +1,8 @@
 ---
-title: "Visual Studio Code 1.119: praktyczne najważniejsze elementy dla .NET"
+title: "VS Code 1.119: OpenTelemetry dla sesji agentów, integracja przeglądarki i bezpieczeństwo"
 date: 2026-05-15
 author: "Emiliano Montesdeoca"
-description: "Praktyczne spojrzenie .NET na VS Code 1.119: co testować w pierwszej kolejności i gdzie może poprawić codzienne tworzenie oprogramowania."
+description: "VS Code 1.119 (maj 2026) dodaje śledzenie OpenTelemetry dla sesji agentów, udostępnianie kart przeglądarki, ulepszenia zaufania i bezpieczeństwa oraz poprawkę bezpieczeństwa 1.119.1."
 tags:
   - VS Code
   - .NET
@@ -10,22 +10,41 @@ tags:
   - Productivity
 ---
 
-*Ten post został automatycznie przetłumaczony. Oryginalna wersja dostępna jest [tutaj]({{< ref "index.md" >}}).*
+*Ten post został automatycznie przetłumaczony. Kliknij [tutaj]({{< ref "index.md" >}}), aby zobaczyć oryginalną wersję.*
 
-[Visual Studio Code 1.119: The Practical .NET Highlights](https://code.visualstudio.com/updates/v1_119) zasługuje na bliższe przyjrzenie się, jeśli budujesz lub obsługujesz systemy .NET w dużej skali.
+[VS Code 1.119](https://code.visualstudio.com/updates/v1_119) ukazał się 6 maja 2026 roku (z poprawką bezpieczeństwa 1.119.1 wkrótce po niej). Wydanie koncentruje się na obserwowalności agentów, interakcji z przeglądarką i redukcji przerw.
 
-Z mojej perspektywy ważne jest nie tyle główna funkcja, ile to, jak szybko zespół może zamienić ją w bezpieczniejszy, powtarzalny przepływ pracy inżynieryjnej.
+## Śledzenie OpenTelemetry dla sesji agentów
 
-## Dlaczego ma to znaczenie dla zespołów .NET
+To wyróżniająca się funkcja dla każdego, kto uruchamia agenty na produkcji lub debuguje przepływy pracy agentyczne. Włącz ją za pomocą dwóch ustawień:
 
-Większość zespołów balansuje między szybkością dostarczania, spójnością platformy a zarządzaniem. Ta aktualizacja jest przydatna, ponieważ daje bardziej konkretną ścieżkę poprawy jednego z tych ograniczeń bez przepisywania wszystkiego od nowa.
+```json
+"github.copilot.chat.otel.enabled": true,
+"github.copilot.chat.otel.otlpEndpoint": "http://localhost:4318"
+```
 
-## Praktyczne kolejne kroki
+Ślady przestrzegają semantycznych konwencji GenAI. Każde żądanie agenta tworzy span główny `invoke_agent` z zagnieżdżonymi spanami podrzędnymi: `chat`, `execute_tool` i `execute_hook`. Użycie tokenów jest raportowane na żądanie — w tym liczniki odczytu i tworzenia pamięci podręcznej.
 
-1. Zwaliduj funkcję w małym pilocie .NET z danymi zbliżonymi do produkcyjnych.
-2. Dodaj wyraźne punkty kontrolne wycofania i obserwowalności przed szerszym wdrożeniem.
-3. Zapisz wzorzec implementacji w swoich wewnętrznych szablonach, aby inne zespoły mogły go ponownie wykorzystać.
+Działa z lokalnym agentem, agentem działającym w tle Copilot CLI i agentem Claude. Każdy backend kompatybilny z OTLP akceptuje ślady — [Aspire Dashboard standalone](https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/dashboard/standalone) dobrze sprawdza się do lokalnego rozwoju.
 
-## Źródło
+## Agenty mogą teraz uzyskiwać dostęp do kart przeglądarki
 
-- Oryginalny artykuł: [https://code.visualstudio.com/updates/v1_119](https://code.visualstudio.com/updates/v1_119)
+Agenty mogą żądać dostępu do kart zintegrowanej przeglądarki — ale nie automatycznie. Musisz jawnie udostępnić kartę za pomocą selektora kontekstu, przeciągania i upuszczania lub sugerowanego kontekstu. W przeglądarce znajduje się przycisk udostępniania do odwoływania dostępu. Gdy agent próbuje otworzyć nową kartę w tej samej domenie co już otwarta (nieudostępniona) karta, VS Code prosi o ponowne użycie istniejącej karty.
+
+## Zoptymalizowane użycie tokenów
+
+Eksperymentalny lekki model zarządza teraz listami zadań agentów, utrzymując tę pracę administracyjną z dala od droższego modelu podstawowego. Zmniejsza zużycie tokenów dla zadań, które nie wymagają pełnej zdolności rozumowania.
+
+## Zaufanie i bezpieczeństwo
+
+Mniej przerw: VS Code 1.119 zmniejsza monity o żądania dostępu do sieci i zapisy do folderów tymczasowych przez agenty. Poprawka 1.119.1 rozwiązuje konkretne problemy z bezpieczeństwem — warto zaktualizować, jeśli jeszcze tego nie zrobiono.
+
+## Szybkie przełączanie do podglądu Markdown
+
+Małe, ale przydatne: teraz możesz szybko przełączyć bieżący edytor do podglądu Markdown bez nawigowania.
+
+## VS Code Agents (podgląd Insiders)
+
+Przeprojektowany interfejs sesji agentów — nowy selektor repozytoriów (lokalne/repos/zdalne), ulepszenia podsesji, dopracowanie web i mobilne, animacje postępu — jest dostępny w Insiders pod adresem [insiders.vscode.dev/agents](https://insiders.vscode.dev/agents).
+
+Pełny dziennik zmian: [code.visualstudio.com/updates/v1_119](https://code.visualstudio.com/updates/v1_119).

@@ -1,8 +1,8 @@
 ---
-title: "Azure Data Studio रिटायर हो गया: अपना Azure SQL वर्कफ़्लो VS Code में लाएं"
+title: "Azure Data Studio बंद हो गया: अपना Azure SQL वर्कफ़्लो VS Code में ले जाएं"
 date: 2026-05-09
 author: "Emiliano Montesdeoca"
-description: "Azure Data Studio के रिटायरमेंट का .NET टीमों के लिए क्या अर्थ है और VS Code में Azure SQL वर्कफ़्लो के लिए व्यावहारिक माइग्रेशन पथ।"
+description: "Azure Data Studio 6 फरवरी 2025 को बंद हो गया, सपोर्ट 28 फरवरी 2026 को समाप्त होगा। MSSQL एक्सटेंशन के साथ VS Code में माइग्रेशन का पूरा रास्ता यहां है।"
 tags:
   - .NET
   - Azure SQL
@@ -10,22 +10,42 @@ tags:
   - Developer Tools
 ---
 
-*यह पोस्ट स्वचालित रूप से अनुवादित है। मूल संस्करण के लिए [यहाँ क्लिक करें]({{< ref "index.md" >}}).*
+*यह पोस्ट स्वचालित रूप से अनुवादित की गई है। मूल संस्करण के लिए, [यहाँ क्लिक करें]({{< ref "index.md" >}}).*
 
-[Azure Data Studio Is Retired: Move Your Azure SQL Workflow to VS Code](https://devblogs.microsoft.com/azure-sql/azure-data-studio-is-retired-move-your-azure-sql-workflow-to-vs-code-in-10-minutes/) पर गौर करना ज़रूरी है अगर आप .NET सिस्टम को बड़े पैमाने पर बना या चला रहे हैं।
+[Azure Data Studio 6 फरवरी 2025 को बंद हो गया](https://devblogs.microsoft.com/azure-sql/azure-data-studio-is-retired-move-your-azure-sql-workflow-to-vs-code-in-10-minutes/), सपोर्ट 28 फरवरी 2026 को समाप्त होगा — अनुशंसित विकल्प MSSQL एक्सटेंशन के साथ VS Code है।
 
-मेरे नज़रिए से, मुख्य फ़ीचर उतना ज़रूरी नहीं जितना यह कि एक टीम इसे कितनी जल्दी एक सुरक्षित, दोहराने योग्य इंजीनियरिंग वर्कफ़्लो में बदल सकती है।
+## क्या इंस्टॉल करें
 
-## .NET टीमों के लिए यह क्यों मायने रखता है
+शुरुआत के लिए तीन चीजें:
 
-अधिकांश टीमें डिलीवरी की गति, प्लेटफ़ॉर्म की एकरूपता और गवर्नेंस के बीच संतुलन बनाती हैं। यह अपडेट उपयोगी है क्योंकि यह सब कुछ नए सिरे से लिखे बिना उन बाधाओं में से किसी एक को सुधारने का अधिक ठोस रास्ता देता है।
+- **MSSQL एक्सटेंशन** — VS Code Marketplace में "SQL Server (mssql)" खोजें
+- **SQL Database Projects एक्सटेंशन** — कोड के रूप में स्कीमा, बिल्ड वैलिडेशन, गाइडेड पब्लिश
+- **.NET 8 SDK** — बिल्ड सिस्टम के लिए आवश्यक; SDK न मिलना पहली बार के सबसे आम समस्या है
 
-## व्यावहारिक अगले कदम
+## ADS कनेक्शन और सेटिंग्स माइग्रेट करें
 
-1. प्रोडक्शन-जैसे डेटा के साथ एक छोटे .NET पायलट में फ़ीचर की पुष्टि करें।
-2. व्यापक रोलआउट से पहले स्पष्ट रोलबैक और ऑब्ज़र्वेबिलिटी चेकपॉइंट जोड़ें।
-3. इम्प्लीमेंटेशन पैटर्न को अपने इंटरनल टेम्पलेट में कैप्चर करें ताकि दूसरी टीमें इसका पुनः उपयोग कर सकें।
+MSSQL एक्सटेंशन में **ADS Migration Toolkit** शामिल है जो एक गाइडेड फ्लो में एक बार का माइग्रेशन संभालता है: सेव किए गए कनेक्शन, कनेक्शन ग्रुप, सेटिंग्स और की बाइंडिंग सभी अपने आप इंपोर्ट हो जाते हैं।
 
-## स्रोत
+## F5 की आदत वापस पाएं
 
-- मूल लेख: [https://devblogs.microsoft.com/azure-sql/azure-data-studio-is-retired-move-your-azure-sql-workflow-to-vs-code-in-10-minutes/](https://devblogs.microsoft.com/azure-sql/azure-data-studio-is-retired-move-your-azure-sql-workflow-to-vs-code-in-10-minutes/)
+ADS यूजर क्वेरी चलाने के लिए F5 पर निर्भर रहते हैं। **MSSQL Database Management Keymap** एक्सटेंशन इंस्टॉल करें और F5 सहित ADS-स्टाइल की बाइंडिंग वापस पाएं।
+
+## SQL Database Projects: कोड के रूप में स्कीमा
+
+प्रोजेक्ट पर राइट-क्लिक → **Publish** → टार्गेट कॉन्फ़िगर करें → जेनरेट T-SQL स्क्रिप्ट देखें → डिप्लॉय करें। डिप्लॉयमेंट से पहले स्क्रिप्ट प्रिव्यू मुख्य सेफ्टी फीचर है। आइटम टेम्पलेट टेबल, स्टोर्ड प्रोसीजर और व्यू के लिए स्टब जेनरेट करते हैं — SSDT जैसा ही वर्कफ्लो।
+
+सामान्य समस्या: `.sqlproj` फाइल में **टार्गेट प्लेटफॉर्म मिसमैच** बिल्ड एरर देगा अगर प्रोजेक्ट किसी अलग SQL Server वर्जन के लिए बनाया गया था।
+
+## Schema Compare और Schema Designer
+
+एक्सटेंशन में **Schema Compare** (प्रोजेक्ट बनाम डिप्लॉय्ड डेटाबेस का diff) और **Schema Designer** (DDL लिखे बिना विजुअल स्कीमा एडिटिंग) भी शामिल हैं।
+
+## Microsoft Fabric डेवलपर्स
+
+सेटअप एक जैसा है, लेकिन VS Code में खोलने से पहले **Fabric पोर्टल** से शुरू करें और डेटाबेस को Git से कनेक्ट करें। Microsoft के पास एक समर्पित गाइड है: *Azure Data Studio to VS Code — What it means for SQL database in Fabric developers*।
+
+## सारांश
+
+माइग्रेशन एक बार का गाइडेड फ्लो है, मैन्युअल रिबिल्ड नहीं। तीन टूल इंस्टॉल करें, ADS Migration Toolkit चलाएं, की बाइंडिंग रिस्टोर करें — और 10 मिनट से कम में सामान्य काम पर वापस आ जाएं।
+
+स्टेप-बाय-स्टेप स्क्रीनशॉट और Fabric-स्पेसिफिक वॉकथ्रू के लिए [पूरा आर्टिकल](https://devblogs.microsoft.com/azure-sql/azure-data-studio-is-retired-move-your-azure-sql-workflow-to-vs-code-in-10-minutes/) देखें।

@@ -1,8 +1,8 @@
 ---
-title: "Agentic Platform Engineering के साथ Migration की रूटीन वर्क हटाना"
+title: "Agentic Platform Engineering के साथ Migration के Monkey Work को हटाना"
 date: 2026-05-05
 author: "Emiliano Montesdeoca"
-description: "एंटरप्राइज़ .NET प्रोग्राम में दोहराव वाले माइग्रेशन कार्य को कम करने के लिए agentic platform engineering के उपयोग पर एक व्यावहारिक नज़र।"
+description: "Git-Ape एक वास्तविक AWS Terraform डिप्लॉयमेंट को Azure Bicep में माइग्रेट करने का वॉकथ्रू करता है — 1:1 सिंटैक्स कनवर्जन के बजाय डिप्लॉयमेंट इंटेंट निकालकर और आर्किटेक्चर को रीमैप करके।"
 tags:
   - .NET
   - Azure
@@ -10,22 +10,56 @@ tags:
   - Platform Engineering
 ---
 
-*यह पोस्ट स्वचालित रूप से अनुवादित है। मूल संस्करण के लिए [यहाँ क्लिक करें]({{< ref "index.md" >}}).*
+*यह पोस्ट स्वचालित रूप से अनुवादित की गई है। मूल संस्करण के लिए, [यहाँ क्लिक करें]({{< ref "index.md" >}}).*
 
-[Removing the Monkey Work of Migration with Agentic Platform Engineering](https://devblogs.microsoft.com/all-things-azure/removing-the-monkey-work-of-migration-using-agentic-platform-engineering/) पर गौर करना ज़रूरी है अगर आप .NET सिस्टम को बड़े पैमाने पर बना या चला रहे हैं।
+[Removing the Monkey Work of Migration with Agentic Platform Engineering](https://devblogs.microsoft.com/all-things-azure/removing-the-monkey-work-of-migration-using-agentic-platform-engineering/) — Git-Ape (git agentic platform engineering tool) का एक वॉकथ्रू जो एक वास्तविक AWS Terraform रेपो को Azure में माइग्रेट करता है, लाइन-बाय-लाइन कनवर्जन की बजाय इंटेंट एक्सट्रैक्शन पर ध्यान केंद्रित करते हुए।
 
-मेरे नज़रिए से, मुख्य फ़ीचर उतना ज़रूरी नहीं जितना यह कि एक टीम इसे कितनी जल्दी एक सुरक्षित, दोहराने योग्य इंजीनियरिंग वर्कफ़्लो में बदल सकती है।
+## इनपुट: contoso-migration
 
-## .NET टीमों के लिए यह क्यों मायने रखता है
+स्रोत एक वास्तविक Terraform प्रोजेक्ट (`contoso-migration`) है जो AWS पर Next.js ऐप डिप्लॉय करता है — कंप्यूट के लिए EC2, लोड बैलेंसिंग के लिए ALB, आर्टिफैक्ट्स के लिए S3, और आइडेंटिटी के लिए IAM कीज़। लागत: ~34$/महीना। लक्ष्य Azure पर वही इंफ्रास्ट्रक्चर पुनः बनाना नहीं है; बल्कि यह पता लगाना है कि डिप्लॉयमेंट वास्तव में क्या करने की कोशिश कर रहा है और उसे Azure-नेटिव सेवाओं पर पुनर्निर्माण करना है।
 
-अधिकांश टीमें डिलीवरी की गति, प्लेटफ़ॉर्म की एकरूपता और गवर्नेंस के बीच संतुलन बनाती हैं। यह अपडेट उपयोगी है क्योंकि यह सब कुछ नए सिरे से लिखे बिना उन बाधाओं में से किसी एक को सुधारने का अधिक ठोस रास्ता देता है।
+## चरण 1: वेलिडेशन और ऑथ
 
-## व्यावहारिक अगले कदम
+Git-Ape सभी आवश्यक CLI टूल्स — `az`, `aws`, `gh`, `jq`, `git` — को वेलिडेट करके शुरू करता है और कुछ भी छूने से पहले सक्रिय ऑथ सेशन की पुष्टि करता है। कोई आंशिक रन नहीं।
 
-1. प्रोडक्शन-जैसे डेटा के साथ एक छोटे .NET पायलट में फ़ीचर की पुष्टि करें।
-2. व्यापक रोलआउट से पहले स्पष्ट रोलबैक और ऑब्ज़र्वेबिलिटी चेकपॉइंट जोड़ें।
-3. इम्प्लीमेंटेशन पैटर्न को अपने इंटरनल टेम्पलेट में कैप्चर करें ताकि दूसरी टीमें इसका पुनः उपयोग कर सकें।
+## चरण 2: इंटेंट एक्सट्रैक्शन
 
-## स्रोत
+एजेंट GitHub API के माध्यम से पूरे सोर्स रेपो को पढ़ता है और डिप्लॉयमेंट इंटेंट निकालता है: रनटाइम (Node.js), कंप्यूट टाइप, इंग्रेस पैटर्न, आर्टिफैक्ट हैंडलिंग, आइडेंटिटी मॉडल, नेटवर्किंग और मॉनिटरिंग। यह मुख्य चरण है — यह डिप्लॉयमेंट क्या करता है इसका एक सिमेंटिक मॉडल बना रहा है, न कि यह कौन से Terraform कीवर्ड उपयोग करता है।
 
-- मूल लेख: [https://devblogs.microsoft.com/all-things-azure/removing-the-monkey-work-of-migration-using-agentic-platform-engineering/](https://devblogs.microsoft.com/all-things-azure/removing-the-monkey-work-of-migration-using-agentic-platform-engineering/)
+## चरण 3: सर्विस मैपिंग
+
+AWS सेवाओं को Azure समकक्षों में मैप किया जाता है:
+- EC2 → App Service (Linux, Node 20 LTS)
+- ALB → App Service बिल्ट-इन लोड बैलेंसिंग
+- IAM रोल्स/कीज़ → Managed Identity
+- Terraform → Bicep + GitHub Actions
+
+## चरण 4: क्रिटिक एजेंट
+
+आउटपुट जेनरेट करने से पहले, एक क्रिटिक एजेंट चलता है और दो ब्लॉकिंग समस्याएं पकड़ता है:
+
+1. **बिल्ड-ऑन-स्टार्टअप एंटी-पैटर्न** — मूल Terraform EC2 पर स्टार्टअप पर `npm install && npm run build` चला रहा था। फिक्स: CI में बिल्ड करें, एक रेडी आर्टिफैक्ट डिप्लॉय करें।
+2. **अनावश्यक Blob Storage** — S3 का उपयोग आर्टिफैक्ट स्टेजिंग के लिए किया जा रहा था जिसे उचित CI/CD से समाप्त किया जा सकता था। क्रिटिक एजेंट ने इसे पूरी तरह से हटा दिया।
+
+## चरण 5: जेनरेटेड आउटपुट
+
+परिणाम मूल 200+ लाइनों के Terraform के बजाय ~80 लाइनें Bicep है। एजेंट ने `infra/main.bicep` और `.github/workflows/deploy.yml` के साथ एक नया GitHub रेपो बनाया और सभी AWS-विशिष्ट फाइलें हटा दीं।
+
+## सुरक्षा स्थिति तुलना
+
+माइग्रेशन ने एक महत्वपूर्ण सुरक्षा अपग्रेड भी दिया:
+
+| AWS मूल | Azure आउटपुट |
+|---|---|
+| केवल HTTP | केवल HTTPS, TLS 1.2 |
+| 0.0.0.0/0 के लिए SSH खुला | कोई SSH एक्सपोज़र नहीं |
+| IAM एक्सेस कीज़ | OIDC + Managed Identity |
+| कोई मॉनिटरिंग नहीं | Application Insights |
+
+लागत: मूल $34/महीना के मुकाबले ~$13/महीना।
+
+## यह एक सिंटैक्स कनवर्टर से कैसे अलग है
+
+क्रिटिक एजेंट चरण वही है जो इसे मैकेनिकल ट्रांसलेशन से अलग करता है। इसने ऐसे पैटर्न पकड़े जो AWS पर काम करते लेकिन Azure पर गलत होते — और उन्हें दोहराने के बजाय ठीक किया। आउटपुट "Azure सिंटैक्स में AWS" नहीं है; यह एक Azure-नेटिव डिप्लॉयमेंट है जो उसी लक्ष्य को अधिक स्वच्छ रूप से प्राप्त करता है।
+
+पूर्ण एजेंट ट्रेस और जेनरेटेड फाइलों के लिए [पूर्ण वॉकथ्रू](https://devblogs.microsoft.com/all-things-azure/removing-the-monkey-work-of-migration-using-agentic-platform-engineering/) देखें।

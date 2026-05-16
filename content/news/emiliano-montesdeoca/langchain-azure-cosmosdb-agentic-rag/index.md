@@ -2,7 +2,7 @@
 title: "LangChain + Azure Cosmos DB for Agentic Apps and RAG"
 date: 2026-05-12
 author: "Emiliano Montesdeoca"
-description: "How LangChain integration with Azure Cosmos DB helps .NET teams design agentic and RAG systems with stronger data foundations."
+description: "langchain-azure-cosmosdb is a new Python package that consolidates vector search, chat history, agent state checkpointing, semantic caching, and long-term memory into a single Azure Cosmos DB for NoSQL backend."
 tags:
   - .NET
   - Azure Cosmos DB
@@ -10,20 +10,67 @@ tags:
   - RAG
 ---
 
-[LangChain + Azure Cosmos DB for Agentic Apps and RAG](https://devblogs.microsoft.com/cosmosdb/langchain-azure-cosmos-db-agents-rag/) is worth a close look if you are building or operating .NET systems at scale.
+[`langchain-azure-cosmosdb`](https://devblogs.microsoft.com/cosmosdb/langchain-azure-cosmos-db-agents-rag/) (`pip install langchain-azure-cosmosdb`) is a new Python package that connects LangChain and LangGraph to Azure Cosmos DB for NoSQL, replacing the usual 5+ separate services for vector storage, caching, history, and memory with a single database.
 
-From my perspective, the important part is not the headline feature but how quickly a team can convert it into a safer, repeatable engineering workflow.
+## Six integrations in one package
 
-## Why it matters for .NET teams
+The package ships six integration classes (each with sync and async variants):
 
-Most teams are balancing delivery speed, platform consistency, and governance. This update is useful because it gives you a more concrete path to improve one of those constraints without rewriting everything.
+1. **AzureCosmosDBNoSqlVectorSearch** — vector, full-text (BM25), hybrid (vector+text with RRF), and weighted hybrid search
+2. **AzureCosmosDBNoSqlSemanticCache** — cache LLM responses to cut latency and cost on repeated queries
+3. **CosmosDBChatMessageHistory** — persist conversation history with TTL support
+4. **CosmosDBSaverSync / CosmosDBSaver** — LangGraph checkpointer: persists graph state per thread_id across invocations
+5. **CosmosDBCacheSync / CosmosDBCache** — LangGraph node-level result caching
+6. **CosmosDBStore / AsyncCosmosDBStore** — long-term memory with namespace organization and semantic search
 
-## Practical next steps
+Both access key and Managed Identity (Entra ID) auth are supported across all integrations.
 
-1. Validate the feature in a small .NET pilot with production-like data.
-2. Add clear rollback and observability checkpoints before broader rollout.
-3. Capture the implementation pattern in your internal templates so other teams can reuse it.
+## Vector and hybrid search
 
-## Source
+Azure Cosmos DB for NoSQL supports DiskANN and Quantized Flat vector indexes, scaling from thousands to billions of vectors — the same database that powers ChatGPT conversation histories and memories at OpenAI. Setting up hybrid search:
 
-- Original article: [https://devblogs.microsoft.com/cosmosdb/langchain-azure-cosmos-db-agents-rag/](https://devblogs.microsoft.com/cosmosdb/langchain-azure-cosmos-db-agents-rag/)
+```python
+vectorstore = AzureCosmosDBNoSqlVectorSearch(
+    cosmos_client=...,
+    embedding=AzureOpenAIEmbeddings(...),
+    ...
+)
+results = vectorstore.similarity_search(
+    "distributed database",
+    k=5,
+    search_type="hybrid",
+    full_text_rank_filter=[{"search_field": "text", "search_text": "distributed"}]
+)
+```
+
+## LangGraph multi-turn agents with Cosmos checkpointing
+
+The `CosmosDBSaverSync` checkpointer persists LangGraph graph state so agents remember context across separate invocations — no in-memory state required:
+
+```python
+checkpointer = CosmosDBSaverSync(
+    database_name="agents-db",
+    container_name="checkpoints",
+    endpoint="..."
+)
+app = graph.compile(checkpointer=checkpointer)
+
+# Turn 1
+app.invoke(
+    {"messages": [("user", "Hi, I'm Alice!")]},
+    config={"configurable": {"thread_id": "user-123"}}
+)
+
+# Turn 2 — state persisted from turn 1
+app.invoke(
+    {"messages": [("user", "What's my name?")]},
+    config={"configurable": {"thread_id": "user-123"}}
+)
+# Returns: "Your name is Alice!"
+```
+
+## One database instead of five
+
+Consolidating everything into Cosmos DB for NoSQL means one connection, one set of credentials, one scaling knob, and one place to look when something goes wrong. The package is available on PyPI and the source is at [langchain-ai/langchain-azure](https://github.com/langchain-ai/langchain-azure) on GitHub.
+
+Full details at [devblogs.microsoft.com](https://devblogs.microsoft.com/cosmosdb/langchain-azure-cosmos-db-agents-rag/).
