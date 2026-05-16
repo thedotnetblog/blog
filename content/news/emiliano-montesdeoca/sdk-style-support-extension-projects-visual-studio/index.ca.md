@@ -1,6 +1,6 @@
 ---
 title: "Compatibilitat amb projectes d'estil SDK per a extensions a Visual Studio"
-date: 2026-05-04
+date: 2026-05-13
 author: "Emiliano Montesdeoca"
 description: "Resum practic per a equips .NET sobre \"Compatibilitat amb projectes d'estil SDK per a extensions a Visual Studio\", amb passos clars per avaluar-ho en produccio."
 tags:

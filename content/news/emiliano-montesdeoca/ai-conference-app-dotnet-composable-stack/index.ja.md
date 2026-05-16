@@ -1,6 +1,6 @@
 ---
 title: ".NET no konpoozaburu sutakku de AI kaigi appu o kouchiku suru"
-date: 2026-05-04
+date: 2026-05-06
 author: "Emiliano Montesdeoca"
 description: "\".NET no konpoozaburu sutakku de AI kaigi appu o kouchiku suru\" ni tsuite .NET chiimu muke ni honban teki kanten de jissen teki ni matomemashita."
 tags:

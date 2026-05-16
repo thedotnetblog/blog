@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio Code 1.119: .NET के लिए व्यावहारिक हाइलाइट्स"
-date: 2026-05-04
+date: 2026-05-15
 author: "Emiliano Montesdeoca"
 description: "VS Code 1.119 पर .NET का व्यावहारिक नज़रिया: पहले क्या टेस्ट करें और यह दिन-प्रतिदिन की डेवलपमेंट को कहाँ बेहतर बना सकता है।"
 tags:

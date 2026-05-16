@@ -1,6 +1,6 @@
 ---
 title: "zai .NET 10 zhong jiehe API banben kongzhi yu OpenAPI"
-date: 2026-05-04
+date: 2026-05-07
 author: "Emiliano Montesdeoca"
 description: "Weirao \"zai .NET 10 zhong jiehe API banben kongzhi yu OpenAPI\" de .NET tuandui shiyong jiedu baohan ke luodi de shengchan pinggu buzhou."
 tags:

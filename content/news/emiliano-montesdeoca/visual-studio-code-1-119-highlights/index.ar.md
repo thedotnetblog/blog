@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio Code 1.119: أبرز النقاط العملية لـ .NET"
-date: 2026-05-04
+date: 2026-05-15
 author: "Emiliano Montesdeoca"
 description: "النظرة العملية لـ .NET على VS Code 1.119: ما الذي يجب اختباره أولاً، وأين يمكنه تحسين التطوير اليومي."
 tags:

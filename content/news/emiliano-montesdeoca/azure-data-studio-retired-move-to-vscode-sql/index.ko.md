@@ -1,6 +1,6 @@
 ---
 title: "Azure Data Studio jongryo Azure SQL weokeupeullo reul VS Code ro ijeon"
-date: 2026-05-04
+date: 2026-05-09
 author: "Emiliano Montesdeoca"
 description: "\"Azure Data Studio jongryo Azure SQL weokeupeullo reul VS Code ro ijeon\"reul .NET tim gwanjeomeseo silmujeogeuro jeongrihago unyeong geomto dangyereul damassseubnida."
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "Azure Developer CLI azd 2026 4wol .NET tim haeksim"
-date: 2026-05-04
+date: 2026-05-08
 author: "Emiliano Montesdeoca"
 description: "\"Azure Developer CLI azd 2026 4wol .NET tim haeksim\"reul .NET tim gwanjeomeseo silmujeogeuro jeongrihago unyeong geomto dangyereul damassseubnida."
 tags:

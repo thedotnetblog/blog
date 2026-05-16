@@ -1,6 +1,6 @@
 ---
 title: "Dukungan SDK-Style untuk Proyek Ekstensi di Visual Studio"
-date: 2026-05-04
+date: 2026-05-13
 author: "Emiliano Montesdeoca"
 description: "Mengapa dukungan proyek SDK-style untuk ekstensi Visual Studio merupakan penyederhanaan yang berarti untuk pengembangan ekstensi .NET."
 tags:

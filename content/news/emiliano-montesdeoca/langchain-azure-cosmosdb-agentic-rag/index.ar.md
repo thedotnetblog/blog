@@ -1,6 +1,6 @@
 ---
 title: "LangChain + Azure Cosmos DB للتطبيقات الذكية وRAG"
-date: 2026-05-04
+date: 2026-05-12
 author: "Emiliano Montesdeoca"
 description: "كيف يساعد تكامل LangChain مع Azure Cosmos DB فرق .NET على تصميم أنظمة ذكية وRAG بأسس بيانات أقوى."
 tags:

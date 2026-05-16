@@ -1,6 +1,6 @@
 ---
 title: "Naprawianie przetwarzania wsadowego „wszystko albo nic” w Azure Service Bus"
-date: 2026-05-04
+date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "Dlaczego obsługa wsadowa „wszystko albo nic” szkodzi niezawodności i jak rozliczanie wiadomość po wiadomości poprawia przepływy pracy Service Bus dla .NET."
 tags:

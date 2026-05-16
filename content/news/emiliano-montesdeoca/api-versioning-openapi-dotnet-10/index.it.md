@@ -1,6 +1,6 @@
 ---
 title: "Combinare il versionamento API con OpenAPI in .NET 10"
-date: 2026-05-04
+date: 2026-05-07
 author: "Emiliano Montesdeoca"
 description: "Sintesi pratica per team .NET su \"Combinare il versionamento API con OpenAPI in .NET 10\", con passi chiari per valutarlo in produzione."
 tags:

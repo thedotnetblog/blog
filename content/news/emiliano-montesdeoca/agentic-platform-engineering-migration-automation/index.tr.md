@@ -1,6 +1,6 @@
 ---
 title: "Agentic Platform Engineering ile Göçün Tekrarlayan İşlerini Ortadan Kaldırma"
-date: 2026-05-04
+date: 2026-05-05
 author: "Emiliano Montesdeoca"
 description: "Kurumsal .NET programlarında tekrarlayan geçiş çalışmalarını azaltmak için agentic platform engineering kullanımına pratik bir bakış."
 tags:

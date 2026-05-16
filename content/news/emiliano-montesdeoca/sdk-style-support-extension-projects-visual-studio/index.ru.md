@@ -1,6 +1,6 @@
 ---
 title: "Поддержка проектов расширений в стиле SDK для Visual Studio"
-date: 2026-05-04
+date: 2026-05-13
 author: "Emiliano Montesdeoca"
 description: "Почему поддержка проектов в стиле SDK для расширений Visual Studio является значимым упрощением для разработки расширений .NET."
 tags:

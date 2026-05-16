@@ -1,6 +1,6 @@
 ---
 title: "Azure Data Studio e stato ritirato: sposta il tuo flusso Azure SQL su VS Code"
-date: 2026-05-04
+date: 2026-05-09
 author: "Emiliano Montesdeoca"
 description: "Sintesi pratica per team .NET su \"Azure Data Studio e stato ritirato: sposta il tuo flusso Azure SQL su VS Code\", con passi chiari per valutarlo in produzione."
 tags:

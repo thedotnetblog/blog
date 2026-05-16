@@ -1,6 +1,6 @@
 ---
 title: "Azure Data Studio Emekli Oldu: Azure SQL İş Akışınızı VS Code'a Taşıyın"
-date: 2026-05-04
+date: 2026-05-09
 author: "Emiliano Montesdeoca"
 description: "Azure Data Studio'nun kullanımdan kaldırılmasının .NET ekipleri için anlamı ve VS Code'da Azure SQL iş akışları için pratik bir geçiş yolu."
 tags:

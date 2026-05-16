@@ -1,6 +1,6 @@
 ---
 title: "Azure Data Studio रिटायर हो गया: अपना Azure SQL वर्कफ़्लो VS Code में लाएं"
-date: 2026-05-04
+date: 2026-05-09
 author: "Emiliano Montesdeoca"
 description: "Azure Data Studio के रिटायरमेंट का .NET टीमों के लिए क्या अर्थ है और VS Code में Azure SQL वर्कफ़्लो के लिए व्यावहारिक माइग्रेशन पथ।"
 tags:

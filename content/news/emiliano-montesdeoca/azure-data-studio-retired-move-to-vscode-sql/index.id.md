@@ -1,6 +1,6 @@
 ---
 title: "Azure Data Studio Pensiun: Pindahkan Alur Kerja Azure SQL Anda ke VS Code"
-date: 2026-05-04
+date: 2026-05-09
 author: "Emiliano Montesdeoca"
 description: "Apa arti penghentian Azure Data Studio bagi tim .NET dan jalur migrasi praktis untuk alur kerja Azure SQL di VS Code."
 tags:

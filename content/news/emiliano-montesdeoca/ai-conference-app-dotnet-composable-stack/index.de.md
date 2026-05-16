@@ -1,6 +1,6 @@
 ---
 title: "Eine KI gestutzte Konferenz App mit dem komponierbaren .NET Stack bauen"
-date: 2026-05-04
+date: 2026-05-06
 author: "Emiliano Montesdeoca"
 description: "Praktische .NET Zusammenfassung zu \"Eine KI gestutzte Konferenz App mit dem komponierbaren .NET Stack bauen\" mit klaren Schritten fur die Bewertung im Produktiveinsatz."
 tags:

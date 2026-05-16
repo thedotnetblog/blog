@@ -1,6 +1,6 @@
 ---
 title: "Het repetitieve migratiewerk elimineren met Agentic Platform Engineering"
-date: 2026-05-04
+date: 2026-05-05
 author: "Emiliano Montesdeoca"
 description: "Een praktische blik op het gebruik van agentic platform engineering om repetitief migratiewerk te verminderen in zakelijke .NET-programma's."
 tags:

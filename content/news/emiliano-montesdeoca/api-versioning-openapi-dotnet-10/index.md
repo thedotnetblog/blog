@@ -1,6 +1,6 @@
 ---
 title: "Combining API Versioning with OpenAPI in .NET 10"
-date: 2026-05-04
+date: 2026-05-07
 author: "Emiliano Montesdeoca"
 description: "A practical approach to combining API versioning and OpenAPI in .NET 10 to keep contracts clear and evolvable."
 tags:

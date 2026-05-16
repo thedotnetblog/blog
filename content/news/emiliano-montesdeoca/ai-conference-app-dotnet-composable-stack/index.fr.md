@@ -1,6 +1,6 @@
 ---
 title: "Creer une application de conference IA avec la pile composable de .NET"
-date: 2026-05-04
+date: 2026-05-06
 author: "Emiliano Montesdeoca"
 description: "Resume pratique pour les equipes .NET sur \"Creer une application de conference IA avec la pile composable de .NET\", avec des etapes concretes pour la production."
 tags:

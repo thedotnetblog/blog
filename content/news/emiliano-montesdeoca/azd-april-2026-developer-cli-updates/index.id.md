@@ -1,6 +1,6 @@
 ---
 title: "Azure Developer CLI (azd) April 2026: Yang Penting bagi Tim .NET"
-date: 2026-05-04
+date: 2026-05-08
 author: "Emiliano Montesdeoca"
 description: "Pembaruan kunci Azure Developer CLI April 2026 yang penting bagi pengembang .NET yang mengirimkan aplikasi cloud dan agen."
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "حوكمة استدعاءات أدوات MCP في .NET باستخدام Agent Governance Toolkit"
-date: 2026-05-04
+date: 2026-05-11
 author: "Emiliano Montesdeoca"
 description: "كيفية إدخال الحوكمة وفحوصات السياسة وتنفيذ أدوات أكثر أماناً لوكلاء .NET المستندين إلى MCP."
 tags:

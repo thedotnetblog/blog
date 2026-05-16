@@ -1,6 +1,6 @@
 ---
 title: "MCP Toolaufrufe in .NET mit dem Agent Governance Toolkit steuern"
-date: 2026-05-04
+date: 2026-05-11
 author: "Emiliano Montesdeoca"
 description: "Praktische .NET Zusammenfassung zu \"MCP Toolaufrufe in .NET mit dem Agent Governance Toolkit steuern\" mit klaren Schritten fur die Bewertung im Produktiveinsatz."
 tags:

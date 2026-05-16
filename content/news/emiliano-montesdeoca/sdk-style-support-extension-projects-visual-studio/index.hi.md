@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio में Extension Projects के लिए SDK-Style Support"
-date: 2026-05-04
+date: 2026-05-13
 author: "Emiliano Montesdeoca"
 description: "Visual Studio extensions के लिए SDK-style project support .NET extension development के लिए एक सार्थक सरलीकरण क्यों है।"
 tags:

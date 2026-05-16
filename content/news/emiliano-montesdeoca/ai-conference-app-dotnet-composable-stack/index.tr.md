@@ -1,6 +1,6 @@
 ---
 title: ".NET'in Birleştirilebilir Stack'i ile Yapay Zeka Destekli Konferans Uygulaması Oluşturma"
-date: 2026-05-04
+date: 2026-05-06
 author: "Emiliano Montesdeoca"
 description: "Yapay zeka destekli bir konferans uygulaması oluştururken birleştirilebilir .NET stack'inin pratikte nasıl göründüğü."
 tags:

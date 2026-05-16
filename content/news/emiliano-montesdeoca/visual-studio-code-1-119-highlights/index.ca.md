@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio Code 1.119: punts practics per a .NET"
-date: 2026-05-04
+date: 2026-05-15
 author: "Emiliano Montesdeoca"
 description: "Resum practic per a equips .NET sobre \"Visual Studio Code 1.119: punts practics per a .NET\", amb passos clars per avaluar-ho en produccio."
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "Prise en charge du style SDK pour les projets d'extension dans Visual Studio"
-date: 2026-05-04
+date: 2026-05-13
 author: "Emiliano Montesdeoca"
 description: "Resume pratique pour les equipes .NET sur \"Prise en charge du style SDK pour les projets d'extension dans Visual Studio\", avec des etapes concretes pour la production."
 tags:

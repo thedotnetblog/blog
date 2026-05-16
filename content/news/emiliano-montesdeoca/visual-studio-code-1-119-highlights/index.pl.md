@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio Code 1.119: praktyczne najważniejsze elementy dla .NET"
-date: 2026-05-04
+date: 2026-05-15
 author: "Emiliano Montesdeoca"
 description: "Praktyczne spojrzenie .NET na VS Code 1.119: co testować w pierwszej kolejności i gdzie może poprawić codzienne tworzenie oprogramowania."
 tags:

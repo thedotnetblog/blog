@@ -1,6 +1,6 @@
 ---
 title: "ejentogata purattofomu enjinia ringu de ikou no tanjun sagyo o herasu"
-date: 2026-05-04
+date: 2026-05-05
 author: "Emiliano Montesdeoca"
 description: "\"ejentogata purattofomu enjinia ringu de ikou no tanjun sagyo o herasu\" ni tsuite .NET chiimu muke ni honban teki kanten de jissen teki ni matomemashita."
 tags:

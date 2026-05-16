@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio Nisan Güncellemesi: .NET İş Akışları için Cloud Agent Entegrasyonu"
-date: 2026-05-04
+date: 2026-05-14
 author: "Emiliano Montesdeoca"
 description: "Nisan Visual Studio güncellemesinin ayrıntılı bir incelemesi ve Cloud Agent entegrasyonunun .NET iş akışlarında neyi değiştirdiği."
 tags:

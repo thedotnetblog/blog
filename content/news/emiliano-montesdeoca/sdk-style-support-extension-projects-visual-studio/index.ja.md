@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio kakucho purojekuto muke SDK sutairu sapoto"
-date: 2026-05-04
+date: 2026-05-13
 author: "Emiliano Montesdeoca"
 description: "\"Visual Studio kakucho purojekuto muke SDK sutairu sapoto\" ni tsuite .NET chiimu muke ni honban teki kanten de jissen teki ni matomemashita."
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio Code 1.119: aspectos practicos para .NET"
-date: 2026-05-04
+date: 2026-05-15
 author: "Emiliano Montesdeoca"
 description: "Resumen practico para equipos .NET sobre \"Visual Studio Code 1.119: aspectos practicos para .NET\", con pasos claros para evaluarlo en produccion."
 tags:

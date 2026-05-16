@@ -1,6 +1,6 @@
 ---
 title: ".NET 10 में API Versioning को OpenAPI के साथ मिलाना"
-date: 2026-05-04
+date: 2026-05-07
 author: "Emiliano Montesdeoca"
 description: ".NET 10 में API वर्सनिंग और OpenAPI को मिलाने का व्यावहारिक तरीका ताकि कॉन्ट्रैक्ट स्पष्ट और विकसित होने योग्य रहें।"
 tags:

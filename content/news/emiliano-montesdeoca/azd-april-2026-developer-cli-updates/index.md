@@ -1,6 +1,6 @@
 ---
 title: "Azure Developer CLI (azd) April 2026: What Matters for .NET Teams"
-date: 2026-05-04
+date: 2026-05-08
 author: "Emiliano Montesdeoca"
 description: "Key Azure Developer CLI April 2026 updates that matter for .NET developers shipping cloud apps and agents."
 tags:

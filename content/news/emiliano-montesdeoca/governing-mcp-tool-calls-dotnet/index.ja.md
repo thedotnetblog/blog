@@ -1,6 +1,6 @@
 ---
 title: "Agent Governance Toolkit de .NET no MCP tsuuru yobidashi o tosei suru"
-date: 2026-05-04
+date: 2026-05-11
 author: "Emiliano Montesdeoca"
 description: "\"Agent Governance Toolkit de .NET no MCP tsuuru yobidashi o tosei suru\" ni tsuite .NET chiimu muke ni honban teki kanten de jissen teki ni matomemashita."
 tags:

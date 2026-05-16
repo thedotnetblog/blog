@@ -1,6 +1,6 @@
 ---
 title: "shiyong Agent Governance Toolkit zhili .NET zhong de MCP gongju diaoyong"
-date: 2026-05-04
+date: 2026-05-11
 author: "Emiliano Montesdeoca"
 description: "Weirao \"shiyong Agent Governance Toolkit zhili .NET zhong de MCP gongju diaoyong\" de .NET tuandui shiyong jiedu baohan ke luodi de shengchan pinggu buzhou."
 tags:

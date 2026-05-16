@@ -1,6 +1,6 @@
 ---
 title: "Usuwanie żmudnej pracy migracji dzięki agentowej inżynierii platformowej"
-date: 2026-05-04
+date: 2026-05-05
 author: "Emiliano Montesdeoca"
 description: "Praktyczne spojrzenie na wykorzystanie agentowej inżynierii platformowej do redukcji powtarzalnej pracy migracyjnej w korporacyjnych programach .NET."
 tags:

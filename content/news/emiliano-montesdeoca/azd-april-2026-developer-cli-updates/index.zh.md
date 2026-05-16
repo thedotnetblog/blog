@@ -1,6 +1,6 @@
 ---
 title: "Azure Developer CLI azd 2026 nian 4 yue gengxin .NET tuandui guanzhu dian"
-date: 2026-05-04
+date: 2026-05-08
 author: "Emiliano Montesdeoca"
 description: "Weirao \"Azure Developer CLI azd 2026 nian 4 yue gengxin .NET tuandui guanzhu dian\" de .NET tuandui shiyong jiedu baohan ke luodi de shengchan pinggu buzhou."
 tags:

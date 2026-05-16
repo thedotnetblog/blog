@@ -1,6 +1,6 @@
 ---
 title: "SDK-Style Support for Extension Projects in Visual Studio"
-date: 2026-05-04
+date: 2026-05-13
 author: "Emiliano Montesdeoca"
 description: "Why SDK-style project support for Visual Studio extensions is a meaningful simplification for .NET extension development."
 tags:

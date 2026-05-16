@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio'da Uzantı Projeleri için SDK Stilinde Destek"
-date: 2026-05-04
+date: 2026-05-13
 author: "Emiliano Montesdeoca"
 description: "Visual Studio uzantıları için SDK stili proje desteğinin .NET uzantı geliştirme için neden anlamlı bir basitleştirme olduğu."
 tags:

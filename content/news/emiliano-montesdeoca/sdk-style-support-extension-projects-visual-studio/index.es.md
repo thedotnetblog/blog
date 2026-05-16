@@ -1,6 +1,6 @@
 ---
 title: "Compatibilidad con proyectos de estilo SDK para extensiones en Visual Studio"
-date: 2026-05-04
+date: 2026-05-13
 author: "Emiliano Montesdeoca"
 description: "Resumen practico para equipos .NET sobre \"Compatibilidad con proyectos de estilo SDK para extensiones en Visual Studio\", con pasos claros para evaluarlo en produccion."
 tags:

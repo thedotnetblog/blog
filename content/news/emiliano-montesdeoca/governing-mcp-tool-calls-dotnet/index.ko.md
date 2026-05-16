@@ -1,6 +1,6 @@
 ---
 title: "Agent Governance Toolkit euro .NET MCP dogu ho chul geobeoneonseu jeogyong"
-date: 2026-05-04
+date: 2026-05-11
 author: "Emiliano Montesdeoca"
 description: "\"Agent Governance Toolkit euro .NET MCP dogu ho chul geobeoneonseu jeogyong\"reul .NET tim gwanjeomeseo silmujeogeuro jeongrihago unyeong geomto dangyereul damassseubnida."
 tags:

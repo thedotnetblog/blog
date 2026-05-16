@@ -1,6 +1,6 @@
 ---
 title: "Governing MCP Tool Calls in .NET with the Agent Governance Toolkit"
-date: 2026-05-04
+date: 2026-05-11
 author: "Emiliano Montesdeoca"
 description: "How to introduce governance, policy checks, and safer tool execution for MCP-based .NET agents."
 tags:

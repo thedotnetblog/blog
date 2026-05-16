@@ -1,6 +1,6 @@
 ---
 title: "Azure Developer CLI azd 2026 nen 4 gatsu .NET chiimu no pointo"
-date: 2026-05-04
+date: 2026-05-08
 author: "Emiliano Montesdeoca"
 description: "\"Azure Developer CLI azd 2026 nen 4 gatsu .NET chiimu no pointo\" ni tsuite .NET chiimu muke ni honban teki kanten de jissen teki ni matomemashita."
 tags:

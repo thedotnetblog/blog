@@ -1,6 +1,6 @@
 ---
 title: "Azure Service Bus में All-or-Nothing Batch Processing को ठीक करना"
-date: 2026-05-04
+date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "ऑल-ऑर-नथिंग बैच हैंडलिंग रिलायबिलिटी को क्यों नुकसान पहुँचाती है, और per-message settlement .NET के लिए Service Bus वर्कफ़्लो को कैसे सुधारता है।"
 tags:
