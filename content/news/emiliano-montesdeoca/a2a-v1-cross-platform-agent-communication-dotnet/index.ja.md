@@ -1,8 +1,8 @@
 ---
-title: "A2A v1 Microsoft Agent Framework for .NET no kurosu purattofomu ejento tsushin"
+title: "A2A v1 登場: Microsoft Agent Framework for .NET でのクロスプラットフォームエージェント通信"
 date: 2026-05-04
 author: "Emiliano Montesdeoca"
-description: "\"A2A v1 Microsoft Agent Framework for .NET no kurosu purattofomu ejento tsushin\" ni tsuite .NET chiimu muke ni honban teki kanten de jissen teki ni matomemashita."
+description: "A2A プロトコル v1.0 がリリースされ、Microsoft Agent Framework の .NET パッケージが更新されました — AIエージェントをプロバイダー間で接続・公開するための安定した相互運用性標準。"
 tags:
   - .NET
   - Agent Framework
@@ -10,22 +10,48 @@ tags:
   - Interoperability
 ---
 
-*Kono kiji wa jidou honyaku desu. Genshou no eigo ban wa [koko]({{< ref "index.md" >}}).*
+*この投稿は自動翻訳されました。元のバージョンは[こちら]({{< ref "index.md" >}})。*
 
-[A2A v1 Microsoft Agent Framework for .NET no kurosu purattofomu ejento tsushin](https://devblogs.microsoft.com/agent-framework/a2a-v1-is-here-cross-platform-agent-communication-in-microsoft-agent-framework-for-net/) wa .NET shisutemu o honban unyou suru chiimu ni totte kakunin suru kachi ga arimasu.
+[A2A v1 登場: Microsoft Agent Framework for .NET でのクロスプラットフォームエージェント通信](https://devblogs.microsoft.com/agent-framework/a2a-v1-is-here-cross-platform-agent-communication-in-microsoft-agent-framework-for-net/) — A2A プロトコルが v1.0 に到達し、.NET の A2A Agent（クライアント）と A2A Hosting（サーバー）パッケージが更新されました。
 
-Watashi no mikata de wa juuyou na no wa shinkino kinou sono mono yori mo saiyou deki ru jissou pataan e hayaku otoshikomeru ka desu.
+## A2A v1 の実体
 
-## .NET chiimu ni totte juuyou na riyuu
+A2A は、AWS、Cisco、Google、IBM Research、Microsoft、Salesforce、SAP、ServiceNow の代表者からなるテクニカルステアリングコミッティが支援するAIエージェント向けオープン相互運用プロトコルです。v1 ラベルは、これが安定した本番対応の標準になったことを意味します。実装する SDK と Agent Framework パッケージはまだプレビュー段階ですが、プロトコル自体は確定しています。
 
-Kono shurui no koushin wa kaihatsu supiido purattofomu seigousei gabanansu no baransu o toriyasuku shimasu.
+v1 は v0.3 からマルチテナントサポート、暗号化IDのための署名付き Agent Cards、改善されたセキュリティフロー、ウェブ整合アーキテクチャを追加しました。
 
-## Jissen teki na tsugi no suteppu
+## リモート A2A エージェントへの接続
 
-1. Honban ni chikai deeta de chiisana .NET pairotto o jisshi suru.
-2. Tenkai mae ni kansokusei to rorubakku jouken o teigi suru.
-3. Jissou pataan o shanai tenpureeto ka shite yokoten kai suru.
+リモート A2A エージェントはコード内では単なる `AIAgent` です — 同じ `RunAsync`、同じストリーミング、同じセッション管理：
 
-## Source
+```csharp
+// Well-known URI による探索
+A2ACardResolver resolver = new(new Uri("https://a2a-agent.example.com"));
+AIAgent agent = await resolver.GetAIAgentAsync();
+Console.WriteLine(await agent.RunAsync("What's the weather in Seattle?"));
 
-- Original article: [https://devblogs.microsoft.com/agent-framework/a2a-v1-is-here-cross-platform-agent-communication-in-microsoft-agent-framework-for-net/](https://devblogs.microsoft.com/agent-framework/a2a-v1-is-here-cross-platform-agent-communication-in-microsoft-agent-framework-for-net/)
+// 直接設定
+A2AClient a2aClient = new(new Uri("https://a2a-agent.example.com"));
+AIAgent agent = a2aClient.AsAIAgent(name: "my-agent", description: "A helpful assistant.");
+
+// ストリーミングも同様
+await foreach (var update in agent.RunStreamingAsync("Write a short summary..."))
+    Console.Write(update.Text);
+```
+
+## エージェントを A2A エンドポイントとして公開
+
+Microsoft Foundry、Azure OpenAI、OpenAI、Anthropic、AWS Bedrock で構築した任意の `AIAgent` を、ASP.NET Core の 2 行で A2A エンドポイントとして公開できます：
+
+```csharp
+builder.Services.AddKeyedSingleton<AIAgent>("weather-agent", (sp, _) => ...);
+builder.AddA2AServer("weather-agent");
+```
+
+エージェントカードは `/.well-known/agent-card.json` で自動的に提供されます。
+
+## 実際に何を意味するか
+
+安定した v1 プロトコルにより、breaking changes を心配せずに .NET エージェントを Python、Java、その他の言語で構築されたエージェントと接続できます。署名付き Agent Cards の暗号化 ID は、エージェント間の信頼検証の基盤も提供します。
+
+完全な変更履歴と v0.3 からの移行メモについては、[完全な記事](https://devblogs.microsoft.com/agent-framework/a2a-v1-is-here-cross-platform-agent-communication-in-microsoft-agent-framework-for-net/)をご覧ください。
