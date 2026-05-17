@@ -1,6 +1,9 @@
 name: Build and deploy Hugo site
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
@@ -37,6 +40,7 @@ jobs:
         run: hugo --gc --minify
 
       - name: Deploy to public branch
+        if: github.event_name != 'pull_request'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
