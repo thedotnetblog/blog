@@ -1,5 +1,5 @@
 ---
-title: "Naprawianie przetwarzania wsadowego „wszystko albo nic" w Azure Service Bus"
+title: 'Naprawianie przetwarzania wsadowego „wszystko albo nic" w Azure Service Bus'
 date: 2026-05-10
 author: "Emiliano Montesdeoca"
 description: "Azure Functions obsługuje teraz rozliczanie wiadomość po wiadomości dla wyzwalaczy Service Bus, umożliwiając niezależne ukończenie, porzucenie, wysłanie do kolejki utraconych wiadomości lub odroczenie każdej wiadomości w partii."
