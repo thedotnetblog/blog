@@ -6,11 +6,13 @@ The `hugo --gc --minify` command generates a static site in `public/`. The site 
 
 ## How it works
 
-A workflow at `.github/workflows/deploy.yml` runs on every push to `main`, on a daily schedule (`0 2 * * *` UTC), and when manually dispatched. It builds Hugo and force-pushes the static output to the `public` branch (orphan branch containing only the built site).
+A workflow at `.github/workflows/deploy.yml` runs on every pull request targeting `main`, on every push to `main`, on a daily schedule (`0 2 * * *` UTC), and when manually dispatched. It always builds Hugo, and only deploys to `public` for non-PR runs.
 
 ```yaml
 # .github/workflows/deploy.yml (summary)
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
   schedule:
@@ -26,6 +28,7 @@ jobs:
           extended: true
       - run: hugo --gc --minify
       - uses: peaceiris/actions-gh-pages@v4
+        if: github.event_name != 'pull_request'
         with:
           publish_dir: ./public
           publish_branch: public
