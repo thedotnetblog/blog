@@ -8,7 +8,7 @@ paginate = 10
 enableRobotsTXT = true
 enableGitInfo = true
 summaryLength = 70
-buildFuture = true
+buildFuture = false
 
 [languages]
   [languages.en]
