@@ -9,6 +9,7 @@ tags:
   - Models
   - Cost Optimization
   - Evaluations
+dir: rtl
 ---
 
 > *تمت ترجمة هذه المقالة تلقائيًا. للنسخة الأصلية، [انقر هنا]({{< ref "index.md" >}}).*
