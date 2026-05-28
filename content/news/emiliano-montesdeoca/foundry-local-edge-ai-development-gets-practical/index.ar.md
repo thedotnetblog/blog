@@ -9,6 +9,7 @@ tags:
   - Edge AI
   - AI
   - Developer Tools
+dir: rtl
 ---
 
 > *تمت ترجمة هذه المقالة تلقائيًا. للنسخة الأصلية، [انقر هنا]({{< ref "index.md" >}}).*
