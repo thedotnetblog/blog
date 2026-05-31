@@ -11,7 +11,7 @@ tags:
   - Microsoft Agent Framework
 ---
 
-*Dieser Beitrag wurde automatisch übersetzt.*
+*Dieser Beitrag wurde automatisch übersetzt. Zur Originalversion [hier klicken]({{< ref "index.md" >}}).*
 
 Agentische Automatisierung interessiert mich immer mehr, wenn sie auf deterministischen Prüfungen statt auf Bauchgefühl beruht.
 
