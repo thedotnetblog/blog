@@ -11,7 +11,7 @@ tags:
   - Microsoft Agent Framework
 ---
 
-*Aquest article s'ha traduït automàticament.*
+*Aquest article s'ha traduït automàticament. Per veure la versió original, [fes clic aquí]({{< ref "index.md" >}}).*
 
 Sempre m'interessa més l'automatització agentiva quan es fonamenta en comprovacions deterministes i no en sensacions.
 
