@@ -11,7 +11,7 @@ tags:
   - Microsoft Agent Framework
 ---
 
-*Artikel ini diterjemahkan secara otomatis.*
+*Artikel ini diterjemahkan secara otomatis. Untuk versi aslinya, [klik di sini]({{< ref "index.md" >}}).*
 
 Saya selalu lebih tertarik pada otomatisasi agentik ketika itu bertumpu pada pengecekan deterministik, bukan sekadar firasat.
 
