@@ -11,7 +11,7 @@ tags:
   - Microsoft Agent Framework
 ---
 
-*Bu makale otomatik olarak çevrildi.*
+*Bu makale otomatik olarak çevrildi. Orijinal sürüm için [buraya tıklayın]({{< ref "index.md" >}}).*
 
 Ajan odaklı otomasyon, sezgilere değil deterministik kontrollere dayandığında beni her zaman daha çok ilgilendirir.
 
