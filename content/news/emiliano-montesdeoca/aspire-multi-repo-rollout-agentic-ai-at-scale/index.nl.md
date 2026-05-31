@@ -11,7 +11,7 @@ tags:
   - Microsoft Agent Framework
 ---
 
-*Dit artikel is automatisch vertaald.*
+*Dit artikel is automatisch vertaald. Voor de oorspronkelijke versie, [klik hier]({{< ref "index.md" >}}).*
 
 Agentische automatisering interesseert me altijd meer wanneer die is gebaseerd op deterministische controles in plaats van op gevoel.
 
