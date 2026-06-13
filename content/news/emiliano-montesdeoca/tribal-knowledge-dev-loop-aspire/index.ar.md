@@ -9,6 +9,7 @@ tags:
   - AI
   - Dev Loop
   - .NET
+dir: rtl
 ---
 
 > *تمت ترجمة هذه المقالة تلقائيًا. لقراءة الأصل، [انقر هنا]({{< ref "tribal-knowledge-dev-loop-aspire.md" >}}).* 
