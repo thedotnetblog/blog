@@ -9,6 +9,7 @@ tags:
   - "ASP.NET Core"
   - ".NET 10"
   - "Maintenance & Updates"
+dir: rtl
 ---
 
 *تمت ترجمة هذه المقالة تلقائيًا. للنسخة الأصلية، [انقر هنا](https://thedotnetblog.com/posts/emiliano-montesdeoca/dotnet-10-0-7-oob-security-patch-data-protection/).*
