@@ -1,4 +1,84 @@
 ---
+title: "Marketplace de ajan platformu hikâyesinin bir parçası haline geliyor"
+date: 2026-06-05
+author: "Emiliano Montesdeoca"
+description: "Microsoft Marketplace giderek app ve agent yaşam döngüsünün bir parçası olarak konumlandırılıyor: yalnızca keşif değil, aynı zamanda build sourcing, distribution, monetization ve ürün içi görünürlük."
+tags:
+  - Microsoft Marketplace
+  - AI
+  - Agents
+  - Azure
+  - Distribution
+---
+
+> *Bu yazı otomatik olarak çevrilmiştir. Orijinal sürüm için [buraya tıklayın]({{< ref "index.md" >}}).*
+
+Genelde agent'ları modeller, framework'ler, tooling, hosting ve governance açısından konuşuruz.
+
+Bu Marketplace duyurusu, **distribution ve monetization**'ın da hikâyenin bir parçası olduğunu hatırlatıyor.
+
+Bunu ele almaya değer kılan da bu.
+
+## İlginç değişim, Marketplace'in engineering loop'un bir parçası olmak istemesi
+
+Kaynak yazı, Marketplace'i yalnızca bir katalog olarak çerçevelemiyor.
+
+Onu tam yaşam döngüsünün bir parçası olarak çerçeveliyor:
+
+- build
+- scale
+- monetize
+
+Bu anlamlı bir değişim.
+
+Çünkü Marketplace şu şeyler için bir yer haline geldiğinde:
+
+- AI component'leri source etmek
+- app ve agent'ları distribute etmek
+- onları Microsoft ürünleri arasında surface etmek
+- Microsoft'un ticari makinesi üzerinden monetize etmek
+
+artık yalnızca bir storefront konusu değil, platform konuşmasının bir parçası olur.
+
+## Bunun göründüğünden daha önemli olmasının nedeni
+
+Bunun geliştiriciler için Aspire, Foundry veya Agent Framework kadar merkezî olduğunu düşünmüyorum.
+
+Ama önemli olduğunu düşünüyorum, çünkü platformlar ancak insanlar şunları yapabiliyorsa önemlidir:
+
+- faydalı bir şey build etmek
+- onu anlamlı bir yere ship etmek
+- adoption almak
+- onu ticari olarak sürdürebilmek
+
+Teknik capability'ye tüm odak verildiğinde bu ticari ve dağıtım katmanı gözden kaçması kolaydır.
+
+Ama ekipler gerçek customers istediği anda çok önemli hale gelir.
+
+## Kaynak yazıdaki daha güçlü satır
+
+**For developers, Marketplace turns code into results** cümlesi benim zevkime göre biraz fazla cilalı, ama doğru fikre işaret ediyor.
+
+Asıl stratejik hamle, Microsoft'un Marketplace'i şunlara daha yakın konumlandırmak istemesi:
+
+- AI stack sourcing
+- enterprise distribution
+- ürün içi discovery
+- monetization workflows
+
+Bu genişleme devam ederse, Marketplace agent tabanlı ürünler geliştiren geliştiriciler için çok daha relevant hale gelir.
+
+## Benim görüşüm
+
+Bu, Aspire, Foundry veya Agent Framework kadar çekirdek bir engineering hikâyesi değil.
+
+Ama yine de relevant, çünkü platformlar ancak insanlar oluşturdukları şeyi build edebiliyor, ship edebiliyor, distribute edebiliyor ve sürdürebiliyorsa önemlidir.
+
+Marketplace açıkça bu yaşam döngüsünün daha büyük bir kısmını sahiplenmeye çalışıyor.
+
+Ve Microsoft başarılı olursa, stack'in bu parçası bugün birçok geliştiricinin düşündüğünden daha önemli olacak.
+
+Orijinal yazı: [Build, scale, and monetize apps and agents with Microsoft Marketplace](https://devblogs.microsoft.com/all-things-azure/build-scale-and-monetize-apps-and-agents-with-microsoft-marketplace/)---
 title: "Marketplace de ajan platformu hikayesinin bir parçası haline geliyor"
 date: 2026-06-05
 author: "Emiliano Montesdeoca"
