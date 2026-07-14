@@ -1,8 +1,8 @@
 ---
-title: 'Data API Builder Özel Yolları, API'leri İnsanlar İçin Tasarlamanızı Sağlar, Tablolar İçin Değil'
+title: "Data API Builder Özel Yolları, API'leri İnsanlar İçin Tasarlamanızı Sağlar, Tablolar İçin Değil"
 date: 2026-07-17
 author: 'Emiliano Montesdeoca'
-description: 'DAB'deki bileşik REST yolları, alan odaklı API tasarımı için küçük bir özellik ancak büyük mimari etkiye sahiptir.'
+description: "DAB'deki bileşik REST yolları, alan odaklı API tasarımı için küçük bir özellik ancak büyük mimari etkiye sahiptir."
 tags:
   - data-api-builder
   - azure-sql

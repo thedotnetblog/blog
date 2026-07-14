@@ -1,5 +1,5 @@
 ---
-title: 'Data API Builder Custom Paths: Ontwerp API's voor Mensen, Niet voor Tabellen'
+title: "Data API Builder Custom Paths: Ontwerp API's voor Mensen, Niet voor Tabellen"
 date: 2026-07-17
 author: 'Emiliano Montesdeoca'
 description: 'Samengestelde REST-paden in DAB zijn een kleine functie met grote architecturale impact voor domeingericht API-ontwerp.'

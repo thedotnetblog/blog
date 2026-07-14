@@ -2,7 +2,7 @@
 title: 'De beste azd-updates zijn degene die teamkwetsbaarheid wegnemen'
 date: 2026-07-14
 author: 'Emiliano Montesdeoca'
-description: 'De laatste azd-cyclus draait minder om glimmende commando's en meer om het verminderen van deploymentchaos in echte teams.'
+description: "De laatste azd-cyclus draait minder om glimmende commando's en meer om het verminderen van deploymentchaos in echte teams."
 tags:
   - azure-developer-cli
   - azd

@@ -1,5 +1,5 @@
 ---
-title: 'Foundry'de Claude GA, Model Heyecanı Değil Kurumsal Altyapıyla İlgili'
+title: "Foundry'de Claude GA, Model Heyecanı Değil Kurumsal Altyapıyla İlgili"
 date: 2026-07-16
 author: 'Emiliano Montesdeoca'
 description: 'Genel kullanılabilirlik önemli çünkü üretim yapay zekasını engelleyen tedarik, yönetişim ve veri ikametgahı sürtünmesini çözüyor.'

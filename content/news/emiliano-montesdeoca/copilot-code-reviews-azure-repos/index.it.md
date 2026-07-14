@@ -1,3 +1,4 @@
+---
 title: "Le code review di Copilot in Azure Repos sono più importanti di quanto sembrino"
 date: 2026-06-11
 author: "Emiliano Montesdeoca"

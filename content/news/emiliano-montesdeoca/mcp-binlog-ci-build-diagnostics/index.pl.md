@@ -2,7 +2,7 @@
 title: 'Diagnostyka Kompilacji MCP w CI To Pierwszy Przepływ AI, Który Szybko Się Zwraca'
 date: 2026-07-18
 author: 'Emiliano Montesdeoca'
-description: 'Gdy analiza Binlog MCP działa bezpośrednio w przepływach pull requestów, zespoły skracają czas triage'u awarii i odblokowują programistów szybciej.'
+description: "Gdy analiza Binlog MCP działa bezpośrednio w przepływach pull requestów, zespoły skracają czas triage'u awarii i odblokowują programistów szybciej."
 tags:
   - dotnet
   - mcp

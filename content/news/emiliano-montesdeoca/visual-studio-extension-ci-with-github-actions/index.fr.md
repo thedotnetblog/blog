@@ -2,7 +2,7 @@
 title: "Les équipes d'extensions Visual Studio devraient cesser de publier par habitude et commencer à publier par pipeline"
 date: 2026-07-23
 author: 'Emiliano Montesdeoca'
-description: 'Un flux GitHub Actions reproductible pour le versionnement et la publication VSIX est désormais suffisamment simple pour qu'il soit difficile de justifier des étapes de publication manuelles.'
+description: "Un flux GitHub Actions reproductible pour le versionnement et la publication VSIX est désormais suffisamment simple pour qu'il soit difficile de justifier des étapes de publication manuelles."
 tags:
   - visual-studio
   - vsix
