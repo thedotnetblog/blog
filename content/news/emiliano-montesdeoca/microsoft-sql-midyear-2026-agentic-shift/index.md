@@ -20,12 +20,12 @@ At the engine layer, GA features like AI_GENERATE_EMBEDDINGS, External Model obj
 
 The tooling story is equally important. SSMS gets Copilot agent mode, schema compare, SQL formatter improvements, and richer execution context. VS Code’s MSSQL extension keeps pushing notebooks, schema design with AI assistance, DAB integration, and Azure provisioning workflows. This dual-track investment says Microsoft expects developers to stay polyglot in IDE choice while standardizing on shared data-plane capabilities.
 
-My strongest take: SQL MCP Server is the centerpiece trend. Once SQL entities are safely exposed as toolable interfaces for agents, the database stops being passive storage and becomes an active participant in orchestration. That creates new leverage, but also raises the bar for security architecture, identity propagation, and auditability.
+My strongest take: **SQL MCP Server is the centerpiece trend**. Once SQL entities are safely exposed as toolable interfaces for agents, the database stops being passive storage and becomes an active participant in orchestration. That creates new leverage, but also raises the bar for security architecture, identity propagation, and auditability.
 
 What should teams do now?
 
-Pick one migration lane and execute it hard. Either modernize your schema/dev pipeline around SQL projects plus CI/CD, or focus on MCP-ready governance and data access controls. Trying to absorb every feature announcement in parallel will stall delivery. Also, establish a single identity baseline with Entra authentication wherever possible. Mixed auth patterns are the fastest path to inconsistent policy enforcement.
-
-Finally, treat the driver ecosystem updates as production-critical work, not maintenance noise. SqlClient, ODBC, OLE DB, Python connectors, and Django adapters all shipped meaningful reliability and compatibility changes. If your app stack spans languages, your data reliability is only as strong as the least-updated driver in production.
+- **Pick one migration lane and execute it hard.** Either modernize your schema/dev pipeline around SQL projects plus CI/CD, or focus on MCP-ready governance and data access controls. Trying to absorb every feature announcement in parallel will stall delivery.
+- **Establish a single identity baseline** with Entra authentication wherever possible. Mixed auth patterns are the fastest path to inconsistent policy enforcement.
+- **Treat the driver ecosystem updates as production-critical work**, not maintenance noise. SqlClient, ODBC, OLE DB, Python connectors, and Django adapters all shipped meaningful reliability and compatibility changes. If your app stack spans languages, your data reliability is only as strong as the least-updated driver in production.
 
 This is the real message of 2026 so far: Microsoft SQL is becoming the operational core for agentic systems. Teams that modernize with governance in mind will move faster. Teams that chase features without platform discipline will accumulate expensive complexity.
