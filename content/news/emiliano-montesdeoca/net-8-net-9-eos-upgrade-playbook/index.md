@@ -17,17 +17,14 @@ This announcement is straightforward, and teams should respond with equal clarit
 
 Applications will keep running. That is not the point. The point is that security and servicing updates stop. Once that happens, every known vulnerability without a backport path becomes your operational liability.
 
-My opinionated take: organizations often treat framework upgrades as optional maintenance and then pay for that decision in emergency windows, audit findings, and rushed vendor escalations. Upgrade planning should be a product roadmap item, not a side quest.
+My opinionated take: **organizations often treat framework upgrades as optional maintenance** and then pay for that decision in emergency windows, audit findings, and rushed vendor escalations. Upgrade planning should be a product roadmap item, not a side quest.
 
 A practical migration stance for .NET teams:
 
-Set .NET 10 retargeting as a dated objective, not an open-ended backlog item.
-
-Run compatibility and regression testing in parallel with feature work now, not in Q4.
-
-Track dependency and hosting readiness as separate workstreams because many failures happen outside the project file.
-
-Use Upgrade Assistant and breaking-change documentation early to front-load surprises.
+- **Set .NET 10 retargeting as a dated objective**, not an open-ended backlog item.
+- **Run compatibility and regression testing** in parallel with feature work now, not in Q4.
+- **Track dependency and hosting readiness** as separate workstreams, because many failures happen outside the project file.
+- **Use Upgrade Assistant and breaking-change documentation** early to front-load surprises.
 
 If you own shared libraries used by multiple products, publish your .NET 10 support timeline publicly inside your org. Downstream teams need lead time.
 
@@ -35,7 +32,7 @@ Visual Studio’s out-of-support component marking also matters operationally. I
 
 One under-discussed detail is that .NET 8 and .NET 9 converge on the same end date. This compresses upgrade windows for organizations that staggered adoption expecting more cushion. If you moved to .NET 9 for feature access, you still land on the same support cliff.
 
-For platform leads, the decision matrix is simple: migrate before deadline, or document and accept unsupported risk with compensating controls. There is no third option where nothing changes.
+For platform leads, the decision matrix is simple: **migrate before deadline, or document and accept unsupported risk** with compensating controls. There is no third option where nothing changes.
 
 The good news is that .NET 10 is an LTS target through November 2028, which buys stable runway once you complete the move.
 
