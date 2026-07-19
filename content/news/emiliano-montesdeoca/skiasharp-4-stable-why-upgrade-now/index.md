@@ -25,15 +25,12 @@ The lifecycle correctness improvements called out here also matter. Fixing nativ
 
 My opinionated take: teams should stop evaluating graphics stack upgrades only by visible feature deltas. Stability and maintainability deltas are often more valuable than visual deltas.
 
-Practical upgrade guidance:
+### Practical upgrade guidance
 
-Pilot SkiaSharp 4 on UI paths with shadows, layered cards, and text-heavy surfaces to validate expected gains.
-
-Run snapshot and visual-regression checks across your key target platforms before broad rollout.
-
-Test asset pipelines with modern formats and orientation metadata to catch behavior changes early.
-
-If you run MAUI or Uno workloads, align your roadmap with the new cadence and watch preview channel announcements for future backend shifts.
+- **Pilot SkiaSharp 4 on UI paths** with shadows, layered cards, and text-heavy surfaces to validate expected gains.
+- **Run snapshot and visual-regression checks** across your key target platforms before broad rollout.
+- **Test asset pipelines** with modern formats and orientation metadata to catch behavior changes early.
+- **If you run MAUI or Uno workloads**, align your roadmap with the new cadence and watch preview channel announcements for future backend shifts.
 
 The co-maintenance model with Uno Platform is another positive sign. Critical infrastructure libraries age better when there are multiple deeply invested maintainers with real product pressure.
 
@@ -41,4 +38,4 @@ I also appreciate the explicit mention of automation in release operations. Agen
 
 If your app depends on SkiaSharp and you delayed migration waiting for a stable v4 landing, this is that moment. Staying on older versions now has a clearer opportunity cost.
 
-Bottom line: SkiaSharp 4 stable is less about chasing novelty and more about adopting a healthier graphics foundation for the next few years of .NET UI work.
+**Bottom line:** SkiaSharp 4 stable is less about chasing novelty and more about adopting a healthier graphics foundation for the next few years of .NET UI work.
