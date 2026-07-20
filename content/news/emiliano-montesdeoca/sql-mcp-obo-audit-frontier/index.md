@@ -18,14 +18,16 @@ Original source: https://devblogs.microsoft.com/azure-sql/sql-mcp-server-obo-aut
 
 This is why OBO support in Data API builder 2.0 with SQL MCP Server is a bigger deal than it first appears. Username/password and managed identity approaches still work operationally, but both collapse identity into the service boundary. Logs show the app or middleware, not the human request origin. That is acceptable for simple automation. It is not acceptable for regulated agentic workflows.
 
-With OBO, SQL authenticates the delegated user context, not the tool host identity. That gives you a fundamentally better audit model: user principal, action, statement context, and middle-tier app identifier together. You get traceability without losing the control surface of MCP tools and DAB entity permissions.
+With OBO, SQL authenticates the **delegated user context**, not the tool host identity. That gives you a fundamentally better audit model: user principal, action, statement context, and middle-tier app identifier together. You get traceability without losing the control surface of MCP tools and DAB entity permissions.
 
 My opinion is firm here: if your agent can touch sensitive SQL data, OBO should be your default architecture, not an optional hardening task. The setup is more involved, but identity debt is always paid later, usually during security incidents, compliance audits, or executive escalations.
 
-Practical implementation guidance:
+### Practical implementation guidance
 
-Start by validating identity flow with a minimal “WhoAmI” view and automated checks in integration tests. If the SQL principal does not match the signed-in user, stop and fix before shipping. Next, wire Log Analytics queries for SQLSecurityAuditEvents into your SOC dashboards and alert on high-risk actions initiated through OBO paths. Finally, align RBAC and DAB permissions so user-level identity and action-level authorization stay consistent end to end.
+- **Start by validating identity flow** with a minimal "WhoAmI" view and automated checks in integration tests. If the SQL principal does not match the signed-in user, stop and fix before shipping.
+- **Wire Log Analytics queries** for SQLSecurityAuditEvents into your SOC dashboards and alert on high-risk actions initiated through OBO paths.
+- **Align RBAC and DAB permissions** so user-level identity and action-level authorization stay consistent end to end.
 
 One subtle but important design point in the announcement is cache behavior. DAB explicitly blocks response caching when user-delegated auth is enabled. That tradeoff is correct. Performance tricks that can leak user-scoped outcomes are not worth it in multi-tenant or regulated environments.
 
-SQL MCP Server plus OBO is the beginning of a mature pattern: agents as controlled operators, users as accountable principals, data planes as auditable systems. If your architecture cannot answer “who did this” with confidence, it is not production-ready AI, no matter how polished the demo looks.
+**SQL MCP Server plus OBO** is the beginning of a mature pattern: agents as controlled operators, users as accountable principals, data planes as auditable systems. If your architecture cannot answer "who did this" with confidence, it is not production-ready AI, no matter how polished the demo looks.
