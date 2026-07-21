@@ -21,29 +21,25 @@ What I like most is that versioning gets treated as pipeline state, not a pre-re
 
 The split between gallery publishing and Marketplace publishing is also operationally mature. Teams need a place for quick validation builds that do not carry official-release semantics. Pushing everything directly to Marketplace is high-friction and encourages risky shortcuts.
 
-A strong release pattern for extension teams is:
+### A strong release pattern for extension teams
 
-On pull requests and main commits, produce CI VSIX artifacts and publish to gallery for testers.
+- **On pull requests and main commits**, produce CI VSIX artifacts and publish to gallery for testers.
+- **On tagged releases**, publish signed and validated packages to Marketplace.
+- **Keep token handling minimal** with dedicated secrets and least-privilege scopes.
 
-On tagged releases, publish signed and validated packages to Marketplace.
-
-Keep token handling minimal with dedicated secrets and least-privilege scopes.
-
-My opinionated take: extension ecosystems lag behind app ecosystems in CI discipline because small teams assume manual workflows are manageable. They are manageable until they are not. One rushed patch, one broken package, one forgotten manifest update, and trust drops.
+My opinionated take: **extension ecosystems lag behind app ecosystems in CI discipline** because small teams assume manual workflows are manageable. They are manageable until they are not. One rushed patch, one broken package, one forgotten manifest update, and trust drops.
 
 These reusable actions are useful because they encode repeated release logic once and let teams focus on extension quality instead of packaging mechanics.
 
 There is still engineering judgment required. You should gate Marketplace publication behind quality checks, and you should treat publish manifests as audited release artifacts. But the baseline pipeline complexity is now low enough that manual-only releases are mostly technical debt.
 
-If you lead extension development, standardize this now across repositories. You will get better traceability, easier onboarding, and fewer one-person release bottlenecks.
+If you lead extension development, **standardize this now across repositories**. You will get better traceability, easier onboarding, and fewer one-person release bottlenecks.
 
-Suggested rollout:
+### Suggested rollout
 
-Start with build plus gallery publish for one extension.
-
-Introduce version stamping after validating your manifest-source conventions.
-
-Add Marketplace publishing only after secret management and release gates are in place.
+- **Start with build plus gallery publish** for one extension.
+- **Introduce version stamping** after validating your manifest-source conventions.
+- **Add Marketplace publishing** only after secret management and release gates are in place.
 
 This is not about chasing DevOps fashion. It is about reliability for the people who install your tooling and expect updates to work.
 
