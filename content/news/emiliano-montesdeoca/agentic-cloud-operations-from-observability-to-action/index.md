@@ -1,6 +1,6 @@
 ---
 title: "Agentic Cloud Operations Gets Interesting When It Moves Beyond Dashboards"
-date: 2026-06-24
+date: 2026-11-13
 author: "Emiliano Montesdeoca"
 description: "The latest Azure vision for agentic cloud operations is notable because it connects observability, governance, and optimization into a single loop. The real story is moving from cloud insight to controlled action."
 tags:
