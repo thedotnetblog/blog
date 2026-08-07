@@ -1,6 +1,6 @@
 ---
 title: "VS Code 1.112: What .NET Developers Should Actually Care About"
-date: 2026-03-26
+date: 2026-08-29
 author: "Emiliano Montesdeoca"
 description: "VS Code 1.112 just dropped and it's packed with agent upgrades, an integrated browser debugger, MCP sandboxing, and monorepo support. Here's what actually matters if you're building with .NET."
 tags:
