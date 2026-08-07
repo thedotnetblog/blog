@@ -1,6 +1,6 @@
 ---
 title: "Azure Functions MCP Extension Keeps Getting More Practical"
-date: 2026-06-26
+date: 2026-11-14
 author: "Emiliano Montesdeoca"
 description: "The latest Azure Functions MCP extension update adds resources, prompts, MCP Apps, stronger auth options, and a better .NET builder experience. The bigger story is that serverless MCP on Azure is getting genuinely production-friendly."
 tags:
