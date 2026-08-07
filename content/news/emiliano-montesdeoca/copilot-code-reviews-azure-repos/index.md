@@ -1,6 +1,6 @@
 ---
 title: "Copilot Code Reviews in Azure Repos Are a Bigger Deal Than They Look"
-date: 2026-06-11
+date: 2026-10-25
 author: "Emiliano Montesdeoca"
 description: "GitHub Copilot code reviews are coming to Azure Repos, and that matters for teams that are not ready to move everything to GitHub yet. The real value is keeping AI-assisted review inside an existing enterprise workflow."
 tags:
