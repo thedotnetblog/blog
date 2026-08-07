@@ -1,6 +1,6 @@
 ---
 title: "Hermetic Aspire End-to-End Tests Are the Kind of Pattern More Teams Should Steal"
-date: 2026-05-30
+date: 2026-09-16
 author: "Emiliano Montesdeoca"
 description: "The Azure Chaos Studio testing write-up shows a very practical pattern: hermetic, ephemeral Aspire-based end-to-end environments that improve reliability for both humans and AI-assisted development."
 tags:
