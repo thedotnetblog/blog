@@ -1,6 +1,6 @@
 ---
 title: "Agent Harnesses Matter Because Prompts Are Not Enough"
-date: 2026-06-20
+date: 2026-11-11
 author: "Emiliano Montesdeoca"
 description: "The new Microsoft Agent Framework claw and harness walkthrough is a useful reminder that real agents need a runtime shell around the model: tools, planning, memory, sessions, and a practical execution loop."
 tags:
