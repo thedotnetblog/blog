@@ -1,6 +1,6 @@
 ---
 title: "Your Dev Loop Is Full of Tribal Knowledge — and Aspire Has the Right Response"
-date: 2026-06-01
+date: 2026-09-07
 author: "Emiliano Montesdeoca"
 description: "A new Aspire post makes a strong point: many teams do not lack tooling, they lack a consistent application model that turns hidden operational knowledge into something humans, scripts, and agents can actually use."
 tags:
