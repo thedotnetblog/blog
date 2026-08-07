@@ -1,6 +1,6 @@
 ---
 title: "Intelligent Terminal 0.1.1 Is Starting to Show What an AI-Native Shell Experience Could Look Like"
-date: 2026-06-29
+date: 2026-11-04
 author: "Emiliano Montesdeoca"
 description: "Intelligent Terminal 0.1.1 adds Bash and WSL support, a manual /fix flow, and on-the-fly model switching. It is still early, but the direction is becoming much more interesting for developers who live in the terminal."
 tags:
