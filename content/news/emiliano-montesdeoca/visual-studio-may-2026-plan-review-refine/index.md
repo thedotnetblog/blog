@@ -1,6 +1,6 @@
 ---
 title: "Visual Studio’s May Update Is Really About Better Control Between Idea and Change"
-date: 2026-06-12
+date: 2026-09-13
 author: "Emiliano Montesdeoca"
 description: "The May Visual Studio update adds the Plan agent, better skill management, context window visibility, and stronger multi-file diff experiences. The common theme is better control over the AI-assisted inner loop."
 tags:
