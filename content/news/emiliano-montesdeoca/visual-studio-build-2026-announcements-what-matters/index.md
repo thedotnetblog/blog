@@ -1,6 +1,6 @@
 ---
 title: "The Most Interesting Visual Studio Build 2026 Announcements Are About Friction Removal"
-date: 2026-06-13
+date: 2026-10-06
 author: "Emiliano Montesdeoca"
 description: "Visual Studio’s Build 2026 announcement points to a clear direction: stronger AI integration, better merge conflict handling, improved modernization flows, and fewer small inner-loop interruptions."
 tags:
