@@ -1,6 +1,6 @@
 ---
 title: "The .NET Sessions From Build 2026 Worth Your Time"
-date: 2026-05-24
+date: 2026-10-21
 author: "Emiliano Montesdeoca"
 description: "The latest .NET at Build roundup points to the sessions that matter most if you care about .NET 11, agentic web apps, AI building blocks, Aspire, and modernization."
 tags:
