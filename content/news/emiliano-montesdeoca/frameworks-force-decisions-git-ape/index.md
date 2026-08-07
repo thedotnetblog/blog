@@ -1,6 +1,6 @@
 ---
 title: "Frameworks Only Matter When They Actually Force Better Decisions"
-date: 2026-06-06
+date: 2026-10-17
 author: "Emiliano Montesdeoca"
 description: "A new Git-Ape write-up makes a useful point: architecture and governance frameworks only matter when they become delivery controls instead of passive reference material."
 tags:
