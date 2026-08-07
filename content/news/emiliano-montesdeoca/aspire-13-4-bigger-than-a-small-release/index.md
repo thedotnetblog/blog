@@ -1,6 +1,6 @@
 ---
 title: "Aspire 13.4 Is Supposed to Be a Small Release — It Does Not Read Like One"
-date: 2026-06-02
+date: 2026-09-20
 author: "Emiliano Montesdeoca"
 description: "Aspire 13.4 brings TypeScript AppHost GA, more powerful resource commands, stronger Kubernetes support, Go integration, and AI-adjacent CLI improvements. That is a lot for a so-called small release."
 tags:
