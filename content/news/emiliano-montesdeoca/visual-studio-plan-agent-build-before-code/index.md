@@ -1,6 +1,6 @@
 ---
 title: "The New Plan Agent in Visual Studio Fixes a Very Real AI Workflow Problem"
-date: 2026-06-11
+date: 2026-09-08
 author: "Emiliano Montesdeoca"
 description: "The new Plan agent in Visual Studio matters because it creates a structured planning stage before implementation, which is exactly what bigger features and refactors often need."
 tags:
