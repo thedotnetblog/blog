@@ -1,6 +1,6 @@
 ---
 title: "Claude Opus 4.8 in Foundry Is Another Sign That Model Choice Is Becoming a Platform Feature"
-date: 2026-06-15
+date: 2026-09-17
 author: "Emiliano Montesdeoca"
 description: "Claude Opus 4.8 is now available in Microsoft Foundry. The important part is not just one more model launch, but the continued expansion of serious model choice inside a governed enterprise platform."
 tags:
