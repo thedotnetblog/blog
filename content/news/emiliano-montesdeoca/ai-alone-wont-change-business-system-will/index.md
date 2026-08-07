@@ -1,6 +1,6 @@
 ---
 title: "AI Alone Won’t Change the Business — the System Around It Will"
-date: 2026-06-14
+date: 2026-09-23
 author: "Emiliano Montesdeoca"
 description: "Jay Parikh’s latest AI platform essay is worth reading because it frames the real enterprise challenge correctly: models matter, but the lasting value comes from the governed system that builds, contextualizes, runs, and improves agents over time."
 tags:
