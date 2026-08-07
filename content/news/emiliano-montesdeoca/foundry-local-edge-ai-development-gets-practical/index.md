@@ -1,6 +1,6 @@
 ---
 title: "Foundry Local Is Starting to Make Edge AI Development Feel Practical"
-date: 2026-05-28
+date: 2026-10-19
 author: "Emiliano Montesdeoca"
 description: "The latest Foundry Local updates expand language support, Linux ARM64 support, cancellation flows, and Windows acceleration. The bigger story is that local and edge AI development is getting easier to operationalize."
 tags:
