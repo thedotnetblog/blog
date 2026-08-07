@@ -1,6 +1,6 @@
 ---
 title: "Microsoft Foundry May 2026: The Updates I’d Actually Watch Closely"
-date: 2026-05-27
+date: 2026-09-18
 author: "Emiliano Montesdeoca"
 description: "The latest Microsoft Foundry roundup covers a lot, but the most important threads are trace-based evaluation, new model choice, managed isolation, and the continued rise of local and production-grade agent tooling."
 tags:
