@@ -1,6 +1,6 @@
 ---
 title: "Azure Functions Skills Might Be the Fastest Way to Get Agentic Functions on the Right Track"
-date: 2026-05-18
+date: 2026-09-27
 author: "Emiliano Montesdeoca"
 description: "The new azure-functions-skills preview is interesting because it does more than scaffold code. It teaches coding agents to build Azure Functions with current patterns, managed identity, and deployment-aware defaults."
 tags:
