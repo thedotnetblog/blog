@@ -1,6 +1,6 @@
 ---
 title: "Marketplace Is Becoming Part of the Agent Platform Story Too"
-date: 2026-06-05
+date: 2026-09-21
 author: "Emiliano Montesdeoca"
 description: "Microsoft Marketplace is increasingly being positioned as part of the app-and-agent lifecycle: not just discovery, but build sourcing, distribution, monetization, and in-product surfacing."
 tags:
