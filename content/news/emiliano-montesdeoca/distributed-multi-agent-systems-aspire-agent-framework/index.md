@@ -1,6 +1,6 @@
 ---
 title: "Aspire + Agent Framework Is Starting to Look Like the Real Multi-Agent Stack"
-date: 2026-06-13
+date: 2026-10-23
 author: "Emiliano Montesdeoca"
 description: "The new AlpineAI sample shows what happens when Aspire and Microsoft Agent Framework are used for a real distributed multi-agent system. The important part is not the ski demo. It is the architecture pattern behind it."
 tags:
