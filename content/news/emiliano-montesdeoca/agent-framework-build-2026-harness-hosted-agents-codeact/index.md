@@ -1,6 +1,6 @@
 ---
 title: "Agent Harness, Hosted Agents, and CodeAct: This Is the Agent Framework Update I Would Focus On"
-date: 2026-06-08
+date: 2026-10-07
 author: "Emiliano Montesdeoca"
 description: "The Build 2026 Agent Framework announcement is packed, but the most important threads are the harness model, Foundry hosted agents, and CodeAct for reducing orchestration overhead."
 tags:
