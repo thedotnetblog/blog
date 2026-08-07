@@ -1,6 +1,6 @@
 ---
 title: "Foundry’s Observability-to-ROI Story Is What Serious Agent Platforms Need"
-date: 2026-05-25
+date: 2026-10-10
 author: "Emiliano Montesdeoca"
 description: "The latest Foundry observability announcement matters because it connects tracing, evaluation, optimization, and ROI into one operating loop for AI agents."
 tags:
