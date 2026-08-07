@@ -1,6 +1,6 @@
 ---
 title: "The Agent Framework Sessions From Build 2026 Worth Following"
-date: 2026-06-07
+date: 2026-09-19
 author: "Emiliano Montesdeoca"
 description: "The latest Microsoft Agent Framework Build guide is useful as a map of where the platform conversation is going: hosted agents, observability, governance, multi-agent design, and open interoperability."
 tags:
