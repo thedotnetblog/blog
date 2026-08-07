@@ -1,6 +1,6 @@
 ---
 title: "Reviewing Pull Requests Inside Visual Studio Is Exactly the Kind of Friction Reduction I Like"
-date: 2026-06-21
+date: 2026-10-31
 author: "Emiliano Montesdeoca"
 description: "Visual Studio can now review pull requests end to end without leaving the IDE. That may sound incremental, but for teams living in Visual Studio all day, it removes a lot of unnecessary context switching."
 tags:
