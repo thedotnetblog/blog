@@ -1,6 +1,6 @@
 ---
 title: "The Hard Part of AI Development Is No Longer Access. It Is Operating the Right Model Well"
-date: 2026-05-26
+date: 2026-09-22
 author: "Emiliano Montesdeoca"
 description: "A new Microsoft Foundry guide makes a strong case that model selection, cost control, evaluation, and lifecycle management are now the real differentiators in production AI systems."
 tags:
