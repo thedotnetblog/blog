@@ -1,6 +1,6 @@
 ---
 title: "Aspire in VS Code 13.4 Tightens the Developer Loop in All the Right Ways"
-date: 2026-06-16
+date: 2026-11-01
 author: "Emiliano Montesdeoca"
 description: "Aspire in VS Code 13.4 is not just a feature update. It is a real improvement to the daily development loop with better debugging, resource visibility, panel integration, and TypeScript AppHost support."
 tags:
