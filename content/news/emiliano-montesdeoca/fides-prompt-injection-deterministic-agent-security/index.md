@@ -1,6 +1,6 @@
 ---
 title: "FIDES Is the Kind of Deterministic Agent Security Story I Want to See More Of"
-date: 2026-06-10
+date: 2026-09-06
 author: "Emiliano Montesdeoca"
 description: "The new FIDES capabilities in Agent Framework matter because they move prompt injection defense away from heuristics and toward enforceable policy based on labeled content and middleware checks."
 tags:
