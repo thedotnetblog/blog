@@ -1,6 +1,6 @@
 ---
 title: "Azure DevOps and GitHub in the AI Era: The Platform Split Is Getting Clearer"
-date: 2026-06-03
+date: 2026-10-05
 author: "Emiliano Montesdeoca"
 description: "Microsoft’s latest Azure DevOps and GitHub update makes the direction clearer: GitHub is where the newest agentic workflows land first, while Azure DevOps continues to matter for hybrid and transitional enterprise realities."
 tags:
