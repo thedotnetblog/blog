@@ -1,6 +1,6 @@
 ---
 title: "Why the Layered Design of Microsoft Agent Framework Actually Matters"
-date: 2026-06-10
+date: 2026-10-22
 author: "Emiliano Montesdeoca"
 description: "The new layered SDK explanation for Microsoft Agent Framework is more than architecture talk. It shows how Microsoft wants developers to move from simple loops to production-grade orchestration without throwing everything away."
 tags:
