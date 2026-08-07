@@ -1,6 +1,6 @@
 ---
 title: "Claude Fable 5 in Foundry Changes the Ceiling for Autonomous Agents"
-date: 2026-06-09
+date: 2026-10-24
 author: "Emiliano Montesdeoca"
 description: "Claude Fable 5 is now in Microsoft Foundry, and the real story is not just a stronger model. It is that teams can pair long-running reasoning with Foundry's governance, memory, and deployment stack."
 tags:
