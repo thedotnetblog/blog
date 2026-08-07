@@ -1,6 +1,6 @@
 ---
 title: "Deep Agents + Cosmos DB Show a Practical Pattern for Working Against Live Operational Data"
-date: 2026-06-22
+date: 2026-11-12
 author: "Emiliano Montesdeoca"
 description: "The Deep Agents sample with Azure Cosmos DB is interesting because it shows an agent working directly on operational data, planning across multiple steps, verifying writes, and staying grounded in the same store the business already uses."
 tags:
