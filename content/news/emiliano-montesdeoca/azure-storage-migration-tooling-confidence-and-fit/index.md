@@ -1,6 +1,6 @@
 ---
 title: "Azure Storage Migration Is Really a Tooling and Confidence Problem"
-date: 2026-06-25
+date: 2026-11-02
 author: "Emiliano Montesdeoca"
 description: "The latest Azure Storage migration guidance is less about one magic migration tool and more about choosing the right combination of planning, online movement, and offline transfer. That is the practical story worth noticing."
 tags:
