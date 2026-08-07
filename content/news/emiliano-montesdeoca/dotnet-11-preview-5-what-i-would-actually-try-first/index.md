@@ -1,6 +1,6 @@
 ---
 title: ".NET 11 Preview 5: What I Would Actually Try First"
-date: 2026-06-12
+date: 2026-10-26
 author: "Emiliano Montesdeoca"
 description: ".NET 11 Preview 5 ships improvements across the SDK, runtime, C#, ASP.NET Core, and EF Core. Here are the updates I think are most worth testing early if you build real .NET apps."
 tags:
