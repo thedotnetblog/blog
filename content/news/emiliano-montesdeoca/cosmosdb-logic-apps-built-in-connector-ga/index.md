@@ -1,6 +1,6 @@
 ---
 title: "The Cosmos DB Built-In Connector for Logic Apps Is More Relevant Than It First Looks"
-date: 2026-06-23
+date: 2026-11-03
 author: "Emiliano Montesdeoca"
 description: "The Azure Cosmos DB built-in connector for Logic Apps Standard is now generally available. The key benefit is not just connectivity, but lower-latency in-process execution, change feed support, and a cleaner path to event-driven and AI-oriented workflows."
 tags:
