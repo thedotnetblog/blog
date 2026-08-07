@@ -1,6 +1,6 @@
 ---
 title: "Intelligent Terminal 0.1 Is a Serious First Shot at an AI-Native Shell"
-date: 2026-06-04
+date: 2026-09-29
 author: "Emiliano Montesdeoca"
 description: "Intelligent Terminal 0.1 introduces a native agent pane, error-aware assistance, background agent tasks, and command-palette-driven agent flows. It is experimental, but the direction is very compelling."
 tags:
