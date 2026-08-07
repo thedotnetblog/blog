@@ -1,6 +1,6 @@
 ---
 title: "The MSSQL Extension for VS Code Is Quietly Becoming a Much Bigger Platform"
-date: 2026-05-19
+date: 2026-09-28
 author: "Emiliano Montesdeoca"
 description: "The latest MSSQL extension update adds Azure SQL provisioning, Copilot-assisted schema design, Data API builder, and notebooks. The interesting part is how much database work can now stay inside VS Code."
 tags:
