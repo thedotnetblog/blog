@@ -1,6 +1,6 @@
 ---
 title: "Agentic Modernization Is Becoming the Real .NET Conversation"
-date: 2026-06-14
+date: 2026-10-28
 author: "Emiliano Montesdeoca"
 description: "The upcoming .NET Day on Agentic Modernization is interesting because it reflects a broader shift: teams no longer want a rewrite-first modernization story. They want practical ways to add AI and cloud-native patterns to systems that already matter."
 tags:
