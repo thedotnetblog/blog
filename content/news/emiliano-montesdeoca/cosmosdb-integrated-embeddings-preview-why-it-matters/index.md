@@ -1,6 +1,6 @@
 ---
 title: "Integrated Embeddings in Cosmos DB Remove One of the Most Annoying AI Plumbing Jobs"
-date: 2026-05-20
+date: 2026-10-01
 author: "Emiliano Montesdeoca"
 description: "Integrated Embeddings in Azure Cosmos DB are now in public preview. The big win is simple: embeddings stay in sync with your data without forcing you to build and maintain a separate update pipeline."
 tags:
