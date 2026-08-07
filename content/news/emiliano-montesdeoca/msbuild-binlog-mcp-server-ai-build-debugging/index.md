@@ -1,6 +1,6 @@
 ---
 title: "The Binlog MCP Server Might Be the Most Practical AI Debugging Tool for .NET Right Now"
-date: 2026-06-17
+date: 2026-11-05
 author: "Emiliano Montesdeoca"
 description: "The new Microsoft Binlog MCP Server gives AI assistants direct access to MSBuild binary logs. For .NET developers, that could turn build investigation from manual archaeology into a much faster conversational workflow."
 tags:
