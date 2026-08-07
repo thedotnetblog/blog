@@ -1,6 +1,6 @@
 ---
 title: "Agent Skills for Python Show Why Composition Matters More Than Authoring Style"
-date: 2026-06-09
+date: 2026-09-09
 author: "Emiliano Montesdeoca"
 description: "The latest Agent Skills for Python post is nominally about file, class, and inline skills, but the more important idea is composability across sources without rewriting the provider model."
 tags:
