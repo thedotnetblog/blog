@@ -1,6 +1,6 @@
 ---
 title: "Model Router Evals Are the Step Too Many Teams Skip"
-date: 2026-05-29
+date: 2026-09-05
 author: "Emiliano Montesdeoca"
 description: "The new Foundry model router evaluation repo matters because routing decisions need to be measured against quality, latency, and cost before teams treat automatic model selection as magic."
 tags:
