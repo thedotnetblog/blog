@@ -1,6 +1,6 @@
 ---
 title: "Aspire Multi-Repo Rollout at Scale Shows What Agentic Platform Engineering Looks Like When It Is Grounded"
-date: 2026-05-31
+date: 2026-10-18
 author: "Emiliano Montesdeoca"
 description: "The latest Windows 365 Aspire write-up is interesting because it shows agentic rollout built on top of deterministic checks, metrics, and a real control plane. That is a much healthier model than freestyle automation."
 tags:
