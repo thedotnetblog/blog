@@ -1,6 +1,6 @@
 ---
 title: "The Best GitHub Copilot Advice for .NET Developers Right Now Is to Stop Thinking in Features"
-date: 2026-05-22
+date: 2026-09-12
 author: "Emiliano Montesdeoca"
 description: "A new .NET-focused GitHub Copilot guide makes a strong point: the best way to get value is not by memorizing Copilot modes, but by matching the tool surface to the actual job in front of you."
 tags:
