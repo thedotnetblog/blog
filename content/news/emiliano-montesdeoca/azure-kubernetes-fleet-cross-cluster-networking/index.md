@@ -1,4 +1,67 @@
 ---
+title: "Azure Kubernetes Fleet Manager brings managed cross-cluster networking"
+description: "Azure Kubernetes Fleet Manager enters public preview with Cilium-based cross-cluster networking, global service discovery, observability, and policy management across AKS clusters."
+date: 2026-09-10
+author: "Emiliano Montesdeoca"
+tags: ["Azure", "Kubernetes", "AKS", "Containers", "Networking"]
+slug: azure-kubernetes-fleet-cross-cluster-networking
+---
+
+Original source: [Powering multi-cluster workloads with seamless cross-cluster networking for Azure Kubernetes Fleet Manager](https://azure.microsoft.com/en-us/blog/powering-multi-cluster-workloads-with-seamless-cross-cluster-networking-for-azure-kubernetes-fleet-manager/)
+
+Running one Kubernetes cluster is already an operational discipline. Running a fleet introduces a second problem: services and workloads need to move across cluster and region boundaries without turning every failover, shared service, or capacity decision into a custom networking project.
+
+Microsoft has announced the **public preview of cross-cluster networking for Azure Kubernetes Fleet Manager**. The feature extends the Kubernetes networking model across clusters using Azure CNI powered by Cilium and Advanced Container Networking Services. The goal is direct communication between workloads in joined clusters while retaining cluster-level isolation and governance.
+
+## The networking tax of a fleet
+
+Organizations use multiple Azure Kubernetes Service clusters for regulatory boundaries, regional disaster recovery, blast-domain isolation, or workload placement. Traditional approaches often require VPNs, gateways, and manually maintained service discovery. That plumbing adds latency and gives platform teams another set of moving parts to operate whenever a cluster changes.
+
+Fleet Manager already handles workload propagation and staged update orchestration. Cross-cluster networking addresses the remaining gap: making the network between member clusters a managed part of the fleet rather than a collection of per-cluster exceptions.
+
+The implementation uses **Cilium** for the dataplane and **Kubefleet** for fleet-level orchestration. Both are active CNCF projects, so the capability builds on an open-source foundation while Microsoft manages the lifecycle pieces around it.
+
+## What the preview provides
+
+The source highlights several capabilities:
+
+- **East-west connectivity:** eBPF-based routing allows pods to communicate across clusters without additional proxies or gateways.
+- **Global service discovery:** annotate a Kubernetes Service with `service.cilium.io/global=true` to make it global across joined member clusters, enabling endpoint discovery, load balancing, and failover.
+- **Multi-cluster observability:** aggregated metrics, logs, and flow visibility provide a unified view of network health.
+- **Unified security and governance:** network policies and identity-based security can follow workloads across cluster boundaries.
+- **Managed lifecycle:** Fleet Manager handles certificates and network configuration instead of requiring teams to maintain the multi-cluster components manually.
+
+The result is not merely a new route between clusters. It is a platform capability for exposing selected services across a fleet while keeping the platform team responsible for the network model and its operational boundaries.
+
+## Resilience without hiding the boundaries
+
+Cross-cluster networking is useful for shared-services clusters and global services that route traffic toward healthy endpoints. It can support architectures designed to tolerate a single-cluster or single-region failure, but the feature does not make failure planning disappear.
+
+Applications still need clear ownership of state, retries, timeouts, data replication, and regional dependencies. A global Service can expose endpoints across member clusters; it does not decide whether a stateful .NET service is safe to fail over or whether a request should be retried after a regional network event. Platform networking and application resilience remain related but separate design concerns.
+
+That separation is helpful for .NET teams. Use the fleet network to simplify service reachability, then test the application behavior under endpoint loss, delayed responses, and a changed cluster location. The managed network lowers infrastructure work; it does not replace distributed-systems testing.
+
+## Prerequisites and setup
+
+The preview requires:
+
+1. **Azure CNI powered by Cilium** as the networking dataplane.
+2. **Advanced Container Networking Services** enabled for the clusters.
+3. **Fleet membership** for the clusters that should communicate.
+4. **A cross-cluster network profile** associated with those members.
+5. **Global Service annotations** for services that should be discoverable across clusters.
+
+Once configured, Fleet Manager deploys and manages the required components. The source describes direct pod-to-pod communication across clusters without additional gateways or overlays, reducing the amount of Cilium multi-cluster infrastructure that teams must assemble themselves.
+
+## A practical evaluation path
+
+1. Pick a non-critical service that is representative of the organization’s normal AKS deployment.
+2. Join a small set of clusters to a Fleet and document the existing service-discovery assumptions.
+3. Enable the network profile and expose one carefully selected Service globally.
+4. Measure connectivity, failover, policy enforcement, and observability before adding more workloads.
+5. Test the .NET application when an endpoint or member cluster disappears, not only when every cluster is healthy.
+
+Cross-cluster networking for Azure Kubernetes Fleet Manager is a meaningful step toward making a Kubernetes fleet feel like one governed platform. The useful promise is operational simplicity: direct connectivity, global discovery, and managed lifecycle without asking every application team to become a specialist in multi-cluster network plumbing.---
 title: "Cross-Cluster Networking for Kubernetes Fleet Manager: Seamless Multi-Region Workloads"
 description: "Fleet Manager's Cilium-based cross-cluster networking extends Kubernetes connectivity across AKS clusters while preserving cluster-level isolation and governance."
 date: 2026-09-10
