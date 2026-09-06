@@ -1,0 +1,32 @@
+# The .NET Blog — Full Content
+
+> Articles, tutorials and insights from the .NET community.
+
+The .NET Blog is a community-driven publication featuring articles, tutorials, and deep dives on .NET, ASP.NET Core, C#, cloud architecture, and software engineering. Written by developers, for developers.
+
+## Metadata
+
+- **URL**: https://thedotnetblog.com/
+- **Language**: pl
+- **Last Updated**: 2026-09-06
+
+---
+
+## Events
+- No events published yet.
+
+---
+
+## Authors
+### Emiliano Montesdeoca
+
+- **URL**: https://thedotnetblog.com/pl/authors/emiliano-montesdeoca/
+- **Role**: Microsoft MVP i Team Lead ds. Rozwiązań Chmurowych
+- **Bio**: Emiliano jest urugwajsko-hiszpańskim programistą, Microsoft MVP w kategorii Developer Technologies i orędownikiem społeczności, mieszkającym w Teneryfie na Wyspach Kanaryjskich.
+
+Specjalizuje się w projektowaniu skalowalnych rozwiązań chmurowych przy użyciu technologii Microsoft i obecnie pełni funkcję Team Leada Zespołu Rozwiązań Chmurowych w Intelequia Technologies.
+
+Częsty prelegent na konferencjach międzynarodowych i pasjonat dzielenia się wiedzą, przekłada rozwiązywanie problemów z rzeczywistego świata na praktyczne wskazówki dla programistów.
+
+
+---

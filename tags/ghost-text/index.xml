@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Ghost-Text | The .NET Blog</title><link>https://thedotnetblog.com/tags/ghost-text/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>en</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 18 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tags/ghost-text/index.xml" rel="self" type="application/rss+xml"/><item><title>Inline Suggestions Go Open Source: Consolidating VS Code's AI Foundation</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/copilot-inline-suggestions-open-source-milestone/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/copilot-inline-suggestions-open-source-milestone/</guid><description>GitHub Copilot inline suggestions become open source as VS Code moves toward a unified extension. The interesting story is the performance work behind ghost text.</description><content:encoded>&lt;p&gt;Original source: &lt;a href="https://code.visualstudio.com/blogs/2025/11/04/openSourceAIEditorSecondMilestone"&gt;Open Source AI Editor: Second Milestone&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="inline-suggestions-go-open-source-consolidating-vs-codes-ai-foundation"&gt;Inline Suggestions Go Open Source: Consolidating VS Code&amp;rsquo;s AI Foundation&lt;/h1&gt;
+&lt;p&gt;GitHub Copilot Chat going open source was a major transparency milestone. The next step is more immediate for anyone who codes in VS Code: the inline suggestion pipeline is now open source too.&lt;/p&gt;
+&lt;p&gt;That ghost text appearing as you type is not a single model call. It is a carefully optimized loop involving reuse, caching, prompt construction, post-processing, and decisions about how much code to show. Making that implementation visible is useful for both developers and extension authors.&lt;/p&gt;
+&lt;p&gt;At the same time, VS Code is moving toward a unified Copilot Chat extension that handles chat, agents, and inline suggestions together.&lt;/p&gt;
+&lt;h2 id="one-extension-one-coordination-point"&gt;One Extension, One Coordination Point&lt;/h2&gt;
+&lt;p&gt;The old split was familiar:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The GitHub Copilot extension provided ghost text.&lt;/li&gt;
+&lt;li&gt;The GitHub Copilot Chat extension provided chat, agent mode, and next-edit suggestions.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The source says the team is &amp;ldquo;working towards providing all Copilot functionality in a single VS Code extension: Copilot Chat.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;That consolidation should reduce duplicated work and make it easier for chat and inline suggestions to share context. It also simplifies deployment for organizations managing editor extensions.&lt;/p&gt;
+&lt;p&gt;There is a trade-off, though. Separate extensions offered a clear switch: keep chat and disable inline suggestions, or the other way around. A unified extension moves that control to feature settings instead of extension installation.&lt;/p&gt;
+&lt;h2 id="ghost-text-is-a-latency-problem"&gt;Ghost Text Is a Latency Problem&lt;/h2&gt;
+&lt;p&gt;The newly open implementation makes the performance strategy easier to understand. A suggestion request starts with reuse, not inference:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Check whether the developer is accepting an existing suggestion.&lt;/li&gt;
+&lt;li&gt;Look for a relevant cached suggestion.&lt;/li&gt;
+&lt;li&gt;Reuse an in-flight request from a nearby keystroke.&lt;/li&gt;
+&lt;li&gt;Construct a new prompt only when the earlier work is no longer useful.&lt;/li&gt;
+&lt;li&gt;Post-process the model output and decide how much to display.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;That order matters. A request on every keystroke would be expensive and slow. The editor has to treat typing as a stream of related events, not thousands of isolated prompts.&lt;/p&gt;
+&lt;p&gt;The conceptual loop looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;keystroke
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -&amp;gt; accepting existing suggestion? reuse it
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -&amp;gt; relevant cache? show it
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -&amp;gt; request still running? reuse it
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -&amp;gt; otherwise build context and call the model
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -&amp;gt; normalize indentation and syntax
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -&amp;gt; choose single-line or multi-line output
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For .NET developers, the language-specific context is only one part of the problem. The extension also has to decide which open files, workspace details, and surrounding code are relevant enough to send.&lt;/p&gt;
+&lt;h2 id="open-source-makes-the-heuristics-observable"&gt;Open Source Makes the Heuristics Observable&lt;/h2&gt;
+&lt;p&gt;The real value is not that everyone needs to modify ghost text. It is that the behavior can be inspected.&lt;/p&gt;
+&lt;p&gt;Researchers can study typing-as-suggested detection. Extension authors can understand how context is assembled. Security reviewers can investigate what data leaves the editor. Teams can reason about why a suggestion was fast in one situation and slow in another.&lt;/p&gt;
+&lt;p&gt;That visibility also improves conversations about AI quality. &amp;ldquo;The suggestions feel slow&amp;rdquo; becomes a question about cache hits, request reuse, model latency, or post-processing instead of a vague complaint about the model.&lt;/p&gt;
+&lt;h2 id="the-caveat-consolidation-reduces-a-control-boundary"&gt;The Caveat: Consolidation Reduces a Control Boundary&lt;/h2&gt;
+&lt;p&gt;A single extension is simpler to install and maintain, but it can be harder to customize. If your organization wants chat while disabling inline suggestions, check the feature-level settings and policies rather than assuming the old extension split still applies.&lt;/p&gt;
+&lt;p&gt;Also remember that an open implementation does not make model output deterministic. The pipeline can be transparent while the model remains probabilistic. Tests and review still matter.&lt;/p&gt;
+&lt;h2 id="why-this-matters-to-net-teams"&gt;Why This Matters to .NET Teams&lt;/h2&gt;
+&lt;p&gt;Most .NET teams already manage an editor baseline, analyzers, SDK versions, and repository instructions. A unified AI extension fits that model better than a collection of loosely coordinated add-ons.&lt;/p&gt;
+&lt;p&gt;It also makes a useful operational question possible: where should AI suggestions help, and where should they stay quiet? A team can keep inline suggestions enabled for routine boilerplate while using chat or an agent for deliberate changes that require tests and review.&lt;/p&gt;
+&lt;p&gt;Open source helps the platform team understand the defaults before writing that policy.&lt;/p&gt;
+&lt;h2 id="my-take"&gt;My Take&lt;/h2&gt;
+&lt;p&gt;The headline is open source, but the engineering story is consolidation and latency management. Good AI assistance is not just a bigger model. It is a fast, stateful client that knows when not to call the model.&lt;/p&gt;
+&lt;p&gt;That is a lesson worth carrying into our own .NET tools. Cache what is safe to reuse. Keep context bounded. Make the expensive path observable. Treat the model call as one stage in a workflow, not the whole workflow.&lt;/p&gt;
+&lt;p&gt;For now, update the unified extension in a test group, watch for regressions in latency and suggestion quality, and read the implementation when you need to understand what the editor is doing. Transparency is most useful when it changes how we operate the tool.&lt;/p&gt;</content:encoded></item></channel></rss>

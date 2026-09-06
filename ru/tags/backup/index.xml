@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Backup | The .NET Blog</title><link>https://thedotnetblog.com/ru/tags/backup/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ru</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ru/tags/backup/index.xml" rel="self" type="application/rss+xml"/><item><title>Неизменяемое резервное копирование для Cosmos DB — та функция, которую вы оцените слишком поздно</title><link>https://thedotnetblog.com/ru/news/emiliano-montesdeoca/cosmosdb-backup-preview-immutability-and-recovery/</link><pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ru/news/emiliano-montesdeoca/cosmosdb-backup-preview-immutability-and-recovery/</guid><description>Azure Backup для Azure Cosmos DB теперь добавляет неизменяемые резервные копии и долгосрочное хранение в публичном превью. Ключевой момент — не просто восстановление, а улучшение устойчивости и сохранности доказательств для регулируемых или высокорисковых нагрузок.</description><content:encoded>&lt;p&gt;Функции резервного копирования легко игнорировать вплоть до момента, когда они становятся самой важной вещью в комнате.&lt;/p&gt;
+&lt;p&gt;Именно поэтому я считаю, что новое превью &lt;strong&gt;Azure Backup для Azure Cosmos DB&lt;/strong&gt; заслуживает внимания.&lt;/p&gt;
+&lt;p&gt;Интересная часть здесь — не просто «ещё один вариант резервного копирования». Это добавление &lt;strong&gt;неизменяемых точек восстановления&lt;/strong&gt; и &lt;strong&gt;долгосрочного хранения&lt;/strong&gt; в модели, гораздо лучше согласованной с готовностью к вымогательскому ПО (ransomware), аудируемостью и требованиями к восстановлению в регулируемых средах.&lt;/p&gt;
+&lt;h2 id="неизменяемость-меняет-разговор"&gt;Неизменяемость меняет разговор&lt;/h2&gt;
+&lt;p&gt;Когда злоумышленники атакуют производственные системы, следующий вопрос — уже не просто «есть ли у нас резервная копия?»&lt;/p&gt;
+&lt;p&gt;Это:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;можно ли доверять этой резервной копии?&lt;/li&gt;
+&lt;li&gt;можно ли её изменить или удалить?&lt;/li&gt;
+&lt;li&gt;остаётся ли у нас защищённая точка восстановления после начала инцидента?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Именно поэтому неизменяемые резервные копии важны. Они улучшают путь восстановления, когда окружению вокруг него, возможно, уже нельзя доверять.&lt;/p&gt;
+&lt;h2 id="моё-мнение"&gt;Моё мнение&lt;/h2&gt;
+&lt;p&gt;Это не тот анонс, который вызывает восторг у всех.&lt;/p&gt;
+&lt;p&gt;Но для команд, эксплуатирующих критичные нагрузки на Cosmos DB, это именно та возможность, которая становится центральной в худший день квартала.&lt;/p&gt;
+&lt;p&gt;И это часто самые важные функции, за которыми стоит следить.&lt;/p&gt;
+&lt;p&gt;Оригинальный пост: &lt;a href="https://devblogs.microsoft.com/cosmosdb/azure-backup-for-azure-cosmos-db-public-preview-adds-immutable-backups-and-long-term-retention/"&gt;Azure Backup for Azure Cosmos DB Public Preview Adds Immutable Backups and Long-Term Retention&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

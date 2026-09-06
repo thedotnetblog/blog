@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Backup | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/backup/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/backup/index.xml" rel="self" type="application/rss+xml"/><item><title>النسخ الاحتياطي غير القابل للتغيير لـ Cosmos DB هو نوع الميزة التي تقدرها بعد فوات الأوان</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/cosmosdb-backup-preview-immutability-and-recovery/</link><pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/cosmosdb-backup-preview-immutability-and-recovery/</guid><description>Azure Backup لـ Azure Cosmos DB يضيف الآن نسخًا احتياطية غير قابلة للتغيير واحتفاظ طويل الأمد في المعاينة العامة. النقطة الرئيسية ليست مجرد الاسترداد، بل تحسين المرونة والحفاظ على الأدلة لأعباء العمل المنظمة أو عالية المخاطر.</description><content:encoded>&lt;p&gt;من السهل تجاهل ميزات النسخ الاحتياطي حتى اللحظة التي تصبح فيها أهم شيء في الغرفة.&lt;/p&gt;
+&lt;p&gt;لهذا السبب أعتقد أن معاينة &lt;strong&gt;Azure Backup لـ Azure Cosmos DB&lt;/strong&gt; الجديدة تستحق الاهتمام.&lt;/p&gt;
+&lt;p&gt;الجزء المثير للاهتمام هنا ليس مجرد &amp;ldquo;خيار نسخ احتياطي آخر&amp;rdquo;. بل هو إضافة &lt;strong&gt;نقاط استرداد غير قابلة للتغيير&lt;/strong&gt; و &lt;strong&gt;احتفاظ طويل الأمد&lt;/strong&gt; في نموذج أكثر توافقًا مع الاستعداد للفدية، وقابلية التدقيق، ومتطلبات الاسترداد المنظمة.&lt;/p&gt;
+&lt;h2 id="عدم-القابلية-للتغيير-تغير-المحادثة"&gt;عدم القابلية للتغيير تغير المحادثة&lt;/h2&gt;
+&lt;p&gt;عندما يستهدف المهاجمون أنظمة الإنتاج، السؤال التالي لم يعد مجرد &amp;ldquo;هل لدينا نسخة احتياطية؟&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;بل:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;هل يمكن الوثوق بالنسخة الاحتياطية؟&lt;/li&gt;
+&lt;li&gt;هل يمكن تغييرها أو حذفها؟&lt;/li&gt;
+&lt;li&gt;هل لا يزال لدينا نقطة استرداد محمية بعد بدء الحادثة؟&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;لهذا السبب تهم النسخ الاحتياطية غير القابلة للتغيير. إنها تحسن مسار الاسترداد عندما قد لا تكون البيئة المحيطة به جديرة بالثقة.&lt;/p&gt;
+&lt;h2 id="رأيي"&gt;رأيي&lt;/h2&gt;
+&lt;p&gt;هذا ليس نوع الإعلان الذي يثير حماسة الجميع.&lt;/p&gt;
+&lt;p&gt;لكن للفرق التي تدير أعباء عمل حرجة على Cosmos DB، هو بالضبط نوع القدرة التي تصبح مركزية خلال أسوأ يوم في الربع.&lt;/p&gt;
+&lt;p&gt;وتلك غالبًا هي أهم الميزات التي يجب تتبعها.&lt;/p&gt;
+&lt;p&gt;المقال الأصلي: &lt;a href="https://devblogs.microsoft.com/cosmosdb/azure-backup-for-azure-cosmos-db-public-preview-adds-immutable-backups-and-long-term-retention/"&gt;Azure Backup for Azure Cosmos DB Public Preview Adds Immutable Backups and Long-Term Retention&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

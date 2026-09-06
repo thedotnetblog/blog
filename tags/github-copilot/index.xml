@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Github-Copilot | The .NET Blog</title><link>https://thedotnetblog.com/tags/github-copilot/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>en</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 15 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tags/github-copilot/index.xml" rel="self" type="application/rss+xml"/><item><title>Auto Model Selection in VS Code: Smart Cost Optimization for Coding Agents</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/auto-model-selection-preview-efficiency/</link><pubDate>Sat, 15 Aug 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/auto-model-selection-preview-efficiency/</guid><description>Auto-selects the best model based on capacity and performance. Capacity-aware routing, fallback, and transparent request costs change how teams operate coding agents.</description><content:encoded>&lt;p&gt;Original source: &lt;a href="https://code.visualstudio.com/blogs/2025/09/15/autoModelSelection"&gt;Introducing auto model selection (preview)&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="auto-model-selection-in-vs-code-smart-cost-optimization-for-coding-agents"&gt;Auto Model Selection in VS Code: Smart Cost Optimization for Coding Agents&lt;/h1&gt;
+&lt;p&gt;When you have access to multiple language models, which one do you choose for each request?&lt;/p&gt;
+&lt;p&gt;Most users pick a favorite and stick with it. That is understandable, but it is rarely optimal. Some requests need deep reasoning. Others need a quick edit. Capacity changes during the day, and model costs are not identical.&lt;/p&gt;
+&lt;p&gt;GitHub Copilot&amp;rsquo;s auto model selection is designed to make that decision for you. It chooses a model based on capacity, performance, and cost, while showing which model handled the request and what multiplier applied.&lt;/p&gt;
+&lt;p&gt;That is less glamorous than announcing another model, but it may have a larger effect on daily developer experience.&lt;/p&gt;
+&lt;h2 id="capacity-is-part-of-the-developer-experience"&gt;Capacity Is Part of the Developer Experience&lt;/h2&gt;
+&lt;p&gt;The feature watches which models are available and avoids sending every request to a single overloaded endpoint. If one model is near capacity, another can handle the request instead.&lt;/p&gt;
+&lt;p&gt;The source describes the goal clearly: &amp;ldquo;Auto selects the best model to ensure that you get the optimal performance and reduce the likelihood of rate limits.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;That matters for coding agents because a request is often part of a longer loop. A failed or delayed model call can leave an agent waiting while a developer tries to understand whether the problem is the prompt, the tool, or service capacity. Capacity-aware routing removes one source of noise.&lt;/p&gt;
+&lt;p&gt;The trade-off is that model choice becomes a system decision instead of a personal habit. For routine work, that is probably a good trade.&lt;/p&gt;
+&lt;h2 id="cost-transparency-makes-automation-trustworthy"&gt;Cost Transparency Makes Automation Trustworthy&lt;/h2&gt;
+&lt;p&gt;Auto selection is much easier to accept when the cost is visible. The experience shows which model powered the response and the multiplier applied to it. That lets a developer or team understand what happened instead of guessing.&lt;/p&gt;
+&lt;p&gt;The source describes paid users receiving a discount when auto selects a model, while zero-cost models can provide a fallback path when premium requests are exhausted. The exact economics depend on the subscription and model, so teams should treat the UI and Copilot usage reports as the source of truth rather than hard-coding assumptions.&lt;/p&gt;
+&lt;p&gt;The important design principle is broader: automated routing must be observable. If the system picks a model on your behalf, it should tell you what it picked.&lt;/p&gt;
+&lt;p&gt;For an organization, I would track at least:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Which models are selected most often.&lt;/li&gt;
+&lt;li&gt;How often requests fall back to a lower-cost model.&lt;/li&gt;
+&lt;li&gt;Whether latency or rework changes by model.&lt;/li&gt;
+&lt;li&gt;Whether premium usage falls without reducing developer confidence.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="fallback-keeps-agents-moving"&gt;Fallback Keeps Agents Moving&lt;/h2&gt;
+&lt;p&gt;A coding agent is sensitive to interruptions. If a model is unavailable or a user reaches a premium request limit, the task can stall at exactly the wrong moment.&lt;/p&gt;
+&lt;p&gt;Auto selection provides a fallback path. A request can continue with a model in a different cost tier instead of failing immediately. That does not mean every model is interchangeable. A small model may be perfectly adequate for a rename and a poor choice for a cross-project refactor.&lt;/p&gt;
+&lt;p&gt;This is where good agent design still matters. Make tasks small enough that a fallback model can make progress, and keep architectural decisions behind explicit review.&lt;/p&gt;
+&lt;h2 id="the-caveat-predictability-versus-optimization"&gt;The Caveat: Predictability Versus Optimization&lt;/h2&gt;
+&lt;p&gt;The obvious downside is loss of predictability. If a task depends on a specific model&amp;rsquo;s behavior, auto selection may not be the right default. Model capabilities, tool support, and response style vary.&lt;/p&gt;
+&lt;p&gt;Keep manual selection for work where you have a reason to control the model: a difficult design review, a benchmark, or a reproducibility investigation. Use auto for the broad middle of daily development and compare the results.&lt;/p&gt;
+&lt;p&gt;A sensible team policy is not &amp;ldquo;always use auto&amp;rdquo;. It is &amp;ldquo;use auto by default, and make exceptions explicit.&amp;rdquo;&lt;/p&gt;
+&lt;h2 id="what-i-would-try-in-a-net-team"&gt;What I Would Try in a .NET Team&lt;/h2&gt;
+&lt;p&gt;I would run a small experiment across three task types:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;1. Rename and test a small API behavior.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;2. Implement a bounded ASP.NET Core endpoint.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;3. Review a cross-project architecture change.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Use auto for the first two. Keep a selected model for the third. Record latency, number of revisions, test results, and developer confidence. That produces a better decision than arguing about model names in the abstract.&lt;/p&gt;
+&lt;h2 id="my-take"&gt;My Take&lt;/h2&gt;
+&lt;p&gt;Auto model selection is infrastructure disguised as a convenience feature. Global inference capacity is finite, and routing requests intelligently helps both the service and the developer.&lt;/p&gt;
+&lt;p&gt;The feature earns trust when it stays visible: show the chosen model, expose the cost multiplier, and let developers override the decision when the task warrants it.&lt;/p&gt;
+&lt;p&gt;For most .NET teams, I would enable auto for everyday coding assistance and reserve manual selection for deliberate experiments and high-context design work. Let the system optimize the routine, but keep engineering judgment in charge of the important decisions.&lt;/p&gt;</content:encoded></item><item><title>Autonomous Development Within VS Code: GitHub Copilot Coding Agent Arrives</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/github-copilot-coding-agent-in-vs-code/</link><pubDate>Fri, 14 Aug 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/github-copilot-coding-agent-in-vs-code/</guid><description>Assign GitHub issues to an autonomous agent. Track progress in VS Code. Review PRs, iterate, and close issues without leaving your editor. Multi-agent workflows are now practical.</description><content:encoded>&lt;p&gt;Original source: &lt;a href="https://code.visualstudio.com/blogs/2025/07/17/copilot-coding-agent"&gt;Command GitHub&amp;rsquo;s Coding Agent from VS Code&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="autonomous-development-within-vs-code-github-copilot-coding-agent-arrives"&gt;Autonomous Development Within VS Code: GitHub Copilot Coding Agent Arrives&lt;/h1&gt;
+&lt;p&gt;There&amp;rsquo;s a difference between an AI that suggests code and an AI that completes tasks.&lt;/p&gt;
+&lt;p&gt;VS Code&amp;rsquo;s agent mode was the former: chat with an AI, ask it to modify files, and approve tool calls. Powerful, but synchronous. You&amp;rsquo;re still in the loop, making decisions.&lt;/p&gt;
+&lt;p&gt;GitHub&amp;rsquo;s Copilot Coding Agent is different. You assign it an issue. It spins up a temporary development environment. It explores your codebase, makes changes, runs tests, and opens a pull request. Then it waits for your feedback.&lt;/p&gt;
+&lt;p&gt;And now, you can do all of that—assign, track, review, and iterate—without switching to GitHub.com. It&amp;rsquo;s all in VS Code.&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s not just convenience. That&amp;rsquo;s a different workflow.&lt;/p&gt;
+&lt;h2 id="how-copilot-coding-agent-works"&gt;How Copilot Coding Agent Works&lt;/h2&gt;
+&lt;p&gt;The flow is simple:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Enable&lt;/strong&gt; the agent in GitHub settings.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Assign an issue&lt;/strong&gt; to Copilot Coding Agent.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Let it work&lt;/strong&gt; in a temporary, isolated development environment.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Review the pull request&lt;/strong&gt; it opens.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ask for changes&lt;/strong&gt; or approve the result.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Let the agent iterate&lt;/strong&gt; until the issue is resolved.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The key difference from local agent mode is that the agent runs remotely, in a temporary environment isolated from your machine. It can explore your codebase, install dependencies, build, run tests, and make changes without touching your local filesystem.&lt;/p&gt;
+&lt;p&gt;From the blog: &amp;ldquo;The agent runs within a temporary isolated dev environment that gets spun up where the agent can explore the codebase, make changes, build the code, run tests, etc. - a complete dev environment just for the agent.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;That isolation is crucial for safety. The agent can be as destructive as it needs to be because the environment is disposable.&lt;/p&gt;
+&lt;h2 id="vs-code-integration-track-and-control-everything"&gt;VS Code Integration: Track and Control Everything&lt;/h2&gt;
+&lt;p&gt;Copilot Coding Agent lived on GitHub.com. You assigned an issue, then switched to a browser to watch progress.&lt;/p&gt;
+&lt;p&gt;Now, the pull requests extension brings it into VS Code:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Assign from the sidebar.&lt;/strong&gt; Select an issue in the pull request view and assign it to Copilot Coding Agent without leaving the editor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Track progress.&lt;/strong&gt; A new &lt;strong&gt;Copilot on My Behalf&lt;/strong&gt; query shows agent sessions. Open a session to watch the play-by-play: commands, decisions, and progress.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Terminate when needed.&lt;/strong&gt; If the agent goes off course, terminate the session from VS Code.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Review and iterate.&lt;/strong&gt; When the agent opens a pull request, leave comments and request changes. The agent reads the feedback, updates the pull request, and tries again.&lt;/p&gt;
+&lt;p&gt;The workflow is familiar—review, request changes, iterate—but with an agent as the implementer.&lt;/p&gt;
+&lt;h2 id="a-pull-request-is-still-the-boundary"&gt;A Pull Request Is Still the Boundary&lt;/h2&gt;
+&lt;p&gt;The example in the source article is useful because it shows where autonomy stops. The agent implements a Trending section, including UI and database changes, and opens a pull request. A reviewer notices that the database migration is not enough and the agent needs access to an external account.&lt;/p&gt;
+&lt;p&gt;That is the right place to pause. The pull request is the review boundary. Additional access should be granted deliberately through an MCP server, not by quietly adding credentials to the agent&amp;rsquo;s environment.&lt;/p&gt;
+&lt;p&gt;For a .NET team, the same pattern might look like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Issue: Add a paginated orders endpoint
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Acceptance criteria:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;- Use the existing application service pattern.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;- Return ProblemDetails for validation errors.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;- Add integration tests for page boundaries.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;- Do not change the public database schema.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;- Report the dotnet test command and result in the pull request.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Clear acceptance criteria give the agent a shape it can follow and give the reviewer something concrete to verify.&lt;/p&gt;
+&lt;h2 id="mcp-expands-the-agents-reach"&gt;MCP Expands the Agent&amp;rsquo;s Reach&lt;/h2&gt;
+&lt;p&gt;VS Code lets you configure MCP servers for the Copilot Coding Agent. That is powerful, but the security trade-off is direct: more tools mean more autonomy and more risk.&lt;/p&gt;
+&lt;p&gt;A conceptual configuration might look like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# Example only: grant a narrowly scoped external capability&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;github&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;codingAgent&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;mcpServers&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;- &lt;span class="l"&gt;supabase&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;credentials&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;${SUPABASE_API_KEY}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Use the smallest useful permission set. An agent that can inspect a deployment is not the same as one that can change production. Keep credentials scoped, short-lived, and observable.&lt;/p&gt;
+&lt;h2 id="the-caveat-agent-behavior-is-still-unpredictable"&gt;The Caveat: Agent Behavior Is Still Unpredictable&lt;/h2&gt;
+&lt;p&gt;LLMs are stochastic. Sometimes the agent nails a complex feature. Sometimes it misses context and opens a pull request that needs significant rework.&lt;/p&gt;
+&lt;p&gt;For critical infrastructure changes, add another review layer. The agent is well suited to bounded work that follows existing patterns. Architectural decisions, security-sensitive changes, and changes that cross several systems deserve human ownership.&lt;/p&gt;
+&lt;p&gt;Good tests matter too. The agent runs tests and uses their results as feedback. Bad or missing tests mean more back-and-forth and weaker confidence.&lt;/p&gt;
+&lt;h2 id="my-take-issue-quality-becomes-an-engineering-input"&gt;My Take: Issue Quality Becomes an Engineering Input&lt;/h2&gt;
+&lt;p&gt;This workflow works best when the issue is clear. &amp;ldquo;Fix the dashboard&amp;rdquo; is a conversation starter, not an implementation specification. &amp;ldquo;Add a dark mode toggle to the settings panel, persist the preference, and cover it with a browser test&amp;rdquo; gives an agent something verifiable.&lt;/p&gt;
+&lt;p&gt;Teams adopting coding agents will improve when they invest in:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Clear issue acceptance criteria.&lt;/li&gt;
+&lt;li&gt;Test coverage that describes expected behavior.&lt;/li&gt;
+&lt;li&gt;Deliberate MCP access policies.&lt;/li&gt;
+&lt;li&gt;Review rules for agent-generated changes.&lt;/li&gt;
+&lt;li&gt;Metrics for rework and successful first passes.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This is not replacing developers. It is moving developer attention toward architecture, design, and review while an agent handles routine implementation.&lt;/p&gt;
+&lt;h2 id="what-to-do-next"&gt;What To Do Next&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Install or update the GitHub Pull Requests extension.&lt;/li&gt;
+&lt;li&gt;Enable Copilot Coding Agent in GitHub settings.&lt;/li&gt;
+&lt;li&gt;Create a small test issue with explicit acceptance criteria.&lt;/li&gt;
+&lt;li&gt;Assign it from VS Code and watch the session.&lt;/li&gt;
+&lt;li&gt;Review the pull request as carefully as any human-authored change.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;For .NET teams, start with a bounded endpoint, a test addition, or a small refactoring that fits existing patterns. The autonomous developer is not here to replace your judgment. It is here to multiply the amount of work your judgment can supervise.&lt;/p&gt;
+&lt;p&gt;Use it deliberately.&lt;/p&gt;
+&lt;p&gt;Happy coding.&lt;/p&gt;</content:encoded></item><item><title>VS Code Goes All-In on Open Source AI: Transparency Over Secrets</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/vs-code-open-source-ai-editor/</link><pubDate>Mon, 10 Aug 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/vs-code-open-source-ai-editor/</guid><description>The GitHub Copilot Chat extension moves to MIT open source. A strategic bet on community-driven innovation and transparency in the AI developer tools era.</description><content:encoded>&lt;p&gt;Original source: &lt;a href="https://code.visualstudio.com/blogs/2025/05/19/openSourceAIEditor"&gt;VS Code: Open Source AI Editor&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="vs-code-goes-all-in-on-open-source-ai-transparency-over-secrets"&gt;VS Code Goes All-In on Open Source AI: Transparency Over Secrets&lt;/h1&gt;
+&lt;p&gt;For a decade, VS Code has been one of the most successful open-source projects on GitHub. Millions of developers choose it partly because they can trust an open codebase. When AI became core to the coding experience, VS Code faced a choice: keep AI features proprietary to protect competitive advantage, or bring them into the open.&lt;/p&gt;
+&lt;p&gt;They chose to open source. And that decision tells you something important about where the AI developer tools market is headed.&lt;/p&gt;
+&lt;p&gt;The GitHub Copilot Chat extension—the core of agent mode, chat, and next-edit suggestions—is now open source under the MIT license. The refactor into VS Code core is coming. This isn&amp;rsquo;t a marketing move. It&amp;rsquo;s a genuine reset of development principles for a critical new layer of the platform.&lt;/p&gt;
+&lt;h2 id="why-llms-got-good-enough-to-open-source"&gt;Why LLMs Got Good Enough to Open Source&lt;/h2&gt;
+&lt;p&gt;The initial reasoning was pragmatic. Over the past year, three shifts made open-source AI features viable:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;LLMs improved dramatically.&lt;/strong&gt; &amp;ldquo;Secret sauce&amp;rdquo; prompt engineering used to be the moat. Not anymore. Claude Sonnet, GPT-4, GPT-5—these models are capable enough that clever prompts matter far less than picking the right model and giving it the right context.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;UI patterns converged.&lt;/strong&gt; Every editor—VS Code, JetBrains, Neovim, even web editors—settled on similar UX for AI chat, inline suggestions, and agent mode. Those patterns are no longer proprietary advantages. They&amp;rsquo;re table stakes. Open-sourcing them lets the community refine and extend them faster than any single vendor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Ecosystem exploded.&lt;/strong&gt; There are now hundreds of open-source AI tools, MCP servers, and VS Code extensions. VS Code can&amp;rsquo;t maintain integrations with all of them. Open source removes that burden—extension authors can study the Copilot Chat codebase to debug their own extensions. The community finds bugs faster.&lt;/p&gt;
+&lt;p&gt;From the VS Code team: &amp;ldquo;An ecosystem of open source AI tools and VS Code extensions has emerged. We want to make it easier for these extension authors to build, debug, and test their extensions. This is especially challenging today without access to the source code in the Copilot Chat extension.&amp;rdquo;&lt;/p&gt;
+&lt;h2 id="the-transparency-win-see-what-data-youre-sending"&gt;The Transparency Win: See What Data You&amp;rsquo;re Sending&lt;/h2&gt;
+&lt;p&gt;Here&amp;rsquo;s the win that shouldn&amp;rsquo;t be underrated—you can now read the code and see exactly what telemetry is collected. That matters.&lt;/p&gt;
+&lt;p&gt;When proprietary AI editors collect data, you&amp;rsquo;re trusting a privacy policy. When VS Code open sources, you&amp;rsquo;re reading the code. You see which tokens are sent to the LLM, which data is logged locally, which telemetry is transmitted. Security researchers can audit. Contributors can challenge data collection that feels invasive.&lt;/p&gt;
+&lt;p&gt;For teams evaluating whether to deploy an AI-assisted editor to developers, this transparency is the difference between &amp;ldquo;we have to trust them&amp;rdquo; and &amp;ldquo;we can verify it ourselves.&amp;rdquo;&lt;/p&gt;
+&lt;h2 id="a-practical-implication-faster-security-fixes"&gt;A Practical Implication: Faster Security Fixes&lt;/h2&gt;
+&lt;p&gt;Malicious actors target AI developer tools. When vulnerabilities happen, closed-source tools move slowly—vendors patch, release, users update, hopefully before exploit-in-the-wild.&lt;/p&gt;
+&lt;p&gt;Open source changes the timeline. &amp;ldquo;Throughout VS Code&amp;rsquo;s history as OSS, community issues and PRs have helped us find and fix security issues quickly,&amp;rdquo; the team notes. An indirect injection attack, a prompt injection vector, a data leak risk—the community sees it, reports it, patches are public, and the whole ecosystem hardens.&lt;/p&gt;
+&lt;h2 id="practical-angle-building-on-the-codebase"&gt;Practical Angle: Building on the Codebase&lt;/h2&gt;
+&lt;p&gt;The open-source Copilot Chat extension includes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;System prompts you can study (and improve)&lt;/li&gt;
+&lt;li&gt;Implementation details for agent mode, chat, and inline suggestions&lt;/li&gt;
+&lt;li&gt;Prompt test infrastructure for verifying behavior changes&lt;/li&gt;
+&lt;li&gt;Full telemetry schema&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A .NET developer can now:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Fork and customize prompts&lt;/strong&gt; for your coding standards or tech stack&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Contribute improvements&lt;/strong&gt; that benefit everyone&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Build extensions on top&lt;/strong&gt; of Copilot Chat, knowing exactly how it works internally&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Run locally&lt;/strong&gt; if your organization has data residency requirements&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Here&amp;rsquo;s a code concept from the repository structure:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// The prompts are now readable and modifiable
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// Example: extending system prompt for C# projects
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;systemPrompt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sb"&gt;`
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sb"&gt;You are an AI coding assistant specialized in C# and .NET development.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sb"&gt;Focus on:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sb"&gt;- SOLID principles and clean architecture
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sb"&gt;- Async/await patterns
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sb"&gt;- Entity Framework Core best practices
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sb"&gt;- Azure integration where applicable
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="the-caveat-open-source-doesnt-mean-unmaintained"&gt;The Caveat: Open Source Doesn&amp;rsquo;t Mean Unmaintained&lt;/h2&gt;
+&lt;p&gt;This is a hard truth. Open sourcing is a starting point, not a finish line. The VS Code team is committing to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Active maintenance and security updates&lt;/li&gt;
+&lt;li&gt;Clear contribution guidelines&lt;/li&gt;
+&lt;li&gt;Review capacity for PRs (which is the real bottleneck)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But they&amp;rsquo;re also hoping the community steps up. Some features might move slower than in a closed-source model because consensus takes time. Some experimental ideas won&amp;rsquo;t land because the team can&amp;rsquo;t justify the maintenance burden.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re planning to fork and customize heavily, understand that you&amp;rsquo;re also taking on maintenance debt. VS Code&amp;rsquo;s codebase will evolve, and your fork might diverge.&lt;/p&gt;
+&lt;h2 id="the-ecosystem-play"&gt;The Ecosystem Play&lt;/h2&gt;
+&lt;p&gt;Here&amp;rsquo;s what I think is really happening: VS Code is betting that open source creates a stronger ecosystem than closed source ever could. If the Copilot Chat extension is public, every other editor and agent framework can learn from it. Every researcher can study it. The community attracts talent that proprietary models never could.&lt;/p&gt;
+&lt;p&gt;That bet assumes the model is good enough to stand on its own without secrecy. And in 2025, with LLMs at this capability level, it is.&lt;/p&gt;
+&lt;h2 id="for-net-teams-what-this-means"&gt;For .NET Teams: What This Means&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Evaluate locally&lt;/strong&gt;. You can now clone the repository and run against your own Azure OpenAI or Anthropic instance without sending data to GitHub.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Contribute standards-specific features.&lt;/strong&gt; If your team uses specific patterns (.NET 9 features, Semantic Kernel, etc.), you can contribute improvements specific to your ecosystem.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Plan for customization.&lt;/strong&gt; If you need to customize AI behavior for compliance, data residency, or specific coding standards, the open source model makes that feasible.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Watch the refactor.&lt;/strong&gt; The integration into VS Code core will simplify deployment and guarantees long-term support.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="what-to-do-next"&gt;What To Do Next&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Star the repository&lt;/strong&gt; at &lt;a href="https://github.com/microsoft/vscode-copilot-chat"&gt;github.com/microsoft/vscode-copilot-chat&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Read the open-source prompt&lt;/strong&gt; to understand how chat contexts are framed.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Consider contributing&lt;/strong&gt; if you have improvements specific to your language or framework.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The future of AI-assisted development is open. VS Code just proved they&amp;rsquo;re serious about it.&lt;/p&gt;
+&lt;p&gt;Happy coding.&lt;/p&gt;</content:encoded></item><item><title>Your .NET Repository Needs a Context Layer Before It Needs a Bigger Prompt</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/context-custom-instructions-vscode/</link><pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/context-custom-instructions-vscode/</guid><description>Custom instructions turn Copilot from a general assistant into a teammate that understands a .NET repository's conventions, architecture, and delivery rules.</description><content:encoded>&lt;p&gt;Original source: &lt;a href="https://code.visualstudio.com/blogs/2025/03/26/custom-instructions"&gt;Context is all you need: Better AI results with custom instructions&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Most teams try to improve AI-assisted development by writing longer prompts. That is usually the wrong first move.&lt;/p&gt;
+&lt;p&gt;The better move is to give the tool a durable context layer: the conventions, architectural boundaries, commands, and review expectations that apply to every change in the repository. The Visual Studio Code team calls this custom instructions, and the idea is especially useful for .NET codebases where a short request can touch project references, analyzers, tests, hosting, and deployment decisions all at once.&lt;/p&gt;
+&lt;h2 id="the-prompt-should-not-carry-the-repositorys-memory"&gt;The prompt should not carry the repository&amp;rsquo;s memory&lt;/h2&gt;
+&lt;p&gt;A prompt such as &amp;ldquo;add an endpoint for orders&amp;rdquo; leaves too many decisions open. Which API style? Which validation library? Where do application services live? Are errors returned as &lt;code&gt;ProblemDetails&lt;/code&gt;? Which test project owns the behavior? Does the solution use minimal APIs, controllers, or a vertical slice layout?&lt;/p&gt;
+&lt;p&gt;You can answer those questions every time, but then the prompt becomes a second configuration file. Worse, it becomes a private configuration file that only exists in one developer&amp;rsquo;s chat history.&lt;/p&gt;
+&lt;p&gt;The source article&amp;rsquo;s most practical recommendation is a simple &lt;code&gt;.github/copilot-instructions.md&lt;/code&gt; file. Copilot can discover it automatically, which means the repository can state its working agreements once and let every contributor benefit from them.&lt;/p&gt;
+&lt;p&gt;For a .NET solution, I would start with something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gh"&gt;# Repository guidance
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gu"&gt;## Architecture
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;-&lt;/span&gt; Keep HTTP concerns in the Web project.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;-&lt;/span&gt; Put business rules in application services or vertical slices.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;-&lt;/span&gt; Keep EF Core queries in the data-access boundary.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;-&lt;/span&gt; Do not reference infrastructure projects from the domain project.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gu"&gt;## .NET conventions
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;-&lt;/span&gt; Use nullable reference types and treat warnings as errors.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;-&lt;/span&gt; Prefer async APIs and pass CancellationToken through application boundaries.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;-&lt;/span&gt; Return ProblemDetails for API errors.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;-&lt;/span&gt; Add or update tests for every behavior change.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gu"&gt;## Validation
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;-&lt;/span&gt; Run &lt;span class="sb"&gt;`dotnet format --verify-no-changes`&lt;/span&gt; before opening a pull request.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;-&lt;/span&gt; Run &lt;span class="sb"&gt;`dotnet test --solution .`&lt;/span&gt; for the full test suite.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;-&lt;/span&gt; Do not introduce a new package when an existing project dependency already solves the problem.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This is not a replacement for analyzers, tests, or code review. It is the shared explanation around those mechanisms. The compiler can tell you that a nullable value is unsafe; the instructions can tell Copilot how this repository expects that case to be handled.&lt;/p&gt;
+&lt;h2 id="keep-instructions-close-to-the-thing-they-govern"&gt;Keep instructions close to the thing they govern&lt;/h2&gt;
+&lt;p&gt;One large instruction file is a useful starting point, but it can become another wall of prose. The source article also describes referencing separate files through workspace settings. That lets a team keep specialized guidance where it belongs.&lt;/p&gt;
+&lt;p&gt;For example, a repository might have:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.github/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; copilot-instructions.md
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docs/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; api-conventions.md
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; database-conventions.md
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; testing-conventions.md
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.vscode/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; settings.json
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then workspace settings can point Copilot at the relevant files:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;github.copilot.chat.codeGeneration.instructions&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;file&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;./docs/api-conventions.md&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;file&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;./docs/database-conventions.md&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;file&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;./docs/testing-conventions.md&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I like this approach because it mirrors how a .NET solution is usually organized. API guidance can talk about contracts and versioning without repeating database rules. Testing guidance can explain fixture lifetimes and integration-test dependencies without making every code-generation request carry the entire platform manual.&lt;/p&gt;
+&lt;p&gt;The important constraint is ownership. If a file is referenced by the workspace, it needs to be reviewed like code. Stale instructions are worse than no instructions because they make incorrect output look intentional.&lt;/p&gt;
+&lt;h2 id="prompt-files-are-reusable-workflows-not-magic-spells"&gt;Prompt files are reusable workflows, not magic spells&lt;/h2&gt;
+&lt;p&gt;The announcement also introduces prompt files: Markdown files under &lt;code&gt;.github/prompts&lt;/code&gt; that package a repeatable request. This is where custom instructions move from passive context to team workflow.&lt;/p&gt;
+&lt;p&gt;A prompt file for a new vertical slice might ask Copilot to inspect an existing slice, create the request and handler, add validation, add tests, and report the commands it ran. Another could describe the checks for a migration or a production incident.&lt;/p&gt;
+&lt;p&gt;The value is not that Copilot has learned a secret incantation. The value is that the team has made its process visible, reviewable, and repeatable.&lt;/p&gt;
+&lt;p&gt;For us .NET developers, that distinction matters. A prompt file should not hide decisions that belong in code or CI. It should make the path through those decisions easier to follow. If a prompt file says &amp;ldquo;add tests,&amp;rdquo; it should name the test project, test framework, and required command. If it says &amp;ldquo;add an endpoint,&amp;rdquo; it should point to a real neighboring implementation.&lt;/p&gt;
+&lt;h2 id="what-i-would-do-in-a-real-repository"&gt;What I would do in a real repository&lt;/h2&gt;
+&lt;p&gt;I would roll this out in three small steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Add a short root instruction file with architecture boundaries, commands, and non-negotiable quality rules.&lt;/li&gt;
+&lt;li&gt;Add one prompt file for the most repetitive workflow, such as creating an API slice or diagnosing a failed build.&lt;/li&gt;
+&lt;li&gt;Review the generated changes and the instructions together after a week of use.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;That last step is the one teams skip. The useful question is not whether Copilot produced more code. It is whether the repository needed fewer corrections after the first draft. If the answer is no, improve the context before asking for a more elaborate prompt.&lt;/p&gt;
+&lt;h2 id="the-practical-takeaway"&gt;The practical takeaway&lt;/h2&gt;
+&lt;p&gt;Custom instructions are not a way to outsource engineering judgment. They are a way to keep engineering judgment from disappearing into individual conversations.&lt;/p&gt;
+&lt;p&gt;Start with the repository&amp;rsquo;s boundaries, commands, and examples. Keep specialized guidance in focused files. Turn repeated workflows into prompt files. Then let tests, analyzers, and review remain the final authority.&lt;/p&gt;
+&lt;p&gt;The best AI result is often the one that required the smallest prompt because the repository already explained the important parts.&lt;/p&gt;</content:encoded></item><item><title>Visual Studio June Update: Usage Visibility and MCP Trust Are the Features That Matter Most</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/visual-studio-june-2026-operational-trust/</link><pubDate>Fri, 24 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/visual-studio-june-2026-operational-trust/</guid><description>The most important parts of this release are not cosmetic; they improve governance and confidence in AI-assisted workflows.</description><content:encoded>&lt;p&gt;Original source: &lt;a href="https://devblogs.microsoft.com/visualstudio/visual-studio-june-update-track-your-usage-trust-your-tools/"&gt;Visual Studio June Update – Track Your Usage, Trust Your Tools&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This Visual Studio release has plenty of nice quality-of-life additions, but two updates stand above the rest for serious teams: Copilot usage transparency and MCP trust validation.&lt;/p&gt;
+&lt;p&gt;As AI-assisted development shifts to usage-based billing, &lt;strong&gt;visibility is no longer a convenience metric&lt;/strong&gt;. It is a planning requirement. Real-time usage windows and threshold alerts help teams avoid surprise cost spikes and create healthier usage norms.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;MCP trust validation flow&lt;/strong&gt; is even more strategically important. Tooling ecosystems are becoming dynamic, and dynamic systems need explicit trust boundaries. Comparing startup configuration and capability fingerprints against trusted baselines is exactly the right default posture.&lt;/p&gt;
+&lt;p&gt;My strong opinion: every AI-integrated IDE should do this by default. Silent capability drift in tool servers is an unacceptable risk for enterprise environments.&lt;/p&gt;
+&lt;p&gt;The C++ modernization agent GA for MSVC upgrades is another practical win. Upgrade work is usually deferred because it is tedious and risky. Having guided and automated paths inside the IDE lowers the barrier to staying current, especially for larger legacy codebases.&lt;/p&gt;
+&lt;p&gt;Long-distance next edit suggestions are a good productivity enhancement, but they are best treated as optional acceleration. Trust and governance features should be enabled and understood first; convenience features can follow.&lt;/p&gt;
+&lt;h3 id="practical-recommendations-for-teams-rolling-out-this-release"&gt;Practical recommendations for teams rolling out this release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Enable Copilot usage alerts&lt;/strong&gt; with thresholds aligned to internal budget ownership.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Train developers on MCP trust prompts&lt;/strong&gt; so approvals are intentional, not habitual clicks.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pilot modernization agent workflows&lt;/strong&gt; on one representative C++ solution before broad rollout.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Collect feedback on extended-range suggestions&lt;/strong&gt;, but gate default enablement on measurable acceptance.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The color emoji support is minor on paper, but it improves readability in mixed text contexts like chat, markdown, and output panes. Small UX polish does add up when used daily.&lt;/p&gt;
+&lt;p&gt;Overall, this release reflects a maturing tool philosophy: AI assistance is no longer just about generation speed. It is about control, accountability, and confidence in what runs inside your development environment.&lt;/p&gt;
+&lt;p&gt;If your organization is standardizing on AI-enhanced Visual Studio workflows, &lt;strong&gt;prioritize the operational trust features first&lt;/strong&gt;. They are the foundation that lets the rest of the productivity stack scale safely.&lt;/p&gt;</content:encoded></item><item><title>A WinUI Agent Plugin for GitHub Copilot and Claude Code</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/winui-agent-plugin-github-copilot-claude-code/</link><pubDate>Mon, 08 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/winui-agent-plugin-github-copilot-claude-code/</guid><description>Microsoft released agent skills for WinUI development — scaffold, build, run, test, iterate, all with GitHub Copilot CLI or Claude Code. The key innovation: purpose-built tools that ground the agent in WinUI-specific facts.</description><content:encoded>&lt;p&gt;Getting AI agents to write WinUI apps has been hit-or-miss. Generic agents pull from too much context — mixing WinUI 3 with older UWP patterns, getting MSIX packaging wrong, or generating apps that don&amp;rsquo;t actually run. The new WinUI agent plugin takes a different approach.&lt;/p&gt;
+&lt;h2 id="what-it-is"&gt;What It Is&lt;/h2&gt;
+&lt;p&gt;A set of &lt;a href="https://aka.ms/winui-skills"&gt;open-source agent skills&lt;/a&gt; designed specifically for WinUI and Windows App SDK development, compatible with both GitHub Copilot CLI and Claude Code.&lt;/p&gt;
+&lt;p&gt;Install and run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Add the WinUI plugin to GitHub Copilot CLI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/plugin install winui@awesome-copilot
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Run the setup skill to install prerequisites&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/winui:winui-setup
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then describe the app you want. The agent handles the rest.&lt;/p&gt;
+&lt;h2 id="the-end-to-end-loop"&gt;The End-to-End Loop&lt;/h2&gt;
+&lt;p&gt;The skills are built around a complete development loop: scaffold → build → run → test → iterate. What makes this different from just asking a generic agent:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Scaffold correctly&lt;/strong&gt; — the agent picks the right &lt;code&gt;dotnet new&lt;/code&gt; WinUI template, not an older UWP pattern.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Build through the right pipeline&lt;/strong&gt; — WinUI apps need packaged execution. Generic agents often don&amp;rsquo;t know this and generate apps that compile but don&amp;rsquo;t run. The skills handle the packaged execution model correctly.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Interact and validate&lt;/strong&gt; — if you ask, the agent can interact with the running app to validate functionality, not just check that the build succeeded.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fix compilation errors automatically&lt;/strong&gt; — rather than stopping at the first error, the agent recognizes common WinUI failure modes and steers toward working solutions.&lt;/p&gt;
+&lt;p&gt;Beyond the basics, the skills also handle higher-level polish: accessibility audits, code reviews, MSIX packaging.&lt;/p&gt;
+&lt;h2 id="the-token-efficiency-design"&gt;The Token Efficiency Design&lt;/h2&gt;
+&lt;p&gt;Building in rich WinUI context up front would make every turn expensive. Instead, the skills are paired with purpose-built tools that give the agent ground-truth answers on demand — only pulling in specific reference data when the agent needs it, not loading entire documentation pages preemptively.&lt;/p&gt;
+&lt;p&gt;The result: agents that know WinUI deeply without the token overhead of loading everything every turn.&lt;/p&gt;
+&lt;h2 id="supported-features"&gt;Supported Features&lt;/h2&gt;
+&lt;p&gt;The skills handle: XAML and Fluent Design, MVVM, MSIX packaging, code signing, Store submission, accessibility, theming, UI automation. That covers most of the surface area where agents typically get stuck.&lt;/p&gt;
+&lt;p&gt;Original post: &lt;a href="https://devblogs.microsoft.com/ifdef-windows/build-native-windows-apps-with-ai-agents-for-winui-and-windows-app-sdk/"&gt;Introducing WinUI agent plugin for GitHub Copilot and Claude Code&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>VS Code 1.121: Pin Favorite Models, Terminal Output Compression, Agent SSH</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/vscode-1-121-model-favorites-terminal-compression/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/vscode-1-121-model-favorites-terminal-compression/</guid><description>VS Code 1.121 adds model favorites, expanded terminal tool output compression for test runners and build tools, idle-silence timer for background terminals, and keyboard-interactive SSH in agent host.</description><content:encoded>&lt;p&gt;VS Code 1.121 continues the Copilot agent quality improvements from 1.120, with a focus on model management and terminal behavior.&lt;/p&gt;
+&lt;h2 id="pin-favorite-models"&gt;Pin Favorite Models&lt;/h2&gt;
+&lt;p&gt;The model picker now supports pinning. If you always reach for the same model or two, pin them to the top of the list. Reduces the scrolling when you have access to many models across multiple providers.&lt;/p&gt;
+&lt;h2 id="expanded-terminal-output-compression"&gt;Expanded Terminal Output Compression&lt;/h2&gt;
+&lt;p&gt;The agent terminal tool already compressed output for common commands. 1.121 expands this to cover test runners and build tools:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Test runners:&lt;/strong&gt; &lt;code&gt;pytest&lt;/code&gt;, &lt;code&gt;jest&lt;/code&gt;, &lt;code&gt;cargo test&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Build tools:&lt;/strong&gt; &lt;code&gt;tsc&lt;/code&gt;, &lt;code&gt;cargo build&lt;/code&gt;, &lt;code&gt;make&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Linters, Docker, package managers&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Long build output and test failure reports are compressed into relevant excerpts before being passed to the model. This keeps context usage manageable when the agent runs build cycles or test suites, which can produce thousands of lines of output.&lt;/p&gt;
+&lt;h2 id="idle-silence-timer-for-background-terminals"&gt;Idle-Silence Timer for Background Terminals&lt;/h2&gt;
+&lt;p&gt;A new idle-silence timer for the &lt;code&gt;run_in_terminal&lt;/code&gt; tool: if a sync command produces no output for a configurable period, it&amp;rsquo;s automatically promoted to background execution. This prevents long-running commands from blocking the agent when they&amp;rsquo;re silently processing. You get a terminal ID to check on later.&lt;/p&gt;
+&lt;h2 id="vscode_agent-environment-variable"&gt;VSCODE_AGENT Environment Variable&lt;/h2&gt;
+&lt;p&gt;When Copilot Chat runs commands in the terminal, a &lt;code&gt;VSCODE_AGENT&lt;/code&gt; environment variable is now set. Useful if you have scripts or tools that behave differently when called from an agent session versus interactively.&lt;/p&gt;
+&lt;h2 id="add-to-chat-from-browser"&gt;Add to Chat from Browser&lt;/h2&gt;
+&lt;p&gt;Right-clicking in the integrated browser now shows an &amp;ldquo;Add to Chat&amp;rdquo; option. Select content from a web page and add it directly to your Copilot Chat context without copy-pasting.&lt;/p&gt;
+&lt;h2 id="fixed-multi-line-shell-commands-in-agent-host"&gt;Fixed: Multi-Line Shell Commands in Agent Host&lt;/h2&gt;
+&lt;p&gt;A bug fix that&amp;rsquo;s overdue: multi-line shell commands in the Agent Host terminal tool now work correctly. Previously these could fail or produce incorrect behavior.&lt;/p&gt;
+&lt;h2 id="keyboard-interactive-ssh-authentication"&gt;Keyboard-Interactive SSH Authentication&lt;/h2&gt;
+&lt;p&gt;Agent Host SSH connections now support keyboard-interactive authentication — the fallback auth method used by some SSH servers (including some older corporate configurations). Agents working on remote SSH hosts are less likely to hit auth failures.&lt;/p&gt;
+&lt;p&gt;Original post: &lt;a href="https://code.visualstudio.com/updates/v1_121"&gt;Visual Studio Code 1.121&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>VS Code 1.120: Password Prompts, Context Size Picker, GitHub Metadata in Agent Host</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/vscode-1-120-agent-security-context-picker/</link><pubDate>Sat, 06 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/vscode-1-120-agent-security-context-picker/</guid><description>VS Code 1.120 is a focused release for Copilot users: secure password prompt handling, model context size picker, GitHub PR metadata in agent sessions, and session archive management.</description><content:encoded>&lt;p&gt;VS Code 1.120 shipped with a set of Copilot agent improvements that are small individually but noticeably better in day-to-day use.&lt;/p&gt;
+&lt;h2 id="secure-password-prompt-detection-in-agent-terminals"&gt;Secure Password Prompt Detection in Agent Terminals&lt;/h2&gt;
+&lt;p&gt;When a Copilot agent runs a terminal command that triggers a password or passphrase prompt, VS Code now detects this and shows a confirmation dialog. The dialog focuses the terminal so you can type the secret directly — and critically, secrets are never routed through the model.&lt;/p&gt;
+&lt;p&gt;This is a meaningful security improvement. Previously, agents running commands that triggered authentication prompts could create situations where users might inadvertently expose credentials. The screen reader announcement means accessibility users also get the notification.&lt;/p&gt;
+&lt;h2 id="context-size-picker-in-the-model-picker"&gt;Context Size Picker in the Model Picker&lt;/h2&gt;
+&lt;p&gt;A new context size picker lets you select how much context the model uses for a session. Different models have different context window sizes, and some workflows benefit from constraining it (lower latency, lower cost) or maximizing it (complex codebases, long-running sessions).&lt;/p&gt;
+&lt;h2 id="github-pr-metadata-in-agent-host-sessions"&gt;GitHub PR Metadata in Agent Host Sessions&lt;/h2&gt;
+&lt;p&gt;For sessions backed by a GitHub repository, VS Code now surfaces GitHub metadata — including a pull request button — in the agent host UI. Less context switching to the browser or GitHub extension when you&amp;rsquo;re working on a PR.&lt;/p&gt;
+&lt;h2 id="chat-session-archive-management"&gt;Chat Session Archive Management&lt;/h2&gt;
+&lt;p&gt;Two improvements for the sessions Quick Pick:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Archived sessions are hidden by default (less visual clutter)&lt;/li&gt;
+&lt;li&gt;Searching still matches archived sessions, so you can revive one by title&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sessions are also grouped by recency by default, making recent work easier to find.&lt;/p&gt;
+&lt;h2 id="copilot-cli-plugin-discovery"&gt;Copilot CLI Plugin Discovery&lt;/h2&gt;
+&lt;p&gt;VS Code now automatically discovers Copilot CLI user-installed plugins from &lt;code&gt;~/.copilot/installed-plugins/&lt;/code&gt;. If you&amp;rsquo;ve set up WinUI or other domain-specific agent skills, they&amp;rsquo;re picked up without manual configuration.&lt;/p&gt;
+&lt;h2 id="custom-diff-editor-api-preview"&gt;Custom Diff Editor API (Preview)&lt;/h2&gt;
+&lt;p&gt;For extension authors: a new &lt;code&gt;customDiffEditorProvider&lt;/code&gt; proposed API lets extensions render a unified diff in a single webview with access to both original and modified documents, instead of two side-by-side custom editor views.&lt;/p&gt;
+&lt;p&gt;Original post: &lt;a href="https://code.visualstudio.com/updates/v1_120"&gt;Visual Studio Code 1.120&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>Agent Skills in Visual Studio: Teach Copilot How Your Team Actually Works</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/visual-studio-agent-skills-copilot-team-conventions/</link><pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/visual-studio-agent-skills-copilot-team-conventions/</guid><description>Visual Studio now supports Agent Skills — reusable instruction sets that teach Copilot your team's specific workflows, coding standards, and conventions. Define once, apply automatically.</description><content:encoded>&lt;p&gt;One of the persistent frustrations with AI coding assistants: they know general programming well but don&amp;rsquo;t know &lt;em&gt;your&lt;/em&gt; team&amp;rsquo;s specific conventions, your internal APIs, or your preferred patterns. Every session, you&amp;rsquo;re re-explaining context. Agent Skills in Visual Studio is designed to fix this.&lt;/p&gt;
+&lt;h2 id="what-agent-skills-are"&gt;What Agent Skills Are&lt;/h2&gt;
+&lt;p&gt;Reusable instruction sets — defined in &lt;code&gt;SKILL.md&lt;/code&gt; files — that teach Copilot agents how to handle specific tasks. Define a skill for &amp;ldquo;how to run our build pipeline,&amp;rdquo; &amp;ldquo;how to generate boilerplate for our service layer,&amp;rdquo; or &amp;ldquo;our code review checklist.&amp;rdquo; The agent applies the skill automatically when it&amp;rsquo;s relevant.&lt;/p&gt;
+&lt;p&gt;This isn&amp;rsquo;t new as a concept (&lt;code&gt;.github/copilot-instructions.md&lt;/code&gt; has existed for a while), but the Visual Studio integration makes them first-class objects with discovery UI.&lt;/p&gt;
+&lt;h2 id="creating-skills-in-visual-studio"&gt;Creating Skills in Visual Studio&lt;/h2&gt;
+&lt;p&gt;The integrated UI flow: click the tools icon in Copilot Chat, open the skills panel, click &lt;code&gt;+&lt;/code&gt;. You choose global (personal) or solution-level scope, pick a name, and Visual Studio generates a template. Copilot Agent mode can then help you fill in the template — use the agent to write the skill for the agent.&lt;/p&gt;
+&lt;p&gt;Currently in Insiders channel, coming to Release soon.&lt;/p&gt;
+&lt;p&gt;You can also create skills manually:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;.github/
+skills/
+github-issues/
+SKILL.md
+templates/
+bug-report.md
+code-review/
+SKILL.md
+checklist.md
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="discovery-locations"&gt;Discovery Locations&lt;/h2&gt;
+&lt;p&gt;Skills are auto-discovered from standard paths:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Solution-level (shared via repo):&lt;/strong&gt; &lt;code&gt;.github/skills/&lt;/code&gt;, &lt;code&gt;.claude/skills/&lt;/code&gt;, &lt;code&gt;.agents/skills/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Global/personal (your user profile, available everywhere):&lt;/strong&gt; &lt;code&gt;~/.copilot/skills/&lt;/code&gt;, &lt;code&gt;~/.agents/skills/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The multi-location support means the same convention works with GitHub Copilot, Claude Code, and other agent frameworks — define your skills once, use them everywhere.&lt;/p&gt;
+&lt;h2 id="the-format"&gt;The Format&lt;/h2&gt;
+&lt;p&gt;Skills follow the &lt;a href="https://agentskills.io/specification"&gt;agentskills.io/specification&lt;/a&gt; format — a Markdown-based spec that&amp;rsquo;s both human-readable and machine-parseable. You can include scripts, templates, and examples alongside the &lt;code&gt;SKILL.md&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="practical-value"&gt;Practical Value&lt;/h2&gt;
+&lt;p&gt;The real power isn&amp;rsquo;t the individual features — it&amp;rsquo;s the combination of team-shared skills (via &lt;code&gt;.github/skills/&lt;/code&gt;) and personal skills (via &lt;code&gt;~/.agents/skills/&lt;/code&gt;). Team skills encode how your organization does things. Personal skills encode how you specifically work. The agent gets both contexts automatically.&lt;/p&gt;
+&lt;p&gt;For organizations already using Copilot heavily, this is a meaningful step toward making the tool actually aware of your specific codebase conventions rather than giving generic advice.&lt;/p&gt;
+&lt;p&gt;Original post: &lt;a href="https://devblogs.microsoft.com/visualstudio/agent-skills-in-visual-studio/"&gt;Agent Skills in Visual Studio: Teach Copilot How Your Team Works&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>Azure DevOps MCP Server April Update: WIQL Queries, PAT Auth, and Experimental MCP Apps</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/azure-devops-mcp-server-april-2026-wiql-pat-apps/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/azure-devops-mcp-server-april-2026-wiql-pat-apps/</guid><description>The Azure DevOps MCP Server gets WIQL-powered work item queries, Personal Access Token authentication, MCP annotations, and an experimental MCP Apps feature that packages common workflows into reusable tools.</description><content:encoded>&lt;p&gt;The Azure DevOps MCP Server keeps getting better. Dan Hellem&amp;rsquo;s April update covers both the local and remote servers, and there are some genuinely useful additions here — especially if you&amp;rsquo;ve been using Copilot to navigate boards and repos.&lt;/p&gt;
+&lt;h2 id="wiql-query-support"&gt;WIQL Query Support&lt;/h2&gt;
+&lt;p&gt;The headline feature: a new &lt;code&gt;wit_query_by_wiql&lt;/code&gt; tool that lets you run Work Item Query Language queries directly from your MCP client.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;ve used Azure Boards for any length of time, you know WIQL. It&amp;rsquo;s the SQL-like query syntax for work items: &lt;code&gt;SELECT [System.Id], [System.Title] FROM WorkItems WHERE [System.AssignedTo] = @Me AND [System.State] = 'Active'&lt;/code&gt;. Having that available as an MCP tool means your Copilot sessions can now pull precise work item sets without you manually filtering or clicking through board views.&lt;/p&gt;
+&lt;p&gt;One caveat: on the remote MCP Server, this tool currently requires the &lt;strong&gt;Insiders&lt;/strong&gt; feature flag while they validate query performance at scale. It&amp;rsquo;ll come to everyone once the telemetry looks good.&lt;/p&gt;
+&lt;h2 id="personal-access-tokens-on-the-local-server"&gt;Personal Access Tokens on the Local Server&lt;/h2&gt;
+&lt;p&gt;The local MCP Server now supports PAT authentication. This sounds like a minor quality-of-life fix, but it&amp;rsquo;s actually important for integration scenarios — specifically when you&amp;rsquo;re running the MCP server in a context where interactive authentication isn&amp;rsquo;t available, or when you&amp;rsquo;re connecting from external clients and automation.&lt;/p&gt;
+&lt;p&gt;Setup is documented in the &lt;a href="https://github.com/microsoft/azure-devops-mcp/blob/main/docs/GETTINGSTARTED.md#-personal-access-token-pat"&gt;Getting Started guide&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="mcp-annotations-on-the-remote-server"&gt;MCP Annotations on the Remote Server&lt;/h2&gt;
+&lt;p&gt;Annotations are metadata tags on MCP tools that tell LLMs how to use them safely. The Azure DevOps MCP Server is now implementing annotations for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Read-only tools&lt;/strong&gt; — the LLM knows these are safe to call without user confirmation&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Destructive tools&lt;/strong&gt; — the LLM knows to be cautious and confirm before proceeding&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Open-world tools&lt;/strong&gt; — the LLM understands these may return unpredictable results&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is foundational for agent reliability. Without annotations, the LLM has to guess from the tool name whether it&amp;rsquo;s safe to call. With annotations, the behavior is explicit and the agent can make better decisions.&lt;/p&gt;
+&lt;h2 id="wiki-tool-consolidation"&gt;Wiki Tool Consolidation&lt;/h2&gt;
+&lt;p&gt;The remote server is starting to consolidate related tools into fewer, more capable ones. The wiki tools are the first to get this treatment:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;New Tool&lt;/th&gt;
+&lt;th&gt;Replaces&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;wiki&lt;/code&gt; (read-only)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;wiki_get_page&lt;/code&gt;, &lt;code&gt;wiki_get_page_content&lt;/code&gt;, &lt;code&gt;wiki_list_pages&lt;/code&gt;, &lt;code&gt;wiki_list_wikis&lt;/code&gt;, &lt;code&gt;wiki_get_wiki&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;wiki_upsert_page&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;wiki_create_or_update_page&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Fewer tools = better LLM performance. This is a consistent pattern across MCP server design — smaller, focused tool sets work better because the LLM doesn&amp;rsquo;t have to reason about which of five similarly-named tools to pick.&lt;/p&gt;
+&lt;h2 id="experimental-mcp-apps"&gt;Experimental: MCP Apps&lt;/h2&gt;
+&lt;p&gt;This is the most interesting addition, and it&amp;rsquo;s clearly experimental. MCP Apps are packaged workflows that run inside the MCP server environment:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;servers&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;ado&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;stdio&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;command&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;mcp-server-azuredevops&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;args&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;contoso&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;-d&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;core&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;work&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;work-items&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;mcp-apps&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The first example is &lt;code&gt;mcp_app_my_work_item&lt;/code&gt; — a self-contained work item experience that lets you view, filter, and edit work items assigned to you, without manually chaining multiple tool calls.&lt;/p&gt;
+&lt;p&gt;The idea is compelling: instead of your agent calling &lt;code&gt;wit_get_work_item&lt;/code&gt; → &lt;code&gt;wit_list_work_items&lt;/code&gt; → &lt;code&gt;wit_update_work_item&lt;/code&gt; across multiple turns, a single MCP App provides the entire workflow as one structured, reusable unit. Reduced setup time, consistent behavior, fewer moving parts.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s on the &lt;code&gt;mcp-apps-poc&lt;/code&gt; branch right now, which tells you where it stands in terms of production readiness. But the direction is right — more workflow composition at the MCP layer, less ad-hoc tool chaining in your agent prompts.&lt;/p&gt;
+&lt;h2 id="wrapping-up"&gt;Wrapping up&lt;/h2&gt;
+&lt;p&gt;The Azure DevOps MCP Server is maturing quickly. WIQL support and PAT auth are immediate wins for anyone using Copilot with Azure Boards. The annotation work makes the remote server safer for agentic use cases. And MCP Apps, while experimental, hints at where this is going: from raw tools to composable workflows.&lt;/p&gt;
+&lt;p&gt;Worth keeping an eye on the &lt;a href="https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server"&gt;documentation&lt;/a&gt; as the remote server continues to evolve.&lt;/p&gt;
+&lt;p&gt;Original post by Dan Hellem: &lt;a href="https://devblogs.microsoft.com/devops/azure-devops-mcp-server-april-update/"&gt;Azure DevOps MCP Server April Update&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title>VS Code 1.118: Copilot CLI Gets Session Names, Model Badges, and TypeScript 7.0 Nightly Opt-In</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/vscode-1-118-copilot-cli-session-names-model-badge/</link><pubDate>Sat, 25 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/vscode-1-118-copilot-cli-session-names-model-badge/</guid><description>Visual Studio Code 1.118 is a focused release centered on Copilot CLI improvements — session naming, model badges, auto model selection, and a new option to opt into TypeScript 7.0 nightlies.</description><content:encoded>&lt;p&gt;&lt;a href="https://code.visualstudio.com/updates/v1_118"&gt;Visual Studio Code 1.118&lt;/a&gt; is a smaller focused release — mostly Copilot CLI refinements — but there are a few things worth noting if you use the Agents app or TypeScript heavily.&lt;/p&gt;
+&lt;h2 id="copilot-cli-sessions-get-real-names"&gt;Copilot CLI: sessions get real names&lt;/h2&gt;
+&lt;p&gt;The Copilot CLI SDK session-title APIs are now used as the source of truth for session names. Previously you&amp;rsquo;d get auto-generated labels; now sessions surface the actual name from the SDK. Small quality-of-life improvement but it makes navigating multiple agent sessions a lot less confusing.&lt;/p&gt;
+&lt;h2 id="switch-sessions-faster-with-keyboard-shortcuts"&gt;Switch sessions faster with keyboard shortcuts&lt;/h2&gt;
+&lt;p&gt;The Agents app now has &lt;code&gt;Ctrl+1&lt;/code&gt;, &lt;code&gt;Ctrl+2&lt;/code&gt;, etc. bound to quickly switch between sessions. If you&amp;rsquo;re running multiple Copilot CLI sessions in parallel (which, if you&amp;rsquo;re doing agent-heavy work, you probably are), this removes a lot of mouse clicking.&lt;/p&gt;
+&lt;h2 id="model-badges-in-chat"&gt;Model badges in chat&lt;/h2&gt;
+&lt;p&gt;Copilot CLI responses in the chat panel now show a model badge — you can see at a glance which model handled each request. Useful when you&amp;rsquo;re experimenting with different models in the same session.&lt;/p&gt;
+&lt;h2 id="auto-model-selection-lands-in-copilot-cli"&gt;Auto model selection lands in Copilot CLI&lt;/h2&gt;
+&lt;p&gt;The auto model selection feature — previously available in other parts of Copilot — now works in the Copilot CLI agent too. Let the system pick the best model for the task rather than manually switching.&lt;/p&gt;
+&lt;h2 id="typescript-70-nightly-opt-in"&gt;TypeScript 7.0 nightly opt-in&lt;/h2&gt;
+&lt;p&gt;This one&amp;rsquo;s interesting if you&amp;rsquo;re on the TypeScript cutting edge: you can now opt in to testing TypeScript 7.0 nightlies directly from VS Code settings. TypeScript 7.0 is a major release with significant changes (the &lt;a href="https://devblogs.microsoft.com/typescript/announcing-typescript-7-0-beta/"&gt;beta dropped a few days ago&lt;/a&gt;), and the opt-in path makes it easy to test without changing your global TypeScript install.&lt;/p&gt;
+&lt;h2 id="under-the-hood-node-pty-cleanup"&gt;Under the hood: &lt;code&gt;node-pty&lt;/code&gt; cleanup&lt;/h2&gt;
+&lt;p&gt;The Copilot CLI SDK now resolves &lt;code&gt;node-pty&lt;/code&gt; from VS Code via &lt;code&gt;hostRequire&lt;/code&gt; instead of copying binaries into the SDK&amp;rsquo;s prebuilds folder at build time. This is an internal change but it simplifies distribution and means fewer things that can go wrong at runtime.&lt;/p&gt;
+&lt;h2 id="wrapping-up"&gt;Wrapping up&lt;/h2&gt;
+&lt;p&gt;Not a splashy release, but the Copilot CLI improvements add up — especially session management for anyone doing agent-heavy development. The TypeScript 7.0 nightly opt-in is a nice touch for those who like living on the edge.&lt;/p&gt;
+&lt;p&gt;See the &lt;a href="https://code.visualstudio.com/updates/v1_118"&gt;full release notes&lt;/a&gt; for the complete change list.&lt;/p&gt;</content:encoded></item><item><title>68 Minutes a Day Re-Explaining Code to Copilot? There's a Fix for That</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/auto-memory-stop-re-explaining-code-to-copilot/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/auto-memory-stop-re-explaining-code-to-copilot/</guid><description>Context rot is real — your AI agent drifts after 30 turns, and you're paying the compaction tax every hour. auto-memory gives GitHub Copilot CLI surgical recall without burning thousands of tokens.</description><content:encoded>&lt;p&gt;You know that moment when your Copilot session hits &lt;code&gt;/compact&lt;/code&gt; and the agent completely forgets what you were doing? You spend the next five minutes re-explaining the file structure, the failing test, the three approaches you already tried. Then it happens again. And again.&lt;/p&gt;
+&lt;p&gt;Desi Villanueva timed it: &lt;strong&gt;68 minutes per day&lt;/strong&gt; — just on re-orientation. Not writing code. Not reviewing PRs. Just catching the AI up on things it already knew.&lt;/p&gt;
+&lt;p&gt;Turns out there&amp;rsquo;s a concrete reason this happens, and a concrete fix.&lt;/p&gt;
+&lt;h2 id="the-context-window-lie"&gt;The Context Window Lie&lt;/h2&gt;
+&lt;p&gt;Your agent ships with a big number on the box. 200K tokens. Sounds massive. In practice it&amp;rsquo;s a ceiling, not a guarantee.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s the actual math:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;200K total context&lt;/li&gt;
+&lt;li&gt;Minus ~65K for MCP tools loaded at startup (~33%)&lt;/li&gt;
+&lt;li&gt;Minus ~10K for instruction files like &lt;code&gt;AGENTS.md&lt;/code&gt; or &lt;code&gt;copilot-instructions.md&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That leaves you with roughly &lt;strong&gt;125K before you type a word&lt;/strong&gt;. And it gets worse — LLMs don&amp;rsquo;t degrade gracefully as context fills up. They hit a wall at around 60% capacity. The model starts losing things mentioned 30 turns ago, contradicts earlier responses, hallucinates file names it stated confidently 10 minutes prior. The industry calls this the &amp;ldquo;lost in the middle&amp;rdquo; problem.&lt;/p&gt;
+&lt;p&gt;Effective limit: &lt;strong&gt;45K tokens&lt;/strong&gt; before quality degrades. That&amp;rsquo;s maybe 20-30 turns of active conversation before the agent starts drifting. Which is why you&amp;rsquo;re hitting &lt;code&gt;/compact&lt;/code&gt; every 45 minutes — not because you&amp;rsquo;ve filled 200K tokens, but because the model is already rotting at 120K.&lt;/p&gt;
+&lt;h2 id="the-compaction-tax"&gt;The Compaction Tax&lt;/h2&gt;
+&lt;p&gt;Every &lt;code&gt;/compact&lt;/code&gt; costs you flow state. You&amp;rsquo;re deep in a debugging session. Shared context built up over 30 minutes. The agent knows the file structure, the failing test, the hypothesis. Then the warning hits.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ignore it → agent gets progressively dumber, hallucinates old state&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;/compact&lt;/code&gt; → agent has a 2-paragraph summary of a 30-minute investigation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Either way you lose. Either way you&amp;rsquo;re narrating your own project back to it like a new hire on day one.&lt;/p&gt;
+&lt;p&gt;The cruel part? &lt;strong&gt;The memory already exists.&lt;/strong&gt; Copilot CLI writes every session to a local SQLite database at &lt;code&gt;~/.copilot/session-store.db&lt;/code&gt; — every file touched, every turn, every checkpoint. It&amp;rsquo;s all sitting on disk. The agent just can&amp;rsquo;t read it.&lt;/p&gt;
+&lt;h2 id="auto-memory-a-recall-layer-not-a-memory-system"&gt;auto-memory: A Recall Layer, Not a Memory System&lt;/h2&gt;
+&lt;p&gt;That&amp;rsquo;s the key insight behind &lt;a href="https://github.com/dezgit2025/auto-memory"&gt;auto-memory&lt;/a&gt;: don&amp;rsquo;t build a new memory system — build a read-only query layer over the one that already exists.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pip install auto-memory
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;~1,900 lines of Python. Zero dependencies. Installs in 30 seconds.&lt;/p&gt;
+&lt;p&gt;Instead of flooding the context with grep results, you give the agent surgical access to what actually matters:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Operation&lt;/th&gt;
+&lt;th&gt;Tokens&lt;/th&gt;
+&lt;th&gt;What you get&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;grep -r &amp;quot;auth&amp;quot; src/&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;~5,000–10,000&lt;/td&gt;
+&lt;td&gt;500 results, most irrelevant&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;find . -name &amp;quot;*.py&amp;quot;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;~2,000&lt;/td&gt;
+&lt;td&gt;Every Python file, no context&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Agent re-orientation&lt;/td&gt;
+&lt;td&gt;~2,000&lt;/td&gt;
+&lt;td&gt;You explaining what it should know&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;auto-memory files --json --limit 10&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;~50&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;The 10 files you touched yesterday&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;That&amp;rsquo;s a 200x improvement. The agent skips the archaeological dig and goes straight to what matters.&lt;/p&gt;
+&lt;p&gt;The recommended flow: when you&amp;rsquo;re approaching 50-70% context usage, run &lt;code&gt;/clear&lt;/code&gt; and then prompt with &amp;ldquo;review last sessions we discussed topic X&amp;rdquo;. Instead of burning 12K tokens on blind searches, auto-memory pulls the relevant context in 50.&lt;/p&gt;
+&lt;h2 id="why-this-matters-for-net-developers"&gt;Why This Matters for .NET Developers&lt;/h2&gt;
+&lt;p&gt;If you&amp;rsquo;re using GitHub Copilot CLI for .NET work — scaffolding services, debugging EF Core queries, iterating on Blazor components — the context rot problem hits just as hard. Complex solutions with multiple projects, shared libraries, and deep call chains are exactly the kind of codebase where the agent loses track fastest.&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://github.com/dezgit2025/auto-memory/blob/main/deploy/install.md"&gt;install guide&lt;/a&gt; walks through pointing Copilot CLI at it. It&amp;rsquo;s a one-time setup.&lt;/p&gt;
+&lt;p&gt;Honestly? 68 minutes a day back in your pocket is not a minor quality-of-life tweak. That&amp;rsquo;s almost 6 hours a week.&lt;/p&gt;
+&lt;h2 id="wrapping-up"&gt;Wrapping up&lt;/h2&gt;
+&lt;p&gt;Context rot is a real architectural constraint, not a bug that will get patched. auto-memory works around it by giving your agent a cheap, precise recall mechanism instead of expensive, noisy re-exploration. If you&amp;rsquo;re doing serious AI-assisted development with GitHub Copilot CLI, it&amp;rsquo;s worth the 30-second install.&lt;/p&gt;
+&lt;p&gt;Check it out: &lt;a href="https://github.com/dezgit2025/auto-memory"&gt;auto-memory on GitHub&lt;/a&gt;. Original post by Desi Villanueva: &lt;a href="https://devblogs.microsoft.com/all-things-azure/i-wasted-68-minutes-a-day-re-explaining-my-code-then-i-built-auto-memory/"&gt;I Wasted 68 Minutes a Day Re-Explaining My Code&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title>azd + GitHub Copilot: AI-Powered Project Setup and Smarter Error Fixes</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</link><pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/azd-copilot-integration-ai-setup-troubleshooting/</guid><description>The Azure Developer CLI now integrates with GitHub Copilot to scaffold your project and fix deployment errors — all without leaving the terminal.</description><content:encoded>&lt;p&gt;You know that moment when you want to deploy an existing app to Azure and suddenly find yourself staring at a blank &lt;code&gt;azure.yaml&lt;/code&gt;, trying to remember whether your Express API should use Container Apps or App Service? Yeah, that moment. It just got a whole lot shorter.&lt;/p&gt;
+&lt;p&gt;The Azure Developer CLI (&lt;code&gt;azd&lt;/code&gt;) now integrates with GitHub Copilot in two meaningful ways: AI-assisted project scaffolding during &lt;code&gt;azd init&lt;/code&gt;, and intelligent error troubleshooting when deployments go sideways. Both features stay entirely in your terminal, which is exactly where I want them.&lt;/p&gt;
+&lt;h2 id="setting-up-with-copilot-during-azd-init"&gt;Setting Up with Copilot During azd init&lt;/h2&gt;
+&lt;p&gt;When you run &lt;code&gt;azd init&lt;/code&gt;, there&amp;rsquo;s now a &amp;ldquo;Set up with GitHub Copilot (Preview)&amp;rdquo; option. Select it and Copilot analyzes your codebase to generate the &lt;code&gt;azure.yaml&lt;/code&gt;, infrastructure templates, and Bicep modules — based on your actual code, not a template guess.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd init
+# Select: &amp;#34;Set up with GitHub Copilot (Preview)&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For this to work you&amp;rsquo;ll need:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;azd 1.23.11 or later&lt;/strong&gt; — check with &lt;code&gt;azd version&lt;/code&gt; or update with &lt;code&gt;azd update&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;An active GitHub Copilot subscription&lt;/strong&gt; (Individual, Business, or Enterprise)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub CLI (&lt;code&gt;gh&lt;/code&gt;)&lt;/strong&gt; — &lt;code&gt;azd&lt;/code&gt; will prompt for login if needed&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;What I find genuinely useful here is that it works both ways. Building from scratch? Copilot helps you set up the right Azure services from the start. Have an existing app you&amp;rsquo;ve been putting off deploying? Point Copilot at it and it generates the configuration without you having to restructure anything.&lt;/p&gt;
+&lt;h3 id="what-it-actually-does"&gt;What it actually does&lt;/h3&gt;
+&lt;p&gt;Say you have a Node.js Express API with a PostgreSQL dependency. Instead of manually figuring out whether to target Container Apps or App Service, and then writing Bicep from scratch, Copilot detects your stack and generates:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;An &lt;code&gt;azure.yaml&lt;/code&gt; with the right &lt;code&gt;language&lt;/code&gt;, &lt;code&gt;host&lt;/code&gt;, and &lt;code&gt;build&lt;/code&gt; settings&lt;/li&gt;
+&lt;li&gt;A Bicep module for Azure Container Apps&lt;/li&gt;
+&lt;li&gt;A Bicep module for Azure Database for PostgreSQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And it runs preflight checks before touching anything — verifies your git working directory is clean, asks for MCP server tool consent upfront. Nothing happens without you knowing exactly what&amp;rsquo;s about to change.&lt;/p&gt;
+&lt;h2 id="copilot-powered-error-troubleshooting"&gt;Copilot-Powered Error Troubleshooting&lt;/h2&gt;
+&lt;p&gt;Deployment errors are a fact of life. Missing parameters, permission issues, SKU availability problems — and the error message rarely tells you the one thing you actually need to know: &lt;em&gt;how to fix it&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Without Copilot, your loop looks like: copy the error → search docs → read through three unrelated Stack Overflow answers → run some &lt;code&gt;az&lt;/code&gt; CLI commands → try again and hope. With Copilot integrated into &lt;code&gt;azd&lt;/code&gt;, that loop collapses. When any &lt;code&gt;azd&lt;/code&gt; command fails, it immediately offers four options:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Explain&lt;/strong&gt; — plain-language description of what went wrong&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Guidance&lt;/strong&gt; — step-by-step fix instructions&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Diagnose and Guide&lt;/strong&gt; — full analysis + Copilot applies the fix (with your approval) + optional retry&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skip&lt;/strong&gt; — handle it yourself&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The key thing: Copilot already has context about your project, the command that failed, and the error output. Its suggestions are specific to &lt;em&gt;your situation&lt;/em&gt;, not generic docs.&lt;/p&gt;
+&lt;h3 id="real-examples-where-this-shines"&gt;Real examples where this shines&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Resource provider not registered:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;ERROR: deployment failed: MissingSubscriptionRegistration:
+The subscription is not registered to use namespace &amp;#39;Microsoft.App&amp;#39;.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This trips up anyone deploying to a fresh subscription. Copilot can register the provider and rerun the deployment automatically.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SKU not available:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;ERROR: deployment failed: SkuNotAvailable:
+The requested VM size &amp;#39;Standard_D2s_v3&amp;#39; is not available in location &amp;#39;westus&amp;#39;.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Copilot explains which VM size or region is blocked and suggests alternatives that are actually available in your subscription.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Storage account name collision:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;ERROR: deployment failed: StorageAccountAlreadyTaken:
+The storage account named &amp;#39;myappstorage&amp;#39; is already taken.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Global uniqueness bites everyone at least once. Copilot suggests adding your environment name or a random suffix to your Bicep parameters.&lt;/p&gt;
+&lt;h3 id="set-a-default-behavior"&gt;Set a default behavior&lt;/h3&gt;
+&lt;p&gt;If you always want the same option, skip the interactive prompt:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.category troubleshoot
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Options: &lt;code&gt;explain&lt;/code&gt;, &lt;code&gt;guidance&lt;/code&gt;, &lt;code&gt;troubleshoot&lt;/code&gt;, &lt;code&gt;fix&lt;/code&gt;, &lt;code&gt;skip&lt;/code&gt;. You can also enable auto-fix and retry:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config set copilot.errorHandling.fix allow
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Reset to interactive at any time:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;azd config unset copilot.errorHandling.category
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="why-this-matters-for-net-developers"&gt;Why this matters for .NET developers&lt;/h2&gt;
+&lt;p&gt;If you&amp;rsquo;re building on Azure — whether it&amp;rsquo;s a .NET Aspire app, a containerized API, or anything in between — &lt;code&gt;azd&lt;/code&gt; has been the tool to know for a while now. This Copilot integration removes the last bit of friction that used to make it feel like you needed a cheat sheet just to get started.&lt;/p&gt;
+&lt;p&gt;The scaffolding piece is great for brownfield projects. You&amp;rsquo;ve got an ASP.NET Core app running locally, it works perfectly, but getting it &lt;em&gt;onto&lt;/em&gt; Azure has always required a bit of infrastructure knowledge. Now Copilot bridges that gap. And the error troubleshooting feature is something I genuinely wish I&amp;rsquo;d had the last time I spent 45 minutes debugging a &lt;code&gt;SkuNotAvailable&lt;/code&gt; error across three regions.&lt;/p&gt;
+&lt;h2 id="wrapping-up"&gt;Wrapping up&lt;/h2&gt;
+&lt;p&gt;This is exactly the kind of Copilot integration that adds real value — not AI for AI&amp;rsquo;s sake, but AI that understands your context and saves you actual time. Try it out by running &lt;code&gt;azd update&lt;/code&gt; to get the latest version, then use &lt;code&gt;azd init&lt;/code&gt; on your next project. The team is working on deeper features including Copilot-assisted infrastructure customization, so now&amp;rsquo;s a good time to &lt;a href="https://aka.ms/azd-user-research-signup"&gt;sign up for user research&lt;/a&gt; if you want to influence what comes next.&lt;/p&gt;
+&lt;p&gt;Read the &lt;a href="https://devblogs.microsoft.com/azure-sdk/azd-copilot-integration/"&gt;original announcement here&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title>VS Code 1.117: Agents Are Getting Their Own Git Branches and I'm Here For It</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/vscode-1-117-agents-autopilot-worktrees/</link><pubDate>Sun, 19 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/vscode-1-117-agents-autopilot-worktrees/</guid><description>VS Code 1.117 ships worktree isolation for agent sessions, persistent Autopilot mode, and subagent support. The agentic coding workflow just got way more real.</description><content:encoded>&lt;p&gt;The line between &amp;ldquo;AI assistant&amp;rdquo; and &amp;ldquo;AI teammate&amp;rdquo; keeps getting thinner. VS Code 1.117 just dropped and the &lt;a href="https://code.visualstudio.com/updates/v1_117"&gt;full release notes&lt;/a&gt; are packed, but the story here is clear: agents are becoming first-class citizens in your dev workflow.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s what actually matters.&lt;/p&gt;
+&lt;h2 id="autopilot-mode-finally-remembers-your-preference"&gt;Autopilot mode finally remembers your preference&lt;/h2&gt;
+&lt;p&gt;Previously, you had to re-enable Autopilot every time you started a new session. Annoying. Now your permission mode persists across sessions, and you can configure the default.&lt;/p&gt;
+&lt;p&gt;The Agent Host supports three session configs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Default&lt;/strong&gt; — tools ask for confirmation before running&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bypass&lt;/strong&gt; — auto-approves everything&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Autopilot&lt;/strong&gt; — fully autonomous, answers its own questions and keeps going&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you&amp;rsquo;re scaffolding a new .NET project with migrations, Docker, and CI — set it to Autopilot once and forget about it. That preference sticks.&lt;/p&gt;
+&lt;h2 id="worktree-and-git-isolation-for-agent-sessions"&gt;Worktree and git isolation for agent sessions&lt;/h2&gt;
+&lt;p&gt;This is the big one. Agent sessions now support full worktree and git isolation. That means when an agent works on a task, it gets its own branch and working directory. Your main branch stays untouched.&lt;/p&gt;
+&lt;p&gt;Even better — Copilot CLI generates meaningful branch names for these worktree sessions. No more &lt;code&gt;agent-session-abc123&lt;/code&gt;. You get something that actually describes what the agent is doing.&lt;/p&gt;
+&lt;p&gt;For .NET developers running multiple feature branches or fixing bugs while a long scaffolding task runs, this is a game changer. You can have an agent building out your API controllers in one worktree while you&amp;rsquo;re debugging a service layer issue in another. No conflicts. No stashing. No mess.&lt;/p&gt;
+&lt;h2 id="subagents-and-agent-teams"&gt;Subagents and agent teams&lt;/h2&gt;
+&lt;p&gt;The Agent Host Protocol now supports subagents. An agent can spin up other agents to handle parts of a task. Think of it as delegating — your main agent coordinates, and specialized agents handle the pieces.&lt;/p&gt;
+&lt;p&gt;This is early, but the potential for .NET workflows is obvious. Imagine one agent handling your EF Core migrations while another sets up your integration tests. We&amp;rsquo;re not fully there yet, but the protocol support landing now means tooling will follow fast.&lt;/p&gt;
+&lt;h2 id="terminal-output-auto-included-when-agents-send-input"&gt;Terminal output auto-included when agents send input&lt;/h2&gt;
+&lt;p&gt;Small but meaningful. When an agent sends input to the terminal, the terminal output is now automatically included in the context. Before, the agent had to make an extra turn just to read what happened.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;ve ever watched an agent run &lt;code&gt;dotnet build&lt;/code&gt;, fail, and then take another round-trip just to see the error — that friction is gone. It sees the output immediately and reacts.&lt;/p&gt;
+&lt;h2 id="self-updating-agents-app-on-macos"&gt;Self-updating Agents app on macOS&lt;/h2&gt;
+&lt;p&gt;The standalone Agents app on macOS now self-updates. No more manually downloading new versions. It just stays current.&lt;/p&gt;
+&lt;h2 id="the-smaller-stuff-worth-knowing"&gt;The smaller stuff worth knowing&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;package.json hovers&lt;/strong&gt; now show both the installed version and the latest available. Useful if you manage npm tooling alongside your .NET projects.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Images in JSDoc&lt;/strong&gt; comments render correctly in hovers and completions.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Copilot CLI sessions&lt;/strong&gt; now indicate whether they were created by VS Code or externally — handy when you&amp;rsquo;re jumping between terminals.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Copilot CLI, Claude Code, and Gemini CLI&lt;/strong&gt; are recognized as shell types. The editor knows what you&amp;rsquo;re running.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="the-takeaway"&gt;The takeaway&lt;/h2&gt;
+&lt;p&gt;VS Code 1.117 isn&amp;rsquo;t a flashy feature dump. It&amp;rsquo;s infrastructure. Worktree isolation, persistent permissions, subagent protocols — these are the building blocks for a workflow where agents handle real, parallel tasks without stepping on your code.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re building with .NET and haven&amp;rsquo;t leaned into the agentic workflow yet, honestly, now&amp;rsquo;s the time to start.&lt;/p&gt;</content:encoded></item><item><title>Docker Sandbox Lets Copilot Agents Refactor Your Code Without Risking Your Machine</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/</link><pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/copilot-docker-sandbox-agentic-refactoring/</guid><description>Docker Sandbox gives GitHub Copilot agents a secure microVM to run wild with refactoring — no permission prompts, no risk to your host. Here's why that changes everything for large-scale .NET modernization.</description><content:encoded>&lt;p&gt;If you&amp;rsquo;ve used Copilot&amp;rsquo;s agent mode for anything beyond small edits, you know the pain. Every file write, every terminal command — another permission prompt. Now imagine running that across 50 projects. Not fun.&lt;/p&gt;
+&lt;p&gt;The Azure team just dropped a post about &lt;a href="https://devblogs.microsoft.com/all-things-azure/best-of-both-worlds-for-agentic-refactoring-github-copilot-microvms-via-docker-sandbox/"&gt;Docker Sandbox for GitHub Copilot agents&lt;/a&gt;, and honestly, this is one of the most practical agentic tooling improvements I&amp;rsquo;ve seen. It uses microVMs to give Copilot a fully isolated environment where it can go wild — install packages, run builds, execute tests — without touching your host system.&lt;/p&gt;
+&lt;h2 id="what-docker-sandbox-actually-gives-you"&gt;What Docker Sandbox actually gives you&lt;/h2&gt;
+&lt;p&gt;The core idea is simple: spin up a lightweight microVM with a full Linux environment, sync your workspace into it, and let the Copilot agent operate freely inside. When it&amp;rsquo;s done, changes sync back.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s what makes it more than just &amp;ldquo;run stuff in a container&amp;rdquo;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Bidirectional workspace sync&lt;/strong&gt; that preserves absolute paths. Your project structure looks identical inside the sandbox. No path-related build failures.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Private Docker daemon&lt;/strong&gt; running inside the microVM. The agent can build and run containers without ever mounting your host&amp;rsquo;s Docker socket. That&amp;rsquo;s a big deal for security.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP/HTTPS filtering proxies&lt;/strong&gt; that control what the agent can reach on the network. You decide which registries and endpoints are allowed. Supply chain attacks from a rogue &lt;code&gt;npm install&lt;/code&gt; inside the sandbox? Blocked.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;YOLO mode&lt;/strong&gt; — yes, that&amp;rsquo;s what they call it. The agent runs without permission prompts because it literally cannot damage your host. Every destructive action is contained.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="why-net-developers-should-care"&gt;Why .NET developers should care&lt;/h2&gt;
+&lt;p&gt;Think about the modernization work so many teams are facing right now. You have a .NET Framework solution with 30 projects, and you need to move it to .NET 9. That&amp;rsquo;s hundreds of file changes — project files, namespace updates, API replacements, NuGet migrations.&lt;/p&gt;
+&lt;p&gt;With Docker Sandbox, you can point a Copilot agent at a project, let it refactor freely inside the microVM, run &lt;code&gt;dotnet build&lt;/code&gt; and &lt;code&gt;dotnet test&lt;/code&gt; to validate, and only accept the changes that actually work. No risk of it accidentally nuking your local dev environment while experimenting.&lt;/p&gt;
+&lt;p&gt;The post also describes running a &lt;strong&gt;fleet of parallel agents&lt;/strong&gt; — each in its own sandbox — tackling different projects simultaneously. For large .NET solutions or microservice architectures, that&amp;rsquo;s a massive time saver. One agent per service, all running isolated, all validated independently.&lt;/p&gt;
+&lt;h2 id="the-security-angle-matters"&gt;The security angle matters&lt;/h2&gt;
+&lt;p&gt;Here&amp;rsquo;s the thing most people skip over: when you let an AI agent execute arbitrary commands, you&amp;rsquo;re trusting it with your entire machine. Docker Sandbox flips that model. The agent gets full autonomy inside a throwaway environment. The network proxy ensures it can only pull from approved sources. Your host filesystem, Docker daemon, and credentials stay untouched.&lt;/p&gt;
+&lt;p&gt;For teams with compliance requirements — and that&amp;rsquo;s most enterprise .NET shops — this is the difference between &amp;ldquo;we can&amp;rsquo;t use agentic AI&amp;rdquo; and &amp;ldquo;we can adopt it safely.&amp;rdquo;&lt;/p&gt;
+&lt;h2 id="takeaway"&gt;Takeaway&lt;/h2&gt;
+&lt;p&gt;Docker Sandbox solves the fundamental tension of agentic coding: agents need freedom to be useful, but freedom on your host machine is dangerous. MicroVMs give you both. If you&amp;rsquo;re planning any large-scale .NET refactoring or modernization, this is worth setting up now. The combination of Copilot&amp;rsquo;s code intelligence with a safe execution environment is exactly what production teams have been waiting for.&lt;/p&gt;</content:encoded></item><item><title>Agentic Platform Engineering Is Getting Real — Git-APE Shows How</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/agentic-platform-engineering-git-ape/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/agentic-platform-engineering-git-ape/</guid><description>Microsoft's Git-APE project puts agentic platform engineering into practice — using GitHub Copilot agents and Azure MCP to turn natural-language requests into validated cloud infrastructure.</description><content:encoded>&lt;p&gt;Platform engineering has been one of those terms that sounds great in conference talks but usually means &amp;ldquo;we built an internal portal and a Terraform wrapper.&amp;rdquo; The real promise — self-service infrastructure that&amp;rsquo;s actually safe, governed, and fast — has always been a few steps away.&lt;/p&gt;
+&lt;p&gt;The Azure team just published &lt;a href="https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/"&gt;Part 2 of their agentic platform engineering series&lt;/a&gt;, and this one is all about the hands-on implementation. They call it &lt;strong&gt;Git-APE&lt;/strong&gt; (yes, the acronym is intentional), and it&amp;rsquo;s an open-source project that uses GitHub Copilot agents plus Azure MCP servers to turn natural-language requests into validated, deployed infrastructure.&lt;/p&gt;
+&lt;h2 id="what-git-ape-actually-does"&gt;What Git-APE actually does&lt;/h2&gt;
+&lt;p&gt;The core idea: instead of developers learning Terraform modules, navigating portal UIs, or filing tickets to a platform team, they talk to a Copilot agent. The agent interprets the intent, generates Infrastructure-as-Code, validates it against policies, and deploys — all within VS Code.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s the setup:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/Azure/git-ape
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; git-ape
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Open the workspace in VS Code, and the agent configuration files are auto-discovered by GitHub Copilot. You interact with the agent directly:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;@git-ape deploy a function app with storage in West Europe
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The agent uses Azure MCP Server under the hood to interact with Azure services. The MCP configuration in VS Code settings enables specific capabilities:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;azureMcp.serverMode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;namespace&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;azureMcp.enabledServices&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;deploy&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;bestpractices&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;group&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;subscription&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;functionapp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;storage&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;sql&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;monitor&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;azureMcp.readOnly&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="why-this-matters"&gt;Why this matters&lt;/h2&gt;
+&lt;p&gt;For those of us building on Azure, this shifts the platform engineering conversation from &amp;ldquo;how do we build a portal&amp;rdquo; to &amp;ldquo;how do we describe our guardrails as APIs.&amp;rdquo; When your platform&amp;rsquo;s interface is an AI agent, the quality of your constraints and policies becomes the product.&lt;/p&gt;
+&lt;p&gt;The Part 1 blog laid out the theory: well-described APIs, control schemas, and explicit guardrails make platforms agent-ready. Part 2 proves it works by shipping actual tooling. The agent doesn&amp;rsquo;t just blindly generate resources — it validates against best practices, respects naming conventions, and applies your organization&amp;rsquo;s policies.&lt;/p&gt;
+&lt;p&gt;Clean-up is just as easy:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;@git-ape destroy my-resource-group
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="my-take"&gt;My take&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;ll be honest — this one is more about the pattern than the specific tool. Git-APE itself is a demo/reference architecture. But the underlying idea — agents as the interface to your platform, MCP as the protocol, GitHub Copilot as the host — is where enterprise developer experience is heading.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re a platform team looking at how to make your internal tooling agent-friendly, there&amp;rsquo;s no better starting point. And if you&amp;rsquo;re a .NET developer wondering how this connects to your world: the Azure MCP Server and GitHub Copilot agents work with any Azure workload. Your ASP.NET Core API, your .NET Aspire stack, your containerized microservices — all of it can be the target of an agentic deployment flow.&lt;/p&gt;
+&lt;h2 id="wrapping-up"&gt;Wrapping up&lt;/h2&gt;
+&lt;p&gt;Git-APE is an early but concrete look at agentic platform engineering in practice. Clone the &lt;a href="https://github.com/Azure/git-ape"&gt;repo&lt;/a&gt;, try the demo, and start thinking about how your platform&amp;rsquo;s APIs and policies would need to look for an agent to safely use them.&lt;/p&gt;
+&lt;p&gt;Read the &lt;a href="https://devblogs.microsoft.com/all-things-azure/putting-agentic-platform-engineering-to-the-test/"&gt;full post&lt;/a&gt; for the walkthrough and video demos.&lt;/p&gt;</content:encoded></item><item><title>GitHub Copilot's Modernization Assessment Is the Best Migration Tool You're Not Using Yet</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/dotnet-modernization-assessment-github-copilot/</guid><description>GitHub Copilot's modernization extension doesn't just suggest code changes — it produces a full migration assessment with actionable issues, Azure target comparisons, and a collaborative workflow. Here's why the assessment document is the key to everything.</description><content:encoded>&lt;p&gt;Migrating a legacy .NET Framework app to modern .NET is one of those tasks everyone knows they should do but nobody wants to start. It&amp;rsquo;s never just &amp;ldquo;change the target framework.&amp;rdquo; It&amp;rsquo;s APIs that disappeared, packages that don&amp;rsquo;t exist anymore, hosting models that work completely differently, and a million small decisions about what to containerize, what to rewrite, and what to leave alone.&lt;/p&gt;
+&lt;p&gt;Jeffrey Fritz just published a &lt;a href="https://devblogs.microsoft.com/dotnet/your-migrations-source-of-truth-the-modernization-assessment/"&gt;deep dive into GitHub Copilot&amp;rsquo;s modernization assessment&lt;/a&gt;, and honestly? This is the best migration tooling I&amp;rsquo;ve seen for .NET. Not because of the code generation — that&amp;rsquo;s table stakes now. Because of the assessment document it produces.&lt;/p&gt;
+&lt;h2 id="its-not-just-a-code-suggestion-engine"&gt;It&amp;rsquo;s not just a code suggestion engine&lt;/h2&gt;
+&lt;p&gt;The VS Code extension follows an &lt;strong&gt;Assess → Plan → Execute&lt;/strong&gt; model. The assessment phase analyzes your entire codebase and produces a structured document that captures everything: what needs to change, what Azure resources to provision, what deployment model to use. Everything downstream — infrastructure-as-code, containerization, deployment manifests — flows from what the assessment finds.&lt;/p&gt;
+&lt;p&gt;The assessment is stored under &lt;code&gt;.github/modernize/assessment/&lt;/code&gt; in your project. Each run produces an independent report, so you build up a history and can track how your migration posture evolves as you fix issues.&lt;/p&gt;
+&lt;h2 id="two-ways-to-start"&gt;Two ways to start&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Recommended Assessment&lt;/strong&gt; — the fast path. Pick from curated domains (Java/.NET Upgrade, Cloud Readiness, Security) and get meaningful results without touching configuration. Great for a first look at where your app stands.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Custom Assessment&lt;/strong&gt; — the targeted path. Configure exactly what to analyze: target compute (App Service, AKS, Container Apps), target OS, containerization analysis. Pick multiple Azure targets to compare migration approaches side-by-side.&lt;/p&gt;
+&lt;p&gt;That comparison view is genuinely useful. An app with 3 mandatory issues for App Service might have 7 for AKS. Seeing both helps drive the hosting decision before you commit to a migration path.&lt;/p&gt;
+&lt;h2 id="the-issue-breakdown-is-actionable"&gt;The issue breakdown is actionable&lt;/h2&gt;
+&lt;p&gt;Each issue comes with a criticality level:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Mandatory&lt;/strong&gt; — must fix or migration fails&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Potential&lt;/strong&gt; — might impact migration, needs human judgment&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Optional&lt;/strong&gt; — recommended improvements, won&amp;rsquo;t block migration&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And each issue links to affected files and line numbers, provides a detailed description of what&amp;rsquo;s wrong and why it matters for your target platform, gives concrete remediation steps (not just &amp;ldquo;fix this&amp;rdquo;), and includes links to official documentation.&lt;/p&gt;
+&lt;p&gt;You can hand individual issues to developers and they have everything they need to act. That&amp;rsquo;s the difference between a tool that tells you &amp;ldquo;there&amp;rsquo;s a problem&amp;rdquo; and one that tells you how to solve it.&lt;/p&gt;
+&lt;h2 id="the-upgrade-paths-covered"&gt;The upgrade paths covered&lt;/h2&gt;
+&lt;p&gt;For .NET specifically:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.NET Framework → .NET 10&lt;/li&gt;
+&lt;li&gt;ASP.NET → ASP.NET Core&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Each upgrade path has detection rules that know which APIs were removed, which patterns have no direct equivalent, and what security issues need attention.&lt;/p&gt;
+&lt;p&gt;For teams managing multiple apps, there&amp;rsquo;s also a CLI that supports multi-repo batch assessments — clone all repos, assess them all, get per-app reports plus an aggregated portfolio view.&lt;/p&gt;
+&lt;h2 id="my-take"&gt;My take&lt;/h2&gt;
+&lt;p&gt;If you&amp;rsquo;re sitting on legacy .NET Framework apps (and let&amp;rsquo;s be real, most enterprise teams are), this is &lt;em&gt;the&lt;/em&gt; tool to start with. The assessment document alone is worth the time — it turns a vague &amp;ldquo;we should modernize&amp;rdquo; into a concrete, prioritized list of work items with clear paths forward.&lt;/p&gt;
+&lt;p&gt;The collaborative workflow is smart too: export assessments, share with your team, import them without re-running. Architecture reviews where the decision-makers aren&amp;rsquo;t the ones running the tools? Covered.&lt;/p&gt;
+&lt;h2 id="wrapping-up"&gt;Wrapping up&lt;/h2&gt;
+&lt;p&gt;GitHub Copilot&amp;rsquo;s modernization assessment transforms .NET migration from a scary, undefined project into a structured, trackable process. Start with a recommended assessment to see where you stand, then use custom assessments to compare Azure targets and build your migration plan.&lt;/p&gt;
+&lt;p&gt;Read the &lt;a href="https://devblogs.microsoft.com/dotnet/your-migrations-source-of-truth-the-modernization-assessment/"&gt;full walkthrough&lt;/a&gt; and grab the &lt;a href="https://aka.ms/ghcp-appmod/vscode-ext"&gt;VS Code extension&lt;/a&gt; to try it on your own codebase.&lt;/p&gt;</content:encoded></item><item><title>Visual Studio's March Update Lets You Build Custom Copilot Agents — and the find_symbol Tool Is a Big Deal</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/</link><pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/visual-studio-march-2026-custom-copilot-agents/</guid><description>Visual Studio's March 2026 update ships custom Copilot agents, reusable agent skills, a language-aware find_symbol tool, and Copilot-powered profiling from Test Explorer. Here's what matters.</description><content:encoded>&lt;p&gt;Visual Studio just got its most significant Copilot update yet. Mark Downie &lt;a href="https://devblogs.microsoft.com/visualstudio/visual-studio-march-update-build-your-own-custom-agents/"&gt;announced the March release&lt;/a&gt;, and the headline is custom agents — but honestly, the &lt;code&gt;find_symbol&lt;/code&gt; tool buried further down might be the feature that changes your workflow the most.&lt;/p&gt;
+&lt;p&gt;Let me break down what&amp;rsquo;s actually here.&lt;/p&gt;
+&lt;h2 id="custom-copilot-agents-in-your-repo"&gt;Custom Copilot agents in your repo&lt;/h2&gt;
+&lt;p&gt;Want Copilot to follow your team&amp;rsquo;s coding standards, run your build pipeline, or query your internal docs? Now you can build exactly that.&lt;/p&gt;
+&lt;p&gt;Custom agents are defined as &lt;code&gt;.agent.md&lt;/code&gt; files that you drop into &lt;code&gt;.github/agents/&lt;/code&gt; in your repository. Each agent gets full access to workspace awareness, code understanding, tools, your preferred model, and MCP connections to external services. They show up in the agent picker alongside the built-in agents.&lt;/p&gt;
+&lt;p&gt;This is the same pattern VS Code has been supporting — and it&amp;rsquo;s great to see Visual Studio catch up. For teams that have already built agents for VS Code, your &lt;code&gt;.agent.md&lt;/code&gt; files should work across both IDEs (though tool names can vary, so test them).&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://github.com/github/awesome-copilot"&gt;awesome-copilot&lt;/a&gt; repo has community-contributed agent configurations you can use as starting points.&lt;/p&gt;
+&lt;h2 id="agent-skills-reusable-instruction-packs"&gt;Agent skills: reusable instruction packs&lt;/h2&gt;
+&lt;p&gt;Skills are automatically picked up from &lt;code&gt;.github/skills/&lt;/code&gt; in your repo or &lt;code&gt;~/.copilot/skills/&lt;/code&gt; in your profile. Each skill is a &lt;code&gt;SKILL.md&lt;/code&gt; file following the &lt;a href="https://agentskills.io/specification"&gt;Agent Skills specification&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Think of skills as modular expertise you can mix and match. You might have a skill for your API conventions, another for your testing patterns, and another for your deployment workflow. When a skill activates, it shows up in the chat so you know it&amp;rsquo;s being applied.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;ve been using skills in VS Code, they work the same way in Visual Studio now.&lt;/p&gt;
+&lt;h2 id="find_symbol-language-aware-navigation-for-agents"&gt;find_symbol: language-aware navigation for agents&lt;/h2&gt;
+&lt;p&gt;This is where things get really interesting. The new &lt;code&gt;find_symbol&lt;/code&gt; tool gives Copilot&amp;rsquo;s agent mode actual language-service-powered symbol navigation. Instead of searching your code as text, the agent can:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Find all references to a symbol across your project&lt;/li&gt;
+&lt;li&gt;Access type information, declarations, and scope metadata&lt;/li&gt;
+&lt;li&gt;Navigate call sites with full language awareness&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;What this means in practice: when you ask Copilot to refactor a method or update a parameter signature across call sites, it can actually see your code&amp;rsquo;s structure. No more &amp;ldquo;the agent changed the method but missed three call sites&amp;rdquo; situations.&lt;/p&gt;
+&lt;p&gt;Supported languages include C#, C++, Razor, TypeScript, and anything with a supported LSP extension. For .NET developers, this is a massive improvement — C# codebases with deep type hierarchies and interfaces benefit enormously from symbol-aware navigation.&lt;/p&gt;
+&lt;h2 id="profile-tests-with-copilot"&gt;Profile tests with Copilot&lt;/h2&gt;
+&lt;p&gt;There&amp;rsquo;s now a &lt;strong&gt;Profile with Copilot&lt;/strong&gt; command in the Test Explorer context menu. Select a test, click profile, and the Profiling Agent automatically runs it and analyzes performance — combining CPU usage and instrumentation data to deliver actionable insights.&lt;/p&gt;
+&lt;p&gt;No more manually configuring profiler sessions, running the test, exporting results, and trying to read a flame graph. The agent does the analysis and tells you what&amp;rsquo;s slow and why. Currently .NET only, which makes sense given Visual Studio&amp;rsquo;s deep .NET diagnostics integration.&lt;/p&gt;
+&lt;h2 id="perf-tips-during-live-debugging"&gt;Perf tips during live debugging&lt;/h2&gt;
+&lt;p&gt;Performance optimization now happens while you debug, not after. As you step through code, Visual Studio shows execution time and performance signals inline. See a slow line? Click the Perf Tip and ask Copilot for optimization suggestions right there.&lt;/p&gt;
+&lt;p&gt;The Profiling Agent captures runtime data automatically — elapsed time, CPU usage, memory behavior — and Copilot uses it to pinpoint hot spots. This keeps performance work as part of your debugging flow instead of a separate task you keep postponing.&lt;/p&gt;
+&lt;h2 id="fix-nuget-vulnerabilities-from-solution-explorer"&gt;Fix NuGet vulnerabilities from Solution Explorer&lt;/h2&gt;
+&lt;p&gt;When a vulnerability is detected in a NuGet package, you now see a notification with a &lt;strong&gt;Fix with GitHub Copilot&lt;/strong&gt; link directly in Solution Explorer. Click through and Copilot analyzes the vulnerability, recommends the right package updates, and implements them.&lt;/p&gt;
+&lt;p&gt;For teams that struggle to keep dependencies up to date (which is basically everyone), this removes the friction of &amp;ldquo;I know there&amp;rsquo;s a vulnerability but figuring out the right update path is a project in itself.&amp;rdquo;&lt;/p&gt;
+&lt;h2 id="wrapping-up"&gt;Wrapping up&lt;/h2&gt;
+&lt;p&gt;Custom agents and skills are the headline, but &lt;code&gt;find_symbol&lt;/code&gt; is the sleeper hit — it fundamentally changes how accurate Copilot can be when refactoring .NET code. Combined with live profiling integration and vulnerability fixes, this update makes Visual Studio&amp;rsquo;s AI features feel genuinely practical rather than demo-ready.&lt;/p&gt;
+&lt;p&gt;Download &lt;a href="https://visualstudio.microsoft.com/downloads/"&gt;Visual Studio 2026 Insiders&lt;/a&gt; to try it all out.&lt;/p&gt;</content:encoded></item></channel></rss>

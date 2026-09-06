@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Automation | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/automation/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/automation/index.xml" rel="self" type="application/rss+xml"/><item><title>Missiecontrole voor coderingagenten: een geïntegreerde ervaring in VS Code</title><link>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/unified-agent-experience-mission-control/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/unified-agent-experience-mission-control/</guid><description>VS Code brengt lokale, cloud-, CLI- en externe coderingagenten samen in Agent Sessions zodat ontwikkelaars autonoom werk kunnen volgen, onderbreken en coördineren.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Automatische vertaling&lt;/strong&gt;: Dit is een geautomatiseerde Nederlandse vertaling van &lt;a href="https://thedotnetblog.com/nl/news/emiliano-montesdeoca/unified-agent-experience-mission-control/"&gt;de Engelse versie&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id="missiecontrole-voor-coderingagenten-een-geïntegreerde-ervaring-in-vs-code"&gt;Missiecontrole voor coderingagenten: een geïntegreerde ervaring in VS Code&lt;/h1&gt;
+&lt;p&gt;Een enkele coderingassistent is gemakkelijk te begrijpen. Meerdere agenten die op verschillende plaatsen werken niet.&lt;/p&gt;
+&lt;p&gt;Één agent draait lokaal in VS Code. Een ander werkt aan een GitHub-issue in de cloud. Een CLI-agent leeft in de terminal. Een externe coderingagent kan een ander sessiemodel en andere limieten hebben. Zonder een gedeeld overzicht besteden ontwikkelaars meer tijd aan het volgen van werk dan aan het superviseren ervan.&lt;/p&gt;
+&lt;p&gt;De geïntegreerde agentenervaring van VS Code pakt dit coördinatieprobleem aan met Agent Sessions: één plek om agenten te starten, hun status te zien, hun gesprekken te openen en in te grijpen wanneer het plan verandert.&lt;/p&gt;
+&lt;p&gt;Dit gaat minder om een ander agent toevoegen en meer om meerdere agenten beheersbaar te maken.&lt;/p&gt;
+&lt;h2 id="één-weergave-voor-verschillende-soorten-werk"&gt;Één weergave voor verschillende soorten werk&lt;/h2&gt;
+&lt;p&gt;Het bronartikel beschrijft vier verschillende deelnemers: lokale GitHub Copilot, Copilot Coding Agent in de cloud, GitHub Copilot CLI en OpenAI Codex voor in aanmerking komende Copilot-abonnees.&lt;/p&gt;
+&lt;p&gt;Ze hebben verschillende sterke punten:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Een lokale agent kan de huidige werkruimte inspecteren en snelle wijzigingen aanbrengen.&lt;/li&gt;
+&lt;li&gt;Een cloud-coderingagent kan asynchroon aan een issue werken en een pull request openen.&lt;/li&gt;
+&lt;li&gt;Een CLI-agent past in terminal-zware workflows en operationele opdrachten.&lt;/li&gt;
+&lt;li&gt;Een ander platform kan een ander model of redeneerstijl bieden.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Agent Sessions geeft die taken een gezamenlijk thuis. U kunt zien wat er draait, wat het doet en waar u het gesprek kunt voortzetten.&lt;/p&gt;
+&lt;p&gt;Die zichtbaarheid is belangrijk omdat autonoom werk coördinatie niet verwijdert. Het maakt coördinatie een eerste-klassige engineeringtaak.&lt;/p&gt;
+&lt;h2 id="onderbrekingen-zijn-onderdeel-van-de-workflow"&gt;Onderbrekingen zijn onderdeel van de workflow&lt;/h2&gt;
+&lt;p&gt;De bron maakt een eenvoudige waarneming: &amp;ldquo;Het is gebruikelijk om een prompt te sturen en je te realiseren dat je iets belangrijks bent vergeten.&amp;rdquo; Eerder was de keuze vaak wachten of annuleren. Met chat-editors kunt u een actieve sessie openen en informatie toevoegen terwijl de agent werkt.&lt;/p&gt;
+&lt;p&gt;Dit is meer van echte samenwerking. Vereisten veranderen. Een test onthult een aanname. Een reviewer merkt op dat een API achterwaarts compatibel moet blijven. De bruikbare agent is niet degene die nooit correctie nodig heeft; het is degene die correctie kan opnemen zonder de hele taak kwijt te raken.&lt;/p&gt;
+&lt;p&gt;Voor .NET-werk kan een onderbreking zo eenvoudig zijn als:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Keep the existing public route unchanged. Add the new behavior behind the application service,
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;use the existing ProblemDetails convention, and add a test for the old response shape.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;De instructie is kort omdat de repository al de grotere context bevat. De sessie is de plek om de richting aan te passen, niet om het hele systeem opnieuw uit te leggen.&lt;/p&gt;
+&lt;h2 id="aangepaste-agenten-veranderen-teamgewoonten-in-rollen"&gt;Aangepaste agenten veranderen teamgewoonten in rollen&lt;/h2&gt;
+&lt;p&gt;VS Code introduceert ook gespecialiseerde agenten zoals Plan. In plaats van onmiddellijk te implementeren, stelt een planningsagent vragen over bereik, componenten, bibliotheken en beperkingen voordat een implementatiespecificatie wordt opgesteld.&lt;/p&gt;
+&lt;p&gt;Dit patroon is bruikbaar buiten een ingebouwde agent. Een team kan gerichte rollen definiëren:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Onderzoek&lt;/strong&gt; verzamelt bewijzen en schrijft een kort besluitkaart.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Review&lt;/strong&gt; controleert een wijziging tegen repository-conventies.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Testen&lt;/strong&gt; identificeert gemiste gevallen en stelt een testplan voor.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Architectuur&lt;/strong&gt; vergelijkt opties zonder bestanden te wijzigen.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Een kleine aangepaste agentdefinitie kan er als volgt uitzien:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;agent&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;plan&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;description&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;Refines vague requests into clear implementation specs&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;prompt&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="sd"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Ask about scope, constraints, existing patterns, and edge cases.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Produce a concise specification before any implementation begins.&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Het nuttige onderdeel is niet de YAML. Het is de expliciete scheiding van verantwoordelijkheden. Een planningsagent mag niet stilletjes productiegoed bewerken. Een review-agent mag niet het ontwerp herschrijven dat het zou moeten evalueren.&lt;/p&gt;
+&lt;h2 id="subagenten-verminderen-contextbotsingen"&gt;Subagenten verminderen contextbotsingen&lt;/h2&gt;
+&lt;p&gt;Lange conversaties verzamelen onrelated context. Subagenten bieden een geïsoleerde werkruimte voor een begrensd onderzoekstaak, dan geven ze het resultaat terug aan de hoofdsessie.&lt;/p&gt;
+&lt;p&gt;Dit is een goed geschikt voor vragen als:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Analyze the API project and recommend an authentication strategy.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Return trade-offs and a decision record. Do not edit files.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;De hoofdagent blijft gericht op implementatie terwijl de onderzoeksagent een enger vraag aanpakt. Hetzelfde principe is van toepassing op teams: duidelijke delegatie levert betere resultaten op dan het starten van verschillende agenten met overlappende autoriteit.&lt;/p&gt;
+&lt;h2 id="de-voorbehoud-meer-agenten-betekenen-meer-coördinatie"&gt;De voorbehoud: meer agenten betekenen meer coördinatie&lt;/h2&gt;
+&lt;p&gt;Agent Sessions kan activiteit tonen, maar het kan geen conflicterende eigendom oplossen. Twee agenten die hetzelfde gebied bewerken, kunnen nog steeds een merge-probleem creëren. Een cloudagent en een lokale agent kunnen incompatibele aannames doen. Een aangepaste agent kan een aanbeveling produceren die een ander agent negeert.&lt;/p&gt;
+&lt;p&gt;Stel grenzen in:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Één agent is eigenaar van implementatie voor een gegeven tak.&lt;/li&gt;
+&lt;li&gt;Onderzoeksagenten retourneren artefacten, niet ontraced bewerkingen.&lt;/li&gt;
+&lt;li&gt;Pull requests blijven de review-grens.&lt;/li&gt;
+&lt;li&gt;Agentennamen en prompts stellen vast wat zij mogen veranderen.&lt;/li&gt;
+&lt;li&gt;Sessieuitvoer wordt behouden wanneer deze een belangrijk besluit verklaart.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="mijn-inzicht"&gt;Mijn inzicht&lt;/h2&gt;
+&lt;p&gt;De multi-agent toekomst is geen wachtrij van chatvensters. Het is een klein team met rollen, handoffs en verantwoording.&lt;/p&gt;
+&lt;p&gt;Agent Sessions is waardevol omdat het erkent dat deze realiteit. Het geeft ontwikkelaars een bedieningspaneel voor werk dat al in de editor, terminal en cloud plaatsvindt. De volgende productiviteitswinst zal minder voortkomen uit het hebben van meer agenten en meer uit het leesbaar maken van hun grenzen.&lt;/p&gt;
+&lt;p&gt;Voor een .NET-team zou ik beginnen met één planningsagent en één implementatieagent. Gebruik de planningsuitvoer als de issue- of pull request-specificatie en laat de implementatieagent binnen die grens werken. Meet herwerkingen voordat u meer rollen toevoegt.&lt;/p&gt;
+&lt;p&gt;De beste missiecontrole is nog steeds degene die eigendom duidelijk maakt.&lt;/p&gt;</content:encoded></item><item><title>De Agent Confidence Index zou moeten veranderen wat je hierna automatiseert</title><link>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/agent-confidence-index-automation-boundaries/</link><pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/agent-confidence-index-automation-boundaries/</guid><description>De data laat zien dat teams agents het meest vertrouwen voor repetitief technisch werk, niet voor risicovolle beoordelingsmomenten.</description><content:encoded>&lt;p&gt;Oorspronkelijke bron: &lt;a href="https://www.microsoft.com/en-us/microsoft-cloud/blog/2026/06/29/the-2026-agent-confidence-index-where-300-builders-see-real-momentum/"&gt;The 2026 Agent Confidence Index: Where 300 builders see real momentum&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Dit rapport is waardevol omdat het vage optimisme vervangt door vertrouwenssignalen op workloadniveau. De boodschap is duidelijk: teams vertrouwen agents het meest wanneer werk voorspelbaar, repetitief en omkeerbaar is.&lt;/p&gt;
+&lt;p&gt;Precies daar zouden leiders als eerste moeten investeren.&lt;/p&gt;
+&lt;p&gt;Geautomatiseerde rapportgeneratie, boilerplate-codesteigers, operationele monitoring en het samenstellen van release notes zijn niet glamoureus, maar het zijn ideale delegatie-oppervlakken. Ze brengen veel cognitieve wrijving met zich mee en relatief weinig nadeel wanneer ze worden begrensd met reviewloops.&lt;/p&gt;
+&lt;p&gt;Wat net zo opvalt, is waar het vertrouwen lager blijft: taken met zware systemische koppeling en een onomkeerbare inslagradius. Service mesh-afstemming, schemamigratiestrategie en diepgaande geheugendiagnostiek vragen nog steeds om ervaren menselijk toezicht. Het rapport suggereert daar geen verlamming, maar wel grensbewuste samenwerking.&lt;/p&gt;
+&lt;p&gt;Mijn eigenzinnige opvatting is dat de meeste organisaties dit nog steeds achterstevoren benaderen. Ze vragen: kunnen agents al complex werk aan? De betere vraag is: welke onderdelen van ons huidige werk zouden mensen nu meteen handmatig moeten stoppen te doen?&lt;/p&gt;
+&lt;p&gt;Een praktisch adoptiepatroon voor softwareteams:&lt;/p&gt;
+&lt;p&gt;Automatiseer direct taken met hoog volume en laag risico.&lt;/p&gt;
+&lt;p&gt;Voorzie elk geautomatiseerd pad van kwaliteitssignalen en rollback-hooks.&lt;/p&gt;
+&lt;p&gt;Behoud expliciete menselijke goedkeuring voor risicovolle beslissingen totdat je evaluatiedata het tegendeel bewijst.&lt;/p&gt;
+&lt;p&gt;De nadruk van het rapport op human-in-the-loop als topprioriteit is niet conservatief. Het is volwassen. Teams die verantwoord opschalen, behandelen toezicht als architectuur, niet als ceremonie. Ze bouwen guardrails, voeren levenscyclusevaluaties uit en controleren op drift.&lt;/p&gt;
+&lt;p&gt;Er is ook een carrière-implicatie die aandacht verdient. Naarmate agents repetitie overnemen, verschuift engineeringwaarde verder naar systeembeoordeling: het kiezen van grenzen, het definiëren van evaluatiecriteria en het ontwerpen van veerkrachtige workflows. Senior engineers die dergelijke systemen kunnen vormgeven, krijgen buitenproportionele invloed. Junior engineers die vroeg leren om agentoutput te superviseren en valideren, ontwikkelen zich sneller dan zij die alleen syntax uit hun hoofd leren.&lt;/p&gt;
+&lt;p&gt;Voor .NET-teams is dit het moment om een automatiseringsportfoliokaart te maken: classificeer interne workflows op omkeerbaarheid, bedrijfsimpact en observeerbaarheid. Automatiseer vervolgens in die volgorde. Laat nieuwigheid niet de prioriteit bepalen.&lt;/p&gt;
+&lt;p&gt;Het bredere verhaal in deze index is hoopvol maar veeleisend. De productiviteitswinst van agents is reëel, maar voltrekt zich niet vanzelf. Organisaties die uniforme context, governance en gedisciplineerde evaluatie combineren, zullen voorop lopen. Organisaties die deze fundamenten overslaan, zullen ruis produceren op grote schaal.&lt;/p&gt;
+&lt;p&gt;Vertrouwen wordt taak voor taak verdiend. Dat is geen beperking. Het is een routekaart.&lt;/p&gt;</content:encoded></item></channel></rss>

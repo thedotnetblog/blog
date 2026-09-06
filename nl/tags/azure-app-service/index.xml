@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure App Service | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/azure-app-service/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 05 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/azure-app-service/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL MCP Server op Azure App Service — Geen containers vereist</title><link>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</link><pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</guid><description>SQL MCP Server kan nu draaien op Azure App Service zonder Docker of Kubernetes. Wat dit betekent voor .NET-ontwikkelaars die AI-agents bouwen die communiceren met SQL-databases.</description><content:encoded>&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor de originele versie, &lt;a href="https://thedotnetblog.com/nl/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Eerlijk gezegd: elke keer dat ik &amp;ldquo;vereist een container&amp;rdquo; in een tutorial zie, ontsnapt er iets van een zucht. Containers zijn geweldig — totdat je team geen containerstrategie heeft, en een functie die simpel leek plotseling vastloopt op onverwachte orchestratiecomplexiteit die niemand had gepland.&lt;/p&gt;
+&lt;p&gt;Daarom trok dit mijn aandacht. SQL MCP Server kan nu draaien op Azure App Service — geen Docker, geen Kubernetes, alleen hetzelfde Data API Builder (DAB)-configuratiebestand dat je SQL-database blootstelt via MCP, REST en GraphQL.&lt;/p&gt;
+&lt;h2 id="wat-is-sql-mcp-server"&gt;Wat is SQL MCP Server?&lt;/h2&gt;
+&lt;p&gt;Een snelle introductie als je er nog niet bekend mee bent. SQL MCP Server zit tussen je AI-agent en SQL-database in. In plaats van de agent directe toegang tot de database te geven (een slecht idee), stelt het je tabellen en views bloot als een abstractielaag — entiteiten met gedefinieerde rechten.&lt;/p&gt;
+&lt;p&gt;Gebouwd op &lt;a href="https://learn.microsoft.com/nl-nl/azure/data-api-builder/"&gt;Data API Builder&lt;/a&gt;, wat betekent dat één configuratiebestand MCP &lt;em&gt;en&lt;/em&gt; REST &lt;em&gt;en&lt;/em&gt; GraphQL tegelijkertijd beheert. Je agent praat met het MCP-eindpunt. Je traditionele applicatie praat met REST of GraphQL. Dezelfde configuratie, dezelfde runtime, verschillende oppervlakken.&lt;/p&gt;
+&lt;p&gt;Dit is genuinelijk nuttig — je hoeft niet twee afzonderlijke API-lagen te onderhouden.&lt;/p&gt;
+&lt;h2 id="het-containerprobleem-en-de-oplossing"&gt;Het containerprobleem (en de oplossing)&lt;/h2&gt;
+&lt;p&gt;Het originele deploymentmodel van SQL MCP Server gebruikte containers. Dat werkt goed in veel teams — maar niet in allemaal. Veel .NET-teams standaardiseren op Azure App Service of VM&amp;rsquo;s. Een containerruntime vereisen alleen om een SQL-eindpunt bloot te stellen, voegt wrijving toe waar niemand om vroeg.&lt;/p&gt;
+&lt;p&gt;De nieuwe walkthrough laat zien hoe je de container volledig kunt overslaan. Alles werkt via een &lt;code&gt;dab start&lt;/code&gt;-commando, gehost op App Service als een standaard .NET 8-webproces.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Installeer Data API Builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet tool install microsoft.dataapibuilder --prerelease -g
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Initialiseer de configuratie&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --host-mode Development --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;SQL_CONNECTION_STRING&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Voeg een entiteit toe&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add products --source dbo.products --permissions &lt;span class="s2"&gt;&amp;#34;authenticated:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Configureer de App Service-authenticatieprovider&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab configure --runtime.host.authentication.provider AppService
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Start de server&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Op dit punt heb je MCP op &lt;code&gt;/mcp&lt;/code&gt;, REST en GraphQL vanuit hetzelfde proces — en niets dat in een container draait.&lt;/p&gt;
+&lt;h2 id="authenticatie-zonder-gedeelde-api-sleutels"&gt;Authenticatie zonder gedeelde API-sleutels&lt;/h2&gt;
+&lt;p&gt;Dit is het deel dat ik het meest waardeer. Bij deployment naar App Service configureer je Microsoft Entra ID als authenticatieprovider. Geen gedeelde secrets in configuratiebestanden, geen API-sleutels om te roteren.&lt;/p&gt;
+&lt;p&gt;De verbindingsreeks blijft in App Service-omgevingsvariabelen (niet in &lt;code&gt;dab-config.json&lt;/code&gt;), en het MCP-eindpunt is beveiligd door platformauthenticatie. Als je Azure-workloads al zijn afgestemd op Entra ID, past dit er natuurlijk in.&lt;/p&gt;
+&lt;p&gt;Voor lokale ontwikkeling schakel je over naar de &lt;code&gt;Simulator&lt;/code&gt;-modus en STDIO-transport. Schakel terug naar de &lt;code&gt;AppService&lt;/code&gt;-modus voor deployment. Schoon en expliciet.&lt;/p&gt;
+&lt;h2 id="deployment-naar-app-service"&gt;Deployment naar App Service&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az appservice plan create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --sku B1 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --is-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --plan &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --runtime &lt;span class="s2"&gt;&amp;#34;DOTNETCORE:8.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp config &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --startup-file &lt;span class="s2"&gt;&amp;#34;dab start&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Deploy vervolgens je DAB-project met de codedeploymentmethode die je team al gebruikt. Het cruciale detail: dit is een &lt;strong&gt;code&lt;/strong&gt;-deployment, geen containerdeployment.&lt;/p&gt;
+&lt;h2 id="waarom-dit-belangrijk-is-voor-net-ontwikkelaars"&gt;Waarom dit belangrijk is voor .NET-ontwikkelaars&lt;/h2&gt;
+&lt;p&gt;Als je AI-agents bouwt in .NET, zal je agent vroeg of laat moeten communiceren met een database. SQL MCP Server geeft je een gestructureerde manier om dit te doen — zonder ruwe verbindingsreeksen bloot te stellen.&lt;/p&gt;
+&lt;p&gt;Bekijk de volledige walkthrough in de &lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-app-service/"&gt;originele blogpost&lt;/a&gt; en het &lt;a href="https://github.com/Azure-Samples/SQL-MCP-NoContainer"&gt;GitHub-voorbeeldrepository&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="conclusie"&gt;Conclusie&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server op App Service is een pragmatische keuze voor .NET-teams die hun agents gestructureerde SQL-datatoegang willen geven zonder een containerstrategie. Probeer het — je agents zullen het schone API-oppervlak waarderen.&lt;/p&gt;</content:encoded></item></channel></rss>

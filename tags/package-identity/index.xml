@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Package-Identity | The .NET Blog</title><link>https://thedotnetblog.com/tags/package-identity/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>en</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 25 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tags/package-identity/index.xml" rel="self" type="application/rss+xml"/><item><title>WinApp CLI Finally Makes Package Identity Practical for .NET Teams</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/winapp-cli-package-identity-for-dotnet/</link><pubDate>Sat, 25 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/winapp-cli-package-identity-for-dotnet/</guid><description>Package identity used to be setup pain; WinApp CLI turns it into a repeatable workflow for running and shipping apps.</description><content:encoded>&lt;p&gt;Original source: &lt;a href="https://devblogs.microsoft.com/dotnet/packaging-dotnet-apps-winapp/"&gt;Packaging and Package Identity for .NET apps with WinApp CLI on Windows&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For years, package identity has been one of those quietly painful gaps in .NET desktop development. You could build an app quickly, but the moment you needed notifications, background tasks, file handlers, or newer Windows capabilities, you fell into manifest and signing complexity.&lt;/p&gt;
+&lt;p&gt;WinApp CLI changes that equation in a practical way.&lt;/p&gt;
+&lt;p&gt;The biggest win is workflow integration. If init prepares project prerequisites and dotnet run can execute with identity through project-level configuration, teams can validate Windows-specific features during normal development instead of late-release packaging drills.&lt;/p&gt;
+&lt;p&gt;That shift is more important than it sounds. Late identity integration creates &lt;strong&gt;hidden risk&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;APIs work in isolated tests but fail in realistic app startup paths.&lt;/li&gt;
+&lt;li&gt;Packaging defects surface after feature work is done.&lt;/li&gt;
+&lt;li&gt;Release confidence depends on scarce specialists.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;By front-loading identity support, WinApp CLI makes these issues visible where they are cheapest to fix.&lt;/p&gt;
+&lt;p&gt;I also like the explicit support for argument passing, execution alias behavior, and no-launch debugging scenarios. Those details are what separate toy tooling from production-friendly tooling. Engineering teams need control, not just defaults.&lt;/p&gt;
+&lt;p&gt;On packaging, the combination of pack plus cert generation and install is exactly the right direction for teams that need repeatable local validation before distribution. It lowers the barrier to disciplined signing workflows without pretending trust and certificate management are optional.&lt;/p&gt;
+&lt;p&gt;My strong opinion: &lt;strong&gt;if your .NET app targets modern Windows experiences, package identity should be treated as a first-week concern, not a release-week concern&lt;/strong&gt;. WinApp CLI now gives you enough ergonomics to make that standard.&lt;/p&gt;
+&lt;p&gt;The VS Code extension story is equally relevant. Not every team wants to live in terminal scripts all day, and integrated F5 debug plus command-palette operations reduce onboarding friction for mixed-experience teams. This is especially helpful in organizations transitioning from legacy desktop tooling patterns.&lt;/p&gt;
+&lt;h3 id="practical-adoption-plan"&gt;Practical adoption plan&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Run &lt;code&gt;winapp init&lt;/code&gt;&lt;/strong&gt; on one representative app and validate identity-gated features immediately.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Add MSIX packaging to CI&lt;/strong&gt; for release candidates, even if distribution happens later.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;For console apps&lt;/strong&gt;, standardize execution alias setup early to avoid debugging confusion.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;If you maintain multiple desktop stacks&lt;/strong&gt;, use WinApp as the shared identity and packaging baseline.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="the-bottom-line"&gt;The bottom line&lt;/h2&gt;
+&lt;p&gt;WinApp CLI does not just add commands. It &lt;strong&gt;removes excuses&lt;/strong&gt;. Package identity is no longer an advanced niche for .NET desktop teams. It is becoming table stakes, and now it is finally approachable.&lt;/p&gt;</content:encoded></item></channel></rss>

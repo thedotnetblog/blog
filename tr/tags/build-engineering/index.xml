@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Build-Engineering | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/build-engineering/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/build-engineering/index.xml" rel="self" type="application/rss+xml"/><item><title>CI'da MCP Derleme Tanılaması, Kendini Hızlıca amorti Eden İlk AI İş Akışı</title><link>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/mcp-binlog-ci-build-diagnostics/</link><pubDate>Sat, 18 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/mcp-binlog-ci-build-diagnostics/</guid><description>Binlog MCP analizi doğrudan pull request iş akışlarında çalıştığında, ekipler başarısızlık triyaj süresini azaltır ve geliştiricileri daha hızlı engellerden kurtarır.</description><content:encoded>&lt;p&gt;Orijinal kaynak: &lt;a href="https://devblogs.microsoft.com/dotnet/mcp-build-diagnostics-workflows/"&gt;MCP Beyond the Chat Window: Build Diagnostics in CI&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Bu, şimdiye kadarki en güçlü pratik MCP hikayelerinden biridir çünkü sohbet demo dünyasını terk edip pipeline gerçekliğine girer.&lt;/p&gt;
+&lt;p&gt;Gösterilen model etkileyicidir: başarısız PR derlemesi, MCP aracılığıyla binlog&amp;rsquo;a karşı ajan analizini tetikler, ardından iş akışı eyleme dönüştürülebilir kök neden bağlamını pull request&amp;rsquo;e geri gönderir. Geliştirici zamanının bugün genellikle boşa harcandığı yer tam olarak burasıdır.&lt;/p&gt;
+&lt;p&gt;Çoğu ekip hala kırmızı derlemeleri pahalı manuel döngülerle ele alır:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Binlog&amp;rsquo;u indir.&lt;/li&gt;
+&lt;li&gt;Görüntüleyiciyi aç.&lt;/li&gt;
+&lt;li&gt;Başarısız hedef ve görevi izle.&lt;/li&gt;
+&lt;li&gt;Bulguları gözden geçirenler için çevir.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;MCP tabanlı binlog araçları bu döngüyü sıkıştırır ve analizi, nöbetçi derleme uzmanı değil, her katkıda bulunan kişi için kullanılabilir hale getirir.&lt;/p&gt;
+&lt;p&gt;İş akışındaki yalnızca danışma amaçlı duruş da akıllı bir mimari seçimdir. Birleştirme kapılamayı mevcut gerekli derlemelerinizle tutun ve ajan tanılamasını yetki değil, hızlandırma olarak kullanın. Bu, güveni korurken yine de üretkenlik kazanımlarını yakalar.&lt;/p&gt;
+&lt;p&gt;Genişletilmiş araç yüzeyi dikkate değerdir. Hedef muhakemesi, değerlendirme özellikleri, çözümleyici maliyet dökümleri, kritik yol grafikleri, geri yükleme analizi ve artımlı davranış incelemesi, dil modellerinin kesin araçlar aracılığıyla maruz kaldığında iyi ele aldığı türden yapılandırılmış tanılamalardır.&lt;/p&gt;
+&lt;p&gt;Benim görüşümlü düşüncem: &lt;strong&gt;mühendislikte AI&amp;rsquo;nın gerçekten altyapı haline geldiği yer burasıdır&lt;/strong&gt;. Bir yetenek, riskli özerklik eklemeden derleme başarısızlıklarını açıklamak için geçen ortalama süreyi güvenilir bir şekilde azaltıyorsa, varsayılan olarak CI&amp;rsquo;ya aittir.&lt;/p&gt;
+&lt;p&gt;Değerlendirme verileri durumu güçlendirir. Araçsız temellere kıyasla önemli ölçüde daha düşük duvar saati ve token kullanımı ile daha iyi puanlar, üretkenlik kazanımlarının anekdot niteliğinde olmadığını gösterir.&lt;/p&gt;
+&lt;p&gt;.NET ekipleri için pratik kullanıma sunma planı:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;İlgili derleme ve test işleri için CI&amp;rsquo;da &lt;strong&gt;/bl oluşturmayı standart&lt;/strong&gt; hale getirin.&lt;/li&gt;
+&lt;li&gt;İlk olarak kritik olmayan bir depoda &lt;strong&gt;MCP tanılama yorumlarını tanıtın&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Triyaj süresi metriklerini&lt;/strong&gt; ve yanlış pozitif açıklama oranını izleyin.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Yalnızca&lt;/strong&gt; yorum kalitesini ve geliştirici kabulünü kanıtladıktan sonra genişletin.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bir uyarı: araç yeteneklerine sürümlü sözleşmeler olarak davranın. Sunucu yüzeyleri gelişir ve pipeline güvenilirliği açık uyumluluk kontrollerine bağlıdır. Yetenek keşif araçları, pipeline kurulumunuzun bir parçası olmalıdır.&lt;/p&gt;
+&lt;p&gt;Kuruluşunuz yazılım teslimatında yüksek güvenilirlikli bir AI benimseme noktası arıyorsa, işte bu. Sınırlı, ölçülebilir ve doğrudan geliştirici döngü süresine bağlıdır.&lt;/p&gt;
+&lt;p&gt;MCP burada bir yenilik katmanı değildir. &lt;strong&gt;Yapılandırılmış operasyonel zeka için bir taşıyıcıdır&lt;/strong&gt; ve derleme pipeline&amp;rsquo;ları bunu kullanmak için ideal bir yerdir.&lt;/p&gt;</content:encoded></item></channel></rss>

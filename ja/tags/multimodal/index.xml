@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Multimodal | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/multimodal/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 25 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/multimodal/index.xml" rel="self" type="application/rss+xml"/><item><title>VS Code 1.128 Makes a Clear Bet: The Agents Window Is Becoming the New Work Surface</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/vscode-1-128-agents-window-grows-up/</link><pubDate>Sat, 25 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/vscode-1-128-agents-window-grows-up/</guid><description>VS Code 1.128 は、マルチチャットセッション、GA ビジョンサポート、より深いホスト/セッション制御により、エージェントワークフローをノベルティから日々のエルゴノミクスへと変える。</description><content:encoded>&lt;p&gt;Visual Studio Code 1.128 は、ひとつのキラー機能のためではなく、複数の変更が単一の方向性に沿っているため、意味のあるリリースである: エディタ内のエージェントファースト開発が、構造化され、並列化され、運用上管理可能になりつつある。&lt;/p&gt;
+&lt;p&gt;オリジナルソース: &lt;a href="https://code.visualstudio.com/updates/v1_128"&gt;https://code.visualstudio.com/updates/v1_128&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;特筆すべきは、エージェントホストセッションにおける&lt;strong&gt;よりリッチなマルチチャット動作&lt;/strong&gt;であり、ピアチャット、フォーク、単一の親セッション下での並行ターンを含む。これはまさに、代替実装を探索したり、検証パス間でタスクを分割したりするときに経験豊富な開発者が必要とするものである。それは、めったに線形ではない実際のエンジニアリング作業を反映している。&lt;/p&gt;
+&lt;p&gt;私の見解: これは、Agents ウィンドウがチャットパネルというよりもワークスペースオーケストレーションサーフェスのように感じられる最初の VS Code リリースである。&lt;/p&gt;
+&lt;p&gt;選択されたワークスペースなしのクイックチャットも、見た目以上に重要である。これらは、プロジェクトバインドセッションを明確に区別しながら、概念的またはアーキテクチャ上の質問への摩擦を減らす。その分離は、混乱を減らし、コード修正ワークフローのコンテキスト整合性を維持するのに役立つ。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Copilot Vision の GA 到達&lt;/strong&gt;ももうひとつの変曲点である。画像と PDF がチャットへの通常の入力になると、ドキュメント多用および UI 多用のタスクが大幅に流動的になる。チームは今やマルチモーダルコンテキストを高度なアドオンではなくデフォルト機能として考えるべきである。&lt;/p&gt;
+&lt;p&gt;実用的なプラットフォームの影響もある。エージェントホストシナリオにおける &lt;strong&gt;BYOK サポート&lt;/strong&gt;、設定可能なモデルサンプリングパラメータ、ユーティリティモデルのデフォルトは、エンタープライズモデルガバナンスの成熟度の高まりを示している。厳格なプロバイダー要件を持つ組織は、一律のデフォルトではなく、より細かい制御で動作を形成できる。&lt;/p&gt;
+&lt;h3 id="1128-を採用するチームへの推奨"&gt;1.128 を採用するチームへの推奨&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;マルチチャットセッションでのチャット分岐と命名の規約を定義し&lt;/strong&gt;、並行探索が会話ノイズにならないようにする。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;開発者に実装用のチャットと、テストまたは障害分析用のチャットを別々に保つことを推奨する。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;クイックチャットはリポジトリ外の質問に意図的に使用する。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BYOK エンドポイントを実行している場合&lt;/strong&gt;、ワークロードクラスごとにベースライン temperature/top_p プロファイルを確立し、例外を文書化する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ユーティリティフローを Copilot 提供モデルと BYOK モデルのどちらで実行するかを決定し&lt;/strong&gt;、意図しないサイレント動作ギャップを避ける。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;OS レベルのショートカットを戦略的に検討する。&lt;/strong&gt; システム全体で VS Code コマンドをトリガーできることはパワーユーザーのフローを改善できるが、管理されていないキーバインディングの散乱はチーム間の一貫性を損なう可能性がある。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="結論"&gt;結論&lt;/h2&gt;
+&lt;p&gt;VS Code 1.128 は機能を追加するだけではない。実際の開発ループにおけるエージェントコラボレーションのメカニズムを強化する。次のサイクルで勝つエディタは、エージェントインタラクションをサイドバーの実験ではなく、&lt;strong&gt;ファーストクラスのワークフロープリミティブ&lt;/strong&gt;として扱うものである。このリリースは、VS Code がそのレースを理解していることを示している。&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Build-Engineering | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/build-engineering/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/build-engineering/index.xml" rel="self" type="application/rss+xml"/><item><title>MCP Build Diagnostics in CI Is the First AI Workflow That Actually Pays for Itself Fast</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/mcp-binlog-ci-build-diagnostics/</link><pubDate>Sat, 18 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/mcp-binlog-ci-build-diagnostics/</guid><description>Binlog MCP 分析がプルリクエストワークフローで直接実行されると、チームは障害トリアージ時間を削減し、開発者をより迅速にアンブロックできる。</description><content:encoded>&lt;p&gt;オリジナルソース: &lt;a href="https://devblogs.microsoft.com/dotnet/mcp-build-diagnostics-workflows/"&gt;MCP Beyond the Chat Window: Build Diagnostics in CI&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;これはこれまでのところ最も強力な実践的 MCP ストーリーのひとつである。なぜなら、チャットデモの世界を離れ、パイプラインの現実に入るからだ。&lt;/p&gt;
+&lt;p&gt;示されているパターンは説得力がある: 失敗した PR ビルドが MCP 経由で binlog に対するエージェント分析をトリガーし、ワークフローが実行可能な根本原因コンテキストをプルリクエストに投稿する。それはまさに、現在開発者の時間が無駄にされている場所である。&lt;/p&gt;
+&lt;p&gt;ほとんどのチームは依然として高コストな手動ループで赤いビルドを処理している:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;binlog をダウンロードする。&lt;/li&gt;
+&lt;li&gt;ビューアを開く。&lt;/li&gt;
+&lt;li&gt;失敗したターゲットとタスクを追跡する。&lt;/li&gt;
+&lt;li&gt;調査結果をレビュー担当者に翻訳する。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;MCP ベースの binlog ツールはそのループを圧縮し、オンコールのビルドスペシャリストだけでなく、すべてのコントリビューターが分析を利用できるようにする。&lt;/p&gt;
+&lt;p&gt;ワークフローにおけるアドバイザリースタンスも賢いアーキテクチャ上の選択である。既存の必須ビルドでマージゲートを引き続き使用し、エージェント診断は権威ではなく高速化として使用する。これにより信頼を維持しながら、生産性向上を捉える。&lt;/p&gt;
+&lt;p&gt;拡張されたツールサーフェスは注目に値する。ターゲット推論、評価プロパティ、アナライザーコスト内訳、クリティカルパスグラフ、リストア分析、インクリメンタルビルド動作検査は、まさに言語モデルが正確なツールを通じて公開されたときにうまく処理できる種類の構造化診断である。&lt;/p&gt;
+&lt;p&gt;私の意見を明確に述べる:&lt;strong&gt;これこそがエンジニアリングにおける AI が実際にインフラストラクチャになる場所である&lt;/strong&gt;。ある機能が、危険な自律性を追加することなく、ビルド失敗の説明までの平均時間を確実に削減するなら、それはデフォルトで CI に属する。&lt;/p&gt;
+&lt;p&gt;評価データはその主張を強化する。ツールなしのベースラインと比較して、実質的に低い壁時計時間とトークン使用量でより良いスコアを達成していることは、生産性向上が逸話ではないことを示している。&lt;/p&gt;
+&lt;p&gt;.NET チームのための実践的ロールアウト計画:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;関連するビルドおよびテストジョブの CI で /bl 生成を標準化する。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;最初は重要でないリポジトリで MCP 診断コメントを導入する。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;トリアージ時間メトリクスと誤検知説明率を追跡する。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;コメント品質と開発者の受け入れを証明した後にのみ拡大する。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;ひとつの注意点: ツール機能をバージョン管理された契約として扱うこと。サーバーサーフェスは進化し、ワークフローの信頼性は明示的な互換性チェックに依存する。機能発見ツールはパイプラインセットアップの一部であるべきである。&lt;/p&gt;
+&lt;p&gt;組織がソフトウェアデリバリーにおける信頼性の高い AI 導入ポイントを探していたなら、これである。それは境界があり、測定可能で、開発者のサイクルタイムに直接結びついている。&lt;/p&gt;
+&lt;p&gt;ここでの MCP はノベルティレイヤーではない。&lt;strong&gt;それは構造化された運用インテリジェンスのためのトランスポートであり&lt;/strong&gt;、ビルドパイプラインはそれを活用するのに理想的な場所である。&lt;/p&gt;</content:encoded></item></channel></rss>

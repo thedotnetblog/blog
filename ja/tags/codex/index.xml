@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Codex | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/codex/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/codex/index.xml" rel="self" type="application/rss+xml"/><item><title>コーディングエージェントのミッションコントロール：VS Codeでの統一されたエクスペリエンス</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/unified-agent-experience-mission-control/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/unified-agent-experience-mission-control/</guid><description>VS Codeは、ローカル、クラウド、CLI、およびサードパーティのコーディングエージェントをAgent Sessionsに集約し、開発者が自律的な作業を追跡、割り込み、調整できるようにします。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されました。原文は&lt;a href="https://thedotnetblog.com/ja/news/emiliano-montesdeoca/unified-agent-experience-mission-control/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id="コーディングエージェントのミッションコントロールvs-codeでの統一されたエクスペリエンス"&gt;コーディングエージェントのミッションコントロール：VS Codeでの統一されたエクスペリエンス&lt;/h1&gt;
+&lt;p&gt;単一のコーディングアシスタントは理解するのが簡単です。異なる場所で動作する複数のエージェントはそうではありません。&lt;/p&gt;
+&lt;p&gt;1つのエージェントはVS Codeでローカルに実行されます。別のエージェントはクラウド内のGitHub Issueで機能します。CLIエージェントはターミナルで動作します。サードパーティのコーディングエージェントは異なるセッションモデルと異なる制限を持つ可能性があります。共有ビューがなければ、開発者は作業の監督よりも追跡により多くの時間を費やします。&lt;/p&gt;
+&lt;p&gt;VS Codeの統一されたエージェント体験はAgent Sessionsでその調整の問題に対処します：エージェントを起動し、ステータスを確認し、会話を開き、計画が変わったときに介入する1つの場所です。&lt;/p&gt;
+&lt;p&gt;これは別のエージェントを追加することよりも、複数のエージェントを管理可能にすることに関するものです。&lt;/p&gt;
+&lt;h2 id="さまざまなタイプの作業のための1つのビュー"&gt;さまざまなタイプの作業のための1つのビュー&lt;/h2&gt;
+&lt;p&gt;ソース記事では、4つの異なる参加者について説明します：ローカルのGitHub Copilot、クラウド内のCopilot Coding Agent、GitHub Copilot CLI、および対象のCopilot購読者向けのOpenAI Codexです。&lt;/p&gt;
+&lt;p&gt;彼らは異なる強みを持っています：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ローカルエージェントは現在のワークスペースを検査して素早く変更を加えることができます。&lt;/li&gt;
+&lt;li&gt;クラウドコーディングエージェントはIssueで非同期に作業し、プルリクエストを開くことができます。&lt;/li&gt;
+&lt;li&gt;CLIエージェントはターミナル中心のワークフローと操作コマンドに適しています。&lt;/li&gt;
+&lt;li&gt;別のプロバイダーは異なるモデルまたは推論スタイルを提供できます。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Agent Sessionsはこれらのタスクに共通のホームを提供します。何が実行されているか、何をしているか、会話をどこで拾うかを確認できます。&lt;/p&gt;
+&lt;p&gt;自律的な作業は調整を排除しないため、その可視性は重要です。これは調整を第一級のエンジニアリングタスクにします。&lt;/p&gt;
+&lt;h2 id="割り込みはワークフローの一部です"&gt;割り込みはワークフローの一部です&lt;/h2&gt;
+&lt;p&gt;ソースは簡単な観察を行います：「プロンプトを送信してから重要なことを忘れていたことに気付くのは一般的です。」以前は、選択肢は待つかキャンセルすることであることが多かったです。チャットエディタを使用すると、アクティブなセッションを開いてエージェントが作業中に情報を追加できます。&lt;/p&gt;
+&lt;p&gt;これは実際のコラボレーションに近いです。要件は変わります。テストが仮定を明らかにします。レビュアーがAPIを後方互換性を保つ必要があることに気付きます。有用なエージェントは修正が不要なエージェントではなく、修正を吸収してタスク全体を失わないエージェントです。&lt;/p&gt;
+&lt;p&gt;.NETの作業の場合、割り込みは次のようにシンプルな場合があります：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Keep the existing public route unchanged. Add the new behavior behind the application service,
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;use the existing ProblemDetails convention, and add a test for the old response shape.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;命令は短いです。リポジトリが既により大きなコンテキストを含んでいるからです。セッションは方向を修正する場所であり、システム全体を再度述べる場所ではありません。&lt;/p&gt;
+&lt;h2 id="カスタムエージェントがチームの習慣をロールに変える"&gt;カスタムエージェントがチームの習慣をロールに変える&lt;/h2&gt;
+&lt;p&gt;VS Codeは、Planなどの専門的なエージェントも導入しています。すぐに実装するのではなく、計画エージェントは実装仕様を生成する前に、スコープ、コンポーネント、ライブラリ、および制約についての質問をします。&lt;/p&gt;
+&lt;p&gt;そのパターンは組み込みエージェントを超えて有用です。チームは焦点を絞ったロールを定義できます：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Research&lt;/strong&gt;は証拠を集め、短い決定記録を書きます。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Review&lt;/strong&gt;は変更がリポジトリ規約に対して正しいかどうかを確認します。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Testing&lt;/strong&gt;は欠落しているケースを特定し、テストプランを提案します。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Architecture&lt;/strong&gt;はファイルを変更せずにオプションを比較します。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;小規模なカスタムエージェント定義は次のようになります：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;agent&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;plan&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;description&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;Refines vague requests into clear implementation specs&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;prompt&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="sd"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Ask about scope, constraints, existing patterns, and edge cases.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Produce a concise specification before any implementation begins.&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;有用な部分はYAMLではありません。それは責任の明確な分離です。計画エージェントは本番コードをそっと編集するべきではありません。レビューエージェントは評価することになっているデザインを書き直すべきではありません。&lt;/p&gt;
+&lt;h2 id="サブエージェントはコンテキストの衝突を削減します"&gt;サブエージェントはコンテキストの衝突を削減します&lt;/h2&gt;
+&lt;p&gt;長い会話は無関係なコンテキストを蓄積します。サブエージェントは限定された研究タスク用に分離されたワークスペースを提供し、結果をメインセッションに戻します。&lt;/p&gt;
+&lt;p&gt;これは次のような質問に適しています：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Analyze the API project and recommend an authentication strategy.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Return trade-offs and a decision record. Do not edit files.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;メインエージェントは実装に焦点を保つ一方で、研究エージェントはより狭い質問を処理します。同じ原則がチームにも適用されます：明確な委譲は重複する権限で複数のエージェントを起動するよりも良い結果をもたらします。&lt;/p&gt;
+&lt;h2 id="注意事項より多くのエージェントはより多くの調整を意味します"&gt;注意事項：より多くのエージェントはより多くの調整を意味します&lt;/h2&gt;
+&lt;p&gt;Agent Sessionsはアクティビティを表示できますが、競合する所有権を解決することはできません。2つのエージェントが同じエリアを編集している場合でもマージの問題を作成できます。クラウドエージェントとローカルエージェントは互いに互換性のない仮定を行うことができます。カスタムエージェントは別のエージェントが無視する推奨事項を生成できます。&lt;/p&gt;
+&lt;p&gt;境界を設定してください：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;1つのエージェントが特定のブランチの実装を所有しています。&lt;/li&gt;
+&lt;li&gt;研究エージェントは追跡されていない編集ではなく成果物を返します。&lt;/li&gt;
+&lt;li&gt;プルリクエストはレビュー境界のままです。&lt;/li&gt;
+&lt;li&gt;エージェント名とプロンプトは、変更が許可されているものを述べています。&lt;/li&gt;
+&lt;li&gt;セッション出力は、重要な決定を説明するときに保持されます。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="私の意見"&gt;私の意見&lt;/h2&gt;
+&lt;p&gt;マルチエージェントの未来はチャットウィンドウのキューではありません。それはロール、引き渡し、および責任を持つ小さなチームです。&lt;/p&gt;
+&lt;p&gt;Agent Sessionsは価値があります。それがその現実を認識しているからです。エディタ、ターミナル、およびクラウド全体で既に起こっている作業に対して、開発者に制御面を提供します。次の生産性の向上は、より多くのエージェントを持つことからではなく、その境界を判読可能にすることから生じるでしょう。&lt;/p&gt;
+&lt;p&gt;.NETチームの場合、1つの計画エージェントと1つの実装エージェントで開始します。計画出力をIssueまたはプルリクエスト仕様として使用してから、実装エージェントが境界内で作業するようにします。より多くのロールを追加する前に改作を測定してください。&lt;/p&gt;
+&lt;p&gt;最高のミッションコントロールはまだ所有権を明らかにするものです。&lt;/p&gt;</content:encoded></item></channel></rss>

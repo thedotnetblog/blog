@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Rest-Api | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/rest-api/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 17 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/rest-api/index.xml" rel="self" type="application/rss+xml"/><item><title>Data API Builder 自定义路径让你为人类设计 API，而非为表设计</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/data-api-builder-custom-paths-domain-first/</link><pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/data-api-builder-custom-paths-domain-first/</guid><description>DAB 中的复合 REST 路径是一个小功能，但对面向领域的 API 设计具有重大的架构影响。</description><content:encoded>&lt;p&gt;原文来源：&lt;a href="https://devblogs.microsoft.com/azure-sql/data-api-builder-custom-rest-paths/"&gt;Compose your API surface with Data API builder custom paths&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Data API Builder 中新的&lt;strong&gt;复合 REST 路径&lt;/strong&gt;支持可能看起来像是一个微小的配置改进，但它实际上解决了一个长期的 API 设计矛盾：数据库拓扑泄露到公开端点设计中。&lt;/p&gt;
+&lt;p&gt;默认的基于实体的路由非常适合快速起步。但它们在长期产品 API 中往往是错误的。真正的系统需要匹配业务概念、所有权边界和消费者心智模型的路由结构。&lt;/p&gt;
+&lt;p&gt;这就是为什么这个 DAB 变更很重要。你可以在保持生成式 API 便利性的同时，呈现一个更清晰的领域优先界面。&lt;/p&gt;
+&lt;p&gt;我的个人观点很简单：&lt;strong&gt;如果你的 API 路径结构在生产中镜像原始表名&lt;/strong&gt;，你通常是在优化后端便利性，而牺牲了客户端的清晰度。&lt;/p&gt;
+&lt;p&gt;有了自定义路径，团队可以建立更好的边界，如销售、计费、支持或合作伙伴专属界面。这并不能替代正确的 API 治理，但它给 DAB 用户提供了一个实用的方式来将路由设计与产品语言对齐。&lt;/p&gt;
+&lt;h3 id="采用此功能的团队实用指南"&gt;采用此功能的团队实用指南&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;在随意添加路径之前先定义命名策略&lt;/strong&gt;。不一致的子片段会成为长期杂乱。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;将端点映射到限界上下文&lt;/strong&gt;，而非组织架构图。团队会变；领域语义应该稳定。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;将路径结构视为版本策略的一部分&lt;/strong&gt;，并明确记录破坏性变更。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;验证自定义路由结构上的授权行为&lt;/strong&gt;，确保路由清晰度与安全性清晰度相匹配。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我欣赏 DAB 整体上的&lt;strong&gt;杠杆模型&lt;/strong&gt;：你获得分页、过滤、投影和其他端点机制，而无需编写重复的控制器代码。自定义路径通过减少 API 架构师最大的反对意见之一，使这种杠杆更加面向生产。&lt;/p&gt;
+&lt;p&gt;有一个&lt;strong&gt;注意事项&lt;/strong&gt;。更好的路径组合可能会诱使团队过快暴露过多内容，因为生成感觉太容易。护栏仍然重要：保持实体暴露的审慎性，集中应用策略，避免从内部架构实验意外构建公开契约。&lt;/p&gt;
+&lt;p&gt;对于在交付压力下的 .NET 组织，如果使用得当，这个功能是一个生产力利器。你可以比手工编写的 API 层更快地行动，同时仍然保持一个连贯和业务友好的端点界面。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;核心观点：&lt;/strong&gt; DAB 自定义路径不是为了美化 URL。它们关于&lt;strong&gt;重拾 API 设计意图&lt;/strong&gt;，同时保持生成式端点的运维效率。&lt;/p&gt;</content:encoded></item></channel></rss>

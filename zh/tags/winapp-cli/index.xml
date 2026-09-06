@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Winapp-Cli | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/winapp-cli/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 25 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/winapp-cli/index.xml" rel="self" type="application/rss+xml"/><item><title>WinApp CLI 终于让包标识对 .NET 团队变得实用</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/winapp-cli-package-identity-for-dotnet/</link><pubDate>Sat, 25 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/winapp-cli-package-identity-for-dotnet/</guid><description>包标识曾经是设置上的痛苦；WinApp CLI 将其变成了一个可重复的工作流，用于运行和发布应用。</description><content:encoded>&lt;p&gt;原文来源：&lt;a href="https://devblogs.microsoft.com/dotnet/packaging-dotnet-apps-winapp/"&gt;Packaging and Package Identity for .NET apps with WinApp CLI on Windows&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;多年来，包标识一直是 .NET 桌面开发中那些悄无声息地痛苦的缺口之一。你可以快速构建一个应用，但当你需要通知、后台任务、文件处理程序或更新的 Windows 能力时，你就会陷入清单和签名复杂性的泥潭。&lt;/p&gt;
+&lt;p&gt;WinApp CLI 以一种实用的方式改变了这个等式。&lt;/p&gt;
+&lt;p&gt;最大的胜利是工作流集成。如果 &lt;code&gt;init&lt;/code&gt; 能准备项目先决条件，&lt;code&gt;dotnet run&lt;/code&gt; 可以通过项目级配置以标识执行，团队就可以在正常开发期间验证 Windows 特有的功能，而不是在发布前的打包演练中。&lt;/p&gt;
+&lt;p&gt;这种转变比听起来更重要。后期的标识集成会创建&lt;strong&gt;隐藏的风险&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API 在隔离测试中正常，但在实际的应用启动路径中失败。&lt;/li&gt;
+&lt;li&gt;打包缺陷在功能工作完成后才暴露。&lt;/li&gt;
+&lt;li&gt;发布信心依赖于稀缺的专家。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过前置标识支持，WinApp CLI 让这些问题在修复成本最低时变得可见。&lt;/p&gt;
+&lt;p&gt;我也喜欢对参数传递、执行别名行为和无启动调试场景的显式支持。这些细节是区分玩具工具和生产友好型工具的关键。工程团队需要控制，而不仅仅是默认值。&lt;/p&gt;
+&lt;p&gt;在打包方面，pack 加证书生成和安装的组合，正是那些需要可重复本地验证后再分发的团队所需要的方向。它降低了有纪律的签名工作流的门槛，而没有假装信任和证书管理是可选的。&lt;/p&gt;
+&lt;p&gt;我强烈的观点：&lt;strong&gt;如果你的 .NET 应用面向现代 Windows 体验，包标识应该被视为第一周的问题，而非发布周的问题&lt;/strong&gt;。WinApp CLI 现在提供了足够的人体工程学来使之成为标准。&lt;/p&gt;
+&lt;p&gt;VS Code 扩展的故事同样相关。不是每个团队都想整天活在终端脚本中，集成的 F5 调试加命令面板操作降低了混合经验团队的入门摩擦。这对正在从传统桌面工具模式转型的组织尤其有帮助。&lt;/p&gt;
+&lt;h3 id="实用的采纳计划"&gt;实用的采纳计划&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;在一个有代表性的应用上运行 &lt;code&gt;winapp init&lt;/code&gt;&lt;/strong&gt;，并立即验证标识门控功能。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;为发布候选版本将 MSIX 打包加入 CI&lt;/strong&gt;，即使分发生效较晚。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对于控制台应用&lt;/strong&gt;，尽早标准化执行别名设置以避免调试混乱。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;如果你维护多个桌面栈&lt;/strong&gt;，使用 WinApp 作为共享的标识和打包基线。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="核心观点"&gt;核心观点&lt;/h2&gt;
+&lt;p&gt;WinApp CLI 不仅仅添加了命令。它&lt;strong&gt;消除了借口&lt;/strong&gt;。包标识不再是 .NET 桌面团队的高级小众话题。它正在成为基本门槛，而现在它终于易于操作了。&lt;/p&gt;</content:encoded></item></channel></rss>

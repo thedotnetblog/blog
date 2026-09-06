@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Winapp-Cli | The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/winapp-cli/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ko</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 25 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/winapp-cli/index.xml" rel="self" type="application/rss+xml"/><item><title>WinApp CLI가 마침내 .NET 팀을 위해 패키지 아이덴티티를 실용적으로 만듭니다</title><link>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/winapp-cli-package-identity-for-dotnet/</link><pubDate>Sat, 25 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/winapp-cli-package-identity-for-dotnet/</guid><description>패키지 아이덴티티는 설정의 고통이었습니다; WinApp CLI는 앱 실행 및 출시를 위한 반복 가능한 워크플로로 전환합니다.</description><content:encoded>&lt;p&gt;원문: &lt;a href="https://devblogs.microsoft.com/dotnet/packaging-dotnet-apps-winapp/"&gt;Packaging and Package Identity for .NET apps with WinApp CLI on Windows&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;수년간 패키지 아이덴티티는 .NET 데스크톱 개발에서 조용히 고통스러운 격차 중 하나였습니다. 앱을 빠르게 빌드할 수 있었지만, 알림, 백그라운드 작업, 파일 핸들러 또는 최신 Windows 기능이 필요한 순간 매니페스트 및 서명 복잡성에 빠졌습니다.&lt;/p&gt;
+&lt;p&gt;WinApp CLI는 실용적인 방식으로 그 방정식을 바꿉니다.&lt;/p&gt;
+&lt;p&gt;가장 큰 승리는 워크플로 통합입니다. init이 프로젝트 사전 요구사항을 준비하고 dotnet run이 프로젝트 수준 구성으로 아이덴티티를 가지고 실행할 수 있다면, 팀은 늦은 릴리스 패키징 드릴 대신 정상적인 개발 중에 Windows 특정 기능을 검증할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;그 전환은 들리는 것보다 더 중요합니다. 늦은 아이덴티티 통합은 &lt;strong&gt;숨겨진 위험&lt;/strong&gt;을 만듭니다:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API는 격리된 테스트에서 작동하지만 실제 앱 시작 경로에서는 실패합니다.&lt;/li&gt;
+&lt;li&gt;패키징 결함은 기능 작업이 완료된 후에 표면화됩니다.&lt;/li&gt;
+&lt;li&gt;릴리스 자신감은 희소한 전문가에 의존합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;아이덴티티 지원을 사전에 로드함으로써, WinApp CLI는 이러한 문제를 수정하기 가장 저렴한 곳에서 볼 수 있게 만듭니다.&lt;/p&gt;
+&lt;p&gt;또한 인수 전달, 실행 별칭 동작, 실행 없음 디버깅 시나리오에 대한 명시적 지원이 마음에 듭니다. 이러한 세부 사항이 장난감 툴링과 프로덕션 친화적 툴링을 구분합니다. 엔지니어링 팀은 기본값뿐만 아니라 제어가 필요합니다.&lt;/p&gt;
+&lt;p&gt;패키징 측면에서 pack에 인증서 생성과 설치를 결합한 것은 배포 전에 반복 가능한 로컬 검증이 필요한 팀에게 정확히 올바른 방향입니다. 이는 인증서 관리가 선택 사항인 척하지 않으면서 규율 있는 서명 워크플로에 대한 장벽을 낮춥니다.&lt;/p&gt;
+&lt;p&gt;내 강한 의견: &lt;strong&gt;.NET 앱이 최신 Windows 환경을 대상으로 한다면, 패키지 아이덴티티는 릴리스 주간 고려사항이 아닌 첫 주 고려사항으로 취급되어야 합니다.&lt;/strong&gt; WinApp CLI는 이제 이를 표준으로 만들기에 충분한 인체공학을 제공합니다.&lt;/p&gt;
+&lt;p&gt;VS Code 확장 스토리도 마찬가지로 관련성이 있습니다. 모든 팀이 하루 종일 터미널 스크립트에서 살고 싶어하지 않으며, 통합된 F5 디버그와 명령 팔레트 작업은 혼합 경험 팀의 온보딩 마찰을 줄입니다. 이것은 레거시 데스크톱 툴링 패턴에서 전환하는 조직에서 특히 도움이 됩니다.&lt;/p&gt;
+&lt;h3 id="실용적인-도입-계획"&gt;실용적인 도입 계획&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;대표 앱 하나에서 &lt;code&gt;winapp init&lt;/code&gt;을 실행&lt;/strong&gt;하고 아이덴티티 게이트 기능을 즉시 검증하세요.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;릴리스 후보에 대해 CI에 MSIX 패키징을 추가&lt;/strong&gt;하세요, 배포가 나중에 발생하더라도.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;콘솔 앱의 경우&lt;/strong&gt;, 디버깅 혼란을 피하기 위해 일찍 실행 별칭 설정을 표준화하세요.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;여러 데스크톱 스택을 유지한다면&lt;/strong&gt;, WinApp을 공유 아이덴티티 및 패키징 기준선으로 사용하세요.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="결론"&gt;결론&lt;/h2&gt;
+&lt;p&gt;WinApp CLI는 단순히 명령을 추가하지 않습니다. &lt;strong&gt;변명을 제거합니다.&lt;/strong&gt; 패키지 아이덴티티는 더 이상 .NET 데스크톱 팀을 위한 고급 틈새가 아닙니다. 기본 요건이 되고 있으며, 이제 마침내 접근 가능해졌습니다.&lt;/p&gt;</content:encoded></item></channel></rss>

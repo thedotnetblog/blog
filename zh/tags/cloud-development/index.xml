@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Cloud Development | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/cloud-development/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Wed, 15 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/cloud-development/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure SDK 2026 年 6 月：为什么月度更新日志是战略性的，而非行政性的</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/azure-sdk-june-2026-what-matters/</link><pubDate>Wed, 15 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/azure-sdk-june-2026-what-matters/</guid><description>6 月的 Azure SDK 发布揭示了一个更广泛的现实：将月度 SDK 节奏纳入工作流的团队，在可靠性、安全性和功能采用方面获得了复利优势。</description><content:encoded>&lt;p&gt;月度 SDK 文章很容易被扫一眼然后忘记。这是一个错误。2026 年 6 月的 Azure SDK 更新是一个很好的例子，说明为什么成熟的团队将这些版本视为工程规划的输入，而不仅仅是包元数据。&lt;/p&gt;
+&lt;p&gt;原文来源：https://devblogs.microsoft.com/azure-sdk/azure-sdk-release-june-2026/&lt;/p&gt;
+&lt;p&gt;两个 GA 信号值得关注：用于 Python 的 &lt;strong&gt;Azure AI Transcription 1.0.0&lt;/strong&gt; 和用于 Python 的 &lt;strong&gt;Microsoft Planetary Computer Pro 1.0.0&lt;/strong&gt;。稳定的客户端库减少了关于接口、支持期望和操作行为的不确定性。它们也表明上游服务正在从实验阶段转向生产姿态。&lt;/p&gt;
+&lt;p&gt;Planetary Computer 版本中有一个重要的细微差别：更丰富的响应模型伴随着一个破坏性重命名——从 &lt;code&gt;list_collections&lt;/code&gt; 改为 &lt;code&gt;get_collections&lt;/code&gt;。这正是为什么即使是在 1.x 边界，依赖更新也需要兼容性测试和发布说明审查。&lt;/p&gt;
+&lt;p&gt;我的观点：最好的 SDK 策略是&lt;strong&gt;无聊而持续&lt;/strong&gt;。频繁升级，自动测试，让你的团队贴近语言特定的发布说明。按季度或半年批量升级的团队会积累迁移风险，并失去对行为变化原因的背景了解。&lt;/p&gt;
+&lt;h3 id="面向工程经理和高级开发人员的实用行动"&gt;面向工程经理和高级开发人员的实用行动&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;创建与平台 guild 绑定的月度 SDK 审查仪式&lt;/strong&gt;。对于每个语言栈，将更新分为三类：立即采用、计划采用和推迟并说明原因。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;密切关注首次稳定版发布&lt;/strong&gt;——它们通常能解锁等待支持保证的内部产品团队。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;审慎对待 beta 包。&lt;/strong&gt; Beta 版对于概念验证速度非常棒，但只有在通过显式功能标志和版本锁定策略隔离后才可使用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;跨语言组织&lt;/strong&gt;应积极使用统一的发布说明矩阵。如果你的后端是 .NET、数据工具是 Python 而内部 CLI 是 Node，碎片化的升级行为会造成能力不一致和支持负担。&lt;/p&gt;
+&lt;p&gt;另一个有用的原则：&lt;strong&gt;不要把稳定等同于&amp;quot;永远安全&amp;quot;&lt;/strong&gt;。GA 意味着受支持，而非静态不变。你仍然需要围绕关键的 SDK 驱动工作流进行可观测性和回归测试。&lt;/p&gt;
+&lt;h2 id="核心观点"&gt;核心观点&lt;/h2&gt;
+&lt;p&gt;这个月的 Azure SDK 版本看起来可能不起眼，但它强化了一个战略模式。云交付速度越来越依赖于&lt;strong&gt;依赖管理的健康度&lt;/strong&gt;。构建可靠升级能力的团队交付更快、恢复更快。忽视发布节奏的团队会花更多时间理清版本漂移，而非构建产品价值。&lt;/p&gt;</content:encoded></item></channel></rss>

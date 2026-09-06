@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure AI Search | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/azure-ai-search/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 29 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/azure-ai-search/index.xml" rel="self" type="application/rss+xml"/><item><title>2026年5月の Azure SDK リリースには、.NET 開発者が無視すべきでない項目がいくつかある</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/azure-sdk-may-2026-agent-server-rust-search/</link><pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/azure-sdk-may-2026-agent-server-rust-search/</guid><description>2026年5月の Azure SDK リリースは幅広い内容だが、特に注目すべきテーマが3つある。Azure AI Search のナレッジベース、新しい Agent Server ライブラリ、そして Azure SDK エコシステム全体で進むクロス言語の成熟だ。</description><content:encoded>&lt;p&gt;&lt;em&gt;この記事は自動翻訳されています。原文は&lt;a href="https://thedotnetblog.com/ja/news/emiliano-montesdeoca/azure-sdk-may-2026-agent-server-rust-search/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;月次の SDK まとめは、時として圧倒されることがあります。&lt;/p&gt;
+&lt;p&gt;しかし、&lt;strong&gt;2026年5月の Azure SDK リリース&lt;/strong&gt;には、単なる一般的なパッケージの羅列として扱うのではなく、切り分けて見る価値のある項目がいくつかあります。&lt;/p&gt;
+&lt;h2 id="注目したい点"&gt;注目したい点&lt;/h2&gt;
+&lt;p&gt;私が特に目を引かれたのは次の3つです。&lt;/p&gt;
+&lt;h3 id="1-azure-ai-search-のナレッジベースとエージェント的な取得"&gt;1. Azure AI Search のナレッジベースとエージェント的な取得&lt;/h3&gt;
+&lt;p&gt;これはおそらく、このリリースで戦略的に最も興味深い項目です。新しいナレッジベースと取得機能は、検索インフラがよりエージェントを意識する方向へ進んでいる流れを後押ししています。&lt;/p&gt;
+&lt;h3 id="2-新しい-agent-server-プレビューライブラリ"&gt;2. 新しい Agent Server プレビューライブラリ&lt;/h3&gt;
+&lt;p&gt;新しいエージェント用ホスティングライブラリは、ランタイム構造、ヘルス、シャットダウン動作、そしてエージェントエンドポイント周辺のより正式なホスティングモデルに関心があるなら追う価値があります。&lt;/p&gt;
+&lt;h3 id="3-エコシステム全体の成熟"&gt;3. エコシステム全体の成熟&lt;/h3&gt;
+&lt;p&gt;Rust の GA、Batch の GA、プロビジョニングライブラリのような項目でさえ、Azure SDK の表面積が広がり、より本格的になっていることを示すため、間接的に重要です。&lt;/p&gt;
+&lt;h2 id="私の見方"&gt;私の見方&lt;/h2&gt;
+&lt;p&gt;SDK のリリースノートを一行ずつ読む必要はありません。&lt;/p&gt;
+&lt;p&gt;ただし、Azure 上で .NET を使って開発していて、Azure AI Search、ホスト型エージェント、またはクラウドネイティブなサービス統合がロードマップにあるなら、このリリースは目を通す価値があります。&lt;/p&gt;
+&lt;p&gt;元の投稿: &lt;a href="https://devblogs.microsoft.com/azure-sdk/azure-sdk-release-may-2026/"&gt;Azure SDK Release (May 2026)&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

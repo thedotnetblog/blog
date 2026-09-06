@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Integration | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/integration/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 23 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/integration/index.xml" rel="self" type="application/rss+xml"/><item><title>The Cosmos DB Built-In Connector for Logic Apps Is More Relevant Than It First Looks</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/cosmosdb-logic-apps-built-in-connector-ga/</link><pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/cosmosdb-logic-apps-built-in-connector-ga/</guid><description>Logic Apps Standard 向け Azure Cosmos DB ビルトインコネクタが一般提供開始。重要なのは接続性だけではなく、低レイテンシのインプロセス実行、変更フィードサポート、イベント駆動および AI 指向ワークフローへのよりクリーンなパスである。</description><content:encoded>&lt;p&gt;「コネクタのアナウンスメント」と聞くと、そのストーリーは些細なものだと思いがちである。&lt;/p&gt;
+&lt;p&gt;今回の場合、このアナウンスメントはもっと評価されるべきだと思う。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Logic Apps Standard 向け Azure Cosmos DB ビルトインコネクタ&lt;/strong&gt;が一般提供開始となった。興味深いのは、Logic Apps が Cosmos DB と通信できることだけではない。統合がよりネイティブで、より高性能で、イベント駆動ワークフローにより現実的になることである。&lt;/p&gt;
+&lt;h2 id="ビルトインが重要な理由"&gt;ビルトインが重要な理由&lt;/h2&gt;
+&lt;p&gt;マネージドコネクタとビルトインコネクタの違いは、単なるデプロイの詳細ではない。&lt;/p&gt;
+&lt;p&gt;Logic Apps ランタイムとインプロセスで実行することは以下を意味する:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;低レイテンシ&lt;/li&gt;
+&lt;li&gt;より良いスループット&lt;/li&gt;
+&lt;li&gt;より少ない外部ホップ&lt;/li&gt;
+&lt;li&gt;高ボリュームまたはリアクティブワークフローへのよりクリーンな適合&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;そして、&lt;strong&gt;変更フィードトリガー&lt;/strong&gt;、&lt;strong&gt;バルク操作&lt;/strong&gt;、&lt;strong&gt;パッチサポート&lt;/strong&gt;、&lt;strong&gt;Entra ID 認証&lt;/strong&gt;を追加すると、このコネクタは「単純なワークフロー配管」よりもはるかに本格的なものに見え始める。&lt;/p&gt;
+&lt;h2 id="ai-の角度も現実的である"&gt;AI の角度も現実的である&lt;/h2&gt;
+&lt;p&gt;記事の RAG パイプライン、エンベディングフロー、ナレッジベースパターンに関する議論が、私にとってこれをより際立たせた。&lt;/p&gt;
+&lt;p&gt;Logic Apps と Cosmos DB がこれほど緊密に統合されれば、プラットフォームは以下をサポートできる:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;リアクティブな取り込みフロー&lt;/li&gt;
+&lt;li&gt;ドキュメントエンリッチメントパイプライン&lt;/li&gt;
+&lt;li&gt;ベクトル関連ワークフロー&lt;/li&gt;
+&lt;li&gt;AI コンポーネントを中心としたノーコードまたはローコードのオーケストレーション&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これにより、このコネクタは統合スペシャリストだけでなく、より広い範囲に関連するものになる。&lt;/p&gt;
+&lt;h2 id="私の見解"&gt;私の見解&lt;/h2&gt;
+&lt;p&gt;これは、プロダクトカテゴリではなく実際のワークフローについて考えるほど、価値が高まる種類のリリースである。&lt;/p&gt;
+&lt;p&gt;Logic Apps Standard と Cosmos DB を一緒に使用しているチームにとって、GA コネクタは、カスタムグルーがあちこちに存在することなく、イベント駆動統合と AI 関連自動化のためのより強力な基盤を提供する。&lt;/p&gt;
+&lt;p&gt;それは注目に値する。&lt;/p&gt;
+&lt;p&gt;元記事: &lt;a href="https://devblogs.microsoft.com/cosmosdb/announcing-general-availability-of-the-azure-cosmos-db-built-in-connector-for-logic-apps-standard/"&gt;Announcing General Availability of the Azure Cosmos DB Built-in Connector for Logic Apps Standard&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

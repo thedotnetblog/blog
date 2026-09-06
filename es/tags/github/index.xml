@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>GitHub | The .NET Blog</title><link>https://thedotnetblog.com/es/tags/github/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>es</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sun, 14 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/es/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>La IA sola no cambiará el negocio — el sistema que la rodea lo hará</title><link>https://thedotnetblog.com/es/news/emiliano-montesdeoca/ai-alone-wont-change-business-system-will/</link><pubDate>Sun, 14 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/es/news/emiliano-montesdeoca/ai-alone-wont-change-business-system-will/</guid><description>El último ensayo de plataforma de IA de Jay Parikh vale la pena leerlo porque enmarca correctamente el verdadero desafío empresarial: los modelos importan, pero el valor duradero proviene del sistema gobernado que construye, contextualiza, ejecuta y mejora agentes con el tiempo.</description><content:encoded>&lt;p&gt;Hay una línea en el último ensayo de la plataforma de IA de Microsoft que creo que llega al corazón del momento actual:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;los ganadores no serán los que tengan más demos, sino los que conviertan la IA en un sistema gobernado y en mejora continua para el trabajo real.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Eso es exactamente correcto.&lt;/p&gt;
+&lt;h2 id="esta-es-una-de-las-mejores-piezas-estratégicas-de-ia-porque-acierta-el-nivel"&gt;Esta es una de las mejores piezas estratégicas de IA porque acierta el nivel&lt;/h2&gt;
+&lt;p&gt;Demasiadas conversaciones sobre IA todavía se reducen a hablar de modelos.&lt;/p&gt;
+&lt;p&gt;Qué modelo es más inteligente.
+Qué modelo es más barato.
+Qué modelo es el más nuevo.&lt;/p&gt;
+&lt;p&gt;No son preguntas irrelevantes, pero son demasiado pequeñas si piensas como una empresa.&lt;/p&gt;
+&lt;p&gt;El artículo fuente acierta la escala del desafío. Dice claramente que &amp;ldquo;&lt;strong&gt;Lo que determina el éxito es el sistema alrededor de la IA&lt;/strong&gt;.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Ese es el marco útil.&lt;/p&gt;
+&lt;p&gt;Porque el valor empresarial real proviene del sistema alrededor del modelo:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;cómo se construyen los agentes&lt;/li&gt;
+&lt;li&gt;cómo se fundamentan en el contexto empresarial&lt;/li&gt;
+&lt;li&gt;cómo se despliegan&lt;/li&gt;
+&lt;li&gt;cómo se gobiernan&lt;/li&gt;
+&lt;li&gt;cómo mejoran con el tiempo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Eso es lo que separa la experimentación dispersa de la transformación real.&lt;/p&gt;
+&lt;p&gt;Fuente original: &lt;a href="https://blogs.microsoft.com/blog/2026/06/02/ai-alone-wont-change-your-business-the-system-running-it-will/"&gt;AI alone won&amp;rsquo;t change your business. The system running it will.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>Azure DevOps y GitHub en la era de la IA: la división de plataformas se vuelve más clara</title><link>https://thedotnetblog.com/es/news/emiliano-montesdeoca/azure-devops-github-ai-era-platform-direction/</link><pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/es/news/emiliano-montesdeoca/azure-devops-github-ai-era-platform-direction/</guid><description>La última actualización de Azure DevOps y GitHub de Microsoft hace más clara la dirección: GitHub es donde aterrizan primero los flujos de trabajo de agentes más nuevos, mientras que Azure DevOps sigue siendo importante para las realidades empresariales híbridas y de transición.</description><content:encoded>&lt;p&gt;La última actualización de Azure DevOps y GitHub es interesante menos por una sola función y más por la dirección de la plataforma que hace explícita.&lt;/p&gt;
+&lt;p&gt;El mensaje es bastante claro ahora:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;GitHub es donde aterrizan primero los flujos de trabajo de agentes más nuevos&lt;/li&gt;
+&lt;li&gt;Azure DevOps sigue siendo importante, especialmente en entornos empresariales híbridos y de transición&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Esa división se está volviendo más fácil de describir honestamente.&lt;/p&gt;
+&lt;h2 id="lo-más-útil-de-esta-publicación-es-que-deja-de-fingir"&gt;Lo más útil de esta publicación es que deja de fingir&lt;/h2&gt;
+&lt;p&gt;Una de las mejores líneas en el artículo fuente es que para los equipos que impulsan el desarrollo activo, mover repositorios a GitHub a menudo significa desbloquear &amp;ldquo;&lt;strong&gt;los últimos flujos de trabajo impulsados por IA&lt;/strong&gt;&amp;rdquo;, mientras que Azure DevOps continúa recibiendo inversión para equipos que necesitan más tiempo.&lt;/p&gt;
+&lt;p&gt;Esa es una forma mucho más útil de hablar sobre el panorama de la plataforma que los mensajes vagos de &amp;ldquo;todo es genial en todas partes&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Fuente original: &lt;a href="https://devblogs.microsoft.com/devops/azure-devops-and-github-journeying-into-the-ai-era/"&gt;Azure DevOps and GitHub: Journeying into the AI Era&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Winapp-Cli | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/winapp-cli/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 25 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/winapp-cli/index.xml" rel="self" type="application/rss+xml"/><item><title>WinApp CLI Finally Makes Package Identity Practical for .NET Teams</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/winapp-cli-package-identity-for-dotnet/</link><pubDate>Sat, 25 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/winapp-cli-package-identity-for-dotnet/</guid><description>パッケージ ID はかつてセットアップの痛みだった。WinApp CLI はそれをアプリの実行と出荷のための反復可能なワークフローに変える。</description><content:encoded>&lt;p&gt;オリジナルソース: &lt;a href="https://devblogs.microsoft.com/dotnet/packaging-dotnet-apps-winapp/"&gt;Packaging and Package Identity for .NET apps with WinApp CLI on Windows&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;長年にわたり、パッケージ ID は .NET デスクトップ開発における静かに痛いギャップのひとつであった。アプリを素早く構築することはできても、通知、バックグラウンドタスク、ファイルハンドラ、新しい Windows 機能が必要になった瞬間に、マニフェストと署名の複雑さに陥っていた。&lt;/p&gt;
+&lt;p&gt;WinApp CLI はその方程式を実用的な方法で変える。&lt;/p&gt;
+&lt;p&gt;最大の成果はワークフロー統合である。init がプロジェクトの前提条件を準備し、dotnet run がプロジェクトレベルの設定を通じて ID で実行できるなら、チームはリリース終盤のパッケージ化作業ではなく、通常の開発中に Windows 固有の機能を検証できる。&lt;/p&gt;
+&lt;p&gt;このシフトは見た目以上に重要である。後半での ID 統合は&lt;strong&gt;隠れたリスク&lt;/strong&gt;を生み出す:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API は分離テストでは機能するが、現実的なアプリ起動パスでは失敗する。&lt;/li&gt;
+&lt;li&gt;パッケージングの欠陥は機能作業が完了した後に表面化する。&lt;/li&gt;
+&lt;li&gt;リリースの自信は不足しているスペシャリストに依存する。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;ID サポートを前倒しすることで、WinApp CLI はこれらの問題を修正が最も安価な場所で可視化する。&lt;/p&gt;
+&lt;p&gt;また、引数渡し、実行エイリアス動作、起動なしデバッグシナリオの明示的サポートも気に入っている。これらの詳細は、おもちゃツールとプロダクション対応ツールを分けるものである。エンジニアリングチームにはデフォルトだけでなく、制御が必要である。&lt;/p&gt;
+&lt;p&gt;パッケージングに関しては、pack と証明書生成およびインストールの組み合わせは、配布前に反復可能なローカル検証を必要とするチームにとってまさに正しい方向性である。それは、署名と証明書管理がオプションであるふりをすることなく、規律ある署名ワークフローへの障壁を下げる。&lt;/p&gt;
+&lt;p&gt;私の強い意見:&lt;strong&gt;.NET アプリがモダン Windows エクスペリエンスをターゲットにしているなら、パッケージ ID はリリース前週の関心事ではなく、最初の週の関心事として扱うべきである&lt;/strong&gt;。WinApp CLI は今やそれを標準にするのに十分なエルゴノミクスを提供している。&lt;/p&gt;
+&lt;p&gt;VS Code 拡張ストーリーも同様に関連性がある。すべてのチームが一日中ターミナルスクリプトで生活したいわけではなく、統合された F5 デバッグとコマンドパレット操作は、混合経験チームのオンボーディング摩擦を減らす。これは特に、レガシーデスクトップツールパターンから移行中の組織で役立つ。&lt;/p&gt;
+&lt;h3 id="実践的導入計画"&gt;実践的導入計画&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;代表的なアプリで &lt;code&gt;winapp init&lt;/code&gt; を実行し&lt;/strong&gt;、ID ゲート付き機能を即座に検証する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;リリース候補の CI に MSIX パッケージングを追加する&lt;/strong&gt;。配布が後になっても構わない。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;コンソールアプリの場合&lt;/strong&gt;、デバッグの混乱を避けるために実行エイリアス設定を早期に標準化する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;複数のデスクトップスタックをメンテナンスしている場合&lt;/strong&gt;、WinApp を共有 ID およびパッケージングのベースラインとして使用する。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="結論"&gt;結論&lt;/h2&gt;
+&lt;p&gt;WinApp CLI は単にコマンドを追加するだけではない。&lt;strong&gt;言い訳を排除する&lt;/strong&gt;。パッケージ ID はもはや .NET デスクトップチームにとって高度なニッチではない。それは必須要件になりつつあり、そして今やついにアプローチ可能になった。&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Data API Builder | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/data-api-builder/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Wed, 22 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/data-api-builder/index.xml" rel="self" type="application/rss+xml"/><item><title>Perbatasan Nyata untuk SQL Agen: Auditabilitas dengan OBO di SQL MCP Server</title><link>https://thedotnetblog.com/id/news/emiliano-montesdeoca/sql-mcp-obo-audit-frontier/</link><pubDate>Wed, 22 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/news/emiliano-montesdeoca/sql-mcp-obo-audit-frontier/</guid><description>Otentikasi On-Behalf-Of di Data API builder plus SQL MCP Server adalah tonggak tata kelola utama karena Azure SQL akhirnya dapat mengaudit manusia di balik tindakan agen.</description><content:encoded>&lt;p&gt;Sumber asli: &lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-obo-auth/"&gt;https://devblogs.microsoft.com/azure-sql/sql-mcp-server-obo-auth/&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>Jalur Kustom Data API Builder Memungkinkan Anda Mendesain API untuk Manusia, Bukan Tabel</title><link>https://thedotnetblog.com/id/news/emiliano-montesdeoca/data-api-builder-custom-paths-domain-first/</link><pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/news/emiliano-montesdeoca/data-api-builder-custom-paths-domain-first/</guid><description>Jalur REST majemuk di DAB adalah fitur kecil dengan dampak arsitektural besar untuk desain API berorientasi domain.</description><content:encoded>&lt;p&gt;Sumber asli: &lt;a href="https://devblogs.microsoft.com/azure-sql/data-api-builder-custom-rest-paths/"&gt;Compose your API surface with Data API builder custom paths&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>Ekstensi MSSQL untuk VS Code diam-diam menjadi platform yang jauh lebih besar</title><link>https://thedotnetblog.com/id/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/</link><pubDate>Tue, 19 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/</guid><description>Pembaruan terbaru ekstensi MSSQL menambahkan provisioning Azure SQL, desain schema berbantuan Copilot, Data API builder, dan notebook. Bagian yang menarik adalah seberapa banyak pekerjaan database yang sekarang bisa tetap di dalam VS Code.</description><content:encoded>&lt;p&gt;&lt;em&gt;Artikel ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Ekstensi MSSQL untuk VS Code sudah lama berkembang, tetapi pembaruan terbaru ini membuat arahnya jauh lebih jelas.&lt;/p&gt;
+&lt;p&gt;Ini bukan lagi sekadar «connect lalu jalankan beberapa query».&lt;/p&gt;
+&lt;p&gt;Dengan &lt;strong&gt;provisioning Azure SQL&lt;/strong&gt;, &lt;strong&gt;Schema Designer dengan Copilot&lt;/strong&gt;, &lt;strong&gt;SQL Notebooks&lt;/strong&gt;, dan &lt;strong&gt;Data API builder&lt;/strong&gt; yang semuanya didorong maju dalam satu rilis, ekstensi ini menjadi workspace yang jauh lebih lengkap untuk pengembangan yang berpusat pada database.&lt;/p&gt;
+&lt;h2 id="daya-tarik-praktisnya-adalah-provisioning-langsung-dari-editor"&gt;Daya tarik praktisnya adalah provisioning langsung dari editor&lt;/h2&gt;
+&lt;p&gt;Tulisan sumber mengatakan bahwa Anda sekarang bisa membuat cloud database yang dikelola penuh «langsung dari editor Anda tanpa biaya» menggunakan free tier.&lt;/p&gt;
+&lt;p&gt;Itu jenis fitur yang terdengar kecil sampai Anda menyadari betapa banyak friction setup yang dihilangkannya.&lt;/p&gt;
+&lt;p&gt;Bagi banyak developer, bagian yang merepotkan dari eksperimen berat data bukan SQL itu sendiri. Melainkan gap environment antara:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ide&lt;/li&gt;
+&lt;li&gt;database&lt;/li&gt;
+&lt;li&gt;schema&lt;/li&gt;
+&lt;li&gt;API&lt;/li&gt;
+&lt;li&gt;backend yang bisa diuji&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Jika gap itu dipersingkat di dalam satu tool, seluruh workflow menjadi lebih menarik.&lt;/p&gt;
+&lt;h2 id="inilah-seperti-apa-inner-loop-yang-lebih-kuat-untuk-pekerjaan-data"&gt;Inilah seperti apa inner loop yang lebih kuat untuk pekerjaan data&lt;/h2&gt;
+&lt;p&gt;Yang saya suka dari rilis ini adalah ia menjaga lebih banyak workflow database di satu tempat:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;memprovision database&lt;/li&gt;
+&lt;li&gt;mendesain schema&lt;/li&gt;
+&lt;li&gt;meninjau perubahan&lt;/li&gt;
+&lt;li&gt;menghasilkan script ORM&lt;/li&gt;
+&lt;li&gt;mengekspos API&lt;/li&gt;
+&lt;li&gt;menguji endpoint&lt;/li&gt;
+&lt;li&gt;mendokumentasikan dan melakukan query lewat notebook&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Itu adalah cerita yang jauh lebih meyakinkan daripada memperlakukan SQL sebagai tool sampingan yang terpisah di stack.&lt;/p&gt;
+&lt;h2 id="workflow-schema-berbantuan-copilot-adalah-tempat-nilai-ai-terasa-nyata"&gt;Workflow schema berbantuan Copilot adalah tempat nilai AI terasa nyata&lt;/h2&gt;
+&lt;p&gt;Tambahan pada schema designer sangat menarik karena tampaknya berhasil mencapai keseimbangan yang baik.&lt;/p&gt;
+&lt;p&gt;Nilainya bukan «AI mendesain model data Anda dan Anda mempercayainya begitu saja».&lt;/p&gt;
+&lt;p&gt;Nilainya adalah:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;titik awal yang lebih cepat&lt;/li&gt;
+&lt;li&gt;review visual&lt;/li&gt;
+&lt;li&gt;pelacakan perubahan&lt;/li&gt;
+&lt;li&gt;output yang berorientasi migrasi&lt;/li&gt;
+&lt;li&gt;kontrol accept/undo yang eksplisit&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Itu adalah workflow AI yang jauh lebih sehat dibanding auto-generation penuh tanpa jalur inspeksi.&lt;/p&gt;
+&lt;p&gt;Dan untuk pekerjaan database, kemampuan review sangat penting.&lt;/p&gt;
+&lt;h2 id="data-api-builder-adalah-pengganda-yang-tenang"&gt;Data API builder adalah pengganda yang tenang&lt;/h2&gt;
+&lt;p&gt;Fitur lain yang tidak akan saya abaikan adalah integrasi Data API builder.&lt;/p&gt;
+&lt;p&gt;Jika Anda bisa berpindah dari schema ke:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;REST&lt;/li&gt;
+&lt;li&gt;GraphQL&lt;/li&gt;
+&lt;li&gt;endpoint MCP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;dalam environment yang sama, itu menciptakan jalur yang sangat efisien untuk prototype backend dan tool internal.&lt;/p&gt;
+&lt;p&gt;Itu tidak menggantikan rekayasa backend yang lebih dalam. Tetapi itu sangat mempersingkat jalan dari ide database ke antarmuka yang bekerja.&lt;/p&gt;
+&lt;h2 id="pandangan-saya"&gt;Pandangan saya&lt;/h2&gt;
+&lt;p&gt;Rilis ini membuat ekstensi MSSQL terasa lebih seperti platform kecil di dalam VS Code daripada sekadar add-on sederhana.&lt;/p&gt;
+&lt;p&gt;Bagi developer yang membangun API, tool data, tool admin, atau prototype berbasis SQL, itu adalah perubahan yang berarti.&lt;/p&gt;
+&lt;p&gt;Dan jika Microsoft terus mempertajam loop ini, ekstensi ini akan menjadi jauh lebih strategis daripada yang masih diasumsikan banyak orang.&lt;/p&gt;
+&lt;p&gt;Tulisan asli: &lt;a href="https://devblogs.microsoft.com/azure-sql/vscode-mssql-june-2026/"&gt;MSSQL Extension for VS Code: Azure SQL Database Provisioning and More&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>SQL MCP Server di Azure App Service — Tanpa Container</title><link>https://thedotnetblog.com/id/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</link><pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</guid><description>SQL MCP Server kini dapat berjalan di Azure App Service tanpa Docker atau Kubernetes. Apa artinya bagi developer .NET yang membangun agen AI yang berkomunikasi dengan database SQL.</description><content:encoded>&lt;p&gt;&lt;em&gt;Postingan ini telah diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Jujur saja: setiap kali melihat &amp;ldquo;membutuhkan container&amp;rdquo; dalam sebuah tutorial, ada rasa lelah yang muncul. Container memang hebat — sampai tim kamu tidak punya strategi container, dan fitur yang tampak sederhana tiba-tiba tersangkut pada kompleksitas orkestrasi yang tidak direncanakan siapapun.&lt;/p&gt;
+&lt;p&gt;Itulah mengapa ini menarik perhatian saya. SQL MCP Server kini dapat berjalan di Azure App Service — tanpa Docker, tanpa Kubernetes, hanya dengan file konfigurasi Data API Builder (DAB) yang sama yang mengekspos database SQL kamu melalui MCP, REST, dan GraphQL.&lt;/p&gt;
+&lt;h2 id="apa-itu-sql-mcp-server"&gt;Apa itu SQL MCP Server?&lt;/h2&gt;
+&lt;p&gt;Pengenalan singkat jika kamu belum familiar. SQL MCP Server berada di antara agen AI kamu dan database SQL. Alih-alih memberikan akses langsung ke database pada agen (ide yang buruk), ia mengekspos tabel dan view kamu sebagai lapisan abstraksi — entitas dengan izin yang terdefinisi.&lt;/p&gt;
+&lt;p&gt;Dibangun di atas &lt;a href="https://learn.microsoft.com/id-id/azure/data-api-builder/"&gt;Data API Builder&lt;/a&gt;, yang berarti satu file konfigurasi mengelola MCP &lt;em&gt;dan&lt;/em&gt; REST &lt;em&gt;dan&lt;/em&gt; GraphQL sekaligus. Agen kamu berkomunikasi dengan endpoint MCP. Aplikasi tradisional berkomunikasi dengan REST atau GraphQL. Konfigurasi yang sama, runtime yang sama, permukaan yang berbeda.&lt;/p&gt;
+&lt;p&gt;Ini benar-benar berguna — kamu tidak perlu memelihara dua lapisan API yang terpisah.&lt;/p&gt;
+&lt;h2 id="masalah-container-dan-solusinya"&gt;Masalah Container (dan Solusinya)&lt;/h2&gt;
+&lt;p&gt;Model deployment awal SQL MCP Server menggunakan container. Ini berfungsi dengan baik di banyak tim — tapi tidak semua. Banyak tim .NET menggunakan Azure App Service atau VM sebagai standar. Mengharuskan runtime container hanya untuk mengekspos endpoint SQL menambah hambatan yang tidak diminta siapapun.&lt;/p&gt;
+&lt;p&gt;Panduan baru menunjukkan cara melewatkan container sepenuhnya. Semuanya berjalan dengan perintah &lt;code&gt;dab start&lt;/code&gt;, di-host di App Service sebagai proses web .NET 8 standar.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Instal Data API Builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet tool install microsoft.dataapibuilder --prerelease -g
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Inisialisasi konfigurasi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --host-mode Development --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;SQL_CONNECTION_STRING&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Tambahkan entitas&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add products --source dbo.products --permissions &lt;span class="s2"&gt;&amp;#34;authenticated:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Konfigurasi penyedia autentikasi App Service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab configure --runtime.host.authentication.provider AppService
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Jalankan server&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Pada titik ini kamu memiliki MCP di &lt;code&gt;/mcp&lt;/code&gt;, REST dan GraphQL dari proses yang sama — dan tidak ada yang berjalan di container.&lt;/p&gt;
+&lt;h2 id="autentikasi-tanpa-api-key-bersama"&gt;Autentikasi Tanpa API Key Bersama&lt;/h2&gt;
+&lt;p&gt;Inilah bagian yang paling saya hargai. Saat deploy ke App Service, kamu mengonfigurasi Microsoft Entra ID sebagai penyedia autentikasi. Tidak ada rahasia bersama dalam file konfigurasi, tidak ada API key untuk dirotasi.&lt;/p&gt;
+&lt;p&gt;Connection string tetap berada di variabel lingkungan App Service (bukan di &lt;code&gt;dab-config.json&lt;/code&gt;), dan endpoint MCP dilindungi oleh autentikasi platform. Jika workload Azure kamu sudah selaras dengan Entra ID, ini akan terintegrasi secara alami.&lt;/p&gt;
+&lt;p&gt;Untuk development lokal, beralih ke mode &lt;code&gt;Simulator&lt;/code&gt; dan transport STDIO. Kembali ke mode &lt;code&gt;AppService&lt;/code&gt; sebelum deployment. Bersih dan eksplisit.&lt;/p&gt;
+&lt;h2 id="deploy-ke-app-service"&gt;Deploy ke App Service&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az appservice plan create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --sku B1 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --is-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --plan &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --runtime &lt;span class="s2"&gt;&amp;#34;DOTNETCORE:8.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp config &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --startup-file &lt;span class="s2"&gt;&amp;#34;dab start&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Kemudian deploy proyek DAB kamu menggunakan metode deployment kode yang sudah digunakan tim kamu. Detail kuncinya: ini adalah deployment &lt;strong&gt;kode&lt;/strong&gt;, bukan deployment container.&lt;/p&gt;
+&lt;h2 id="mengapa-penting-bagi-developer-net"&gt;Mengapa Penting bagi Developer .NET&lt;/h2&gt;
+&lt;p&gt;Jika kamu membangun agen AI di .NET, cepat atau lambat agen kamu perlu berkomunikasi dengan database. SQL MCP Server memberimu cara terstruktur untuk melakukannya — tanpa mengekspos connection string mentah.&lt;/p&gt;
+&lt;p&gt;Lihat panduan lengkapnya di &lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-app-service/"&gt;postingan blog asli&lt;/a&gt; dan &lt;a href="https://github.com/Azure-Samples/SQL-MCP-NoContainer"&gt;repositori sampel GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="kesimpulan"&gt;Kesimpulan&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server di App Service adalah pilihan pragmatis untuk tim .NET yang ingin memberikan akses data SQL terstruktur kepada agen mereka tanpa strategi container. Coba — agen kamu akan mengapresiasi permukaan API yang bersih.&lt;/p&gt;</content:encoded></item><item><title>SQL MCP Server — Cara yang Tepat untuk Memberi Agen AI Akses Database</title><link>https://thedotnetblog.com/id/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>SQL MCP Server dari Data API builder memberi agen AI akses database yang aman dan deterministik tanpa mengekspos skema atau mengandalkan NL2SQL.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Postingan ini diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Jujur saja: sebagian besar server MCP database yang tersedia saat ini sangat menakutkan. Mereka mengambil kueri bahasa alami, menghasilkan SQL secara langsung, dan menjalankannya pada data produksi Anda.&lt;/p&gt;
+&lt;p&gt;Tim Azure SQL baru saja &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;memperkenalkan SQL MCP Server&lt;/a&gt;, dan mengambil pendekatan yang secara fundamental berbeda.&lt;/p&gt;
+&lt;h2 id="mengapa-tidak-nl2sql"&gt;Mengapa tidak NL2SQL?&lt;/h2&gt;
+&lt;p&gt;Model tidak deterministik. SQL MCP Server menggunakan pendekatan &lt;strong&gt;NL2DAB&lt;/strong&gt;. Agen bekerja dengan lapisan abstraksi entitas Data API builder untuk menghasilkan T-SQL yang akurat secara deterministik.&lt;/p&gt;
+&lt;h2 id="tujuh-alat-bukan-tujuh-ratus"&gt;Tujuh alat, bukan tujuh ratus&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server mengekspos tepat tujuh alat DML:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — temukan entitas yang tersedia&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — sisipkan baris&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — kueri tabel dan view&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — modifikasi baris&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — hapus baris&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — jalankan stored procedure&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — kueri agregasi&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="mulai-dalam-tiga-perintah"&gt;Mulai dalam tiga perintah&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers --source dbo.Customers --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="cerita-keamanan-solid"&gt;Cerita keamanan solid&lt;/h2&gt;
+&lt;p&gt;RBAC di setiap lapisan, integrasi Azure Key Vault, Microsoft Entra + OAuth kustom.&lt;/p&gt;
+&lt;p&gt;Lihat &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;posting lengkap&lt;/a&gt; dan &lt;a href="https://aka.ms/sql/mcp"&gt;dokumentasi&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

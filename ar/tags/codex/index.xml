@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Codex | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/codex/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/codex/index.xml" rel="self" type="application/rss+xml"/><item><title>Mission Control للعوامل البرمجية: تجربة موحدة في VS Code</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/unified-agent-experience-mission-control/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/unified-agent-experience-mission-control/</guid><description>يوفر VS Code تجربة موحدة للعوامل البرمجية المحلية والسحابية وعبر سطر الأوامر والجهات الخارجية في جلسات العوامل، مما يتيح للمطورين تتبع العمل المستقل والتحكم فيه وتنسيقه.</description><content:encoded>&lt;p&gt;&lt;em&gt;تمت ترجمة هذا المنشور تلقائيًا. للنسخة الأصلية، &lt;a href="https://thedotnetblog.com/ar/news/emiliano-montesdeoca/unified-agent-experience-mission-control/"&gt;انقر هنا&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;h1 id="mission-control-للعوامل-البرمجية-تجربة-موحدة-في-vs-code"&gt;Mission Control للعوامل البرمجية: تجربة موحدة في VS Code&lt;/h1&gt;
+&lt;p&gt;يسهل فهم عامل مساعد برمجي واحد. لكن عدة عوامل تعمل في أماكن مختلفة ليس كذلك.&lt;/p&gt;
+&lt;p&gt;يعمل عامل واحد محليًا في VS Code. عامل آخر يعمل على قضية GitHub في السحابة. عامل سطر الأوامر يعيش في المحطة الطرفية. قد يكون لعامل برمجي من جهة خارجية نموذج جلسة مختلف وحدود مختلفة. بدون عرض مشترك، يقضي المطورون وقتًا أطول في تتبع العمل أكثر من الإشراف عليه.&lt;/p&gt;
+&lt;p&gt;تعالج تجربة VS Code الموحدة للعوامل مشكلة التنسيق هذه من خلال جلسات العوامل: مكان واحد لتشغيل العوامل ورؤية حالتها وفتح محادثاتهم والتدخل عندما يتغير الخطة.&lt;/p&gt;
+&lt;p&gt;هذا يتعلق أقل بإضافة عامل آخر وأكثر بجعل عدة عوامل قابلة للإدارة.&lt;/p&gt;
+&lt;h2 id="عرض-واحد-لأنواع-مختلفة-من-العمل"&gt;عرض واحد لأنواع مختلفة من العمل&lt;/h2&gt;
+&lt;p&gt;تصف المقالة الأصلية أربعة مشاركين مختلفين: GitHub Copilot المحلي، وعامل Copilot البرمجي في السحابة، و GitHub Copilot CLI، و OpenAI Codex لمشتركي Copilot المؤهلين.&lt;/p&gt;
+&lt;p&gt;لديهم نقاط قوة مختلفة:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;يمكن لعامل محلي فحص مساحة العمل الحالية وإجراء تغييرات سريعة.&lt;/li&gt;
+&lt;li&gt;يمكن لعامل البرمجة السحابي العمل بشكل غير متزامن على قضية وفتح طلب سحب.&lt;/li&gt;
+&lt;li&gt;يناسب عامل سطر الأوامر سير العمل الثقيل للمحطة الطرفية والأوامر التشغيلية.&lt;/li&gt;
+&lt;li&gt;يمكن لمزود آخر أن يوفر نموذجًا مختلفًا أو أسلوب استدلال.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;توفر جلسات العوامل بيتًا مشتركًا لتلك المهام. يمكنك رؤية ما يعمل وما يفعله وأين يمكنك متابعة المحادثة.&lt;/p&gt;
+&lt;p&gt;هذا الوضوح مهم لأن العمل المستقل لا يزيل التنسيق. إنه يجعل التنسيق مهمة هندسية من الدرجة الأولى.&lt;/p&gt;
+&lt;h2 id="المقاطعات-جزء-من-سير-العمل"&gt;المقاطعات جزء من سير العمل&lt;/h2&gt;
+&lt;p&gt;تقدم المقالة الأصلية ملاحظة بسيطة: &amp;ldquo;من الشائع إرسال موجه وإدراك أنك نسيت شيئًا مهمًا.&amp;rdquo; في السابق، كان الخيار غالبًا هو الانتظار أو الإلغاء. مع محررات الدردشة، يمكنك فتح جلسة نشطة وإضافة معلومات بينما يعمل العامل.&lt;/p&gt;
+&lt;p&gt;هذا أقرب إلى التعاون الحقيقي. تتغير المتطلبات. قد يكشف الاختبار افتراضًا. قد يلاحظ المراجع أن واجهة برمجية يجب أن تبقى متوافقة للخلف. العامل المفيد ليس الذي لا يحتاج أبدًا إلى تصحيح؛ إنه الذي يمكنه استيعاب التصحيح دون فقدان المهمة كلها.&lt;/p&gt;
+&lt;p&gt;بالنسبة لعمل .NET، قد تكون المقاطعة بسيطة مثل:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Keep the existing public route unchanged. Add the new behavior behind the application service,
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;use the existing ProblemDetails convention, and add a test for the old response shape.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;التعليمات قصيرة لأن المستودع يحمل بالفعل السياق الأكبر. الجلسة هي المكان لتصحيح الاتجاه، وليس لإعادة صياغة النظام بأكمله.&lt;/p&gt;
+&lt;h2 id="العوامل-المخصصة-تحول-عادات-الفريق-إلى-أدوار"&gt;العوامل المخصصة تحول عادات الفريق إلى أدوار&lt;/h2&gt;
+&lt;p&gt;يقدم VS Code أيضًا عوامل متخصصة مثل Plan. بدلاً من التنفيذ فورًا، يطرح عامل التخطيط أسئلة حول النطاق والمكونات والمكتبات والقيود قبل إنتاج مواصفات التنفيذ.&lt;/p&gt;
+&lt;p&gt;هذا النمط مفيد خارج عامل مدمج. يمكن للفريق تحديد أدوار مركزة:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;البحث&lt;/strong&gt; يجمع الأدلة ويكتب سجل قرار قصير.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;المراجعة&lt;/strong&gt; تحقق من التغيير مقابل اتفاقيات المستودع.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;الاختبار&lt;/strong&gt; يحدد الحالات المفقودة ويقترح خطة اختبار.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;الهندسة المعمارية&lt;/strong&gt; تقارن الخيارات دون تعديل الملفات.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;قد يبدو تعريف عامل مخصص صغير مثل هذا:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;agent&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;plan&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;description&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;Refines vague requests into clear implementation specs&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;prompt&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="sd"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Ask about scope, constraints, existing patterns, and edge cases.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Produce a concise specification before any implementation begins.&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;الجزء المفيد ليس YAML. إنه الفصل الصريح للمسؤوليات. لا ينبغي لعامل التخطيط أن يعدل كود الإنتاج بهدوء. لا ينبغي لعامل المراجعة أن يعيد كتابة التصميم الذي من المفترض أن يقيمه.&lt;/p&gt;
+&lt;h2 id="العوامل-الفرعية-تقلل-تصادمات-السياق"&gt;العوامل الفرعية تقلل تصادمات السياق&lt;/h2&gt;
+&lt;p&gt;تتراكم المحادثات الطويلة السياق غير ذي الصلة. توفر العوامل الفرعية مساحة عمل معزولة لمهمة بحث محدودة، ثم تعيد النتيجة إلى الجلسة الرئيسية.&lt;/p&gt;
+&lt;p&gt;هذا ملاءمة جيدة لأسئلة مثل:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Analyze the API project and recommend an authentication strategy.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Return trade-offs and a decision record. Do not edit files.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;يبقى العامل الرئيسي مركزًا على التنفيذ بينما يتعامل عامل البحث مع سؤال أضيق. تنطبق نفس المبادئ على الفرق: التفويض الواضح ينتج نتائج أفضل من إطلاق عدة عوامل بسلطة متداخلة.&lt;/p&gt;
+&lt;h2 id="التحذير-عدد-أكبر-من-العوامل-يعني-المزيد-من-التنسيق"&gt;التحذير: عدد أكبر من العوامل يعني المزيد من التنسيق&lt;/h2&gt;
+&lt;p&gt;يمكن لجلسات العوامل عرض النشاط، لكنها لا تستطيع حل تضارب الملكية. عاملان يحرران نفس المنطقة لا يزالان يمكنهما إنشاء مشكلة دمج. عامل سحابي وعامل محلي يمكنهما إجراء افتراضات غير متوافقة. يمكن لعامل مخصص إنتاج توصية يتجاهلها عامل آخر.&lt;/p&gt;
+&lt;p&gt;حدد الحدود:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;عامل واحد يملك التنفيذ لفرع معين.&lt;/li&gt;
+&lt;li&gt;تعيد عوامل البحث المحتفظات، وليس التحريرات غير المتتبعة.&lt;/li&gt;
+&lt;li&gt;طلبات السحب تبقى حدود المراجعة.&lt;/li&gt;
+&lt;li&gt;أسماء العوامل والمحفزات تحدد ما قد يتغيرون.&lt;/li&gt;
+&lt;li&gt;يتم الاحتفاظ بمخرجات الجلسة عندما تشرح قرارًا مهمًا.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="رأيي"&gt;رأيي&lt;/h2&gt;
+&lt;p&gt;مستقبل الوكالات المتعددة ليس طابور نوافذ الدردشة. إنه فريق صغير له أدوار وتسليمات ومسؤولية.&lt;/p&gt;
+&lt;p&gt;جلسات العوامل قيمة لأنها تعترف بهذا الواقع. إنها تعطي المطورين سطح تحكم للعمل الذي يحدث بالفعل عبر المحرر والمحطة الطرفية والسحابة. سيأتي الكسب الإنتاجي التالي أقل من وجود عوامل أكثر وأكثر من جعل حدودهم واضحة.&lt;/p&gt;
+&lt;p&gt;بالنسبة لفريق .NET، سأبدأ بعامل تخطيط واحد وعامل تنفيذ واحد. استخدم مخرجات التخطيط كمواصفات المشكلة أو طلب السحب، ثم دع عامل التنفيذ يعمل ضمن تلك الحدود. قياس إعادة العمل قبل إضافة المزيد من الأدوار.&lt;/p&gt;
+&lt;p&gt;أفضل مراقبة مهمة هي التي تجعل الملكية واضحة.&lt;/p&gt;</content:encoded></item></channel></rss>

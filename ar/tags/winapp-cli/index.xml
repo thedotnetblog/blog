@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Winapp-Cli | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/winapp-cli/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 25 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/winapp-cli/index.xml" rel="self" type="application/rss+xml"/><item><title>WinApp CLI أخيرًا يجعل Package Identity عمليًا لفرق .NET</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/winapp-cli-package-identity-for-dotnet/</link><pubDate>Sat, 25 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/winapp-cli-package-identity-for-dotnet/</guid><description>package identity كانت ألم إعداد؛ WinApp CLI يحولها إلى سير عمل قابل للتكرار لتشغيل وشحن التطبيقات.</description><content:encoded>&lt;p&gt;المصدر الأصلي: &lt;a href="https://devblogs.microsoft.com/dotnet/packaging-dotnet-apps-winapp/"&gt;Packaging and Package Identity for .NET apps with WinApp CLI on Windows&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;لسنوات، كانت package identity واحدة من تلك الفجوات المؤلمة بهدوء في تطوير سطح المكتب .NET. يمكنك بناء تطبيق بسرعة، لكن اللحظة التي احتجت فيها إشعارات أو مهام خلفية أو معالجات ملفات أو قدرات Windows أحدث، كنت تقع في تعقيد البيان والتوقيع.&lt;/p&gt;
+&lt;p&gt;WinApp CLI يغير تلك المعادلة بطريقة عملية.&lt;/p&gt;
+&lt;p&gt;أكبر فوز هو تكامل سير العمل. إذا كان init يعد متطلبات المشروع و dotnet run يمكنه التنفيذ بهوية من خلال تكوين على مستوى المشروع، يمكن للفرق التحقق من ميزات Windows الخاصة أثناء التطوير العادي بدلاً من تدريبات التعبئة في وقت متأخر من الإصدار.&lt;/p&gt;
+&lt;p&gt;هذا التحول أهم مما يبدو. تكامل الهوية المتأخر يخلق خطرًا خفيًا:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;APIs تعمل في اختبارات معزولة لكنها تفشل في مسارات بدء تشغيل التطبيق الواقعية.&lt;/li&gt;
+&lt;li&gt;عيوب التعبئة تظهر بعد اكتمال عمل الميزات.&lt;/li&gt;
+&lt;li&gt;ثقة الإصدار تعتمد على متخصصين نادرين.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;بدعم الهوية المبكر، WinApp CLI يجعل هذه المشكلات مرئية حيث تكون أرخص في الإصلاح.&lt;/p&gt;
+&lt;p&gt;أعجب أيضًا بالدعم الصريح لتمرير الوسائط وسلوك اسم التنفيذ وسيناريوهات التصحيح بدون إطلاق. تلك التفاصيل هي ما يفصل أدوات الألعاب عن الأدوات الصديقة للإنتاج. فرق الهندسة تحتاج تحكمًا، وليس فقط إعدادات افتراضية.&lt;/p&gt;
+&lt;p&gt;في التعبئة، مجموعة pack بالإضافة إلى توليد الشهادة و install هو بالضبط الاتجاه الصحيح للفرق التي تحتاج تحققًا محليًا قابلاً للتكرار قبل التوزيع. إنه يخفض الحاجز لسير عمل توقيع منضبط دون التظاهر بأن الثقة وإدارة الشهادات اختيارية.&lt;/p&gt;
+&lt;p&gt;رأيي القوي: إذا كان تطبيق .NET الخاص بك يستهدف تجارب Windows الحديثة، يجب معاملة package identity كاهتمام في الأسبوع الأول، وليس كاهتمام في أسبوع الإصدار. WinApp CLI يعطيك الآن بيئة عمل كافية لجعل ذلك معيارًا.&lt;/p&gt;
+&lt;p&gt;قصة إضافة VS Code ذات صلة أيضًا. ليس كل فريق يريد العيش في نصوص طرفية طوال اليوم، وتصحيح F5 المتكامل إضافة عمليات لوحة الأوامر تقلل احتكاك onboarding للفرق ذات الخبرات المختلطة. هذا مفيد بشكل خاص في المنظمات التي تنتقل من أنماط أدوات سطح المكتب القديمة.&lt;/p&gt;
+&lt;p&gt;خطة تبني عملية:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;شغّل winapp init على تطبيق تمثيلي واحد وتحقق من الميزات المقيدة بالهوية فورًا.&lt;/li&gt;
+&lt;li&gt;أضف تعبئة MSIX إلى CI لمرشحي الإصدار، حتى لو حدث التوزيع لاحقًا.&lt;/li&gt;
+&lt;li&gt;لتطبيقات وحدة التحكم، وحدد إعداد اسم التنفيذ مبكرًا لتجنب ارتباك التصحيح.&lt;/li&gt;
+&lt;li&gt;إذا كنت تدير مكدسات سطح مكتب متعددة، استخدم WinApp كخط أساس الهوية والتعبئة المشترك.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;باختصار، WinApp CLI لا يضيف أوامر فقط. إنه يزيل الأعذار. Package identity لم تعد niche متقدم لفرق .NET على سطح المكتب. إنها أصبحت أساس الطاولة، وأخيرًا أصبحت متاحة.&lt;/p&gt;</content:encoded></item></channel></rss>

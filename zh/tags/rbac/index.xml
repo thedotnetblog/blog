@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Rbac | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/rbac/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 16 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/rbac/index.xml" rel="self" type="application/rss+xml"/><item><title>无需密钥的 Cosmos DB 访问是新的基线标准</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/cosmosdb-role-assignment-without-secrets/</link><pubDate>Thu, 16 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/cosmosdb-role-assignment-without-secrets/</guid><description>如果你的 Cosmos DB 应用仍然依赖于密钥，你在运维安全上已经落后了。</description><content:encoded>&lt;p&gt;原文来源：&lt;a href="https://devblogs.microsoft.com/cosmosdb/which-azure-cosmos-db-role-does-my-app-need/"&gt;Which Azure Cosmos DB Role Does My App Need?&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这个 Cosmos DB 指南中最重要的思想不是一个命令、一个角色 ID 或一个 CLI 技巧——而是架构性的：&lt;strong&gt;停止将凭据视为应用配置&lt;/strong&gt;，开始将身份视为运行时状态。&lt;/p&gt;
+&lt;p&gt;太多团队仍然使用连接字符串发布，因为这样感觉很快。其实不快。这是递延的风险。配置文件中的每个密钥都是一个等待发生的事故——一次匆忙的提交、一个复制的管道变量或一个泄漏的日志。托管身份加上数据平面 RBAC 几乎完全消除了这类故障。&lt;/p&gt;
+&lt;p&gt;实际的挑战在于对&lt;strong&gt;控制平面&lt;/strong&gt;和&lt;strong&gt;数据平面&lt;/strong&gt;授权的混淆。这是很多本来很强大的团队浪费数天时间的地方。资源上的 Azure RBAC 角色不会自动授予文档访问权限，而 Cosmos 数据平面角色也不授予账户管理权限。如果你的团队没有在你的操作手册中明确记录这种分离，你将不断遇到脆弱的部署和难以调试的 403 错误。&lt;/p&gt;
+&lt;h3 id="我对生产团队的个人建议"&gt;我对生产团队的个人建议&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;读取路径从 Data Reader 开始&lt;/strong&gt;，只有确实需要写入的地方才使用 Data Contributor。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;仅在每个账户有单一应用边界时才广泛授权&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;如果你跨多个服务共享一个账户&lt;/strong&gt;，尽早将范围缩小到数据库或容器边界，而不是等待审计压力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这是一类&lt;strong&gt;复利&lt;/strong&gt;式的决策。当你用 &lt;code&gt;DefaultAzureCredential&lt;/code&gt; 和仅端点配置来连接你的 .NET 应用时，每个环境都变得更干净：本地、CI、staging 和生产。你也能更快地进行事件响应，因为你可以通过角色分配来推理权限，而不是寻找神秘的密钥。&lt;/p&gt;
+&lt;p&gt;文章还暗示了一个成熟团队应该接受的理念：&lt;strong&gt;权限是迭代式设计&lt;/strong&gt;，而非一次性设置。你可以从足够宽的范围开始以完成交付，然后通过遥测和访问审查逐步收紧。最小权限不是一个哲学终点，而是一个交付习惯。&lt;/p&gt;
+&lt;p&gt;如果你只从这篇文章中采纳一件事，那就是这个：&lt;strong&gt;先移除密钥，再优化角色&lt;/strong&gt;。搞反顺序的团队通常会在会议上卡住。先移除密钥的团队通常先交付，再加固。&lt;/p&gt;
+&lt;p&gt;在 2026 年，&lt;strong&gt;无密钥数据访问不是一个高级模式&lt;/strong&gt;。它是在 Azure 上运行严肃 .NET 系统的最低负责任标准。&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Build-Engineering | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/build-engineering/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 18 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/build-engineering/index.xml" rel="self" type="application/rss+xml"/><item><title>تشخيصات بناء MCP في CI هي أول سير عمل AI يدفع ثمنه بسرعة</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/mcp-binlog-ci-build-diagnostics/</link><pubDate>Sat, 18 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/mcp-binlog-ci-build-diagnostics/</guid><description>عندما يعمل تحليل MCP لـ Binlog مباشرة في سير عمل طلبات السحب، تقلل الفرق وقت فرز الفشل وتسرع المطورين.</description><content:encoded>&lt;p&gt;المصدر الأصلي: &lt;a href="https://devblogs.microsoft.com/dotnet/mcp-build-diagnostics-workflows/"&gt;MCP Beyond the Chat Window: Build Diagnostics in CI&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;هذه واحدة من أقوى قصص MCP العملية حتى الآن لأنها تترك عالم عروض الدردشة وتدخل واقع خط الأنابيب.&lt;/p&gt;
+&lt;p&gt;النمط الموضح مقنع: فشل بناء PR يطلق تحليل الوكيل ضد binlog عبر MCP، ثم سير العمل ينشر سياق السبب الجذري القابل للتنفيذ مرة أخرى إلى طلب السحب. هذا هو بالضبط حيث يُهدر وقت المطور اليوم.&lt;/p&gt;
+&lt;p&gt;معظم الفرق لا تزال تتعامل مع البناء الأحمر بحلقات يدوية مكلفة:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;تحميل binlog.&lt;/li&gt;
+&lt;li&gt;فتح العارض.&lt;/li&gt;
+&lt;li&gt;تتبع الهدف والمهمة الفاشلة.&lt;/li&gt;
+&lt;li&gt;ترجمة النتائج للمراجعين.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;أدوات MCP القائمة على binlog تضغط تلك الحلقة وتجعل التحليل متاحًا لكل مساهم، وليس فقط خبير البناء المناوب.&lt;/p&gt;
+&lt;p&gt;موقف الاستشارة فقط في سير العمل هو أيضًا خيار معماري ذكي. حافظ على دمج البوابة مع بنائك الحالي المطلوب، واستخدم تشخيصات الوكيل كتسريع وليس كسلطة. هذا يحافظ على الثقة مع الاستمرار في جني مكاسب الإنتاجية.&lt;/p&gt;
+&lt;p&gt;سطح الأداة الموسع ملحوظ. استدلال الهدف، وخصائص التقييم، وتحليلات تكلفة المحلل، ورسوم بيانية للمسار الحرج، وتحليل الاستعادة، وفحص السلوك التزايدي — كلها بالضبط نوع التشخيصات المنظمة التي تتعامل معها نماذج اللغة بشكل جيد عندما تُعرض عبر أدوات دقيقة.&lt;/p&gt;
+&lt;p&gt;رأيي الشخصي: هذا هو المكان الذي يصبح فيه AI في الهندسة بنية تحتية بالفعل. إذا كانت القدرة تقلل بشكل موثوق متوسط الوقت لشرح فشل البناء دون إضافة استقلالية محفوفة بالمخاطر، فهي تنتمي إلى CI افتراضيًا.&lt;/p&gt;
+&lt;p&gt;بيانات التقييم تقوي الحجة. نتائج أفضل مع وقت مادي أقل واستخدام رموز أقل مقارنة بخطوط الأساس بدون أدوات تشير إلى أن مكاسب الإنتاجية ليست قصصية.&lt;/p&gt;
+&lt;p&gt;خطة طرح عملية لفرق .NET:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;اجعل إنشاء /bl قياسيًا في CI لوظائف البناء والاختبار ذات الصلة.&lt;/li&gt;
+&lt;li&gt;قدم تعليقات تشخيص MCP في مستودع غير حرج أولاً.&lt;/li&gt;
+&lt;li&gt;تتبع مقاييس وقت الفرز ومعدل التفسير الإيجابي الكاذب.&lt;/li&gt;
+&lt;li&gt;وسع فقط بعد إثبات جودة التعليق وقبول المطور.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;تحذير واحد: تعامل مع قدرات الأداة كعقود مُرقمة. أسطح الخادم تتطور، وموثوقية سير العمل تعتمد على فحوصات التوافق الصريحة. أدوات اكتشاف القدرات يجب أن تكون جزءًا من إعداد خط الأنابيب الخاص بك.&lt;/p&gt;
+&lt;p&gt;إذا كانت مؤسستك تبحث عن نقطة اعتماد AI عالية الثقة في توصيل البرمجيات، فهذه هي. إنها محدودة وقابلة للقياس ومرتبطة مباشرة بوقت دورة المطور.&lt;/p&gt;
+&lt;p&gt;MCP هنا ليس طبقة جديدة. إنه ناقل للذكاء التشغيلي المنظم، وخطوط أنابيب البناء هي مكان مثالي لاستغلاله.&lt;/p&gt;</content:encoded></item></channel></rss>

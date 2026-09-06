@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Automation | The .NET Blog</title><link>https://thedotnetblog.com/hi/tags/automation/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>hi</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/hi/tags/automation/index.xml" rel="self" type="application/rss+xml"/><item><title>कोडिंग एजेंट्स के लिए मिशन कंट्रोल: VS Code में एक एकीकृत अनुभव</title><link>https://thedotnetblog.com/hi/news/emiliano-montesdeoca/unified-agent-experience-mission-control/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/hi/news/emiliano-montesdeoca/unified-agent-experience-mission-control/</guid><description>VS Code स्थानीय, क्लाउड, CLI और तृतीय-पक्ष कोडिंग एजेंट्स को एजेंट सेशन में एक साथ लाता है, ताकि डेवलपर्स स्वायत्त कार्य को ट्रैक, बाधित और समन्वित कर सकें।</description><content:encoded>&lt;p&gt;&lt;em&gt;यह पोस्ट स्वचालित रूप से अनुवादित की गई है। मूल संस्करण के लिए, &lt;a href="https://thedotnetblog.com/hi/news/emiliano-montesdeoca/unified-agent-experience-mission-control/"&gt;यहाँ क्लिक करें&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;h1 id="कडग-एजटस-क-लए-मशन-कटरल-vs-code-म-एक-एककत-अनभव"&gt;कोडिंग एजेंट्स के लिए मिशन कंट्रोल: VS Code में एक एकीकृत अनुभव&lt;/h1&gt;
+&lt;p&gt;एक ही कोडिंग सहायक को समझना आसान है। कई एजेंट्स जो अलग-अलग जगहों पर काम करते हैं, वह नहीं।&lt;/p&gt;
+&lt;p&gt;एक एजेंट VS Code में स्थानीय रूप से चलता है। दूसरा क्लाउड में एक GitHub समस्या पर काम करता है। एक CLI एजेंट टर्मिनल में रहता है। एक तृतीय-पक्ष कोडिंग एजेंट के पास एक अलग सेशन मॉडल और अलग सीमाएं हो सकती हैं। साझा दृश्य के बिना, डेवलपर्स काम की देखरेख करने की तुलना में अधिक समय ट्रैकिंग में बिताते हैं।&lt;/p&gt;
+&lt;p&gt;VS Code का एकीकृत एजेंट अनुभव एजेंट सेशन के साथ उस समन्वय समस्या को हल करता है: एजेंट्स लॉन्च करने, उनकी स्थिति देखने, उनकी बातचीत खोलने और योजना बदलने पर हस्तक्षेप करने के लिए एक जगह।&lt;/p&gt;
+&lt;p&gt;यह एक अन्य एजेंट जोड़ने की तुलना में कई एजेंट्स को प्रबंधनीय बनाने के बारे में अधिक है।&lt;/p&gt;
+&lt;h2 id="वभनन-परकर-क-करय-क-लए-एक-दशय"&gt;विभिन्न प्रकार के कार्य के लिए एक दृश्य&lt;/h2&gt;
+&lt;p&gt;स्रोत लेख चार अलग प्रतिभागियों का वर्णन करता है: स्थानीय GitHub Copilot, क्लाउड में Copilot कोडिंग एजेंट, GitHub Copilot CLI, और योग्य Copilot सदस्यों के लिए OpenAI Codex।&lt;/p&gt;
+&lt;p&gt;उनकी शक्तियां अलग-अलग हैं:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;एक स्थानीय एजेंट वर्तमान वर्कस्पेस की जांच कर सकता है और तेजी से परिवर्तन कर सकता है।&lt;/li&gt;
+&lt;li&gt;एक क्लाउड कोडिंग एजेंट एक समस्या पर अतुल्यकालिक रूप से काम कर सकता है और एक pull request खोल सकता है।&lt;/li&gt;
+&lt;li&gt;एक CLI एजेंट टर्मिनल-भारी वर्कफ़्लो और परिचालन आदेशों के लिए उपयुक्त है।&lt;/li&gt;
+&lt;li&gt;दूसरा प्रदाता एक अलग मॉडल या तर्क शैली प्रदान कर सकता है।&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;एजेंट सेशन उन कार्यों को एक सामान्य घर देता है। आप देख सकते हैं कि क्या चल रहा है, यह क्या कर रहा है, और बातचीत को कहां उठाया जाए।&lt;/p&gt;
+&lt;p&gt;वह दृश्यमानता महत्वपूर्ण है क्योंकि स्वायत्त कार्य समन्वय को हटाता नहीं है। यह समन्वय को एक प्रथम-श्रेणी इंजीनियरिंग कार्य बनाता है।&lt;/p&gt;
+&lt;h2 id="बधए-वरकफल-क-हसस-ह"&gt;बाधाएं वर्कफ़्लो का हिस्सा हैं&lt;/h2&gt;
+&lt;p&gt;स्रोत एक सरल अवलोकन करता है: &amp;ldquo;प्रॉम्प्ट भेजना और महसूस करना सामान्य है कि आप कुछ महत्वपूर्ण भूल गए हैं।&amp;rdquo; पहले, विकल्प अक्सर प्रतीक्षा करना या रद्द करना था। चैट संपादकों के साथ, आप एक सक्रिय सेशन खोल सकते हैं और एजेंट के काम करते समय जानकारी जोड़ सकते हैं।&lt;/p&gt;
+&lt;p&gt;यह वास्तविक सहयोग के करीब है। आवश्यकताएं बदलती हैं। एक परीक्षण एक धारणा को प्रकट करता है। एक समीक्षक नोटिस करता है कि एक API पिछड़ा संगत रहना चाहिए। उपयोगी एजेंट वह नहीं है जिसे कभी सुधार की आवश्यकता नहीं है; यह वह है जो बिना पूरे कार्य को खोए सुधार को अवशोषित कर सकता है।&lt;/p&gt;
+&lt;p&gt;.NET कार्य के लिए, एक बाधा जितनी सरल हो सकती है:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Keep the existing public route unchanged. Add the new behavior behind the application service,
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;use the existing ProblemDetails convention, and add a test for the old response shape.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;निर्देश छोटा है क्योंकि रिपोजिटरी पहले से ही बड़ा संदर्भ रखती है। सेशन दिशा को सही करने के लिए है, पूरी प्रणाली को फिर से बताने के लिए नहीं।&lt;/p&gt;
+&lt;h2 id="कसटम-एजटस-टम-क-आदत-क-भमकओ-म-बदलत-ह"&gt;कस्टम एजेंट्स टीम की आदतों को भूमिकाओं में बदलते हैं&lt;/h2&gt;
+&lt;p&gt;VS Code विशेष एजेंट्स जैसे Plan भी पेश करता है। तुरंत लागू करने के बजाय, एक योजना एजेंट कार्यान्वयन विनिर्देश तैयार करने से पहले गुंजाइश, घटक, पुस्तकालय, और बाधाओं के बारे में प्रश्न पूछता है।&lt;/p&gt;
+&lt;p&gt;वह पैटर्न एक निर्मित एजेंट से परे उपयोगी है। एक टीम केंद्रित भूमिकाएं परिभाषित कर सकती है:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;अनुसंधान&lt;/strong&gt; साक्ष्य एकत्रित करता है और एक छोटा निर्णय रिकॉर्ड लिखता है।&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;समीक्षा&lt;/strong&gt; एक परिवर्तन को रिपोजिटरी सम्मेलनों के विरुद्ध जांचता है।&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;परीक्षण&lt;/strong&gt; लापता मामलों की पहचान करता है और एक परीक्षा योजना का प्रस्ताव करता है।&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;आर्किटेक्चर&lt;/strong&gt; फाइलों को संशोधित किए बिना विकल्पों की तुलना करता है।&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;एक छोटी कस्टम एजेंट परिभाषा इस तरह दिख सकती है:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;agent&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;plan&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;description&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;Refines vague requests into clear implementation specs&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;prompt&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="sd"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Ask about scope, constraints, existing patterns, and edge cases.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Produce a concise specification before any implementation begins.&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;उपयोगी हिस्सा YAML नहीं है। यह जिम्मेदारियों का स्पष्ट पृथक्करण है। एक योजना एजेंट को शांति से उत्पादन कोड नहीं संपादित करना चाहिए। एक समीक्षा एजेंट को डिज़ाइन को फिर से लिखना नहीं चाहिए जिसका वह मूल्यांकन करने के लिए माना जाता है।&lt;/p&gt;
+&lt;h2 id="सबएजटस-सदरभ-टकरव-क-कम-करत-ह"&gt;सबएजेंट्स संदर्भ टकराव को कम करते हैं&lt;/h2&gt;
+&lt;p&gt;लंबी बातचीत संबंधित संदर्भ जमा करती है। सबएजेंट्स एक सीमाबद्ध अनुसंधान कार्य के लिए एक अलग वर्कस्पेस प्रदान करते हैं, फिर मुख्य सेशन में परिणाम वापस करते हैं।&lt;/p&gt;
+&lt;p&gt;यह ऐसे प्रश्नों के लिए एक अच्छा फिट है:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Analyze the API project and recommend an authentication strategy.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Return trade-offs and a decision record. Do not edit files.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;मुख्य एजेंट कार्यान्वयन पर केंद्रित रहता है जबकि अनुसंधान एजेंट एक संकीर्ण प्रश्न को संभालता है। यही सिद्धांत टीमों पर भी लागू होता है: स्पष्ट प्रतिनिधिमंडल कई एजेंट्स को अतिव्यापी अधिकार के साथ शुरू करने की तुलना में बेहतर परिणाम देता है।&lt;/p&gt;
+&lt;h2 id="चतवन-अधक-एजटस-क-मतलब-अधक-समनवय-ह"&gt;चेतावनी: अधिक एजेंट्स का मतलब अधिक समन्वय है&lt;/h2&gt;
+&lt;p&gt;एजेंट सेशन गतिविधि दिखा सकते हैं, लेकिन यह संघर्षपूर्ण स्वामित्व को हल नहीं कर सकता। दो एजेंट्स एक ही क्षेत्र को संपादित कर सकते हैं फिर भी एक मर्ज समस्या बना सकते हैं। एक क्लाउड एजेंट और एक स्थानीय एजेंट असंगत धारणाएं बना सकते हैं। एक कस्टम एजेंट एक सिफारिश तैयार कर सकता है जिसे दूसरा एजेंट नजरअंदाज करता है।&lt;/p&gt;
+&lt;p&gt;सीमाएं निर्धारित करें:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;एक एजेंट किसी दिए गए शाखा के लिए कार्यान्वयन का मालिक है।&lt;/li&gt;
+&lt;li&gt;अनुसंधान एजेंट्स कलाकृतियां लौटाते हैं, अनट्रैक किए गए संपादन नहीं।&lt;/li&gt;
+&lt;li&gt;Pull requests समीक्षा सीमा बनी रहती हैं।&lt;/li&gt;
+&lt;li&gt;एजेंट नाम और प्रॉम्प्ट बताते हैं कि वे क्या बदल सकते हैं।&lt;/li&gt;
+&lt;li&gt;सेशन आउटपुट बनाए रखा जाता है जब यह एक महत्वपूर्ण निर्णय की व्याख्या करता है।&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="मर-दषटकण"&gt;मेरा दृष्टिकोण&lt;/h2&gt;
+&lt;p&gt;बहु-एजेंट भविष्य चैट विंडो की कतार नहीं है। यह भूमिकाओं, हस्तांतरण, और जवाबदेही वाली एक छोटी टीम है।&lt;/p&gt;
+&lt;p&gt;एजेंट सेशन मूल्यवान है क्योंकि यह उस वास्तविकता को स्वीकार करता है। यह डेवलपर्स को ऐसे कार्य के लिए एक नियंत्रण सतह देता है जो पहले से ही संपादक, टर्मिनल, और क्लाउड में हो रहा है। अगला उत्पादकता लाभ अधिक एजेंट्स से कम और उनकी सीमाओं को पठनीय बनाने से अधिक आएगा।&lt;/p&gt;
+&lt;p&gt;एक .NET टीम के लिए, मैं एक योजना एजेंट और एक कार्यान्वयन एजेंट के साथ शुरू करूंगा। योजना आउटपुट को मुद्दे या pull request विनिर्देश के रूप में उपयोग करें, फिर कार्यान्वयन एजेंट को उस सीमा के अंदर काम करने दें। अधिक भूमिकाएं जोड़ने से पहले पुनः कार्य को मापें।&lt;/p&gt;
+&lt;p&gt;सर्वोत्तम मिशन कंट्रोल अभी भी वह है जो स्वामित्व को स्पष्ट बनाता है।&lt;/p&gt;</content:encoded></item><item><title>एजेंट कॉन्फिडेंस इंडेक्स को आपके अगले ऑटोमेशन के फैसले को बदलना चाहिए</title><link>https://thedotnetblog.com/hi/news/emiliano-montesdeoca/agent-confidence-index-automation-boundaries/</link><pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/hi/news/emiliano-montesdeoca/agent-confidence-index-automation-boundaries/</guid><description>डेटा बताता है कि टीमें एजेंटों पर सबसे अधिक भरोसा दोहराव वाले तकनीकी कार्यों के लिए करती हैं, न कि उच्च-दांव वाले निर्णयों के लिए।</description><content:encoded>&lt;p&gt;मूल स्रोत: &lt;a href="https://www.microsoft.com/en-us/microsoft-cloud/blog/2026/06/29/the-2026-agent-confidence-index-where-300-builders-see-real-momentum/"&gt;The 2026 Agent Confidence Index: Where 300 builders see real momentum&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;यह रिपोर्ट इसलिए मूल्यवान है क्योंकि यह अस्पष्ट आशावाद को वर्कलोड-स्तर के कॉन्फिडेंस सिग्नल से बदल देती है। संदेश स्पष्ट है: टीमें एजेंटों पर सबसे अधिक भरोसा वहाँ करती हैं जहाँ काम पूर्वानुमानित, दोहराव वाला और प्रतिवर्ती हो।&lt;/p&gt;
+&lt;p&gt;नेताओं को बिल्कुल वहीं पहले निवेश करना चाहिए।&lt;/p&gt;
+&lt;p&gt;स्वचालित रिपोर्ट जनरेशन, बॉयलरप्लेट कोड स्कैफोल्डिंग, ऑपरेशनल मॉनिटरिंग और रिलीज़ नोट सिंथेसिस ग्लैमरस नहीं हैं, लेकिन ये आदर्श डेलिगेशन सतहें हैं। इनमें उच्च संज्ञानात्मक खिंचाव है और रिव्यू लूप के साथ अपेक्षाकृत कम नकारात्मक प्रभाव है।&lt;/p&gt;
+&lt;p&gt;जो उतना ही ध्यान खींचता है वह है जहाँ कॉन्फिडेंस कम रहता है: भारी सिस्टमिक कपलिंग और अपरिवर्तनीय ब्लास्ट रेडियस वाले कार्य। सर्विस मेश ट्यूनिंग, स्कीमा माइग्रेशन रणनीति और डीप मेमोरी डायग्नोस्टिक्स में अभी भी अनुभवी मानव पर्यवेक्षण की आवश्यकता है। रिपोर्ट वहाँ पक्षाघात का सुझाव नहीं देती, लेकिन यह सीमा-जागरूक सहयोग का सुझाव देती है।&lt;/p&gt;
+&lt;p&gt;मेरी राय में, अधिकांश संगठन अभी भी इसे उल्टा फ्रेम कर रहे हैं। वे पूछते हैं, क्या एजेंट अभी जटिल काम कर सकते हैं? बेहतर सवाल यह है: हमारे मौजूदा काम के कौन से हिस्से मनुष्यों को अभी मैन्युअल रूप से करना बंद कर देने चाहिए?&lt;/p&gt;
+&lt;p&gt;सॉफ्टवेयर टीमों के लिए एक व्यावहारिक एडॉप्शन पैटर्न:&lt;/p&gt;
+&lt;p&gt;उच्च-मात्रा, कम-पछतावे वाले कार्यों को तुरंत ऑटोमेट करें।&lt;/p&gt;
+&lt;p&gt;हर ऑटोमेटेड पाथ को क्वालिटी सिग्नल और रोलबैक हुक से इंस्ट्रूमेंट करें।&lt;/p&gt;
+&lt;p&gt;उच्च-दांव वाले निर्णयों के लिए स्पष्ट मानव हस्ताक्षर बनाए रखें जब तक आपका eval डेटा अन्यथा साबित न करे।&lt;/p&gt;
+&lt;p&gt;रिपोर्ट का मानव-इन-द-लूप पर जोर एक शीर्ष प्राथमिकता के रूप में रूढ़िवादी नहीं है। यह परिपक्व है। जो टीमें जिम्मेदारी से स्केल करती हैं वे पर्यवेक्षण को आर्किटेक्चर मानती हैं, समारोह नहीं। वे गार्डरेल बनाती हैं, लाइफसाइकिल इवैल्यूएशन चलाती हैं और ड्रिफ्ट का ऑडिट करती हैं।&lt;/p&gt;
+&lt;p&gt;एक करियर निहितार्थ भी है जो ध्यान देने योग्य है। जैसे-जैसे एजेंट दोहराव को अवशोषित करते हैं, इंजीनियरिंग मूल्य सिस्टम जजमेंट की ओर स्थानांतरित होता है: सीमाओं का चयन, इवैल्यूएशन मानदंड परिभाषित करना और रेज़िलिएंट वर्कफ़्लो डिज़ाइन करना। वरिष्ठ इंजीनियर जो उन सिस्टम को आकार दे सकते हैं उनका असमान लाभ होगा। जूनियर इंजीनियर जो जल्दी एजेंट आउटपुट की निगरानी और सत्यापन करना सीखते हैं वे केवल सिंटैक्स याद करने वालों की तुलना में तेज़ी से प्रगति करेंगे।&lt;/p&gt;
+&lt;p&gt;.NET टीमों के लिए, यह एक ऑटोमेशन पोर्टफोलियो मैप बनाने का क्षण है: प्रतिवर्तीता, व्यावसायिक प्रभाव और ऑब्ज़र्वबिलिटी द्वारा आंतरिक वर्कफ़्लो को वर्गीकृत करें। फिर उसी क्रम में ऑटोमेट करें। नवीनता को प्राथमिकता निर्धारित न करने दें।&lt;/p&gt;
+&lt;p&gt;इस इंडेक्स में व्यापक कथा आशाजनक लेकिन मांग वाली है। एजेंट उत्पादकता लाभ वास्तविक हैं, फिर भी वे स्व-निष्पादित नहीं हैं। जो संगठन एकीकृत संदर्भ, गवर्नेंस और अनुशासित इवैल्यूएशन को जोड़ते हैं वे आगे बढ़ेंगे। जो संगठन उन नींवों को छोड़ते हैं वे पैमाने पर शोर उत्पन्न करेंगे।&lt;/p&gt;
+&lt;p&gt;कॉन्फिडेंस कार्य-दर-कार्य अर्जित किया जाता है। यह एक सीमा नहीं है। यह एक रोडमैप है।&lt;/p&gt;</content:encoded></item></channel></rss>

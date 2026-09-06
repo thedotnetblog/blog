@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Anthropic | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/anthropic/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 16 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/anthropic/index.xml" rel="self" type="application/rss+xml"/><item><title>Claude GA in Foundry Is About Enterprise Plumbing, Not Model Hype</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/claude-ga-in-microsoft-foundry-enterprise-path/</link><pubDate>Thu, 16 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/claude-ga-in-microsoft-foundry-enterprise-path/</guid><description>General Availability が重要なのは、本番 AI を妨げる調達、ガバナンス、データレジデンシーの摩擦を解決するからである。</description><content:encoded>&lt;p&gt;オリジナルソース: &lt;a href="https://azure.microsoft.com/en-us/blog/claude-in-microsoft-foundry-is-now-generally-available/"&gt;Claude in Microsoft Foundry is now generally available&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ほとんどのエンタープライズ AI の遅延は、モデルの品質によって引き起こされるのではない。それらはモデルの周りのすべてによって引き起こされる: ID、課金、データレジデンシー、承認、ポリシー適用。だからこそ、この GA アナウンスメントが重要なのである。&lt;/p&gt;
+&lt;p&gt;Azure 上の Microsoft Foundry 内での Claude の利用可能は、エンタープライズ実行のためのパッケージング上の勝利である。チームは既存の Azure アカウント構造、既存のガバナンス制御、既存のコスト管理チャネルを使用できる。大規模組織にとって、これはプロトタイプが本番システムになるかどうかをしばしば決定する。&lt;/p&gt;
+&lt;p&gt;実用的な利点は明確である:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;認証とアクセス制御&lt;/strong&gt;は、使い慣れた Entra と RBAC のパターンを通じて機能する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;消費&lt;/strong&gt;は、エンタープライズコミットメントと整合した統合 Azure 請求に表示される。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;データゾーンオプションとゼロリテンション&lt;/strong&gt;オプションは、法的およびコンプライアンス上の境界に早期に対処する。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;私の強い見解は、これこそがエンタープライズ AI 導入の実際の姿であるということだ: ひとつのベストモデルではなく、その上にルーティング、評価、ポリシーレイヤーを持つガバナンスされたモデルポートフォリオである。Foundry のモデルルーティングとコントロールプレーンガードレールを中心としたポジショニングは、そのアーキテクチャをサポートしている。&lt;/p&gt;
+&lt;p&gt;チームは依然としてひとつの誤解を避けるべきである: マネージドプラットフォーム制御はアプリケーションレベルの責任を置き換えるものではない。製品固有の評価、拒否ポリシー、レッドチームシナリオ、フォールバック動作設計が依然として必要である。プラットフォームガバナンスは基盤であり、建物全体ではない。&lt;/p&gt;
+&lt;p&gt;.NET ワークロードを実行している場合、このアナウンスメントは&lt;strong&gt;今すぐ AI 統合モデルを標準化する&lt;/strong&gt;シグナルである:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;プロバイダー間でモデル呼び出しとテレメトリにひとつの内部抽象化を使用する&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;モデルエンドポイントを追加する前に評価スイートとポリシーチェックを集中化する&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;プロンプトとツールの動作をバージョン管理し&lt;/strong&gt;、時間の経過による動作変更を監査できるようにする。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これは、エージェントパターンがマルチステップかつツール拡張型になるにつれて特に重要である。弱い制御のコストは、自律性とともに非線形にスケールする。&lt;/p&gt;
+&lt;p&gt;私がこの GA の瞬間について気に入っているのは、&lt;strong&gt;モデル能力とエンタープライズの現実を整合させる&lt;/strong&gt;点である。フロンティア品質だけでは十分ではない。調達チームはクリーンな支出トレースを必要とする。セキュリティチームは制御ポイントを必要とする。プラットフォームチームは予測可能なランタイム動作を必要とする。&lt;/p&gt;
+&lt;p&gt;それらのピースが存在するとき、実験はついに永続的なプロダクト作業に卒業できる。&lt;/p&gt;
+&lt;p&gt;組織が Claude クラスの推論を Azure ネイティブ環境内にデプロイする運用上信頼できるパスを待っていたなら、これがおそらく変曲点である。ただし、イネーブルメントで止まってはならない。厳格な評価規律とエージェント動作の明確な所有権と組み合わせること。&lt;/p&gt;
+&lt;p&gt;モデルアクセスは今や簡単である。&lt;strong&gt;信頼できる実行が依然として差別化要因である。&lt;/strong&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

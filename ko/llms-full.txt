@@ -1,0 +1,158 @@
+# The .NET Blog — Full Content
+
+> Articles, tutorials and insights from the .NET community.
+
+The .NET Blog is a community-driven publication featuring articles, tutorials, and deep dives on .NET, ASP.NET Core, C#, cloud architecture, and software engineering. Written by developers, for developers.
+
+## Metadata
+
+- **URL**: https://thedotnetblog.com/
+- **Language**: ko
+- **Last Updated**: 2026-09-06
+
+---
+
+## Events
+### .NET Day Switzerland 2026
+
+- **URL**: https://thedotnetblog.com/ko/events/dotnet-day-switzerland-2026/
+- **Date**: August 25, 2026
+- **Type**: Conference
+- **Location**: Arena Cinemas Sihlcity, 취리히, 스위스
+
+> .NET 개발자, 아키텍트, 전문가를 위한 비영리 커뮤니티 컨퍼런스 — .NET, C#, ASP.NET Core, Azure 등을 다루며 — 취리히에서 개최됩니다.
+
+
+
+**.NET Day Switzerland 2026**은 **2026년 8월 25일** **Arena Cinemas Sihlcity**(Kalanderplatz 8, 8045 취리히)에서 개최됩니다.
+
+개발자, 아키텍트, 전문가가 .NET, C#, ASP.NET Core, Azure 등 Microsoft 개발 생태계 전반에 대해 논의하는 독립적인 비영리 커뮤니티 컨퍼런스입니다. 모든 발표자와 스태프는 자원봉사로 참여하며, 티켓 판매 잉여금은 자선 단체 또는 스위스 .NET 커뮤니티에 기부됩니다.
+
+## 참가자 혜택
+
+- 국제 전문가의 고품질 세션
+- 다른 참가자와의 네트워킹
+- 휴식 시간, 점심, 아페로 중 음식과 음료
+- 스폰서 교류를 통한 커리어 기회
+- 휴식 시간에 발표자와 직접 대화
+
+## 티켓
+
+| 종류 | 가격 | 판매 현황 |
+|-----|------|---------|
+| Very Early Bird (4월 1일–30일) | 299 CHF | 최대 100매 |
+| Early Bird | 399 CHF | 최대 100매 |
+| 일반 | 449 CHF | 매진 시까지 |
+
+발표자와 일정은 아직 발표되지 않았습니다 — 발표자 모집은 [Sessionize](https://sessionize.com/net-day-switzerland-2026/)에서 진행 중입니다.
+
+## 주최자
+
+- [Fabian Gosebrink](https://twitter.com/FabianGosebrink)
+- [Manuel Meyer](https://twitter.com/manumeyer1)
+- [Thomas Gassmann](https://twitter.com/gassmannt)
+
+## 링크
+
+- [이벤트 웹사이트](https://dotnetday.ch/)
+- [뉴스레터 구독](http://eepurl.com/dDoFEn)
+
+
+---
+### SDD Conference 2026
+
+- **URL**: https://thedotnetblog.com/ko/events/sdd-conference-2026/
+- **Date**: May 11, 2026
+- **Type**: Conference
+- **Location**: Barbican Centre, 런던, 영국
+
+> 런던 Barbican Centre에서 열리는 5일간의 소프트웨어 개발 컨퍼런스 — 78개 세션과 14개 워크숍으로 아키텍처, .NET, AI, Azure, DevOps 등을 다룹니다.
+
+
+
+**SDD 2026**은 **2026년 5월 11일~15일** **런던의 Barbican Centre**에서 개최됩니다. 3일간의 핵심 컨퍼런스는 화요일부터 목요일까지이며, 월요일과 금요일에는 선택적 전일 워크숍이 있습니다.
+
+**78개 세션**과 **14개 워크숍**을 갖춘 유럽에서 가장 알찬 개발자 컨퍼런스 중 하나입니다.
+
+## 주제
+
+- 아키텍처적 사고
+- C# 13에서의 함수형 코드
+- 서버리스 디자인
+- 시맨틱 AI
+- Azure Kubernetes Services
+- 린 DevOps 전략
+- 모델 컨텍스트 프로토콜 (MCP)
+- .NET에서의 에이전틱 AI
+- 모놀리스 리팩토링
+- LLM으로 더 빠르게 코딩
+- 포스트 양자 세계의 암호학
+- 로컬 퍼스트 개발
+
+## 발표자
+
+**Kevlin Henney**, **Neal Ford**, **Sander Hoogendoorn**, **Andrew Clymer**, **Jacqui Read**, **Christian Weyer**, **Jeff Prosise**, **Jules May**, **Oliver Sturm**, **Raju Gandhi**를 포함한 세계적 수준의 라인업.
+
+## 티켓 및 정보
+
+- [이벤트 웹사이트](https://sddconf.com/)
+- [전체 어젠다 PDF](https://sddvault.s3.amazonaws.com/assets/SDD_2026_schedule.pdf)
+- [등록 옵션](https://sddconf.com/register)
+
+SDD 2025 참가자의 98%가 전체 경험을 좋음, 매우 좋음 또는 우수로 평가했습니다.
+
+
+---
+### Global Azure Spain 2026
+
+- **URL**: https://thedotnetblog.com/ko/events/global-azure-spain-2026/
+- **Date**: April 18, 2026
+- **Type**: Conference
+- **Location**: Kinépolis Diversia, Alcobendas, 마드리드, 스페인
+
+> 스페인 최대의 Azure 커뮤니티 이벤트 — Azure, AI, 데이터, 보안, 클라우드 네이티브 개발에 관한 하루 종일 세션, 38명의 발표자, 3개 트랙.
+
+
+
+Global Azure Spain 2026은 **2026년 4월 18일** 마드리드 Alcobendas의 **Kinépolis Diversia**에서 개최됩니다. 스페인 최대의 커뮤니티 주도 Azure 이벤트로, AI 에이전트, Azure 네트워킹, Cosmos DB, Fabric, IoT, 보안 등을 다루는 3개 병렬 트랙에 38명의 발표자가 참여합니다.
+
+이벤트는 **08:30부터 18:30**까지 진행되며, 키노트, 커피 브레이크, 점심, 클로징 Q&A 세션을 포함합니다.
+
+## 어젠다 하이라이트
+
+- **Domando Agentes de IA**: Azure AI Foundry와 Azure API Management를 활용한 거버넌스, 도구, API
+- **Construyendo agentes con LibreChat en Azure**
+- **How Can I Steal Your Data with Azure Private Endpoints**
+- **Stop Building APIs. Forge Agents with Azure**
+- **Agentic DevOps Meets IoT: Real-Time Systems with Fabric and GitHub Copilot**
+- **El regreso de los tamagotchis!**: 멀티 에이전트 시스템 실전
+- **Foundry Control Plane como plataforma de Agentes global**
+- **Rompiendo el perímetro: Zero Trust aplicado en Azure**
+
+## 티켓
+
+등록은 상징적인 기부입니다 — 티켓 전체 금액은 **Plan International**에 직접 기부되어 전 세계 아동 권리와 평등을 지원합니다. 정원이 제한되어 있으니 서둘러 등록하세요.
+
+- [Eventbrite에서 티켓 구매](https://www.eventbrite.es/e/entradas-global-azure-spain-2026-en-madrid-1981594189564)
+- [이벤트 웹사이트](https://globalazure.es/)
+
+## Azure Tour 2026
+
+마드리드 외에도 Global Azure Tour 2026은 **사라고사**, **테네리페**, **세비야**에서도 개최됩니다.
+
+
+---
+
+## Authors
+### Emiliano Montesdeoca
+
+- **URL**: https://thedotnetblog.com/ko/authors/emiliano-montesdeoca/
+- **Role**: Microsoft MVP & 클라우드 솔루션 팀 리드
+- **Bio**: Emiliano는 우루과이계 스페인 소프트웨어 개발자이자 Microsoft MVP(Developer Technologies)이며, 카나리아 제도 테네리페에 기반을 둔 커뮤니티 옹호자입니다.
+
+Microsoft 기술을 사용한 확장 가능한 클라우드 솔루션 설계를 전문으로 하며, 현재 Intelequia Technologies에서 클라우드 솔루션 팀을 이끌고 있습니다.
+
+빈번한 국제 컨퍼런스 연사이자 열정적인 지식 공유자로서, 실제 문제 해결을 개발자를 위한 실용적인 인사이트로 변환합니다.
+
+
+---

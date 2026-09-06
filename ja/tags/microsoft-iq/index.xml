@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Microsoft-Iq | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/microsoft-iq/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/microsoft-iq/index.xml" rel="self" type="application/rss+xml"/><item><title>The Agent Confidence Index Should Change What You Automate Next</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/agent-confidence-index-automation-boundaries/</link><pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/agent-confidence-index-automation-boundaries/</guid><description>データによれば、チームがエージェントに最も信頼を寄せるのは反復可能な技術的作業であり、影響の大きい判断業務ではない。</description><content:encoded>&lt;p&gt;オリジナルソース: &lt;a href="https://www.microsoft.com/en-us/microsoft-cloud/blog/2026/06/29/the-2026-agent-confidence-index-where-300-builders-see-real-momentum/"&gt;The 2026 Agent Confidence Index: Where 300 builders see real momentum&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;このレポートが価値を持つのは、漠然とした楽観論ではなく、ワークロードレベルの信頼度シグナルを提供している点だ。メッセージは明確である。チームがエージェントに最も信頼を寄せるのは、作業が予測可能で反復的かつリバーシブルな領域である。&lt;/p&gt;
+&lt;p&gt;リーダーはまさにそこに&lt;strong&gt;最初に投資すべき&lt;/strong&gt;である。&lt;/p&gt;
+&lt;p&gt;自動レポート生成、ボイラープレートコードのスキャフォールディング、運用監視、リリースノートの合成といったタスクは華やかではないが、&lt;strong&gt;理想的な委任領域&lt;/strong&gt;である。これらは認知的負荷が高く、レビューループで制約すれば比較的ダウンサイドが小さい。&lt;/p&gt;
+&lt;p&gt;同様に注目すべきは、信頼度が&lt;strong&gt;低いまま&lt;/strong&gt;の領域である。システム結合度が高く、影響範囲が不可逆的なタスクだ。サービメッシュのチューニング、スキーママイグレーション戦略、深層メモリ診断には、依然として経験豊富な人間の監視が必要である。このレポートはそこで停止を促すものではないが、境界を意識したコラボレーションを推奨している。&lt;/p&gt;
+&lt;h3 id="私の見解"&gt;私の見解&lt;/h3&gt;
+&lt;p&gt;私の意見を明確に述べると、ほとんどの組織は依然として逆向きに問題を捉えている。「エージェントは複雑な作業をこなせるか？」と問うよりも、「現在の作業のうち、人間が手動で行うべきではない部分はどこか？」と問うべきである。&lt;/p&gt;
+&lt;h3 id="ソフトウェアチームのための実践的導入パターン"&gt;ソフトウェアチームのための実践的導入パターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;自動化する&lt;/strong&gt;: 高ボリュームで後悔リスクの低いタスクは即座に自動化する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;計装する&lt;/strong&gt;: すべての自動化パスに品質シグナルとロールバックフックを組み込む。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;人間の明示的承認を維持する&lt;/strong&gt;: 評価データが証明するまでは、影響の大きい意思決定には人間の承認を必須とする。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;このレポートが最優先事項として強調する&lt;strong&gt;ヒューマンインザループ&lt;/strong&gt;は、保守的であることではない。成熟していることである。責任を持ってスケールするチームは、監視を儀式ではなくアーキテクチャとして扱う。ガードレールを構築し、ライフサイクル評価を実行し、ドリフトを監査する。&lt;/p&gt;
+&lt;p&gt;ここには見逃せないキャリア上の示唆もある。エージェントが反復作業を吸収するにつれて、エンジニアリングの価値はシステム判断へとシフトする。すなわち、境界の選択、評価基準の定義、回復力のあるワークフローの設計である。それらのシステムを形作れるシニアエンジニアは、非常に大きなレバレッジを得る。エージェントの出力を早期に監督・検証する方法を学ぶジュニアエンジニアは、構文を暗記するだけのエンジニアよりも早く成長する。&lt;/p&gt;
+&lt;p&gt;.NET チームにとって、今こそ&lt;strong&gt;自動化ポートフォリオマップ&lt;/strong&gt;を作成する時である。内部ワークフローを可逆性、ビジネス影響、可観測性で分類し、その順序で自動化する。新規性に優先順位を決めさせてはならない。&lt;/p&gt;
+&lt;p&gt;このインデックスの広範なナラティブは希望的だが、要求も厳しい。エージェントの生産性向上は現実のものだが、自動的に実現するものではない。統一されたコンテキスト、ガバナンス、規律ある評価を組み合わせた組織が先を行く。それらの基盤を飛ばした組織は、スケールしたノイズを生み出すだけだ。&lt;/p&gt;
+&lt;p&gt;信頼はタスクごとに獲得される。それは制約ではない。&lt;strong&gt;ロードマップである&lt;/strong&gt;。&lt;/p&gt;</content:encoded></item></channel></rss>

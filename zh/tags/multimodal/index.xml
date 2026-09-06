@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Multimodal | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/multimodal/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 25 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/multimodal/index.xml" rel="self" type="application/rss+xml"/><item><title>VS Code 1.128 打了一个清晰的赌：智能体窗口正成为新的工作界面</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/vscode-1-128-agents-window-grows-up/</link><pubDate>Sat, 25 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/vscode-1-128-agents-window-grows-up/</guid><description>VS Code 1.128 通过多聊天会话、GA 视觉支持和更深的主机/会话控制，将智能体工作流从新奇转变为日常人体工程学。</description><content:encoded>&lt;p&gt;Visual Studio Code 1.128 是一个有意义的版本，不是因为一个杀手级功能，而是因为几个变化围绕一个方向对齐：编辑器内的智能体优先开发正变得结构化、并行化和运维上可管理。&lt;/p&gt;
+&lt;p&gt;原文来源：https://code.visualstudio.com/updates/v1_128&lt;/p&gt;
+&lt;p&gt;最突出的是智能体主机会话中&lt;strong&gt;更丰富的多聊天行为&lt;/strong&gt;，包括对等聊天、分支和同一父会话下的并发轮次。这正是有经验的开发者在探索替代实现或跨验证路径拆分任务时所需要的。它反映了真正的工程工作——很少是线性的。&lt;/p&gt;
+&lt;p&gt;我的看法：这是第一个 VS Code 版本，其中智能体窗口感觉不再像一个聊天面板，而更像一个工作区编排界面。&lt;/p&gt;
+&lt;p&gt;没有选定工作区的快速聊天也比表面上看起来更重要。它们降低了概念性或架构性问题的摩擦，同时保持项目绑定会话的独立性。这种分离可以减少杂乱，并为修改代码的工作流保留上下文完整性。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Copilot Vision 达到 GA&lt;/strong&gt; 是另一个转折点。一旦图像和 PDF 成为聊天的正常输入，文档密集和 UI 密集的任务将变得更加流畅。团队现在应该将多模态上下文视为默认能力，而非高级附加功能。&lt;/p&gt;
+&lt;p&gt;也有实际的平台影响。智能体主机场景中的 &lt;strong&gt;BYOK 支持&lt;/strong&gt;、可配置的模型采样参数和实用模型默认值，表明企业模型治理日益成熟。有严格提供者要求的组织现在可以以更精细的控制来塑造行为，而非一刀切的默认值。&lt;/p&gt;
+&lt;h3 id="面向采用-1128-的团队的建议"&gt;面向采用 1.128 的团队的建议&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;为多聊天会话中的聊天分支和命名定义约定&lt;/strong&gt;，以便并行探索不会变成对话噪音。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;鼓励开发者将一个聊天用于实现&lt;/strong&gt;，另一个用于测试或故障分析。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;有意图地使用快速聊天&lt;/strong&gt;解决非仓库问题。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;如果你运行 BYOK 端点&lt;/strong&gt;，按工作负载类别建立 baseline temperature/top_p 配置文件并记录例外。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;决定实用流程应在 Copilot 提供的模型还是 BYOK 模型上运行&lt;/strong&gt;，以避免意外的静默行为差距。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;战略性地考虑操作系统级快捷键。&lt;/strong&gt; 能够在系统范围内触发 VS Code 命令可以改善高级用户的工作流，但不受管理的键绑定蔓延可能损害团队间的一致性。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="核心观点"&gt;核心观点&lt;/h2&gt;
+&lt;p&gt;VS Code 1.128 不仅仅增加了功能。它收紧了智能体在真实开发循环中的协作机制。在下一个周期中胜出的编辑器，将是那些把智能体交互视为&lt;strong&gt;一等工作流原语&lt;/strong&gt;（而非侧边栏实验）的编辑器。这个版本表明 VS Code 理解这场竞赛。&lt;/p&gt;</content:encoded></item></channel></rss>

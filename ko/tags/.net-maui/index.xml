@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>.NET MAUI | The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/.net-maui/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ko</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 25 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/.net-maui/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET 11 Preview 4: MCP 서버 템플릿, Runtime-Async 라이브러리, 프로세스 API</title><link>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/dotnet-11-preview-4-mcp-template-runtime-async-process-api/</link><pubDate>Mon, 25 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/dotnet-11-preview-4-mcp-template-runtime-async-process-api/</guid><description>.NET 11 Preview 4가 출시되었습니다. 주요 내용: SDK의 MCP 서버 템플릿, runtime-async로 컴파일된 런타임 라이브러리, 모바일용 dotnet watch, 그리고 프로세스 API의 주요 확장.</description><content:encoded>&lt;p&gt;.NET 11 Preview 4가 출시되었습니다. .NET 주요 미리 보기의 각 릴리스는 런타임, SDK, 라이브러리, ASP.NET Core, MAUI, C#, Entity Framework에 걸쳐 긴 변경 목록을 추가합니다. 전체 목록을 반복하는 대신, 제가 주목한 항목들을 소개합니다.&lt;/p&gt;
+&lt;h2 id="net-sdk에-mcp-서버-템플릿-추가"&gt;.NET SDK에 MCP 서버 템플릿 추가&lt;/h2&gt;
+&lt;p&gt;가장 흥미로운 항목: MCP 서버 프로젝트 템플릿이 이제 SDK에 포함됩니다. 이는 &lt;code&gt;dotnet new mcp-server&lt;/code&gt;(또는 최종 커맨드 이름)가 바로 작동한다는 의미입니다. .NET에서 MCP 도구를 구축하는 분들에게 이는 초기 설정의 번거로움을 크게 줄여줍니다. 플랫폼 toolchain에의 MCP 통합은 생태계가 향하는 방향을 보여줍니다.&lt;/p&gt;
+&lt;h2 id="runtime-async로-컴파일된-런타임-라이브러리"&gt;Runtime-Async로 컴파일된 런타임 라이브러리&lt;/h2&gt;
+&lt;p&gt;런타임 자체가 이제 runtime-async 기능을 사용하여 표준 라이브러리를 컴파일합니다. 이것은 성능에 영향을 미치는 내부 변경입니다 — 런타임의 async 상태 머신이 더 효율적이 됩니다. 여기서 중요한 것은 사용자에게 보이는 API 변경이 아니라, runtime-async가 BCL 자체에 사용될 만큼 성숙했다는 것으로, 기능의 준비 상태에 대한 의미 있는 신호입니다.&lt;/p&gt;
+&lt;h2 id="jit-최적화-및-하드웨어-내장-함수"&gt;JIT 최적화 및 하드웨어 내장 함수&lt;/h2&gt;
+&lt;p&gt;Preview 4는 JIT 작업을 계속합니다. 하드웨어 내장 함수 및 코드 생성 개선이 포함됩니다 — 세부 사항은 런타임 릴리스 노트에 있습니다. 이런 종류의 변경은 일반적으로 코드 변경 없이 밀도 높은 계산 루프의 처리량을 향상시킵니다.&lt;/p&gt;
+&lt;h2 id="프로세스-api-확장"&gt;프로세스 API 확장&lt;/h2&gt;
+&lt;p&gt;Preview 4에서는 &lt;code&gt;System.Diagnostics.Process&lt;/code&gt;의 주요 업데이트가 제공됩니다:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Process.RunAndCaptureTextAsync&lt;/code&gt; — 프로세스 시작, stdout/stderr 캡처, 종료 대기를 데드락 위험 없이 단일 호출로 처리&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;KillOnParentExit&lt;/code&gt; — 부모 프로세스와 자식 프로세스 간의 가벼운 수명 결합&lt;/li&gt;
+&lt;li&gt;트리머 친화적인 &lt;code&gt;SafeProcessHandle&lt;/code&gt; 기반 API&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;데드락 없이 프로세스 출력을 캡처하기 위한 보일러플레이트를 작성해본 적이 있다면(stdout &lt;em&gt;과&lt;/em&gt; stderr의 동시 비동기 읽기), &lt;code&gt;RunAndCaptureTextAsync&lt;/code&gt;가 바로 필요했던 API입니다.&lt;/p&gt;
+&lt;h2 id="android-및-ios용-dotnet-watch"&gt;Android 및 iOS용 dotnet watch&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;dotnet watch&lt;/code&gt;가 이제 .NET MAUI Android 및 iOS 프로젝트의 장치 선택을 지원합니다. 빌드 루프에서 장치 연결을 수동으로 관리하지 않고도 모바일에서 더 빠른 반복이 가능합니다.&lt;/p&gt;
+&lt;h2 id="span-기반-압축-api"&gt;Span 기반 압축 API&lt;/h2&gt;
+&lt;p&gt;새로운 span 기반 Deflate, ZLib, GZip 인코더/디코더 API가 라이브러리에 추가됩니다. 압축 데이터를 처리할 때 할당이 줄어듭니다 — 고처리량 데이터 처리를 수행하는 경우 관련이 있습니다.&lt;/p&gt;
+&lt;h2 id="사용해보기"&gt;사용해보기&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://dotnet.microsoft.com/download/dotnet/11.0"&gt;.NET 11 Preview 4 다운로드&lt;/a&gt; — 미리 보기 버전으로 프로덕션 준비가 되지 않았지만, RC 사이클 이전에 문제를 조기에 발견하기 위해 프로젝트에 적용해볼 가치가 있습니다.&lt;/p&gt;
+&lt;p&gt;원본 게시물: &lt;a href="https://devblogs.microsoft.com/dotnet/dotnet-11-preview-4/"&gt;.NET 11 Preview 4 is now available!&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

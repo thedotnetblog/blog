@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure App Service | The .NET Blog</title><link>https://thedotnetblog.com/ru/tags/azure-app-service/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ru</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 05 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ru/tags/azure-app-service/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL MCP Server на Azure App Service — без контейнеров</title><link>https://thedotnetblog.com/ru/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</link><pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ru/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</guid><description>SQL MCP Server теперь может работать на Azure App Service без Docker и Kubernetes. Что это значит для .NET-разработчиков, создающих AI-агентов для работы с SQL-базами данных.</description><content:encoded>&lt;p&gt;&lt;em&gt;Этот пост переведён автоматически. Чтобы прочитать оригинал, &lt;a href="https://thedotnetblog.com/ru/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/"&gt;нажмите здесь&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Честно говоря: каждый раз, когда в туториале вижу «требует контейнер», где-то внутри вздыхаю. Контейнеры великолепны — пока у вашей команды нет стратегии контейнеризации, и функция, казавшаяся простой, вдруг упирается в неожиданную оркестрационную сложность, которую никто не планировал.&lt;/p&gt;
+&lt;p&gt;Именно поэтому это привлекло моё внимание. SQL MCP Server теперь может работать на Azure App Service — без Docker, без Kubernetes, только с тем же конфигурационным файлом Data API Builder (DAB), который открывает ваш SQL-датабаз через MCP, REST и GraphQL.&lt;/p&gt;
+&lt;h2 id="что-такое-sql-mcp-server"&gt;Что такое SQL MCP Server?&lt;/h2&gt;
+&lt;p&gt;Кратко для тех, кто ещё не знаком. SQL MCP Server располагается между вашим AI-агентом и SQL-базой данных. Вместо того чтобы давать агенту прямой доступ к базе данных (ужасная идея), он открывает ваши таблицы и представления как уровень абстракции — сущности с определёнными правами доступа.&lt;/p&gt;
+&lt;p&gt;Построен на &lt;a href="https://learn.microsoft.com/ru-ru/azure/data-api-builder/"&gt;Data API Builder&lt;/a&gt;, что означает: один конфигурационный файл управляет MCP &lt;em&gt;и&lt;/em&gt; REST &lt;em&gt;и&lt;/em&gt; GraphQL одновременно. Ваш агент общается с MCP-эндпоинтом. Традиционное приложение общается с REST или GraphQL. Одна конфигурация, одна среда выполнения, разные интерфейсы.&lt;/p&gt;
+&lt;p&gt;Это действительно удобно. Не нужно поддерживать два отдельных API-слоя.&lt;/p&gt;
+&lt;h2 id="проблема-контейнеров-и-её-решение"&gt;Проблема контейнеров (и её решение)&lt;/h2&gt;
+&lt;p&gt;Изначальная модель развёртывания SQL MCP Server использовала контейнеры. Это хорошо работает во многих командах — но не во всех. Многие .NET-команды стандартизировались на Azure App Service или виртуальных машинах. Требовать контейнерный runtime только ради одного SQL-эндпоинта — это лишнее трение, которого никто не просил.&lt;/p&gt;
+&lt;p&gt;Новое руководство показывает, как обойтись без контейнера вовсе. Всё работает через команду &lt;code&gt;dab start&lt;/code&gt;, запущенный как стандартный .NET 8 веб-процесс на App Service.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Установка Data API Builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet tool install microsoft.dataapibuilder --prerelease -g
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Инициализация конфигурации&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --host-mode Development --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;SQL_CONNECTION_STRING&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Добавление сущности&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add products --source dbo.products --permissions &lt;span class="s2"&gt;&amp;#34;authenticated:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Настройка провайдера аутентификации App Service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab configure --runtime.host.authentication.provider AppService
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Запуск сервера&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;На этом этапе у вас есть MCP по адресу &lt;code&gt;/mcp&lt;/code&gt;, REST и GraphQL из того же процесса — и ничего в контейнере.&lt;/p&gt;
+&lt;h2 id="аутентификация-без-общих-api-ключей"&gt;Аутентификация без общих API-ключей&lt;/h2&gt;
+&lt;p&gt;Это та часть, которую я ценю больше всего. При развёртывании на App Service вы настраиваете Microsoft Entra ID в качестве провайдера аутентификации. Никаких общих секретов в конфигурационных файлах, никаких API-ключей для ротации.&lt;/p&gt;
+&lt;p&gt;Строка подключения хранится в переменных среды App Service (не в &lt;code&gt;dab-config.json&lt;/code&gt;), а MCP-эндпоинт защищён платформенной аутентификацией. Если ваши Azure-нагрузки уже используют Entra ID, интеграция происходит органично.&lt;/p&gt;
+&lt;p&gt;Для локальной разработки переключайтесь в режим &lt;code&gt;Simulator&lt;/code&gt; и STDIO-транспорт. Возвращайтесь к режиму &lt;code&gt;AppService&lt;/code&gt; перед развёртыванием. Чисто и явно.&lt;/p&gt;
+&lt;h2 id="развёртывание-на-app-service"&gt;Развёртывание на App Service&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az appservice plan create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --sku B1 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --is-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --plan &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --runtime &lt;span class="s2"&gt;&amp;#34;DOTNETCORE:8.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp config &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --startup-file &lt;span class="s2"&gt;&amp;#34;dab start&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Затем разверните свой DAB-проект методом, который уже использует ваша команда. Ключевой момент: это развёртывание &lt;strong&gt;кода&lt;/strong&gt;, а не контейнера.&lt;/p&gt;
+&lt;h2 id="почему-это-важно-для-net-разработчиков"&gt;Почему это важно для .NET-разработчиков&lt;/h2&gt;
+&lt;p&gt;Если вы создаёте AI-агентов на .NET, рано или поздно им нужно будет работать с базой данных. SQL MCP Server предоставляет структурированный способ сделать это — без открытия сырых строк подключения или написания собственных API-слоёв.&lt;/p&gt;
+&lt;p&gt;Ознакомьтесь с полным руководством в &lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-app-service/"&gt;оригинальной статье&lt;/a&gt; и &lt;a href="https://github.com/Azure-Samples/SQL-MCP-NoContainer"&gt;примере на GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="итог"&gt;Итог&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server на App Service — практичный выбор для .NET-команд, которые хотят дать агентам структурированный доступ к SQL-данным без контейнерной стратегии. Попробуйте — ваши агенты оценят чистый API-интерфейс.&lt;/p&gt;</content:encoded></item></channel></rss>

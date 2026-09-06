@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Data API Builder | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/data-api-builder/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Wed, 22 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/data-api-builder/index.xml" rel="self" type="application/rss+xml"/><item><title>De echte grens voor agentic SQL: auditeerbaarheid met OBO in SQL MCP Server</title><link>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/sql-mcp-obo-audit-frontier/</link><pubDate>Wed, 22 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/sql-mcp-obo-audit-frontier/</guid><description>On-Behalf-Of-authenticatie in Data API builder plus SQL MCP Server is een grote mijlpaal voor governance omdat Azure SQL eindelijk de mens achter een agentactie kan auditen.</description><content:encoded>&lt;p&gt;Er is een pijnlijke waarheid in enterprise-AI-projecten: veel teams zijn geobsedeerd door modelkwaliteit en negeren verantwoording. Wanneer een agent productiedata schrijft of leest, is de eerste vraag bij een incidentonderzoek niet &amp;ldquo;was het antwoord goed?&amp;rdquo; Het is &amp;ldquo;wie heeft dit eigenlijk gedaan?&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Oorspronkelijke bron: &lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-obo-auth/"&gt;https://devblogs.microsoft.com/azure-sql/sql-mcp-server-obo-auth/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Daarom is OBO-ondersteuning in Data API builder 2.0 met SQL MCP Server een grotere zaak dan het eerst lijkt. Gebruikersnaam/wachtwoord- en managed-identity-benaderingen werken operationeel nog steeds, maar beide laten identiteit samenvallen met de servicegrens. Logs tonen de app of middleware, niet de menselijke oorsprong van het verzoek. Dat is acceptabel voor eenvoudige automatisering. Het is niet acceptabel voor gereguleerde agentic workflows.&lt;/p&gt;
+&lt;p&gt;Met OBO authenticeert SQL de gedelegeerde gebruikerscontext, niet de identiteit van de toolhost. Dat geeft je een fundamenteel beter auditmodel: gebruikersprincipal, actie, statementcontext en middle-tier-app-identifier samen. Je krijgt traceerbaarheid zonder het controleoppervlak van MCP-tools en DAB-entiteitsrechten te verliezen.&lt;/p&gt;
+&lt;p&gt;Mijn mening is hier stellig: als je agent gevoelige SQL-data kan aanraken, zou OBO je standaardarchitectuur moeten zijn, geen optionele verhardingstaak. De setup is uitgebreider, maar identiteitsschuld wordt altijd later betaald, meestal tijdens beveiligingsincidenten, compliance-audits of escalaties naar het management.&lt;/p&gt;
+&lt;p&gt;Praktische implementatierichtlijnen:&lt;/p&gt;
+&lt;p&gt;Begin met het valideren van de identiteitsflow met een minimale &amp;ldquo;WhoAmI&amp;rdquo;-view en geautomatiseerde controles in integratietests. Als de SQL-principal niet overeenkomt met de ingelogde gebruiker, stop en fix voordat je uitlevert. Bekabel vervolgens Log Analytics-queries voor SQLSecurityAuditEvents naar je SOC-dashboards en alert op hoogrisicoacties geïnitieerd via OBO-paden. Stem tot slot RBAC en DAB-rechten af zodat identiteit op gebruikersniveau en autorisatie op actieniveau end-to-end consistent blijven.&lt;/p&gt;
+&lt;p&gt;Eén subtiel maar belangrijk ontwerppunt in de aankondiging is cachegedrag. DAB blokkeert expliciet responscaching wanneer user-delegated auth is ingeschakeld. Die afweging is correct. Prestatietrucs die gebruikersgebonden resultaten kunnen lekken, zijn het niet waard in multi-tenant of gereguleerde omgevingen.&lt;/p&gt;
+&lt;p&gt;SQL MCP Server plus OBO is het begin van een volwassen patroon: agents als gecontroleerde operators, gebruikers als verantwoordelijke principals, dataplanes als auditeerbare systemen. Als je architectuur niet met vertrouwen kan antwoorden op &amp;ldquo;wie heeft dit gedaan&amp;rdquo;, is het geen productieklare AI, hoe gepolijst de demo er ook uitziet.&lt;/p&gt;</content:encoded></item><item><title>Data API Builder Custom Paths: Ontwerp API's voor Mensen, Niet voor Tabellen</title><link>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/data-api-builder-custom-paths-domain-first/</link><pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/data-api-builder-custom-paths-domain-first/</guid><description>Samengestelde REST-paden in DAB zijn een kleine functie met grote architecturale impact voor domeingericht API-ontwerp.</description><content:encoded>&lt;p&gt;Originele bron: &lt;a href="https://devblogs.microsoft.com/azure-sql/data-api-builder-custom-rest-paths/"&gt;Compose your API surface with Data API builder custom paths&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;De nieuwe ondersteuning voor samengestelde REST-paden in Data API Builder lijkt misschien een kleine configuratieverbetering, maar het lost eigenlijk een aloude spanning in API-ontwerp op: databasestructuur die lekt in het ontwerp van openbare endpoints.&lt;/p&gt;
+&lt;p&gt;Standaard entiteitgebaseerde routes zijn geweldig voor snelle starts. Ze zijn vaak verkeerd voor langetermijnproduct-API&amp;rsquo;s. Echte systemen hebben routestructuren nodig die aansluiten bij bedrijfsconcepten, eigenaarsgrenzen en de mentale modellen van gebruikers.&lt;/p&gt;
+&lt;p&gt;Daarom is deze DAB-wijziging belangrijk. Je kunt het gemak van gegenereerde API&amp;rsquo;s behouden terwijl je een schonere domeinfirst-oppervlakte presenteert.&lt;/p&gt;
+&lt;p&gt;Mijn uitgesproken mening is simpel: als je API-padstructuur in productie ruwe tabelnamen weerspiegelt, optimaliseer je meestal voor backend-gemak ten koste van duidelijkheid voor clients.&lt;/p&gt;
+&lt;p&gt;Met aangepaste paden kunnen teams betere grenzen modelleren, zoals verkoop, facturatie, ondersteuning of partnerspecifieke oppervlaktes. Dit vervangt geen goed API-beheer, maar geeft DAB-gebruikers een praktische manier om routeontwerp af te stemmen op producttaal.&lt;/p&gt;
+&lt;p&gt;Praktische richtlijnen voor teams die deze functie adopteren:&lt;/p&gt;
+&lt;p&gt;Definieer een naamgevingsbeleid voordat je ad-hoc paden toevoegt. Inconsistente subsegmenten worden rommel op de lange termijn.&lt;/p&gt;
+&lt;p&gt;Wijs endpoints toe aan begrensde contexten, niet aan organisatieschema&amp;rsquo;s. Teams veranderen; domeinsemantiek moet stabiel zijn.&lt;/p&gt;
+&lt;p&gt;Behandel padstructuur als onderdeel van je versioneringsstrategie en documenteer breaking changes expliciet.&lt;/p&gt;
+&lt;p&gt;Valideer autorisatiegedrag langs aangepaste routestructuren, zodat routehelderheid gepaard gaat met beveiligingshelderheid.&lt;/p&gt;
+&lt;p&gt;Wat ik waardeer aan DAB in het algemeen is het hefboommodel: je krijgt paginering, filtering, projectie en andere endpointmechanismen zonder repetitieve controllercode te schrijven. Aangepaste paden maken die hefboom productiegerichter door een van de grootste bezwaren van API-architecten weg te nemen.&lt;/p&gt;
+&lt;p&gt;Er is één kanttekening. Een betere padsamenstelling kan teams verleiden om te veel te snel bloot te geven omdat genereren makkelijk aanvoelt. Beveiligingen blijven belangrijk: houd entiteitblootstelling doelbewust, pas beleid centraal toe en vermijd het bouwen van onbedoelde openbare contracten uit interne schema-experimenten.&lt;/p&gt;
+&lt;p&gt;Voor .NET-organisaties onderleveringsdruk is deze functie een productiviteitsversneller als deze met discipline wordt gebruikt. Je kunt sneller werken dan handgemaakte API-lagen terwijl je toch een samenhangend en bedrijfsvriendelijk endpoint-oppervlak behoudt.&lt;/p&gt;
+&lt;p&gt;Bottom line: DAB aangepaste paden gaan niet over het mooier maken van URL&amp;rsquo;s. Ze gaan over het heroveren van API-ontwerpintentie terwijl de operationele efficiëntie van gegenereerde endpoints behouden blijft.&lt;/p&gt;</content:encoded></item><item><title>De MSSQL-extensie voor VS Code wordt stilletjes een veel groter platform</title><link>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/</link><pubDate>Tue, 19 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/</guid><description>De nieuwste update van de MSSQL-extensie voegt Azure SQL-provisioning, Copilot-ondersteund schemaontwerp, Data API Builder en notebooks toe. Het interessante is hoeveel databasewerk nu binnen VS Code kan blijven.</description><content:encoded>&lt;p&gt;&lt;em&gt;Dit artikel is automatisch vertaald. Voor de oorspronkelijke versie, &lt;a href="https://thedotnetblog.com/nl/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;De MSSQL-extensie voor VS Code groeit al een tijd, maar deze nieuwste update maakt de richting veel duidelijker.&lt;/p&gt;
+&lt;p&gt;Het is niet meer alleen «verbinden en een paar queries draaien».&lt;/p&gt;
+&lt;p&gt;Met &lt;strong&gt;Azure SQL-provisioning&lt;/strong&gt;, &lt;strong&gt;Schema Designer met Copilot&lt;/strong&gt;, &lt;strong&gt;SQL Notebooks&lt;/strong&gt; en &lt;strong&gt;Data API Builder&lt;/strong&gt; die allemaal in één release worden doorontwikkeld, wordt de extensie een veel completere werkruimte voor databasegerichte ontwikkeling.&lt;/p&gt;
+&lt;h2 id="de-praktische-haak-is-provisioning-direct-vanuit-de-editor"&gt;De praktische haak is provisioning direct vanuit de editor&lt;/h2&gt;
+&lt;p&gt;De bronpost zegt dat je nu een volledig beheerde cloud-database «direct vanuit je editor en zonder kosten» kunt maken met de gratis tier.&lt;/p&gt;
+&lt;p&gt;Dat is het soort functie dat klein lijkt totdat je beseft hoeveel setup-frictie het wegneemt.&lt;/p&gt;
+&lt;p&gt;Voor veel ontwikkelaars zit het vervelende deel van data-zware experimenten niet in SQL zelf. Het zit in de omgevingskloof tussen:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;idee&lt;/li&gt;
+&lt;li&gt;database&lt;/li&gt;
+&lt;li&gt;schema&lt;/li&gt;
+&lt;li&gt;API&lt;/li&gt;
+&lt;li&gt;testbare backend&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Als die kloof kleiner wordt binnen één tool, wordt de hele workflow aantrekkelijker.&lt;/p&gt;
+&lt;h2 id="dit-is-hoe-een-sterkere-inner-loop-voor-datawerk-eruitziet"&gt;Dit is hoe een sterkere inner loop voor datawerk eruitziet&lt;/h2&gt;
+&lt;p&gt;Wat ik aan deze release waardeer, is dat meer van de databaseworkflow op één plek blijft:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;database provisioneren&lt;/li&gt;
+&lt;li&gt;schema ontwerpen&lt;/li&gt;
+&lt;li&gt;wijzigingen beoordelen&lt;/li&gt;
+&lt;li&gt;ORM-scripts genereren&lt;/li&gt;
+&lt;li&gt;API&amp;rsquo;s exposen&lt;/li&gt;
+&lt;li&gt;endpoints testen&lt;/li&gt;
+&lt;li&gt;documenteren en queryen via notebooks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Dat is een veel overtuigender verhaal dan SQL behandelen als een los zijgereedschap in de stack.&lt;/p&gt;
+&lt;h2 id="de-copilot-ondersteunde-schemaworkflow-is-waar-de-ai-waarde-echt-voelbaar-wordt"&gt;De Copilot-ondersteunde schemaworkflow is waar de AI-waarde echt voelbaar wordt&lt;/h2&gt;
+&lt;p&gt;De toevoegingen aan de schema-designer zijn vooral interessant omdat ze een goed evenwicht lijken te treffen.&lt;/p&gt;
+&lt;p&gt;De waarde is niet «AI ontwerpt je datamodel en jij vertrouwt er blind op».&lt;/p&gt;
+&lt;p&gt;De waarde is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;snellere startpunten&lt;/li&gt;
+&lt;li&gt;visuele review&lt;/li&gt;
+&lt;li&gt;wijzigingstracking&lt;/li&gt;
+&lt;li&gt;migratiegerichte output&lt;/li&gt;
+&lt;li&gt;expliciete accept/undo-controles&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Dat is een veel gezondere AI-workflow dan volledige auto-generatie zonder inspectiepad.&lt;/p&gt;
+&lt;p&gt;En voor databasewerk is reviewbaarheid heel belangrijk.&lt;/p&gt;
+&lt;h2 id="data-api-builder-is-een-stille-vermenigvuldiger"&gt;Data API Builder is een stille vermenigvuldiger&lt;/h2&gt;
+&lt;p&gt;De andere functie die ik niet zou negeren is de Data API Builder-integratie.&lt;/p&gt;
+&lt;p&gt;Als je binnen dezelfde omgeving van schema naar:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;REST&lt;/li&gt;
+&lt;li&gt;GraphQL&lt;/li&gt;
+&lt;li&gt;MCP-endpoints&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;kunt gaan, ontstaat een zeer efficiënt pad voor backendprototypes en interne tools.&lt;/p&gt;
+&lt;p&gt;Dat vervangt geen diepere backend engineering. Maar het verkort de weg van database-idee naar werkende interface absoluut.&lt;/p&gt;
+&lt;h2 id="mijn-visie"&gt;Mijn visie&lt;/h2&gt;
+&lt;p&gt;Deze release laat de MSSQL-extensie meer aanvoelen als een klein platform in VS Code dan als een simpel add-on.&lt;/p&gt;
+&lt;p&gt;Voor ontwikkelaars die API&amp;rsquo;s, datatools, beheertools of SQL-gestuurde prototypes bouwen, is dat een betekenisvolle verschuiving.&lt;/p&gt;
+&lt;p&gt;En als Microsoft deze loop blijft aanscherpen, wordt de extensie veel strategischer nuttig dan veel mensen nu nog aannemen.&lt;/p&gt;
+&lt;p&gt;Originele post: &lt;a href="https://devblogs.microsoft.com/azure-sql/vscode-mssql-june-2026/"&gt;MSSQL Extension for VS Code: Azure SQL Database Provisioning and More&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>SQL MCP Server op Azure App Service — Geen containers vereist</title><link>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</link><pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</guid><description>SQL MCP Server kan nu draaien op Azure App Service zonder Docker of Kubernetes. Wat dit betekent voor .NET-ontwikkelaars die AI-agents bouwen die communiceren met SQL-databases.</description><content:encoded>&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor de originele versie, &lt;a href="https://thedotnetblog.com/nl/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Eerlijk gezegd: elke keer dat ik &amp;ldquo;vereist een container&amp;rdquo; in een tutorial zie, ontsnapt er iets van een zucht. Containers zijn geweldig — totdat je team geen containerstrategie heeft, en een functie die simpel leek plotseling vastloopt op onverwachte orchestratiecomplexiteit die niemand had gepland.&lt;/p&gt;
+&lt;p&gt;Daarom trok dit mijn aandacht. SQL MCP Server kan nu draaien op Azure App Service — geen Docker, geen Kubernetes, alleen hetzelfde Data API Builder (DAB)-configuratiebestand dat je SQL-database blootstelt via MCP, REST en GraphQL.&lt;/p&gt;
+&lt;h2 id="wat-is-sql-mcp-server"&gt;Wat is SQL MCP Server?&lt;/h2&gt;
+&lt;p&gt;Een snelle introductie als je er nog niet bekend mee bent. SQL MCP Server zit tussen je AI-agent en SQL-database in. In plaats van de agent directe toegang tot de database te geven (een slecht idee), stelt het je tabellen en views bloot als een abstractielaag — entiteiten met gedefinieerde rechten.&lt;/p&gt;
+&lt;p&gt;Gebouwd op &lt;a href="https://learn.microsoft.com/nl-nl/azure/data-api-builder/"&gt;Data API Builder&lt;/a&gt;, wat betekent dat één configuratiebestand MCP &lt;em&gt;en&lt;/em&gt; REST &lt;em&gt;en&lt;/em&gt; GraphQL tegelijkertijd beheert. Je agent praat met het MCP-eindpunt. Je traditionele applicatie praat met REST of GraphQL. Dezelfde configuratie, dezelfde runtime, verschillende oppervlakken.&lt;/p&gt;
+&lt;p&gt;Dit is genuinelijk nuttig — je hoeft niet twee afzonderlijke API-lagen te onderhouden.&lt;/p&gt;
+&lt;h2 id="het-containerprobleem-en-de-oplossing"&gt;Het containerprobleem (en de oplossing)&lt;/h2&gt;
+&lt;p&gt;Het originele deploymentmodel van SQL MCP Server gebruikte containers. Dat werkt goed in veel teams — maar niet in allemaal. Veel .NET-teams standaardiseren op Azure App Service of VM&amp;rsquo;s. Een containerruntime vereisen alleen om een SQL-eindpunt bloot te stellen, voegt wrijving toe waar niemand om vroeg.&lt;/p&gt;
+&lt;p&gt;De nieuwe walkthrough laat zien hoe je de container volledig kunt overslaan. Alles werkt via een &lt;code&gt;dab start&lt;/code&gt;-commando, gehost op App Service als een standaard .NET 8-webproces.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Installeer Data API Builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet tool install microsoft.dataapibuilder --prerelease -g
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Initialiseer de configuratie&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --host-mode Development --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;SQL_CONNECTION_STRING&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Voeg een entiteit toe&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add products --source dbo.products --permissions &lt;span class="s2"&gt;&amp;#34;authenticated:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Configureer de App Service-authenticatieprovider&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab configure --runtime.host.authentication.provider AppService
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Start de server&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Op dit punt heb je MCP op &lt;code&gt;/mcp&lt;/code&gt;, REST en GraphQL vanuit hetzelfde proces — en niets dat in een container draait.&lt;/p&gt;
+&lt;h2 id="authenticatie-zonder-gedeelde-api-sleutels"&gt;Authenticatie zonder gedeelde API-sleutels&lt;/h2&gt;
+&lt;p&gt;Dit is het deel dat ik het meest waardeer. Bij deployment naar App Service configureer je Microsoft Entra ID als authenticatieprovider. Geen gedeelde secrets in configuratiebestanden, geen API-sleutels om te roteren.&lt;/p&gt;
+&lt;p&gt;De verbindingsreeks blijft in App Service-omgevingsvariabelen (niet in &lt;code&gt;dab-config.json&lt;/code&gt;), en het MCP-eindpunt is beveiligd door platformauthenticatie. Als je Azure-workloads al zijn afgestemd op Entra ID, past dit er natuurlijk in.&lt;/p&gt;
+&lt;p&gt;Voor lokale ontwikkeling schakel je over naar de &lt;code&gt;Simulator&lt;/code&gt;-modus en STDIO-transport. Schakel terug naar de &lt;code&gt;AppService&lt;/code&gt;-modus voor deployment. Schoon en expliciet.&lt;/p&gt;
+&lt;h2 id="deployment-naar-app-service"&gt;Deployment naar App Service&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az appservice plan create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --sku B1 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --is-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --plan &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --runtime &lt;span class="s2"&gt;&amp;#34;DOTNETCORE:8.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp config &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --startup-file &lt;span class="s2"&gt;&amp;#34;dab start&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Deploy vervolgens je DAB-project met de codedeploymentmethode die je team al gebruikt. Het cruciale detail: dit is een &lt;strong&gt;code&lt;/strong&gt;-deployment, geen containerdeployment.&lt;/p&gt;
+&lt;h2 id="waarom-dit-belangrijk-is-voor-net-ontwikkelaars"&gt;Waarom dit belangrijk is voor .NET-ontwikkelaars&lt;/h2&gt;
+&lt;p&gt;Als je AI-agents bouwt in .NET, zal je agent vroeg of laat moeten communiceren met een database. SQL MCP Server geeft je een gestructureerde manier om dit te doen — zonder ruwe verbindingsreeksen bloot te stellen.&lt;/p&gt;
+&lt;p&gt;Bekijk de volledige walkthrough in de &lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-app-service/"&gt;originele blogpost&lt;/a&gt; en het &lt;a href="https://github.com/Azure-Samples/SQL-MCP-NoContainer"&gt;GitHub-voorbeeldrepository&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="conclusie"&gt;Conclusie&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server op App Service is een pragmatische keuze voor .NET-teams die hun agents gestructureerde SQL-datatoegang willen geven zonder een containerstrategie. Probeer het — je agents zullen het schone API-oppervlak waarderen.&lt;/p&gt;</content:encoded></item><item><title>SQL MCP Server — De Juiste Manier om AI-agents Databasetoegang te Geven</title><link>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>SQL MCP Server van Data API builder geeft AI-agents veilige, deterministische databasetoegang zonder schema's bloot te stellen of te vertrouwen op NL2SQL.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit bericht is automatisch vertaald. Voor het origineel, &lt;a href="https://thedotnetblog.com/nl/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Laten we eerlijk zijn: de meeste database-MCP-servers die vandaag beschikbaar zijn, zijn angstaanjagend. Ze nemen een zoekopdracht in natuurlijke taal, genereren SQL on-the-fly en voeren het uit op je productiegegevens.&lt;/p&gt;
+&lt;p&gt;Het Azure SQL-team heeft zojuist &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;SQL MCP Server geïntroduceerd&lt;/a&gt;, en het neemt een fundamenteel andere aanpak.&lt;/p&gt;
+&lt;h2 id="waarom-geen-nl2sql"&gt;Waarom geen NL2SQL?&lt;/h2&gt;
+&lt;p&gt;Modellen zijn niet deterministisch. SQL MCP Server gebruikt een &lt;strong&gt;NL2DAB&lt;/strong&gt;-aanpak. De agent werkt met de entiteitsabstractielaag van Data API builder om nauwkeurige T-SQL deterministisch te produceren.&lt;/p&gt;
+&lt;h2 id="zeven-tools-niet-zevenhonderd"&gt;Zeven tools, niet zevenhonderd&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server biedt precies zeven DML-tools:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — ontdek beschikbare entiteiten&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — rijen invoegen&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — tabellen en views opvragen&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — rijen wijzigen&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — rijen verwijderen&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — opgeslagen procedures uitvoeren&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — aggregatiequery&amp;rsquo;s&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="in-drie-opdrachten-aan-de-slag"&gt;In drie opdrachten aan de slag&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers --source dbo.Customers --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="het-beveiligingsverhaal-is-solide"&gt;Het beveiligingsverhaal is solide&lt;/h2&gt;
+&lt;p&gt;RBAC op elke laag, Azure Key Vault-integratie, Microsoft Entra + aangepaste OAuth.&lt;/p&gt;
+&lt;p&gt;Bekijk de &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;volledige post&lt;/a&gt; en &lt;a href="https://aka.ms/sql/mcp"&gt;documentatie&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

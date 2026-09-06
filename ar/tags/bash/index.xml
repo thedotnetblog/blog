@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Bash | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/bash/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 29 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Intelligent Terminal 0.1.1 بدأ يوضح كيف يمكن أن تبدو تجربة shell أصلية للذكاء الاصطناعي</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</link><pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</guid><description>يضيف Intelligent Terminal 0.1.1 دعم Bash وWSL، وتدفق /fix يدوي، وتبديل النماذج أثناء التشغيل. ما زال مبكرًا، لكن الاتجاه يصبح أكثر إثارة للاهتمام للمطورين الذين يعيشون داخل الطرفية.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;تُرجِمت هذه المقالة تلقائيًا. للاطلاع على النسخة الأصلية بالإنجليزية، &lt;a href="https://thedotnetblog.com/ar/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/"&gt;انقر هنا&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ما زلت أعتقد أن الذكاء الاصطناعي في الطرفية هو أحد أكثر مجالات تجربة المطورين وعدًا في الوقت الحالي.&lt;/p&gt;
+&lt;p&gt;ولهذا السبب برز &lt;strong&gt;Intelligent Terminal 0.1.1&lt;/strong&gt; أكثر من مجرد إصدار نقطي عادي.&lt;/p&gt;
+&lt;p&gt;هذا التحديث يضيف:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;اكتشاف أخطاء Bash وWSL&lt;/li&gt;
+&lt;li&gt;تدفق &lt;code&gt;/fix&lt;/code&gt; يدوي&lt;/li&gt;
+&lt;li&gt;تبديل النماذج أثناء التشغيل&lt;/li&gt;
+&lt;li&gt;لوحة agent أكثر قابلية للتخصيص&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;هذا المزيج يبدأ في جعل المنتج يبدو أقل كأنه تجربة أولية وأكثر كأنه تجربة shell تتطور فعليًا.&lt;/p&gt;
+&lt;h2 id="fix-هو-النوع-الصحيح-من-الميزات"&gt;&lt;code&gt;/fix&lt;/code&gt; هو النوع الصحيح من الميزات&lt;/h2&gt;
+&lt;p&gt;أكثر إضافة أعجبتني هي على الأرجح &lt;code&gt;/fix&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;لماذا؟ لأن ليست كل مشكلة تظهر على شكل فشل واضح ونظيف في shell. أحيانًا ينجح الأمر تقنيًا، لكنه يظل يعطيك نتيجة خاطئة. وهنا بالضبط يفيد تدفق يدوي من نوع &amp;ldquo;ساعدني على التفكير في هذه النتيجة&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;هذا نموذج دعم داخل الطرفية أكثر واقعية بكثير من انتظار آلية اكتشاف تلقائي مثالية.&lt;/p&gt;
+&lt;h2 id="دعم-bash-وwsl-يجعل-التجربة-أكثر-مصداقية"&gt;دعم Bash وWSL يجعل التجربة أكثر مصداقية&lt;/h2&gt;
+&lt;p&gt;كان من الضروري التوسع إلى ما بعد PowerShell.&lt;/p&gt;
+&lt;p&gt;إذا كان لهذا النوع من ذكاء الطرفية أن يصبح مهمًا لعدد أكبر من المطورين، فعليه أن يعمل في الأماكن التي يقضي فيها المطورون وقتهم فعلًا. ودعم Bash وWSL جزء كبير من ذلك.&lt;/p&gt;
+&lt;h2 id="وجهة-نظري"&gt;وجهة نظري&lt;/h2&gt;
+&lt;p&gt;هذا لا يزال في مرحلة مبكرة، لكن الاتجاه جيد.&lt;/p&gt;
+&lt;p&gt;الطرفية من أكثر الأماكن الطبيعية للتشخيص بمساعدة الذكاء الاصطناعي، وإصلاح الأوامر، والإرشاد الواعي بالبيئة. تجعلني التحديثات مثل هذه أتخيل ذلك المستقبل بسهولة أكبر.&lt;/p&gt;
+&lt;p&gt;المقال الأصلي: &lt;a href="https://devblogs.microsoft.com/commandline/intelligent-terminal-0-1-1-is-here-bash-support-new-slash-commands-and-customization/"&gt;Intelligent Terminal 0.1.1 is here: bash support, new slash commands, and more customization&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

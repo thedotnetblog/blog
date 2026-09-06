@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Platform-Lifecycle | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/platform-lifecycle/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sun, 19 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/platform-lifecycle/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET 8 和 .NET 9 终止支持：将其视为交付截止日期</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/net-8-net-9-eos-upgrade-playbook/</link><pubDate>Sun, 19 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/net-8-net-9-eos-upgrade-playbook/</guid><description>2026 年 11 月 10 日不仅仅是一个支持日期；它是推迟升级风险变得显式的节点。</description><content:encoded>&lt;p&gt;原文来源：&lt;a href="https://devblogs.microsoft.com/dotnet/dotnet-8-9-end-of-support/"&gt;.NET 8 and .NET 9 will reach End of Support on November 10, 2026&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这个公告很直接，团队应该以同样的清晰度回应：如果你计划在 2026 年 11 月 10 日之后继续在 .NET 8 或 .NET 9 上发布，你是在做出一个有意的不受支持运行时决定。&lt;/p&gt;
+&lt;p&gt;应用会继续运行。这不是重点。重点是安全和维护更新将会停止。一旦发生这种情况，每个已知的、没有反向移植路径的漏洞都会成为你的运维责任。&lt;/p&gt;
+&lt;p&gt;我的个人观点：&lt;strong&gt;组织经常将框架升级视为可选的维护&lt;/strong&gt;，然后在紧急窗口、审计发现和匆忙的供应商升级中为这个决定付出代价。升级规划应该是一个产品路线图项目，而非一个支线任务。&lt;/p&gt;
+&lt;p&gt;面向 .NET 团队的实用迁移立场：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;将 .NET 10 迁移设定为带日期的目标&lt;/strong&gt;，而非开放式的积压项目。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;现在就将兼容性和回归测试与功能开发并行进行&lt;/strong&gt;，而不是等到第四季度。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;将依赖和托管准备作为单独的工作流跟踪&lt;/strong&gt;，因为很多失败发生在项目文件之外。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;尽早使用 Upgrade Assistant 和破坏性变更文档&lt;/strong&gt;，以提前发现意外。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果你拥有多个产品使用的共享库，在组织内部公开发布你的 .NET 10 支持时间线。下游团队需要前置时间。&lt;/p&gt;
+&lt;p&gt;Visual Studio 的&amp;quot;不再受支持&amp;quot;组件标记在操作上也很重要。它创建了一个清晰信号，表明工具链清理是保持合规的一部分。忽视这一点的团队通常会在混合 SDK 状态和不一致的构建行为中越陷越深。&lt;/p&gt;
+&lt;p&gt;一个较少被讨论的细节是 .NET 8 和 .NET 9 在同一日期终止支持。这压缩了那些以为分批采用能获得更多缓冲的组织的升级窗口。如果你为了功能访问而迁移到 .NET 9，你仍然落在同一个支持悬崖上。&lt;/p&gt;
+&lt;p&gt;对于平台负责人来说，决策矩阵很简单：&lt;strong&gt;在截止日期前迁移，或者记录并接受带有补偿性控制的非受支持风险&lt;/strong&gt;。没有第三个&amp;quot;什么都不变&amp;quot;的选项。&lt;/p&gt;
+&lt;p&gt;好消息是 .NET 10 是一个 LTS 目标，支持到 2028 年 11 月——一旦你完成迁移，就能获得稳定的运行时间。&lt;/p&gt;
+&lt;p&gt;不要等到最后的补丁星期二才开始。把它当作一个有安全影响的交付截止日期来对待，因为事实就是如此。&lt;/p&gt;</content:encoded></item></channel></rss>

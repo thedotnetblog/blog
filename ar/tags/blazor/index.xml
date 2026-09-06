@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Blazor | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/blazor/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 23 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/blazor/index.xml" rel="self" type="application/rss+xml"/><item><title>كيف انتقل Copilot Studio إلى .NET 10 WebAssembly وأصبح أسرع بنسبة 20%</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</link><pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</guid><description>تحسينات .NET 10 WASM ليست فقط للمشاريع الجديدة. إليك ما قاسه Copilot Studio بعد الترقية من .NET 8: بصمة تلقائية للملفات، WasmStripILAfterAOT افتراضياً وأرقام أداء تنفيذ حقيقية.</description><content:encoded>&lt;p&gt;قام فريق Copilot Studio بشيء كان فضوليًا بشأنه جميع مطوري Blazor WASM: لقد قاموا فعليًا بترقية تطبيق إنتاجي من .NET 8 إلى .NET 10 وقاسوا النتائج. يشارك المنشور أرقامًا محددة، وهو أمر نادر ومفيد حقًا.&lt;/p&gt;
+&lt;h2 id="الترقية-كانت-مملة-هذا-أمر-جيد"&gt;الترقية كانت مملة (هذا أمر جيد)&lt;/h2&gt;
+&lt;p&gt;تحديث إطار العمل المستهدف، تحديث مراجع الحزم، إصلاح التغييرات المخلة. هذا كل شيء. بناء .NET 10 يعمل الآن في الإنتاج. الهجرة نفسها لم تكن الجزء المثير للاهتمام — التغييرات في .NET 10 هي ذلك.&lt;/p&gt;
+&lt;h2 id="البصمة-التلقائية-للأصول"&gt;البصمة التلقائية للأصول&lt;/h2&gt;
+&lt;p&gt;في السابق، كان توزيع تطبيق WASM يعني كتابة نصوص برمجية مخصصة لإعادة تسمية الأصول المنشورة بتجزئات SHA256 لتجاوز التخزين المؤقت. كان لدى Copilot Studio نص PowerShell يقوم بهذا بالضبط — إعادة تسمية الملفات، حقن سمات &lt;code&gt;integrity&lt;/code&gt; في محمّل JavaScript، إدارة كل شيء يدويًا.&lt;/p&gt;
+&lt;p&gt;في .NET 10، كل ذلك مدمج. يتم وضع بصمة تلقائية على الأصول المنشورة، واستيرادها مباشرة من &lt;code&gt;dotnet.js&lt;/code&gt;، والتحقق من سلامتها دون تدخل يدوي. قام الفريق بحذف نص إعادة التسمية.&lt;/p&gt;
+&lt;p&gt;تغيير صغير في النطاق، تخفيض كبير في التعقيد.&lt;/p&gt;
+&lt;h2 id="wasmstripilafteraot-مفعل-الآن-افتراضيا"&gt;WasmStripILAfterAOT مفعّل الآن افتراضيًا&lt;/h2&gt;
+&lt;p&gt;في .NET 8، كان إزالة IL من التجميعات المترجمة بـ AOT اختياريًا. في .NET 10 هو السلوك الافتراضي. بعد ترجمة AOT، يتم إزالة رمز IL الأصلي من المخرجات — غير مطلوب في وقت التشغيل، والاحتفاظ به كان يضخم حجم الحزمة دون سبب.&lt;/p&gt;
+&lt;p&gt;يستخدم Copilot Studio تحسينًا محددًا: يوزع كلًا من محرك JIT (بدء سريع) ومحرك AOT (أقصى أداء في الحالة الثابتة)، يحمّل كليهما بالتوازي وينتقل من JIT إلى AOT بمجرد استعداده. كما يُزيل تكرار الملفات المتطابقة بين المحركَين.&lt;/p&gt;
+&lt;p&gt;يعني سلوك إزالة IL الجديد أن تجميعات AOT لم تعد تطابق نظيراتها من JIT بشكل بت ببت، لذا تُزال تكرارات ملفات أقل:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.NET 8: 59 ملفًا مشتركًا&lt;/li&gt;
+&lt;li&gt;.NET 10: 22 ملفًا مشتركًا&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;النتيجة الصافية: حجم حزمة أكبر بحوالي 15% لمحرك AOT. تنزيل AOT أبطأ بحوالي 6% على شبكة LAN السريعة، وأبطأ بحوالي 17% على 4G. لكن كل ذلك يحدث في الخلفية بعد أن يصبح التطبيق تفاعليًا بالفعل.&lt;/p&gt;
+&lt;h2 id="أرقام-الأداء"&gt;أرقام الأداء&lt;/h2&gt;
+&lt;p&gt;هذا هو الجزء المهم:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;أسرع بحوالي 20%&lt;/strong&gt; في المكالمة الأولى (المسار البارد)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;أسرع بحوالي 5%&lt;/strong&gt; في المكالمات اللاحقة (المسار الدافئ)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;التحسينات أكثر وضوحًا في &amp;ldquo;البوتات الكبيرة&amp;rdquo; — العملاء الكبيرة والمعقدة حيث يهيمن الكود المترجم بـ AOT. لسير العمل الأبسط، الكسب أصغر.&lt;/p&gt;
+&lt;h2 id="إذا-كنت-لا-تزال-على-net-8"&gt;إذا كنت لا تزال على .NET 8&lt;/h2&gt;
+&lt;p&gt;قصة الهجرة بسيطة بحق: حدّث &lt;code&gt;&amp;lt;TargetFramework&amp;gt;&lt;/code&gt;، حدّث مراجع الحزم، احذف أي نصوص بصمة مخصصة، وستستفيد تلقائيًا من &lt;code&gt;WasmStripILAfterAOT&lt;/code&gt;. إذا كنت تترجم بـ AOT، توقع مكاسب مماثلة في الأداء.&lt;/p&gt;
+&lt;p&gt;ملاحظة من المنشور: إذا كنت تحمّل وقت تشغيل .NET WASM داخل &lt;code&gt;WebWorker&lt;/code&gt;، اضبط &lt;code&gt;dotnetSidecar = true&lt;/code&gt; عند التهيئة.&lt;/p&gt;
+&lt;p&gt;المنشور الأصلي: &lt;a href="https://devblogs.microsoft.com/dotnet/copilot-studio-dotnet-10-migration/"&gt;Copilot Studio gets faster with .NET 10 on WebAssembly&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

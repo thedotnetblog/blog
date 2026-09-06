@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Data API Builder | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/data-api-builder/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Wed, 22 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/data-api-builder/index.xml" rel="self" type="application/rss+xml"/><item><title>Ajan SQL için Gerçek Sınır: SQL MCP Sunucusunda OBO ile Denetlenebilirlik</title><link>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/sql-mcp-obo-audit-frontier/</link><pubDate>Wed, 22 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/sql-mcp-obo-audit-frontier/</guid><description>Data API builder ve SQL MCP Server'da On-Behalf-Of kimlik doğrulaması önemli bir yönetişim kilometre taşıdır çünkü Azure SQL sonunda bir ajan eyleminin arkasındaki insanı denetleyebilir.</description><content:encoded>&lt;p&gt;Kurumsal AI projelerinde acı bir gerçek vardır: birçok ekip model kalitesine takıntılıdır ve hesap verebilirliği görmezden gelir. Bir ajan üretim verilerini yazdığında veya okuduğunda, ilk olay inceleme sorusu &amp;ldquo;cevap iyi miydi?&amp;rdquo; değildir. &amp;ldquo;Bunu gerçekte kim yaptı?&amp;rdquo; olur.&lt;/p&gt;
+&lt;p&gt;Orijinal kaynak: &lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-obo-auth/"&gt;https://devblogs.microsoft.com/azure-sql/sql-mcp-server-obo-auth/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Bu nedenle Data API builder 2.0 ile SQL MCP Server&amp;rsquo;daki OBO desteği ilk bakışta göründüğünden daha büyük bir olaydır. Kullanıcı adı/parola ve yönetilen kimlik yaklaşımları operasyonel olarak hala çalışır, ancak her ikisi de kimliği hizmet sınırına çöker. Günlükler uygulamayı veya ara katmanı gösterir, insan isteğinin kaynağını değil. Bu basit otomasyon için kabul edilebilir. Düzenlenmiş ajan iş akışları için kabul edilebilir değildir.&lt;/p&gt;
+&lt;p&gt;OBO ile SQL, araç ana bilgisayar kimliğini değil, &lt;strong&gt;delegeli kullanıcı bağlamını&lt;/strong&gt; doğrular. Bu size temelde daha iyi bir denetim modeli verir: kullanıcı asıl, eylem, ifade bağlamı ve orta katman uygulama tanımlayıcısı birlikte. MCP araçlarının ve DAB varlık izinlerinin kontrol yüzeyini kaybetmeden izlenebilirlik elde edersiniz.&lt;/p&gt;
+&lt;p&gt;Benim görüşüm kesindir: ajanınız hassas SQL verilerine dokunabiliyorsa, OBO isteğe bağlı bir sağlamlaştırma görevi değil, varsayılan mimariniz olmalıdır. Kurulum daha karmaşıktır, ancak kimlik borcu her zaman daha sonra ödenir, genellikle güvenlik olayları, uyum denetimleri veya yönetici eskülasyonları sırasında.&lt;/p&gt;
+&lt;h3 id="pratik-uygulama-rehberliği"&gt;Pratik uygulama rehberliği&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Kimlik akışını doğrulayarak başlayın&lt;/strong&gt; minimal bir &amp;ldquo;WhoAmI&amp;rdquo; görünümü ve entegrasyon testlerinde otomatik kontrollerle. SQL asıl kullanıcısı, oturum açmış kullanıcıyla eşleşmiyorsa, göndermeden önce durun ve düzeltin.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SQLSecurityAuditEvents için Log Analytics sorgularını&lt;/strong&gt; SOC panolarınıza bağlayın ve OBO yolları aracılığıyla başlatılan yüksek riskli eylemler için uyarı ayarlayın.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RBAC ve DAB izinlerini hizalayın&lt;/strong&gt; böylece kullanıcı düzeyinde kimlik ve eylem düzeyinde yetkilendirme uçtan uca tutarlı kalır.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Duyuruda ince ama önemli bir tasarım noktası önbellek davranışıdır. DAB, kullanıcı delegeli kimlik doğrulaması etkinleştirildiğinde yanıt önbelleğe almayı açıkça engeller. Bu ödünleşim doğrudur. Çok kiracılı veya düzenlenmiş ortamlarda, kullanıcı kapsamlı sonuçları sızdırabilecek performans hileleri buna değmez.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SQL MCP Server artı OBO&lt;/strong&gt;, olgun bir modelin başlangıcıdır: kontrollü operatörler olarak ajanlar, sorumlu asıllar olarak kullanıcılar, denetlenebilir sistemler olarak veri düzlemleri. Mimarınız &amp;ldquo;bunu kim yaptı?&amp;rdquo; sorusuna güvenle cevap veremiyorsa, demo ne kadar cilalı görünürse görünsün, bu üretime hazır AI değildir.&lt;/p&gt;</content:encoded></item><item><title>Data API Builder Özel Yolları, API'leri İnsanlar İçin Tasarlamanızı Sağlar, Tablolar İçin Değil</title><link>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/data-api-builder-custom-paths-domain-first/</link><pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/data-api-builder-custom-paths-domain-first/</guid><description>DAB'deki bileşik REST yolları, alan odaklı API tasarımı için küçük bir özellik ancak büyük mimari etkiye sahiptir.</description><content:encoded>&lt;p&gt;Orijinal kaynak: &lt;a href="https://devblogs.microsoft.com/azure-sql/data-api-builder-custom-rest-paths/"&gt;Compose your API surface with Data API builder custom paths&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Data API Builder&amp;rsquo;daki yeni bileşik REST yolu desteği, küçük bir yapılandırma iyileştirmesi gibi görünebilir, ancak aslında uzun süredir devam eden bir API tasarım gerilimini çözer: veritabanı topolojisinin genel uç nokta tasarımına sızması.&lt;/p&gt;
+&lt;p&gt;Varsayılan varlık tabanlı yollar hızlı başlangıçlar için harikadır. Uzun vadeli ürün API&amp;rsquo;leri için genellikle yanlıştır. Gerçek sistemlerin, iş kavramlarına, sahiplik sınırlarına ve tüketici zihinsel modellerine uygun rota yapılarına ihtiyacı vardır.&lt;/p&gt;
+&lt;p&gt;Bu DAB değişikliğinin önemli olmasının nedeni budur. Oluşturulan API kolaylığını korurken daha temiz bir alan-ilk yüzey sunabilirsiniz.&lt;/p&gt;
+&lt;p&gt;Benim görüşümlü düşüncem basittir: API yol yapınız üretimde ham tablo adlarını yansıtıyorsa, genellikle istemci netliği pahasına arka uç kolaylığı için optimize ediyorsunuz demektir.&lt;/p&gt;
+&lt;p&gt;Özel yollarla ekipler daha iyi sınırlar modelleyebilir: satış, fatura, destek veya ortağa özel yüzeyler gibi. Bu, uygun API yönetişiminin yerini almaz, ancak DAB kullanıcılarına rota tasarımını ürün diliyle hizalamak için pratik bir yol verir.&lt;/p&gt;
+&lt;p&gt;Bu özelliği benimseyen ekipler için pratik rehberlik:&lt;/p&gt;
+&lt;p&gt;Yolları gelişigüzel eklemeden önce bir adlandırma politikası tanımlayın. Tutarsız alt segmentler uzun vadeli karmaşa haline gelir.&lt;/p&gt;
+&lt;p&gt;Uç noktaları organizasyon şemalarına değil, sınırlı bağlamlara eşleyin. Ekipler değişir; alan semantiği kararlı olmalıdır.&lt;/p&gt;
+&lt;p&gt;Yol yapısını sürüm oluşturma stratejinizin bir parçası olarak ele alın ve kırıcı değişiklikleri açıkça belgeleyin.&lt;/p&gt;
+&lt;p&gt;Özel rota yapıları boyunca yetkilendirme davranışını doğrulayın, böylece rota netliği güvenlik netliği ile eşleşir.&lt;/p&gt;
+&lt;p&gt;DAB&amp;rsquo;da genel olarak takdir ettiğim şey kaldıraç modelidir: tekrarlayan denetleyici kodu yazmadan sayfalama, filtreleme, projeksiyon ve diğer uç nokta mekaniğini elde edersiniz. Özel yollar, API mimarlarının en büyük itirazlarından birini azaltarak bu kaldıracı daha üretime hazır hale getirir.&lt;/p&gt;
+&lt;p&gt;Bir uyarı var. Daha iyi yol oluşturma, üretmenin kolay hissettirmesi nedeniyle ekipleri çok fazla şeyi çok hızlı açığa çıkarmaya cezbedebilir. Korkuluklar hala önemlidir: varlık pozlamasını kasıtlı tutun, politikayı merkezi olarak uygulayın ve dahili şema deneylerinden kazara kamuya açık sözleşmeler oluşturmaktan kaçının.&lt;/p&gt;
+&lt;p&gt;Teslimat baskısı altındaki .NET kuruluşları için bu özellik, disiplinle kullanılırsa bir üretkenlik artışıdır. Elişi API katmanlarından daha hızlı hareket edebilirken yine de tutarlı ve iş dostu bir uç nokta yüzeyi koruyabilirsiniz.&lt;/p&gt;
+&lt;p&gt;Alt satır: DAB özel yolları URL&amp;rsquo;leri güzelleştirmekle ilgili değildir. Oluşturulan uç noktaların operasyonel verimliliğini korurken API tasarım niyetini geri kazanmakla ilgilidir.&lt;/p&gt;</content:encoded></item><item><title>VS Code için MSSQL uzantısı sessizce çok daha büyük bir platforma dönüşüyor</title><link>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/</link><pubDate>Tue, 19 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/</guid><description>MSSQL uzantısının en son güncellemesi Azure SQL provisioning, Copilot destekli şema tasarımı, Data API builder ve notebook'lar ekliyor. İlginç olan, artık ne kadar çok veritabanı işinin VS Code içinde kalabildiği.</description><content:encoded>&lt;p&gt;&lt;em&gt;Bu makale otomatik olarak çevrildi. Orijinal sürüm için &lt;a href="https://thedotnetblog.com/tr/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/"&gt;buraya tıklayın&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;VS Code için MSSQL uzantısı bir süredir büyüyordu, ama bu son güncelleme yönü çok daha net hale getiriyor.&lt;/p&gt;
+&lt;p&gt;Artık sadece «bağlan ve birkaç sorgu çalıştır» değil.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Azure SQL provisioning&lt;/strong&gt;, &lt;strong&gt;Copilot destekli Schema Designer&lt;/strong&gt;, &lt;strong&gt;SQL Notebooks&lt;/strong&gt; ve &lt;strong&gt;Data API builder&lt;/strong&gt; tek bir sürümde ileri taşınırken, uzantı veritabanı merkezli geliştirme için çok daha eksiksiz bir çalışma alanına dönüşüyor.&lt;/p&gt;
+&lt;h2 id="pratik-çekim-noktası-doğrudan-editörden-provisioning"&gt;Pratik çekim noktası, doğrudan editörden provisioning&lt;/h2&gt;
+&lt;p&gt;Kaynak yazı, artık free tier kullanarak «doğrudan editöründen ve ücretsiz olarak» tam yönetilen bir bulut veritabanı oluşturabileceğini söylüyor.&lt;/p&gt;
+&lt;p&gt;Bu, ne kadar çok setup sürtünmesi kaldırdığını fark edene kadar küçük görünen türden bir özellik.&lt;/p&gt;
+&lt;p&gt;Birçok geliştirici için veri ağırlıklı denemelerin can sıkıcı kısmı SQL&amp;rsquo;in kendisi değildir. Sorun şu environment boşluğudur:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;fikir&lt;/li&gt;
+&lt;li&gt;veritabanı&lt;/li&gt;
+&lt;li&gt;şema&lt;/li&gt;
+&lt;li&gt;API&lt;/li&gt;
+&lt;li&gt;test edilebilir backend&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bu boşluk tek bir araç içinde kısalırsa, tüm workflow daha çekici hale gelir.&lt;/p&gt;
+&lt;h2 id="veri-işi-için-daha-güçlü-bir-inner-loop-böyle-görünür"&gt;Veri işi için daha güçlü bir inner loop böyle görünür&lt;/h2&gt;
+&lt;p&gt;Bu sürümde sevdiğim şey, veritabanı workflow&amp;rsquo;unun daha fazlasını tek yerde tutması:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;veritabanı provision etme&lt;/li&gt;
+&lt;li&gt;şema tasarlama&lt;/li&gt;
+&lt;li&gt;değişiklikleri gözden geçirme&lt;/li&gt;
+&lt;li&gt;ORM script&amp;rsquo;leri üretme&lt;/li&gt;
+&lt;li&gt;API&amp;rsquo;ler sunma&lt;/li&gt;
+&lt;li&gt;endpoint&amp;rsquo;leri test etme&lt;/li&gt;
+&lt;li&gt;notebook&amp;rsquo;lar üzerinden dokümantasyon ve sorgu&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bu, SQL&amp;rsquo;i stack içinde kopuk bir yan araç gibi görmekten çok daha ikna edici bir hikâye.&lt;/p&gt;
+&lt;h2 id="copilot-destekli-şema-workflowu-ai-valuenun-gerçekten-hissedildiği-yer"&gt;Copilot destekli şema workflow&amp;rsquo;u, AI value&amp;rsquo;nun gerçekten hissedildiği yer&lt;/h2&gt;
+&lt;p&gt;Schema designer eklemeleri özellikle ilginç, çünkü iyi bir denge yakalamış gibi duruyorlar.&lt;/p&gt;
+&lt;p&gt;Değer «AI veri modelinizi tasarlar ve siz körü körüne güvenirsiniz» değil.&lt;/p&gt;
+&lt;p&gt;Değer şunlar:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;daha hızlı başlangıç noktaları&lt;/li&gt;
+&lt;li&gt;görsel review&lt;/li&gt;
+&lt;li&gt;değişiklik takibi&lt;/li&gt;
+&lt;li&gt;migration odaklı çıktı&lt;/li&gt;
+&lt;li&gt;açık accept/undo kontrolleri&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bu, inspection path&amp;rsquo;i olmayan tam auto-generation&amp;rsquo;dan çok daha sağlıklı bir AI workflow&amp;rsquo;u.&lt;/p&gt;
+&lt;p&gt;Ve veritabanı işlerinde reviewability çok önemlidir.&lt;/p&gt;
+&lt;h2 id="data-api-builder-sessiz-bir-çarpan"&gt;Data API builder sessiz bir çarpan&lt;/h2&gt;
+&lt;p&gt;Göz ardı etmeyeceğim diğer özellik Data API builder entegrasyonu.&lt;/p&gt;
+&lt;p&gt;Aynı environment içinde şemadan şunlara geçebiliyorsanız:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;REST&lt;/li&gt;
+&lt;li&gt;GraphQL&lt;/li&gt;
+&lt;li&gt;MCP endpoints&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;bu, backend prototype&amp;rsquo;ları ve internal tool&amp;rsquo;lar için çok verimli bir yol oluşturur.&lt;/p&gt;
+&lt;p&gt;Bu, daha derin backend engineering&amp;rsquo;in yerini almaz. Ama veritabanı fikrinden çalışan bir arayüze giden yolu ciddi biçimde kısaltır.&lt;/p&gt;
+&lt;h2 id="değerlendirmem"&gt;Değerlendirmem&lt;/h2&gt;
+&lt;p&gt;Bu sürüm MSSQL uzantısını basit bir add-on yerine VS Code içinde küçük bir platform gibi hissettiriyor.&lt;/p&gt;
+&lt;p&gt;API, data tool, admin tool veya SQL-backed prototype geliştirenler için bu önemli bir değişim.&lt;/p&gt;
+&lt;p&gt;Ve Microsoft bu loop&amp;rsquo;u sıkılaştırmaya devam ederse, uzantı bugün birçok kişinin düşündüğünden çok daha stratejik olarak faydalı olacak.&lt;/p&gt;
+&lt;p&gt;Orijinal gönderi: &lt;a href="https://devblogs.microsoft.com/azure-sql/vscode-mssql-june-2026/"&gt;MSSQL Extension for VS Code: Azure SQL Database Provisioning and More&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>SQL MCP Server Azure App Service'te — Konteyner Gerekmez</title><link>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</link><pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</guid><description>SQL MCP Server artık Docker veya Kubernetes olmadan Azure App Service'te çalışabiliyor. SQL veritabanlarıyla iletişim kuran AI ajanları geliştiren .NET geliştiricileri için ne anlama geldiğini ele alıyoruz.</description><content:encoded>&lt;p&gt;&lt;em&gt;Bu yazı otomatik olarak çevrilmiştir. Orijinal sürüm için &lt;a href="https://thedotnetblog.com/tr/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/"&gt;buraya tıklayın&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Dürüst olmak gerekirse: bir öğreticide &amp;ldquo;konteyner gerektirir&amp;rdquo; ifadesini her gördüğümde içimden bir ah çıkıyor. Konteynerler harika — ta ki ekibinizin bir konteyner stratejisi olmayana kadar, ve basit görünen bir özellik aniden kimsenin planlamadığı beklenmedik orkestrasyon karmaşıklığına takılıp kalıyor.&lt;/p&gt;
+&lt;p&gt;İşte bu yüzden bu dikkatimi çekti. SQL MCP Server artık Azure App Service&amp;rsquo;te çalışabiliyor — Docker yok, Kubernetes yok, yalnızca SQL veritabanınızı MCP, REST ve GraphQL üzerinden açığa çıkaran aynı Data API Builder (DAB) yapılandırma dosyasıyla.&lt;/p&gt;
+&lt;h2 id="sql-mcp-server-nedir"&gt;SQL MCP Server Nedir?&lt;/h2&gt;
+&lt;p&gt;Henüz tanışmadıysanız hızlı bir giriş. SQL MCP Server, AI ajanınız ile SQL veritabanı arasına konumlanır. Ajana veritabanına doğrudan erişim vermek yerine (berbat bir fikir), tablolarınızı ve görünümlerinizi tanımlı izinlere sahip varlıklar olarak bir soyutlama katmanıyla açığa çıkarır.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://learn.microsoft.com/tr-tr/azure/data-api-builder/"&gt;Data API Builder&lt;/a&gt; üzerine inşa edilmiştir; bu da tek bir yapılandırma dosyasının MCP &lt;em&gt;ve&lt;/em&gt; REST &lt;em&gt;ve&lt;/em&gt; GraphQL&amp;rsquo;i aynı anda yönettiği anlamına gelir. Ajanınız MCP uç noktasıyla konuşur. Geleneksel uygulamanız REST veya GraphQL ile konuşur. Aynı yapılandırma, aynı çalışma zamanı, farklı yüzeyler.&lt;/p&gt;
+&lt;p&gt;Bu gerçekten kullanışlı — iki ayrı API katmanını sürdürmenize gerek yok.&lt;/p&gt;
+&lt;h2 id="konteyner-sorunu-ve-çözümü"&gt;Konteyner Sorunu (ve Çözümü)&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server&amp;rsquo;ın orijinal dağıtım modeli konteyner kullanıyordu. Pek çok ekip için iyi çalışıyor — ama hepsi için değil. Birçok .NET ekibi Azure App Service veya sanal makinelerde standartlaşmış. Yalnızca bir SQL uç noktasını açığa çıkarmak için konteyner çalışma zamanı gerektirmek, kimsenin istemediği bir sürtünme yaratıyor.&lt;/p&gt;
+&lt;p&gt;Yeni kılavuz konteyneri tamamen atlama yöntemini gösteriyor. Her şey &lt;code&gt;dab start&lt;/code&gt; komutuyla çalışıyor ve App Service üzerinde standart bir .NET 8 web süreci olarak barındırılıyor.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Data API Builder&amp;#39;ı yükleyin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet tool install microsoft.dataapibuilder --prerelease -g
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Yapılandırmayı başlatın&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --host-mode Development --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;SQL_CONNECTION_STRING&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Bir varlık ekleyin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add products --source dbo.products --permissions &lt;span class="s2"&gt;&amp;#34;authenticated:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# App Service kimlik doğrulama sağlayıcısını yapılandırın&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab configure --runtime.host.authentication.provider AppService
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Sunucuyu başlatın&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Bu noktada &lt;code&gt;/mcp&lt;/code&gt;&amp;lsquo;de MCP&amp;rsquo;niz var, aynı süreçten REST ve GraphQL var — ve hiçbir şey bir konteynerde çalışmıyor.&lt;/p&gt;
+&lt;h2 id="paylaşılan-api-anahtarı-olmadan-kimlik-doğrulama"&gt;Paylaşılan API Anahtarı Olmadan Kimlik Doğrulama&lt;/h2&gt;
+&lt;p&gt;En çok değer verdiğim kısım bu. App Service&amp;rsquo;e dağıtırken Microsoft Entra ID&amp;rsquo;yi kimlik doğrulama sağlayıcısı olarak yapılandırıyorsunuz. Yapılandırma dosyalarında paylaşılan sır yok, döndürülecek API anahtarı yok.&lt;/p&gt;
+&lt;p&gt;Bağlantı dizesi App Service ortam değişkenlerinde tutuluyor (&lt;code&gt;dab-config.json&lt;/code&gt;&amp;lsquo;da değil) ve MCP uç noktası platform kimlik doğrulamasıyla korunuyor. Azure iş yükleriniz Entra ID ile zaten uyumluysa bu doğal bir şekilde entegre oluyor.&lt;/p&gt;
+&lt;p&gt;Yerel geliştirme için &lt;code&gt;Simulator&lt;/code&gt; moduna ve STDIO aktarımına geçin. Dağıtımdan önce &lt;code&gt;AppService&lt;/code&gt; moduna geri dönün. Temiz ve açık.&lt;/p&gt;
+&lt;h2 id="app-servicee-dağıtım"&gt;App Service&amp;rsquo;e Dağıtım&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az appservice plan create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --sku B1 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --is-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --plan &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --runtime &lt;span class="s2"&gt;&amp;#34;DOTNETCORE:8.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp config &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --startup-file &lt;span class="s2"&gt;&amp;#34;dab start&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ardından ekibinizin halihazırda kullandığı kod dağıtım yöntemini kullanarak DAB projenizi dağıtın. Önemli nokta: bu bir &lt;strong&gt;kod&lt;/strong&gt; dağıtımıdır, konteyner dağıtımı değil.&lt;/p&gt;
+&lt;h2 id="net-geliştiricileri-için-neden-önemli"&gt;.NET Geliştiricileri İçin Neden Önemli&lt;/h2&gt;
+&lt;p&gt;.NET&amp;rsquo;te AI ajanları geliştiriyorsanız, er ya da geç ajanınızın bir veritabanıyla iletişim kurması gerekecek. SQL MCP Server, ham bağlantı dizelerini açığa çıkarmadan bunu yapmanın yapılandırılmış bir yolunu sunuyor.&lt;/p&gt;
+&lt;p&gt;Tam kılavuzu &lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-app-service/"&gt;orijinal blog yazısında&lt;/a&gt; ve &lt;a href="https://github.com/Azure-Samples/SQL-MCP-NoContainer"&gt;GitHub örnek deposunda&lt;/a&gt; inceleyin.&lt;/p&gt;
+&lt;h2 id="sonuç"&gt;Sonuç&lt;/h2&gt;
+&lt;p&gt;App Service&amp;rsquo;teki SQL MCP Server, konteyner stratejisi olmaksızın ajanlara yapılandırılmış SQL veri erişimi sağlamak isteyen .NET ekipleri için pratik bir seçenek. Deneyin — ajanlarınız temiz API yüzeyini takdir edecek.&lt;/p&gt;</content:encoded></item><item><title>SQL MCP Server — AI Ajanlarına Veritabanı Erişimi Vermenin Doğru Yolu</title><link>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>Data API builder'dan SQL MCP Server, AI ajanlara şema açıklamadan ve NL2SQL'e dayanmadan güvenli, deterministik veritabanı erişimi sağlar. RBAC, önbellekleme, çoklu veritabanı desteği — hepsi yerleşik.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Bu yazı otomatik olarak çevrilmiştir. Orijinal için &lt;a href="https://thedotnetblog.com/tr/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;buraya tıklayın&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Dürüst olalım: bugün mevcut veritabanı MCP sunucularının çoğu gerçekten ürkütücü. Doğal dil sorgusu alıyor, anında SQL üretiyor ve bunu üretim verinize karşı çalıştırıyor. Ne yanlış gidebilir ki? (Her şey. Her şey yanlış gidebilir.)&lt;/p&gt;
+&lt;p&gt;Azure SQL ekibi az önce &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;SQL MCP Server&amp;rsquo;ı tanıttı&lt;/a&gt; ve bu yaklaşım temelden farklı. Data API builder (DAB) 2.0&amp;rsquo;ın bir özelliği olarak geliştirilen bu araç, AI ajanlarına NL2SQL olmadan, şemanızı açıklamadan ve her adımda tam RBAC ile veritabanı işlemlerine yapılandırılmış, deterministik erişim sağlıyor.&lt;/p&gt;
+&lt;h2 id="neden-nl2sql-yok"&gt;Neden NL2SQL yok?&lt;/h2&gt;
+&lt;p&gt;Bu, en ilginç tasarım kararı. Modeller deterministik değil ve karmaşık sorgular en büyük hata riskini taşıyan yapılar. AI&amp;rsquo;ın üretmesini umduğunuz tam sorgular da deterministik olmayan şekilde üretildiğinde en dikkatli incelenmesi gereken sorgular oluyor.&lt;/p&gt;
+&lt;p&gt;Bunun yerine SQL MCP Server bir &lt;strong&gt;NL2DAB&lt;/strong&gt; yaklaşımı benimsiyor. Ajan, Data API builder&amp;rsquo;ın varlık soyutlama katmanı ve yerleşik sorgu oluşturucu ile birlikte çalışarak doğru ve düzgün biçimlendirilmiş T-SQL deterministik olarak üretiyor. Kullanıcı için aynı sonuç, ancak hayali JOIN&amp;rsquo;ler veya kazara veri ifşası riski olmadan.&lt;/p&gt;
+&lt;h2 id="yedi-araç-yedi-yüz-değil"&gt;Yedi araç, yedi yüz değil&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server, veritabanının büyüklüğünden bağımsız olarak tam olarak yedi DML aracı sunuyor:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — mevcut varlıkları ve işlemleri keşfet&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — satır ekle&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — tablolar ve görünümleri sorgula&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — satırları değiştir&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — satırları sil&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — saklı yordamları çalıştır&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — toplama sorguları&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bu akıllıca bir tasarım çünkü bağlam pencereleri ajanın düşünme alanıdır. Yüzlerce araç tanımıyla doldurmak, muhakeme için daha az alan bırakır. Yedi sabit araç, ajanın &lt;em&gt;gezinmek&lt;/em&gt; yerine &lt;em&gt;düşünmeye&lt;/em&gt; odaklanmasını sağlar.&lt;/p&gt;
+&lt;p&gt;Her araç ayrı ayrı etkinleştirilebilir veya devre dışı bırakılabilir:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;runtime&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;path&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dml-tools&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;describe-entities&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;create-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;read-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;update-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;delete-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;execute-entity&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;aggregate-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="üç-komutla-başlangıç"&gt;Üç komutla başlangıç&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --database-type mssql &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --source dbo.Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Bu kadar. Customers tablonuzu açığa çıkaran çalışan bir SQL MCP Server&amp;rsquo;ınız var. Varlık soyutlama katmanı, adları ve sütunları takma adla kullanmanıza, rol başına alanları sınırlamanıza ve iç şema ayrıntılarını açıklamadan ajanların tam olarak neyi göreceğini kontrol etmenize olanak tanıyor.&lt;/p&gt;
+&lt;h2 id="güvenlik-hikayesi-sağlam"&gt;Güvenlik hikayesi sağlam&lt;/h2&gt;
+&lt;p&gt;Data API builder&amp;rsquo;ın olgunluğu burada meyvesini veriyor:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Her katmanda RBAC&lt;/strong&gt; — her varlık hangi rollerin okuyabileceğini, oluşturabileceğini, güncelleyebileceğini veya silebileceğini ve hangi alanların görünür olduğunu tanımlıyor&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Azure Key Vault entegrasyonu&lt;/strong&gt; — bağlantı dizeleri ve gizli anahtarlar güvenli şekilde yönetiliyor&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Microsoft Entra + özel OAuth&lt;/strong&gt; — üretim düzeyinde kimlik doğrulama&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Content Security Policy&lt;/strong&gt; — ajanlar ham SQL değil, denetimli bir sözleşme üzerinden etkileşim kuruyor&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Şema soyutlaması özellikle önemli. İç tablo ve sütun adlarınız asla ajana açıklanmıyor. Veritabanı ERD&amp;rsquo;nize göre değil, AI etkileşimi için mantıklı olan varlıkları, takma adları ve açıklamaları siz tanımlıyorsunuz.&lt;/p&gt;
+&lt;h2 id="çok-veritabanı-ve-çok-protokol"&gt;Çok veritabanı ve çok protokol&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server, Microsoft SQL, PostgreSQL, Azure Cosmos DB ve MySQL&amp;rsquo;i destekliyor. Ve bir DAB özelliği olduğundan, aynı yapılandırmadan eş zamanlı olarak REST, GraphQL ve MCP endpoint&amp;rsquo;leri elde ediyorsunuz. Aynı varlık tanımları, aynı RBAC kuralları, aynı güvenlik — üç protokol genelinde.&lt;/p&gt;
+&lt;p&gt;DAB 2.0&amp;rsquo;daki otomatik yapılandırma, hızlı prototipleme için daha az soyutlamaya razıysanız veritabanınızı inceleyebilir ve yapılandırmayı dinamik olarak oluşturabilir.&lt;/p&gt;
+&lt;h2 id="kişisel-görüşüm"&gt;Kişisel görüşüm&lt;/h2&gt;
+&lt;p&gt;AI ajanları için kurumsal veritabanı erişimi işte böyle çalışmalı. &amp;ldquo;Hey LLM, biraz SQL yaz da üretime at bakalım&amp;rdquo; değil. Bunun yerine: iyi tanımlanmış bir varlık katmanı, deterministik sorgu üretimi, her adımda RBAC, önbellekleme, izleme ve telemetri. En iyi anlamda sıkıcı.&lt;/p&gt;
+&lt;p&gt;.NET geliştiricileri için entegrasyon hikayesi temiz — DAB bir .NET aracıdır, MCP Server bir container olarak çalışır ve çoğumuzun zaten kullandığı Azure SQL ile çalışır. Veri erişimine ihtiyaç duyan AI ajanları geliştiriyorsanız buradan başlayın.&lt;/p&gt;
+&lt;h2 id="sonuç"&gt;Sonuç&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server ücretsiz, açık kaynaklı ve her yerde çalışır. AI ajanlarına güvenli veritabanı erişimi sağlamak için Microsoft&amp;rsquo;un öngörülü yaklaşımıdır. Başlamak için &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;tam yazıyı&lt;/a&gt; ve &lt;a href="https://aka.ms/sql/mcp"&gt;dokümantasyonu&lt;/a&gt; inceleyin.&lt;/p&gt;</content:encoded></item></channel></rss>

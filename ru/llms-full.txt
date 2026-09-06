@@ -1,0 +1,158 @@
+# The .NET Blog — Full Content
+
+> Articles, tutorials and insights from the .NET community.
+
+The .NET Blog is a community-driven publication featuring articles, tutorials, and deep dives on .NET, ASP.NET Core, C#, cloud architecture, and software engineering. Written by developers, for developers.
+
+## Metadata
+
+- **URL**: https://thedotnetblog.com/
+- **Language**: ru
+- **Last Updated**: 2026-09-06
+
+---
+
+## Events
+### .NET Day Switzerland 2026
+
+- **URL**: https://thedotnetblog.com/ru/events/dotnet-day-switzerland-2026/
+- **Date**: August 25, 2026
+- **Type**: Conference
+- **Location**: Arena Cinemas Sihlcity, Цюрих, Швейцария
+
+> Некоммерческая конференция сообщества для .NET-разработчиков, архитекторов и экспертов — .NET, C#, ASP.NET Core, Azure и другие темы — в Цюрихе.
+
+
+
+**.NET Day Switzerland 2026** пройдёт **25 августа 2026 года** в **Arena Cinemas Sihlcity** (Kalanderplatz 8, 8045 Цюрих).
+
+Это независимая некоммерческая конференция сообщества для разработчиков, архитекторов и экспертов, посвящённая .NET, C#, ASP.NET Core, Azure и экосистеме разработки Microsoft. Все спикеры и организаторы участвуют добровольно, а излишки от продажи билетов направляются на благотворительность или развитие швейцарского .NET-сообщества.
+
+## Что вас ждёт
+
+- Качественные доклады от международных экспертов
+- Нетворкинг с другими участниками
+- Еда, закуски и напитки во время перерывов, обеда и аперо
+- Карьерные возможности через взаимодействие со спонсорами
+- Прямое общение со спикерами в перерывах
+
+## Билеты
+
+| Категория | Цена | Доступность |
+|-----------|------|------------|
+| Very Early Bird (1–30 апр) | 299 CHF | Макс. 100 билетов |
+| Early Bird | 399 CHF | Макс. 100 билетов |
+| Обычный | 449 CHF | До распродажи |
+
+Спикеры и расписание ещё не объявлены — приём заявок открыт на [Sessionize](https://sessionize.com/net-day-switzerland-2026/).
+
+## Организаторы
+
+- [Fabian Gosebrink](https://twitter.com/FabianGosebrink)
+- [Manuel Meyer](https://twitter.com/manumeyer1)
+- [Thomas Gassmann](https://twitter.com/gassmannt)
+
+## Ссылки
+
+- [Сайт мероприятия](https://dotnetday.ch/)
+- [Подписка на рассылку](http://eepurl.com/dDoFEn)
+
+
+---
+### SDD Conference 2026
+
+- **URL**: https://thedotnetblog.com/ru/events/sdd-conference-2026/
+- **Date**: May 11, 2026
+- **Type**: Conference
+- **Location**: Barbican Centre, Лондон, Великобритания
+
+> 5-дневная конференция по разработке ПО в Barbican Centre в Лондоне с 78 сессиями и 14 воркшопами по архитектуре, .NET, ИИ, Azure, DevOps и другим темам.
+
+
+
+**SDD 2026** проходит с **11 по 15 мая 2026 года** в **Barbican Centre в Лондоне**. Основная 3-дневная конференция — со вторника по четверг, с опциональными однодневными воркшопами в понедельник и пятницу.
+
+С **78 сессиями** и **14 воркшопами** это одна из самых насыщенных конференций для разработчиков в Европе.
+
+## Темы
+
+- Архитектурное мышление
+- Функциональный код на C# 13
+- Serverless-дизайн
+- Семантический ИИ
+- Azure Kubernetes Services
+- Lean DevOps стратегии
+- Протокол контекста модели (MCP)
+- Агентный ИИ в .NET
+- Рефакторинг монолита
+- Быстрее программировать с LLM
+- Криптография в постквантовом мире
+- Local-First разработка
+
+## Спикеры
+
+Программу мирового класса представляют **Kevlin Henney**, **Neal Ford**, **Sander Hoogendoorn**, **Andrew Clymer**, **Jacqui Read**, **Christian Weyer**, **Jeff Prosise**, **Jules May**, **Oliver Sturm** и **Raju Gandhi**.
+
+## Билеты и информация
+
+- [Сайт мероприятия](https://sddconf.com/)
+- [PDF полного расписания](https://sddvault.s3.amazonaws.com/assets/SDD_2026_schedule.pdf)
+- [Варианты регистрации](https://sddconf.com/register)
+
+98% участников SDD 2025 оценили общее впечатление как хорошее, очень хорошее или отличное.
+
+
+---
+### Global Azure Spain 2026
+
+- **URL**: https://thedotnetblog.com/ru/events/global-azure-spain-2026/
+- **Date**: April 18, 2026
+- **Type**: Conference
+- **Location**: Kinépolis Diversia, Алькобендас, Мадрид, Испания
+
+> Крупнейшее Azure-мероприятие сообщества в Испании — полный день сессий по Azure, ИИ, данным, безопасности и облачной разработке с 38 спикерами на 3 треках.
+
+
+
+Global Azure Spain 2026 проходит **18 апреля 2026 года** в **Kinépolis Diversia** в Алькобендасе, Мадрид. Это крупнейшее сообщественное Azure-мероприятие в Испании, объединяющее 38 спикеров на 3 параллельных треках: ИИ-агенты, сети Azure, Cosmos DB, Fabric, IoT, безопасность и многое другое.
+
+Мероприятие проходит с **08:30 до 18:30** и включает в себя кейноут, кофе-брейки, обед и заключительную сессию вопросов и ответов.
+
+## Основные моменты программы
+
+- **Domando Agentes de IA**: управление, инструменты и API с Azure AI Foundry и Azure API Management
+- **Construyendo agentes con LibreChat en Azure**
+- **How Can I Steal Your Data with Azure Private Endpoints**
+- **Stop Building APIs. Forge Agents with Azure**
+- **Agentic DevOps Meets IoT: Real-Time Systems with Fabric and GitHub Copilot**
+- **El regreso de los tamagotchis!**: мультиагентные системы в действии
+- **Foundry Control Plane como plataforma de Agentes global**
+- **Rompiendo el perímetro: Zero Trust aplicado en Azure**
+
+## Билеты
+
+Регистрация — символическое пожертвование. Вся стоимость билета направляется в **Plan International** на поддержку прав детей и равенства по всему миру. Количество мест ограничено, поэтому бронируйте заранее.
+
+- [Билеты на Eventbrite](https://www.eventbrite.es/e/entradas-global-azure-spain-2026-en-madrid-1981594189564)
+- [Сайт мероприятия](https://globalazure.es/)
+
+## Azure Tour 2026
+
+Помимо Мадрида, Global Azure Tour 2026 также проходит в **Сарагосе**, **Тенерифе** и **Севилье**.
+
+
+---
+
+## Authors
+### Emiliano Montesdeoca
+
+- **URL**: https://thedotnetblog.com/ru/authors/emiliano-montesdeoca/
+- **Role**: Microsoft MVP и тимлид облачных решений
+- **Bio**: Эмилиано — уругвайско-испанский разработчик, Microsoft MVP в области Developer Technologies и активист сообщества, проживающий на Тенерифе, Канарские острова.
+
+Он специализируется на проектировании масштабируемых облачных решений с использованием технологий Microsoft и в настоящее время возглавляет группу облачных решений в Intelequia Technologies.
+
+Частый докладчик на международных конференциях и увлечённый наставник, он превращает решения реальных задач в практические рекомендации для разработчиков.
+
+
+---

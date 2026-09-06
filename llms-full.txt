@@ -1,0 +1,278 @@
+# The .NET Blog — Full Content
+
+> Articles, tutorials and insights from the .NET community.
+
+The .NET Blog is a community-driven publication featuring articles, tutorials, and deep dives on .NET, ASP.NET Core, C#, cloud architecture, and software engineering. Written by developers, for developers.
+
+## Metadata
+
+- **URL**: https://thedotnetblog.com/
+- **Language**: en
+- **Last Updated**: 2026-09-06
+
+---
+## New Design: Dark Mode and a Minimal Theme
+
+- **URL**: https://thedotnetblog.com/posts/emiliano-montesdeoca/new-design-dark-mode-and-minimal-theme/
+- **Date**: June 20, 2025
+- **Author**: Emiliano Montesdeoca
+- **Tags**: meta, blog, design
+- **Reading time**: 2 min
+
+> The .NET Blog got a full visual refresh — a custom minimal dark theme built from scratch. Here's what changed and why.
+
+
+
+The blog has a new look.
+
+I spent a few weeks redesigning The .NET Blog from the ground up with a custom Hugo theme I'm calling `dotnet-minimal`. It's dark by default, fast to load, and designed to keep the focus on the writing.
+
+## What changed
+
+**Dark mode as the default.** Not as an option, not as a toggle you have to find — dark by default, with a light mode toggle in the header for those who prefer it. Most developers I know have their editor in dark mode, their terminal in dark mode, their OS in dark mode. The blog should match.
+
+**Typography first.** The previous design had too much visual noise. The new one strips everything back to the content: a clear reading width, generous line height, and a font stack that respects the system.
+
+**Code blocks.** Syntax highlighting uses the Nord theme, which pairs well with the dark background. Line numbers are off by default — they add visual weight without much value for most posts.
+
+**Performance.** No JavaScript frameworks, no CSS-in-JS, no npm install required to edit the theme. The entire CSS is a single file. Page load times are in the sub-100ms range on the CDN.
+
+## What stayed the same
+
+The content structure didn't change. Posts still live in Markdown files organised by author. The Hugo build pipeline is identical. If you were a contributor before, nothing in your workflow changed.
+
+## The typewriter effect
+
+The one bit of JavaScript on the home page is a small typewriter animation in the hero. It cycles through phrases like "share what they build." and "build cloud-native apps." It's purely cosmetic and degrades gracefully if JS is disabled.
+
+## Open source
+
+The theme is part of the [blog repository](https://github.com/thedotnetblog/blog) and is available under the MIT license. If you want to use it as a base for your own Hugo blog, go ahead.
+
+
+---
+## We Added Multi-Language Support
+
+- **URL**: https://thedotnetblog.com/posts/emiliano-montesdeoca/we-added-multi-language-support/
+- **Date**: February 14, 2025
+- **Author**: Emiliano Montesdeoca
+- **Tags**: meta, blog, i18n
+- **Reading time**: 2 min
+
+> The .NET Blog now publishes every post in 17 languages using automated translation — and here's how we built it into the Hugo workflow.
+
+
+
+As of today, every new post on The .NET Blog is automatically translated into 16 additional languages.
+
+We support: English, Spanish, Catalan, German, French, Portuguese, Italian, Japanese, Chinese, Korean, Russian, Hindi, Polish, Turkish, Arabic, Indonesian, and Dutch.
+
+## Why bother?
+
+The .NET ecosystem is global. A large chunk of our readers are not native English speakers, and while most developers *can* read technical English, reading in your first language is faster and less fatiguing. If we want the blog to actually be useful to the wider .NET community, we had to solve this.
+
+## How it works
+
+Each post lives in a **leaf bundle** — a folder with an `index.md` and language-specific variants like `index.es.md`, `index.ja.md`, etc. Hugo's multilingual mode handles routing: `/posts/my-post/` serves English, `/es/posts/my-post/` serves Spanish, and so on.
+
+Translation is handled as part of the content pipeline. When a new post is merged, a workflow generates the translated variants and commits them alongside the original.
+
+## What we didn't want
+
+We specifically didn't want a "translated version" to feel like a second-class page. Every translated page has the same layout, the same code examples, and the same SEO treatment as the English original.
+
+The language switcher in the header lets readers jump between languages on any page — it links to the same content, not the home page.
+
+## What's next?
+
+Right-to-left layout support for Arabic is on the list. The CSS foundation is in place (`dir="rtl"` on the `<html>` element), but there are a few edge cases in the post layout to sort out first.
+
+
+---
+## The .NET Blog Is Live
+
+- **URL**: https://thedotnetblog.com/posts/emiliano-montesdeoca/the-dotnet-blog-is-live/
+- **Date**: November 01, 2024
+- **Author**: Emiliano Montesdeoca
+- **Tags**: meta, blog
+- **Reading time**: 2 min
+
+> After months of tinkering, The .NET Blog is finally live. Here's what it is, why I built it, and where I want to take it.
+
+
+
+I've been wanting to do this for a while.
+
+There are plenty of great resources for .NET developers — Microsoft's own blog, Stack Overflow, YouTube channels — but I kept noticing a gap: a place for the community to write *long-form*, technical, practical content without the noise of a social feed or the formality of official docs.
+
+So I built one.
+
+## What is The .NET Blog?
+
+It's a community-driven publication. The idea is simple: developers who are building things with .NET, Azure, AI, and cloud-native tools write about what they're learning. No sponsored posts. No fluff. Just real experience turned into something useful for the next person.
+
+The tech stack is deliberately simple:
+
+- **Hugo** — static site generator, fast build times, easy content authoring in Markdown
+- A custom minimal dark theme I wrote from scratch
+- Hosted on GitHub Pages, deployed via GitHub Actions
+
+## Why Hugo?
+
+I wanted contributors to be able to write posts in Markdown and submit them via pull request. No CMS login, no account to create. Just a fork, a new file, and a PR. That keeps the barrier to entry low and puts the content right where it belongs — in version control.
+
+## What's next?
+
+I want to grow this into a real community publication. The roadmap includes multi-author profiles, multi-language support, and a proper events timeline for the .NET conference circuit.
+
+If you want to write here, the contribute page explains how. The bar is technical quality, not résumé credentials.
+
+Let's build something useful.
+
+
+---
+
+## Events
+### .NET Day Switzerland 2026
+
+- **URL**: https://thedotnetblog.com/events/dotnet-day-switzerland-2026/
+- **Date**: August 25, 2026
+- **Type**: Conference
+- **Location**: Arena Cinemas Sihlcity, Zürich, Switzerland
+
+> A non-profit community conference for .NET developers, architects, and experts — covering .NET, C#, ASP.NET Core, Azure, and more — in Zürich.
+
+
+
+**.NET Day Switzerland 2026** takes place on **August 25, 2026** at **Arena Cinemas Sihlcity** (Kalanderplatz 8, 8045 Zürich).
+
+This is an independent, non-profit community conference for developers, architects, and experts to discuss .NET, C#, ASP.NET Core, Azure, and the broader Microsoft development ecosystem. All speakers and staff volunteer their time, and any surplus from ticket sales goes to charity or the Swiss .NET community.
+
+## What you get
+
+- Top quality sessions from international subject experts
+- Networking with other participants
+- Food, snacks, and beverages during breaks, lunch, and apéro
+- Career opportunities through sponsor interactions
+- Direct discussions with speakers during breaks
+
+## Tickets
+
+| Tier | Price | Availability |
+|------|-------|-------------|
+| Very Early Bird (Apr 1–30) | 299 CHF | Max 100 tickets |
+| Early Bird | 399 CHF | Max 100 tickets |
+| Regular | 449 CHF | Until sold out |
+
+Speakers and schedule are not yet announced — the Call for Speakers is open on [Sessionize](https://sessionize.com/net-day-switzerland-2026/).
+
+## Organizers
+
+- [Fabian Gosebrink](https://twitter.com/FabianGosebrink)
+- [Manuel Meyer](https://twitter.com/manumeyer1)
+- [Thomas Gassmann](https://twitter.com/gassmannt)
+
+## Links
+
+- [Event website](https://dotnetday.ch/)
+- [Newsletter signup](http://eepurl.com/dDoFEn)
+
+
+---
+### SDD Conference 2026
+
+- **URL**: https://thedotnetblog.com/events/sdd-conference-2026/
+- **Date**: May 11, 2026
+- **Type**: Conference
+- **Location**: Barbican Centre, London, UK
+
+> A 5-day software development conference at the Barbican Centre in London with 78 sessions and 14 workshops covering architecture, .NET, AI, Azure, DevOps, and more.
+
+
+
+**SDD 2026** runs from **May 11–15, 2026** at the **Barbican Centre in London**. The core 3-day conference is Tuesday through Thursday, with optional full-day workshops on Monday and Friday.
+
+With **78 sessions** and **14 workshops**, this is one of the most packed developer conferences in Europe.
+
+## Topics
+
+- Architectural Thinking
+- Functional Code in C# 13
+- Serverless Design
+- Semantic AI
+- Azure Kubernetes Services
+- Lean DevOps Strategies
+- The Model Context Protocol (MCP)
+- Agentic AI in .NET
+- Refactoring the Monolith
+- Coding Faster with LLMs
+- Cryptography in a Post-Quantum World
+- Local First Development
+
+## Speakers
+
+World-class lineup including **Kevlin Henney**, **Neal Ford**, **Sander Hoogendoorn**, **Andrew Clymer**, **Jacqui Read**, **Christian Weyer**, **Jeff Prosise**, **Jules May**, **Oliver Sturm**, and **Raju Gandhi**.
+
+## Tickets and info
+
+- [Event website](https://sddconf.com/)
+- [Full agenda PDF](https://sddvault.s3.amazonaws.com/assets/SDD_2026_schedule.pdf)
+- [Registration options](https://sddconf.com/register)
+
+98% of SDD 2025 attendees rated the overall experience as good, very good, or excellent.
+
+
+---
+### Global Azure Spain 2026
+
+- **URL**: https://thedotnetblog.com/events/global-azure-spain-2026/
+- **Date**: April 18, 2026
+- **Type**: Conference
+- **Location**: Kinépolis Diversia, Alcobendas, Madrid, Spain
+
+> The biggest Azure community event in Spain — a full day of sessions on Azure, AI, data, security, and cloud-native development with 38 speakers across 3 tracks.
+
+
+
+Global Azure Spain 2026 takes place on **April 18, 2026** at **Kinépolis Diversia** in Alcobendas, Madrid. It's the largest community-driven Azure event in Spain, bringing together 38 speakers across 3 parallel tracks covering AI agents, Azure networking, Cosmos DB, Fabric, IoT, security, and much more.
+
+The event runs from **08:30 to 18:30** and includes keynote, coffee breaks, lunch, and a closing Q&A session.
+
+## Highlights from the agenda
+
+- **Domando Agentes de IA**: governance, tools, and APIs with Azure AI Foundry and Azure API Management
+- **Construyendo agentes con LibreChat en Azure**
+- **How Can I Steal Your Data with Azure Private Endpoints**
+- **Stop Building APIs. Forge Agents with Azure**
+- **Agentic DevOps Meets IoT: Real-Time Systems with Fabric and GitHub Copilot**
+- **El regreso de los tamagotchis!**: multi-agent systems in action
+- **Foundry Control Plane como plataforma de Agentes global**
+- **Rompiendo el perímetro: Zero Trust aplicado en Azure**
+
+## Tickets
+
+Registration is a symbolic donation — the full ticket price goes directly to **Plan International**, supporting children's rights and equality worldwide. Limited capacity, so grab your spot early.
+
+- [Get tickets on Eventbrite](https://www.eventbrite.es/e/entradas-global-azure-spain-2026-en-madrid-1981594189564)
+- [Event website](https://globalazure.es/)
+
+## Azure Tour 2026
+
+Beyond Madrid, the Global Azure Tour 2026 also includes stops in **Zaragoza**, **Tenerife**, and **Sevilla**.
+
+
+---
+
+## Authors
+### Emiliano Montesdeoca
+
+- **URL**: https://thedotnetblog.com/authors/emiliano-montesdeoca/
+- **Role**: Microsoft MVP & Team Lead Cloud Solutions
+- **Bio**: Emiliano is an Uruguayan-Spanish software developer, Microsoft MVP in Developer Technologies, and community advocate based in Tenerife, Canary Islands.
+
+He specializes in architecting scalable cloud solutions using Microsoft technologies and currently serves as Team Lead for the Cloud Solutions Team at Intelequia Technologies.
+
+A frequent international conference speaker and passionate knowledge sharer, he translates real-world problem-solving into actionable insights for developers.
+
+
+---

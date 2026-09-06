@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>WebAssembly | The .NET Blog</title><link>https://thedotnetblog.com/ru/tags/webassembly/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ru</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 23 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ru/tags/webassembly/index.xml" rel="self" type="application/rss+xml"/><item><title>Как Copilot Studio Перешёл на .NET 10 WebAssembly и Стал на 20% Быстрее</title><link>https://thedotnetblog.com/ru/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</link><pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ru/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</guid><description>Улучшения .NET 10 WASM — не только для новых проектов. Вот что измерила команда Copilot Studio после обновления с .NET 8: автоматическое отпечатывание, WasmStripILAfterAOT по умолчанию и реальные цифры производительности выполнения.</description><content:encoded>&lt;p&gt;Команда Copilot Studio сделала то, о чём все разработчики Blazor WASM были любопытны: они действительно обновили производственное приложение с .NET 8 до .NET 10 и измерили результаты. Пост содержит конкретные цифры, что редко встречается и по-настоящему полезно.&lt;/p&gt;
+&lt;h2 id="обновление-было-скучным-это-хорошо"&gt;Обновление Было Скучным (Это Хорошо)&lt;/h2&gt;
+&lt;p&gt;Обновить целевой фреймворк, обновить ссылки на пакеты, исправить нарушающие изменения. Вот и всё. Сборка .NET 10 теперь работает в продакшене. Сама миграция не была интересной частью — изменения в .NET 10 таковыми являются.&lt;/p&gt;
+&lt;h2 id="автоматическое-отпечатывание-ресурсов"&gt;Автоматическое Отпечатывание Ресурсов&lt;/h2&gt;
+&lt;p&gt;Раньше развёртывание WASM-приложения означало написание пользовательских скриптов для переименования опубликованных ресурсов с SHA256-хэшами для сброса кэша. Copilot Studio имел скрипт PowerShell, делавший именно это — переименовывать файлы, внедрять атрибуты &lt;code&gt;integrity&lt;/code&gt; в JavaScript-загрузчик, управлять всем вручную.&lt;/p&gt;
+&lt;p&gt;В .NET 10 всё это встроено. Опубликованные ресурсы автоматически получают отпечаток, импортируются непосредственно из &lt;code&gt;dotnet.js&lt;/code&gt; и проверяются на целостность без ручного вмешательства. Команда удалила скрипт переименования.&lt;/p&gt;
+&lt;p&gt;Небольшое изменение в объёме, значительное снижение сложности.&lt;/p&gt;
+&lt;h2 id="wasmstripilafteraot-теперь-включён-по-умолчанию"&gt;WasmStripILAfterAOT Теперь Включён по Умолчанию&lt;/h2&gt;
+&lt;p&gt;В .NET 8 удаление IL из AOT-скомпилированных сборок было opt-in. В .NET 10 это поведение по умолчанию. После AOT-компиляции исходный IL-байткод удаляется из выходных данных — он не нужен во время выполнения, а его сохранение раздувало размер пакета без причины.&lt;/p&gt;
+&lt;p&gt;Copilot Studio использует специфическую оптимизацию: он поставляет как JIT-движок (быстрый запуск), так и AOT-движок (максимальная производительность в установившемся режиме), загружая оба параллельно и переключаясь с JIT на AOT, когда он готов. Также дедуплицируются файлы, идентичные между двумя движками.&lt;/p&gt;
+&lt;p&gt;Новое поведение удаления IL означает, что AOT-сборки больше не совпадают побайтно со своими JIT-аналогами, поэтому меньше файлов дедуплицируется:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.NET 8: 59 общих файлов&lt;/li&gt;
+&lt;li&gt;.NET 10: 22 общих файла&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Чистый результат: примерно на 15% больший размер пакета для AOT-движка. Загрузка AOT примерно на 6% медленнее по быстрой LAN, примерно на 17% медленнее по 4G. Но всё это происходит в фоновом режиме после того, как приложение уже интерактивно.&lt;/p&gt;
+&lt;h2 id="цифры-производительности"&gt;Цифры Производительности&lt;/h2&gt;
+&lt;p&gt;Это часть, которая важна:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;~20% быстрее&lt;/strong&gt; при первом вызове (холодный путь)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;~5% быстрее&lt;/strong&gt; при последующих вызовах (тёплый путь)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Улучшения наиболее заметны в &amp;ldquo;больших ботах&amp;rdquo; — крупных, сложных агентах, где доминирует AOT-скомпилированный код. Для более простых рабочих процессов выигрыш меньше.&lt;/p&gt;
+&lt;h2 id="если-вы-ещё-на-net-8"&gt;Если Вы Ещё на .NET 8&lt;/h2&gt;
+&lt;p&gt;История миграции действительно проста: обновите &lt;code&gt;&amp;lt;TargetFramework&amp;gt;&lt;/code&gt;, обновите ссылки на пакеты, удалите любые пользовательские скрипты отпечатывания, и вы автоматически получите преимущества от &lt;code&gt;WasmStripILAfterAOT&lt;/code&gt;. Если вы компилируете AOT, ожидайте аналогичных улучшений производительности.&lt;/p&gt;
+&lt;p&gt;Замечание из поста: если вы загружаете рантайм .NET WASM внутри &lt;code&gt;WebWorker&lt;/code&gt;, установите &lt;code&gt;dotnetSidecar = true&lt;/code&gt; при инициализации.&lt;/p&gt;
+&lt;p&gt;Оригинальный пост: &lt;a href="https://devblogs.microsoft.com/dotnet/copilot-studio-dotnet-10-migration/"&gt;Copilot Studio gets faster with .NET 10 on WebAssembly&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

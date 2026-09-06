@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Blazor | The .NET Blog</title><link>https://thedotnetblog.com/tags/blazor/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>en</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 23 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tags/blazor/index.xml" rel="self" type="application/rss+xml"/><item><title>How Copilot Studio Migrated to .NET 10 WebAssembly and Got 20% Faster</title><link>https://thedotnetblog.com/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</link><pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</guid><description>.NET 10 WASM improvements aren't just for new projects. Here's what Copilot Studio measured after upgrading from .NET 8: automatic fingerprinting, WasmStripILAfterAOT by default, and real execution performance numbers.</description><content:encoded>&lt;p&gt;The Copilot Studio team did something every Blazor WASM developer has been curious about: they actually upgraded a production application from .NET 8 to .NET 10 and measured the results. The post shares specific numbers, which is rare and genuinely useful.&lt;/p&gt;
+&lt;h2 id="the-upgrade-was-boring-thats-a-good-thing"&gt;The Upgrade Was Boring (That&amp;rsquo;s a Good Thing)&lt;/h2&gt;
+&lt;p&gt;Updating target framework, refreshing package references, fixing any breaking changes. That&amp;rsquo;s it. The .NET 10 build is now running in production. The migration itself wasn&amp;rsquo;t the interesting part — the changes in .NET 10 are.&lt;/p&gt;
+&lt;h2 id="automatic-asset-fingerprinting"&gt;Automatic Asset Fingerprinting&lt;/h2&gt;
+&lt;p&gt;Previously, shipping a WASM app meant writing custom scripts to rename published assets with SHA256 hashes for cache-busting. Copilot Studio had a PowerShell script doing exactly this — rename files, inject &lt;code&gt;integrity&lt;/code&gt; attributes into the JavaScript loader, manage the whole thing manually.&lt;/p&gt;
+&lt;p&gt;In .NET 10, all of that is built in. Published assets are automatically fingerprinted, imported directly from &lt;code&gt;dotnet.js&lt;/code&gt;, and integrity-validated without manual intervention. The team deleted the renaming script.&lt;/p&gt;
+&lt;p&gt;Small change in scope, significant reduction in complexity.&lt;/p&gt;
+&lt;h2 id="wasmstripilafteraot-is-now-on-by-default"&gt;WasmStripILAfterAOT Is Now On by Default&lt;/h2&gt;
+&lt;p&gt;In .NET 8, stripping IL from AOT-compiled assemblies was opt-in. In .NET 10 it&amp;rsquo;s the default. After AOT compilation, the original IL bytecode is removed from the output — it isn&amp;rsquo;t needed at runtime, and keeping it was inflating package size for no reason.&lt;/p&gt;
+&lt;p&gt;Copilot Studio uses a specific optimization: it ships both a JIT engine (fast startup) and an AOT engine (maximum steady-state performance), loading both in parallel and handing off from JIT to AOT once it&amp;rsquo;s ready. It also deduplicates files that are identical between the two engines.&lt;/p&gt;
+&lt;p&gt;The new IL stripping behavior means AOT assemblies no longer match their JIT counterparts bit-for-bit, so fewer files are deduplicated:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.NET 8: 59 shared files&lt;/li&gt;
+&lt;li&gt;.NET 10: 22 shared files&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Net result: roughly 15% larger package size for the AOT engine. The AOT download is ~6% slower on fast LAN, ~17% slower on 4G. But it all happens in the background after the app is already interactive.&lt;/p&gt;
+&lt;h2 id="the-performance-numbers"&gt;The Performance Numbers&lt;/h2&gt;
+&lt;p&gt;This is the part that matters:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;~20% faster&lt;/strong&gt; on the first call (cold path)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;~5% faster&lt;/strong&gt; on subsequent calls (warm path)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The improvements are most visible in &amp;ldquo;big bots&amp;rdquo; — large, complex agents where AOT-compiled code dominates. For simpler workflows the gain is smaller.&lt;/p&gt;
+&lt;h2 id="if-youre-still-on-net-8"&gt;If You&amp;rsquo;re Still on .NET 8&lt;/h2&gt;
+&lt;p&gt;The migration story is genuinely simple: update &lt;code&gt;&amp;lt;TargetFramework&amp;gt;&lt;/code&gt;, refresh package references, remove any custom fingerprinting scripts, and you&amp;rsquo;ll automatically benefit from &lt;code&gt;WasmStripILAfterAOT&lt;/code&gt;. If you&amp;rsquo;re AOT-compiling, expect similar performance gains.&lt;/p&gt;
+&lt;p&gt;One note from the post: if you load the .NET WASM runtime inside a &lt;code&gt;WebWorker&lt;/code&gt;, set &lt;code&gt;dotnetSidecar = true&lt;/code&gt; when initializing.&lt;/p&gt;
+&lt;p&gt;Original post: &lt;a href="https://devblogs.microsoft.com/dotnet/copilot-studio-dotnet-10-migration/"&gt;Copilot Studio gets faster with .NET 10 on WebAssembly&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

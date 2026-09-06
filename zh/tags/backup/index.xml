@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Backup | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/backup/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/backup/index.xml" rel="self" type="application/rss+xml"/><item><title>Cosmos DB 的不可变备份是那种你会很晚才感激的功能</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/cosmosdb-backup-preview-immutability-and-recovery/</link><pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/cosmosdb-backup-preview-immutability-and-recovery/</guid><description>Azure Backup for Azure Cosmos DB 现在在公开预览中增加了不可变备份和长期保留。关键点不仅在于恢复，还在于改善受监管或高风险工作负载的弹性和证据保存。</description><content:encoded>&lt;p&gt;备份功能很容易被忽视——直到它们变成房间里最重要的事情。&lt;/p&gt;
+&lt;p&gt;这就是为什么我认为新的 &lt;strong&gt;Azure Backup for Azure Cosmos DB&lt;/strong&gt; 预览版值得关注。&lt;/p&gt;
+&lt;p&gt;有趣的部分不仅仅是一个&amp;quot;另一个备份选项&amp;quot;。而是增加了&lt;strong&gt;不可变恢复点&lt;/strong&gt;和&lt;strong&gt;长期保留&lt;/strong&gt;，其模式与勒索软件防御、可审计性和受监管的恢复需求更加契合。&lt;/p&gt;
+&lt;h2 id="不可变改变了对话"&gt;不可变改变了对话&lt;/h2&gt;
+&lt;p&gt;当攻击者针对生产系统时，下一个问题不再只是&amp;quot;我们有备份吗？&amp;quot;&lt;/p&gt;
+&lt;p&gt;而是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;备份可信吗？&lt;/li&gt;
+&lt;li&gt;它能否被修改或删除？&lt;/li&gt;
+&lt;li&gt;事故开始后我们是否还有受保护的恢复点？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这就是为什么不可变备份很重要。它改善了当周围环境不再可信时的恢复路径。&lt;/p&gt;
+&lt;h2 id="我的看法"&gt;我的看法&lt;/h2&gt;
+&lt;p&gt;这不是那种会让人人兴奋的公告。&lt;/p&gt;
+&lt;p&gt;但对于在 Cosmos DB 上运行关键工作负载的团队来说，它正是那种会在季度最糟糕的那一天成为中心的能力。&lt;/p&gt;
+&lt;p&gt;而这些往往是最值得跟踪的功能。&lt;/p&gt;
+&lt;p&gt;原文：&lt;a href="https://devblogs.microsoft.com/cosmosdb/azure-backup-for-azure-cosmos-db-public-preview-adds-immutable-backups-and-long-term-retention/"&gt;Azure Backup for Azure Cosmos DB Public Preview Adds Immutable Backups and Long-Term Retention&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Integration | The .NET Blog</title><link>https://thedotnetblog.com/pt/tags/integration/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>pt</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 23 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/pt/tags/integration/index.xml" rel="self" type="application/rss+xml"/><item><title>O Conector Nativo do Cosmos DB para Logic Apps É Mais Relevante do Que Parece à Primeira Vista</title><link>https://thedotnetblog.com/pt/news/emiliano-montesdeoca/cosmosdb-logic-apps-built-in-connector-ga/</link><pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/pt/news/emiliano-montesdeoca/cosmosdb-logic-apps-built-in-connector-ga/</guid><description>O conector nativo do Azure Cosmos DB para Logic Apps Standard agora está geralmente disponível. O benefício-chave não é apenas conectividade, mas execução em processo com menor latência, suporte ao change feed e um caminho mais limpo para fluxos de trabalho orientados a eventos e a IA.</description><content:encoded>&lt;p&gt;Quando as pessoas ouvem &amp;ldquo;anúncio de conector&amp;rdquo;, é fácil supor que a história é menor.&lt;/p&gt;
+&lt;p&gt;Neste caso, acho que o anúncio merece mais crédito.&lt;/p&gt;
+&lt;p&gt;O &lt;strong&gt;conector nativo do Azure Cosmos DB para Logic Apps Standard&lt;/strong&gt; agora está geralmente disponível, e o que o torna interessante não é apenas que o Logic Apps pode conversar com o Cosmos DB. É que a integração se torna mais nativa, mais performática e mais realista para fluxos de trabalho orientados a eventos.&lt;/p&gt;
+&lt;h2 id="por-que-ser-nativo-importa"&gt;Por que ser nativo importa&lt;/h2&gt;
+&lt;p&gt;A diferença entre conectores gerenciados e nativos não é apenas trivialidade de implantação.&lt;/p&gt;
+&lt;p&gt;Rodar em processo com o runtime do Logic Apps significa:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;menor latência&lt;/li&gt;
+&lt;li&gt;melhor throughput&lt;/li&gt;
+&lt;li&gt;menos saltos externos&lt;/li&gt;
+&lt;li&gt;um encaixe mais limpo para fluxos de trabalho de alto volume ou reativos&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;E quando você adiciona &lt;strong&gt;gatilhos de change feed&lt;/strong&gt;, &lt;strong&gt;operações em lote&lt;/strong&gt;, &lt;strong&gt;suporte a patch&lt;/strong&gt; e &lt;strong&gt;autenticação Entra ID&lt;/strong&gt;, o conector começa a parecer algo muito mais sério do que &amp;ldquo;encanamento simples de workflow&amp;rdquo;.&lt;/p&gt;
+&lt;h2 id="o-ângulo-de-ia-também-é-real"&gt;O ângulo de IA também é real&lt;/h2&gt;
+&lt;p&gt;A discussão do post sobre pipelines de RAG, fluxos de embedding e padrões de base de conhecimento é o que mais me chamou atenção.&lt;/p&gt;
+&lt;p&gt;Uma vez que o Logic Apps e o Cosmos DB estejam integrados dessa forma, a plataforma pode suportar:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;fluxos reativos de ingestão&lt;/li&gt;
+&lt;li&gt;pipelines de enriquecimento de documentos&lt;/li&gt;
+&lt;li&gt;fluxos de trabalho relacionados a vetores&lt;/li&gt;
+&lt;li&gt;orquestração no-code ou low-code em torno de componentes de IA&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Isso torna o conector relevante para além dos especialistas em integração.&lt;/p&gt;
+&lt;h2 id="minha-opinião"&gt;Minha opinião&lt;/h2&gt;
+&lt;p&gt;Este é o tipo de lançamento que se torna mais valioso quanto mais você pensa em fluxos de trabalho reais em vez de categorias de produto.&lt;/p&gt;
+&lt;p&gt;Para equipes que usam Logic Apps Standard e Cosmos DB juntos, o conector GA dá uma base mais forte para integração orientada a eventos e automação adjacente a IA sem cola customizada em todo lugar.&lt;/p&gt;
+&lt;p&gt;Isso vale a pena acompanhar.&lt;/p&gt;
+&lt;p&gt;Post original: &lt;a href="https://devblogs.microsoft.com/cosmosdb/announcing-general-availability-of-the-azure-cosmos-db-built-in-connector-for-logic-apps-standard/"&gt;Announcing General Availability of the Azure Cosmos DB Built-in Connector for Logic Apps Standard&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

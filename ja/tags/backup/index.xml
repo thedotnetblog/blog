@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Backup | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/backup/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/backup/index.xml" rel="self" type="application/rss+xml"/><item><title>Immutable Backup for Cosmos DB Is the Kind of Feature You Appreciate Too Late</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/cosmosdb-backup-preview-immutability-and-recovery/</link><pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/cosmosdb-backup-preview-immutability-and-recovery/</guid><description>Azure Backup for Azure Cosmos DB にパブリックプレビューでイミュータブルバックアップと長期保存が追加された。重要なのは単なる復旧ではなく、規制対象または高リスクワークロードのための復元力と証拠保存の向上である。</description><content:encoded>&lt;p&gt;バックアップ機能は、それがその場で最も重要なものになるまでは無視されがちである。&lt;/p&gt;
+&lt;p&gt;だからこそ、新しい &lt;strong&gt;Azure Backup for Azure Cosmos DB&lt;/strong&gt; プレビューが注目に値すると思う。&lt;/p&gt;
+&lt;p&gt;ここで興味深いのは、単なる「別のバックアップオプション」ではない。ランサムウェア対策、監査可能性、規制された復旧要件にはるかに適したモデルにおける、&lt;strong&gt;イミュータブルな復旧ポイント&lt;/strong&gt;と&lt;strong&gt;長期保存&lt;/strong&gt;の追加である。&lt;/p&gt;
+&lt;h2 id="イミュータビリティが会話を変える"&gt;イミュータビリティが会話を変える&lt;/h2&gt;
+&lt;p&gt;攻撃者が本番システムを標的にするとき、次の質問はもはや「バックアップはあるか？」だけではない。&lt;/p&gt;
+&lt;p&gt;それは以下のとおりである:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;バックアップは信頼できるか？&lt;/li&gt;
+&lt;li&gt;変更または削除される可能性はあるか？&lt;/li&gt;
+&lt;li&gt;インシデント開始後も保護された復旧ポイントは残っているか？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;だからこそ、イミュータブルバックアップが重要なのである。周囲の環境がもはや信頼できない場合でも、復旧パスを改善する。&lt;/p&gt;
+&lt;h2 id="私の見解"&gt;私の見解&lt;/h2&gt;
+&lt;p&gt;これは全員を興奮させる種類のアナウンスメントではない。&lt;/p&gt;
+&lt;p&gt;しかし、Cosmos DB 上で重要なワークロードを実行しているチームにとっては、四半期で最悪の日に中心的になる種類の機能である。&lt;/p&gt;
+&lt;p&gt;そしてそれらは多くの場合、追跡すべき最も重要な機能である。&lt;/p&gt;
+&lt;p&gt;元記事: &lt;a href="https://devblogs.microsoft.com/cosmosdb/azure-backup-for-azure-cosmos-db-public-preview-adds-immutable-backups-and-long-term-retention/"&gt;Azure Backup for Azure Cosmos DB Public Preview Adds Immutable Backups and Long-Term Retention&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

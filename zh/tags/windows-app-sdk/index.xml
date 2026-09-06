@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Windows App SDK | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/windows-app-sdk/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 08 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/windows-app-sdk/index.xml" rel="self" type="application/rss+xml"/><item><title>GitHub Copilot 和 Claude Code 的 WinUI 智能体插件</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/winui-agent-plugin-github-copilot-claude-code/</link><pubDate>Mon, 08 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/winui-agent-plugin-github-copilot-claude-code/</guid><description>Microsoft 发布了用于 WinUI 开发的智能体技能：脚手架、构建、运行、测试、迭代，全部通过 GitHub Copilot CLI 或 Claude Code 完成。核心创新：专用工具将智能体锚定在 WinUI 特定的事实中。</description><content:encoded>&lt;p&gt;Microsoft 发布了用于 WinUI 应用程序开发的开源智能体技能集，可在 &lt;a href="https://aka.ms/winui-skills"&gt;aka.ms/winui-skills&lt;/a&gt; 获取。&lt;/p&gt;
+&lt;h2 id="安装与配置"&gt;安装与配置&lt;/h2&gt;
+&lt;p&gt;使用 &lt;code&gt;/plugin install winui@awesome-copilot&lt;/code&gt; 安装插件，然后使用 &lt;code&gt;/winui:winui-setup&lt;/code&gt; 运行初始配置。设置过程会验证前提条件、安装必要的依赖项并为 WinUI 应用程序开发配置环境。&lt;/p&gt;
+&lt;h2 id="端到端开发循环"&gt;端到端开发循环&lt;/h2&gt;
+&lt;p&gt;这些技能涵盖完整的开发周期：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;脚手架：&lt;/strong&gt; 使用 &lt;code&gt;dotnet new WinUI&lt;/code&gt; 和适当的参数生成正确的项目模板 — 智能体知道正确的模板和默认配置值。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;构建：&lt;/strong&gt; 管理 WinUI 应用程序所需的打包执行模型，包括包签名和清单配置。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;交互与验证：&lt;/strong&gt; 启动应用程序、与其交互并验证行为。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;修复编译错误：&lt;/strong&gt; 智能体理解 WinUI 特定的错误消息，并知道如何解决它们。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="通过专用工具提高令牌效率"&gt;通过专用工具提高令牌效率&lt;/h2&gt;
+&lt;p&gt;核心创新在于这些技能包含专用工具，可按需获取具体的参考数据：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;WinUI 和 Fluent Design API 详情&lt;/li&gt;
+&lt;li&gt;MVVM 模式和最佳实践&lt;/li&gt;
+&lt;li&gt;MSIX 打包、代码签名和 Store 提交&lt;/li&gt;
+&lt;li&gt;可访问性、主题和 UI 自动化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;工具不是将所有 WinUI 文档注入上下文，而是在智能体需要时精确获取所需内容。这在智能体运行可能产生数千行输出的构建周期或测试套件时保持上下文使用的高效性，并提高专业领域的精度。&lt;/p&gt;
+&lt;h2 id="为什么专用技能很重要"&gt;为什么专用技能很重要&lt;/h2&gt;
+&lt;p&gt;通用语言模型对 WinUI 特定的细节了解有限：打包执行模型、Fluent Design API、MSIX 集成或 Windows App SDK 包装 Win32 功能的特定方式。专用工具通过将智能体锚定在已验证的 WinUI 事实中来解决这个问题，而不是依赖可能过时或不正确的模型知识。&lt;/p&gt;
+&lt;p&gt;同样的模式适用于任何具有自身规范和要求（与通用开发模式不同）的专业框架或 SDK。&lt;/p&gt;
+&lt;p&gt;原始文章：&lt;a href="https://devblogs.microsoft.com/ifdef-windows/winui-agent-plugin-github-copilot-claude-code/"&gt;A WinUI Agent Plugin for GitHub Copilot and Claude Code&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>dotnet new WinUI：无需 Visual Studio 即可创建 Windows 应用</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/dotnet-new-winui-templates-cli-vscode/</link><pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/dotnet-new-winui-templates-cli-vscode/</guid><description>WinUI 项目模板现在可以通过 dotnet new 使用——空白应用、NavigationView 模式等。支持 VS Code，无需 Visual Studio，内置 Fluent Design 默认设置。</description><content:encoded>&lt;p&gt;WinUI 开发过去需要 Visual Studio。这一情况正在改变：Microsoft 发布了适用于 WinUI 的开源项目和项目模板，这些模板可与 &lt;code&gt;dotnet new&lt;/code&gt; 配合使用，将 Windows 应用开发纳入标准 CLI 工作流。&lt;/p&gt;
+&lt;h2 id="三条命令即可开始"&gt;三条命令即可开始&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 安装模板&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet new install Microsoft.WindowsAppSDK.WinUI.CSharp.Templates
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 创建 NavigationView 应用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet new winui-navview -n MyApp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 运行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; MyApp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;无需 Visual Studio，无需手动配置项目。应用通过 &lt;code&gt;dotnet run&lt;/code&gt; 运行。&lt;/p&gt;
+&lt;h2 id="包含的内容"&gt;包含的内容&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;空白模板&lt;/strong&gt;（&lt;code&gt;dotnet new winui&lt;/code&gt;）——现代化的起点，已连接 Fluent 标题栏，包含带 &lt;code&gt;.ico&lt;/code&gt; 资源的更新默认应用图标，以及正确的浅色/深色模式默认值。比旧版空白模板更好，后者需要你自己配置基础设置。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NavigationView 模板&lt;/strong&gt;（&lt;code&gt;dotnet new winui-navview&lt;/code&gt;）——主从导航模式，完整连接了 NavigationView、现代标题栏和多页导航结构。遵循基于导航的应用的标准 Windows 应用轮廓。如果你要构建带侧边导航的应用，请从这里开始。&lt;/p&gt;
+&lt;p&gt;两个模板都开箱即遵循 &lt;a href="https://learn.microsoft.com/windows/apps/design/basics/app-silhouette"&gt;Windows 应用轮廓&lt;/a&gt;——用于布局、导航和视觉结构的现代 Fluent Design 模式。&lt;/p&gt;
+&lt;h2 id="为什么对非-visual-studio-开发者很重要"&gt;为什么对非 Visual Studio 开发者很重要&lt;/h2&gt;
+&lt;p&gt;使用 VS Code、Rider 或命令行工具的 WinUI 开发者一直处于不利地位。现有的 Visual Studio 模板无法在 VS 之外使用——必须手动重建项目结构并配置基础内容。&lt;/p&gt;
+&lt;p&gt;这些模板是开源的（参见 &lt;a href="https://github.com/microsoft/WindowsAppSDK/pull/6407"&gt;WindowsAppSDK PR #6407&lt;/a&gt;），基于&lt;a href="https://github.com/microsoft/microsoft-ui-xaml/issues/10388"&gt;社区反馈&lt;/a&gt;开发，现已可用。Visual Studio 支持正在开发中——这些相同的模板最终也将在那里运行。&lt;/p&gt;
+&lt;p&gt;对于希望自动化 WinUI 项目设置、将其集成到 CI 中，或者只是想使用 Visual Studio 以外的编辑器的团队来说，这是一个有意义的改进。&lt;/p&gt;
+&lt;p&gt;原文：&lt;a href="https://devblogs.microsoft.com/ifdef-windows/introducing-dotnet-new-templates-for-winui/"&gt;Introducing dotnet new WinUI templates&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>AI Engineering | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/ai-engineering/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/ai-engineering/index.xml" rel="self" type="application/rss+xml"/><item><title>Agent Framework Orchestrations 1.0: Choose Coordination Patterns, Not Plumbing</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/agent-framework-orchestration-1-0-choose-patterns-not-plumbing/</link><pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/agent-framework-orchestration-1-0-choose-patterns-not-plumbing/</guid><description>Python と .NET の両方でオーケストレーションパターンが安定版に達したことで、チームはマルチエージェント調整のセマンティクスを標準化し、ワークフロー制御ロジックを毎回手書きする必要から解放される。</description><content:encoded>&lt;p&gt;Microsoft Agent Framework のオーケストレーションが &lt;strong&gt;Python と .NET で 1.0 に到達&lt;/strong&gt;したことは、目に見えないエンジニアリングコストを削減するリリースのひとつである。これによりチームは安定した調整レイヤーを手に入れ、プロジェクトごとに同じルーティング、ストール、完了ロジックを書き直す必要がなくなる。&lt;/p&gt;
+&lt;p&gt;オリジナルソース: &lt;a href="https://devblogs.microsoft.com/agent-framework/agent-frameworks-orchestration-patterns-reach-1-0/"&gt;https://devblogs.microsoft.com/agent-framework/agent-frameworks-orchestration-patterns-reach-1-0/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;見出しは&lt;strong&gt;パターンパリティ&lt;/strong&gt;である。sequential、concurrent、handoff、group chat、magentic が両 SDK で安定版となった。このクロスランゲージの一貫性は、混在スタックと共有プラットフォーム標準を持つ組織にとって運用上重要である。&lt;/p&gt;
+&lt;p&gt;私の最も強い意見を述べる:&lt;strong&gt;手書きのマルチエージェントループは、真に新しい調整問題を解決している場合を除き、初日から技術負債である&lt;/strong&gt;。ほとんどのチームは、テスト済みのオーケストレーションパターンから始め、プロファイリングがカスタム動作の必要性を証明した場合にのみプリミティブに落とすべきである。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Magentic&lt;/strong&gt; は最も興味深い選択肢である。なぜなら、マネージャー主導の適応をコード化しているからだ。すべてのホップをスクリプト化する代わりに、参加者とガードレールを設定し、マネージャーエージェントがラウンドを調整し、ストールを検出し、進捗が崩れたときに計画をリセットする。これにより、複雑さが脆いコード分岐から、明示的なオーケストレーションポリシーへと移行する。&lt;/p&gt;
+&lt;h3 id="実践的なパターン選択ガイダンス"&gt;実践的なパターン選択ガイダンス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Sequential&lt;/strong&gt; — 決定性が最も重要で、パイプラインが線形の場合。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Concurrent&lt;/strong&gt; — ファンアウト分析と、明確な集約ルールを持つマージステージ向け。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Handoff&lt;/strong&gt; — ドメインルーティングが主要な場合。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Group chat&lt;/strong&gt; — モデレーション付き協調推論が厳格なパイプラインよりも出力品質を向上させる場合。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Magentic&lt;/strong&gt; — タスクが曖昧で、適応的計画のためのオーケストレーションオーバーヘッドが価値に見合う場合。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;ガードレールを省略してはならない。&lt;/strong&gt; 最大ラウンド数、ストールしきい値、リセット制限はオプションの調整つまみではない。暴走ループと制御不能なコストに対する安全境界である。&lt;/p&gt;
+&lt;p&gt;もうひとつの重要なアーキテクチャ上の利点:&lt;strong&gt;オーケストレーションビルダーは通常のワークフローにコンパイルされる&lt;/strong&gt;。つまり、高レベルのパターンを活用しながらも、構成の柔軟性を維持できる。便利な API がチームを低レベルの制御からロックアウトするという、一般的なフレームワークの罠を回避している。&lt;/p&gt;
+&lt;p&gt;社内 AI プラットフォームを運用しているなら、このリリースは&lt;strong&gt;標準化作業&lt;/strong&gt;を引き起こすべきである。承認済みのオーケストレーションのデフォルト、監視の期待値、パターンタイプごとのエスカレーションルールを定義する。ここでの一貫性は、チーム間での重複した障害から救ってくれる。&lt;/p&gt;
+&lt;h2 id="結論"&gt;結論&lt;/h2&gt;
+&lt;p&gt;Orchestration 1.0 は、マルチエージェントシステムを流行らせることではない。それはシステムを&lt;strong&gt;管理可能&lt;/strong&gt;にすることである。パターンファーストの調整を採用するチームは、より速く出荷し、デバッグも少なく済む。すべてのリポジトリでコーディネーターロジックを再発明し続けるチームは、次の1年を回避可能な複雑性の維持に費やすことになる。&lt;/p&gt;</content:encoded></item></channel></rss>

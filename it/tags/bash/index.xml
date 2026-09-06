@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Bash | The .NET Blog</title><link>https://thedotnetblog.com/it/tags/bash/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>it</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 29 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/it/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Intelligent Terminal 0.1.1 sta iniziando a mostrare come potrebbe apparire un’esperienza shell nativa per l’IA</title><link>https://thedotnetblog.com/it/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</link><pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/it/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</guid><description>Intelligent Terminal 0.1.1 aggiunge il supporto per Bash e WSL, un flusso manuale `/fix` e la possibilità di cambiare modello al volo. È ancora presto, ma la direzione sta diventando molto più interessante per gli sviluppatori che vivono nel terminale.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Questo articolo è stato tradotto automaticamente. Per la versione originale, &lt;a href="https://thedotnetblog.com/it/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/"&gt;clicca qui&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Penso ancora che l’IA nel terminale sia una delle aree più promettenti dell’esperienza per gli sviluppatori in questo momento.&lt;/p&gt;
+&lt;p&gt;È per questo che &lt;strong&gt;Intelligent Terminal 0.1.1&lt;/strong&gt; mi ha colpito più di quanto farebbe normalmente una versione puntuale.&lt;/p&gt;
+&lt;p&gt;Questo aggiornamento aggiunge:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;rilevamento degli errori Bash e WSL&lt;/li&gt;
+&lt;li&gt;un flusso manuale &lt;code&gt;/fix&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;il cambio di modello al volo&lt;/li&gt;
+&lt;li&gt;un pannello agente più personalizzabile&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Questa combinazione inizia a far sembrare il prodotto meno un esperimento e più un’esperienza shell in evoluzione.&lt;/p&gt;
+&lt;h2 id="fix-è-il-tipo-di-funzionalità-giusto"&gt;&lt;code&gt;/fix&lt;/code&gt; è il tipo di funzionalità giusto&lt;/h2&gt;
+&lt;p&gt;L’aggiunta che mi piace di più è probabilmente &lt;code&gt;/fix&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Perché? Perché non tutti i problemi si presentano come un errore shell pulito. A volte il comando funziona tecnicamente eppure restituisce il risultato sbagliato. È proprio in quel caso che un flusso manuale del tipo “aiutami a ragionare su questo risultato” diventa utile.&lt;/p&gt;
+&lt;p&gt;È un modello di assistenza nel terminale molto più realistico che aspettare un meccanismo di rilevamento automatico perfetto.&lt;/p&gt;
+&lt;h2 id="il-supporto-per-bash-e-wsl-rende-lesperienza-più-credibile"&gt;Il supporto per Bash e WSL rende l’esperienza più credibile&lt;/h2&gt;
+&lt;p&gt;Estendere oltre PowerShell era necessario.&lt;/p&gt;
+&lt;p&gt;Se questo tipo di intelligenza del terminale deve contare per più sviluppatori, deve funzionare dove gli sviluppatori passano davvero il tempo. Il supporto per Bash e WSL è una parte importante di questo.&lt;/p&gt;
+&lt;h2 id="il-mio-giudizio"&gt;Il mio giudizio&lt;/h2&gt;
+&lt;p&gt;Siamo ancora in una fase iniziale del prodotto, ma la direzione è buona.&lt;/p&gt;
+&lt;p&gt;Il terminale è uno dei luoghi più naturali per il troubleshooting assistito dall’IA, la correzione dei comandi e la guida consapevole dell’ambiente. Aggiornamenti come questo rendono più facile immaginare quel futuro.&lt;/p&gt;
+&lt;p&gt;Articolo originale: &lt;a href="https://devblogs.microsoft.com/commandline/intelligent-terminal-0-1-1-is-here-bash-support-new-slash-commands-and-customization/"&gt;Intelligent Terminal 0.1.1 Is Starting to Show What an AI-Native Shell Experience Could Look Like&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

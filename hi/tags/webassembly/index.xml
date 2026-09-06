@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>WebAssembly | The .NET Blog</title><link>https://thedotnetblog.com/hi/tags/webassembly/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>hi</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 23 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/hi/tags/webassembly/index.xml" rel="self" type="application/rss+xml"/><item><title>Copilot Studio ने .NET 10 WebAssembly में माइग्रेट करके 20% तेज़ गति कैसे प्राप्त की</title><link>https://thedotnetblog.com/hi/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</link><pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/hi/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</guid><description>.NET 10 WASM सुधार केवल नई परियोजनाओं के लिए नहीं हैं। .NET 8 से अपग्रेड करने के बाद Copilot Studio ने जो मापा: स्वचालित फिंगरप्रिंटिंग, डिफ़ॉल्ट WasmStripILAfterAOT, और वास्तविक निष्पादन प्रदर्शन संख्याएं।</description><content:encoded>&lt;p&gt;Copilot Studio टीम ने वह किया जिसके बारे में सभी Blazor WASM डेवलपर उत्सुक थे: उन्होंने वास्तव में एक प्रोडक्शन एप्लिकेशन को .NET 8 से .NET 10 में अपग्रेड किया और परिणाम मापे। पोस्ट में विशिष्ट संख्याएं साझा की गई हैं, जो दुर्लभ और वास्तव में उपयोगी है।&lt;/p&gt;
+&lt;h2 id="अपगरड-उबऊ-थ-यह-एक-अचछ-बत-ह"&gt;अपग्रेड उबाऊ था (यह एक अच्छी बात है)&lt;/h2&gt;
+&lt;p&gt;टार्गेट फ्रेमवर्क अपडेट करना, पैकेज संदर्भ ताज़ा करना, ब्रेकिंग बदलाव ठीक करना। बस इतना ही। .NET 10 बिल्ड अब प्रोडक्शन में चल रहा है। माइग्रेशन खुद दिलचस्प हिस्सा नहीं था — .NET 10 में बदलाव हैं।&lt;/p&gt;
+&lt;h2 id="सवचलत-एसट-फगरपरटग"&gt;स्वचालित एसेट फिंगरप्रिंटिंग&lt;/h2&gt;
+&lt;p&gt;पहले, WASM ऐप वितरित करने का मतलब था कैश-बस्टिंग के लिए SHA256 हैश के साथ प्रकाशित एसेट का नाम बदलने के लिए कस्टम स्क्रिप्ट लिखना। Copilot Studio के पास एक PowerShell स्क्रिप्ट थी जो ठीक यही करती थी — फ़ाइलें रीनेम करना, JavaScript लोडर में &lt;code&gt;integrity&lt;/code&gt; विशेषताएं इंजेक्ट करना, सब कुछ मैन्युअल रूप से प्रबंधित करना।&lt;/p&gt;
+&lt;p&gt;.NET 10 में, यह सब अंतर्निहित है। प्रकाशित एसेट स्वचालित रूप से फिंगरप्रिंट किए जाते हैं, सीधे &lt;code&gt;dotnet.js&lt;/code&gt; से आयात किए जाते हैं, और मैन्युअल हस्तक्षेप के बिना अखंडता-सत्यापित होते हैं। टीम ने रीनेमिंग स्क्रिप्ट हटा दी।&lt;/p&gt;
+&lt;p&gt;दायरे में छोटा बदलाव, जटिलता में महत्वपूर्ण कमी।&lt;/p&gt;
+&lt;h2 id="wasmstripilafteraot-अब-डफलट-रप-स-चल"&gt;WasmStripILAfterAOT अब डिफ़ॉल्ट रूप से चालू&lt;/h2&gt;
+&lt;p&gt;.NET 8 में, AOT-कंपाइल असेंबली से IL हटाना ऑप्ट-इन था। .NET 10 में यह डिफ़ॉल्ट है। AOT संकलन के बाद, मूल IL बाइटकोड आउटपुट से हटा दिया जाता है — रनटाइम पर इसकी आवश्यकता नहीं होती, और इसे रखने से पैकेज साइज़ बिना कारण बढ़ता था।&lt;/p&gt;
+&lt;p&gt;Copilot Studio एक विशिष्ट अनुकूलन का उपयोग करता है: यह JIT इंजन (तेज़ स्टार्टअप) और AOT इंजन (अधिकतम स्टेडी-स्टेट प्रदर्शन) दोनों वितरित करता है, दोनों को समानांतर में लोड करता है और तैयार होने पर JIT से AOT में हैंडऑफ़ करता है। यह दोनों इंजनों के बीच समान फ़ाइलों को भी डीडुप्लीकेट करता है।&lt;/p&gt;
+&lt;p&gt;नया IL स्ट्रिपिंग व्यवहार इसका मतलब है कि AOT असेंबली अब अपने JIT समकक्षों के साथ बिट-फॉर-बिट मेल नहीं खाती, इसलिए कम फ़ाइलें डीडुप्लीकेट होती हैं:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.NET 8: 59 साझा फ़ाइलें&lt;/li&gt;
+&lt;li&gt;.NET 10: 22 साझा फ़ाइलें&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;शुद्ध परिणाम: AOT इंजन के लिए पैकेज साइज़ लगभग 15% बड़ा। AOT डाउनलोड तेज़ LAN पर ~6% धीमा, 4G पर ~17% धीमा। लेकिन यह सब ऐप के इंटरैक्टिव हो जाने के बाद पृष्ठभूमि में होता है।&lt;/p&gt;
+&lt;h2 id="परदरशन-सखयए"&gt;प्रदर्शन संख्याएं&lt;/h2&gt;
+&lt;p&gt;यह वह हिस्सा है जो मायने रखता है:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;पहली कॉल पर &lt;strong&gt;~20% तेज़&lt;/strong&gt; (कोल्ड पाथ)&lt;/li&gt;
+&lt;li&gt;बाद की कॉल पर &lt;strong&gt;~5% तेज़&lt;/strong&gt; (वार्म पाथ)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;ldquo;बड़े बॉट्स&amp;rdquo; में सुधार सबसे अधिक दिखाई देते हैं — बड़े, जटिल एजेंट जहां AOT-कंपाइल कोड हावी है। सरल वर्कफ़्लो के लिए लाभ छोटा है।&lt;/p&gt;
+&lt;h2 id="यद-आप-अभ-भ-net-8-पर-ह"&gt;यदि आप अभी भी .NET 8 पर हैं&lt;/h2&gt;
+&lt;p&gt;माइग्रेशन की कहानी वास्तव में सरल है: &lt;code&gt;&amp;lt;TargetFramework&amp;gt;&lt;/code&gt; अपडेट करें, पैकेज संदर्भ अपडेट करें, कोई भी कस्टम फिंगरप्रिंटिंग स्क्रिप्ट हटाएं, और आप स्वचालित रूप से &lt;code&gt;WasmStripILAfterAOT&lt;/code&gt; से लाभ उठाएंगे। यदि आप AOT कंपाइल कर रहे हैं, तो समान प्रदर्शन लाभ की उम्मीद करें।&lt;/p&gt;
+&lt;p&gt;पोस्ट से एक नोट: यदि आप &lt;code&gt;WebWorker&lt;/code&gt; के अंदर .NET WASM रनटाइम लोड करते हैं, तो इनिशियलाइज़ करते समय &lt;code&gt;dotnetSidecar = true&lt;/code&gt; सेट करें।&lt;/p&gt;
+&lt;p&gt;मूल पोस्ट: &lt;a href="https://devblogs.microsoft.com/dotnet/copilot-studio-dotnet-10-migration/"&gt;Copilot Studio gets faster with .NET 10 on WebAssembly&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>
