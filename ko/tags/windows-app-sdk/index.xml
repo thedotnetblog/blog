@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Windows App SDK | The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/windows-app-sdk/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ko</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 08 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/windows-app-sdk/index.xml" rel="self" type="application/rss+xml"/><item><title>GitHub Copilot과 Claude Code를 위한 WinUI 에이전트 플러그인</title><link>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/winui-agent-plugin-github-copilot-claude-code/</link><pubDate>Mon, 08 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/winui-agent-plugin-github-copilot-claude-code/</guid><description>Microsoft가 WinUI 개발을 위한 에이전트 스킬을 출시했습니다: 스캐폴드, 빌드, 실행, 테스트, 반복 - 모두 GitHub Copilot CLI 또는 Claude Code로. 핵심 혁신: WinUI 특정 사실에 에이전트를 고정하는 전용 도구.</description><content:encoded>&lt;p&gt;Microsoft가 WinUI 애플리케이션 개발을 위한 오픈 소스 에이전트 스킬 세트를 공개했습니다. &lt;a href="https://aka.ms/winui-skills"&gt;aka.ms/winui-skills&lt;/a&gt;에서 이용할 수 있습니다.&lt;/p&gt;
+&lt;h2 id="설치-및-설정"&gt;설치 및 설정&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;/plugin install winui@awesome-copilot&lt;/code&gt;으로 플러그인을 설치한 다음 &lt;code&gt;/winui:winui-setup&lt;/code&gt;으로 초기 설정을 실행합니다. 설정 프로세스는 사전 요구 사항을 확인하고 필요한 종속성을 설치하며 WinUI 애플리케이션 개발을 위한 환경을 구성합니다.&lt;/p&gt;
+&lt;h2 id="엔드투엔드-개발-루프"&gt;엔드투엔드 개발 루프&lt;/h2&gt;
+&lt;p&gt;스킬은 완전한 개발 주기를 커버합니다:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;스캐폴드:&lt;/strong&gt; 적절한 매개변수로 &lt;code&gt;dotnet new WinUI&lt;/code&gt;를 사용하여 올바른 프로젝트 템플릿을 생성합니다 — 에이전트는 올바른 템플릿과 기본 구성 값을 알고 있습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;빌드:&lt;/strong&gt; WinUI 애플리케이션이 필요로 하는 패키지화된 실행 모델을 관리하며, 패키지 서명 및 매니페스트 구성을 포함합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;상호작용 및 검증:&lt;/strong&gt; 애플리케이션을 시작하고 상호작용하며 동작을 검증합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;컴파일 오류 수정:&lt;/strong&gt; 에이전트는 WinUI 특정 오류 메시지를 이해하고 해결 방법을 알고 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="전용-도구를-통한-토큰-효율성"&gt;전용 도구를 통한 토큰 효율성&lt;/h2&gt;
+&lt;p&gt;핵심 혁신은 스킬에 필요 시 구체적인 참조 데이터를 가져오는 전용 도구가 포함된다는 것입니다:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;WinUI 및 Fluent Design API 세부 정보&lt;/li&gt;
+&lt;li&gt;MVVM 패턴 및 모범 사례&lt;/li&gt;
+&lt;li&gt;MSIX 패키징, 코드 서명 및 Store 제출&lt;/li&gt;
+&lt;li&gt;접근성, 테마 및 UI 자동화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;WinUI 문서 전체를 컨텍스트에 주입하는 대신, 도구는 에이전트가 필요한 순간에 정확히 필요한 것을 가져옵니다. 이것은 에이전트가 수천 줄의 출력을 생성할 수 있는 빌드 사이클이나 테스트 스위트를 실행할 때 컨텍스트 사용을 효율적으로 유지하고 전문 도메인에서의 정확성을 향상시킵니다.&lt;/p&gt;
+&lt;h2 id="전용-스킬이-중요한-이유"&gt;전용 스킬이 중요한 이유&lt;/h2&gt;
+&lt;p&gt;범용 언어 모델은 WinUI 특정 뉘앙스에 대한 제한된 지식을 가지고 있습니다: 패키지화된 실행 모델, Fluent Design API, MSIX 통합 또는 Windows App SDK가 Win32 기능을 래핑하는 특정 방식. 전용 도구는 잠재적으로 오래되거나 부정확한 모델 지식 대신 검증된 WinUI 사실에 에이전트를 고정함으로써 이를 해결합니다.&lt;/p&gt;
+&lt;p&gt;동일한 패턴은 일반적인 개발 패턴과 다른 고유한 규칙 및 요구 사항을 가진 모든 특수 프레임워크나 SDK에 적용됩니다.&lt;/p&gt;
+&lt;p&gt;원본 게시물: &lt;a href="https://devblogs.microsoft.com/ifdef-windows/winui-agent-plugin-github-copilot-claude-code/"&gt;A WinUI Agent Plugin for GitHub Copilot and Claude Code&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>dotnet new WinUI: Visual Studio 없이 Windows 앱 만들기</title><link>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/dotnet-new-winui-templates-cli-vscode/</link><pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/dotnet-new-winui-templates-cli-vscode/</guid><description>WinUI 프로젝트 템플릿이 이제 dotnet new에서 작동합니다 — 빈 앱, NavigationView 패턴 등. VS Code 지원, Visual Studio 불필요, Fluent Design 기본값 내장.</description><content:encoded>&lt;p&gt;WinUI 개발에는 이전에 Visual Studio가 필요했습니다. 이것이 바뀌고 있습니다: Microsoft가 &lt;code&gt;dotnet new&lt;/code&gt;에서 작동하는 WinUI용 오픈 소스 프로젝트 및 항목 템플릿을 공개하여 Windows 앱 개발을 표준 CLI 워크플로우에 통합했습니다.&lt;/p&gt;
+&lt;h2 id="세-가지-명령으로-시작하기"&gt;세 가지 명령으로 시작하기&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 템플릿 설치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet new install Microsoft.WindowsAppSDK.WinUI.CSharp.Templates
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# NavigationView 앱 만들기&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet new winui-navview -n MyApp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 실행&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; MyApp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Visual Studio 없음, 수동 프로젝트 설정 없음. 앱은 &lt;code&gt;dotnet run&lt;/code&gt;으로 실행됩니다.&lt;/p&gt;
+&lt;h2 id="포함된-내용"&gt;포함된 내용&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;빈 템플릿&lt;/strong&gt; (&lt;code&gt;dotnet new winui&lt;/code&gt;) — Fluent 제목 표시줄이 이미 연결된 현대적인 출발점. &lt;code&gt;.ico&lt;/code&gt; 에셋이 포함된 업데이트된 기본 앱 아이콘, 올바른 밝은/어두운 모드 기본값. 기본 사항을 직접 설정해야 했던 이전 빈 템플릿보다 낫습니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NavigationView 템플릿&lt;/strong&gt; (&lt;code&gt;dotnet new winui-navview&lt;/code&gt;) — 마스터-상세 탐색 패턴, NavigationView, 현대적인 제목 표시줄, 다중 페이지 탐색 구조가 완전히 연결되어 있습니다. 탐색 기반 앱을 위한 표준 Windows 앱 실루엣을 따릅니다. 사이드 탐색이 있는 것을 빌드하는 경우 여기서 시작하세요.&lt;/p&gt;
+&lt;p&gt;두 템플릿 모두 &lt;a href="https://learn.microsoft.com/windows/apps/design/basics/app-silhouette"&gt;Windows 앱 실루엣&lt;/a&gt; — 레이아웃, 탐색, 시각적 구조를 위한 현대적인 Fluent Design 패턴 — 을 즉시 따릅니다.&lt;/p&gt;
+&lt;h2 id="visual-studio를-사용하지-않는-개발자에게-중요한-이유"&gt;Visual Studio를 사용하지 않는 개발자에게 중요한 이유&lt;/h2&gt;
+&lt;p&gt;VS Code, Rider 또는 명령줄 도구를 사용하는 WinUI 개발자들은 홀대받아 왔습니다. 기존 Visual Studio 템플릿은 VS 외부에서 사용할 수 없었고, 프로젝트 구조를 수동으로 다시 만들고 기본 사항을 연결해야 했습니다.&lt;/p&gt;
+&lt;p&gt;이 템플릿들은 오픈 소스입니다 (&lt;a href="https://github.com/microsoft/WindowsAppSDK/pull/6407"&gt;WindowsAppSDK PR #6407&lt;/a&gt; 참조). &lt;a href="https://github.com/microsoft/microsoft-ui-xaml/issues/10388"&gt;커뮤니티 피드백&lt;/a&gt;에서 개발되었으며 지금 사용 가능합니다. Visual Studio 지원도 진행 중 — 이 동일한 템플릿들은 결국 거기서도 작동할 것입니다.&lt;/p&gt;
+&lt;p&gt;WinUI 프로젝트 설정을 스크립트로 작성하거나, CI에 통합하거나, 단순히 Visual Studio가 아닌 다른 에디터를 사용하려는 팀에게 이것은 의미 있는 개선입니다.&lt;/p&gt;
+&lt;p&gt;원본 게시물: &lt;a href="https://devblogs.microsoft.com/ifdef-windows/introducing-dotnet-new-templates-for-winui/"&gt;Introducing dotnet new WinUI templates&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

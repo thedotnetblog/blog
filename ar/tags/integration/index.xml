@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Integration | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/integration/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 23 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/integration/index.xml" rel="self" type="application/rss+xml"/><item><title>الموصل المدمج لـ Cosmos DB في Logic Apps أكثر أهمية مما يبدو للوهلة الأولى</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/cosmosdb-logic-apps-built-in-connector-ga/</link><pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/cosmosdb-logic-apps-built-in-connector-ga/</guid><description>الموصل المدمج لـ Azure Cosmos DB في Logic Apps Standard أصبح الآن متاحًا بشكل عام. الفائدة الرئيسية ليست مجرد الاتصال، بل التنفيذ داخل العملية بزمن استجابة أقل، ودعم تغذية التغيير، ومسار أنظف لسير العمل الموجه للأحداث والذكاء الاصطناعي.</description><content:encoded>&lt;p&gt;عندما يسمع الناس &amp;ldquo;إعلان موصل&amp;rdquo;، من السهل افتراض أن القصة ثانوية.&lt;/p&gt;
+&lt;p&gt;في هذه الحالة، أعتقد أن الإعلان يستحق المزيد من التقدير.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;الموصل المدمج لـ Azure Cosmos DB في Logic Apps Standard&lt;/strong&gt; أصبح الآن متاحًا بشكل عام، وما يجعله مثيرًا للاهتمام ليس فقط أن Logic Apps يمكنها التحدث إلى Cosmos DB. بل أن التكامل يصبح أكثر أصالة وأداءً وواقعية لسير العمل الموجه بالأحداث.&lt;/p&gt;
+&lt;h2 id="لماذا-المدمج-مهم"&gt;لماذا المدمج مهم&lt;/h2&gt;
+&lt;p&gt;الفرق بين الموصلات المدارة والمدمجة ليس مجرد تفاصيل نشر.&lt;/p&gt;
+&lt;p&gt;التشغيل داخل العملية مع بيئة تشغيل Logic Apps يعني:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;زمن استجابة أقل&lt;/li&gt;
+&lt;li&gt;إنتاجية أفضل&lt;/li&gt;
+&lt;li&gt;قفزات خارجية أقل&lt;/li&gt;
+&lt;li&gt;ملاءمة أنظف لسير العمل عالي الحجم أو التفاعلي&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;وعند إضافة &lt;strong&gt;مشغلات تغذية التغيير&lt;/strong&gt; و &lt;strong&gt;العمليات الجماعية&lt;/strong&gt; و &lt;strong&gt;دعم التصحيح&lt;/strong&gt; و &lt;strong&gt;مصادقة Entra ID&lt;/strong&gt;، يبدأ الموصل في الظهور كشيء أكثر جدية من &amp;ldquo;سباكة سير عمل بسيطة.&amp;rdquo;&lt;/p&gt;
+&lt;h2 id="زاوية-ai-حقيقية-أيضا"&gt;زاوية AI حقيقية أيضًا&lt;/h2&gt;
+&lt;p&gt;مناقشة المقال لخطوط أنابيب RAG وتدفقات التضمين وأنماط قواعد المعرفة هي ما جعل هذا يبرز بالنسبة لي.&lt;/p&gt;
+&lt;p&gt;بمجرد أن يتكامل Logic Apps و Cosmos DB بهذه القوة، يمكن للمنصة دعم:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;تدفقات الاستيعاب التفاعلية&lt;/li&gt;
+&lt;li&gt;خطوط أنابيب إثراء المستندات&lt;/li&gt;
+&lt;li&gt;سير العمل المتعلق بالمتجهات&lt;/li&gt;
+&lt;li&gt;تنسيق بدون كود أو بكود منخفض حول مكونات AI&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;هذا يجعل الموصل ذا صلة بأكثر من مجرد متخصصي التكامل.&lt;/p&gt;
+&lt;h2 id="رأيي"&gt;رأيي&lt;/h2&gt;
+&lt;p&gt;هذا هو نوع الإصدار الذي يصبح أكثر قيمة كلما فكرت في سير العمل الحقيقي بدلاً من فئات المنتجات.&lt;/p&gt;
+&lt;p&gt;للفرق التي تستخدم Logic Apps Standard و Cosmos DB معًا، الموصل GA يعطي أساسًا أقوى للتكامل الموجه بالأحداث والأتمتة المجاورة لـ AI دون مواد لاصقة مخصصة في كل مكان.&lt;/p&gt;
+&lt;p&gt;هذا يستحق الاهتمام.&lt;/p&gt;
+&lt;p&gt;المقال الأصلي: &lt;a href="https://devblogs.microsoft.com/cosmosdb/announcing-general-availability-of-the-azure-cosmos-db-built-in-connector-for-logic-apps-standard/"&gt;Announcing General Availability of the Azure Cosmos DB Built-in Connector for Logic Apps Standard&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

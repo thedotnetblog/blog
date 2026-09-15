@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Backup | The .NET Blog</title><link>https://thedotnetblog.com/pt/tags/backup/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>pt</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/pt/tags/backup/index.xml" rel="self" type="application/rss+xml"/><item><title>Backup Imutável para o Cosmos DB É o Tipo de Recurso Que Você Aprecia Tarde Demais</title><link>https://thedotnetblog.com/pt/news/emiliano-montesdeoca/cosmosdb-backup-preview-immutability-and-recovery/</link><pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/pt/news/emiliano-montesdeoca/cosmosdb-backup-preview-immutability-and-recovery/</guid><description>O Azure Backup para o Azure Cosmos DB agora adiciona backups imutáveis e retenção de longo prazo em prévia pública. O ponto-chave não é apenas a recuperação, mas melhorar a resiliência e a preservação de evidências para cargas de trabalho reguladas ou de alto risco.</description><content:encoded>&lt;p&gt;Recursos de backup são fáceis de ignorar até o momento em que se tornam a coisa mais importante da sala.&lt;/p&gt;
+&lt;p&gt;É por isso que acho que a nova prévia do &lt;strong&gt;Azure Backup para o Azure Cosmos DB&lt;/strong&gt; merece atenção.&lt;/p&gt;
+&lt;p&gt;A parte interessante aqui não é apenas &amp;ldquo;mais uma opção de backup&amp;rdquo;. É a adição de &lt;strong&gt;pontos de recuperação imutáveis&lt;/strong&gt; e &lt;strong&gt;retenção de longo prazo&lt;/strong&gt; em um modelo muito mais alinhado com preparação contra ransomware, auditabilidade e requisitos de recuperação regulados.&lt;/p&gt;
+&lt;h2 id="a-imutabilidade-muda-a-conversa"&gt;A imutabilidade muda a conversa&lt;/h2&gt;
+&lt;p&gt;Quando atacantes miram sistemas de produção, a próxima pergunta não é mais apenas &amp;ldquo;temos um backup?&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;É:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;o backup pode ser confiável?&lt;/li&gt;
+&lt;li&gt;ele pode ser alterado ou excluído?&lt;/li&gt;
+&lt;li&gt;ainda temos um ponto de recuperação protegido depois que o incidente começa?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;É por isso que backups imutáveis importam. Eles melhoram o caminho de recuperação quando o ambiente ao redor pode não ser mais confiável.&lt;/p&gt;
+&lt;h2 id="minha-opinião"&gt;Minha opinião&lt;/h2&gt;
+&lt;p&gt;Este não é o tipo de anúncio que empolga todo mundo.&lt;/p&gt;
+&lt;p&gt;Mas para equipes que operam cargas de trabalho críticas no Cosmos DB, é exatamente o tipo de capacidade que se torna central no pior dia do trimestre.&lt;/p&gt;
+&lt;p&gt;E esses costumam ser os recursos mais importantes de acompanhar.&lt;/p&gt;
+&lt;p&gt;Post original: &lt;a href="https://devblogs.microsoft.com/cosmosdb/azure-backup-for-azure-cosmos-db-public-preview-adds-immutable-backups-and-long-term-retention/"&gt;Azure Backup for Azure Cosmos DB Public Preview Adds Immutable Backups and Long-Term Retention&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

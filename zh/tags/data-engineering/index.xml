@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Data Engineering | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/data-engineering/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Wed, 15 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/data-engineering/index.xml" rel="self" type="application/rss+xml"/><item><title>别再视数据库为特殊雪花：正确使用 Azure DevOps + SQL Projects</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/azure-devops-sql-projects-ci-cd-fundamentals/</link><pubDate>Wed, 15 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/azure-devops-sql-projects-ci-cd-fundamentals/</guid><description>Azure DevOps 中的 SQL 项目管道模型证明了，当团队采用代码优先的 CI/CD 纪律时，数据库交付可以是可重复、安全且可测试的。</description><content:encoded>&lt;p&gt;很多团队声称自己在做 DevOps，然后却从某人的笔记本电脑上手动部署数据库变更。这种矛盾正是这个 Azure SQL 指南要解决的。SQL 项目加上 Azure DevOps 管道，使数据库交付变得确定性、可审计且足够安全以应对真实的生产工作流。&lt;/p&gt;
+&lt;p&gt;原文来源：https://devblogs.microsoft.com/azure-sql/fundamentals-of-azure-devops-with-sql-projects/&lt;/p&gt;
+&lt;p&gt;该方法中最强大的部分不是 YAML 语法，而是&lt;strong&gt;纪律序列&lt;/strong&gt;：先构建，再发布，然后用最小权限和无密码身份保护部署路径。用 &lt;code&gt;dotnet build&lt;/code&gt; 构建 &lt;code&gt;.sqlproj&lt;/code&gt; 能在早期验证目标平台兼容性，并生成一个可以在环境间提升的 DACPAC 制品。&lt;/p&gt;
+&lt;p&gt;我的观点很直白：&lt;strong&gt;如果你的架构不在 CI 中构建，你的数据库质量过程基本就是在碰运气&lt;/strong&gt;。在 SSMS 或 VS Code 中的本地成功不是发布保证。&lt;/p&gt;
+&lt;p&gt;部署设计也非常&lt;strong&gt;务实&lt;/strong&gt;。使用与 Entra 身份关联的服务连接，授予用于架构和数据比较的限定范围数据库角色，以及为运行者 IP 自动临时开放防火墙并保证清理。这就是那种团队直到安全审查迫使他们重新审视一切时才肯做的运维卫生。&lt;/p&gt;
+&lt;h3 id="立即可应用的实用建议"&gt;立即可应用的实用建议&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;拆分构建和部署管道。&lt;/strong&gt; 构建应在分支变更时运行并快速失败。部署应是环境特定的且受策略门控。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;在安全管道变量中存储目标连接字符串&lt;/strong&gt;和基础设施元数据，并定期轮换角色分配的治理审查。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;在 CI 中显式锁定 SqlPackage 版本&lt;/strong&gt;，以避免意外的行为变化。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;不要过早过度授权。&lt;/strong&gt; 以 &lt;code&gt;db_ddladmin&lt;/code&gt;、&lt;code&gt;db_datareader&lt;/code&gt; 和 &lt;code&gt;db_datawriter&lt;/code&gt; 开始是比给每个管道主体授予 &lt;code&gt;db_owner&lt;/code&gt;&amp;ldquo;只是为了让它工作&amp;quot;更好的基线。只有在具体的部署需求证明必要时才提升权限。&lt;/p&gt;
+&lt;p&gt;另一个重要的收获是&lt;strong&gt;可移植性&lt;/strong&gt;。因为 SQL 项目运行在 .NET SDK 工具链上，这个模式不限于 Azure DevOps。相同的基本原则可以迁移到 GitHub Actions 或其他编排器——这使得这个指南具有战略性，而非平台锁定。&lt;/p&gt;
+&lt;h2 id="核心观点"&gt;核心观点&lt;/h2&gt;
+&lt;p&gt;如果你的组织仍然将架构交付视为应用 CI/CD 之外的特殊流程，这就是你的迁移蓝图。你不需要英雄般的平台工程。你需要&lt;strong&gt;一致性、身份优先的安全&lt;/strong&gt;，以及停止通过临时权限路径交付数据库变更的意愿。&lt;/p&gt;
+&lt;p&gt;这样做的团队将交付更快、回滚事件更少。推迟的团队将继续为手动数据平面部署的隐性成本买单。&lt;/p&gt;</content:encoded></item></channel></rss>

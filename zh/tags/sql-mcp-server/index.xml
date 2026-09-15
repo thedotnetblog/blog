@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>SQL MCP Server | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/sql-mcp-server/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Wed, 22 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/sql-mcp-server/index.xml" rel="self" type="application/rss+xml"/><item><title>智能体 SQL 的真正前沿：SQL MCP Server 中带 OBO 的可审计性</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/sql-mcp-obo-audit-frontier/</link><pubDate>Wed, 22 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/sql-mcp-obo-audit-frontier/</guid><description>Data API builder 加 SQL MCP Server 中的 OBO 身份验证是一个重要的治理里程碑，因为 Azure SQL 终于可以审计智能体操作背后的人类用户了。</description><content:encoded>&lt;p&gt;企业 AI 项目中有一个痛苦的真相：很多团队痴迷于模型质量而忽视了问责性。当一个智能体写入或读取生产数据时，事件审查的第一个问题不是&amp;quot;答案好吗？&amp;ldquo;而是&amp;quot;这到底是谁干的？&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;原文来源：https://devblogs.microsoft.com/azure-sql/sql-mcp-server-obo-auth/&lt;/p&gt;
+&lt;p&gt;这就是为什么 Data API builder 2.0 与 SQL MCP Server 中的 OBO 支持比它初看起来重要得多。用户名/密码和托管身份方法在操作上仍然有效，但两者都将身份折叠到服务边界中。日志显示的是应用或中间件，而不是人类请求的源头。这对简单的自动化来说是可以接受的，但对受监管的智能体工作流来说是不可接受的。&lt;/p&gt;
+&lt;p&gt;使用 OBO，SQL 验证的是&lt;strong&gt;委派的用户上下文&lt;/strong&gt;，而不是工具宿主身份。这给了你一个根本更好的审计模型：用户主体、操作、语句上下文和中间层应用标识符一起出现。你在获得可追溯性的同时，没有失去 MCP 工具和 DAB 实体权限的控制面。&lt;/p&gt;
+&lt;p&gt;我的观点很坚定：如果你的智能体可以接触敏感的 SQL 数据，OBO 应该是你的默认架构，而不是一个可选的加固任务。设置更复杂，但身份债务总是会晚些时候偿还——通常是在安全事件、合规审计或高管升级期间。&lt;/p&gt;
+&lt;h3 id="实用实施指导"&gt;实用实施指导&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;从一个最小的 WhoAmI 视图和集成测试中的自动化检查开始验证身份流&lt;/strong&gt;。如果 SQL 主体与登录用户不匹配，在交付前停下来修复。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;将针对 SQLSecurityAuditEvents 的 Log Analytics 查询接入你的 SOC 仪表盘&lt;/strong&gt;，并对通过 OBO 路径发起的风险操作进行告警。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对齐 RBAC 和 DAB 权限&lt;/strong&gt;，确保用户级身份和操作级授权端到端保持一致。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;公告中一个微妙但重要的设计点是缓存行为。DAB 在启用用户委派身份验证时显式阻止响应缓存。这个权衡是正确的。在多租户或受监管环境中，可能泄漏用户范围结果的性能技巧不值得冒险。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SQL MCP Server 加 OBO&lt;/strong&gt; 是一种成熟模式的开始：智能体作为受控操作者，用户作为可问责主体，数据平面作为可审计系统。如果你的架构不能自信地回答&amp;quot;这是谁做的&amp;quot;，无论演示多么精美，它都不是生产就绪的 AI。&lt;/p&gt;</content:encoded></item><item><title>NL2SQL 是智能体时代的 SQL 注入</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/nl2sql-agentic-sql-injection-mcp-server/</link><pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/nl2sql-agentic-sql-injection-mcp-server/</guid><description>在让智能体用自然语言查询你的数据库之前，请先读这篇文章。NL2SQL 看起来简单，直到你思考模式完整性、非确定性，以及 SQL MCP Server 究竟解决了什么。</description><content:encoded>&lt;p&gt;NL2SQL 有一个听起来很完美的推介版本：用户用自然语言提问，智能体生成 SQL，数据返回。更少的界面，更少的查询，更少的代码。简单。&lt;/p&gt;
+&lt;p&gt;然后你再多想五分钟。&lt;/p&gt;
+&lt;h2 id="演示中没人提的问题"&gt;演示中没人提的问题&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;模式（Schema）不是为了解释事物而设计的。&lt;/strong&gt; 晦涩的表名、不一致的列名、在没有额外谓词的情况下语义上无效的技术有效关系——这在企业数据库中很常见。这些不是 bug，只是业务变更积累的历史。但当你要求模型从一个并非为传达意图而设计的模式中推断意图时，模型还是会尝试。它不会放弃。它会生成最佳查询并自信地返回结果。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;模型是非确定性的。&lt;/strong&gt; 对同一个数据库问同一个问题两次，你可能会得到不同的 SQL。模型在计算概率，上下文中的细微变化会产生不同的输出。你无法通过测试获得智能体总是生成正确查询的保证。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;用户审查无法扩展。&lt;/strong&gt; &amp;ldquo;执行前只需审查每个查询&amp;quot;听起来很安全。但这假设用户既是数据模型又是 SQL 的专家——恰恰是那些不需要自然语言界面的人。它还引入了认知过载和新型确认偏差，被查询复杂性压倒的用户会批准无效查询而不是去调查它们。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;然后还有注入。&lt;/strong&gt; 在传统 SQL 开发中，参数化解决了注入问题，因为用户输入填充的是参数，而不是 SQL 结构。在 NL2SQL 中，模型本身生成 SQL。提示词、模式上下文、对话历史和检索的数据都会影响执行的内容。如果有人精心设计一个改变模型生成内容的提示，那就是注入——不是在参数级别，而是在查询生成级别。与 DROP TABLE（明显、可恢复）不同，NL2SQL 注入会产生在没有可见错误的情况下返回错误结果的查询。业务决策基于错误数据做出。&lt;/p&gt;
+&lt;h2 id="sql-mcp-server-究竟解决了什么"&gt;SQL MCP Server 究竟解决了什么&lt;/h2&gt;
+&lt;p&gt;这里文章提出了最有用的实用观点。SQL MPC Server 不是给智能体任意的模式访问权限并期待最好的结果，而是暴露了一个建立在 &lt;a href="https://learn.microsoft.com/en-us/azure/data-api-builder/overview"&gt;Data API builder&lt;/a&gt; 之上的&lt;strong&gt;精心策划的 API 表面&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;差异很重要：智能体不生成 SQL。它调用返回预定义结果形状的命名端点。SQL 由开发人员编写一次，是确定性的。智能体的非确定性被限制在选择&lt;em&gt;调用哪个&lt;/em&gt;端点，而不是组合任意查询。&lt;/p&gt;
+&lt;p&gt;这类似于参数化在传统应用模型中对 SQL 注入所做的——消除了从不受信任的输入构建任意查询的能力。&lt;/p&gt;
+&lt;h2 id="正确的问题"&gt;正确的问题&lt;/h2&gt;
+&lt;p&gt;这篇文章不是说&amp;quot;永远不要使用 NL2SQL&amp;rdquo;。它说：对&lt;em&gt;在哪里&lt;/em&gt;应用它以及&lt;em&gt;暴露什么&lt;/em&gt;要有意识。对于在受控环境中、具有有限范围模式和只读访问权限的探索性分析，NL2SQL 可能没问题。对于业务决策依赖于结果的生产系统，经过精心策划的 API 层要安全得多。&lt;/p&gt;
+&lt;p&gt;说实话：有些问题确实更适合用命名端点后面的结构化查询来解决，而不是自然语言到 SQL。SQL MCP Server 为你提供了这个选项，而不必完全放弃智能体界面。&lt;/p&gt;
+&lt;p&gt;原文链接：&lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-nl2sql/"&gt;Considering NL2SQL? Should your database really be the prompt? How can SQL MCP Server help?&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

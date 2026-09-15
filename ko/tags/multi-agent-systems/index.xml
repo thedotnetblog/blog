@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Multi-Agent Systems | The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/multi-agent-systems/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ko</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/multi-agent-systems/index.xml" rel="self" type="application/rss+xml"/><item><title>Agent Framework Orchestrations 1.0: 협업 패턴을 선택하고, 배관 작업은 선택하지 마세요</title><link>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/agent-framework-orchestration-1-0-choose-patterns-not-plumbing/</link><pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/agent-framework-orchestration-1-0-choose-patterns-not-plumbing/</guid><description>Python과 .NET에서 오케스트레이션 패턴이 안정화됨에 따라, 팀은 워크플로 제어 로직을 직접 구현하는 대신 다중 에이전트 협업 의미를 표준화할 수 있습니다.</description><content:encoded>&lt;p&gt;Microsoft Agent Framework 오케스트레이션이 &lt;strong&gt;Python과 .NET에서 1.0&lt;/strong&gt;에 도달한 것은 보이지 않는 엔지니어링 비용을 줄여주는 그런 릴리스 중 하나입니다. 팀이 모든 프로젝트에서 동일한 라우팅, 지연, 완료 로직을 다시 작성하는 일을 중단할 수 있도록 안정적인 협업 레이어를 제공합니다.&lt;/p&gt;
+&lt;p&gt;원문: &lt;a href="https://devblogs.microsoft.com/agent-framework/agent-frameworks-orchestration-patterns-reach-1-0/"&gt;https://devblogs.microsoft.com/agent-framework/agent-frameworks-orchestration-patterns-reach-1-0/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;핵심은 &lt;strong&gt;패턴 패리티&lt;/strong&gt;입니다: sequential, concurrent, handoff, group chat, magentic이 이제 두 SDK에서 모두 안정화되었습니다. 이 크로스-언어 일관성은 혼합 스택과 공유 플랫폼 표준을 가진 조직에서 운영적으로 중요합니다.&lt;/p&gt;
+&lt;p&gt;제 가장 강력한 의견: &lt;strong&gt;수동으로 작성된 다중 에이전트 루프는 진정으로 새로운 협업 문제를 해결하는 경우가 아니라면 첫날부터 기술 부채&lt;/strong&gt;입니다. 대부분의 팀은 검증된 오케스트레이션 패턴으로 시작하고, 프로파일링이 사용자 지정 동작이 필요함을 증명할 때만 기본 요소로 내려가야 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Magentic&lt;/strong&gt;은 관리자 주도 적응을 체계화하기 때문에 가장 흥미로운 옵션입니다. 모든 단계를 스크립팅하는 대신 참가자와 가드레일을 구성한 후, 관리자 에이전트가 라운드를 조정하고, 정체를 감지하며, 진행이 중단될 때 계획을 재설정하도록 합니다. 이는 복잡성을 취약한 코드 분기에서 명시적인 오케스트레이션 정책으로 이동시킵니다.&lt;/p&gt;
+&lt;h3 id="실용적인-패턴-선택-가이드"&gt;실용적인 패턴 선택 가이드&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Sequential&lt;/strong&gt; — 결정론이 가장 중요하고 파이프라인이 선형적일 때.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Concurrent&lt;/strong&gt; — 분석 확장(fan-out)과 명확한 집계 규칙이 있는 병합 단계용.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Handoff&lt;/strong&gt; — 도메인 라우팅이 주가 될 때.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Group chat&lt;/strong&gt; — 중재된 협력적 추론이 엄격한 파이프라인보다 더 나은 출력 품질을 제공할 때.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Magentic&lt;/strong&gt; — 작업이 모호하고 적응형 계획이 추가 오케스트레이션 오버헤드를 감수할 가치가 있을 때.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;가드레일을 건너뛰지 마세요.&lt;/strong&gt; 최대 라운드, 정체 임계값, 재설정 한도는 선택적 튜닝 노브가 아닙니다. 실행 불가능한 루프와 통제 불가능한 비용에 대한 안전 경계입니다.&lt;/p&gt;
+&lt;p&gt;또 다른 주요 아키텍처 이점: &lt;strong&gt;오케스트레이션 빌더는 일반 워크플로우로 컴파일됩니다&lt;/strong&gt;. 즉, 하이레벨 패턴의 이점을 누리면서도 구성 유연성을 유지할 수 있습니다. 이는 편의 API가 팀을 하위 수준 제어에서 잠그는 일반적인 프레임워크 함정을 피합니다.&lt;/p&gt;
+&lt;p&gt;내부 AI 플랫폼을 운영한다면, 이 릴리스는 &lt;strong&gt;표준화 작업&lt;/strong&gt;을 촉발해야 합니다. 승인된 오케스트레이션 기본값, 모니터링 기대치, 패턴 유형별 에스컬레이션 규칙을 정의하세요. 여기서의 일관성은 팀 전체에서 중복된 실패를 방지해줍니다.&lt;/p&gt;
+&lt;h2 id="결론"&gt;결론&lt;/h2&gt;
+&lt;p&gt;Orchestration 1.0은 다중 에이전트 시스템을 유행으로 만드는 것이 아닙니다. &lt;strong&gt;관리 가능하게 만드는 것&lt;/strong&gt;입니다. 패턴 우선 협업을 채택한 팀은 더 빠르게 출시하고 덜 디버깅할 것입니다. 모든 리포지토리에서 코디네이터 로직을 계속 재발명하는 팀은 피할 수 있는 복잡성을 유지하는 데 다음 해를 보낼 것입니다.&lt;/p&gt;</content:encoded></item></channel></rss>

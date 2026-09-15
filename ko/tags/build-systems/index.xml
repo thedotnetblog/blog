@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Build-Systems | The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/build-systems/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ko</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Wed, 22 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/build-systems/index.xml" rel="self" type="application/rss+xml"/><item><title>TypeScript 7은 빠르지만, 더 큰 교훈은 마이그레이션 규율입니다</title><link>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/typescript-7-incremental-migration-playbook/</link><pubDate>Wed, 22 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/typescript-7-incremental-migration-playbook/</guid><description>VS Code 마이그레이션 이야기는 실제 프로덕션 제약 조건 하에서의 점진적 엔지니어링에 대한 진정한 마스터클래스입니다.</description><content:encoded>&lt;p&gt;원문: &lt;a href="https://code.visualstudio.com/blogs/2026/06/26/iterating-faster-with-ts-7"&gt;Iterating faster with TypeScript 7&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;속도 수치는 훌륭하지만, 이 TypeScript 7 이야기의 진정한 가치는 프로세스이지 벤치마크가 아닙니다.&lt;/p&gt;
+&lt;p&gt;네, 핵심 TypeScript 워크로드를 수십 초에서 낮은 단위 초로 이동하는 것은 혁신적입니다. 모든 시니어 엔지니어는 느린 피드백 루프의 누적 비용을 알고 있습니다. 하지만 여기서 눈에 띄는 것은 VS Code 팀이 하나의 마이그레이션 주말에 코드베이스를 걸지 않고 거의 완전한 컴파일러 재작성을 채택한 방법입니다.&lt;/p&gt;
+&lt;p&gt;그들은 대부분의 팀이 한다고 주장하지만 실제로 실행하는 소수만 하는 일을 했습니다: 메인라인에서의 작고 되돌릴 수 있는 단계, 초기 이중 실행 검증, 의도적인 탈출구. 그 접근법은 두 팀 모두에게 레버리지를 주었습니다. VS Code는 개발자 흐름을 차단하지 않고 자신감을 얻었고, TypeScript는 광범위한 릴리스 훨씬 전에 실제 세계 회귀 압력을 얻었습니다.&lt;/p&gt;
+&lt;h3 id="실용적-패턴-모든-대규모-코드베이스에서-재사용-가능"&gt;실용적 패턴 (모든 대규모 코드베이스에서 재사용 가능)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;저위험, no-emit 검증 경로로 시작&lt;/strong&gt;하세요.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;이전 및 새 툴체인을 병렬로 충분히 오래 실행&lt;/strong&gt;하여 비호환성을 매핑하세요.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;포맷팅 및 개발자 인체공학을 일차적인 마이그레이션 차단 요소로 취급&lt;/strong&gt;하고, 미용 버그가 아닌 것으로 하세요.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;먼저 간단한 프로젝트를 마이그레이션&lt;/strong&gt;하여 가장 어려운 표면을 건드리기 전에 플레이북을 수립하세요.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;가장 감사하게 생각하는 것은 툴링 마찰에 대한 정직한 프레이밍입니다. 팀은 CI가 스타일 검사를 게이트할 때 작은 포맷팅 차이가 채택을 얼마나 빠르게 좌초시킬 수 있는지 종종 과소평가합니다. VS Code 팀은 이를 사용자 오류가 아닌 실제 엔지니어링 작업으로 취급했습니다. 그 결정은 아마도 롤아웃 피로를 방지했을 것입니다.&lt;/p&gt;
+&lt;p&gt;내 강한 의견: &lt;strong&gt;성능 업그레이드는 신뢰를 보존하는 마이그레이션 전략과 짝을 이룰 때만 비즈니스 가치가 됩니다.&lt;/strong&gt; 자신감 없는 원시 속도는 롤백 변동을 만듭니다. 속도 없는 자신감은 회의론을 만듭니다. 이 마이그레이션은 둘 다 달성했습니다.&lt;/p&gt;
+&lt;p&gt;리더를 위한 미묘한 통찰: 일찍 참여함으로써 VS Code는 효과적으로 TypeScript의 품질 인프라의 일부가 되었습니다. 그런 종류의 업스트림 협업은 종종 다운스트림 패치 및 해결 방법 부채보다 저렴합니다. 팀이 기본 툴링에 의존한다면, GA 이후가 아닌 GA 전에 참여하세요.&lt;/p&gt;
+&lt;p&gt;TypeScript 7 이전을 계획하고 있다면, &lt;strong&gt;헤드라인을 복사하지 말고 실행 모델을 복사하세요.&lt;/strong&gt; 이전 경로를 사용 가능하게 유지하고, 불일치 데이터를 수집하며, 일일 개발자 흐름을 먼저 최적화하세요. 7배 속도 향상은 매력적이지만, 지속 가능한 이점은 조직적입니다: 팀이 큰 변경을 안전하게 수행하는 방법을 배웁니다.&lt;/p&gt;
+&lt;p&gt;그것이 단일 릴리스 주기를 넘어 &lt;strong&gt;복리 효과&lt;/strong&gt;가 나는 능력입니다.&lt;/p&gt;</content:encoded></item></channel></rss>

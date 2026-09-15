@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Skiasharp | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/skiasharp/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 21 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/skiasharp/index.xml" rel="self" type="application/rss+xml"/><item><title>SkiaSharp 4 稳定版既是渲染故事，也是维护故事</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/skiasharp-4-stable-why-upgrade-now/</link><pubDate>Tue, 21 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/skiasharp-4-stable-why-upgrade-now/</guid><description>新的稳定版不仅仅关乎功能，更关乎更健康的发布节奏和更安全的长期图形栈。</description><content:encoded>&lt;p&gt;原文来源：&lt;a href="https://devblogs.microsoft.com/dotnet/skiasharp-4-0-stable/"&gt;SkiaSharp 4.0 is here: announcing the first stable release&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;SkiaSharp 4 稳定版之所以值得关注——超越了通常的发布兴奋——是因为它解决了大多数团队低估的部分：维护速度。&lt;/p&gt;
+&lt;p&gt;是的，可变字体、调色板和动画 WebP 支持很有吸引力。是的，在阴影密集的 GPU 场景中的性能提升对现代 UI 表面有意义。但更大的信号是结构性的：与上游 Skia 里程碑更紧密的对齐，以及更清晰的稳定版与预览版节奏。&lt;/p&gt;
+&lt;p&gt;这正是生产团队从基础图形依赖中需要的。&lt;/p&gt;
+&lt;p&gt;在跨平台 .NET 应用中，图形库位于渲染路径的深处。当它们落后上游太久时，团队会积累不可见的风险：编解码器差距、安全延迟和难以解释的跨平台渲染差异。一个可预测的发布节奏可以减少这种漂移。&lt;/p&gt;
+&lt;p&gt;这里指出的生命周期正确性改进也很重要。修复原生对象生命周期和 use-after-free 类问题是不引人注目的工作，但这是演示看起来没问题与产品能承受真实工作负载之间的区别。&lt;/p&gt;
+&lt;p&gt;我的个人观点：团队应该停止仅通过可见的功能差异来评估图形栈升级。稳定性和可维护性的差异往往比视觉差异更有价值。&lt;/p&gt;
+&lt;h3 id="实用的升级指导"&gt;实用的升级指导&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;在带阴影、分层卡片和文本密集的 UI 路径上试点 SkiaSharp 4&lt;/strong&gt;，以验证预期收益。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;在广泛推广前，跨你的关键目标平台运行快照和视觉回归检查&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用现代格式和方向元数据测试资产管道&lt;/strong&gt;，以尽早捕获行为变化。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;如果你运行 MAUI 或 Uno 工作负载&lt;/strong&gt;，将你的路线图与新节奏对齐，并关注预览频道公告以了解未来的后端变更。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;与 Uno Platform 的共同维护模式也是一个积极信号。关键基础设施库在有多个深度投入的维护者和真实产品压力时会表现得更好。&lt;/p&gt;
+&lt;p&gt;我也很欣赏发布操作中自动化的明确提及。智能体辅助的依赖同步和 CVE 审计在这里不是营销话术——它们是复杂的原生包装栈在不让维护者筋疲力尽的情况下跟上节奏的方式。&lt;/p&gt;
+&lt;p&gt;如果你的应用依赖于 SkiaSharp，而你推迟了迁移等待稳定版 v4 落地，就是现在了。停留在旧版本上现在有了更清晰的机会成本。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;核心观点：&lt;/strong&gt; SkiaSharp 4 稳定版更多是关于采纳一个更健康的图形基础，以支持未来几年的 .NET UI 工作，而非追逐新奇性。&lt;/p&gt;</content:encoded></item></channel></rss>

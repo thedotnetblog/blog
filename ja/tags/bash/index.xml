@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Bash | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/bash/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 29 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Intelligent Terminal 0.1.1 が、AI ネイティブなシェル体験がどう見えるのかを少しずつ示し始めている</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</link><pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</guid><description>Intelligent Terminal 0.1.1 では、Bash と WSL のサポート、手動の `/fix` フロー、実行中のモデル切り替えが追加されました。まだ初期段階ですが、ターミナルを日常的に使う開発者にとってはかなり面白い方向に進んでいます。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;この記事は自動翻訳されています。原文は&lt;a href="https://thedotnetblog.com/ja/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;私は今でも、ターミナルにおける AI は、今もっとも有望な開発者体験の分野のひとつだと思っています。&lt;/p&gt;
+&lt;p&gt;だからこそ、&lt;strong&gt;Intelligent Terminal 0.1.1&lt;/strong&gt; は、普通のポイントリリース以上に目を引きました。&lt;/p&gt;
+&lt;p&gt;この更新で追加されたのは次の内容です。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bash と WSL のエラー検出&lt;/li&gt;
+&lt;li&gt;手動の &lt;code&gt;/fix&lt;/code&gt; フロー&lt;/li&gt;
+&lt;li&gt;実行中のモデル切り替え&lt;/li&gt;
+&lt;li&gt;さらにカスタマイズしやすくなったエージェントペイン&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;この組み合わせによって、製品は単なる実験というより、進化するシェル体験のように感じられるようになってきます。&lt;/p&gt;
+&lt;h2 id="fix-はちょうどよい種類の機能"&gt;&lt;code&gt;/fix&lt;/code&gt; はちょうどよい種類の機能&lt;/h2&gt;
+&lt;p&gt;私が最も気に入った追加機能は、おそらく &lt;code&gt;/fix&lt;/code&gt; です。&lt;/p&gt;
+&lt;p&gt;なぜかというと、すべての問題がきれいなシェル失敗として現れるわけではないからです。コマンド自体は技術的には成功しているのに、結果が間違っていることもあります。そんなときこそ、「この結果について一緒に考えてほしい」という手動フローが役に立ちます。&lt;/p&gt;
+&lt;p&gt;それは、完璧な自動検出機構を待つよりも、はるかに現実的なターミナル支援の形です。&lt;/p&gt;
+&lt;h2 id="bash-と-wsl-のサポートでより現実味が増す"&gt;Bash と WSL のサポートで、より現実味が増す&lt;/h2&gt;
+&lt;p&gt;PowerShell だけにとどまらず、対応範囲を広げるのは必要でした。&lt;/p&gt;
+&lt;p&gt;こうしたターミナルのインテリジェンスがより多くの開発者にとって重要になるには、開発者が実際に時間を過ごす場所で動く必要があります。Bash と WSL のサポートは、その大きな部分を占めます。&lt;/p&gt;
+&lt;h2 id="私の見方"&gt;私の見方&lt;/h2&gt;
+&lt;p&gt;まだ初期段階のツールではありますが、方向性は良いです。&lt;/p&gt;
+&lt;p&gt;ターミナルは、AI 支援のトラブルシューティング、コマンド修復、環境を理解したガイダンスに最も自然に適した場所のひとつです。こうした更新は、その未来を想像しやすくしてくれます。&lt;/p&gt;
+&lt;p&gt;元の記事: &lt;a href="https://devblogs.microsoft.com/commandline/intelligent-terminal-0-1-1-is-here-bash-support-new-slash-commands-and-customization/"&gt;Intelligent Terminal 0.1.1 Is Starting to Show What an AI-Native Shell Experience Could Look Like&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

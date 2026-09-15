@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure App Service | The .NET Blog</title><link>https://thedotnetblog.com/hi/tags/azure-app-service/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>hi</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 05 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/hi/tags/azure-app-service/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL MCP Server Azure App Service पर — बिना कंटेनर के</title><link>https://thedotnetblog.com/hi/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</link><pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/hi/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</guid><description>SQL MCP Server अब Docker या Kubernetes के बिना Azure App Service पर चल सकता है। SQL डेटाबेस से कनेक्ट होने वाले AI एजेंट बनाने वाले .NET डेवलपर्स के लिए इसका क्या मतलब है।</description><content:encoded>&lt;p&gt;&lt;em&gt;यह पोस्ट स्वचालित रूप से अनुवादित की गई है। मूल संस्करण के लिए, &lt;a href="https://thedotnetblog.com/hi/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/"&gt;यहाँ क्लिक करें&lt;/a&gt;।&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;सच बताऊं तो: जब भी किसी ट्यूटोरियल में &amp;ldquo;कंटेनर आवश्यक है&amp;rdquo; देखता हूं, मन में एक आह-सी आती है। कंटेनर बेहतरीन हैं — जब तक टीम के पास कंटेनर स्ट्रैटेजी न हो, और तब एक सरल-सी दिखने वाली फीचर अचानक अनपेक्षित ऑर्केस्ट्रेशन जटिलता में फंस जाती है।&lt;/p&gt;
+&lt;p&gt;इसीलिए यह ध्यान खींचता है। SQL MCP Server अब Azure App Service पर चल सकता है — बिना Docker के, बिना Kubernetes के, सिर्फ उसी Data API Builder (DAB) कॉन्फिग फाइल के साथ जो MCP, REST और GraphQL के जरिए आपका SQL डेटाबेस एक्सपोज़ करती है।&lt;/p&gt;
+&lt;h2 id="sql-mcp-server-कय-ह"&gt;SQL MCP Server क्या है?&lt;/h2&gt;
+&lt;p&gt;अगर आप अभी परिचित नहीं हैं तो संक्षिप्त परिचय। SQL MCP Server आपके AI एजेंट और SQL डेटाबेस के बीच में बैठता है। एजेंट को सीधे डेटाबेस एक्सेस देने (जो बहुत बुरा विचार है) की बजाय, यह आपकी टेबल और व्यू को एक एब्स्ट्रैक्शन लेयर के रूप में एक्सपोज़ करता है — निर्धारित परमिशन के साथ एंटिटी।&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://learn.microsoft.com/hi-in/azure/data-api-builder/"&gt;Data API Builder&lt;/a&gt; पर बना है, यानी एक ही कॉन्फिग फाइल MCP &lt;em&gt;और&lt;/em&gt; REST &lt;em&gt;और&lt;/em&gt; GraphQL सब एक साथ मैनेज करती है। एजेंट MCP एंडपॉइंट से बात करता है। ट्रेडिशनल एप्लिकेशन REST या GraphQL से बात करती है। एक ही कॉन्फिग, एक ही रनटाइम, अलग-अलग सरफेस।&lt;/p&gt;
+&lt;p&gt;यह वाकई उपयोगी है — दो अलग API लेयर बनाए रखने की जरूरत नहीं।&lt;/p&gt;
+&lt;h2 id="कटनर-क-समसय-और-समधन"&gt;कंटेनर की समस्या (और समाधान)&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server का मूल डिप्लॉयमेंट मॉडल कंटेनर इस्तेमाल करता था। कई टीमों के लिए यह ठीक काम करता है — लेकिन सभी के लिए नहीं। कई .NET टीमें Azure App Service या VM पर स्टैंडर्डाइज़ हैं। सिर्फ एक SQL एंडपॉइंट एक्सपोज़ करने के लिए कंटेनर रनटाइम की जरूरत पड़ना अनचाहा घर्षण है।&lt;/p&gt;
+&lt;p&gt;नया वॉकथ्रू दिखाता है कि कंटेनर पूरी तरह स्किप कैसे करें। सब कुछ &lt;code&gt;dab start&lt;/code&gt; कमांड से चलता है, App Service पर एक स्टैंडर्ड .NET 8 वेब प्रोसेस के रूप में होस्ट किया जाता है।&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Data API Builder इंस्टॉल करें&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet tool install microsoft.dataapibuilder --prerelease -g
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# कॉन्फिग इनिशियलाइज़ करें&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --host-mode Development --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;SQL_CONNECTION_STRING&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# एंटिटी जोड़ें&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add products --source dbo.products --permissions &lt;span class="s2"&gt;&amp;#34;authenticated:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# App Service ऑथेंटिकेशन प्रोवाइडर कॉन्फिगर करें&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab configure --runtime.host.authentication.provider AppService
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# सर्वर शुरू करें&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;इस पॉइंट पर आपके पास &lt;code&gt;/mcp&lt;/code&gt; पर MCP है, उसी प्रोसेस से REST और GraphQL है, और कुछ भी कंटेनर में नहीं चल रहा।&lt;/p&gt;
+&lt;h2 id="शयरड-api-क-बन-ऑथटकशन"&gt;शेयर्ड API की बिना ऑथेंटिकेशन&lt;/h2&gt;
+&lt;p&gt;यह वो हिस्सा है जो मुझे सबसे ज्यादा पसंद है। App Service पर डिप्लॉय करते समय Microsoft Entra ID को ऑथेंटिकेशन प्रोवाइडर के रूप में कॉन्फिगर करते हैं। कॉन्फिग फाइलों में कोई शेयर्ड सीक्रेट नहीं, कोई API की रोटेट नहीं करनी।&lt;/p&gt;
+&lt;p&gt;कनेक्शन स्ट्रिंग App Service एनवायरनमेंट वेरिएबल में रहती है (&lt;code&gt;dab-config.json&lt;/code&gt; में नहीं), और MCP एंडपॉइंट प्लेटफॉर्म ऑथेंटिकेशन से सुरक्षित है। अगर आपके Azure वर्कलोड पहले से Entra ID के साथ अलाइन हैं, तो यह स्वाभाविक रूप से फिट होता है।&lt;/p&gt;
+&lt;p&gt;लोकल डेवलपमेंट के लिए &lt;code&gt;Simulator&lt;/code&gt; मोड और STDIO ट्रांसपोर्ट पर स्विच करें। डिप्लॉयमेंट से पहले &lt;code&gt;AppService&lt;/code&gt; मोड पर वापस आएं। क्लीन और स्पष्ट।&lt;/p&gt;
+&lt;h2 id="app-service-पर-डपलय-कर"&gt;App Service पर डिप्लॉय करें&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az appservice plan create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --sku B1 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --is-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --plan &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --runtime &lt;span class="s2"&gt;&amp;#34;DOTNETCORE:8.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp config &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --startup-file &lt;span class="s2"&gt;&amp;#34;dab start&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;फिर अपनी टीम द्वारा पहले से इस्तेमाल किए जाने वाले कोड डिप्लॉयमेंट मेथड का इस्तेमाल करके DAB प्रोजेक्ट डिप्लॉय करें। मुख्य बात: यह &lt;strong&gt;कोड&lt;/strong&gt; डिप्लॉयमेंट है, कंटेनर डिप्लॉयमेंट नहीं।&lt;/p&gt;
+&lt;h2 id="net-डवलपरस-क-लए-कय-मयन-रखत-ह"&gt;.NET डेवलपर्स के लिए क्यों मायने रखता है&lt;/h2&gt;
+&lt;p&gt;अगर आप .NET में AI एजेंट बना रहे हैं, तो जल्दी या बाद में एजेंट को डेटाबेस से बात करनी होगी। SQL MCP Server इसे करने का एक स्ट्रक्चर्ड तरीका देता है — रॉ कनेक्शन स्ट्रिंग एक्सपोज़ किए बिना।&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-app-service/"&gt;ओरिजिनल ब्लॉग पोस्ट&lt;/a&gt; और &lt;a href="https://github.com/Azure-Samples/SQL-MCP-NoContainer"&gt;GitHub सैंपल रिपॉजिटरी&lt;/a&gt; में पूरा वॉकथ्रू देखें।&lt;/p&gt;
+&lt;h2 id="नषकरष"&gt;निष्कर्ष&lt;/h2&gt;
+&lt;p&gt;App Service पर SQL MCP Server उन .NET टीमों के लिए एक व्यावहारिक विकल्प है जो बिना कंटेनर स्ट्रैटेजी के एजेंटों को स्ट्रक्चर्ड SQL डेटा एक्सेस देना चाहती हैं। इसे आज़माएं — आपके एजेंट क्लीन API सरफेस की सराहना करेंगे।&lt;/p&gt;</content:encoded></item></channel></rss>

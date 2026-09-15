@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Entity Framework | The .NET Blog</title><link>https://thedotnetblog.com/de/tags/entity-framework/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>de</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 12 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/de/tags/entity-framework/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET 11 Preview 5: Was ich tatsächlich zuerst testen würde</title><link>https://thedotnetblog.com/de/news/emiliano-montesdeoca/dotnet-11-preview-5-what-i-would-actually-try-first/</link><pubDate>Fri, 12 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/de/news/emiliano-montesdeoca/dotnet-11-preview-5-what-i-would-actually-try-first/</guid><description>.NET 11 Preview 5 liefert Verbesserungen im SDK, Runtime, C#, ASP.NET Core und EF Core. Hier sind die Updates, die ich am meisten für einen frühen Test halte, wenn Sie echte .NET-Apps bauen.</description><content:encoded>&lt;p&gt;.NET Preview-Beiträge sind immer vollgepackt.&lt;/p&gt;
+&lt;p&gt;Das sind gute Nachrichten für die Plattform, aber es bedeutet auch, dass die praktische Frage vergraben wird: &lt;strong&gt;was sollten Sie tatsächlich zuerst testen?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;.NET 11 Preview 5 bringt viel im SDK, Runtime, Libraries, ASP.NET Core, C#, MAUI und EF Core. Anstatt dies in eine riesige Changelog-Zusammenfassung zu verwandeln, möchte ich mich auf die Teile konzentrieren, die meiner Meinung nach jetzt echte Entwickleraufmerksamkeit verdienen.&lt;/p&gt;
+&lt;h2 id="die-mcp-server-vorlage-in-dotnet-new-ist-ein-signal"&gt;Die MCP-Server-Vorlage in &lt;code&gt;dotnet new&lt;/code&gt; ist ein Signal&lt;/h2&gt;
+&lt;p&gt;Dies ist wahrscheinlich der strategischste Punkt im SDK-Bereich.&lt;/p&gt;
+&lt;p&gt;Wenn eine Projektvorlage direkt im SDK landet, bedeutet das, dass die Plattform das Szenario nicht mehr als Nische betrachtet. Eine &lt;strong&gt;MCP-Server-Vorlage&lt;/strong&gt; in &lt;code&gt;dotnet new&lt;/code&gt; senkt die Kosten für das Ausprobieren des Musters und sendet eine klare Botschaft, wohin sich das Ökosystem entwickelt.&lt;/p&gt;
+&lt;p&gt;Wenn Sie Agent-Tooling, interne Assistenten oder KI-integrierte Entwicklerdienstprogramme in .NET bauen, ist dies eines der ersten Dinge, die ich testen würde.&lt;/p&gt;
+&lt;h2 id="build-zeit-schwachstellen--und-end-of-life-prüfungen-sind-genau-die-art-von-standardwerten-die-ich-mag"&gt;Build-Zeit-Schwachstellen- und End-of-Life-Prüfungen sind genau die Art von Standardwerten, die ich mag&lt;/h2&gt;
+&lt;p&gt;Sicherheits- und Lebenszyklusbewusstsein sind viel besser, wenn die Plattform Ihnen &lt;strong&gt;während des Builds&lt;/strong&gt; hilft, nicht erst hinterher in einem separaten Bericht, den niemand liest.&lt;/p&gt;
+&lt;p&gt;Die neuen SDK-Prüfungen auf Schwachstellen und End-of-Life-Pakete während des Builds sind die Art von Feature, die ich liebe, weil sie besseres Verhalten zum Standard machen.&lt;/p&gt;
+&lt;p&gt;Diese sind nicht auffällig, aber sie sind die Art von Verbesserungen, die wirklich gut altern.&lt;/p&gt;
+&lt;h2 id="meine-kurzliste-für-einen-ersten-durchgang"&gt;Meine Kurzliste für einen ersten Durchgang&lt;/h2&gt;
+&lt;p&gt;Wenn ich einen halben Tag hätte, um Preview 5 zu erkunden, würde ich Folgendes tun:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;die MCP-Server-Vorlage ausprobieren&lt;/li&gt;
+&lt;li&gt;Builds ausführen und die neuen Schwachstellen-/EOL-Prüfungen inspizieren&lt;/li&gt;
+&lt;li&gt;jede Codebasis testen, die von den neuen C#-Modellierungsfunktionen profitieren könnte&lt;/li&gt;
+&lt;li&gt;Blazor SSR-Szenarien validieren, wenn Sie auf diesem Stack sind&lt;/li&gt;
+&lt;li&gt;EF Core-lastige Pfade ausführen und auf Warnungsänderungen oder SQL-Unterschiede achten&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Dort sehe ich den frühen Wert.&lt;/p&gt;
+&lt;p&gt;Originalquelle: &lt;a href="https://devblogs.microsoft.com/dotnet/dotnet-11-preview-5/"&gt;.NET 11 Preview 5 is now available!&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

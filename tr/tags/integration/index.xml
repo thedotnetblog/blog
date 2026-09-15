@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Integration | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/integration/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 23 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/integration/index.xml" rel="self" type="application/rss+xml"/><item><title>Cosmos DB için Logic Apps Yerleşik Bağlayıcısı İlk Bakışta Göründüğünden Daha Kullanışlı</title><link>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/cosmosdb-logic-apps-built-in-connector-ga/</link><pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/cosmosdb-logic-apps-built-in-connector-ga/</guid><description>Logic Apps Standard için Azure Cosmos DB yerleşik bağlayıcısı artık genel kullanıma sunuldu. Temel fayda yalnızca bağlantı değil, daha düşük gecikmeli süreç içi yürütme, değişiklik akışı desteği ve olay odaklı ile AI odaklı iş akışlarına daha temiz bir yoldur.</description><content:encoded>&lt;p&gt;İnsanlar &amp;ldquo;bağlayıcı duyurusu&amp;rdquo; duyduğunda, hikayenin önemsiz olduğunu varsaymak kolaydır.&lt;/p&gt;
+&lt;p&gt;Bu durumda, duyurunun daha fazla takdiri hak ettiğini düşünüyorum.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Logic Apps Standard için Azure Cosmos DB yerleşik bağlayıcısı&lt;/strong&gt; artık genel kullanıma sunuldu ve onu ilginç kılan sadece Logic Apps&amp;rsquo;in Cosmos DB ile konuşabilmesi değil. Entegrasyonun daha yerel, daha performanslı ve olay odaklı iş akışları için daha gerçekçi hale gelmesidir.&lt;/p&gt;
+&lt;h2 id="yerleşik-olması-neden-önemli"&gt;Yerleşik olması neden önemli&lt;/h2&gt;
+&lt;p&gt;Yönetilen ve yerleşik bağlayıcılar arasındaki fark sadece dağıtım detayı değildir.&lt;/p&gt;
+&lt;p&gt;Logic Apps çalışma zamanı ile süreç içinde çalışmak şu anlama gelir:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;daha düşük gecikme&lt;/li&gt;
+&lt;li&gt;daha iyi verim&lt;/li&gt;
+&lt;li&gt;daha az harici atlama&lt;/li&gt;
+&lt;li&gt;yüksek hacimli veya reaktif iş akışları için daha temiz bir uyum&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ve &lt;strong&gt;değişiklik akışı tetikleyicileri&lt;/strong&gt;, &lt;strong&gt;toplu işlemler&lt;/strong&gt;, &lt;strong&gt;yama desteği&lt;/strong&gt; ve &lt;strong&gt;Entra ID kimlik doğrulaması&lt;/strong&gt; eklendiğinde, bağlayıcı &amp;ldquo;basit iş akışı tesisatından&amp;rdquo; çok daha ciddi bir şey gibi görünmeye başlar.&lt;/p&gt;
+&lt;h2 id="ai-açısı-da-gerçek"&gt;AI açısı da gerçek&lt;/h2&gt;
+&lt;p&gt;Gönderinin RAG管道ıları, embedding akışları ve bilgi tabanı kalıpları hakkındaki tartışması, benim için bunu daha da öne çıkardı.&lt;/p&gt;
+&lt;p&gt;Logic Apps ve Cosmos DB bu kadar sıkı entegre olduğunda, platform şunları destekleyebilir:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;reaktif veri alma akışları&lt;/li&gt;
+&lt;li&gt;belge zenginleştirme管道ıları&lt;/li&gt;
+&lt;li&gt;vektör ile ilgili iş akışları&lt;/li&gt;
+&lt;li&gt;AI bileşenleri etrafında kodsuz veya düşük kodlu orkestrasyon&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bu, bağlayıcıyı yalnızca entegrasyon uzmanlarından daha fazlası için alakalı hale getirir.&lt;/p&gt;
+&lt;h2 id="benim-görüşüm"&gt;Benim görüşüm&lt;/h2&gt;
+&lt;p&gt;Bu, ürün kategorileri yerine gerçek iş akışlarını düşündükçe daha değerli hale gelen türden bir sürümdür.&lt;/p&gt;
+&lt;p&gt;Logic Apps Standard ve Cosmos DB&amp;rsquo;yi birlikte kullanan ekipler için GA bağlayıcısı, her yerde özel yapıştırıcı olmadan olay odaklı entegrasyon ve AI ile ilgili otomasyon için daha güçlü bir temel sağlar.&lt;/p&gt;
+&lt;p&gt;Bu dikkate değer.&lt;/p&gt;
+&lt;p&gt;Orijinal yazı: &lt;a href="https://devblogs.microsoft.com/cosmosdb/announcing-general-availability-of-the-azure-cosmos-db-built-in-connector-for-logic-apps-standard/"&gt;Announcing General Availability of the Azure Cosmos DB Built-in Connector for Logic Apps Standard&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

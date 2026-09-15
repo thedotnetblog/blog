@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Backup | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/backup/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/backup/index.xml" rel="self" type="application/rss+xml"/><item><title>Onveranderlijke back-ups voor Cosmos DB zijn het soort feature dat je te laat waardeert</title><link>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/cosmosdb-backup-preview-immutability-and-recovery/</link><pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/cosmosdb-backup-preview-immutability-and-recovery/</guid><description>Azure Backup voor Azure Cosmos DB voegt nu onveranderlijke back-ups en langetermijnretentie toe in publieke preview. Het belangrijkste punt is niet alleen herstel, maar het verbeteren van veerkracht en bewijsbehoud voor gereguleerde of risicovolle workloads.</description><content:encoded>&lt;p&gt;Back-upfeatures zijn makkelijk te negeren, tot het moment waarop ze het belangrijkste ding in de kamer worden.&lt;/p&gt;
+&lt;p&gt;Daarom denk ik dat de nieuwe &lt;strong&gt;Azure Backup voor Azure Cosmos DB&lt;/strong&gt;-preview aandacht verdient.&lt;/p&gt;
+&lt;p&gt;Het interessante hier is niet zomaar &amp;ldquo;nog een back-upoptie&amp;rdquo;. Het is de toevoeging van &lt;strong&gt;onveranderlijke herstelpunten&lt;/strong&gt; en &lt;strong&gt;langetermijnretentie&lt;/strong&gt; in een model dat veel beter is afgestemd op ransomware-paraatheid, controleerbaarheid en gereguleerde herstelvereisten.&lt;/p&gt;
+&lt;h2 id="onveranderlijkheid-verandert-het-gesprek"&gt;Onveranderlijkheid verandert het gesprek&lt;/h2&gt;
+&lt;p&gt;Wanneer aanvallers productiesystemen targeten, is de volgende vraag niet langer alleen &amp;ldquo;hebben we een back-up?&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Het is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;kan de back-up vertrouwd worden?&lt;/li&gt;
+&lt;li&gt;kan deze worden aangepast of verwijderd?&lt;/li&gt;
+&lt;li&gt;hebben we nog een beschermd herstelpunt nadat het incident begint?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Daarom zijn onveranderlijke back-ups belangrijk. Ze verbeteren het herstelpad wanneer de omgeving eromheen misschien niet langer betrouwbaar is.&lt;/p&gt;
+&lt;h2 id="mijn-standpunt"&gt;Mijn standpunt&lt;/h2&gt;
+&lt;p&gt;Dit is niet het soort aankondiging dat iedereen enthousiast maakt.&lt;/p&gt;
+&lt;p&gt;Maar voor teams die kritieke workloads op Cosmos DB draaien, is het precies het soort mogelijkheid dat centraal komt te staan op de slechtste dag van het kwartaal.&lt;/p&gt;
+&lt;p&gt;En dat zijn vaak de belangrijkste features om te volgen.&lt;/p&gt;
+&lt;p&gt;Oorspronkelijke post: &lt;a href="https://devblogs.microsoft.com/cosmosdb/azure-backup-for-azure-cosmos-db-public-preview-adds-immutable-backups-and-long-term-retention/"&gt;Azure Backup for Azure Cosmos DB Public Preview Adds Immutable Backups and Long-Term Retention&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

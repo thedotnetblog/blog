@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Backup | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/backup/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/backup/index.xml" rel="self" type="application/rss+xml"/><item><title>Cosmos DB için Değişmez Yedekleme, Çok Geç Takdir Ettiğiniz Türden Bir Özellik</title><link>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/cosmosdb-backup-preview-immutability-and-recovery/</link><pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/cosmosdb-backup-preview-immutability-and-recovery/</guid><description>Azure Cosmos DB için Azure Backup artık genel önizlemede değişmez yedeklemeler ve uzun süreli saklama ekliyor. Önemli olan yalnızca kurtarma değil, dayanıklılığı ve kanıt korumasını yüksek riskli veya düzenlemeye tabi iş yükleri için iyileştirmek.</description><content:encoded>&lt;p&gt;Yedekleme özellikleri, odadaki en önemli şey haline geldiği ana kadar göz ardı edilmesi kolay olan özelliklerdir.&lt;/p&gt;
+&lt;p&gt;Yeni &lt;strong&gt;Azure Cosmos DB için Azure Backup&lt;/strong&gt; önizlemesinin ilgiyi hak ettiğini düşünmemin nedeni bu.&lt;/p&gt;
+&lt;p&gt;Buradaki ilginç kısım yalnızca &amp;ldquo;bir yedekleme seçeneği daha&amp;rdquo; değil. &lt;strong&gt;Değişmez kurtarma noktaları&lt;/strong&gt; ve &lt;strong&gt;uzun süreli saklama&lt;/strong&gt;nın, fidye yazılımı hazırlığı, denetlenebilirlik ve düzenlemeye tabi kurtarma gereksinimleriyle çok daha iyi uyumlu bir modele eklenmesi.&lt;/p&gt;
+&lt;h2 id="değişmezlik-konuşmayı-değiştiriyor"&gt;Değişmezlik konuşmayı değiştiriyor&lt;/h2&gt;
+&lt;p&gt;Saldırganlar üretim sistemlerini hedeflediğinde, bir sonraki soru artık yalnızca &amp;ldquo;yedeğimiz var mı?&amp;rdquo; değil.&lt;/p&gt;
+&lt;p&gt;Şu:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;yedeğe güvenilebilir mi?&lt;/li&gt;
+&lt;li&gt;değiştirilebilir veya silinebilir mi?&lt;/li&gt;
+&lt;li&gt;olay başladıktan sonra hâlâ korunan bir kurtarma noktamız var mı?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Değişmez yedeklemelerin önemli olmasının nedeni bu. Çevresindeki ortam artık güvenilir olmayabileceğinde kurtarma yolunu iyileştiriyorlar.&lt;/p&gt;
+&lt;h2 id="görüşüm"&gt;Görüşüm&lt;/h2&gt;
+&lt;p&gt;Bu, herkesi heyecanlandıran türden bir duyuru değil.&lt;/p&gt;
+&lt;p&gt;Ama Cosmos DB üzerinde kritik iş yükleri çalıştıran ekipler için, çeyreğin en kötü gününde merkezi hale gelen tam olarak türden bir yetenek.&lt;/p&gt;
+&lt;p&gt;Ve bunlar genellikle takip edilecek en önemli özellikler.&lt;/p&gt;
+&lt;p&gt;Orijinal yazı: &lt;a href="https://devblogs.microsoft.com/cosmosdb/azure-backup-for-azure-cosmos-db-public-preview-adds-immutable-backups-and-long-term-retention/"&gt;Azure Backup for Azure Cosmos DB Public Preview Adds Immutable Backups and Long-Term Retention&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

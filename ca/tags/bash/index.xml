@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Bash | The .NET Blog</title><link>https://thedotnetblog.com/ca/tags/bash/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ca</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 29 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ca/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Intelligent Terminal 0.1.1 comença a mostrar com podria ser una experiència de shell nativa per a IA</title><link>https://thedotnetblog.com/ca/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</link><pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ca/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</guid><description>Intelligent Terminal 0.1.1 afegeix suport per a Bash i WSL, un flux manual de /fix i canvi de model sobre la marxa. Encara és aviat, però la direcció es fa molt més interessant per als desenvolupadors que viuen al terminal.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Aquest article ha estat traduït automàticament. Per a la versió original, &lt;a href="https://thedotnetblog.com/ca/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/"&gt;fes clic aquí&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Encara penso que la terminal és un dels llocs més naturals perquè la IA aplicada al desenvolupament esdevingui realment útil.&lt;/p&gt;
+&lt;p&gt;Per això &lt;strong&gt;Intelligent Terminal 0.1.1&lt;/strong&gt; va destacar més que una versió puntual típica.&lt;/p&gt;
+&lt;p&gt;Aquesta actualització afegeix:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;detecció d’errors de Bash i WSL&lt;/li&gt;
+&lt;li&gt;un flux manual de &lt;code&gt;/fix&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;canvi de model sobre la marxa&lt;/li&gt;
+&lt;li&gt;un agent pane més personalitzable&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Aquesta combinació comença a fer que el producte se senti menys com un experiment i més com una experiència de shell en evolució.&lt;/p&gt;
+&lt;h2 id="fix-és-el-tipus-de-funció-adequat"&gt;&lt;code&gt;/fix&lt;/code&gt; és el tipus de funció adequat&lt;/h2&gt;
+&lt;p&gt;L’addició que més m’agrada probablement és &lt;code&gt;/fix&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Per què? Perquè no tots els problemes apareixen com una fallada neta del shell. De vegades l’ordre funciona tècnicament, però igualment et dona el resultat equivocat. És exactament en aquest punt on és útil un flux manual del tipus &amp;ldquo;ajuda’m a raonar sobre aquest resultat&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Aquest és un model d’assistència dins la terminal molt més realista que esperar un mecanisme d’auto-detecció perfecte.&lt;/p&gt;
+&lt;h2 id="el-suport-per-a-bash-i-wsl-fa-lexperiència-més-creïble"&gt;El suport per a Bash i WSL fa l’experiència més creïble&lt;/h2&gt;
+&lt;p&gt;Expandir-se més enllà de PowerShell era necessari.&lt;/p&gt;
+&lt;p&gt;Si aquest tipus d’intel·ligència de terminal ha de ser rellevant per a més desenvolupadors, ha de funcionar allà on els desenvolupadors passen realment el temps. I el suport per a Bash i WSL n’és una part important.&lt;/p&gt;
+&lt;h2 id="la-meva-opinió"&gt;La meva opinió&lt;/h2&gt;
+&lt;p&gt;Encara és una eina en fase inicial, però la direcció és bona.&lt;/p&gt;
+&lt;p&gt;La terminal és un dels llocs més naturals per al troubleshooting assistit per IA, la reparació d’ordres i l’orientació conscient de l’entorn. Actualitzacions com aquesta fan que sigui molt més fàcil imaginar aquest futur.&lt;/p&gt;
+&lt;p&gt;Article original: &lt;a href="https://devblogs.microsoft.com/commandline/intelligent-terminal-0-1-1-is-here-bash-support-new-slash-commands-and-customization/"&gt;Intelligent Terminal 0.1.1 is here: bash support, new slash commands, and more customization&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

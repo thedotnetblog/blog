@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Vsix | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/vsix/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/vsix/index.xml" rel="self" type="application/rss+xml"/><item><title>Visual Studio Extension Teams Should Stop Releasing by Habit and Start Releasing by Pipeline</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/visual-studio-extension-ci-with-github-actions/</link><pubDate>Thu, 23 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/visual-studio-extension-ci-with-github-actions/</guid><description>VSIX のバージョニングと公開のための反復可能な GitHub Actions フローが十分にシンプルになり、手動リリース手順を正当化するのが難しくなった。</description><content:encoded>&lt;p&gt;オリジナルソース: &lt;a href="https://devblogs.microsoft.com/visualstudio/automating-your-visual-studio-extension-builds-with-github-actions/"&gt;Automating your Visual Studio extension builds with GitHub Actions&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Visual Studio 拡張をメンテナンスしていて、リリースの重要な部分を依然として手動で実行しているなら、これがモダナイズのシグナルである。&lt;/p&gt;
+&lt;p&gt;この記事で示されているワークフローは意図的に実用的である: バージョンスタンプ、ビルド、テスト用アーティファクトをギャラリーに公開、安定版ビットを Marketplace に公開。重いプラットフォーム儀式はなく、決定論的なリリース動作のみである。&lt;/p&gt;
+&lt;p&gt;私が最も気に入っているのは、バージョニングがリリース前のチェックリスト項目ではなく、パイプライン状態として扱われることである。そのひとつの判断で、驚くほど多くのミスが排除される: 不一致のメタデータ、古いアセンブリバージョン、一貫性のないリリースノート。&lt;/p&gt;
+&lt;p&gt;ギャラリー公開と Marketplace 公開の分割も運用上成熟している。チームには、公式リリースのセマンティクスを持たない迅速な検証ビルドのための場所が必要である。すべてを直接 Marketplace にプッシュすることは摩擦が大きく、リスクのある近道を助長する。&lt;/p&gt;
+&lt;h3 id="拡張チームのための強力なリリースパターン"&gt;拡張チームのための強力なリリースパターン&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;プルリクエストと main コミット時には&lt;/strong&gt;、CI VSIX アーティファクトを生成し、テスター向けにギャラリーに公開する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;タグ付きリリース時には&lt;/strong&gt;、署名され検証されたパッケージを Marketplace に公開する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;トークン処理は最小限に&lt;/strong&gt;、専用シークレットと最小特権スコープを使用する。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;私の意見を明確に述べる:&lt;strong&gt;拡張エコシステムは、アプリエコシステムに比べて CI 規律で遅れている&lt;/strong&gt;。なぜなら、小規模チームは手動ワークフローが管理可能だと想定するからだ。それらは管理可能だが、そうでなくなる瞬間が来る。ひとつの慌てたパッチ、ひとつの壊れたパッケージ、ひとつの忘れられたマニフェスト更新で、信頼は低下する。&lt;/p&gt;
+&lt;p&gt;これらの再利用可能アクションが有用なのは、繰り返されるリリースロジックを一度エンコードし、チームがパッケージングの仕組みではなく拡張品質に集中できるようにするからである。&lt;/p&gt;
+&lt;p&gt;それでもエンジニアリング判断は必要である。Marketplace 公開は品質チェックの後ろにゲートし、公開マニフェストは監査済みリリースアーティファクトとして扱うべきである。しかし、ベースラインパイプラインの複雑さは、手動のみのリリースがほとんど技術負債となるほど低くなった。&lt;/p&gt;
+&lt;p&gt;拡張開発をリードしているなら、&lt;strong&gt;これを今すぐ全リポジトリで標準化せよ&lt;/strong&gt;。より良いトレーサビリティ、より簡単なオンボーディング、そしてより少ない一人リリースボトルネックを得られる。&lt;/p&gt;
+&lt;h3 id="推奨ロールアウト"&gt;推奨ロールアウト&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ひとつの拡張でビルドとギャラリー公開から始める。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;マニフェスト-ソースの規約を検証した後、バージョンスタンピングを導入する。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;シークレット管理とリリースゲートが整ってから Marketplace 公開を追加する。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これは DevOps ファッションを追うことではない。ツールをインストールし、更新が正常に機能することを期待する人々のための信頼性に関するものである。&lt;/p&gt;
+&lt;p&gt;安定した拡張エコシステムは、安定したアプリケーションと同じ方法で構築される: 人間の推測を取り除く、退屈で反復可能な自動化である。&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure App Service | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/azure-app-service/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 05 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/azure-app-service/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL MCP Server 在 Azure App Service 上运行 — 无需容器</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</link><pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</guid><description>SQL MCP Server 现在可以在 Azure App Service 上运行，无需 Docker 或 Kubernetes。这对于构建与 SQL 数据库通信的 AI 代理的 .NET 开发者意味着什么。</description><content:encoded>&lt;p&gt;&lt;em&gt;本文已自动翻译。要查看原始版本，请&lt;a href="https://thedotnetblog.com/zh/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/"&gt;点击此处&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;老实说：每次在教程中看到&amp;quot;需要容器&amp;quot;，我内心都会叹一口气。容器很棒——直到你的团队没有容器策略，一个看似简单的功能突然被意料之外的编排复杂性阻挡。&lt;/p&gt;
+&lt;p&gt;这就是为什么这个让我眼前一亮。SQL MCP Server 现在可以在 Azure App Service 上运行——无需 Docker，无需 Kubernetes，只需相同的 Data API Builder（DAB）配置文件，通过 MCP、REST 和 GraphQL 公开你的 SQL 数据库。&lt;/p&gt;
+&lt;h2 id="什么是-sql-mcp-server"&gt;什么是 SQL MCP Server？&lt;/h2&gt;
+&lt;p&gt;如果你还不了解，简单介绍一下。SQL MCP Server 位于你的 AI 代理和 SQL 数据库之间。它不是让代理直接访问数据库（这是个糟糕的想法），而是将你的表和视图作为带有定义权限的实体抽象层公开。&lt;/p&gt;
+&lt;p&gt;它构建在 &lt;a href="https://learn.microsoft.com/zh-cn/azure/data-api-builder/"&gt;Data API Builder&lt;/a&gt; 之上，这意味着单个配置文件同时管理 MCP、REST 和 GraphQL。你的代理与 MCP 端点通信，传统应用与 REST 或 GraphQL 通信。相同的配置，相同的运行时，不同的接口。&lt;/p&gt;
+&lt;p&gt;这真的很有用——你不需要维护两个独立的 API 层。&lt;/p&gt;
+&lt;h2 id="容器问题及解决方案"&gt;容器问题（及解决方案）&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server 最初的部署模型是容器。这在很多团队中运行良好，但并非所有团队都适用。许多 .NET 团队标准化使用 Azure App Service 或虚拟机。仅仅为了公开 SQL 端点而需要容器运行时，增加了没有人要求的摩擦。&lt;/p&gt;
+&lt;p&gt;新的教程展示了如何完全跳过容器。一切都通过 &lt;code&gt;dab start&lt;/code&gt; 命令运行，作为标准的 .NET 8 Web 进程托管在 App Service 上。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 安装 Data API Builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet tool install microsoft.dataapibuilder --prerelease -g
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 初始化配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --host-mode Development --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;SQL_CONNECTION_STRING&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 添加实体&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add products --source dbo.products --permissions &lt;span class="s2"&gt;&amp;#34;authenticated:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 配置 App Service 认证提供程序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab configure --runtime.host.authentication.provider AppService
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 启动服务器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此时，你在 &lt;code&gt;/mcp&lt;/code&gt; 有 MCP，同一进程提供 REST 和 GraphQL，没有任何东西运行在容器中。&lt;/p&gt;
+&lt;h2 id="无需共享-api-密钥的身份验证"&gt;无需共享 API 密钥的身份验证&lt;/h2&gt;
+&lt;p&gt;这是我最欣赏的部分。部署到 App Service 时，你将 Microsoft Entra ID 配置为身份验证提供程序。配置文件中没有共享密钥，不需要轮换 API 密钥。&lt;/p&gt;
+&lt;p&gt;连接字符串保留在 App Service 环境变量中（不在 &lt;code&gt;dab-config.json&lt;/code&gt; 中），MCP 端点通过平台身份验证保护。如果你的 Azure 工作负载已经与 Entra ID 对齐，这将自然融入。&lt;/p&gt;
+&lt;p&gt;本地开发时，切换到 &lt;code&gt;Simulator&lt;/code&gt; 模式和 STDIO 传输。部署前切换回 &lt;code&gt;AppService&lt;/code&gt; 模式。干净且明确。&lt;/p&gt;
+&lt;h2 id="部署到-app-service"&gt;部署到 App Service&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az appservice plan create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --sku B1 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --is-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --plan &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --runtime &lt;span class="s2"&gt;&amp;#34;DOTNETCORE:8.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp config &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --startup-file &lt;span class="s2"&gt;&amp;#34;dab start&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后使用你的团队已经使用的代码部署方法部署你的 DAB 项目。关键细节：这是&lt;strong&gt;代码&lt;/strong&gt;部署，不是容器部署。&lt;/p&gt;
+&lt;h2 id="为什么这对-net-开发者很重要"&gt;为什么这对 .NET 开发者很重要&lt;/h2&gt;
+&lt;p&gt;如果你在 .NET 中构建 AI 代理，你的代理最终需要与数据库通信。SQL MCP Server 提供了一种结构化的方式来实现这一点，无需暴露原始连接字符串。&lt;/p&gt;
+&lt;p&gt;查看&lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-app-service/"&gt;原始博客文章&lt;/a&gt;和 &lt;a href="https://github.com/Azure-Samples/SQL-MCP-NoContainer"&gt;GitHub 示例仓库&lt;/a&gt;的完整教程。&lt;/p&gt;
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;p&gt;App Service 上的 SQL MCP Server 是 .NET 团队的实用选择，无需容器策略即可为代理提供结构化的 SQL 数据访问。试试看——你的代理会很感激清晰的 API 接口。&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Data API Builder | The .NET Blog</title><link>https://thedotnetblog.com/it/tags/data-api-builder/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>it</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Wed, 22 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/it/tags/data-api-builder/index.xml" rel="self" type="application/rss+xml"/><item><title>La Vera Frontiera per l'SQL Agentico: Verificabilità con OBO in SQL MCP Server</title><link>https://thedotnetblog.com/it/news/emiliano-montesdeoca/sql-mcp-obo-audit-frontier/</link><pubDate>Wed, 22 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/it/news/emiliano-montesdeoca/sql-mcp-obo-audit-frontier/</guid><description>L'autenticazione On-Behalf-Of in Data API builder più SQL MCP Server è una tappa di governance importante perché Azure SQL può finalmente verificare l'umano dietro un'azione di un agente.</description><content:encoded>&lt;p&gt;C&amp;rsquo;è una verità dolorosa nei progetti AI enterprise: molti team sono ossessionati dalla qualità del modello e ignorano la responsabilità. Quando un agente scrive o legge dati di produzione, la prima domanda nella revisione dell&amp;rsquo;incidente non è &amp;ldquo;la risposta era buona?&amp;rdquo; È &amp;ldquo;chi ha effettivamente fatto questo?&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Fonte originale: &lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-obo-auth/"&gt;https://devblogs.microsoft.com/azure-sql/sql-mcp-server-obo-auth/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Ecco perché il supporto OBO in Data API builder 2.0 con SQL MCP Server è più importante di quanto sembri. Gli approcci con username/password e identità gestita funzionano ancora operativamente, ma entrambi collassano l&amp;rsquo;identità nel confine del servizio. I log mostrano l&amp;rsquo;app o il middleware, non l&amp;rsquo;origine della richiesta umana. Questo è accettabile per automazione semplice. Non è accettabile per workflow agentici regolamentati.&lt;/p&gt;
+&lt;p&gt;Con OBO, SQL autentica il &lt;strong&gt;contesto utente delegato&lt;/strong&gt;, non l&amp;rsquo;identità dell&amp;rsquo;host dello strumento. Questo ti dà un modello di audit fondamentalmente migliore: principale utente, azione, contesto dell&amp;rsquo;istruzione e identificatore dell&amp;rsquo;app di livello intermedio insieme. Ottieni tracciabilità senza perdere la superficie di controllo degli strumenti MCP e delle autorizzazioni delle entità DAB.&lt;/p&gt;
+&lt;p&gt;La mia opinione è ferma qui: se il tuo agente può toccare dati SQL sensibili, OBO dovrebbe essere la tua architettura predefinita, non un compito di hardening opzionale. La configurazione è più complessa, ma il debito di identità viene sempre pagato dopo, di solito durante incidenti di sicurezza, audit di conformità o escalation esecutive.&lt;/p&gt;
+&lt;h3 id="guida-pratica-allimplementazione"&gt;Guida pratica all&amp;rsquo;implementazione&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Inizia validando il flusso di identità&lt;/strong&gt; con una vista &amp;ldquo;WhoAmI&amp;rdquo; minima e controlli automatizzati nei test di integrazione. Se il principale SQL non corrisponde all&amp;rsquo;utente autenticato, fermati e correggi prima di spedire.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Collega query Log Analytics&lt;/strong&gt; per SQLSecurityAuditEvents nei tuoi dashboard SOC e attiva alert per azioni ad alto rischio avviate attraverso percorsi OBO.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Allinea RBAC e autorizzazioni DAB&lt;/strong&gt; in modo che l&amp;rsquo;identità a livello utente e l&amp;rsquo;autorizzazione a livello di azione rimangano coerenti end-to-end.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Un punto di design sottile ma importante nell&amp;rsquo;annuncio è il comportamento della cache. DAB blocca esplicitamente la memorizzazione nella cache delle risposte quando l&amp;rsquo;auth delegato dall&amp;rsquo;utente è abilitato. Quel compromesso è corretto. Trucchi di performance che possono far trapelare risultati con ambito utente non ne valgono la pena in ambienti multi-tenant o regolamentati.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SQL MCP Server più OBO&lt;/strong&gt; è l&amp;rsquo;inizio di un pattern maturo: agenti come operatori controllati, utenti come principali responsabili, piani dati come sistemi verificabili. Se la tua architettura non può rispondere &amp;ldquo;chi ha fatto questo&amp;rdquo; con fiducia, non è AI pronta per la produzione, non importa quanto sia raffinata la demo.&lt;/p&gt;</content:encoded></item><item><title>I Percorsi Personalizzati di Data API Builder Ti Permettono di Progettare API per Umani, Non per Tabelle</title><link>https://thedotnetblog.com/it/news/emiliano-montesdeoca/data-api-builder-custom-paths-domain-first/</link><pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/it/news/emiliano-montesdeoca/data-api-builder-custom-paths-domain-first/</guid><description>I percorsi REST composti in DAB sono una piccola funzionalità con un grande impatto architetturale per il design API orientato al dominio.</description><content:encoded>&lt;p&gt;Fonte originale: &lt;a href="https://devblogs.microsoft.com/azure-sql/data-api-builder-custom-rest-paths/"&gt;Compose your API surface with Data API builder custom paths&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Il nuovo supporto per &lt;strong&gt;percorsi REST composti&lt;/strong&gt; in Data API Builder potrebbe sembrare un miglioramento di configurazione minore, ma in realtà risolve una tensione di design API di vecchia data: la topologia del database che si riversa nel design degli endpoint pubblici.&lt;/p&gt;
+&lt;p&gt;Le route basate su entità predefinite sono ottime per iniziare velocemente. Sono spesso sbagliate per API di prodotto a lungo termine. I sistemi reali hanno bisogno di strutture di route che corrispondano ai concetti di business, ai confini di proprietà e ai modelli mentali dei consumatori.&lt;/p&gt;
+&lt;p&gt;Ecco perché questo cambiamento di DAB è importante. Puoi mantenere la comodità dell&amp;rsquo;API generata mentre presenti una superficie domain-first più pulita.&lt;/p&gt;
+&lt;p&gt;La mia opinione è semplice: &lt;strong&gt;se la struttura del tuo percorso API rispecchia i nomi grezzi delle tabelle in produzione&lt;/strong&gt;, di solito stai ottimizzando per la comodità del backend a scapito della chiarezza del client.&lt;/p&gt;
+&lt;p&gt;Con i percorsi personalizzati, i team possono modellare confini migliori, come superfici specifiche per vendite, fatturazione, supporto o partner. Questo non sostituisce una corretta governance API, ma dà agli utenti di DAB un modo pratico per allineare il design delle route con il linguaggio di prodotto.&lt;/p&gt;
+&lt;h3 id="guida-pratica-per-i-team-che-adottano-questa-funzionalità"&gt;Guida pratica per i team che adottano questa funzionalità&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Definisci una politica di denominazione&lt;/strong&gt; prima di aggiungere percorsi ad hoc. Sottosegmenti inconsistenti diventano zavorra a lungo termine.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mappa gli endpoint a contesti delimitati&lt;/strong&gt;, non a organigrammi. I team cambiano; la semantica del dominio dovrebbe essere stabile.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tratta la struttura del percorso come parte della tua strategia di versioning&lt;/strong&gt; e documenta esplicitamente le breaking changes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Valida il comportamento dell&amp;rsquo;autorizzazione&lt;/strong&gt; lungo le strutture di percorso personalizzate in modo che la chiarezza delle route sia abbinata alla chiarezza della sicurezza.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ciò che apprezzo in DAB in generale è il &lt;strong&gt;modello di leva&lt;/strong&gt;: ottieni paginazione, filtraggio, proiezione e altri meccanismi di endpoint senza scrivere codice controller ripetitivo. I percorsi personalizzati rendono quella leva più pronta per la produzione riducendo una delle maggiori obiezioni degli architetti API.&lt;/p&gt;
+&lt;p&gt;C&amp;rsquo;è un &lt;strong&gt;avvertimento&lt;/strong&gt;. Una migliore composizione dei percorsi può tentare i team a esporre troppo troppo velocemente perché la generazione sembra facile. I guardrail contano ancora: mantieni l&amp;rsquo;esposizione delle entità deliberata, applica le policy centralmente ed evita di costruire contratti pubblici accidentali da esperimenti di schema interni.&lt;/p&gt;
+&lt;p&gt;Per le organizzazioni .NET sotto pressione di delivery, questa funzionalità è uno sblocco di produttività se usata con disciplina. Puoi muoverti più velocemente dei livelli API artigianali preservando comunque una superficie di endpoint coerente e business-friendly.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;In sintesi:&lt;/strong&gt; i percorsi personalizzati di DAB non riguardano l&amp;rsquo;abbellimento delle URL. Riguardano &lt;strong&gt;recuperare l&amp;rsquo;intenzione del design API&lt;/strong&gt; mantenendo l&amp;rsquo;efficienza operativa degli endpoint generati.&lt;/p&gt;</content:encoded></item><item><title>L'estensione MSSQL per VS Code sta diventando silenziosamente una piattaforma molto più grande</title><link>https://thedotnetblog.com/it/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/</link><pubDate>Tue, 19 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/it/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/</guid><description>L'ultimo aggiornamento dell'estensione MSSQL aggiunge provisioning di Azure SQL, progettazione dello schema assistita da Copilot, Data API builder e notebook. La parte interessante è quanta parte del lavoro sui database può ora restare dentro VS Code.</description><content:encoded>&lt;p&gt;&lt;em&gt;Questo articolo è stato tradotto automaticamente. Per la versione originale, &lt;a href="https://thedotnetblog.com/it/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/"&gt;clicca qui&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;L&amp;rsquo;estensione MSSQL per VS Code è cresciuta da tempo, ma questo ultimo aggiornamento rende la direzione molto più chiara.&lt;/p&gt;
+&lt;p&gt;Non è più solo «connetti e lancia qualche query».&lt;/p&gt;
+&lt;p&gt;Con il &lt;strong&gt;provisioning di Azure SQL&lt;/strong&gt;, &lt;strong&gt;Schema Designer con Copilot&lt;/strong&gt;, i &lt;strong&gt;SQL Notebooks&lt;/strong&gt; e &lt;strong&gt;Data API builder&lt;/strong&gt; tutti spinti in avanti in un&amp;rsquo;unica release, l&amp;rsquo;estensione sta diventando un ambiente di lavoro molto più completo per lo sviluppo centrato sui database.&lt;/p&gt;
+&lt;h2 id="il-richiamo-pratico-è-il-provisioning-direttamente-dalleditor"&gt;Il richiamo pratico è il provisioning direttamente dall&amp;rsquo;editor&lt;/h2&gt;
+&lt;p&gt;L&amp;rsquo;articolo sorgente dice che ora puoi creare un database cloud completamente gestito «direttamente dal tuo editor e senza costi» usando il tier gratuito.&lt;/p&gt;
+&lt;p&gt;È il tipo di funzionalità che sembra piccola finché non ti rendi conto di quanta frizione di configurazione elimina.&lt;/p&gt;
+&lt;p&gt;Per molti sviluppatori, la parte fastidiosa delle sperimentazioni pesanti sui dati non è SQL in sé. È il gap di ambiente tra:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;idea&lt;/li&gt;
+&lt;li&gt;database&lt;/li&gt;
+&lt;li&gt;schema&lt;/li&gt;
+&lt;li&gt;API&lt;/li&gt;
+&lt;li&gt;backend testabile&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Se quel gap si accorcia dentro un solo tool, l&amp;rsquo;intero workflow diventa più attraente.&lt;/p&gt;
+&lt;h2 id="ecco-come-appare-un-inner-loop-più-forte-per-il-lavoro-sui-dati"&gt;Ecco come appare un inner loop più forte per il lavoro sui dati&lt;/h2&gt;
+&lt;p&gt;Quello che mi piace di questa release è che mantiene più parte del workflow del database nello stesso posto:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;provisioning del database&lt;/li&gt;
+&lt;li&gt;progettazione dello schema&lt;/li&gt;
+&lt;li&gt;revisione delle modifiche&lt;/li&gt;
+&lt;li&gt;generazione di script ORM&lt;/li&gt;
+&lt;li&gt;esposizione di API&lt;/li&gt;
+&lt;li&gt;test degli endpoint&lt;/li&gt;
+&lt;li&gt;documentazione e query tramite notebook&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Questa è una storia molto più convincente che trattare SQL come uno strumento laterale scollegato nello stack.&lt;/p&gt;
+&lt;h2 id="il-flusso-di-lavoro-dello-schema-assistito-da-copilot-è-dove-il-valore-dellai-sembra-reale"&gt;Il flusso di lavoro dello schema assistito da Copilot è dove il valore dell&amp;rsquo;AI sembra reale&lt;/h2&gt;
+&lt;p&gt;Le aggiunte al designer dello schema sono particolarmente interessanti perché sembrano trovare un buon equilibrio.&lt;/p&gt;
+&lt;p&gt;Il valore non è «l&amp;rsquo;AI progetta il tuo modello dati e tu ti fidi ciecamente».&lt;/p&gt;
+&lt;p&gt;Il valore è:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;punti di partenza più rapidi&lt;/li&gt;
+&lt;li&gt;revisione visiva&lt;/li&gt;
+&lt;li&gt;tracciamento delle modifiche&lt;/li&gt;
+&lt;li&gt;output orientato alla migrazione&lt;/li&gt;
+&lt;li&gt;controlli espliciti accetta/annulla&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;È un workflow AI molto più sano di una generazione automatica completa senza un percorso di ispezione.&lt;/p&gt;
+&lt;p&gt;E per il lavoro sui database, la revisabilità conta moltissimo.&lt;/p&gt;
+&lt;h2 id="data-api-builder-è-un-moltiplicatore-silenzioso"&gt;Data API builder è un moltiplicatore silenzioso&lt;/h2&gt;
+&lt;p&gt;L&amp;rsquo;altra funzionalità che non ignorerei è l&amp;rsquo;integrazione di Data API builder.&lt;/p&gt;
+&lt;p&gt;Se puoi passare dallo schema a:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;REST&lt;/li&gt;
+&lt;li&gt;GraphQL&lt;/li&gt;
+&lt;li&gt;endpoint MCP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;all&amp;rsquo;interno dello stesso ambiente, crei un percorso molto efficiente per prototipi backend e tool interni.&lt;/p&gt;
+&lt;p&gt;Questo non sostituisce un&amp;rsquo;ingegneria backend più profonda. Ma accorcia moltissimo il percorso dall&amp;rsquo;idea di database a un&amp;rsquo;interfaccia funzionante.&lt;/p&gt;
+&lt;h2 id="la-mia-lettura"&gt;La mia lettura&lt;/h2&gt;
+&lt;p&gt;Questa release fa sembrare l&amp;rsquo;estensione MSSQL più una piccola piattaforma dentro VS Code che un semplice add-on.&lt;/p&gt;
+&lt;p&gt;Per gli sviluppatori che costruiscono API, strumenti dati, tool di amministrazione o prototipi basati su SQL, è un cambiamento significativo.&lt;/p&gt;
+&lt;p&gt;E se Microsoft continuerà a stringere questo loop, l&amp;rsquo;estensione diventerà molto più strategicamente utile di quanto molte persone pensino ancora.&lt;/p&gt;
+&lt;p&gt;Articolo originale: &lt;a href="https://devblogs.microsoft.com/azure-sql/vscode-mssql-june-2026/"&gt;MSSQL Extension for VS Code: Azure SQL Database Provisioning and More&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>SQL MCP Server su Azure App Service — Senza Container</title><link>https://thedotnetblog.com/it/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</link><pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/it/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</guid><description>Il SQL MCP Server ora può girare su Azure App Service senza Docker né Kubernetes. Cosa significa per gli sviluppatori .NET che costruiscono agenti AI che parlano con database SQL.</description><content:encoded>&lt;p&gt;&lt;em&gt;Questo articolo è stato tradotto automaticamente. Per la versione originale, &lt;a href="https://thedotnetblog.com/it/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/"&gt;clicca qui&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Diciamoci la verità: ogni volta che vedo &amp;ldquo;richiede un container&amp;rdquo; in un tutorial, una piccola parte di me sospira. I container sono fantastici — finché il tuo team non ha una strategia per i container, e improvvisamente una funzionalità che sembrava semplice è bloccata da complessità di orchestrazione che nessuno aveva pianificato.&lt;/p&gt;
+&lt;p&gt;Ecco perché questo mi ha colpito. Il SQL MCP Server ora può girare su Azure App Service — senza Docker, senza Kubernetes, solo con la stessa configurazione di Data API Builder (DAB) che espone il tuo database SQL tramite MCP, REST e GraphQL.&lt;/p&gt;
+&lt;h2 id="cosè-il-sql-mcp-server"&gt;Cos&amp;rsquo;è il SQL MCP Server?&lt;/h2&gt;
+&lt;p&gt;Contesto rapido se non lo conosci ancora. Il SQL MCP Server si trova tra il tuo agente AI e il tuo database SQL. Invece di dare all&amp;rsquo;agente accesso diretto al database (un&amp;rsquo;idea pessima), espone le tue tabelle e view come uno strato di astrazione — entità con permessi definiti.&lt;/p&gt;
+&lt;p&gt;È costruito su &lt;a href="https://learn.microsoft.com/it-it/azure/data-api-builder/"&gt;Data API Builder&lt;/a&gt;, il che significa che un singolo file di configurazione gestisce MCP &lt;em&gt;e&lt;/em&gt; REST &lt;em&gt;e&lt;/em&gt; GraphQL contemporaneamente. Il tuo agente parla con l&amp;rsquo;endpoint MCP. La tua applicazione tradizionale parla con REST o GraphQL. Stessa config, stesso runtime, superfici diverse.&lt;/p&gt;
+&lt;p&gt;Questo è genuinamente utile. Non stai mantenendo due strati API separati.&lt;/p&gt;
+&lt;h2 id="il-problema-del-container-e-la-soluzione"&gt;Il Problema del Container (e la Soluzione)&lt;/h2&gt;
+&lt;p&gt;Il modello di deployment originale del SQL MCP Server usava i container. Funziona bene in molti team — ma non in tutti. Molti team .NET standardizzano su Azure App Service o VM. Richiedere un runtime di container solo per esporre un endpoint SQL aggiunge attrito che nessuno ha chiesto.&lt;/p&gt;
+&lt;p&gt;Il nuovo walkthrough mostra come saltare completamente il container. Tutto funziona con un comando &lt;code&gt;dab start&lt;/code&gt;, ospitato su App Service come un processo web .NET 8 standard.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Installare Data API Builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet tool install microsoft.dataapibuilder --prerelease -g
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Inizializzare la configurazione&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --host-mode Development --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;SQL_CONNECTION_STRING&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Aggiungere un&amp;#39;entità&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add products --source dbo.products --permissions &lt;span class="s2"&gt;&amp;#34;authenticated:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Configurare il provider di autenticazione App Service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab configure --runtime.host.authentication.provider AppService
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Avviare il server&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A questo punto hai MCP su &lt;code&gt;/mcp&lt;/code&gt;, REST e GraphQL dallo stesso processo, e niente che gira in un container.&lt;/p&gt;
+&lt;h2 id="autenticazione-senza-chiavi-api-condivise"&gt;Autenticazione Senza Chiavi API Condivise&lt;/h2&gt;
+&lt;p&gt;Questa è la parte che apprezzo di più. Quando fai il deploy su App Service, configuri Microsoft Entra ID come provider di autenticazione. Nessun segreto condiviso nei file di configurazione, nessuna chiave API da ruotare.&lt;/p&gt;
+&lt;p&gt;La stringa di connessione rimane in una variabile d&amp;rsquo;ambiente di App Service (non in &lt;code&gt;dab-config.json&lt;/code&gt;), e l&amp;rsquo;endpoint MCP è protetto dall&amp;rsquo;autenticazione della piattaforma. Se sei già allineato con Entra ID nei tuoi workload Azure, questo si integra naturalmente.&lt;/p&gt;
+&lt;p&gt;Per lo sviluppo locale, passi alla modalità &lt;code&gt;Simulator&lt;/code&gt; e al trasporto STDIO. Torni alla modalità &lt;code&gt;AppService&lt;/code&gt; prima del deployment. Pulito ed esplicito.&lt;/p&gt;
+&lt;h2 id="deploy-su-app-service"&gt;Deploy su App Service&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az appservice plan create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --sku B1 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --is-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --plan &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --runtime &lt;span class="s2"&gt;&amp;#34;DOTNETCORE:8.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp config &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --startup-file &lt;span class="s2"&gt;&amp;#34;dab start&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Poi fai il deploy del tuo progetto DAB usando il metodo di deployment del codice che il tuo team già utilizza. Il dettaglio chiave: è un deployment di &lt;strong&gt;codice&lt;/strong&gt;, non di container.&lt;/p&gt;
+&lt;h2 id="perché-importa-per-gli-sviluppatori-net"&gt;Perché Importa per gli Sviluppatori .NET&lt;/h2&gt;
+&lt;p&gt;Se stai costruendo agenti AI in .NET, prima o poi il tuo agente dovrà comunicare con un database. Il SQL MCP Server ti dà un modo strutturato per farlo senza esporre stringhe di connessione grezze.&lt;/p&gt;
+&lt;p&gt;Consulta il tutorial completo nel &lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-app-service/"&gt;post originale&lt;/a&gt; e il &lt;a href="https://github.com/Azure-Samples/SQL-MCP-NoContainer"&gt;repository di esempio su GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="conclusione"&gt;Conclusione&lt;/h2&gt;
+&lt;p&gt;Il SQL MCP Server su App Service è una solida opzione pragmatica per i team .NET che vogliono dare ai propri agenti accesso strutturato ai dati SQL senza una strategia di container. Provalo — i tuoi agenti apprezzeranno la superficie API pulita.&lt;/p&gt;</content:encoded></item><item><title>SQL MCP Server — Il modo giusto per dare accesso ai database agli agenti AI</title><link>https://thedotnetblog.com/it/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/it/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>SQL MCP Server di Data API builder offre agli agenti AI un accesso sicuro e deterministico ai database senza esporre schemi o affidarsi a NL2SQL. RBAC, cache, supporto multi-database — tutto integrato.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Questo post è stato tradotto automaticamente. Per la versione originale, &lt;a href="https://thedotnetblog.com/it/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;clicca qui&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Siamo onesti: la maggior parte dei server MCP per database disponibili oggi sono spaventosi. Prendono una query in linguaggio naturale, generano SQL al volo e lo eseguono contro i tuoi dati di produzione. Cosa potrebbe andare storto? (Tutto. Tutto potrebbe andare storto.)&lt;/p&gt;
+&lt;p&gt;Il team di Azure SQL ha appena &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;presentato SQL MCP Server&lt;/a&gt;, e adotta un approccio fondamentalmente diverso. Costruito come funzionalità di Data API builder (DAB) 2.0, dà agli agenti AI un accesso strutturato e deterministico alle operazioni sul database — senza NL2SQL, senza esporre il tuo schema, e con RBAC completo ad ogni passaggio.&lt;/p&gt;
+&lt;h2 id="perché-non-nl2sql"&gt;Perché non NL2SQL?&lt;/h2&gt;
+&lt;p&gt;Questa è la decisione di design più interessante. I modelli non sono deterministici, e le query complesse sono le più propense a produrre errori sottili. Le query esatte che gli utenti sperano che l&amp;rsquo;AI possa generare sono anche quelle che richiedono più scrutinio quando prodotte in modo non deterministico.&lt;/p&gt;
+&lt;p&gt;Invece, SQL MCP Server usa un approccio &lt;strong&gt;NL2DAB&lt;/strong&gt;. L&amp;rsquo;agente lavora con il livello di astrazione delle entità di Data API builder e il suo query builder integrato per produrre T-SQL accurato e ben formato in modo deterministico. Stesso risultato per l&amp;rsquo;utente, ma senza il rischio di JOIN allucinati o esposizione accidentale di dati.&lt;/p&gt;
+&lt;h2 id="sette-strumenti-non-settecento"&gt;Sette strumenti, non settecento&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server espone esattamente sette strumenti DML, indipendentemente dalle dimensioni del database:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — scoprire entità e operazioni disponibili&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — inserire righe&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — interrogare tabelle e viste&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — modificare righe&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — rimuovere righe&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — eseguire stored procedure&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — query di aggregazione&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Questo è intelligente perché le finestre di contesto sono lo spazio di pensiero dell&amp;rsquo;agente. Inondarle con centinaia di definizioni di strumenti lascia meno spazio per il ragionamento. Sette strumenti fissi mantengono l&amp;rsquo;agente concentrato sul &lt;em&gt;pensare&lt;/em&gt; piuttosto che sul &lt;em&gt;navigare&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Ogni strumento può essere abilitato o disabilitato individualmente:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;runtime&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;path&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dml-tools&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;describe-entities&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;create-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;read-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;update-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;delete-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;execute-entity&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;aggregate-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="iniziare-in-tre-comandi"&gt;Iniziare in tre comandi&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --database-type mssql &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --source dbo.Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ecco un SQL MCP Server funzionante che espone la tua tabella Customers. Il livello di astrazione delle entità significa che puoi creare alias per nomi e colonne, limitare i campi per ruolo e controllare esattamente cosa vedono gli agenti — senza esporre dettagli interni dello schema.&lt;/p&gt;
+&lt;h2 id="la-storia-della-sicurezza-è-solida"&gt;La storia della sicurezza è solida&lt;/h2&gt;
+&lt;p&gt;Qui è dove la maturità di Data API builder ripaga:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;RBAC ad ogni livello&lt;/strong&gt; — ogni entità definisce quali ruoli possono leggere, creare, aggiornare o eliminare, e quali campi sono visibili&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Integrazione con Azure Key Vault&lt;/strong&gt; — stringhe di connessione e segreti gestiti in modo sicuro&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Microsoft Entra + OAuth personalizzato&lt;/strong&gt; — autenticazione di livello produzione&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Content Security Policy&lt;/strong&gt; — gli agenti interagiscono attraverso un contratto controllato, non SQL grezzo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;L&amp;rsquo;astrazione dello schema è particolarmente importante. I nomi interni delle tue tabelle e colonne non vengono mai esposti all&amp;rsquo;agente. Definisci entità, alias e descrizioni che hanno senso per l&amp;rsquo;interazione AI — non il tuo diagramma ERD del database.&lt;/p&gt;
+&lt;h2 id="multi-database-e-multi-protocollo"&gt;Multi-database e multi-protocollo&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server supporta Microsoft SQL, PostgreSQL, Azure Cosmos DB e MySQL. E poiché è una funzionalità di DAB, ottieni endpoint REST, GraphQL e MCP simultaneamente dalla stessa configurazione. Stesse definizioni di entità, stesse regole RBAC, stessa sicurezza — su tutti e tre i protocolli.&lt;/p&gt;
+&lt;p&gt;L&amp;rsquo;auto-configurazione in DAB 2.0 può persino ispezionare il tuo database e costruire la configurazione dinamicamente, se sei a tuo agio con meno astrazione per la prototipazione rapida.&lt;/p&gt;
+&lt;h2 id="la-mia-opinione"&gt;La mia opinione&lt;/h2&gt;
+&lt;p&gt;Ecco come dovrebbe funzionare l&amp;rsquo;accesso aziendale ai database per gli agenti AI. Non &amp;ldquo;hey LLM, scrivimi un po&amp;rsquo; di SQL e YOLO sulla produzione.&amp;rdquo; Invece: un livello di entità ben definito, generazione deterministica delle query, RBAC ad ogni passaggio, caching, monitoraggio e telemetria. È noioso nel miglior modo possibile.&lt;/p&gt;
+&lt;p&gt;Per gli sviluppatori .NET, la storia dell&amp;rsquo;integrazione è pulita — DAB è uno strumento .NET, l&amp;rsquo;MCP Server gira come container, e funziona con Azure SQL, che la maggior parte di noi sta già usando. Se stai costruendo agenti AI che hanno bisogno di accesso ai dati, inizia qui.&lt;/p&gt;
+&lt;h2 id="conclusione"&gt;Conclusione&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server è gratuito, open-source e gira ovunque. È l&amp;rsquo;approccio prescrittivo di Microsoft per dare agli agenti AI un accesso sicuro ai database. Consulta il &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;post completo&lt;/a&gt; e la &lt;a href="https://aka.ms/sql/mcp"&gt;documentazione&lt;/a&gt; per iniziare.&lt;/p&gt;</content:encoded></item></channel></rss>

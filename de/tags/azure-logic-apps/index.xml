@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure Logic Apps | The .NET Blog</title><link>https://thedotnetblog.com/de/tags/azure-logic-apps/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>de</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 23 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/de/tags/azure-logic-apps/index.xml" rel="self" type="application/rss+xml"/><item><title>Der integrierte Cosmos DB-Connector für Logic Apps ist relevanter, als es zunächst scheint</title><link>https://thedotnetblog.com/de/news/emiliano-montesdeoca/cosmosdb-logic-apps-built-in-connector-ga/</link><pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/de/news/emiliano-montesdeoca/cosmosdb-logic-apps-built-in-connector-ga/</guid><description>Der integrierte Azure Cosmos DB-Connector für Logic Apps Standard ist jetzt allgemein verfügbar. Der Hauptvorteil ist nicht nur Konnektivität, sondern geringere Latenz, Change-Feed-Unterstützung und ein saubererer Weg zu ereignisgesteuerten und KI-orientierten Workflows.</description><content:encoded>&lt;p&gt;Wenn Leute &amp;ldquo;Connector-Ankündigung&amp;rdquo; hören, ist es leicht anzunehmen, dass die Geschichte nebensächlich ist.&lt;/p&gt;
+&lt;p&gt;In diesem Fall verdient die Ankündigung mehr Anerkennung.&lt;/p&gt;
+&lt;p&gt;Der &lt;strong&gt;Azure Cosmos DB Built-in-Connector für Logic Apps Standard&lt;/strong&gt; ist jetzt allgemein verfügbar, und was ihn interessant macht, ist nicht nur, dass Logic Apps mit Cosmos DB sprechen kann. Es ist, dass die Integration nativer, leistungsfähiger und realistischer für ereignisgesteuerte Workflows wird.&lt;/p&gt;
+&lt;h2 id="warum-integriert-wichtig-ist"&gt;Warum integriert wichtig ist&lt;/h2&gt;
+&lt;p&gt;Der Unterschied zwischen verwalteten und integrierten Connectoren ist nicht nur Deployment-Trivia.&lt;/p&gt;
+&lt;p&gt;Die Ausführung im Prozess mit der Logic Apps-Laufzeit bedeutet:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;geringere Latenz&lt;/li&gt;
+&lt;li&gt;besserer Durchsatz&lt;/li&gt;
+&lt;li&gt;weniger externe Sprünge&lt;/li&gt;
+&lt;li&gt;eine sauberere Passform für hochvolumige oder reaktive Workflows&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Und wenn Sie &lt;strong&gt;Change-Feed-Trigger&lt;/strong&gt;, &lt;strong&gt;Bulk-Operationen&lt;/strong&gt;, &lt;strong&gt;Patch-Unterstützung&lt;/strong&gt; und &lt;strong&gt;Entra-ID-Authentifizierung&lt;/strong&gt; hinzufügen, beginnt der Connector wie etwas viel Ernsthafteres auszusehen als &amp;ldquo;einfache Workflow-Installation&amp;rdquo;.&lt;/p&gt;
+&lt;h2 id="der-ki-aspekt-ist-auch-real"&gt;Der KI-Aspekt ist auch real&lt;/h2&gt;
+&lt;p&gt;Die Diskussion des Beitrags über RAG-Pipelines, Embedding-Flows und Wissensdatenbank-Muster ließ dies für mich noch mehr hervorstechen.&lt;/p&gt;
+&lt;p&gt;Sobald Logic Apps und Cosmos DB so eng integriert sind, kann die Plattform unterstützen:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;reaktive Erfassungsflüsse&lt;/li&gt;
+&lt;li&gt;Dokumentenanreicherungspipelines&lt;/li&gt;
+&lt;li&gt;vektorbezogene Workflows&lt;/li&gt;
+&lt;li&gt;No-Code- oder Low-Code-Orchestrierung um KI-Komponenten&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Das macht den Connector für mehr als nur Integrationsspezialisten relevant.&lt;/p&gt;
+&lt;p&gt;Originalquelle: &lt;a href="https://devblogs.microsoft.com/cosmosdb/announcing-general-availability-of-the-azure-cosmos-db-built-in-connector-for-logic-apps-standard/"&gt;Announcing General Availability of the Azure Cosmos DB Built-in Connector for Logic Apps Standard&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

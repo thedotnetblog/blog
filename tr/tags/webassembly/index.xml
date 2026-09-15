@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>WebAssembly | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/webassembly/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 23 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/webassembly/index.xml" rel="self" type="application/rss+xml"/><item><title>Copilot Studio .NET 10 WebAssembly'ye Nasıl Geçti ve %20 Daha Hızlı Oldu</title><link>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</link><pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</guid><description>.NET 10 WASM iyileştirmeleri sadece yeni projeler için değil. Copilot Studio'nun .NET 8'den yükseltme sonrası ölçtükleri: otomatik parmak izi, varsayılan WasmStripILAfterAOT ve gerçek yürütme performans sayıları.</description><content:encoded>&lt;p&gt;Copilot Studio ekibi, tüm Blazor WASM geliştiricilerinin merak ettiği şeyi yaptı: bir üretim uygulamasını gerçekten .NET 8&amp;rsquo;den .NET 10&amp;rsquo;a yükseltti ve sonuçları ölçtü. Gönderi, nadir ve gerçekten yararlı olan belirli sayılar paylaşıyor.&lt;/p&gt;
+&lt;h2 id="yükseltme-sıkıcıydı-bu-iyi-bir-şey"&gt;Yükseltme Sıkıcıydı (Bu İyi Bir Şey)&lt;/h2&gt;
+&lt;p&gt;Hedef çerçeveyi güncellemek, paket referanslarını yenilemek, son değişiklikleri düzeltmek. Hepsi bu. .NET 10 derlemesi artık üretimde çalışıyor. Geçişin kendisi ilginç kısım değildi — .NET 10&amp;rsquo;daki değişiklikler ilginç.&lt;/p&gt;
+&lt;h2 id="otomatik-varlık-parmak-izi"&gt;Otomatik Varlık Parmak İzi&lt;/h2&gt;
+&lt;p&gt;Önceden, bir WASM uygulaması dağıtmak, önbellek temizleme için yayınlanan varlıkları SHA256 karmaları ile yeniden adlandırmak üzere özel komut dosyaları yazmak anlamına geliyordu. Copilot Studio&amp;rsquo;nun tam olarak bunu yapan bir PowerShell betiği vardı — dosyaları yeniden adlandırma, JavaScript yükleyicisine &lt;code&gt;integrity&lt;/code&gt; özelliklerini enjekte etme, her şeyi manuel olarak yönetme.&lt;/p&gt;
+&lt;p&gt;.NET 10&amp;rsquo;da tüm bunlar yerleşiktir. Yayınlanan varlıklar otomatik olarak parmak izi alınır, doğrudan &lt;code&gt;dotnet.js&lt;/code&gt;&amp;lsquo;den içe aktarılır ve manuel müdahale olmadan bütünlük doğrulaması yapılır. Ekip yeniden adlandırma betiğini sildi.&lt;/p&gt;
+&lt;p&gt;Kapsamda küçük değişiklik, karmaşıklıkta önemli azalma.&lt;/p&gt;
+&lt;h2 id="wasmstripilafteraot-artık-varsayılan-olarak-açık"&gt;WasmStripILAfterAOT Artık Varsayılan Olarak Açık&lt;/h2&gt;
+&lt;p&gt;.NET 8&amp;rsquo;de, AOT derlenmiş derlemelerden IL kaldırmak isteğe bağlıydı. .NET 10&amp;rsquo;da bu varsayılan. AOT derlemesinden sonra, orijinal IL bayt kodu çıktıdan kaldırılır — çalışma zamanında gerekli değildir ve onu korumak paket boyutunu gereksiz yere şişiriyordu.&lt;/p&gt;
+&lt;p&gt;Copilot Studio belirli bir optimizasyon kullanır: hem JIT motoru (hızlı başlangıç) hem de AOT motorunu (maksimum kararlı durum performansı) dağıtır, her ikisini paralel olarak yükler ve hazır olduğunda JIT&amp;rsquo;ten AOT&amp;rsquo;a geçiş yapar. Ayrıca iki motor arasında özdeş dosyaları tekilleştirir.&lt;/p&gt;
+&lt;p&gt;Yeni IL sıyırma davranışı, AOT derlemelerinin artık JIT karşılıklarıyla bit bit eşleşmediği anlamına gelir, bu nedenle daha az dosya tekilleştirilir:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.NET 8: 59 paylaşılan dosya&lt;/li&gt;
+&lt;li&gt;.NET 10: 22 paylaşılan dosya&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Net sonuç: AOT motoru için yaklaşık %15 daha büyük paket boyutu. AOT indirme hızlı LAN&amp;rsquo;da ~%6 daha yavaş, 4G&amp;rsquo;de ~%17 daha yavaş. Ancak tüm bunlar uygulama zaten etkileşimli olduktan sonra arka planda gerçekleşir.&lt;/p&gt;
+&lt;h2 id="performans-sayıları"&gt;Performans Sayıları&lt;/h2&gt;
+&lt;p&gt;Önemli olan kısım bu:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;İlk çağrıda &lt;strong&gt;~%20 daha hızlı&lt;/strong&gt; (soğuk yol)&lt;/li&gt;
+&lt;li&gt;Sonraki çağrılarda &lt;strong&gt;~%5 daha hızlı&lt;/strong&gt; (sıcak yol)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;İyileştirmeler, AOT derlenmiş kodun hakim olduğu büyük, karmaşık aracılarda — &amp;ldquo;büyük botlar&amp;quot;da en görünür. Daha basit iş akışları için kazanım daha küçüktür.&lt;/p&gt;
+&lt;h2 id="hâlâ-net-8deyseniz"&gt;Hâlâ .NET 8&amp;rsquo;deyseniz&lt;/h2&gt;
+&lt;p&gt;Geçiş hikayesi gerçekten basit: &lt;code&gt;&amp;lt;TargetFramework&amp;gt;&lt;/code&gt;&amp;lsquo;ü güncelleyin, paket referanslarını yenileyin, özel parmak izi komut dosyalarını kaldırın ve otomatik olarak &lt;code&gt;WasmStripILAfterAOT&lt;/code&gt;&amp;lsquo;tan yararlanacaksınız. AOT derliyorsanız, benzer performans kazanımları bekleyin.&lt;/p&gt;
+&lt;p&gt;Gönderiden bir not: .NET WASM çalışma zamanını bir &lt;code&gt;WebWorker&lt;/code&gt; içinde yüklüyorsanız, başlatırken &lt;code&gt;dotnetSidecar = true&lt;/code&gt; ayarlayın.&lt;/p&gt;
+&lt;p&gt;Orijinal gönderi: &lt;a href="https://devblogs.microsoft.com/dotnet/copilot-studio-dotnet-10-migration/"&gt;Copilot Studio gets faster with .NET 10 on WebAssembly&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

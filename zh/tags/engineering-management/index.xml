@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Engineering-Management | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/engineering-management/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/engineering-management/index.xml" rel="self" type="application/rss+xml"/><item><title>智能体置信指数应改变你接下来自动化的方向</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/agent-confidence-index-automation-boundaries/</link><pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/agent-confidence-index-automation-boundaries/</guid><description>数据显示，团队最信任智能体处理的是重复性技术杂务，而非高风险判断决策。</description><content:encoded>&lt;p&gt;原文来源：&lt;a href="https://www.microsoft.com/en-us/microsoft-cloud/blog/2026/06/29/the-2026-agent-confidence-index-where-300-builders-see-real-momentum/"&gt;The 2026 Agent Confidence Index: Where 300 builders see real momentum&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这份报告之所以有价值，是因为它用工作负载层面的置信信号取代了模糊的乐观情绪。信息很清晰：团队最信任智能体的领域是那些可预测、重复且可逆的工作。&lt;/p&gt;
+&lt;p&gt;这正是领导者应该&lt;strong&gt;优先投入&lt;/strong&gt;的地方。&lt;/p&gt;
+&lt;p&gt;自动生成报告、样板代码脚手架、运行监控和发布说明汇总虽然不华丽，但它们属于&lt;strong&gt;理想的委派场景&lt;/strong&gt;。这些任务认知负担高，而在有审查循环约束下，负面影响相对较低。&lt;/p&gt;
+&lt;p&gt;同样值得关注的是置信度仍然&lt;strong&gt;较低&lt;/strong&gt;的领域：系统耦合度高且不可逆影响范围大的任务——服务网格调优、数据库迁移策略和深度内存诊断，仍然需要经验丰富的人工监督。报告并未建议在这些领域止步不前，而是建议采用边界感知的协作方式。&lt;/p&gt;
+&lt;h3 id="我的看法"&gt;我的看法&lt;/h3&gt;
+&lt;p&gt;我的个人观点是，大多数组织的思考方式仍然是反的。他们问的是&amp;quot;智能体现在能做复杂工作吗？&amp;ldquo;更好的问题是&amp;quot;我们当前工作中的哪些部分，人类应该立刻停止手动操作？&amp;rdquo;&lt;/p&gt;
+&lt;h3 id="面向软件团队的实用采纳模式"&gt;面向软件团队的实用采纳模式&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;立即自动化&lt;/strong&gt;高量级、低风险的重复性任务。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;为每条自动化路径&lt;/strong&gt;配置质量信号和回滚机制。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;在高风险决策上保留明确的人工签核&lt;/strong&gt;，直到评估数据证明可以改变。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;报告将&lt;strong&gt;人在回路中&lt;/strong&gt;作为最高优先级的做法并不保守——而是成熟。负责任地扩展规模的团队将监督视为架构而非仪式。他们构建护栏、运行生命周期评估并审计漂移。&lt;/p&gt;
+&lt;p&gt;报告中还有一条值得关注的职业影响。随着智能体吸收重复性工作，工程价值的重心进一步转向系统判断力：选择边界、定义评估标准以及设计弹性工作流。能够塑造这些系统的高级工程师将拥有超比例的影响力。而早期学会监督和验证智能体输出的初级工程师，将比只记忆语法的人进步更快。&lt;/p&gt;
+&lt;p&gt;对于 .NET 团队来说，现在是时候&lt;strong&gt;创建一份自动化组合地图&lt;/strong&gt;：根据可逆性、业务影响和可观测性对内部工作流进行分类，然后按此顺序进行自动化。不要让新颖性决定优先级。&lt;/p&gt;
+&lt;p&gt;这份指数所传达的更广泛叙事充满希望，但也高要求。智能体带来的生产效率提升是真实的，但它们不会自动执行。那些将统一上下文、治理和纪律性评估相结合的组织将脱颖而出。跳过这些基础的组织只会规模化地制造噪音。&lt;/p&gt;
+&lt;p&gt;信心是通过一个任务一个任务赢得的。这不是限制——&lt;strong&gt;这是一张路线图。&lt;/strong&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

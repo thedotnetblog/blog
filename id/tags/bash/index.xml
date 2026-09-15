@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Bash | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/bash/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 29 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Intelligent Terminal 0.1.1 mulai menunjukkan seperti apa pengalaman shell asli AI bisa terlihat</title><link>https://thedotnetblog.com/id/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</link><pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</guid><description>Intelligent Terminal 0.1.1 menambahkan dukungan Bash dan WSL, alur /fix manual, dan kemampuan mengganti model secara langsung. Ini masih awal, tetapi arahnya semakin menarik bagi pengembang yang hidup di terminal.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Artikel ini telah diterjemahkan secara otomatis. Untuk versi aslinya, &lt;a href="https://thedotnetblog.com/id/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/"&gt;klik di sini&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Saya masih percaya bahwa AI di terminal adalah salah satu area pengalaman developer yang paling menjanjikan saat ini.&lt;/p&gt;
+&lt;p&gt;Itulah sebabnya &lt;strong&gt;Intelligent Terminal 0.1.1&lt;/strong&gt; lebih menonjol bagi saya daripada rilis titik biasa.&lt;/p&gt;
+&lt;p&gt;Pembaruan ini menambahkan:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;deteksi kesalahan Bash dan WSL&lt;/li&gt;
+&lt;li&gt;alur &lt;code&gt;/fix&lt;/code&gt; manual&lt;/li&gt;
+&lt;li&gt;penggantian model secara langsung&lt;/li&gt;
+&lt;li&gt;panel agen yang lebih dapat dikustomisasi&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Kombinasi ini mulai membuat produknya terasa bukan seperti eksperimen semata, melainkan seperti pengalaman shell yang terus berkembang.&lt;/p&gt;
+&lt;h2 id="fix-adalah-jenis-fitur-yang-tepat"&gt;&lt;code&gt;/fix&lt;/code&gt; adalah jenis fitur yang tepat&lt;/h2&gt;
+&lt;p&gt;Tambahan yang paling saya suka mungkin adalah &lt;code&gt;/fix&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Mengapa? Karena tidak semua masalah muncul sebagai kegagalan shell yang bersih. Kadang perintahnya secara teknis berhasil, tetapi tetap memberi hasil yang salah. Di situlah alur manual berupa &amp;ldquo;bantu saya menalar hasil ini&amp;rdquo; menjadi berguna.&lt;/p&gt;
+&lt;p&gt;Itu adalah model bantuan terminal yang jauh lebih realistis daripada menunggu mekanisme deteksi otomatis yang sempurna.&lt;/p&gt;
+&lt;h2 id="dukungan-bash-dan-wsl-membuat-pengalamannya-lebih-kredibel"&gt;Dukungan Bash dan WSL membuat pengalamannya lebih kredibel&lt;/h2&gt;
+&lt;p&gt;Memperluas dukungan di luar PowerShell memang diperlukan.&lt;/p&gt;
+&lt;p&gt;Jika jenis kecerdasan terminal ini ingin relevan bagi lebih banyak pengembang, ia harus bekerja di tempat para pengembang benar-benar menghabiskan waktunya. Dukungan Bash dan WSL adalah bagian besar dari itu.&lt;/p&gt;
+&lt;h2 id="pendapat-saya"&gt;Pendapat saya&lt;/h2&gt;
+&lt;p&gt;Ini masih alat tahap awal, tetapi arahnya bagus.&lt;/p&gt;
+&lt;p&gt;Terminal adalah salah satu tempat paling alami untuk pemecahan masalah berbantuan AI, perbaikan perintah, dan panduan yang sadar konteks lingkungan. Pembaruan seperti ini membuat masa depan itu lebih mudah dibayangkan.&lt;/p&gt;
+&lt;p&gt;Artikel asli: &lt;a href="https://devblogs.microsoft.com/commandline/intelligent-terminal-0-1-1-is-here-bash-support-new-slash-commands-and-customization/"&gt;Intelligent Terminal 0.1.1 Is Starting to Show What an AI-Native Shell Experience Could Look Like&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

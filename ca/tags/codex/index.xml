@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Codex | The .NET Blog</title><link>https://thedotnetblog.com/ca/tags/codex/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ca</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ca/tags/codex/index.xml" rel="self" type="application/rss+xml"/><item><title>Control de Missió per a Agents de Programació: Una Experiència Unificada a VS Code</title><link>https://thedotnetblog.com/ca/news/emiliano-montesdeoca/unified-agent-experience-mission-control/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ca/news/emiliano-montesdeoca/unified-agent-experience-mission-control/</guid><description>VS Code reuneix agents de programació locals, en la nuvola, CLI i de tercers en Sessons d'Agents perquè els desenvolupadors puguin fer un seguiment, interrompre i coordinar el treball autònom.</description><content:encoded>&lt;p&gt;&lt;em&gt;Aquesta publicació ha estat traduïda automàticament. Per a la versió original, &lt;a href="https://thedotnetblog.com/ca/news/emiliano-montesdeoca/unified-agent-experience-mission-control/"&gt;fes clic aquí&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;h1 id="control-de-missió-per-a-agents-de-programació-una-experiència-unificada-a-vs-code"&gt;Control de Missió per a Agents de Programació: Una Experiència Unificada a VS Code&lt;/h1&gt;
+&lt;p&gt;Un únic assistent de programació és fàcil de comprendre. Diversos agents treballant en llocs diferents no ho són.&lt;/p&gt;
+&lt;p&gt;Un agent s&amp;rsquo;executa localment a VS Code. Un altre treballa en una qüestió de GitHub a la nuvola. Un agent CLI viu a la terminal. Un agent de programació de tercers pot tenir un model de sessió diferent i límits diferents. Sense una vista compartida, els desenvolupadors dediquen més temps a fer un seguiment del treball que a supervisar-lo.&lt;/p&gt;
+&lt;p&gt;L&amp;rsquo;experiència unificada d&amp;rsquo;agents de VS Code aborda aquest problema de coordinació amb les Sessons d&amp;rsquo;Agents: un lloc per llançar agents, veure l&amp;rsquo;estat, obrir les seves converses i intervenir quan el pla canvia.&lt;/p&gt;
+&lt;p&gt;Això és menys sobre afegir un altre agent i més sobre fer que múltiples agents siguin manejables.&lt;/p&gt;
+&lt;h2 id="una-vista-per-a-diferents-tipus-de-treball"&gt;Una Vista per a Diferents Tipus de Treball&lt;/h2&gt;
+&lt;p&gt;L&amp;rsquo;article font descriu quatre participants distints: GitHub Copilot local, Copilot Coding Agent a la nuvola, GitHub Copilot CLI i OpenAI Codex per a subscriptors de Copilot elegibles.&lt;/p&gt;
+&lt;p&gt;Tenen fortaleses diferents:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Un agent local pot inspeccionar l&amp;rsquo;espai de treball actual i fer canvis ràpids.&lt;/li&gt;
+&lt;li&gt;Un agent de programació en la nuvola pot treballar de forma asincrònica en una qüestió i obrir una sol·licitud d&amp;rsquo;extracció.&lt;/li&gt;
+&lt;li&gt;Un agent CLI s&amp;rsquo;ajusta als fluxos de treball amb terminal pesada i comandaments operacionals.&lt;/li&gt;
+&lt;li&gt;Un altre proveïdor pot oferir un model diferent o un estil de raonament.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Les Sessons d&amp;rsquo;Agents proporcionen una llar comuna per a aquestes tasques. Podeu veure què s&amp;rsquo;està executant, què està fent i on continuar la conversa.&lt;/p&gt;
+&lt;p&gt;Aquesta visibilitat és important perquè el treball autònom no elimina la coordinació. Fa que la coordinació sigui una tasca d&amp;rsquo;enginyeria de primera classe.&lt;/p&gt;
+&lt;h2 id="les-interrupcions-són-part-del-flux-de-treball"&gt;Les Interrupcions Són Part del Flux de Treball&lt;/h2&gt;
+&lt;p&gt;La font fa una observació senzilla: «És comú enviar una indicació i adonar-se que has oblidat quelcom important». Anteriorment, l&amp;rsquo;opció era sovint d&amp;rsquo;esperar o cancel·lar. Amb editors de xat, podeu obrir una sessió activa i afegir informació mentre l&amp;rsquo;agent està treballant.&lt;/p&gt;
+&lt;p&gt;Això és més proper a la col·laboració real. Els requisits canvien. Una prova revela una suposició. Un revisor nota que una API ha de mantenir la compatibilitat amb versions anteriors. L&amp;rsquo;agent útil no és aquell que mai necessita correccions; és aquell que pot absorbir correccions sense perdre tota la tasca.&lt;/p&gt;
+&lt;p&gt;Per al treball .NET, una interrupció pot ser tan senzilla com:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Keep the existing public route unchanged. Add the new behavior behind the application service,
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;use the existing ProblemDetails convention, and add a test for the old response shape.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;La instrucció és breu perquè el repositori ja porta el context més gran. La sessió és el lloc per corregir la direcció, no per reafirmar tot el sistema.&lt;/p&gt;
+&lt;h2 id="els-agents-personalitzats-transformen-els-hàbits-del-equip-en-rols"&gt;Els Agents Personalitzats Transformen els Hàbits del Equip en Rols&lt;/h2&gt;
+&lt;p&gt;VS Code també introdueix agents especialitzats com Plan. En lloc d&amp;rsquo;implementar immediatament, un agent de planificació fa preguntes sobre abast, components, biblioteques i restriccions abans de produir una especificació d&amp;rsquo;implementació.&lt;/p&gt;
+&lt;p&gt;Aquest patró és útil més enllà d&amp;rsquo;un agent integrat. Un equip pot definir rols enfocats:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Investigació&lt;/strong&gt; recopila evidència i escriu un registre de decisions curt.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Revisió&lt;/strong&gt; comprova un canvi contra les convencions del repositori.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Prova&lt;/strong&gt; identifica casos perduts i proposa un pla de prova.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Arquitectura&lt;/strong&gt; compara opcions sense modificar fitxers.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Una definició de agent personalitzat petit podria tenir aquest aspecte:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;agent&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;plan&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;description&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;Refines vague requests into clear implementation specs&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;prompt&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="sd"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Ask about scope, constraints, existing patterns, and edge cases.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Produce a concise specification before any implementation begins.&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;La part útil no és el YAML. Es tracta de la separació explícita de responsabilitats. Un agent de planificació no hauria de silenciosament editar codi de producció. Un agent de revisió no hauria de reescriure el disseny que se suposava que havia d&amp;rsquo;avaluar.&lt;/p&gt;
+&lt;h2 id="els-subagents-redueixen-les-collisions-de-context"&gt;Els Subagents Redueixen les Col·lisions de Context&lt;/h2&gt;
+&lt;p&gt;Les converses llargues acumulen context no relacionat. Els subagents proporcionen un espai de treball aïllat per a una tasca de recerca limitada i després retornen el resultat a la sessió principal.&lt;/p&gt;
+&lt;p&gt;Això és un bon ajust per a preguntes com:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Analyze the API project and recommend an authentication strategy.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Return trade-offs and a decision record. Do not edit files.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;L&amp;rsquo;agent principal se centra en la implementació mentre que l&amp;rsquo;agent de recerca gestiona una pregunta més estreta. El mateix principi s&amp;rsquo;aplica als equips: la delegació clara produeix millors resultats que llançar diversos agents amb autoritat superposada.&lt;/p&gt;
+&lt;h2 id="ladvertència-més-agents-signifiquen-més-coordinació"&gt;L&amp;rsquo;Advertència: Més Agents Signifiquen Més Coordinació&lt;/h2&gt;
+&lt;p&gt;Les Sessions d&amp;rsquo;Agents poden mostrar activitat, però no pot resoldre conflictes de propietat. Dos agents editant la mateixa àrea poden crear un problema de fusió. Un agent en la nuvola i un agent local poden fer suposicions incompatibles. Un agent personalitzat pot produir una recomanació que un altre agent ignora.&lt;/p&gt;
+&lt;p&gt;Establir límits:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Un agent és propietari de la implementació d&amp;rsquo;una branca donada.&lt;/li&gt;
+&lt;li&gt;Els agents de recerca retornen artefactes, no edicions no rastrejades.&lt;/li&gt;
+&lt;li&gt;Les sol·licituds d&amp;rsquo;extracció romanen el límit de revisió.&lt;/li&gt;
+&lt;li&gt;Els noms dels agents i les indicacions indiquen què poden canviar.&lt;/li&gt;
+&lt;li&gt;La sortida de la sessió es manté quan explica una decisió important.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="la-meva-opinió"&gt;La Meva Opinió&lt;/h2&gt;
+&lt;p&gt;El futur multiagent no és una cua de finestres de xat. És un petit equip amb rols, traspàs i responsabilitat.&lt;/p&gt;
+&lt;p&gt;Les Sessons d&amp;rsquo;Agents són valuoses perquè reconeixen aquesta realitat. Proporciona als desenvolupadors una superfície de control per al treball que ja està passant en l&amp;rsquo;editor, la terminal i la nuvola. El proper guany de productivitat provindran menys de tenir més agents i més de fer que els seus límits siguin llegibles.&lt;/p&gt;
+&lt;p&gt;Per a un equip .NET, començaria amb un agent de planificació i un agent d&amp;rsquo;implementació. Utilitzeu la sortida de planificació com a especificació de problema o sol·licitud d&amp;rsquo;extracció, i permetre que l&amp;rsquo;agent d&amp;rsquo;implementació treballi dins d&amp;rsquo;aquest límit. Mesureu el treball reanomenat abans d&amp;rsquo;afegir més rols.&lt;/p&gt;
+&lt;p&gt;El millor control de missió és aquell que fa que la propietat sigui obvia.&lt;/p&gt;</content:encoded></item></channel></rss>

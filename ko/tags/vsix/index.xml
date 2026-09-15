@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Vsix | The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/vsix/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ko</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/vsix/index.xml" rel="self" type="application/rss+xml"/><item><title>Visual Studio 확장 팀은 습관적으로 출시를 중단하고 파이프라인으로 출시해야 합니다</title><link>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/visual-studio-extension-ci-with-github-actions/</link><pubDate>Thu, 23 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/visual-studio-extension-ci-with-github-actions/</guid><description>VSIX 버전 관리 및 게시를 위한 반복 가능한 GitHub Actions 흐름이 이제 수동 릴리스 단계를 정당화하기 어려울 정도로 간단해졌습니다.</description><content:encoded>&lt;p&gt;원문: &lt;a href="https://devblogs.microsoft.com/visualstudio/automating-your-visual-studio-extension-builds-with-github-actions/"&gt;Automating your Visual Studio extension builds with GitHub Actions&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Visual Studio 확장을 유지하면서 여전히 릴리스의 상당 부분을 수동으로 실행한다면, 이것이 현대화 신호입니다.&lt;/p&gt;
+&lt;p&gt;이 포스트에 표시된 워크플로는 의도적으로 실용적입니다: 버전 스탬프, 빌드, 테스트 아티팩트를 갤러리에 게시, 안정 빌드를 Marketplace에 게시. 무거운 플랫폼 의식 없이, 결정론적 릴리스 동작만 있습니다.&lt;/p&gt;
+&lt;p&gt;가장 마음에 드는 점은 버전 관리가 릴리스 전 체크리스트 항목이 아닌 파이프라인 상태로 취급된다는 것입니다. 그 한 가지 결정은 놀랍게도 많은 실수를 제거합니다: 일치하지 않는 메타데이터, 오래된 어셈블리 버전, 일관성 없는 릴리스 노트.&lt;/p&gt;
+&lt;p&gt;갤러리 게시와 Marketplace 게시의 분할도 운영상 성숙합니다. 팀은 공식 릴리스 의미를 갖지 않는 빠른 검증 빌드를 위한 장소가 필요합니다. 모든 것을 직접 Marketplace에 푸시하는 것은 마찰이 높고 위험한 지름길을 장려합니다.&lt;/p&gt;
+&lt;h3 id="확장-팀을-위한-강력한-릴리스-패턴"&gt;확장 팀을 위한 강력한 릴리스 패턴&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;풀 리퀘스트 및 메인 커밋 시&lt;/strong&gt;, CI VSIX 아티팩트를 생성하고 테스터를 위해 갤러리에 게시하세요.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;태그된 릴리스 시&lt;/strong&gt;, 서명되고 검증된 패키지를 Marketplace에 게시하세요.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;토큰 처리를 전용 비밀과 최소 권한 범위로 최소화&lt;/strong&gt;하세요.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;내 독단적 의견: &lt;strong&gt;확장 생태계는 앱 생태계보다 CI 규율에서 뒤쳐집니다.&lt;/strong&gt; 소규모 팀은 수동 워크플로가 관리 가능하다고 가정하기 때문입니다. 관리 가능하지 않을 때까지는 그렇습니다. 한 번의 성급한 패치, 하나의 깨진 패키지, 하나의 잊혀진 매니페스트 업데이트로 신뢰가 떨어집니다.&lt;/p&gt;
+&lt;p&gt;이러한 재사용 가능한 액션은 반복되는 릴리스 로직을 한 번 인코딩하고 팀이 패키징 메커니즘 대신 확장 품질에 집중할 수 있게 하기 때문에 유용합니다.&lt;/p&gt;
+&lt;p&gt;여전히 엔지니어링 판단이 필요합니다. Marketplace 게시를 품질 검사 뒤에 게이트하고, 게시 매니페스트를 감사된 릴리스 아티팩트로 취급해야 합니다. 하지만 기본 파이프라인 복잡성은 이제 수동 전용 릴리스가 대부분 기술 부채일 정도로 충분히 낮습니다.&lt;/p&gt;
+&lt;p&gt;확장 개발을 이끌고 있다면, &lt;strong&gt;지금 리포지토리 전반에 걸쳐 이를 표준화&lt;/strong&gt;하세요. 더 나은 추적 가능성, 더 쉬운 온보딩, 더 적은 한 사람 릴리스 병목 현상을 얻을 수 있습니다.&lt;/p&gt;
+&lt;h3 id="제안된-롤아웃"&gt;제안된 롤아웃&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;하나의 확장에 대해 빌드와 갤러리 게시로 시작&lt;/strong&gt;하세요.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;매니페스트-소스 규칙을 검증한 후 버전 스탬핑 도입&lt;/strong&gt;하세요.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;비밀 관리와 릴리스 게이트가 마련된 후에만 Marketplace 게시 추가&lt;/strong&gt;하세요.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;이것은 DevOps 유행을 쫓는 것이 아닙니다. 툴링을 설치하고 업데이트가 작동할 것으로 기대하는 사람들을 위한 신뢰성에 관한 것입니다.&lt;/p&gt;
+&lt;p&gt;안정적인 확장 생태계는 안정적인 애플리케이션이 구축되는 것과 같은 방식으로 구축됩니다: 인간의 추측을 제거하는 지루하고 반복 가능한 자동화로.&lt;/p&gt;</content:encoded></item></channel></rss>

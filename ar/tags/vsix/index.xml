@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Vsix | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/vsix/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 23 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/vsix/index.xml" rel="self" type="application/rss+xml"/><item><title>فرق إضافات Visual Studio يجب أن تتوقف عن الإصدار بالعادة وتبدأ الإصدار بخط أنابيب</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/visual-studio-extension-ci-with-github-actions/</link><pubDate>Thu, 23 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/visual-studio-extension-ci-with-github-actions/</guid><description>تدفق GitHub Actions قابل للتكرار لإصدار وتوقيع VSIX أصبح الآن بسيطًا بما يكفي لدرجة أن خطوات الإصدار اليدوية أصبحت صعبة التبرير.</description><content:encoded>&lt;p&gt;المصدر الأصلي: &lt;a href="https://devblogs.microsoft.com/visualstudio/automating-your-visual-studio-extension-builds-with-github-actions/"&gt;Automating your Visual Studio extension builds with GitHub Actions&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;إذا كنت تدير إضافات Visual Studio وما زلت تدير أجزاء كبيرة من الإصدار يدويًا، فهذه إشارتك للتحديث.&lt;/p&gt;
+&lt;p&gt;سير العمل الموضح في هذا المقال متعمد العملي: ختم الإصدار، بناء، نشر قطع الاختبار إلى معرض، ثم نشر القطع المستقرة إلى Marketplace. لا مراسم منصة ثقيلة، فقط سلوك إصدار حتمي.&lt;/p&gt;
+&lt;p&gt;ما يعجبني أكثر هو أن الإصدار يُعالج كحالة خط أنابيب، وليس كعنصر قائمة فحص قبل الإصدار. هذا القرار الواحد يلغي عددًا مدهشًا من الأخطاء: بيانات تعريف غير متطابقة، وإصدارات تجميع قديمة، وملاحظات إصدار غير متناسقة.&lt;/p&gt;
+&lt;p&gt;الفصل بين النشر للمعرض والنشر لـ Marketplace ناضج تشغيليًا أيضًا. الفرق تحتاج مكانًا لبنيات التحقق السريعة التي لا تحمل دلالات الإصدار الرسمي. دفع كل شيء مباشرة إلى Marketplace عالي الاحتكاك ويشجع على اختصارات محفوفة بالمخاطر.&lt;/p&gt;
+&lt;p&gt;نمط إصدار قوي لفرق الإضافات:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;على طلبات السحب والتزامات main، أنتج قطع VSIX CI وانشر إلى المعرض للمختبرين.&lt;/li&gt;
+&lt;li&gt;على الإصدارات الموسومة، انشر الحزم الموقعة والمتحقق منها إلى Marketplace.&lt;/li&gt;
+&lt;li&gt;حافظ على معالجة الرموز بأقل قدر ممكن بأسرار مخصصة ونطاقات أقل امتياز.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;رأيي الشخصي: أنظمة الإضافات البيئية تتخلف عن أنظمة التطبيقات في انضباط CI لأن الفرق الصغيرة تفترض أن سير العمل اليدوي قابل للإدارة. هي قابلة للإدارة حتى لا تكون كذلك. تصحيح واحد متسرع، حزمة واحدة مكسورة، تحديث بيان واحد منسي، والثقة تنهار.&lt;/p&gt;
+&lt;p&gt;هذه الإجراءات القابلة لإعادة الاستخدام مفيدة لأنها ترمز منطق الإصدار المتكرر مرة واحدة وتدع الفرق تركز على جودة الإضافة بدلاً من آليات التعبئة.&lt;/p&gt;
+&lt;p&gt;لا يزال هناك حكم هندسي مطلوب. يجب أن تقيد نشر Marketplace خلف فحوصات الجودة، ويجب أن تتعامل مع بيانات النشر كقطع أثرية مدققة. لكن تعقيد خط الأنابيب الأساسي أصبح الآن منخفضًا بما يكفي لدرجة أن الإصدارات اليدوية فقط هي في الغالب دين تقني.&lt;/p&gt;
+&lt;p&gt;إذا كنت تقود تطوير الإضافات، وحدد هذا الآن عبر المستودعات. ستحصل على تتبع أفضل، و onboarding أسهل، واختناقات إصدار شخص واحد أقل.&lt;/p&gt;
+&lt;p&gt;الطرح المقترح:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ابدأ ببناء زائد نشر معرض لإضافة واحدة.&lt;/li&gt;
+&lt;li&gt;قدم ختم الإصدار بعد التحقق من اتفاقيات مصدر البيان الخاص بك.&lt;/li&gt;
+&lt;li&gt;أضف نشر Marketplace فقط بعد أن تكون إدارة الأسرار وبوابات الإصدار في مكانها.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;هذا ليس عن متعة DevOps. إنه عن الموثوقية للأشخاص الذين يثبتون أدواتك ويتوقعون أن تعمل التحديثات.&lt;/p&gt;
+&lt;p&gt;أنظمة الإضافات المستقرة تُبنى بنفس الطريقة التي تُبنى بها التطبيقات المستقرة: بأتمتة مملة وقابلة للتكرار تزيل التخمين البشري.&lt;/p&gt;</content:encoded></item></channel></rss>

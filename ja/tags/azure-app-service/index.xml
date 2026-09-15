@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure App Service | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/azure-app-service/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 05 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/azure-app-service/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL MCP ServerをAzure App Serviceで動かす — コンテナ不要</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</link><pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</guid><description>SQL MCP ServerがDockerやKubernetesなしでAzure App Serviceで動作するようになりました。SQLデータベースと連携するAIエージェントを構築する.NET開発者にとって何を意味するのかを解説します。</description><content:encoded>&lt;p&gt;&lt;em&gt;この投稿は自動翻訳されました。元の記事は&lt;a href="https://thedotnetblog.com/ja/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/"&gt;こちら&lt;/a&gt;からご覧いただけます。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;正直に言うと、チュートリアルで「コンテナが必要」という言葉を見るたびに少しため息が出ます。コンテナは素晴らしいのですが、チームにコンテナ戦略がない場合、シンプルに見えた機能が予期しないオーケストレーションの複雑さに阻まれることになります。&lt;/p&gt;
+&lt;p&gt;だからこそ、これは注目に値します。SQL MCP ServerがAzure App Serviceで動作するようになりました — DockerもKubernetesも不要で、MCP、REST、GraphQLを通じてSQLデータベースを公開する同じData API Builder（DAB）の設定ファイルだけで動きます。&lt;/p&gt;
+&lt;h2 id="sql-mcp-serverとは"&gt;SQL MCP Serverとは？&lt;/h2&gt;
+&lt;p&gt;まだご存知でない方への簡単な説明です。SQL MCP ServerはAIエージェントとSQLデータベースの間に位置します。エージェントにデータベースへの直接アクセスを与える（これはひどいアイデアです）代わりに、テーブルやビューを権限が定義されたエンティティという抽象化レイヤーとして公開します。&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://learn.microsoft.com/ja-jp/azure/data-api-builder/"&gt;Data API Builder&lt;/a&gt;上に構築されており、1つの設定ファイルがMCP &lt;em&gt;と&lt;/em&gt; REST &lt;em&gt;と&lt;/em&gt; GraphQLを同時に管理します。エージェントはMCPエンドポイントと通信し、従来のアプリケーションはRESTまたはGraphQLと通信します。同じ設定、同じランタイム、異なるインターフェース。&lt;/p&gt;
+&lt;p&gt;これは本当に便利です。2つの別々なAPIレイヤーを管理する必要がありません。&lt;/p&gt;
+&lt;h2 id="コンテナの問題と解決策"&gt;コンテナの問題（と解決策）&lt;/h2&gt;
+&lt;p&gt;SQL MCP Serverの元のデプロイモデルはコンテナでした。多くのチームではうまく機能しますが、すべてのチームではありません。多くの.NETチームはAzure App ServiceやVMに標準化しています。SQLエンドポイントを公開するためだけにコンテナランタイムを必要とするのは、誰も求めていない摩擦を生み出します。&lt;/p&gt;
+&lt;p&gt;新しいウォークスルーではコンテナを完全にスキップする方法を示しています。すべて&lt;code&gt;dab start&lt;/code&gt;コマンドで動作し、標準の.NET 8 Webプロセスとして App Serviceにホストされます。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Data API Builderをインストール&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet tool install microsoft.dataapibuilder --prerelease -g
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 設定を初期化&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --host-mode Development --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;SQL_CONNECTION_STRING&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# エンティティを追加&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add products --source dbo.products --permissions &lt;span class="s2"&gt;&amp;#34;authenticated:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# App Service認証プロバイダーを設定&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab configure --runtime.host.authentication.provider AppService
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# サーバーを起動&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;この時点で、&lt;code&gt;/mcp&lt;/code&gt;でMCP、同じプロセスからRESTとGraphQLが利用可能になり、コンテナは一切不要です。&lt;/p&gt;
+&lt;h2 id="共有apiキーなしの認証"&gt;共有APIキーなしの認証&lt;/h2&gt;
+&lt;p&gt;これが私が最も評価する部分です。App Serviceにデプロイする際、Microsoft Entra IDを認証プロバイダーとして設定します。設定ファイルに共有シークレットを埋め込む必要はなく、APIキーをローテーションする必要もありません。&lt;/p&gt;
+&lt;p&gt;接続文字列はApp Serviceの環境変数に保持され（&lt;code&gt;dab-config.json&lt;/code&gt;には含まれません）、MCPエンドポイントはプラットフォーム認証で保護されます。Azure AIのワークロードでEntra IDにすでに対応している場合、これは自然に統合されます。&lt;/p&gt;
+&lt;p&gt;ローカル開発では&lt;code&gt;Simulator&lt;/code&gt;モードとSTIOトランスポートに切り替えます。デプロイ前に&lt;code&gt;AppService&lt;/code&gt;モードに戻します。クリーンで明示的な設定です。&lt;/p&gt;
+&lt;h2 id="app-serviceへのデプロイ"&gt;App Serviceへのデプロイ&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az appservice plan create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --sku B1 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --is-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --plan &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --runtime &lt;span class="s2"&gt;&amp;#34;DOTNETCORE:8.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp config &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --startup-file &lt;span class="s2"&gt;&amp;#34;dab start&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;その後、チームがすでに使用しているコードデプロイ方法でDABプロジェクトをデプロイします。重要なポイント：これは&lt;strong&gt;コード&lt;/strong&gt;のデプロイであり、コンテナのデプロイではありません。&lt;/p&gt;
+&lt;h2 id="net開発者にとって重要な理由"&gt;.NET開発者にとって重要な理由&lt;/h2&gt;
+&lt;p&gt;.NETでAIエージェントを構築している場合、エージェントはいずれデータベースと通信する必要があります。SQL MCP Serverは、生の接続文字列を公開したりカスタムAPIレイヤーを書いたりすることなく、それを行う構造化された方法を提供します。&lt;/p&gt;
+&lt;p&gt;完全なウォークスルーは&lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-app-service/"&gt;元のブログ記事&lt;/a&gt;と&lt;a href="https://github.com/Azure-Samples/SQL-MCP-NoContainer"&gt;GitHubのサンプルリポジトリ&lt;/a&gt;でご確認ください。&lt;/p&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;App Service上のSQL MCP Serverは、コンテナ戦略なしにエージェントに構造化されたSQLデータアクセスを提供したい.NETチームにとって、実用的な選択肢です。ぜひ試してみてください — エージェントはクリーンなAPIサーフェスを高く評価するでしょう。&lt;/p&gt;</content:encoded></item></channel></rss>

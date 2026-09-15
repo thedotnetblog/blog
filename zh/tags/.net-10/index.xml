@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>.NET 10 | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/.net-10/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 23 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/.net-10/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET 10 中的 NuGet package pruning 是那种你会在各处都感受到的改进</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/nuget-package-pruning-dotnet-10-cleaner-restore/</link><pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/nuget-package-pruning-dotnet-10-cleaner-restore/</guid><description>.NET 10 中新的 NuGet package pruning 可以减少误报的漏洞报告，简化 restore graph，并提升 restore 性能。它是那种会悄悄让日常工作更好的平台变化。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文已自动翻译。原文请&lt;a href="https://thedotnetblog.com/zh/news/emiliano-montesdeoca/nuget-package-pruning-dotnet-10-cleaner-restore/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;有些平台改进之所以令人兴奋，是因为它们打开了新的场景。&lt;/p&gt;
+&lt;p&gt;而另一些改进之所以令人兴奋，是因为它们让现有 workflow 更少噪音、更不脆弱，也更不烦人。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;.NET 10 中的 NuGet package pruning&lt;/strong&gt; 明显属于第二类，而且我这是在夸它。&lt;/p&gt;
+&lt;h2 id="为什么这很重要"&gt;为什么这很重要&lt;/h2&gt;
+&lt;p&gt;如果你曾经处理过 transitive vulnerability noise、过大的 restore graph，或者那些技术上存在但对你的应用所用 runtime 并不真正相关的 package，那么这个变化正好击中了真实的痛点。&lt;/p&gt;
+&lt;p&gt;Pruning 会在 runtime 已经提供平台包时，把这些 platform-provided packages 从有效 dependency graph 中移除。&lt;/p&gt;
+&lt;p&gt;这意味着：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;更少的误报漏洞报告&lt;/li&gt;
+&lt;li&gt;更干净的 transitive dependency graphs&lt;/li&gt;
+&lt;li&gt;更少的 restore overhead&lt;/li&gt;
+&lt;li&gt;更可操作的 audit 结果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="我的看法"&gt;我的看法&lt;/h2&gt;
+&lt;p&gt;这正是我喜欢的那种 .NET 改进。&lt;/p&gt;
+&lt;p&gt;它让默认值更好，减少 mental overhead，并同时改善 security signal quality 和日常 tooling 行为。&lt;/p&gt;
+&lt;p&gt;这就是一种胜利，即使它从来不会出现在 keynote slide 上。&lt;/p&gt;
+&lt;p&gt;原文： &lt;a href="https://devblogs.microsoft.com/dotnet/nuget-package-pruning-in-dotnet-10/"&gt;NuGet Package Pruning: Cleaner Dependencies and Actionable Vulnerability Reports&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>Copilot Studio 如何迁移到 .NET 10 WebAssembly 并提速 20%</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</link><pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</guid><description>.NET 10 WASM 的改进不仅仅适用于新项目。以下是 Copilot Studio 从 .NET 8 升级后测量到的结果：自动指纹识别、默认启用 WasmStripILAfterAOT 以及真实的执行性能数据。</description><content:encoded>&lt;p&gt;Copilot Studio 团队做了所有 Blazor WASM 开发者都好奇的事情：他们实际上将一个生产应用程序从 .NET 8 升级到了 .NET 10 并测量了结果。这篇文章分享了具体数字，这很罕见也非常有用。&lt;/p&gt;
+&lt;h2 id="升级过程很无聊这是好事"&gt;升级过程很无聊（这是好事）&lt;/h2&gt;
+&lt;p&gt;更新目标框架、刷新包引用、修复破坏性更改。就这样。.NET 10 构建现在已在生产环境中运行。迁移本身并不是有趣的部分——.NET 10 中的变化才是。&lt;/p&gt;
+&lt;h2 id="自动资源指纹识别"&gt;自动资源指纹识别&lt;/h2&gt;
+&lt;p&gt;以前，部署 WASM 应用意味着需要编写自定义脚本来用 SHA256 哈希重命名已发布的资源以进行缓存清除。Copilot Studio 有一个 PowerShell 脚本做的正是这件事——重命名文件、将 &lt;code&gt;integrity&lt;/code&gt; 属性注入 JavaScript 加载器、手动管理一切。&lt;/p&gt;
+&lt;p&gt;在 .NET 10 中，所有这些都是内置的。已发布的资源会自动添加指纹，直接从 &lt;code&gt;dotnet.js&lt;/code&gt; 导入，并在无需手动干预的情况下进行完整性验证。团队删除了重命名脚本。&lt;/p&gt;
+&lt;p&gt;范围上的小变化，复杂性的显著降低。&lt;/p&gt;
+&lt;h2 id="wasmstripilafteraot-现在默认启用"&gt;WasmStripILAfterAOT 现在默认启用&lt;/h2&gt;
+&lt;p&gt;在 .NET 8 中，从 AOT 编译的程序集中删除 IL 是选择性的。在 .NET 10 中这是默认行为。AOT 编译后，原始 IL 字节码从输出中删除——运行时不需要它，保留它会无故膨胀包大小。&lt;/p&gt;
+&lt;p&gt;Copilot Studio 使用了一种特定的优化：它同时提供 JIT 引擎（快速启动）和 AOT 引擎（最大稳态性能），并行加载两者，并在准备好后从 JIT 切换到 AOT。它还会对两个引擎之间相同的文件进行去重。&lt;/p&gt;
+&lt;p&gt;新的 IL 剥离行为意味着 AOT 程序集不再与其 JIT 对应项逐位匹配，因此去重的文件更少：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.NET 8：59 个共享文件&lt;/li&gt;
+&lt;li&gt;.NET 10：22 个共享文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;净结果：AOT 引擎的包大小增加了约 15%。在快速 LAN 上 AOT 下载慢约 6%，在 4G 上慢约 17%。但这一切都在应用程序已经可交互后在后台发生。&lt;/p&gt;
+&lt;h2 id="性能数字"&gt;性能数字&lt;/h2&gt;
+&lt;p&gt;这是重要的部分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;首次调用时 &lt;strong&gt;快约 20%&lt;/strong&gt;（冷路径）&lt;/li&gt;
+&lt;li&gt;后续调用时 &lt;strong&gt;快约 5%&lt;/strong&gt;（热路径）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;改进在&amp;quot;大型机器人&amp;quot;中最为明显——AOT 编译代码主导的大型复杂代理。对于更简单的工作流，收益较小。&lt;/p&gt;
+&lt;h2 id="如果您仍在使用-net-8"&gt;如果您仍在使用 .NET 8&lt;/h2&gt;
+&lt;p&gt;迁移过程真的很简单：更新 &lt;code&gt;&amp;lt;TargetFramework&amp;gt;&lt;/code&gt;、刷新包引用、删除任何自定义指纹识别脚本，您将自动从 &lt;code&gt;WasmStripILAfterAOT&lt;/code&gt; 中受益。如果您正在 AOT 编译，预期会有类似的性能提升。&lt;/p&gt;
+&lt;p&gt;文章中的一个注意事项：如果您在 &lt;code&gt;WebWorker&lt;/code&gt; 中加载 .NET WASM 运行时，请在初始化时设置 &lt;code&gt;dotnetSidecar = true&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;原文：&lt;a href="https://devblogs.microsoft.com/dotnet/copilot-studio-dotnet-10-migration/"&gt;Copilot Studio gets faster with .NET 10 on WebAssembly&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>在 .NET 10 中结合 API 版本控制与 OpenAPI</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/api-versioning-openapi-dotnet-10/</link><pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/api-versioning-openapi-dotnet-10/</guid><description>Asp.Versioning v10 是首个正式支持 .NET 10 和 Microsoft.AspNetCore.OpenApi 的版本，可为每个 API 版本生成独立的 OpenAPI 文档。</description><content:encoded>&lt;p&gt;&lt;em&gt;本文已自动翻译。要查看原始版本，&lt;a href="https://thedotnetblog.com/zh/news/emiliano-montesdeoca/api-versioning-openapi-dotnet-10/"&gt;请点击此处&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/dotnet/api-versioning-in-dotnet-10-applications/"&gt;在 .NET 10 中结合 API 版本控制与 OpenAPI&lt;/a&gt; — Microsoft MVP Sander ten Brinke 的特邀文章 — 介绍了新的 &lt;code&gt;Asp.Versioning&lt;/code&gt; v10 包，这是专为 .NET 10 和内置库 &lt;code&gt;Microsoft.AspNetCore.OpenApi&lt;/code&gt; 设计的首个版本，该内置库在 .NET 9 中取代了 Swashbuckle 成为默认选项。&lt;/p&gt;
+&lt;h2 id="aspversioning-v10专为新-openapi-栈而设计"&gt;Asp.Versioning v10：专为新 OpenAPI 栈而设计&lt;/h2&gt;
+&lt;p&gt;旧版 &lt;code&gt;Asp.Versioning&lt;/code&gt; v8.x 仍可通过隐式 roll-forward 在 .NET 10 上运行，但 v10 是专为 &lt;code&gt;Microsoft.AspNetCore.OpenApi&lt;/code&gt; 设计的首个版本。核心配置是将 &lt;code&gt;AddApiVersioning&lt;/code&gt; 与 &lt;code&gt;AddApiExplorer&lt;/code&gt; 链式调用，并为每个要公开的版本单独调用 &lt;code&gt;AddOpenApi&lt;/code&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Services&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddApiVersioning&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DefaultApiVersion&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;ApiVersion&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AssumeDefaultVersionWhenUnspecified&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ReportApiVersions&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddApiExplorer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;GroupNameFormat&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;&amp;#39;v&amp;#39;VVV&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SubstituteApiVersionInUrl&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Services&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddOpenApi&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;v1&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Services&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddOpenApi&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;v2&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这将在 &lt;code&gt;/openapi/v1.json&lt;/code&gt; 和 &lt;code&gt;/openapi/v2.json&lt;/code&gt; 分别生成独立文档。&lt;/p&gt;
+&lt;h2 id="版本控制策略url-路径查询字符串请求头媒体类型"&gt;版本控制策略：URL 路径、查询字符串、请求头、媒体类型&lt;/h2&gt;
+&lt;p&gt;该包支持四种策略。URL 路径版本控制（&lt;code&gt;/api/v1/resource&lt;/code&gt;）是公共 API 最常见的方式。查询字符串（&lt;code&gt;?version=1.0&lt;/code&gt;）和自定义请求头（&lt;code&gt;X-API-Version&lt;/code&gt;）在内部服务中很受欢迎。通过 &lt;code&gt;Accept&lt;/code&gt; 请求头进行媒体类型版本控制是 GitHub 在其 REST API 中采用的方式。&lt;/p&gt;
+&lt;h2 id="同时支持-minimal-api-和-controller"&gt;同时支持 Minimal API 和 Controller&lt;/h2&gt;
+&lt;p&gt;对于 Minimal API，需要创建版本集并将每个路由映射到特定版本：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;var&lt;/span&gt; &lt;span class="n"&gt;versionSet&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;NewApiVersionSet&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HasApiVersion&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;ApiVersion&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HasApiVersion&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;ApiVersion&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Build&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MapGet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;/users&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;GetUsersV1&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;WithApiVersionSet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;versionSet&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;MapToApiVersion&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MapGet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;/users&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;GetUsersV2&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;WithApiVersionSet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;versionSet&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;MapToApiVersion&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;对于 Controller，在类和操作级别应用 &lt;code&gt;[ApiVersion(&amp;quot;1.0&amp;quot;)]&lt;/code&gt; 和 &lt;code&gt;[MapToApiVersion(&amp;quot;1.0&amp;quot;)]&lt;/code&gt; 特性。&lt;/p&gt;
+&lt;h2 id="swaggerui-和-scalar-开箱即用"&gt;SwaggerUI 和 Scalar 开箱即用&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Swashbuckle.AspNetCore.SwaggerUI&lt;/code&gt; 和 &lt;code&gt;Scalar.AspNetCore&lt;/code&gt; 都能无缝集成 — 只需将它们指向各版本的文档 URL，无需额外配置即可获得支持版本的 UI。&lt;/p&gt;
+&lt;h2 id="代码示例使用-net-10-基于文件的应用"&gt;代码示例使用 .NET 10 基于文件的应用&lt;/h2&gt;
+&lt;p&gt;文章中的示例使用了 C# 14 / .NET 10 的新基于文件的应用功能：无需项目文件，直接用 &lt;code&gt;dotnet &amp;lt;文件名&amp;gt;.cs&lt;/code&gt; 运行单个 &lt;code&gt;.cs&lt;/code&gt; 文件。这使代码片段自成一体，便于本地快速试验。&lt;/p&gt;
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;p&gt;如果您正在使用 .NET 10，并希望在不引入第三方中间件的情况下获得干净、有版本控制的 OpenAPI 契约，&lt;code&gt;Asp.Versioning&lt;/code&gt; v10 是官方推荐路径。&lt;/p&gt;
+&lt;p&gt;阅读完整文章：&lt;a href="https://devblogs.microsoft.com/dotnet/api-versioning-in-dotnet-10-applications/"&gt;在 .NET 10 中结合 API 版本控制与 OpenAPI&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>.NET 10 随 Ubuntu 26.04 LTS 发布 — 新特性概览</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/</link><pubDate>Sat, 25 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/</guid><description>Ubuntu 26.04 LTS (Resolute Raccoon) 携 .NET 10 作为一等工具链发布。Native AOT、Chiseled 容器、Linux 7.0。</description><content:encoded>&lt;p&gt;&lt;em&gt;本文已自动翻译。如需查看原文，请&lt;a href="https://thedotnetblog.com/zh/news/emiliano-montesdeoca/dotnet-ubuntu-2604-resolute-raccoon-net10/"&gt;点击此处&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Ubuntu LTS 发布日。&lt;a href="https://canonical.com/blog/canonical-releases-ubuntu-26-04-lts-resolute-raccoon"&gt;Ubuntu 26.04 (Resolute Raccoon)&lt;/a&gt; 今天发布，与每个 Ubuntu LTS 一样，携带最新的 .NET LTS — 这次是 &lt;a href="https://devblogs.microsoft.com/dotnet/whats-new-for-dotnet-in-ubuntu-2604/"&gt;.NET 10&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id="两条命令安装-net-10"&gt;两条命令安装 .NET 10&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt install dotnet-sdk-10.0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;.NET 是 &lt;a href="https://ubuntu.com/toolchains"&gt;Ubuntu 官方支持的工具链&lt;/a&gt;之一，不是第三方附加组件。&lt;/p&gt;
+&lt;h2 id="容器将--noble-更新为--resolute"&gt;容器：将 &lt;code&gt;-noble&lt;/code&gt; 更新为 &lt;code&gt;-resolute&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sed -i &lt;span class="s2"&gt;&amp;#34;s/noble/resolute/g&amp;#34;&lt;/span&gt; Dockerfile
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;包括 &lt;a href="https://devblogs.microsoft.com/dotnet/announcing-dotnet-chiseled-containers/"&gt;Chiseled&lt;/a&gt; 在内的所有现有镜像变体均可用。&lt;/p&gt;
+&lt;h2 id="native-aot3ms-启动14mb-二进制文件"&gt;Native AOT：3ms 启动，1.4MB 二进制文件&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y dotnet-sdk-aot-10.0 clang
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet publish app.cs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 1.4MB 原生二进制文件，启动时间 3ms&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;对于冷启动时间至关重要的云原生工作负载——Functions、容器、Serverless——这是真正的游戏规则改变者。&lt;/p&gt;
+&lt;h2 id="需要-net-8-或-9"&gt;需要 .NET 8 或 9？&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y software-properties-common
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;add-apt-repository ppa:dotnet/backports
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;apt install -y dotnet-sdk-8.0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/dotnet/whats-new-for-dotnet-in-ubuntu-2604/"&gt;完整文章&lt;/a&gt;包含有关 cgroup v2、后量子密码学和 Linux 7.0 的更多详情。&lt;/p&gt;</content:encoded></item><item><title>立即打补丁：.NET 10.0.7 OOB安全更新 (ASP.NET Core Data Protection)</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/dotnet-10-0-7-oob-security-patch-data-protection/</link><pubDate>Wed, 22 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/dotnet-10-0-7-oob-security-patch-data-protection/</guid><description>.NET 10.0.7是修复Microsoft.AspNetCore.DataProtection中安全漏洞的带外发布——管理的认证加密器在错误的字节上计算HMAC，可能导致权限提升。</description><content:encoded>&lt;p&gt;&lt;em&gt;本文已自动翻译。要查看原始版本，请&lt;a href="https://thedotnetblog.com/posts/emiliano-montesdeoca/dotnet-10-0-7-oob-security-patch-data-protection/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;此更新不是可选的。如果您的应用程序使用&lt;code&gt;Microsoft.AspNetCore.DataProtection&lt;/code&gt;，您需要更新到10.0.7。&lt;/p&gt;
+&lt;h2 id="发生了什么"&gt;发生了什么&lt;/h2&gt;
+&lt;p&gt;Patch Tuesday &lt;code&gt;.NET 10.0.6&lt;/code&gt;发布后，一些用户报告解密失败。调查过程中，团队发现了安全漏洞&lt;strong&gt;CVE-2026-40372&lt;/strong&gt;：HMAC验证标签在payload的&lt;strong&gt;错误字节&lt;/strong&gt;上计算，可能导致权限提升。&lt;/p&gt;
+&lt;h2 id="如何修复"&gt;如何修复&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet add package Microsoft.AspNetCore.DataProtection --version 10.0.7
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后&lt;strong&gt;重新构建和重新部署&lt;/strong&gt;您的应用程序。&lt;/p&gt;
+&lt;p&gt;Rahul Bhandari的原始公告：&lt;a href="https://devblogs.microsoft.com/dotnet/dotnet-10-0-7-oob-security-update/"&gt;.NET 10.0.7 Out-of-Band Security Update&lt;/a&gt;。&lt;/p&gt;</content:encoded></item></channel></rss>

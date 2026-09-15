@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Bash | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/bash/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 29 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Intelligent Terminal 0.1.1 begint te laten zien hoe een AI-native shell-ervaring eruit zou kunnen zien</title><link>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</link><pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</guid><description>Intelligent Terminal 0.1.1 voegt Bash- en WSL-ondersteuning, een handmatige /fix-flow en het direct wisselen van modellen toe. Het is nog vroeg, maar de richting wordt steeds interessanter voor ontwikkelaars die in de terminal leven.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Dit artikel is automatisch vertaald. Voor de originele versie, &lt;a href="https://thedotnetblog.com/nl/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/"&gt;klik hier&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Ik blijf denken dat AI in de terminal een van de meest veelbelovende gebieden voor developerservaring op dit moment is.&lt;/p&gt;
+&lt;p&gt;Daarom viel &lt;strong&gt;Intelligent Terminal 0.1.1&lt;/strong&gt; me meer op dan een normale puntrelease meestal zou doen.&lt;/p&gt;
+&lt;p&gt;Deze update voegt toe:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;foutdetectie voor Bash en WSL&lt;/li&gt;
+&lt;li&gt;een handmatige &lt;code&gt;/fix&lt;/code&gt;-flow&lt;/li&gt;
+&lt;li&gt;modellen direct kunnen wisselen&lt;/li&gt;
+&lt;li&gt;een beter aanpasbaar agentpaneel&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Die combinatie laat het product steeds minder voelen als een experiment en meer als een evoluerende shell-ervaring.&lt;/p&gt;
+&lt;h2 id="fix-is-het-juiste-soort-functie"&gt;&lt;code&gt;/fix&lt;/code&gt; is het juiste soort functie&lt;/h2&gt;
+&lt;p&gt;De toevoeging die ik waarschijnlijk het meest waardeer is &lt;code&gt;/fix&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Waarom? Omdat niet elk probleem zich als een nette shell-fout voordoet. Soms werkt het commando technisch gezien, maar krijg je alsnog de verkeerde uitkomst. Juist dan is een handmatige flow als &amp;ldquo;help me hierover redeneren&amp;rdquo; nuttig.&lt;/p&gt;
+&lt;p&gt;Dat is een veel realistischer model voor terminalondersteuning dan wachten op een perfect automatisch detectiemechanisme.&lt;/p&gt;
+&lt;h2 id="bash--en-wsl-ondersteuning-maken-de-ervaring-geloofwaardiger"&gt;Bash- en WSL-ondersteuning maken de ervaring geloofwaardiger&lt;/h2&gt;
+&lt;p&gt;Uitbreiden voorbij PowerShell was nodig.&lt;/p&gt;
+&lt;p&gt;Als dit soort terminalintelligentie relevant moet zijn voor meer ontwikkelaars, moet het werken op de plekken waar ontwikkelaars echt tijd doorbrengen. Bash- en WSL-ondersteuning is daar een belangrijk onderdeel van.&lt;/p&gt;
+&lt;h2 id="mijn-indruk"&gt;Mijn indruk&lt;/h2&gt;
+&lt;p&gt;Dit is nog steeds tooling in een vroege fase, maar de richting is goed.&lt;/p&gt;
+&lt;p&gt;De terminal is een van de meest natuurlijke plekken voor AI-ondersteunde probleemoplossing, commandoherstel en omgevingsbewuste begeleiding. Updates zoals deze maken het makkelijker om die toekomst voor je te zien.&lt;/p&gt;
+&lt;p&gt;Origineel artikel: &lt;a href="https://devblogs.microsoft.com/commandline/intelligent-terminal-0-1-1-is-here-bash-support-new-slash-commands-and-customization/"&gt;Intelligent Terminal 0.1.1 Is Starting to Show What an AI-Native Shell Experience Could Look Like&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

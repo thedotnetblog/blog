@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure Logic Apps | The .NET Blog</title><link>https://thedotnetblog.com/nl/tags/azure-logic-apps/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>nl</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 23 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/nl/tags/azure-logic-apps/index.xml" rel="self" type="application/rss+xml"/><item><title>De ingebouwde Cosmos DB-connector voor Logic Apps is relevanter dan het eerst lijkt</title><link>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/cosmosdb-logic-apps-built-in-connector-ga/</link><pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/nl/news/emiliano-montesdeoca/cosmosdb-logic-apps-built-in-connector-ga/</guid><description>De ingebouwde Azure Cosmos DB-connector voor Logic Apps Standard is nu algemeen beschikbaar. Het belangrijkste voordeel is niet alleen connectiviteit, maar in-process-uitvoering met lagere latentie, change feed-ondersteuning en een schoner pad naar event-driven en AI-gerichte workflows.</description><content:encoded>&lt;p&gt;Als mensen &amp;ldquo;connectoraankondiging&amp;rdquo; horen, is het makkelijk om aan te nemen dat het verhaal minder belangrijk is.&lt;/p&gt;
+&lt;p&gt;In dit geval denk ik dat de aankondiging meer credit verdient.&lt;/p&gt;
+&lt;p&gt;De &lt;strong&gt;ingebouwde Azure Cosmos DB-connector voor Logic Apps Standard&lt;/strong&gt; is nu algemeen beschikbaar, en wat het interessant maakt, is niet alleen dat Logic Apps met Cosmos DB kan praten. Het is dat de integratie natiever, performanter en realistischer wordt voor event-driven workflows.&lt;/p&gt;
+&lt;h2 id="waarom-ingebouwd-belangrijk-is"&gt;Waarom ingebouwd belangrijk is&lt;/h2&gt;
+&lt;p&gt;Het verschil tussen beheerde en ingebouwde connectors is geen triviale implementatiedetail.&lt;/p&gt;
+&lt;p&gt;In-process draaien met de Logic Apps-runtime betekent:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;lagere latentie&lt;/li&gt;
+&lt;li&gt;betere doorvoer&lt;/li&gt;
+&lt;li&gt;minder externe hops&lt;/li&gt;
+&lt;li&gt;een schonere fit voor high-volume of reactieve workflows&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;En als je &lt;strong&gt;change feed-triggers&lt;/strong&gt;, &lt;strong&gt;bulkbewerkingen&lt;/strong&gt;, &lt;strong&gt;patch-ondersteuning&lt;/strong&gt; en &lt;strong&gt;Entra ID-authenticatie&lt;/strong&gt; toevoegt, begint de connector eruit te zien als iets veel serieuzers dan &amp;ldquo;simpele workflowbekabeling&amp;rdquo;.&lt;/p&gt;
+&lt;h2 id="de-ai-invalshoek-is-ook-reëel"&gt;De AI-invalshoek is ook reëel&lt;/h2&gt;
+&lt;p&gt;De bespreking in de post over RAG-pijplijnen, embeddingflows en kennisbank-patronen is wat dit voor mij meer deed opvallen.&lt;/p&gt;
+&lt;p&gt;Zodra Logic Apps en Cosmos DB zo strak geïntegreerd zijn, kan het platform het volgende ondersteunen:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;reactieve ingestieflows&lt;/li&gt;
+&lt;li&gt;documentverrijkingspijplijnen&lt;/li&gt;
+&lt;li&gt;vector-gerelateerde workflows&lt;/li&gt;
+&lt;li&gt;no-code of low-code orchestratie rond AI-componenten&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Dat maakt de connector relevant voor meer dan alleen integratiespecialisten.&lt;/p&gt;
+&lt;h2 id="mijn-standpunt"&gt;Mijn standpunt&lt;/h2&gt;
+&lt;p&gt;Dit is het soort release dat waardevoller wordt naarmate je meer nadenkt over echte workflows in plaats van productcategorieën.&lt;/p&gt;
+&lt;p&gt;Voor teams die Logic Apps Standard en Cosmos DB samen gebruiken, geeft de GA-connector een sterkere basis voor event-driven integratie en AI-aangrenzende automatisering zonder overal aangepaste lijm.&lt;/p&gt;
+&lt;p&gt;Dat is de moeite waard om op te letten.&lt;/p&gt;
+&lt;p&gt;Oorspronkelijke post: &lt;a href="https://devblogs.microsoft.com/cosmosdb/announcing-general-availability-of-the-azure-cosmos-db-built-in-connector-for-logic-apps-standard/"&gt;Announcing General Availability of the Azure Cosmos DB Built-in Connector for Logic Apps Standard&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

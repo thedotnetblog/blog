@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Blazor | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/blazor/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 23 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/blazor/index.xml" rel="self" type="application/rss+xml"/><item><title>Copilot Studio が .NET 10 WebAssembly に移行して 20% 高速化した方法</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</link><pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</guid><description>.NET 10 WASM の改善は新しいプロジェクトだけのものではありません。.NET 8 からアップグレードした後に Copilot Studio が測定したもの：自動フィンガープリント、デフォルトの WasmStripILAfterAOT、そして実際の実行パフォーマンス数値。</description><content:encoded>&lt;p&gt;Copilot Studio チームは、すべての Blazor WASM 開発者が気になっていたことを実行しました：本番アプリケーションを .NET 8 から .NET 10 に実際にアップグレードし、結果を測定しました。投稿には具体的な数値が含まれており、それは珍しく本当に有用です。&lt;/p&gt;
+&lt;h2 id="アップグレードは退屈でしたそれは良いことです"&gt;アップグレードは退屈でした（それは良いことです）&lt;/h2&gt;
+&lt;p&gt;ターゲットフレームワークを更新し、パッケージ参照を更新し、破壊的変更を修正する。それだけです。.NET 10 ビルドは今や本番環境で稼働しています。移行自体は興味深い部分ではありませんでした—.NET 10 の変更がそうです。&lt;/p&gt;
+&lt;h2 id="自動アセットフィンガープリント"&gt;自動アセットフィンガープリント&lt;/h2&gt;
+&lt;p&gt;以前は、WASM アプリを配布するには、キャッシュバスティングのために公開されたアセットを SHA256 ハッシュで名前変更するカスタムスクリプトを書く必要がありました。Copilot Studio にはこれをまさに行う PowerShell スクリプトがありました—ファイルの名前変更、JavaScript ローダーへの &lt;code&gt;integrity&lt;/code&gt; 属性の注入、すべてを手動で管理する。&lt;/p&gt;
+&lt;p&gt;.NET 10 では、これらすべてが組み込まれています。公開されたアセットは自動的にフィンガープリントされ、&lt;code&gt;dotnet.js&lt;/code&gt; から直接インポートされ、手動介入なしに整合性検証されます。チームはリネームスクリプトを削除しました。&lt;/p&gt;
+&lt;p&gt;スコープの小さな変更、複雑さの大幅な削減。&lt;/p&gt;
+&lt;h2 id="wasmstripilafteraot-がデフォルトで有効に"&gt;WasmStripILAfterAOT がデフォルトで有効に&lt;/h2&gt;
+&lt;p&gt;.NET 8 では、AOT でコンパイルされたアセンブリから IL を削除することはオプトインでした。.NET 10 ではデフォルトです。AOT コンパイル後、元の IL バイトコードは出力から削除されます—ランタイムでは必要なく、それを保持することはパッケージサイズを無意味に膨らませていました。&lt;/p&gt;
+&lt;p&gt;Copilot Studio は特定の最適化を使用しています：JIT エンジン（高速起動）と AOT エンジン（最大ステディステートパフォーマンス）の両方を配布し、両方を並行して読み込み、準備ができたら JIT から AOT に引き渡します。また、2つのエンジン間で同一のファイルを重複排除します。&lt;/p&gt;
+&lt;p&gt;新しい IL 削除動作は、AOT アセンブリが JIT の対応物とビット単位で一致しなくなることを意味し、そのため重複排除されるファイルが少なくなります：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.NET 8：59 個の共有ファイル&lt;/li&gt;
+&lt;li&gt;.NET 10：22 個の共有ファイル&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;結果として：AOT エンジンのパッケージサイズが約 15% 大きくなります。AOT ダウンロードは高速 LAN で約 6% 遅く、4G で約 17% 遅くなります。しかし、これはすべてアプリがすでにインタラクティブになった後、バックグラウンドで行われます。&lt;/p&gt;
+&lt;h2 id="パフォーマンス数値"&gt;パフォーマンス数値&lt;/h2&gt;
+&lt;p&gt;重要なのはここです：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;最初の呼び出しで &lt;strong&gt;約 20% 高速&lt;/strong&gt;（コールドパス）&lt;/li&gt;
+&lt;li&gt;後続の呼び出しで &lt;strong&gt;約 5% 高速&lt;/strong&gt;（ウォームパス）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;改善は「大きなボット」で最も顕著です—AOT コンパイルされたコードが支配する大規模で複雑なエージェント。より単純なワークフローではゲインは小さくなります。&lt;/p&gt;
+&lt;h2 id="まだ-net-8-を使用している場合"&gt;まだ .NET 8 を使用している場合&lt;/h2&gt;
+&lt;p&gt;移行の話は本当にシンプルです：&lt;code&gt;&amp;lt;TargetFramework&amp;gt;&lt;/code&gt; を更新し、パッケージ参照を更新し、カスタムフィンガープリントスクリプトを削除すれば、自動的に &lt;code&gt;WasmStripILAfterAOT&lt;/code&gt; の恩恵を受けられます。AOT でコンパイルしている場合は、同様のパフォーマンス向上が期待できます。&lt;/p&gt;
+&lt;p&gt;投稿からの注意事項：.NET WASM ランタイムを &lt;code&gt;WebWorker&lt;/code&gt; の内部で読み込む場合は、初期化時に &lt;code&gt;dotnetSidecar = true&lt;/code&gt; を設定してください。&lt;/p&gt;
+&lt;p&gt;元の投稿：&lt;a href="https://devblogs.microsoft.com/dotnet/copilot-studio-dotnet-10-migration/"&gt;Copilot Studio gets faster with .NET 10 on WebAssembly&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

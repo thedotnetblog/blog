@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Windows Terminal | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/windows-terminal/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 04 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/windows-terminal/index.xml" rel="self" type="application/rss+xml"/><item><title>Intelligent Terminal 0.1 は、AI ネイティブな shell 体験への本格的な最初の一歩です</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/intelligent-terminal-0-1-first-serious-look/</link><pubDate>Thu, 04 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/intelligent-terminal-0-1-first-serious-look/</guid><description>Intelligent Terminal 0.1 は、ネイティブな agent pane、エラーを意識した支援、バックグラウンドタスク、command palette から起動する agent フローを追加します。まだ実験段階ですが、方向性はとても魅力的です。</description><content:encoded>&lt;p&gt;&lt;em&gt;この記事は自動翻訳されています。オリジナル版は&lt;a href="https://thedotnetblog.com/ja/news/emiliano-montesdeoca/intelligent-terminal-0-1-first-serious-look/"&gt;こちら&lt;/a&gt;をご覧ください。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;私は今でも、端末は AI 支援開発が本当に役立つようになる最も自然な場所のひとつだと思っています。&lt;/p&gt;
+&lt;p&gt;だからこそ、&lt;strong&gt;Intelligent Terminal 0.1&lt;/strong&gt; は、実験段階であっても真剣な発表に感じられました。&lt;/p&gt;
+&lt;p&gt;面白いのは、単に「端末内でチャットする」ことではありません。そこにあるのは、次のような native integration です。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;agent pane&lt;/li&gt;
+&lt;li&gt;エラー検出&lt;/li&gt;
+&lt;li&gt;セッション管理&lt;/li&gt;
+&lt;li&gt;バックグラウンドタスク&lt;/li&gt;
+&lt;li&gt;command palette から起動する agent アクション&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これで、単なる付け足しではなく、ちゃんとした shell 体験に近づき始めています。&lt;/p&gt;
+&lt;h2 id="元の記事は本当の痛点を理解しています"&gt;元の記事は本当の痛点を理解しています&lt;/h2&gt;
+&lt;p&gt;元記事の優れた点のひとつは、抽象的な AI の野心から始まらないことです。&lt;/p&gt;
+&lt;p&gt;とても普通の開発者体験から始まります。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;&lt;strong&gt;PowerShell のコマンドを実行してエラーが出て、それをコピーし、ブラウザーを開き、貼り付けて、複数のフォーラム投稿をたどりながら直したことはありませんか？&lt;/strong&gt;&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;この問いが機能するのは、あまりにも身に覚えがあるからです。&lt;/p&gt;
+&lt;p&gt;端末には、こうした小さな中断がたくさんあります。&lt;/p&gt;
+&lt;p&gt;だから、もし AI の居場所があるなら、それはまさにその中断のそばです。&lt;/p&gt;
+&lt;h2 id="ほとんどの-terminal-ai-デモよりも強く感じる理由"&gt;ほとんどの terminal AI デモよりも強く感じる理由&lt;/h2&gt;
+&lt;p&gt;これが興味深いのは、agent があるからだけではありません。&lt;/p&gt;
+&lt;p&gt;開発者が実際にどう働くかを中心に、端末体験そのものが再構想されているからです。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;永続的な agent surface&lt;/li&gt;
+&lt;li&gt;shell 出力からの context&lt;/li&gt;
+&lt;li&gt;エラーが出たときの素早い支援&lt;/li&gt;
+&lt;li&gt;バックグラウンドタスクの起動&lt;/li&gt;
+&lt;li&gt;セッションの再開&lt;/li&gt;
+&lt;li&gt;入り口としての command palette&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これは、shell ウィンドウに貼り付いた浮遊 chat bot よりも、ずっと実用的な workflow に近いです。&lt;/p&gt;
+&lt;h2 id="ここでの本当の製品は-agent-pane-です"&gt;ここでの本当の製品は agent pane です&lt;/h2&gt;
+&lt;p&gt;設計の中で最も重要な部分をひとつ選ぶなら、たぶん agent pane です。&lt;/p&gt;
+&lt;p&gt;なぜか。
+2 つのやりづらいモードの中間を作るからです。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;端末を完全に離れる&lt;/li&gt;
+&lt;li&gt;あるいは、やり取りすべてを inline shell text に押し込む&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これは良い設計判断です。&lt;/p&gt;
+&lt;p&gt;端末を作業面として尊重しつつ、agent に autocomplete 以上の役割を持たせるのに十分な余地を与えています。&lt;/p&gt;
+&lt;h2 id="エラー検出は価値がはっきり見え始める場所です"&gt;エラー検出は、価値がはっきり見え始める場所です&lt;/h2&gt;
+&lt;p&gt;自動エラー検出も、ここではまさに意味のある機能です。&lt;/p&gt;
+&lt;p&gt;端末にはすでに context があります。
+エラーはすでに起きています。
+そして開発者はまだ flow の中にいます。&lt;/p&gt;
+&lt;p&gt;だから shell は、次のようなことに最適な場所になります。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;すぐに診断する&lt;/li&gt;
+&lt;li&gt;修正案を出す&lt;/li&gt;
+&lt;li&gt;すばやく反復する&lt;/li&gt;
+&lt;li&gt;現在の環境を離れずに追加で考える&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これは魔法ではありません。workflow を正しい場所に置いているだけです。&lt;/p&gt;
+&lt;h2 id="私の見方"&gt;私の見方&lt;/h2&gt;
+&lt;p&gt;まだ初期段階ですが、これまで見た terminal AI の方向性の中でも、かなり有望なもののひとつです。&lt;/p&gt;
+&lt;p&gt;魔法を約束しているからではありません。
+開発者が shell の中で既にどう働いているかに、きちんと寄り添っているからです。&lt;/p&gt;
+&lt;p&gt;そしてこの方向で進化し続けるなら、Microsoft のツール群の中でもっとも興味深い AI ネイティブな開発体験のひとつになるかもしれません。&lt;/p&gt;
+&lt;p&gt;元記事: &lt;a href="https://devblogs.microsoft.com/commandline/announcing-intelligent-terminal-version-0-1/"&gt;Announcing Intelligent Terminal 0.1&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

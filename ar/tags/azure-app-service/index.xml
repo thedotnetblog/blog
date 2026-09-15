@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure App Service | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/azure-app-service/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 05 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/azure-app-service/index.xml" rel="self" type="application/rss+xml"/><item><title>خادم SQL MCP على Azure App Service — بدون حاويات</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</link><pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</guid><description>يمكن لخادم SQL MCP الآن العمل على Azure App Service بدون Docker أو Kubernetes. ماذا يعني ذلك لمطوري .NET الذين يبنون وكلاء ذكاء اصطناعي تتواصل مع قواعد بيانات SQL.</description><content:encoded>&lt;p&gt;&lt;em&gt;تمت ترجمة هذه المقالة تلقائياً. للاطلاع على النسخة الأصلية، &lt;a href="https://thedotnetblog.com/ar/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/"&gt;انقر هنا&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;لأكن صريحاً: في كل مرة أرى &amp;ldquo;يتطلب حاوية&amp;rdquo; في برنامج تعليمي، يخرج مني تنهيدة صغيرة. الحاويات رائعة — حتى لا يكون لدى فريقك استراتيجية للحاويات، وفجأة تصطدم ميزة بدت بسيطة بتعقيد تنسيق غير متوقع لم يخطط له أحد.&lt;/p&gt;
+&lt;p&gt;لهذا السبب استرعى هذا انتباهي. يمكن لخادم SQL MCP الآن العمل على Azure App Service — بدون Docker، بدون Kubernetes، فقط مع نفس ملف تكوين Data API Builder (DAB) الذي يكشف قاعدة بيانات SQL الخاصة بك عبر MCP وREST وGraphQL.&lt;/p&gt;
+&lt;h2 id="ما-هو-خادم-sql-mcp"&gt;ما هو خادم SQL MCP؟&lt;/h2&gt;
+&lt;p&gt;مقدمة سريعة إن لم تكن على دراية بعد. يجلس خادم SQL MCP بين وكيل الذكاء الاصطناعي وقاعدة بيانات SQL. بدلاً من منح الوكيل وصولاً مباشراً إلى قاعدة البيانات (فكرة سيئة جداً)، يكشف جداولك ومشاهداتك كطبقة تجريد — كيانات بأذونات محددة.&lt;/p&gt;
+&lt;p&gt;مبني على &lt;a href="https://learn.microsoft.com/ar-sa/azure/data-api-builder/"&gt;Data API Builder&lt;/a&gt;، مما يعني أن ملف تكوين واحد يدير MCP &lt;em&gt;و&lt;/em&gt; REST &lt;em&gt;و&lt;/em&gt; GraphQL في آنٍ واحد. يتحدث وكيلك مع نقطة نهاية MCP. يتحدث تطبيقك التقليدي مع REST أو GraphQL. نفس التكوين، نفس بيئة التشغيل، واجهات مختلفة.&lt;/p&gt;
+&lt;p&gt;هذا مفيد حقاً — لا داعي للحفاظ على طبقتي API منفصلتين.&lt;/p&gt;
+&lt;h2 id="مشكلة-الحاوية-والحل"&gt;مشكلة الحاوية (والحل)&lt;/h2&gt;
+&lt;p&gt;استخدم نموذج النشر الأصلي لخادم SQL MCP الحاويات. يعمل بشكل جيد في كثير من الفرق — لكن ليس في جميعها. تعتمد كثير من فرق .NET معياراً على Azure App Service أو الأجهزة الافتراضية. إلزام بيئة تشغيل حاويات فقط لكشف نقطة نهاية SQL يضيف احتكاكاً لم يطلبه أحد.&lt;/p&gt;
+&lt;p&gt;يُظهر الإرشاد الجديد كيفية تخطي الحاوية تماماً. كل شيء يعمل بأمر &lt;code&gt;dab start&lt;/code&gt;، مستضافاً على App Service كعملية ويب .NET 8 قياسية.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# تثبيت Data API Builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet tool install microsoft.dataapibuilder --prerelease -g
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# تهيئة التكوين&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --host-mode Development --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;SQL_CONNECTION_STRING&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# إضافة كيان&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add products --source dbo.products --permissions &lt;span class="s2"&gt;&amp;#34;authenticated:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# تكوين موفر مصادقة App Service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab configure --runtime.host.authentication.provider AppService
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# تشغيل الخادم&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;عند هذه النقطة لديك MCP على &lt;code&gt;/mcp&lt;/code&gt;، وREST وGraphQL من نفس العملية — ولا شيء يعمل في حاوية.&lt;/p&gt;
+&lt;h2 id="المصادقة-بدون-مفاتيح-api-مشتركة"&gt;المصادقة بدون مفاتيح API مشتركة&lt;/h2&gt;
+&lt;p&gt;هذا هو الجزء الذي أقدّره أكثر. عند النشر على App Service، تقوم بتكوين Microsoft Entra ID كموفر مصادقة. لا أسرار مشتركة في ملفات التكوين، ولا مفاتيح API للتدوير.&lt;/p&gt;
+&lt;p&gt;تبقى سلسلة الاتصال في متغيرات بيئة App Service (وليس في &lt;code&gt;dab-config.json&lt;/code&gt;)، ونقطة نهاية MCP محمية بمصادقة المنصة. إذا كانت أحمال عمل Azure لديك متوافقة بالفعل مع Entra ID، فهذا يندمج بشكل طبيعي.&lt;/p&gt;
+&lt;p&gt;للتطوير المحلي، انتقل إلى وضع &lt;code&gt;Simulator&lt;/code&gt; ونقل STDIO. عُد إلى وضع &lt;code&gt;AppService&lt;/code&gt; قبل النشر. نظيف وصريح.&lt;/p&gt;
+&lt;h2 id="النشر-على-app-service"&gt;النشر على App Service&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az appservice plan create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --sku B1 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --is-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --plan &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --runtime &lt;span class="s2"&gt;&amp;#34;DOTNETCORE:8.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp config &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --startup-file &lt;span class="s2"&gt;&amp;#34;dab start&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ثم انشر مشروع DAB الخاص بك باستخدام أسلوب نشر الكود الذي يستخدمه فريقك بالفعل. التفصيل الرئيسي: هذا نشر &lt;strong&gt;كود&lt;/strong&gt;، وليس نشر حاوية.&lt;/p&gt;
+&lt;h2 id="لماذا-يهم-مطوري-net"&gt;لماذا يهم مطوري .NET&lt;/h2&gt;
+&lt;p&gt;إذا كنت تبني وكلاء ذكاء اصطناعي في .NET، فإن وكيلك سيحتاج في نهاية المطاف إلى التواصل مع قاعدة بيانات. يمنحك خادم SQL MCP طريقة منظمة للقيام بذلك دون الكشف عن سلاسل الاتصال الخام.&lt;/p&gt;
+&lt;p&gt;راجع الإرشاد الكامل في &lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-app-service/"&gt;المقالة الأصلية&lt;/a&gt; و&lt;a href="https://github.com/Azure-Samples/SQL-MCP-NoContainer"&gt;مستودع العينات على GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="الخلاصة"&gt;الخلاصة&lt;/h2&gt;
+&lt;p&gt;خادم SQL MCP على App Service خيار عملي لفرق .NET التي تريد منح وكلائها وصولاً منظماً إلى بيانات SQL بدون استراتيجية حاويات. جرّبه — سيقدّر وكلاؤك واجهة API النظيفة.&lt;/p&gt;</content:encoded></item></channel></rss>

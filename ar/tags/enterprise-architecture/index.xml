@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Enterprise-Architecture | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/enterprise-architecture/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Thu, 16 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/enterprise-architecture/index.xml" rel="self" type="application/rss+xml"/><item><title>Claude GA في Foundry يتعلق بسباكة المؤسسات، وليس ضجة النموذج</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/claude-ga-in-microsoft-foundry-enterprise-path/</link><pubDate>Thu, 16 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/claude-ga-in-microsoft-foundry-enterprise-path/</guid><description>التوفر العام مهم لأنه يحل احتكاك المشتريات والحوكمة والإقامة الذي يعيق AI الإنتاجي.</description><content:encoded>&lt;p&gt;المصدر الأصلي: &lt;a href="https://azure.microsoft.com/en-us/blog/claude-in-microsoft-foundry-is-now-generally-available/"&gt;Claude in Microsoft Foundry is now generally available&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;معظم تأخيرات AI في المؤسسات لا تسببها جودة النموذج. بل تسببها كل ما حول النموذج: الهوية، الفوترة، الإقامة، الموافقات، وتطبيق السياسات. لهذا السبب هذا الإعلان عن GA مهم.&lt;/p&gt;
+&lt;p&gt;توفر Claude داخل Microsoft Foundry على Azure هو فوز تغليفي لتنفيذ المؤسسات. يمكن للفرق استخدام هياكل حسابات Azure الموجودة، وعناصر التحكم في الحوكمة الموجودة، وقنوات إدارة التكاليف الموجودة. للمؤسسات الكبيرة، هذا غالبًا ما يقرر ما إذا كان النموذج الأولي سيصبح نظام إنتاج.&lt;/p&gt;
+&lt;p&gt;المزايا العملية واضحة:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;المصادقة والتحكم في الوصول تتدفق عبر أنماط Entra و RBAC المألوفة.&lt;/li&gt;
+&lt;li&gt;الاستهلاك يظهر في فواتير Azure الموحدة مع توافق التزام المؤسسة.&lt;/li&gt;
+&lt;li&gt;خيارات مناطق البيانات وخيارات عدم الاحتفاظ تعالج الحدود القانونية والامتثالية مبكرًا.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;رأيي القوي: هذا ما يبدو عليه تبني AI في المؤسسات فعليًا: ليس نموذجًا واحدًا أفضل، بل حقيبة نماذج محكومة مع توجيه وتقييم وطبقات سياسات فوقها. تمركز Foundry حول توجيه النموذج وحواجز الحماية في مستوى التحكم يدعم تلك البنية.&lt;/p&gt;
+&lt;p&gt;الفرق يجب أن تتجنب فكرة خاطئة واحدة: عناصر تحكم المنصة المدارة لا تحل محل المسؤولية على مستوى التطبيق. لا تزال بحاجة إلى تقييمات خاصة بالمنتج، وسياسات الرفض، وسيناريوهات الفريق الأحمر، وتصميم سلوك التراجع. حوكمة المنصة هي الأساس، وليس المبنى بأكمله.&lt;/p&gt;
+&lt;p&gt;إذا كنت تدير أعباء عمل .NET، هذا الإعلان هو إشارة لتوحيد نموذج تكامل AI الخاص بك الآن:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;استخدم تجريدًا داخليًا واحدًا لاستدعاء النموذج والتليمترية عبر المزودين.&lt;/li&gt;
+&lt;li&gt;مركز مجموعات التقييم وفحوصات السياسات قبل إضافة المزيد من نقاط نهاية النموذج.&lt;/li&gt;
+&lt;li&gt;حافظ على إصدار سلوك التعليمات والأدوات حتى تتمكن من تدقيق تغييرات السلوك بمرور الوقت.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;هذا مهم بشكل خاص مع تحول أنماط الوكيل إلى أنماط متعددة الخطوات ومعززة بالأدوات. تكلفة الضوابط الضعيفة تتزايد بشكل غير خطي مع الاستقلالية.&lt;/p&gt;
+&lt;p&gt;ما يعجبني في لحظة GA هذه هو أنها توائم قدرة النموذج مع واقع المؤسسة. جودة الحدود وحدها ليست كافية. فرق المشتريات تحتاج سجلات إنفاق نظيفة. فرق الأمان تحتاج نقاط تحكم. فرق المنصة تحتاج سلوك تشغيلي قابل للتنبؤ.&lt;/p&gt;
+&lt;p&gt;عندما توجد هذه القطع، يمكن للتجريب أخيرًا أن يتخرج إلى عمل منتج دائم.&lt;/p&gt;
+&lt;p&gt;إذا كانت مؤسستك تنتظر مسارًا موثوقًا تشغيليًا لنشر Claude-class للاستدلال داخل بيئة Azure أصلية، فهذه على الأرجح نقطة التحول. فقط لا تتوقف عند التمكين. اقرنها بانضباط تقييم صارم وملكية واضحة لسلوك الوكيل.&lt;/p&gt;
+&lt;p&gt;الوصول إلى النموذج سهل الآن. التنفيذ الجدير بالثقة لا يزال هو العامل المميز.&lt;/p&gt;</content:encoded></item></channel></rss>

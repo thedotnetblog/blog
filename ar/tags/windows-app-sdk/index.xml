@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Windows App SDK | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/windows-app-sdk/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 08 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/windows-app-sdk/index.xml" rel="self" type="application/rss+xml"/><item><title>مكوّن إضافي لعامل WinUI لـ GitHub Copilot و Claude Code</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/winui-agent-plugin-github-copilot-claude-code/</link><pubDate>Mon, 08 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/winui-agent-plugin-github-copilot-claude-code/</guid><description>أصدرت Microsoft مهارات العامل لتطوير WinUI: سقالة، بناء، تشغيل، اختبار، تكرار - كل ذلك مع GitHub Copilot CLI أو Claude Code. الابتكار الرئيسي: أدوات مخصصة تُثبّت العامل في حقائق خاصة بـ WinUI.</description><content:encoded>&lt;p&gt;نشرت Microsoft مجموعة مهارات عامل مفتوحة المصدر لتطوير تطبيقات WinUI، متاحة على &lt;a href="https://aka.ms/winui-skills"&gt;aka.ms/winui-skills&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="التثبيت-والإعداد"&gt;التثبيت والإعداد&lt;/h2&gt;
+&lt;p&gt;ثبّت المكوّن الإضافي باستخدام &lt;code&gt;/plugin install winui@awesome-copilot&lt;/code&gt;، ثم قم بتشغيل الإعداد الأولي باستخدام &lt;code&gt;/winui:winui-setup&lt;/code&gt;. تتحقق عملية الإعداد من المتطلبات الأساسية، وتثبّت التبعيات الضرورية، وتهيّئ البيئة لتطوير تطبيقات WinUI.&lt;/p&gt;
+&lt;h2 id="حلقة-التطوير-الشاملة"&gt;حلقة التطوير الشاملة&lt;/h2&gt;
+&lt;p&gt;تغطي المهارات دورة التطوير الكاملة:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;السقالة:&lt;/strong&gt; تُولّد قالب المشروع الصحيح باستخدام &lt;code&gt;dotnet new WinUI&lt;/code&gt; بالمعاملات المناسبة — يعرف العامل القوالب الصحيحة وقيم التكوين الافتراضية.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;البناء:&lt;/strong&gt; يدير نموذج التنفيذ المحزوم الذي تتطلبه تطبيقات WinUI، بما في ذلك توقيع الحزمة وتكوينات المانيفست.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;التفاعل والتحقق:&lt;/strong&gt; يُشغّل التطبيق، ويتفاعل معه، ويتحقق من السلوك.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;إصلاح أخطاء الترجمة:&lt;/strong&gt; يفهم العامل رسائل الخطأ الخاصة بـ WinUI ويعرف كيفية حلها.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="كفاءة-الرموز-من-خلال-الأدوات-المخصصة"&gt;كفاءة الرموز من خلال الأدوات المخصصة&lt;/h2&gt;
+&lt;p&gt;الابتكار الرئيسي هو أن المهارات تتضمن أدوات مخصصة تجلب بيانات مرجعية ملموسة عند الطلب:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;تفاصيل API الخاصة بـ WinUI و Fluent Design&lt;/li&gt;
+&lt;li&gt;أنماط MVVM وأفضل الممارسات&lt;/li&gt;
+&lt;li&gt;تعبئة MSIX، توقيع الكود، والتقديم إلى Store&lt;/li&gt;
+&lt;li&gt;إمكانية الوصول، والسمات، وأتمتة واجهة المستخدم&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;بدلاً من حقن وثائق WinUI بالكامل في السياق، تجلب الأدوات بالضبط ما يحتاجه العامل في اللحظة التي يحتاجه فيها. يُبقي هذا استخدام السياق فعّالاً ويُحسّن الدقة في المجالات المتخصصة.&lt;/p&gt;
+&lt;h2 id="لماذا-المهارات-المخصصة-مهمة"&gt;لماذا المهارات المخصصة مهمة&lt;/h2&gt;
+&lt;p&gt;تمتلك نماذج اللغة ذات الأغراض العامة معرفة محدودة بخصائص WinUI: نموذج التنفيذ المحزوم، وAPIs Fluent Design، وتكامل MSIX، أو الطريقة المحددة التي يُغلّف بها Windows App SDK وظائف Win32. تحل الأدوات المخصصة هذه المشكلة بتثبيت العامل في حقائق WinUI المحققة بدلاً من المعرفة التي قد تكون قديمة أو غير صحيحة.&lt;/p&gt;
+&lt;p&gt;ينطبق نفس النمط على أي إطار عمل أو SDK متخصص له اتفاقياته ومتطلباته الخاصة التي تختلف عن أنماط التطوير العامة.&lt;/p&gt;
+&lt;p&gt;المنشور الأصلي: &lt;a href="https://devblogs.microsoft.com/ifdef-windows/winui-agent-plugin-github-copilot-claude-code/"&gt;A WinUI Agent Plugin for GitHub Copilot and Claude Code&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>dotnet new WinUI: إنشاء تطبيقات Windows دون الحاجة إلى Visual Studio</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/dotnet-new-winui-templates-cli-vscode/</link><pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/dotnet-new-winui-templates-cli-vscode/</guid><description>قوالب مشاريع WinUI تعمل الآن مع dotnet new — تطبيقات فارغة، أنماط NavigationView والمزيد. دعم VS Code، لا يلزم Visual Studio، مع إعدادات Fluent Design الافتراضية مدمجة.</description><content:encoded>&lt;p&gt;كان تطوير WinUI يتطلب Visual Studio في السابق. هذا يتغير الآن: نشرت Microsoft قوالب مشاريع وعناصر مفتوحة المصدر لـ WinUI تعمل مع &lt;code&gt;dotnet new&lt;/code&gt;، مما يجلب تطوير تطبيقات Windows إلى سير عمل CLI القياسي.&lt;/p&gt;
+&lt;h2 id="البدء-بثلاثة-أوامر"&gt;البدء بثلاثة أوامر&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# تثبيت القوالب&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet new install Microsoft.WindowsAppSDK.WinUI.CSharp.Templates
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# إنشاء تطبيق NavigationView&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet new winui-navview -n MyApp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# التشغيل&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; MyApp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;لا Visual Studio، لا إعداد يدوي للمشروع. يعمل التطبيق باستخدام &lt;code&gt;dotnet run&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="ما-هو-متضمن"&gt;ما هو متضمن&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;القالب الفارغ&lt;/strong&gt; (&lt;code&gt;dotnet new winui&lt;/code&gt;) — نقطة انطلاق حديثة مع شريط عنوان Fluent متصل مسبقًا، أيقونة تطبيق افتراضية محدّثة بأصل &lt;code&gt;.ico&lt;/code&gt;، وإعدادات افتراضية صحيحة للوضع الفاتح/الداكن. أفضل من القالب الفارغ القديم الذي كان يتركك تضبط الأساسيات بنفسك.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;قالب NavigationView&lt;/strong&gt; (&lt;code&gt;dotnet new winui-navview&lt;/code&gt;) — نمط التنقل الرئيسي-التفصيلي، متصل بالكامل مع NavigationView وشريط عنوان حديث وبنية تنقل متعددة الصفحات. يتبع صورة تطبيق Windows القياسية للتطبيقات المعتمدة على التنقل. إذا كنت تبني شيئًا يحتوي على تنقل جانبي، ابدأ من هنا.&lt;/p&gt;
+&lt;p&gt;يتبع كلا القالبين &lt;a href="https://learn.microsoft.com/windows/apps/design/basics/app-silhouette"&gt;صور تطبيقات Windows&lt;/a&gt; — أنماط Fluent Design الحديثة للتخطيط والتنقل والبنية المرئية — مباشرةً.&lt;/p&gt;
+&lt;h2 id="لماذا-يهم-هذا-للمطورين-خارج-visual-studio"&gt;لماذا يهم هذا للمطورين خارج Visual Studio&lt;/h2&gt;
+&lt;p&gt;كان مطورو WinUI الذين يستخدمون VS Code أو Rider أو أدوات سطر الأوامر في وضع غير مناسب. القوالب الموجودة في Visual Studio لم تكن قابلة للاستخدام خارج VS — كان لا بد من إعادة إنشاء بنية المشروع يدويًا وتوصيل الأساسيات.&lt;/p&gt;
+&lt;p&gt;هذه القوالب مفتوحة المصدر (انظر &lt;a href="https://github.com/microsoft/WindowsAppSDK/pull/6407"&gt;WindowsAppSDK PR #6407&lt;/a&gt;)، طُوِّرت من &lt;a href="https://github.com/microsoft/microsoft-ui-xaml/issues/10388"&gt;ملاحظات المجتمع&lt;/a&gt;، ومتاحة الآن. دعم Visual Studio قيد التطوير — ستعمل هذه القوالب نفسها هناك أيضًا في نهاية المطاف.&lt;/p&gt;
+&lt;p&gt;للفرق التي تريد أتمتة إعداد مشاريع WinUI، أو دمجه في CI، أو ببساطة استخدام محرر غير Visual Studio، هذا تحسين ذو معنى.&lt;/p&gt;
+&lt;p&gt;المنشور الأصلي: &lt;a href="https://devblogs.microsoft.com/ifdef-windows/introducing-dotnet-new-templates-for-winui/"&gt;Introducing dotnet new WinUI templates&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure App Service | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/azure-app-service/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 05 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/azure-app-service/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL MCP Server Azure App Service'te — Konteyner Gerekmez</title><link>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</link><pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</guid><description>SQL MCP Server artık Docker veya Kubernetes olmadan Azure App Service'te çalışabiliyor. SQL veritabanlarıyla iletişim kuran AI ajanları geliştiren .NET geliştiricileri için ne anlama geldiğini ele alıyoruz.</description><content:encoded>&lt;p&gt;&lt;em&gt;Bu yazı otomatik olarak çevrilmiştir. Orijinal sürüm için &lt;a href="https://thedotnetblog.com/tr/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/"&gt;buraya tıklayın&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Dürüst olmak gerekirse: bir öğreticide &amp;ldquo;konteyner gerektirir&amp;rdquo; ifadesini her gördüğümde içimden bir ah çıkıyor. Konteynerler harika — ta ki ekibinizin bir konteyner stratejisi olmayana kadar, ve basit görünen bir özellik aniden kimsenin planlamadığı beklenmedik orkestrasyon karmaşıklığına takılıp kalıyor.&lt;/p&gt;
+&lt;p&gt;İşte bu yüzden bu dikkatimi çekti. SQL MCP Server artık Azure App Service&amp;rsquo;te çalışabiliyor — Docker yok, Kubernetes yok, yalnızca SQL veritabanınızı MCP, REST ve GraphQL üzerinden açığa çıkaran aynı Data API Builder (DAB) yapılandırma dosyasıyla.&lt;/p&gt;
+&lt;h2 id="sql-mcp-server-nedir"&gt;SQL MCP Server Nedir?&lt;/h2&gt;
+&lt;p&gt;Henüz tanışmadıysanız hızlı bir giriş. SQL MCP Server, AI ajanınız ile SQL veritabanı arasına konumlanır. Ajana veritabanına doğrudan erişim vermek yerine (berbat bir fikir), tablolarınızı ve görünümlerinizi tanımlı izinlere sahip varlıklar olarak bir soyutlama katmanıyla açığa çıkarır.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://learn.microsoft.com/tr-tr/azure/data-api-builder/"&gt;Data API Builder&lt;/a&gt; üzerine inşa edilmiştir; bu da tek bir yapılandırma dosyasının MCP &lt;em&gt;ve&lt;/em&gt; REST &lt;em&gt;ve&lt;/em&gt; GraphQL&amp;rsquo;i aynı anda yönettiği anlamına gelir. Ajanınız MCP uç noktasıyla konuşur. Geleneksel uygulamanız REST veya GraphQL ile konuşur. Aynı yapılandırma, aynı çalışma zamanı, farklı yüzeyler.&lt;/p&gt;
+&lt;p&gt;Bu gerçekten kullanışlı — iki ayrı API katmanını sürdürmenize gerek yok.&lt;/p&gt;
+&lt;h2 id="konteyner-sorunu-ve-çözümü"&gt;Konteyner Sorunu (ve Çözümü)&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server&amp;rsquo;ın orijinal dağıtım modeli konteyner kullanıyordu. Pek çok ekip için iyi çalışıyor — ama hepsi için değil. Birçok .NET ekibi Azure App Service veya sanal makinelerde standartlaşmış. Yalnızca bir SQL uç noktasını açığa çıkarmak için konteyner çalışma zamanı gerektirmek, kimsenin istemediği bir sürtünme yaratıyor.&lt;/p&gt;
+&lt;p&gt;Yeni kılavuz konteyneri tamamen atlama yöntemini gösteriyor. Her şey &lt;code&gt;dab start&lt;/code&gt; komutuyla çalışıyor ve App Service üzerinde standart bir .NET 8 web süreci olarak barındırılıyor.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Data API Builder&amp;#39;ı yükleyin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet tool install microsoft.dataapibuilder --prerelease -g
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Yapılandırmayı başlatın&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --host-mode Development --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;SQL_CONNECTION_STRING&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Bir varlık ekleyin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add products --source dbo.products --permissions &lt;span class="s2"&gt;&amp;#34;authenticated:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# App Service kimlik doğrulama sağlayıcısını yapılandırın&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab configure --runtime.host.authentication.provider AppService
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Sunucuyu başlatın&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Bu noktada &lt;code&gt;/mcp&lt;/code&gt;&amp;lsquo;de MCP&amp;rsquo;niz var, aynı süreçten REST ve GraphQL var — ve hiçbir şey bir konteynerde çalışmıyor.&lt;/p&gt;
+&lt;h2 id="paylaşılan-api-anahtarı-olmadan-kimlik-doğrulama"&gt;Paylaşılan API Anahtarı Olmadan Kimlik Doğrulama&lt;/h2&gt;
+&lt;p&gt;En çok değer verdiğim kısım bu. App Service&amp;rsquo;e dağıtırken Microsoft Entra ID&amp;rsquo;yi kimlik doğrulama sağlayıcısı olarak yapılandırıyorsunuz. Yapılandırma dosyalarında paylaşılan sır yok, döndürülecek API anahtarı yok.&lt;/p&gt;
+&lt;p&gt;Bağlantı dizesi App Service ortam değişkenlerinde tutuluyor (&lt;code&gt;dab-config.json&lt;/code&gt;&amp;lsquo;da değil) ve MCP uç noktası platform kimlik doğrulamasıyla korunuyor. Azure iş yükleriniz Entra ID ile zaten uyumluysa bu doğal bir şekilde entegre oluyor.&lt;/p&gt;
+&lt;p&gt;Yerel geliştirme için &lt;code&gt;Simulator&lt;/code&gt; moduna ve STDIO aktarımına geçin. Dağıtımdan önce &lt;code&gt;AppService&lt;/code&gt; moduna geri dönün. Temiz ve açık.&lt;/p&gt;
+&lt;h2 id="app-servicee-dağıtım"&gt;App Service&amp;rsquo;e Dağıtım&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az appservice plan create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --sku B1 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --is-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --plan &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --runtime &lt;span class="s2"&gt;&amp;#34;DOTNETCORE:8.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp config &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --startup-file &lt;span class="s2"&gt;&amp;#34;dab start&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ardından ekibinizin halihazırda kullandığı kod dağıtım yöntemini kullanarak DAB projenizi dağıtın. Önemli nokta: bu bir &lt;strong&gt;kod&lt;/strong&gt; dağıtımıdır, konteyner dağıtımı değil.&lt;/p&gt;
+&lt;h2 id="net-geliştiricileri-için-neden-önemli"&gt;.NET Geliştiricileri İçin Neden Önemli&lt;/h2&gt;
+&lt;p&gt;.NET&amp;rsquo;te AI ajanları geliştiriyorsanız, er ya da geç ajanınızın bir veritabanıyla iletişim kurması gerekecek. SQL MCP Server, ham bağlantı dizelerini açığa çıkarmadan bunu yapmanın yapılandırılmış bir yolunu sunuyor.&lt;/p&gt;
+&lt;p&gt;Tam kılavuzu &lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-app-service/"&gt;orijinal blog yazısında&lt;/a&gt; ve &lt;a href="https://github.com/Azure-Samples/SQL-MCP-NoContainer"&gt;GitHub örnek deposunda&lt;/a&gt; inceleyin.&lt;/p&gt;
+&lt;h2 id="sonuç"&gt;Sonuç&lt;/h2&gt;
+&lt;p&gt;App Service&amp;rsquo;teki SQL MCP Server, konteyner stratejisi olmaksızın ajanlara yapılandırılmış SQL veri erişimi sağlamak isteyen .NET ekipleri için pratik bir seçenek. Deneyin — ajanlarınız temiz API yüzeyini takdir edecek.&lt;/p&gt;</content:encoded></item></channel></rss>

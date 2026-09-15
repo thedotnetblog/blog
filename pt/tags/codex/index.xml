@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Codex | The .NET Blog</title><link>https://thedotnetblog.com/pt/tags/codex/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>pt</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/pt/tags/codex/index.xml" rel="self" type="application/rss+xml"/><item><title>Mission Control para Agentes de Codificação: Uma Experiência Unificada no VS Code</title><link>https://thedotnetblog.com/pt/news/emiliano-montesdeoca/unified-agent-experience-mission-control/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/pt/news/emiliano-montesdeoca/unified-agent-experience-mission-control/</guid><description>O VS Code reúne agentes de codificação locais, na nuvem, CLI e de terceiros em Sessões de Agentes, permitindo que os desenvolvedores acompanhem, interrompam e coordenem trabalhos autônomos.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Este post foi traduzido automaticamente. Para a versão original, &lt;a href="https://thedotnetblog.com/pt/news/emiliano-montesdeoca/unified-agent-experience-mission-control/"&gt;clique aqui&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id="mission-control-para-agentes-de-codificação-uma-experiência-unificada-no-vs-code"&gt;Mission Control para Agentes de Codificação: Uma Experiência Unificada no VS Code&lt;/h1&gt;
+&lt;p&gt;Um único assistente de codificação é fácil de entender. Vários agentes trabalhando em lugares diferentes não são.&lt;/p&gt;
+&lt;p&gt;Um agente é executado localmente no VS Code. Outro trabalha em uma issue do GitHub na nuvem. Um agente CLI vive no terminal. Um agente de codificação de terceiros pode ter um modelo de sessão diferente e limites diferentes. Sem uma visão compartilhada, os desenvolvedores gastam mais tempo rastreando o trabalho do que supervisionando-o.&lt;/p&gt;
+&lt;p&gt;A experiência unificada de agentes do VS Code aborda esse problema de coordenação com Sessões de Agentes: um lugar para lançar agentes, ver seu status, abrir suas conversas e intervir quando o plano muda.&lt;/p&gt;
+&lt;p&gt;Trata-se menos de adicionar outro agente e mais de tornar múltiplos agentes gerenciáveis.&lt;/p&gt;
+&lt;h2 id="uma-visão-para-diferentes-tipos-de-trabalho"&gt;Uma Visão para Diferentes Tipos de Trabalho&lt;/h2&gt;
+&lt;p&gt;O artigo de origem descreve quatro participantes distintos: GitHub Copilot local, Agente de Codificação Copilot na nuvem, GitHub Copilot CLI e OpenAI Codex para assinantes Copilot elegíveis.&lt;/p&gt;
+&lt;p&gt;Eles têm pontos fortes diferentes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Um agente local pode inspecionar o workspace atual e fazer mudanças rápidas.&lt;/li&gt;
+&lt;li&gt;Um agente de codificação na nuvem pode trabalhar de forma assíncrona em uma issue e abrir um pull request.&lt;/li&gt;
+&lt;li&gt;Um agente CLI se encaixa bem em workflows pesados de terminal e comandos operacionais.&lt;/li&gt;
+&lt;li&gt;Outro provedor pode oferecer um modelo ou estilo de raciocínio diferente.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As Sessões de Agentes oferecem um lar comum para essas tarefas. Você pode ver o que está em execução, o que está fazendo e onde continuar a conversa.&lt;/p&gt;
+&lt;p&gt;Essa visibilidade é importante porque o trabalho autônomo não remove a coordenação. Torna a coordenação uma tarefa de engenharia de primeira classe.&lt;/p&gt;
+&lt;h2 id="interrupções-fazem-parte-do-fluxo-de-trabalho"&gt;Interrupções Fazem Parte do Fluxo de Trabalho&lt;/h2&gt;
+&lt;p&gt;A fonte faz uma observação simples: &amp;ldquo;É comum enviar um prompt e perceber que você esqueceu algo importante.&amp;rdquo; Anteriormente, a escolha era frequentemente esperar ou cancelar. Com editores de chat, você pode abrir uma sessão ativa e adicionar informações enquanto o agente está trabalhando.&lt;/p&gt;
+&lt;p&gt;Isso é mais próximo de uma verdadeira colaboração. Os requisitos mudam. Um teste revela uma suposição. Um revisor percebe que uma API deve permanecer compatível com versões anteriores. O agente útil não é aquele que nunca precisa de correção; é aquele que pode absorver a correção sem perder toda a tarefa.&lt;/p&gt;
+&lt;p&gt;Para trabalhos em .NET, uma interrupção pode ser tão simples quanto:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Keep the existing public route unchanged. Add the new behavior behind the application service,
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;use the existing ProblemDetails convention, and add a test for the old response shape.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A instrução é breve porque o repositório já carrega o contexto maior. A sessão é o lugar para corrigir a direção, não para reafirmar todo o sistema.&lt;/p&gt;
+&lt;h2 id="agentes-personalizados-transformam-hábitos-de-equipe-em-funções"&gt;Agentes Personalizados Transformam Hábitos de Equipe em Funções&lt;/h2&gt;
+&lt;p&gt;O VS Code também introduz agentes especializados, como Plan. Em vez de implementar imediatamente, um agente de planejamento faz perguntas sobre escopo, componentes, bibliotecas e restrições antes de produzir uma especificação de implementação.&lt;/p&gt;
+&lt;p&gt;Esse padrão é útil além de um agente integrado. Uma equipe pode definir funções focadas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Research&lt;/strong&gt; reúne evidências e escreve um registro de decisão breve.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Review&lt;/strong&gt; verifica uma mudança em relação às convenções do repositório.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Testing&lt;/strong&gt; identifica casos ausentes e propõe um plano de testes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Architecture&lt;/strong&gt; compara opções sem modificar arquivos.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Uma pequena definição de agente personalizado pode parecer assim:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;agent&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;plan&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;description&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;Refines vague requests into clear implementation specs&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;prompt&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="sd"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Ask about scope, constraints, existing patterns, and edge cases.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Produce a concise specification before any implementation begins.&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A parte útil não é o YAML. É a separação explícita de responsabilidades. Um agente de planejamento não deve editar silenciosamente código de produção. Um agente de revisão não deve reescrever o design que deveria avaliar.&lt;/p&gt;
+&lt;h2 id="subagentes-reduzem-colisões-de-contexto"&gt;Subagentes Reduzem Colisões de Contexto&lt;/h2&gt;
+&lt;p&gt;Conversas longas acumulam contexto não relacionado. Subagentes fornecem um workspace isolado para uma tarefa de pesquisa limitada e retornam o resultado para a sessão principal.&lt;/p&gt;
+&lt;p&gt;Isso é um bom ajuste para perguntas como:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Analyze the API project and recommend an authentication strategy.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Return trade-offs and a decision record. Do not edit files.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;O agente principal permanece focado em implementação enquanto o agente de pesquisa lida com uma questão mais estreita. O mesmo princípio se aplica a equipes: delegação clara produz melhores resultados do que lançar vários agentes com autoridade sobreposta.&lt;/p&gt;
+&lt;h2 id="a-ressalva-mais-agentes-significam-mais-coordenação"&gt;A Ressalva: Mais Agentes Significam Mais Coordenação&lt;/h2&gt;
+&lt;p&gt;Sessões de Agentes podem mostrar atividade, mas não podem resolver propriedade conflitante. Dois agentes editando a mesma área ainda podem criar um problema de merge. Um agente na nuvem e um agente local podem fazer suposições incompatíveis. Um agente personalizado pode produzir uma recomendação que outro agente ignora.&lt;/p&gt;
+&lt;p&gt;Defina limites:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Um agente é proprietário da implementação para um determinado branch.&lt;/li&gt;
+&lt;li&gt;Agentes de pesquisa retornam artefatos, não edições não rastreadas.&lt;/li&gt;
+&lt;li&gt;Solicitações de pull permanecem o limite de revisão.&lt;/li&gt;
+&lt;li&gt;Nomes de agentes e prompts declaram o que eles podem alterar.&lt;/li&gt;
+&lt;li&gt;A saída da sessão é retida quando explica uma decisão importante.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="minha-opinião"&gt;Minha Opinião&lt;/h2&gt;
+&lt;p&gt;O futuro multi-agente não é uma fila de janelas de chat. É uma pequena equipe com funções, handoffs e responsabilidade.&lt;/p&gt;
+&lt;p&gt;Sessões de Agentes é valioso porque reconhece essa realidade. Oferece aos desenvolvedores uma superfície de controle para trabalhos que já estão acontecendo no editor, terminal e nuvem. O próximo ganho de produtividade virá menos de ter mais agentes e mais de tornar seus limites legíveis.&lt;/p&gt;
+&lt;p&gt;Para uma equipe .NET, eu começaria com um agente de planejamento e um agente de implementação. Use a saída de planejamento como a especificação de issue ou pull request, então deixe o agente de implementação trabalhar dentro desse limite. Meça retrabalhação antes de adicionar mais funções.&lt;/p&gt;
+&lt;p&gt;O melhor mission control ainda é aquele que torna a propriedade óbvia.&lt;/p&gt;</content:encoded></item></channel></rss>

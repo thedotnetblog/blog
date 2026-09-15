@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Bash | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/bash/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 29 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Intelligent Terminal 0.1.1, yapay zekâ yerel bir shell deneyiminin nasıl görünebileceğini göstermeye başlıyor</title><link>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</link><pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</guid><description>Intelligent Terminal 0.1.1, Bash ve WSL desteği, manuel /fix akışı ve modeli anında değiştirme özelliği ekliyor. Hâlâ erken aşamada, ancak yönü terminalde yaşayan geliştiriciler için giderek daha ilginç hale geliyor.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Bu makale otomatik olarak çevrildi. Orijinal sürüm için &lt;a href="https://thedotnetblog.com/tr/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/"&gt;buraya tıklayın&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Terminaldeki yapay zekânın şu anda geliştirici deneyiminin en umut verici alanlarından biri olduğunu düşünmeye devam ediyorum.&lt;/p&gt;
+&lt;p&gt;Bu yüzden &lt;strong&gt;Intelligent Terminal 0.1.1&lt;/strong&gt;, tipik bir nokta sürümden çok daha fazla dikkatimi çekti.&lt;/p&gt;
+&lt;p&gt;Bu güncelleme şunları ekliyor:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bash ve WSL hata algılama&lt;/li&gt;
+&lt;li&gt;manuel &lt;code&gt;/fix&lt;/code&gt; akışı&lt;/li&gt;
+&lt;li&gt;anında model değiştirme&lt;/li&gt;
+&lt;li&gt;daha özelleştirilebilir bir ajan paneli&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bu birleşim, ürünü bir deneyden ziyade gelişen bir shell deneyimi gibi hissettirmeye başlıyor.&lt;/p&gt;
+&lt;h2 id="fix-doğru-türde-bir-özellik"&gt;&lt;code&gt;/fix&lt;/code&gt; doğru türde bir özellik&lt;/h2&gt;
+&lt;p&gt;En çok hoşuma giden ekleme muhtemelen &lt;code&gt;/fix&lt;/code&gt; oldu.&lt;/p&gt;
+&lt;p&gt;Neden? Çünkü her sorun temiz bir shell hatası olarak ortaya çıkmaz. Bazen komut teknik olarak çalışır ama yine de yanlış sonuç verir. Tam da bu noktada &amp;ldquo;bu sonuç hakkında akıl yürütmeme yardım et&amp;rdquo; türünde manuel bir akış işe yarar.&lt;/p&gt;
+&lt;p&gt;Bu, mükemmel bir otomatik algılama mekanizmasını beklemekten çok daha gerçekçi bir terminal destek modelidir.&lt;/p&gt;
+&lt;h2 id="bash-ve-wsl-desteği-deneyimi-daha-inandırıcı-hale-getiriyor"&gt;Bash ve WSL desteği deneyimi daha inandırıcı hale getiriyor&lt;/h2&gt;
+&lt;p&gt;PowerShell&amp;rsquo;in ötesine geçmek gerekiyordu.&lt;/p&gt;
+&lt;p&gt;Bu tür terminal zekâsı daha fazla geliştirici için önemli olacaksa, geliştiricilerin gerçekten zaman geçirdiği yerde çalışması gerekir. Bash ve WSL desteği bunun büyük bir parçası.&lt;/p&gt;
+&lt;h2 id="benim-görüşüm"&gt;Benim görüşüm&lt;/h2&gt;
+&lt;p&gt;Bu hâlâ erken aşama araçlar, ama yön iyi.&lt;/p&gt;
+&lt;p&gt;Terminal, yapay zekâ destekli sorun giderme, komut onarma ve ortamı bilen yönlendirme için en doğal yerlerden biri. Bu tür güncellemeler, o geleceği hayal etmeyi kolaylaştırıyor.&lt;/p&gt;
+&lt;p&gt;Orijinal makale: &lt;a href="https://devblogs.microsoft.com/commandline/intelligent-terminal-0-1-1-is-here-bash-support-new-slash-commands-and-customization/"&gt;Intelligent Terminal 0.1.1 Is Starting to Show What an AI-Native Shell Experience Could Look Like&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

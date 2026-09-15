@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Engineering-Practices | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/engineering-practices/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Wed, 22 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/engineering-practices/index.xml" rel="self" type="application/rss+xml"/><item><title>TypeScript 7 很快，但更大的教训是迁移纪律</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/typescript-7-incremental-migration-playbook/</link><pubDate>Wed, 22 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/typescript-7-incremental-migration-playbook/</guid><description>VS Code 的迁移故事实际上是在真实生产约束下进行增量工程的大师课。</description><content:encoded>&lt;p&gt;原文来源：&lt;a href="https://code.visualstudio.com/blogs/2026/06/26/iterating-faster-with-ts-7"&gt;Iterating faster with TypeScript 7&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;速度数字很出色，但这个 TypeScript 7 故事中的真正价值是过程，而非基准测试。&lt;/p&gt;
+&lt;p&gt;是的，将核心 TypeScript 工作负载从数十秒缩短到个位数是具有变革意义的。每位高级工程师都知道慢速反馈循环的累积成本。但真正引人注目的是 VS Code 团队如何近乎完整地重写了编译器，却没有在一个迁移周末把整个代码库押上赌注。&lt;/p&gt;
+&lt;p&gt;他们做了大多数团队声称会做而实际上很少做到的事：在主分支上进行小的可逆步骤、早期的双轨验证以及有意的逃生口。这种方法给了两个团队杠杆作用。VS Code 在不阻塞开发者流程的情况下获得了信心，而 TypeScript 在广泛发布前很久就获得了真实的回归压力测试。&lt;/p&gt;
+&lt;h3 id="实用的模式任何大型代码库都可复用"&gt;实用的模式（任何大型代码库都可复用）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;从低风险、无产出的验证路径开始。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;将新旧工具链并行运行足够长的时间&lt;/strong&gt;以映射不兼容性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;将格式化和开发者人体工程学视为迁移的一等障碍&lt;/strong&gt;，而非表面错误。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;先迁移简单的项目&lt;/strong&gt;以建立操作手册，然后再涉及最困难的部分。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我最欣赏的是对工具摩擦的诚实描述。团队经常低估小的格式差异在 CI 门控样式检查的情况下能多快地破坏采纳。VS Code 团队将其视为真正的工程工作，而非用户错误。这个决定可能阻止了推广疲劳。&lt;/p&gt;
+&lt;p&gt;我强烈的观点：&lt;strong&gt;性能升级只有在与维护信任的迁移策略搭配时才能变成商业价值&lt;/strong&gt;。没有信心的原始速度会带来回滚的混乱。没有速度的信心会产生怀疑。这次迁移两者都做到了。&lt;/p&gt;
+&lt;p&gt;对领导者来说有一个微妙的洞见：通过早期参与，VS Code 实际上成了 TypeScript 质量基础设施的一部分。这种上游协作通常比下游补丁和变通方案债务更便宜。如果你的团队依赖于基础工具，在 GA 之前就参与进来，而不是之后。&lt;/p&gt;
+&lt;p&gt;如果你正在规划 TypeScript 7 迁移，&lt;strong&gt;不要复制标题，复制执行模型&lt;/strong&gt;。保持旧路径可用，收集不匹配数据，并首先为日常开发者流程进行优化。七倍加速很有说服力，但可持续的优势是组织性的：你的团队学会如何安全地做出重大变更。&lt;/p&gt;
+&lt;p&gt;这是一种能力，它会&lt;strong&gt;复利&lt;/strong&gt;——超越任何一个发布周期。&lt;/p&gt;</content:encoded></item></channel></rss>

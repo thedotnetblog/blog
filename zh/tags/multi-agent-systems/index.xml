@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Multi-Agent Systems | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/multi-agent-systems/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/multi-agent-systems/index.xml" rel="self" type="application/rss+xml"/><item><title>Agent Framework 编排 1.0：选择协调模式，而非去写管道代码</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/agent-framework-orchestration-1-0-choose-patterns-not-plumbing/</link><pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/agent-framework-orchestration-1-0-choose-patterns-not-plumbing/</guid><description>随着编排模式在 Python 和 .NET 上趋于稳定，团队可以标准化多智能体协调语义，而无需手写工作流控制逻辑。</description><content:encoded>&lt;p&gt;Microsoft Agent Framework 编排在 &lt;strong&gt;Python 和 .NET 上达到 1.0&lt;/strong&gt; 是那种能降低隐性工程成本的版本。它为团队提供了一个稳定的协调层，让他们不必在每个项目中重写相同的路由、停顿和完成逻辑。&lt;/p&gt;
+&lt;p&gt;原文来源：https://devblogs.microsoft.com/agent-framework/agent-frameworks-orchestration-patterns-reach-1-0/&lt;/p&gt;
+&lt;p&gt;核心亮点是&lt;strong&gt;模式一致性&lt;/strong&gt;：顺序、并发、移交、群聊和 magentic 现在在两个 SDK 中均已稳定。这种跨语言的一致性对于拥有混合技术栈和共享平台标准的组织具有重大的操作意义。&lt;/p&gt;
+&lt;p&gt;我最强烈的观点是：&lt;strong&gt;手写多智能体循环从第一天起就是技术债务&lt;/strong&gt;，除非你解决的是真正新颖的协调问题。大多数团队应从经过验证的编排模式开始，只有在性能分析证明需要自定义行为时才降级到原始方式。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Magentic&lt;/strong&gt; 是最有趣的选择，因为它将经理主导的自适应决策过程制度化。不是编写每一步的脚本，而是配置参与者和护栏，然后让经理智能体协调多轮交互、检测停滞，并在进度崩溃时重置计划。这将复杂性从脆弱的代码分支转移到了显式的编排策略中。&lt;/p&gt;
+&lt;h3 id="实用的模式选择指南"&gt;实用的模式选择指南&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;顺序模式&lt;/strong&gt;——当确定性最重要且管道是线性的时候。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;并发模式&lt;/strong&gt;——适用于扇出分析和具有明确聚合规则的合并阶段。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;移交模式&lt;/strong&gt;——当领域路由是首要需求时。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;群聊模式&lt;/strong&gt;——当有节制地协作推理能比严格管道提供更好的输出质量时。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Magentic 模式&lt;/strong&gt;——当任务具有不确定性，自适应规划值得额外的编排开销时。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;不要跳过护栏。&lt;/strong&gt; 最大轮数、停滞阈值和重置限制不是可选的调优旋钮；它们是防止失控循环和不可控成本的安全边界。&lt;/p&gt;
+&lt;p&gt;另一个关键的架构优势是：&lt;strong&gt;编排构建器可以编译为普通工作流&lt;/strong&gt;。这意味着你可以在保持组合灵活性的同时，仍然受益于高级模式。它避免了常见框架陷阱——即便利 API 将团队锁定在底层控制之外。&lt;/p&gt;
+&lt;p&gt;如果你运行内部 AI 平台，这次发布应触发&lt;strong&gt;标准化工作&lt;/strong&gt;。为每种模式类型定义批准的编排默认值、监控期望和升级规则。此处的一致性将避免团队间重复失败。&lt;/p&gt;
+&lt;h2 id="核心观点"&gt;核心观点&lt;/h2&gt;
+&lt;p&gt;编排 1.0 的目的不是让多智能体系统变得时髦，而是让它们变得&lt;strong&gt;可管控&lt;/strong&gt;。采用模式优先协调的团队将交付更快、调试更少。而那些在每个仓库中反复重新发明协调器逻辑的团队，将在未来一年里为维护不必要的复杂性而买单。&lt;/p&gt;</content:encoded></item></channel></rss>

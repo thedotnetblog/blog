@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Integration | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/integration/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 23 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/integration/index.xml" rel="self" type="application/rss+xml"/><item><title>Cosmos DB 的 Logic Apps 内置连接器比初看起来更有意义</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/cosmosdb-logic-apps-built-in-connector-ga/</link><pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/cosmosdb-logic-apps-built-in-connector-ga/</guid><description>Azure Cosmos DB 的 Logic Apps Standard 内置连接器现已正式发布。关键优势不仅仅是连接性，而是低延迟的进程内执行、变更源支持以及通往事件驱动和 AI 导向工作流的更清晰路径。</description><content:encoded>&lt;p&gt;当人们听到&amp;quot;连接器发布&amp;quot;时，很容易认为这是个小事。&lt;/p&gt;
+&lt;p&gt;但在这种情况下，我认为这个公告值得更多认可。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Azure Cosmos DB 的 Logic Apps Standard 内置连接器&lt;/strong&gt;现已正式发布，它有趣的地方不仅仅在于 Logic Apps 可以与 Cosmos DB 通信。而是集成的变得更加原生、更高效、对事件驱动工作流更现实。&lt;/p&gt;
+&lt;h2 id="为什么内置很重要"&gt;为什么内置很重要&lt;/h2&gt;
+&lt;p&gt;托管连接器和内置连接器之间的区别不仅仅是部署细节。&lt;/p&gt;
+&lt;p&gt;与 Logic Apps 运行时进程内运行意味着：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;更低的延迟&lt;/li&gt;
+&lt;li&gt;更好的吞吐量&lt;/li&gt;
+&lt;li&gt;更少的外部跳转&lt;/li&gt;
+&lt;li&gt;对高量级或响应式工作流更合适的适配&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;而当你加上&lt;strong&gt;变更源触发器&lt;/strong&gt;、&lt;strong&gt;批量操作&lt;/strong&gt;、&lt;strong&gt;补丁支持&lt;/strong&gt;和 &lt;strong&gt;Entra ID 身份验证&lt;/strong&gt;时，这个连接器看起来就远不止是&amp;quot;简单的工作流管道&amp;quot;了。&lt;/p&gt;
+&lt;h2 id="ai-的角度也是真实的"&gt;AI 的角度也是真实的&lt;/h2&gt;
+&lt;p&gt;文章中对 RAG 管道、嵌入流和知识库模式的讨论让我对它更加印象深刻。&lt;/p&gt;
+&lt;p&gt;一旦 Logic Apps 和 Cosmos DB 如此紧密集成，平台就可以支持：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;响应式数据摄入流&lt;/li&gt;
+&lt;li&gt;文档丰富管道&lt;/li&gt;
+&lt;li&gt;向量相关工作流&lt;/li&gt;
+&lt;li&gt;围绕 AI 组件的无代码或低代码编排&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这使得连接器不仅仅是集成专家的专属。&lt;/p&gt;
+&lt;h2 id="我的看法"&gt;我的看法&lt;/h2&gt;
+&lt;p&gt;这是一种你越想实际工作流（而非产品类别）就越觉得有价值的发布。&lt;/p&gt;
+&lt;p&gt;对于同时使用 Logic Apps Standard 和 Cosmos DB 的团队，GA 连接器为事件驱动集成和 AI 相关自动化提供了更强大的基础，而无需处处使用自定义胶水代码。&lt;/p&gt;
+&lt;p&gt;这值得关注。&lt;/p&gt;
+&lt;p&gt;原文：&lt;a href="https://devblogs.microsoft.com/cosmosdb/announcing-general-availability-of-the-azure-cosmos-db-built-in-connector-for-logic-apps-standard/"&gt;Announcing General Availability of the Azure Cosmos DB Built-in Connector for Logic Apps Standard&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

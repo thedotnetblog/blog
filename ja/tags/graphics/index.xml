@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Graphics | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/graphics/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 21 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/graphics/index.xml" rel="self" type="application/rss+xml"/><item><title>SkiaSharp 4 Stable Is a Maintenance Story as Much as a Rendering Story</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/skiasharp-4-stable-why-upgrade-now/</link><pubDate>Tue, 21 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/skiasharp-4-stable-why-upgrade-now/</guid><description>新しい安定版リリースは機能だけではない。より健全なリリースサイクルと、より安全な長期的グラフィックススタックに関するものである。</description><content:encoded>&lt;p&gt;オリジナルソース: &lt;a href="https://devblogs.microsoft.com/dotnet/skiasharp-4-0-stable/"&gt;SkiaSharp 4.0 is here: announcing the first stable release&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;SkiaSharp 4 安定版は、通常のリリース excitement を超えて注目に値する。なぜなら、ほとんどのチームが過小評価する部分、すなわちメンテナンス速度に対処しているからだ。&lt;/p&gt;
+&lt;p&gt;確かに、バリアブルフォント、カラーパレット、アニメーション WebP サポートは魅力的である。確かに、シャドウ多用の GPU シナリオにおけるパフォーマンス向上は、現代の UI サーフェスにとって意味がある。しかし、より大きなシグナルは構造的である: 上流の Skia マイルストーンとのより緊密な整合性と、より明確な安定版とプレビュー版のリズムである。&lt;/p&gt;
+&lt;p&gt;それはまさに本番チームが基盤的なグラフィックス依存関係に必要とするものである。&lt;/p&gt;
+&lt;p&gt;クロスプラットフォーム .NET アプリケーションにおいて、グラフィックスライブラリはレンダリングパスの深い位置にある。上流に長く遅れすぎると、チームは目に見えないリスクを蓄積する: コーデックのギャップ、セキュリティの遅延、プラットフォーム間の説明困難なレンダリング差異。予測可能なリリースリズムはそのドリフトを削減する。&lt;/p&gt;
+&lt;p&gt;ここで言及されているライフサイクル正確性の改善も重要である。ネイティブオブジェクトのライフタイムと use-after-free クラスの問題を修正することは華やかではないが、見た目は問題ないデモと実際のワークロードに耐えるプロダクトの違いである。&lt;/p&gt;
+&lt;p&gt;私の意見を明確に述べる: チームはグラフィックススタックのアップグレードを可視機能デルタだけで評価するのをやめるべきである。安定性と保守性のデルタは、多くの場合、ビジュアルデルタよりも価値がある。&lt;/p&gt;
+&lt;h3 id="実践的なアップグレードガイダンス"&gt;実践的なアップグレードガイダンス&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;シャドウ、レイヤーカード、テキスト多用のサーフェスを含む UI パスで SkiaSharp 4 をパイロットし&lt;/strong&gt;、期待される利得を検証する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;主要ターゲットプラットフォーム全体でスナップショットとビジュアルリグレッションチェックを実行し&lt;/strong&gt;、広範なロールアウトの前に確認する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;モダンフォーマットと orientation メタデータでアセットパイプラインをテストし&lt;/strong&gt;、動作変更を早期にキャッチする。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MAUI または Uno ワークロードを実行している場合&lt;/strong&gt;、新しいリズムにロードマップを合わせ、将来のバックエンドシフトについてプレビューチャンネルのアナウンスを監視する。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Uno Platform との共同メンテナンスモデルもポジティブな兆候である。重要なインフラライブラリは、実際のプロダクトプレッシャーを持つ複数の深く投資されたメンテナーがいる場合、よりよく経年する。&lt;/p&gt;
+&lt;p&gt;リリース運用における自動化の明示的な言及も評価できる。エージェント支援による依存関係同期と CVE 監査は、ここではマーケティングの飾りではない。複雑なネイティブラップスタックがメンテナーを burnout させずにペースを維持する方法である。&lt;/p&gt;
+&lt;p&gt;アプリが SkiaSharp に依存しており、安定版 v4 を待って移行を遅らせていたなら、今がその時である。古いバージョンに留まることには、今や明確な機会費用がある。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;結論:&lt;/strong&gt; SkiaSharp 4 安定版は、新奇性を追うことではなく、今後数年の .NET UI 作業のためにより健全なグラフィックス基盤を採用することである。&lt;/p&gt;</content:encoded></item></channel></rss>

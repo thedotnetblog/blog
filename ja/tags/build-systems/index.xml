@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Build-Systems | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/build-systems/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Wed, 22 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/build-systems/index.xml" rel="self" type="application/rss+xml"/><item><title>TypeScript 7 Is Fast, but the Bigger Lesson Is Migration Discipline</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/typescript-7-incremental-migration-playbook/</link><pubDate>Wed, 22 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/typescript-7-incremental-migration-playbook/</guid><description>VS Code の移行ストーリーは、実際の本番制約下でのインクリメンタルエンジニアリングのマスタークラスである。</description><content:encoded>&lt;p&gt;オリジナルソース: &lt;a href="https://code.visualstudio.com/blogs/2026/06/26/iterating-faster-with-ts-7"&gt;Iterating faster with TypeScript 7&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;速度の数値は素晴らしいが、この TypeScript 7 ストーリーの本当の価値はプロセスであり、ベンチマークではない。&lt;/p&gt;
+&lt;p&gt;確かに、コア TypeScript ワークロードを数十秒から一桁秒に移行することは変革的である。すべてのシニアエンジニアは、遅いフィードバックループの累積コストを知っている。しかし、ここで際立っているのは、VS Code チームがコードベース全体を一度の移行週末に賭けることなく、ほぼ完全なコンパイラ書き換えを採用した方法である。&lt;/p&gt;
+&lt;p&gt;彼らはほとんどのチームがやると主張しながら、実際にはほとんど実行しないことをやった: メインラインでの小さなリバーシブルなステップ、早期のデュアルラン検証、意図的なエスケープハッチである。そのアプローチは両方のチームにレバレッジを与えた。VS Code は開発者フローをブロックせずに自信を得て、TypeScript は広範なリリースのずっと前に現実世界のリグレッションプレッシャーを得た。&lt;/p&gt;
+&lt;h3 id="実践的パターン大規模コードベースで再利用可能"&gt;実践的パターン（大規模コードベースで再利用可能）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;リスクの低い、出力なしの検証パスから始める。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;新旧のツールチェーンを並行して実行し&lt;/strong&gt;、非互換性を十分にマッピングする。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;フォーマッティングと開発者エルゴノミクスを&lt;/strong&gt;、表面的なバグではなく、ファーストクラスの移行ブロッカーとして扱う。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;シンプルなプロジェクトから移行し&lt;/strong&gt;、最も難しいサーフェスに触れる前にプレイブックを確立する。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;私が最も評価するのは、ツール摩擦の正直なフレーミングである。CI がスタイルチェックでゲートしているときに、小さなフォーマッティングの違いがいかに急速に採用を妨げるかを、チームは過小評価することが多い。VS Code チームはそれをユーザーエラーではなく、実際のエンジニアリング作業として扱った。その判断はおそらくロールアウト疲れを防いだ。&lt;/p&gt;
+&lt;p&gt;私の強い意見:&lt;strong&gt;パフォーマンスアップグレードは、信頼を維持する移行戦略と組み合わされたときにのみビジネス価値になる&lt;/strong&gt;。自信のない生の速度はロールバックの混乱を生む。速度のない自信は懐疑心を生む。この移行は両方を達成した。&lt;/p&gt;
+&lt;p&gt;リーダーにとっての微妙な洞察: 早期に参加することで、VS Code は事実上 TypeScript の品質インフラの一部になった。その種の上流コラボレーションは、下流のパッチ適用や回避策負債よりも多くの場合安価である。チームが基盤ツールに依存しているなら、GA 後ではなく前に関与せよ。&lt;/p&gt;
+&lt;p&gt;TypeScript 7 への移行を計画しているなら、&lt;strong&gt;見出しをコピーするな。実行モデルをコピーせよ。&lt;/strong&gt; 古いパスを利用可能に保ち、不整合データを収集し、まず日々の開発者フローを最適化せよ。7倍の高速化は魅力的だが、持続可能な優位性は組織的なものである: チームが大きな変更を安全に行う方法を学ぶことである。&lt;/p&gt;
+&lt;p&gt;それが、単一のリリースサイクルを超えて&lt;strong&gt;複利で効く&lt;/strong&gt;能力である。&lt;/p&gt;</content:encoded></item></channel></rss>

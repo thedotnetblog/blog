@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Chaos Studio | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/chaos-studio/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 21 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/chaos-studio/index.xml" rel="self" type="application/rss+xml"/><item><title>混沌测试不再是可选项：为什么 Azure Chaos Studio Workspaces 很重要</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/proving-resilience-chaos-studio-workspaces/</link><pubDate>Tue, 21 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/proving-resilience-chaos-studio-workspaces/</guid><description>Azure Chaos Studio Workspaces 将弹性从架构意图转化为可衡量的证据，这一转变应该改变团队在 Azure 上发布软件的方式。</description><content:encoded>&lt;p&gt;大多数团队仍然将弹性视为设计时的检查清单：多可用区、故障转移已启用、重试已到位、完成。这种心态已经过时了。生产事故很少像架构图预测的那样发生，而 Azure 新的 Chaos Studio Workspaces 正是对这一现实的直接回应。&lt;/p&gt;
+&lt;p&gt;原文来源：https://azure.microsoft.com/en-us/blog/proving-application-resilience-on-azure-with-chaos-studio/&lt;/p&gt;
+&lt;p&gt;最重要的转变不是&amp;quot;更多的故障注入&amp;quot;，而是&lt;strong&gt;场景优先的验证&lt;/strong&gt;。Workspaces 不是手动组合随机故障，而是从团队实际看到的中断模式开始：可用区丢失、DNS 中断、数据库故障转移、身份服务中断、缓存雪崩和消息传递中断。这是一个更好的模型，因为运维风险存在于组合中，而非孤立的故障。&lt;/p&gt;
+&lt;p&gt;我的观点很简单：没有定期演练的弹性是弹性剧场。如果你的服务从未经历过一个真实的、跨层的故障序列，你并不了解你的恢复行为——你只是假设。Workspaces 通过自动发现范围并针对真实资源推荐场景来降低这个门槛，消除了&amp;quot;我们不知道从哪里开始&amp;quot;的常见借口。&lt;/p&gt;
+&lt;h3 id="开发者和平台团队现在应该做什么"&gt;开发者和平台团队现在应该做什么&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定义最小的弹性管道&lt;/strong&gt;。每个关键工作负载至少一个场景，按发布节奏执行，并带有通过/失败门控与恢复目标绑定。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;将场景报告视为变更管理中的一等制品&lt;/strong&gt;。它们应该像安全扫描一样附加到发布审批和事后审查中。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;包含应用级别的断言&lt;/strong&gt;，而不仅仅是基础设施的成功。数据库可以正确故障转移，而你的应用仍然提供过期的读取或发生死锁。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;微软的另一个好举措是通过 Copilot 技能和 MCP 工具暴露此功能。这是战略上的明智之举。工程师越来越多地通过助手工作流进行操作，弹性测试应该成为日常循环的一部分，而不是由一个可靠性专家每季度执行一次的仪式。&lt;/p&gt;
+&lt;p&gt;如果你在 Azure 上运行 AI 工作负载，这一点甚至更重要。智能体和检索管道仍然依赖普通的云原语：网络、缓存、身份、存储、数据库。如果这些基础组件没有经过压力测试，平台就谈不上可靠性。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;核心观点：&lt;/strong&gt; Chaos Studio Workspaces 使&amp;quot;证明它&amp;quot;成为可靠性的新默认。早期采纳的团队将自信地交付。推迟的团队将继续在生产中发现弹性缺陷——在那里每个测试都是昂贵且公开的。&lt;/p&gt;</content:encoded></item></channel></rss>

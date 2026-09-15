@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Data API Builder | The .NET Blog</title><link>https://thedotnetblog.com/ar/tags/data-api-builder/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ar</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Wed, 22 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ar/tags/data-api-builder/index.xml" rel="self" type="application/rss+xml"/><item><title>الحدود الحقيقية لـ SQL الوكيلية: قابلية التدقيق مع OBO في SQL MCP Server</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/sql-mcp-obo-audit-frontier/</link><pubDate>Wed, 22 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/sql-mcp-obo-audit-frontier/</guid><description>مصادقة On-Behalf-Of في Data API builder بالإضافة إلى SQL MCP Server هي علامة فارقة في الحوكمة لأن Azure SQL يمكنه أخيرًا تدقيق الإنسان خلف إجراء الوكيل.</description><content:encoded>&lt;p&gt;هناك حقيقة مؤلمة في مشاريع AI المؤسسية: العديد من الفرق تهوس بجودة النموذج وتتجاهل المساءلة. عندما يكتب أو يقرأ وكيل بيانات الإنتاج، أول سؤال في مراجعة الحادث ليس &amp;ldquo;هل كانت الإجابة جيدة؟&amp;rdquo; بل &amp;ldquo;من فعل هذا بالفعل؟&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;المصدر الأصلي: &lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-obo-auth/"&gt;https://devblogs.microsoft.com/azure-sql/sql-mcp-server-obo-auth/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;لهذا السبب دعم OBO في Data API builder 2.0 مع SQL MCP Server هو صفقة أكبر مما يبدو للوهلة الأولى. أساليب اسم المستخدم/كلمة المرور والهوية المدارة لا تزال تعمل تشغيليًا، لكن كلاهما ينهار الهوية في حدود الخدمة. السجلات تظهر التطبيق أو الوسيطة، وليس أصل طلب الإنسان. هذا مقبول للأتمتة البسيطة. إنه غير مقبول لسير العمل الوكيلي المنظم.&lt;/p&gt;
+&lt;p&gt;مع OBO، SQL يوثق سياق المستخدم المفوض، وليس هوية مضيف الأداة. هذا يعطيك نموذج تدقيق أفضل بشكل أساسي: مدير المستخدم، والإجراء، وسياق العبارة، ومعرف تطبيق الطبقة الوسطى معًا. تحصل على قابلية التتبع دون فقدان سطح التحكم لأدوات MCP وأذونات كيان DAB.&lt;/p&gt;
+&lt;p&gt;رأيي ثابت هنا: إذا كان وكيلك يمكنه لمس بيانات SQL حساسة، يجب أن يكون OBO هو بنيتك الافتراضية، وليس مهمة تقوية اختيارية. الإعداد أكثر تعقيدًا، لكن دين الهوية يُدفع دائمًا لاحقًا، عادة أثناء حوادث الأمان أو تدقيقات الامتثال أو تصعيدات تنفيذية.&lt;/p&gt;
+&lt;p&gt;إرشادات التنفيذ العملي:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ابدأ بالتحقق من تدفق الهوية بعرض &amp;ldquo;WhoAmI&amp;rdquo; أدنى وفحوصات آلية في اختبارات التكامل. إذا كان مدير SQL لا يطابق المستخدم المسجل الدخول، توقف وأصلح قبل الشحن.&lt;/li&gt;
+&lt;li&gt;بعد ذلك، قم بتوصيل استعلامات Log Analytics لـ SQLSecurityAuditEvents في لوحات قيادة SOC الخاصة بك وتنبيه على الإجراءات عالية المخاطر التي بدأت من خلال مسارات OBO.&lt;/li&gt;
+&lt;li&gt;أخيرًا، وازن RBAC وأذونات DAB بحيث تظل هوية المستخدم وتفويض مستوى الإجراء متسقين من النهاية إلى النهاية.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;نقطة تصميم دقيقة لكنها مهمة في الإعلان هي سلوك التخزين المؤقت. DAB يحظر صراحة تخزين الاستجابات مؤقتًا عندما يكون تفويض المستخدم مفعلًا. هذه المقايضة صحيحة. حيل الأداء التي يمكنها تسريب نتائج محددة النطاق للمستخدم لا تستحق العناء في البيئات متعددة المستأجرين أو المنظمة.&lt;/p&gt;
+&lt;p&gt;SQL MCP Server بالإضافة إلى OBO هو بداية نمط ناضج: الوكلاء كمشغلين خاضعين للتحكم، والمستخدمون كمديرين مسؤولين، وطائرات البيانات كأنظمة قابلة للتدقيق. إذا كانت بنيتك لا تستطيع الإجابة على &amp;ldquo;من فعل هذا&amp;rdquo; بثقة، فهي ليست AI جاهزًا للإنتاج، بغض النظر عن مدى صقل العرض.&lt;/p&gt;</content:encoded></item><item><title>المسارات المخصصة لـ Data API Builder تتيح لك تصميم APIs للبشر، وليس للجداول</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/data-api-builder-custom-paths-domain-first/</link><pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/data-api-builder-custom-paths-domain-first/</guid><description>مسارات REST المركبة في DAB هي ميزة صغيرة ذات تأثير معماري كبير لتصميم APIs الموجه للمجال.</description><content:encoded>&lt;p&gt;المصدر الأصلي: &lt;a href="https://devblogs.microsoft.com/azure-sql/data-api-builder-custom-rest-paths/"&gt;Compose your API surface with Data API builder custom paths&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;دعم المسار المركب الجديد في Data API Builder قد يبدو كتحسين بسيط في التكوين، لكنه في الواقع يحل توترًا طويل الأمد في تصميم API: تسرب طوبولوجيا قاعدة البيانات إلى تصميم نقطة النهاية العامة.&lt;/p&gt;
+&lt;p&gt;المسارات الافتراضية القائمة على الكيانات رائعة للبدايات السريعة. غالبًا ما تكون خاطئة لـ APIs المنتج طويلة الأمد. الأنظمة الحقيقية تحتاج هياكل مسار تطابق مفاهيم الأعمال وحدود الملكية ونماذج المستهلك الذهنية.&lt;/p&gt;
+&lt;p&gt;لهذا السبب تغيير DAB هذا مهم. يمكنك الاحتفاظ براحة API المولدة مع تقديم سطح موجه للمجال أولاً وأنظف.&lt;/p&gt;
+&lt;p&gt;رأيي الشخصي بسيط: إذا كانت بنية مسار API الخاص بك تعكس أسماء الجداول الخام في الإنتاج، فأنت عادة ما تحسن لراحة الخلفية على حساب وضوح العميل.&lt;/p&gt;
+&lt;p&gt;بالمسارات المخصصة، يمكن للفرق نمذجة حدود أفضل، مثل المبيعات والفواتير والدعم أو أسطح خاصة بالشركاء. هذا لا يحل محل حوكمة API المناسبة، لكنه يعطي مستخدمي DAB طريقة عملية لمواءمة تصميم المسار مع لغة المنتج.&lt;/p&gt;
+&lt;p&gt;إرشادات عملية للفرق التي تتبنى هذه الميزة:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;حدد سياسة تسمية قبل إضافة المسارات بشكل عشوائي. الأقسام الفرعية غير المتسقة تصبح فوضى طويلة الأمد.&lt;/li&gt;
+&lt;li&gt;حدد نقاط النهاية لسياقات محدودة، وليس لمخططات تنظيمية. الفرق تتغير؛ دلالات المجال يجب أن تكون مستقرة.&lt;/li&gt;
+&lt;li&gt;تعامل مع بنية المسار كجزء من استراتيجية الإصدار الخاص بك ووثق التغييرات الجوهرية صراحة.&lt;/li&gt;
+&lt;li&gt;تحقق من سلوك التفويض على طول هياكل المسار المخصصة بحيث يقترن وضوح المسار بوضوح الأمان.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;ما أقدره في DAB بشكل عام هو نموذج الرفع: تحصل على التقسيم والتصفية والإسقاط وآليات نقطة نهاية أخرى دون كتابة كود تحكم متكرر. المسارات المخصصة تجعل ذلك الرفع أكثر جاهزية للإنتاج بتقليل أحد أكبر الاعتراضات من مهندسي API.&lt;/p&gt;
+&lt;p&gt;هناك تحذير واحد. تكوين المسار الأفضل يمكن أن يغري الفرق بكشف الكثير بسرعة لأن التوليد يبدو سهلاً. الحواجز لا تزال مهمة: حافظ على كشف الكيان متعمدًا، طبق السياسة مركزيًا، وتجنب بناء عقود عامة عرضية من تجارب المخطط الداخلية.&lt;/p&gt;
+&lt;p&gt;لمؤسسات .NET تحت ضغط التوصيل، هذه الميزة هي فتح إنتاجية إذا استُخدمت بانضباط. يمكنك التحرك أسرع من طبقات API المصنوعة يدويًا مع الحفاظ على سطح نقطة نهاية متماسك وصديق للأعمال.&lt;/p&gt;
+&lt;p&gt;الخلاصة: مسارات DAB المخصصة ليست حول تجميل عناوين URL. إنها حول استعادة نية تصميم API مع الحفاظ على الكفاءة التشغيلية لنقاط النهاية المولدة.&lt;/p&gt;</content:encoded></item><item><title>إضافة MSSQL في VS Code تتحول بهدوء إلى منصة أكبر بكثير</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/</link><pubDate>Tue, 19 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/</guid><description>يضيف أحدث تحديث لإضافة MSSQL التزويد لـ Azure SQL، وتصميم المخططات بمساعدة Copilot، وData API builder، ودفاتر الملاحظات. الجزء المثير هو كم من أعمال قواعد البيانات يمكن أن تبقى الآن داخل VS Code.</description><content:encoded>&lt;p&gt;&lt;em&gt;تمت ترجمة هذه المقالة تلقائيًا. للاطلاع على النسخة الأصلية، &lt;a href="https://thedotnetblog.com/ar/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/"&gt;انقر هنا&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;لقد كانت إضافة MSSQL لـ VS Code تنمو منذ فترة، لكن هذا التحديث الأخير يجعل الاتجاه أوضح بكثير.&lt;/p&gt;
+&lt;p&gt;لم تعد مجرد «اتصل وشغّل بعض الاستعلامات».&lt;/p&gt;
+&lt;p&gt;مع دفع &lt;strong&gt;تزويد Azure SQL&lt;/strong&gt;، و&lt;strong&gt;مصمم المخططات بمساعدة Copilot&lt;/strong&gt;، و&lt;strong&gt;دفاتر SQL&lt;/strong&gt;، و&lt;strong&gt;Data API builder&lt;/strong&gt; كلها إلى الأمام في إصدار واحد، أصبحت الإضافة مساحة عمل أشمل بكثير للتطوير المرتكز على قواعد البيانات.&lt;/p&gt;
+&lt;h2 id="الجذب-العملي-هنا-هو-التزويد-مباشرة-من-المحرر"&gt;الجذب العملي هنا هو التزويد مباشرة من المحرر&lt;/h2&gt;
+&lt;p&gt;يقول المقال الأصلي إنه يمكنك الآن إنشاء قاعدة بيانات سحابية مُدارة بالكامل «مباشرة من المحرر وبدون تكلفة» باستخدام الطبقة المجانية.&lt;/p&gt;
+&lt;p&gt;هذا هو نوع الميزة التي تبدو صغيرة حتى تدرك مقدار الاحتكاك الذي تزيله من عملية الإعداد.&lt;/p&gt;
+&lt;p&gt;بالنسبة لكثير من المطورين، الجزء المزعج في التجارب الثقيلة بالبيانات ليس SQL نفسه. بل الفجوة البيئية بين:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;الفكرة&lt;/li&gt;
+&lt;li&gt;قاعدة البيانات&lt;/li&gt;
+&lt;li&gt;المخطط&lt;/li&gt;
+&lt;li&gt;API&lt;/li&gt;
+&lt;li&gt;backend قابل للاختبار&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;إذا قصرت هذه الفجوة داخل أداة واحدة، يصبح سير العمل كله أكثر جاذبية.&lt;/p&gt;
+&lt;h2 id="هذا-ما-تبدو-عليه-حلقة-داخلية-أقوى-لأعمال-البيانات"&gt;هذا ما تبدو عليه حلقة داخلية أقوى لأعمال البيانات&lt;/h2&gt;
+&lt;p&gt;ما يعجبني في هذا الإصدار هو أنه يبقي جزءًا أكبر من سير عمل قاعدة البيانات في مكان واحد:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;تزويد قاعدة البيانات&lt;/li&gt;
+&lt;li&gt;تصميم المخطط&lt;/li&gt;
+&lt;li&gt;مراجعة التغييرات&lt;/li&gt;
+&lt;li&gt;توليد سكربتات ORM&lt;/li&gt;
+&lt;li&gt;إتاحة واجهات API&lt;/li&gt;
+&lt;li&gt;اختبار نقاط النهاية&lt;/li&gt;
+&lt;li&gt;التوثيق والاستعلام عبر الدفاتر&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;هذه قصة أكثر إقناعًا بكثير من معاملة SQL كأداة جانبية منفصلة في البنية.&lt;/p&gt;
+&lt;h2 id="سير-عمل-المخطط-بمساعدة-copilot-هو-المكان-الذي-تبدو-فيه-قيمة-الذكاء-الاصطناعي-حقيقية"&gt;سير عمل المخطط بمساعدة Copilot هو المكان الذي تبدو فيه قيمة الذكاء الاصطناعي حقيقية&lt;/h2&gt;
+&lt;p&gt;إضافات مصمم المخططات مثيرة للاهتمام بشكل خاص لأنها تبدو وكأنها تضرب توازنًا جيدًا.&lt;/p&gt;
+&lt;p&gt;القيمة ليست «الذكاء الاصطناعي يصمم نموذج البيانات الخاص بك وأنت تثق به بشكل أعمى».&lt;/p&gt;
+&lt;p&gt;القيمة هي:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;نقاط بداية أسرع&lt;/li&gt;
+&lt;li&gt;مراجعة مرئية&lt;/li&gt;
+&lt;li&gt;تتبع التغييرات&lt;/li&gt;
+&lt;li&gt;مخرجات موجهة للهجرة&lt;/li&gt;
+&lt;li&gt;ضوابط قبول/تراجع واضحة&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;هذا سير عمل ذكاء اصطناعي أكثر صحة بكثير من توليد تلقائي كامل بلا مسار فحص.&lt;/p&gt;
+&lt;p&gt;وفي أعمال قواعد البيانات، قابلية المراجعة مهمة جدًا.&lt;/p&gt;
+&lt;h2 id="data-api-builder-مضاعف-هادئ"&gt;Data API builder مضاعف هادئ&lt;/h2&gt;
+&lt;p&gt;الميزة الأخرى التي لا ينبغي تجاهلها هي تكامل Data API builder.&lt;/p&gt;
+&lt;p&gt;إذا أمكنك الانتقال من المخطط إلى:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;REST&lt;/li&gt;
+&lt;li&gt;GraphQL&lt;/li&gt;
+&lt;li&gt;نقاط نهاية MCP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;داخل البيئة نفسها، فإن ذلك يخلق مسارًا فعالًا جدًا للنماذج الأولية الخلفية والأدوات الداخلية.&lt;/p&gt;
+&lt;p&gt;هذا لا يستبدل الهندسة الخلفية الأعمق. لكنه يختصر الطريق من فكرة قاعدة البيانات إلى واجهة عمل فعلية.&lt;/p&gt;
+&lt;h2 id="وجهة-نظري"&gt;وجهة نظري&lt;/h2&gt;
+&lt;p&gt;هذا الإصدار يجعل إضافة MSSQL تبدو أقرب إلى منصة صغيرة داخل VS Code من كونها مجرد ملحق بسيط.&lt;/p&gt;
+&lt;p&gt;بالنسبة للمطورين الذين يبنون واجهات API، وأدوات بيانات، وأدوات إدارة، أو نماذج أولية مدعومة بـ SQL، فهذا تحول مهم.&lt;/p&gt;
+&lt;p&gt;وإذا واصلت Microsoft تضييق هذه الحلقة، ستصبح الإضافة أكثر فائدة استراتيجيًا بكثير مما يظنه كثير من الناس.&lt;/p&gt;
+&lt;p&gt;المقال الأصلي: &lt;a href="https://devblogs.microsoft.com/azure-sql/vscode-mssql-june-2026/"&gt;MSSQL Extension for VS Code: Azure SQL Database Provisioning and More&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>خادم SQL MCP على Azure App Service — بدون حاويات</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</link><pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</guid><description>يمكن لخادم SQL MCP الآن العمل على Azure App Service بدون Docker أو Kubernetes. ماذا يعني ذلك لمطوري .NET الذين يبنون وكلاء ذكاء اصطناعي تتواصل مع قواعد بيانات SQL.</description><content:encoded>&lt;p&gt;&lt;em&gt;تمت ترجمة هذه المقالة تلقائياً. للاطلاع على النسخة الأصلية، &lt;a href="https://thedotnetblog.com/ar/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/"&gt;انقر هنا&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;لأكن صريحاً: في كل مرة أرى &amp;ldquo;يتطلب حاوية&amp;rdquo; في برنامج تعليمي، يخرج مني تنهيدة صغيرة. الحاويات رائعة — حتى لا يكون لدى فريقك استراتيجية للحاويات، وفجأة تصطدم ميزة بدت بسيطة بتعقيد تنسيق غير متوقع لم يخطط له أحد.&lt;/p&gt;
+&lt;p&gt;لهذا السبب استرعى هذا انتباهي. يمكن لخادم SQL MCP الآن العمل على Azure App Service — بدون Docker، بدون Kubernetes، فقط مع نفس ملف تكوين Data API Builder (DAB) الذي يكشف قاعدة بيانات SQL الخاصة بك عبر MCP وREST وGraphQL.&lt;/p&gt;
+&lt;h2 id="ما-هو-خادم-sql-mcp"&gt;ما هو خادم SQL MCP؟&lt;/h2&gt;
+&lt;p&gt;مقدمة سريعة إن لم تكن على دراية بعد. يجلس خادم SQL MCP بين وكيل الذكاء الاصطناعي وقاعدة بيانات SQL. بدلاً من منح الوكيل وصولاً مباشراً إلى قاعدة البيانات (فكرة سيئة جداً)، يكشف جداولك ومشاهداتك كطبقة تجريد — كيانات بأذونات محددة.&lt;/p&gt;
+&lt;p&gt;مبني على &lt;a href="https://learn.microsoft.com/ar-sa/azure/data-api-builder/"&gt;Data API Builder&lt;/a&gt;، مما يعني أن ملف تكوين واحد يدير MCP &lt;em&gt;و&lt;/em&gt; REST &lt;em&gt;و&lt;/em&gt; GraphQL في آنٍ واحد. يتحدث وكيلك مع نقطة نهاية MCP. يتحدث تطبيقك التقليدي مع REST أو GraphQL. نفس التكوين، نفس بيئة التشغيل، واجهات مختلفة.&lt;/p&gt;
+&lt;p&gt;هذا مفيد حقاً — لا داعي للحفاظ على طبقتي API منفصلتين.&lt;/p&gt;
+&lt;h2 id="مشكلة-الحاوية-والحل"&gt;مشكلة الحاوية (والحل)&lt;/h2&gt;
+&lt;p&gt;استخدم نموذج النشر الأصلي لخادم SQL MCP الحاويات. يعمل بشكل جيد في كثير من الفرق — لكن ليس في جميعها. تعتمد كثير من فرق .NET معياراً على Azure App Service أو الأجهزة الافتراضية. إلزام بيئة تشغيل حاويات فقط لكشف نقطة نهاية SQL يضيف احتكاكاً لم يطلبه أحد.&lt;/p&gt;
+&lt;p&gt;يُظهر الإرشاد الجديد كيفية تخطي الحاوية تماماً. كل شيء يعمل بأمر &lt;code&gt;dab start&lt;/code&gt;، مستضافاً على App Service كعملية ويب .NET 8 قياسية.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# تثبيت Data API Builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet tool install microsoft.dataapibuilder --prerelease -g
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# تهيئة التكوين&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --host-mode Development --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;SQL_CONNECTION_STRING&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# إضافة كيان&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add products --source dbo.products --permissions &lt;span class="s2"&gt;&amp;#34;authenticated:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# تكوين موفر مصادقة App Service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab configure --runtime.host.authentication.provider AppService
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# تشغيل الخادم&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;عند هذه النقطة لديك MCP على &lt;code&gt;/mcp&lt;/code&gt;، وREST وGraphQL من نفس العملية — ولا شيء يعمل في حاوية.&lt;/p&gt;
+&lt;h2 id="المصادقة-بدون-مفاتيح-api-مشتركة"&gt;المصادقة بدون مفاتيح API مشتركة&lt;/h2&gt;
+&lt;p&gt;هذا هو الجزء الذي أقدّره أكثر. عند النشر على App Service، تقوم بتكوين Microsoft Entra ID كموفر مصادقة. لا أسرار مشتركة في ملفات التكوين، ولا مفاتيح API للتدوير.&lt;/p&gt;
+&lt;p&gt;تبقى سلسلة الاتصال في متغيرات بيئة App Service (وليس في &lt;code&gt;dab-config.json&lt;/code&gt;)، ونقطة نهاية MCP محمية بمصادقة المنصة. إذا كانت أحمال عمل Azure لديك متوافقة بالفعل مع Entra ID، فهذا يندمج بشكل طبيعي.&lt;/p&gt;
+&lt;p&gt;للتطوير المحلي، انتقل إلى وضع &lt;code&gt;Simulator&lt;/code&gt; ونقل STDIO. عُد إلى وضع &lt;code&gt;AppService&lt;/code&gt; قبل النشر. نظيف وصريح.&lt;/p&gt;
+&lt;h2 id="النشر-على-app-service"&gt;النشر على App Service&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az appservice plan create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --sku B1 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --is-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --plan &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --runtime &lt;span class="s2"&gt;&amp;#34;DOTNETCORE:8.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp config &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --startup-file &lt;span class="s2"&gt;&amp;#34;dab start&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ثم انشر مشروع DAB الخاص بك باستخدام أسلوب نشر الكود الذي يستخدمه فريقك بالفعل. التفصيل الرئيسي: هذا نشر &lt;strong&gt;كود&lt;/strong&gt;، وليس نشر حاوية.&lt;/p&gt;
+&lt;h2 id="لماذا-يهم-مطوري-net"&gt;لماذا يهم مطوري .NET&lt;/h2&gt;
+&lt;p&gt;إذا كنت تبني وكلاء ذكاء اصطناعي في .NET، فإن وكيلك سيحتاج في نهاية المطاف إلى التواصل مع قاعدة بيانات. يمنحك خادم SQL MCP طريقة منظمة للقيام بذلك دون الكشف عن سلاسل الاتصال الخام.&lt;/p&gt;
+&lt;p&gt;راجع الإرشاد الكامل في &lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-app-service/"&gt;المقالة الأصلية&lt;/a&gt; و&lt;a href="https://github.com/Azure-Samples/SQL-MCP-NoContainer"&gt;مستودع العينات على GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="الخلاصة"&gt;الخلاصة&lt;/h2&gt;
+&lt;p&gt;خادم SQL MCP على App Service خيار عملي لفرق .NET التي تريد منح وكلائها وصولاً منظماً إلى بيانات SQL بدون استراتيجية حاويات. جرّبه — سيقدّر وكلاؤك واجهة API النظيفة.&lt;/p&gt;</content:encoded></item><item><title>خادم SQL MCP — الطريقة الصحيحة لمنح وكلاء الذكاء الاصطناعي وصولاً إلى قواعد البيانات</title><link>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ar/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>يمنح خادم SQL MCP من Data API builder وكلاءَ الذكاء الاصطناعي وصولاً آمناً وحتمياً إلى قواعد البيانات دون كشف المخططات أو الاعتماد على NL2SQL. يأتي مزوداً بتحكم في الصلاحيات، وتخزين مؤقت، ودعم لقواعد بيانات متعددة — كل ذلك مدمج فيه.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;تمت ترجمة هذا المقال تلقائياً. للنسخة الأصلية، &lt;a href="https://thedotnetblog.com/ar/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;انقر هنا&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;لنكن صريحين: معظم خوادم MCP الخاصة بقواعد البيانات المتاحة اليوم مثيرة للقلق. تأخذ استعلاماً بلغة طبيعية، وتولّد SQL بشكل ديناميكي، وتشغّله مباشرةً على بياناتك الإنتاجية. ماذا يمكن أن يحدث بسبب ذلك؟ (كل شيء. كل شيء يمكن أن يحدث.)&lt;/p&gt;
+&lt;p&gt;أعلن فريق Azure SQL للتو عن &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;خادم SQL MCP&lt;/a&gt;، وهو يتبع نهجاً مختلفاً جذرياً. مبنيٌّ كميزة في Data API builder (DAB) 2.0، يمنح وكلاءَ الذكاء الاصطناعي وصولاً منظّماً وحتمياً إلى عمليات قاعدة البيانات — دون NL2SQL، ودون كشف مخططك، وبتحكم كامل في الصلاحيات في كل خطوة.&lt;/p&gt;
+&lt;h2 id="لماذا-لا-nl2sql"&gt;لماذا لا NL2SQL؟&lt;/h2&gt;
+&lt;p&gt;هذا هو أكثر قرارات التصميم إثارةً للاهتمام. النماذج اللغوية ليست حتمية، والاستعلامات المعقدة هي الأكثر عرضة لإنتاج أخطاء دقيقة. الاستعلامات ذاتها التي يأمل المستخدمون أن يولّدها الذكاء الاصطناعي هي التي تحتاج أكبر قدر من التدقيق عند إنتاجها بطريقة غير حتمية.&lt;/p&gt;
+&lt;p&gt;بدلاً من ذلك، يستخدم خادم SQL MCP نهج &lt;strong&gt;NL2DAB&lt;/strong&gt;. يتعامل الوكيل مع طبقة تجريد الكيانات في Data API builder ومنشئ الاستعلامات المدمج فيه لإنتاج T-SQL دقيق ومنسّق بشكل حتمي. النتيجة ذاتها للمستخدم، لكن دون مخاطر الـ JOINs المهلوسة أو الكشف غير المقصود للبيانات.&lt;/p&gt;
+&lt;h2 id="سبعة-أدوات-لا-سبعمائة"&gt;سبعة أدوات، لا سبعمائة&lt;/h2&gt;
+&lt;p&gt;يكشف خادم SQL MCP عن سبعة أدوات DML بالضبط، بغض النظر عن حجم قاعدة البيانات:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — اكتشاف الكيانات المتاحة والعمليات&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — إدراج صفوف&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — الاستعلام عن الجداول والعروض&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — تعديل الصفوف&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — حذف الصفوف&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — تشغيل الإجراءات المخزّنة&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — استعلامات التجميع&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;هذا ذكي لأن نوافذ السياق هي مساحة تفكير الوكيل. إغراقها بمئات من تعريفات الأدوات يقلص مساحة الاستدلال. سبعة أدوات ثابتة تُبقي الوكيل مركّزاً على &lt;em&gt;التفكير&lt;/em&gt; بدلاً من &lt;em&gt;التنقل&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;يمكن تمكين أو تعطيل كل أداة بشكل مستقل:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;runtime&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;path&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dml-tools&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;describe-entities&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;create-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;read-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;update-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;delete-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;execute-entity&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;aggregate-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="البدء-بثلاثة-أوامر"&gt;البدء بثلاثة أوامر&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --database-type mssql &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --source dbo.Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;هذا خادم SQL MCP يعمل ويكشف جدول Customers لديك. تعني طبقة تجريد الكيانات أنه بإمكانك تغيير الأسماء والأعمدة، وتقييد الحقول لكل دور، والتحكم بدقة فيما يراه الوكلاء — دون الكشف عن تفاصيل المخطط الداخلي.&lt;/p&gt;
+&lt;h2 id="قصة-الأمان-متينة"&gt;قصة الأمان متينة&lt;/h2&gt;
+&lt;p&gt;هنا تؤتي نضج Data API builder ثماره:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;التحكم في الصلاحيات في كل طبقة&lt;/strong&gt; — كل كيان يحدد الأدوار التي يمكنها القراءة والإنشاء والتحديث والحذف، والحقول المرئية لكل دور&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;تكامل Azure Key Vault&lt;/strong&gt; — إدارة آمنة لسلاسل الاتصال والأسرار&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Microsoft Entra + OAuth مخصص&lt;/strong&gt; — مصادقة جاهزة للإنتاج&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;سياسة أمان المحتوى&lt;/strong&gt; — يتفاعل الوكلاء عبر عقد محكوم، لا SQL خام&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;تجريد المخطط مهم بشكل خاص. أسماء الجداول والأعمدة الداخلية لا تُكشف أبداً للوكيل. تعرّف الكيانات والأسماء المستعارة والأوصاف التي تناسب تفاعل الذكاء الاصطناعي — لا ERD قاعدة بياناتك.&lt;/p&gt;
+&lt;h2 id="قواعد-بيانات-وبروتوكولات-متعددة"&gt;قواعد بيانات وبروتوكولات متعددة&lt;/h2&gt;
+&lt;p&gt;يدعم خادم SQL MCP كلاً من: Microsoft SQL وPostgreSQL وAzure Cosmos DB وMySQL. ولأنه ميزة DAB، فإنك تحصل على نقاط نهاية REST وGraphQL وMCP في آنٍ واحد من نفس الإعداد. نفس تعريفات الكيانات، ونفس قواعد التحكم في الصلاحيات، ونفس الأمان — عبر البروتوكولات الثلاثة.&lt;/p&gt;
+&lt;p&gt;يمكن للإعداد التلقائي في DAB 2.0 فحص قاعدة بياناتك وبناء الإعداد بشكل ديناميكي، إذا كنت مرتاحاً لتجريد أقل في مرحلة النمذجة السريعة.&lt;/p&gt;
+&lt;h2 id="رأيي"&gt;رأيي&lt;/h2&gt;
+&lt;p&gt;هذه هي الطريقة الصحيحة للوصول المؤسسي إلى قواعد البيانات في وكلاء الذكاء الاصطناعي. ليس &amp;ldquo;هيا أيها LLM، اكتب لي بعض SQL ودعه يعمل على الإنتاج&amp;rdquo;. بدلاً من ذلك: طبقة كيانات محددة بوضوح، وتوليد استعلامات حتمي، وتحكم في الصلاحيات في كل خطوة، وتخزين مؤقت، ومراقبة، وقياسات أداء. إنه ممل بأفضل طريقة ممكنة.&lt;/p&gt;
+&lt;p&gt;بالنسبة لمطوري .NET، قصة التكامل واضحة — DAB أداة .NET، يعمل خادم MCP كحاوية، ويتعامل مع Azure SQL الذي يستخدمه معظمنا. إذا كنت تبني وكلاء ذكاء اصطناعي تحتاج وصولاً إلى البيانات، فابدأ من هنا.&lt;/p&gt;
+&lt;h2 id="خلاصة-القول"&gt;خلاصة القول&lt;/h2&gt;
+&lt;p&gt;خادم SQL MCP مجاني ومفتوح المصدر ويعمل في أي مكان. إنه النهج التوجيهي من Microsoft لمنح وكلاء الذكاء الاصطناعي وصولاً آمناً إلى قواعد البيانات. اطلع على &lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;المقال الكامل&lt;/a&gt; و&lt;a href="https://aka.ms/sql/mcp"&gt;الوثائق&lt;/a&gt; للبدء.&lt;/p&gt;</content:encoded></item></channel></rss>

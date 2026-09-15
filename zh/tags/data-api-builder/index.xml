@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Data API Builder | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/data-api-builder/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Wed, 22 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/data-api-builder/index.xml" rel="self" type="application/rss+xml"/><item><title>智能体 SQL 的真正前沿：SQL MCP Server 中带 OBO 的可审计性</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/sql-mcp-obo-audit-frontier/</link><pubDate>Wed, 22 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/sql-mcp-obo-audit-frontier/</guid><description>Data API builder 加 SQL MCP Server 中的 OBO 身份验证是一个重要的治理里程碑，因为 Azure SQL 终于可以审计智能体操作背后的人类用户了。</description><content:encoded>&lt;p&gt;企业 AI 项目中有一个痛苦的真相：很多团队痴迷于模型质量而忽视了问责性。当一个智能体写入或读取生产数据时，事件审查的第一个问题不是&amp;quot;答案好吗？&amp;ldquo;而是&amp;quot;这到底是谁干的？&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;原文来源：https://devblogs.microsoft.com/azure-sql/sql-mcp-server-obo-auth/&lt;/p&gt;
+&lt;p&gt;这就是为什么 Data API builder 2.0 与 SQL MCP Server 中的 OBO 支持比它初看起来重要得多。用户名/密码和托管身份方法在操作上仍然有效，但两者都将身份折叠到服务边界中。日志显示的是应用或中间件，而不是人类请求的源头。这对简单的自动化来说是可以接受的，但对受监管的智能体工作流来说是不可接受的。&lt;/p&gt;
+&lt;p&gt;使用 OBO，SQL 验证的是&lt;strong&gt;委派的用户上下文&lt;/strong&gt;，而不是工具宿主身份。这给了你一个根本更好的审计模型：用户主体、操作、语句上下文和中间层应用标识符一起出现。你在获得可追溯性的同时，没有失去 MCP 工具和 DAB 实体权限的控制面。&lt;/p&gt;
+&lt;p&gt;我的观点很坚定：如果你的智能体可以接触敏感的 SQL 数据，OBO 应该是你的默认架构，而不是一个可选的加固任务。设置更复杂，但身份债务总是会晚些时候偿还——通常是在安全事件、合规审计或高管升级期间。&lt;/p&gt;
+&lt;h3 id="实用实施指导"&gt;实用实施指导&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;从一个最小的 WhoAmI 视图和集成测试中的自动化检查开始验证身份流&lt;/strong&gt;。如果 SQL 主体与登录用户不匹配，在交付前停下来修复。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;将针对 SQLSecurityAuditEvents 的 Log Analytics 查询接入你的 SOC 仪表盘&lt;/strong&gt;，并对通过 OBO 路径发起的风险操作进行告警。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对齐 RBAC 和 DAB 权限&lt;/strong&gt;，确保用户级身份和操作级授权端到端保持一致。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;公告中一个微妙但重要的设计点是缓存行为。DAB 在启用用户委派身份验证时显式阻止响应缓存。这个权衡是正确的。在多租户或受监管环境中，可能泄漏用户范围结果的性能技巧不值得冒险。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SQL MCP Server 加 OBO&lt;/strong&gt; 是一种成熟模式的开始：智能体作为受控操作者，用户作为可问责主体，数据平面作为可审计系统。如果你的架构不能自信地回答&amp;quot;这是谁做的&amp;quot;，无论演示多么精美，它都不是生产就绪的 AI。&lt;/p&gt;</content:encoded></item><item><title>Data API Builder 自定义路径让你为人类设计 API，而非为表设计</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/data-api-builder-custom-paths-domain-first/</link><pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/data-api-builder-custom-paths-domain-first/</guid><description>DAB 中的复合 REST 路径是一个小功能，但对面向领域的 API 设计具有重大的架构影响。</description><content:encoded>&lt;p&gt;原文来源：&lt;a href="https://devblogs.microsoft.com/azure-sql/data-api-builder-custom-rest-paths/"&gt;Compose your API surface with Data API builder custom paths&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Data API Builder 中新的&lt;strong&gt;复合 REST 路径&lt;/strong&gt;支持可能看起来像是一个微小的配置改进，但它实际上解决了一个长期的 API 设计矛盾：数据库拓扑泄露到公开端点设计中。&lt;/p&gt;
+&lt;p&gt;默认的基于实体的路由非常适合快速起步。但它们在长期产品 API 中往往是错误的。真正的系统需要匹配业务概念、所有权边界和消费者心智模型的路由结构。&lt;/p&gt;
+&lt;p&gt;这就是为什么这个 DAB 变更很重要。你可以在保持生成式 API 便利性的同时，呈现一个更清晰的领域优先界面。&lt;/p&gt;
+&lt;p&gt;我的个人观点很简单：&lt;strong&gt;如果你的 API 路径结构在生产中镜像原始表名&lt;/strong&gt;，你通常是在优化后端便利性，而牺牲了客户端的清晰度。&lt;/p&gt;
+&lt;p&gt;有了自定义路径，团队可以建立更好的边界，如销售、计费、支持或合作伙伴专属界面。这并不能替代正确的 API 治理，但它给 DAB 用户提供了一个实用的方式来将路由设计与产品语言对齐。&lt;/p&gt;
+&lt;h3 id="采用此功能的团队实用指南"&gt;采用此功能的团队实用指南&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;在随意添加路径之前先定义命名策略&lt;/strong&gt;。不一致的子片段会成为长期杂乱。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;将端点映射到限界上下文&lt;/strong&gt;，而非组织架构图。团队会变；领域语义应该稳定。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;将路径结构视为版本策略的一部分&lt;/strong&gt;，并明确记录破坏性变更。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;验证自定义路由结构上的授权行为&lt;/strong&gt;，确保路由清晰度与安全性清晰度相匹配。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我欣赏 DAB 整体上的&lt;strong&gt;杠杆模型&lt;/strong&gt;：你获得分页、过滤、投影和其他端点机制，而无需编写重复的控制器代码。自定义路径通过减少 API 架构师最大的反对意见之一，使这种杠杆更加面向生产。&lt;/p&gt;
+&lt;p&gt;有一个&lt;strong&gt;注意事项&lt;/strong&gt;。更好的路径组合可能会诱使团队过快暴露过多内容，因为生成感觉太容易。护栏仍然重要：保持实体暴露的审慎性，集中应用策略，避免从内部架构实验意外构建公开契约。&lt;/p&gt;
+&lt;p&gt;对于在交付压力下的 .NET 组织，如果使用得当，这个功能是一个生产力利器。你可以比手工编写的 API 层更快地行动，同时仍然保持一个连贯和业务友好的端点界面。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;核心观点：&lt;/strong&gt; DAB 自定义路径不是为了美化 URL。它们关于&lt;strong&gt;重拾 API 设计意图&lt;/strong&gt;，同时保持生成式端点的运维效率。&lt;/p&gt;</content:encoded></item><item><title>VS Code 的 MSSQL 扩展正在悄悄变成一个更大的平台</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/</link><pubDate>Tue, 19 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/</guid><description>最新的 MSSQL 扩展更新加入了 Azure SQL provisioning、Copilot 辅助的 schema 设计、Data API builder 和 notebooks。真正有意思的是，现在有多少数据库工作可以留在 VS Code 里完成。</description><content:encoded>&lt;p&gt;&lt;em&gt;本文已自动翻译。要查看原文，请&lt;a href="https://thedotnetblog.com/zh/news/emiliano-montesdeoca/azure-sql-vscode-provisioning-copilot-designer/"&gt;点击此处&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;VS Code 的 MSSQL 扩展已经增长了一段时间，但这次最新更新把方向变得更清楚了。&lt;/p&gt;
+&lt;p&gt;它不再只是“连接然后跑几个查询”。&lt;/p&gt;
+&lt;p&gt;随着 &lt;strong&gt;Azure SQL provisioning&lt;/strong&gt;、&lt;strong&gt;Copilot 辅助的 Schema Designer&lt;/strong&gt;、&lt;strong&gt;SQL Notebooks&lt;/strong&gt; 和 &lt;strong&gt;Data API builder&lt;/strong&gt; 一起推进，这个扩展正在变成一个面向数据库开发的更完整工作区。&lt;/p&gt;
+&lt;h2 id="真正实用的切入点是直接在编辑器里进行-provisioning"&gt;真正实用的切入点是直接在编辑器里进行 provisioning&lt;/h2&gt;
+&lt;p&gt;原文说，你现在可以使用免费层级“直接从编辑器里、而且免费地”创建一个 fully managed 的云数据库。&lt;/p&gt;
+&lt;p&gt;这类功能看起来很小，直到你意识到它到底减少了多少配置摩擦。&lt;/p&gt;
+&lt;p&gt;对很多开发者来说，数据密集型实验最麻烦的部分不是 SQL 本身，而是下面这些之间的环境鸿沟：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;想法&lt;/li&gt;
+&lt;li&gt;数据库&lt;/li&gt;
+&lt;li&gt;schema&lt;/li&gt;
+&lt;li&gt;API&lt;/li&gt;
+&lt;li&gt;可测试的 backend&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果这个鸿沟可以在一个工具里缩短，整个工作流就会更有吸引力。&lt;/p&gt;
+&lt;h2 id="这才是数据工作的更强-inner-loop"&gt;这才是数据工作的更强 inner loop&lt;/h2&gt;
+&lt;p&gt;我喜欢这个版本的一点是，它把更多数据库工作流留在了同一个地方：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;provisioning 数据库&lt;/li&gt;
+&lt;li&gt;设计 schema&lt;/li&gt;
+&lt;li&gt;审查变更&lt;/li&gt;
+&lt;li&gt;生成 ORM 脚本&lt;/li&gt;
+&lt;li&gt;暴露 API&lt;/li&gt;
+&lt;li&gt;测试 endpoints&lt;/li&gt;
+&lt;li&gt;通过 notebooks 做文档和查询&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这比把 SQL 当成堆栈里一个分离的旁边工具要有说服力得多。&lt;/p&gt;
+&lt;h2 id="copilot-辅助的-schema-工作流才是-ai-价值真正显现的地方"&gt;Copilot 辅助的 schema 工作流，才是 AI 价值真正显现的地方&lt;/h2&gt;
+&lt;p&gt;schema designer 的新增内容尤其有意思，因为它们似乎找到了不错的平衡。&lt;/p&gt;
+&lt;p&gt;价值不是“AI 设计你的 data model，然后你盲目信任它”。&lt;/p&gt;
+&lt;p&gt;价值是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;更快的起点&lt;/li&gt;
+&lt;li&gt;视觉审查&lt;/li&gt;
+&lt;li&gt;变更跟踪&lt;/li&gt;
+&lt;li&gt;面向迁移的输出&lt;/li&gt;
+&lt;li&gt;明确的接受/撤销控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这比没有检查路径的全自动生成健康得多。&lt;/p&gt;
+&lt;p&gt;而对于数据库工作来说，可审查性非常重要。&lt;/p&gt;
+&lt;h2 id="data-api-builder-是一个安静的倍增器"&gt;Data API builder 是一个安静的倍增器&lt;/h2&gt;
+&lt;p&gt;另一个我不会忽视的功能是 Data API builder 的集成。&lt;/p&gt;
+&lt;p&gt;如果你能在同一个环境里从 schema 走到：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;REST&lt;/li&gt;
+&lt;li&gt;GraphQL&lt;/li&gt;
+&lt;li&gt;MCP endpoints&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这就为 backend prototype 和内部工具创造了一条非常高效的路径。&lt;/p&gt;
+&lt;p&gt;这并不能取代更深入的 backend engineering，但它确实大大缩短了从数据库想法到可用接口的路径。&lt;/p&gt;
+&lt;h2 id="我的看法"&gt;我的看法&lt;/h2&gt;
+&lt;p&gt;这个版本让 MSSQL 扩展更像 VS Code 里的一个小型平台，而不是一个简单插件。&lt;/p&gt;
+&lt;p&gt;对于构建 API、数据工具、管理工具或基于 SQL 的 prototype 的开发者来说，这是一个有意义的变化。&lt;/p&gt;
+&lt;p&gt;如果 Microsoft 继续收紧这个循环，这个扩展的战略价值会比很多人现在以为的更高。&lt;/p&gt;
+&lt;p&gt;原始文章：&lt;a href="https://devblogs.microsoft.com/azure-sql/vscode-mssql-june-2026/"&gt;MSSQL Extension for VS Code: Azure SQL Database Provisioning and More&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>SQL MCP Server 在 Azure App Service 上运行 — 无需容器</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</link><pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</guid><description>SQL MCP Server 现在可以在 Azure App Service 上运行，无需 Docker 或 Kubernetes。这对于构建与 SQL 数据库通信的 AI 代理的 .NET 开发者意味着什么。</description><content:encoded>&lt;p&gt;&lt;em&gt;本文已自动翻译。要查看原始版本，请&lt;a href="https://thedotnetblog.com/zh/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/"&gt;点击此处&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;老实说：每次在教程中看到&amp;quot;需要容器&amp;quot;，我内心都会叹一口气。容器很棒——直到你的团队没有容器策略，一个看似简单的功能突然被意料之外的编排复杂性阻挡。&lt;/p&gt;
+&lt;p&gt;这就是为什么这个让我眼前一亮。SQL MCP Server 现在可以在 Azure App Service 上运行——无需 Docker，无需 Kubernetes，只需相同的 Data API Builder（DAB）配置文件，通过 MCP、REST 和 GraphQL 公开你的 SQL 数据库。&lt;/p&gt;
+&lt;h2 id="什么是-sql-mcp-server"&gt;什么是 SQL MCP Server？&lt;/h2&gt;
+&lt;p&gt;如果你还不了解，简单介绍一下。SQL MCP Server 位于你的 AI 代理和 SQL 数据库之间。它不是让代理直接访问数据库（这是个糟糕的想法），而是将你的表和视图作为带有定义权限的实体抽象层公开。&lt;/p&gt;
+&lt;p&gt;它构建在 &lt;a href="https://learn.microsoft.com/zh-cn/azure/data-api-builder/"&gt;Data API Builder&lt;/a&gt; 之上，这意味着单个配置文件同时管理 MCP、REST 和 GraphQL。你的代理与 MCP 端点通信，传统应用与 REST 或 GraphQL 通信。相同的配置，相同的运行时，不同的接口。&lt;/p&gt;
+&lt;p&gt;这真的很有用——你不需要维护两个独立的 API 层。&lt;/p&gt;
+&lt;h2 id="容器问题及解决方案"&gt;容器问题（及解决方案）&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server 最初的部署模型是容器。这在很多团队中运行良好，但并非所有团队都适用。许多 .NET 团队标准化使用 Azure App Service 或虚拟机。仅仅为了公开 SQL 端点而需要容器运行时，增加了没有人要求的摩擦。&lt;/p&gt;
+&lt;p&gt;新的教程展示了如何完全跳过容器。一切都通过 &lt;code&gt;dab start&lt;/code&gt; 命令运行，作为标准的 .NET 8 Web 进程托管在 App Service 上。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 安装 Data API Builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet tool install microsoft.dataapibuilder --prerelease -g
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 初始化配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --host-mode Development --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;SQL_CONNECTION_STRING&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 添加实体&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add products --source dbo.products --permissions &lt;span class="s2"&gt;&amp;#34;authenticated:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 配置 App Service 认证提供程序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab configure --runtime.host.authentication.provider AppService
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 启动服务器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此时，你在 &lt;code&gt;/mcp&lt;/code&gt; 有 MCP，同一进程提供 REST 和 GraphQL，没有任何东西运行在容器中。&lt;/p&gt;
+&lt;h2 id="无需共享-api-密钥的身份验证"&gt;无需共享 API 密钥的身份验证&lt;/h2&gt;
+&lt;p&gt;这是我最欣赏的部分。部署到 App Service 时，你将 Microsoft Entra ID 配置为身份验证提供程序。配置文件中没有共享密钥，不需要轮换 API 密钥。&lt;/p&gt;
+&lt;p&gt;连接字符串保留在 App Service 环境变量中（不在 &lt;code&gt;dab-config.json&lt;/code&gt; 中），MCP 端点通过平台身份验证保护。如果你的 Azure 工作负载已经与 Entra ID 对齐，这将自然融入。&lt;/p&gt;
+&lt;p&gt;本地开发时，切换到 &lt;code&gt;Simulator&lt;/code&gt; 模式和 STDIO 传输。部署前切换回 &lt;code&gt;AppService&lt;/code&gt; 模式。干净且明确。&lt;/p&gt;
+&lt;h2 id="部署到-app-service"&gt;部署到 App Service&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az appservice plan create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --sku B1 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --is-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --plan &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --runtime &lt;span class="s2"&gt;&amp;#34;DOTNETCORE:8.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp config &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --startup-file &lt;span class="s2"&gt;&amp;#34;dab start&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后使用你的团队已经使用的代码部署方法部署你的 DAB 项目。关键细节：这是&lt;strong&gt;代码&lt;/strong&gt;部署，不是容器部署。&lt;/p&gt;
+&lt;h2 id="为什么这对-net-开发者很重要"&gt;为什么这对 .NET 开发者很重要&lt;/h2&gt;
+&lt;p&gt;如果你在 .NET 中构建 AI 代理，你的代理最终需要与数据库通信。SQL MCP Server 提供了一种结构化的方式来实现这一点，无需暴露原始连接字符串。&lt;/p&gt;
+&lt;p&gt;查看&lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-app-service/"&gt;原始博客文章&lt;/a&gt;和 &lt;a href="https://github.com/Azure-Samples/SQL-MCP-NoContainer"&gt;GitHub 示例仓库&lt;/a&gt;的完整教程。&lt;/p&gt;
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;p&gt;App Service 上的 SQL MCP Server 是 .NET 团队的实用选择，无需容器策略即可为代理提供结构化的 SQL 数据访问。试试看——你的代理会很感激清晰的 API 接口。&lt;/p&gt;</content:encoded></item><item><title>SQL MCP Server — 给 AI 代理数据库访问的正确方式</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</link><pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/</guid><description>Data API builder 的 SQL MCP Server 为 AI 代理提供安全、确定性的数据库访问，无需暴露架构或依赖 NL2SQL。RBAC、缓存、多数据库支持 — 全部内置。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文为自动翻译。查看原文请&lt;a href="https://thedotnetblog.com/zh/news/emiliano-montesdeoca/sql-mcp-server-data-api-builder/"&gt;点击这里&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;说实话：今天市面上大多数数据库 MCP 服务器都很可怕。它们接受自然语言查询，即时生成 SQL，然后在你的生产数据上执行。有什么可能出错的？（一切。一切都可能出错。）&lt;/p&gt;
+&lt;p&gt;Azure SQL 团队刚刚&lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;发布了 SQL MCP Server&lt;/a&gt;，它采用了一种根本不同的方法。作为 Data API builder（DAB）2.0 的功能构建，它为 AI 代理提供结构化、确定性的数据库操作访问 — 没有 NL2SQL，不暴露你的架构，每一步都有完整的 RBAC。&lt;/p&gt;
+&lt;h2 id="为什么不用-nl2sql"&gt;为什么不用 NL2SQL？&lt;/h2&gt;
+&lt;p&gt;这是最有趣的设计决策。模型不是确定性的，复杂查询最容易产生微妙的错误。用户希望 AI 能生成的那些查询，恰恰也是在非确定性生成时最需要审查的查询。&lt;/p&gt;
+&lt;p&gt;相反，SQL MCP Server 使用 &lt;strong&gt;NL2DAB&lt;/strong&gt; 方法。代理使用 Data API builder 的实体抽象层和内置查询构建器来确定性地生成准确、格式良好的 T-SQL。对用户来说结果相同，但没有幻觉 JOIN 或意外数据泄露的风险。&lt;/p&gt;
+&lt;h2 id="七个工具不是七百个"&gt;七个工具，不是七百个&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server 精确暴露七个 DML 工具，与数据库大小无关：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;describe_entities&lt;/code&gt; — 发现可用实体和操作&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_record&lt;/code&gt; — 插入行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read_records&lt;/code&gt; — 查询表和视图&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update_record&lt;/code&gt; — 修改行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete_record&lt;/code&gt; — 删除行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;execute_entity&lt;/code&gt; — 运行存储过程&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aggregate_records&lt;/code&gt; — 聚合查询&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这很聪明，因为上下文窗口是代理的思考空间。用数百个工具定义淹没它们会减少推理空间。七个固定工具让代理专注于&lt;em&gt;思考&lt;/em&gt;而不是&lt;em&gt;导航&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;每个工具可以单独启用或禁用：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;runtime&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;path&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;dml-tools&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;describe-entities&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;create-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;read-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;update-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;delete-record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;execute-entity&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;aggregate-records&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="三条命令开始"&gt;三条命令开始&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --database-type mssql &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;sql_connection_string&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --source dbo.Customers &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --permissions &lt;span class="s2"&gt;&amp;#34;anonymous:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这就是一个运行中的 SQL MCP Server，暴露你的 Customers 表。实体抽象层意味着你可以为名称和列创建别名、按角色限制字段，并精确控制代理看到的内容 — 而不暴露内部架构细节。&lt;/p&gt;
+&lt;h2 id="安全故事很扎实"&gt;安全故事很扎实&lt;/h2&gt;
+&lt;p&gt;这是 Data API builder 成熟度发挥价值的地方：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;每一层都有 RBAC&lt;/strong&gt; — 每个实体定义哪些角色可以读取、创建、更新或删除，以及哪些字段可见&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Azure Key Vault 集成&lt;/strong&gt; — 安全管理连接字符串和密钥&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Microsoft Entra + 自定义 OAuth&lt;/strong&gt; — 生产级认证&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内容安全策略&lt;/strong&gt; — 代理通过受控契约交互，而不是原始 SQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;架构抽象特别重要。你的内部表名和列名永远不会暴露给代理。你定义对 AI 交互有意义的实体、别名和描述 — 而不是你的数据库 ERD 图。&lt;/p&gt;
+&lt;h2 id="多数据库和多协议"&gt;多数据库和多协议&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server 支持 Microsoft SQL、PostgreSQL、Azure Cosmos DB 和 MySQL。由于它是 DAB 的功能，你可以从同一配置同时获取 REST、GraphQL 和 MCP 端点。相同的实体定义、相同的 RBAC 规则、相同的安全性 — 跨所有三种协议。&lt;/p&gt;
+&lt;p&gt;DAB 2.0 的自动配置甚至可以检查你的数据库并动态构建配置，如果你愿意为快速原型设计减少抽象的话。&lt;/p&gt;
+&lt;h2 id="我的看法"&gt;我的看法&lt;/h2&gt;
+&lt;p&gt;这就是 AI 代理的企业级数据库访问应该如何工作。不是&amp;quot;嘿 LLM，给我写点 SQL 然后对生产环境 YOLO&amp;quot;。而是：定义良好的实体层、确定性查询生成、每一步的 RBAC、缓存、监控和遥测。以最好的方式无聊着。&lt;/p&gt;
+&lt;p&gt;对于 .NET 开发者，集成故事很清晰 — DAB 是 .NET 工具，MCP Server 作为容器运行，与大多数人已经在用的 Azure SQL 配合工作。如果你正在构建需要数据访问的 AI 代理，从这里开始。&lt;/p&gt;
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+&lt;p&gt;SQL MCP Server 是免费、开源的，可在任何地方运行。这是微软为给 AI 代理提供安全数据库访问的规范性方法。查看&lt;a href="https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/"&gt;完整文章&lt;/a&gt;和&lt;a href="https://aka.ms/sql/mcp"&gt;文档&lt;/a&gt;开始使用。&lt;/p&gt;</content:encoded></item></channel></rss>

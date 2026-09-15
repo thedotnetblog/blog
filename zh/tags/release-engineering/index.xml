@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Release Engineering | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/release-engineering/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 24 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/release-engineering/index.xml" rel="self" type="application/rss+xml"/><item><title>VS Code 1.127 展示了为什么小版本比大营销更能建立信任</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/vscode-1-127-small-release-big-lesson/</link><pubDate>Fri, 24 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/vscode-1-127-small-release-big-lesson/</guid><description>Visual Studio Code 1.127 是一个微小的更新，而这正是它的价值所在：稳定的工具依赖的是有纪律的增量修复，而非只有头条功能。</description><content:encoded>&lt;p&gt;VS Code 1.127 在公开说明中几乎小到好笑。没有花哨的发布叙事，没有重大的功能游行——只是一个针对传统扁平定价负载路径的 token 定价标准化修复。对许多读者来说，这听起来平凡无奇。对工程组织来说，这正是你想要的发布行为。&lt;/p&gt;
+&lt;p&gt;原文来源：https://code.visualstudio.com/updates/v1_127&lt;/p&gt;
+&lt;p&gt;健康的平台不是由偶尔的宏大公告定义的，而是由维护者多快能在真实使用路径中关闭微妙的正确性差距来定义的。定价标准化问题不是表面问题；它们影响对产品遥测、成本报告和规划决策的信任——尤其是在按使用量计费的 AI 工作流中。&lt;/p&gt;
+&lt;p&gt;我的观点是有主见的：&lt;strong&gt;把&amp;quot;小修复&amp;quot;当作低影响的团队，不理解运维软件的经济学&lt;/strong&gt;。计费语义的一行不匹配可能造成数周的支持升级、财务混乱和产品怀疑。尽早清理这个问题比以后解释它更便宜。&lt;/p&gt;
+&lt;p&gt;这里还有一个&lt;strong&gt;发布管理教训&lt;/strong&gt;，对工具供应商和内部平台团队都适用。发布紧凑的更新、范围精确，帮助用户预测风险。它标志着成熟：维护者愿意因为一个修复很重要而发布版本，而非因为市场需要一个故事线。&lt;/p&gt;
+&lt;h3 id="从这个发布中可以复制什么"&gt;从这个发布中可以复制什么&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;频繁发布窄范围补丁&lt;/strong&gt;，并让更新日志极其清晰。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;如果变更涉及金钱、权限或数据正确性&lt;/strong&gt;，即使 UX 影响看起来不可见也要优先处理。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;将 issue 链接附加到发布说明&lt;/strong&gt;，以便工程和运维团队能快速追溯理由和回归历史。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于 VS Code 的用户来说，实用的做法是即使发布说明看起来很少，也要保持稳定通道更新。微小的更新通常解决你还没有遇到但最终会遇到的条件边界——尤其是在企业代理、定价或自定义提供商环境中。&lt;/p&gt;
+&lt;h2 id="核心观点"&gt;核心观点&lt;/h2&gt;
+&lt;p&gt;在一个痴迷于 AI 新奇性的市场中，VS Code 1.127 是一个有用的提醒：&lt;strong&gt;可靠性是一个产品功能&lt;/strong&gt;。有时最专业的发布，是那个安静地消除了用户本不该注意到的摩擦的发布。&lt;/p&gt;
+&lt;p&gt;如果你的团队运行任何内部编辑器扩展或智能体平台，这是一个好基准。问问你自己：你的发布节奏在奖励正确性方面，是否像奖励可见性一样强烈？答案通常比任何主题演讲都能更好地预测长期的开发者信任。&lt;/p&gt;</content:encoded></item></channel></rss>

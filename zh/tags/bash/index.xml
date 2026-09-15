@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Bash | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/bash/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 29 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Intelligent Terminal 0.1.1 开始展示 AI 原生 shell 体验可能会是什么样子</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</link><pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</guid><description>Intelligent Terminal 0.1.1 增加了 Bash 和 WSL 支持、手动 /fix 流程，以及运行时切换模型的能力。虽然还处于早期阶段，但对于长期在终端中工作的开发者来说，这个方向已经越来越有意思了。</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文已自动翻译。原文请点击这里： &lt;a href="https://thedotnetblog.com/zh/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/"&gt;Intelligent Terminal 0.1.1 Is Starting to Show What an AI-Native Shell Experience Could Look Like&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我一直认为，终端中的 AI 是当前最有前景的开发者体验领域之一。&lt;/p&gt;
+&lt;p&gt;这也是为什么 &lt;strong&gt;Intelligent Terminal 0.1.1&lt;/strong&gt; 比一般的点版本更新更能吸引我。&lt;/p&gt;
+&lt;p&gt;这次更新加入了：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bash 和 WSL 错误检测&lt;/li&gt;
+&lt;li&gt;手动 &lt;code&gt;/fix&lt;/code&gt; 流程&lt;/li&gt;
+&lt;li&gt;运行时切换模型&lt;/li&gt;
+&lt;li&gt;更可自定义的代理面板&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种组合开始让产品不再像一个实验，而更像一个不断演进的 shell 体验。&lt;/p&gt;
+&lt;h2 id="fix-才是对的功能类型"&gt;&lt;code&gt;/fix&lt;/code&gt; 才是对的功能类型&lt;/h2&gt;
+&lt;p&gt;我最喜欢的新增功能大概就是 &lt;code&gt;/fix&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;为什么？因为并不是每个问题都会直接表现为干净的 shell 失败。有时候命令在技术上是执行成功了，但结果却仍然是错的。正是在这种时候，像“帮我推理一下这个结果”这样的手动流程才会派上用场。&lt;/p&gt;
+&lt;p&gt;这比等待一个完美的自动检测机制要现实得多，也更像真正的终端辅助模型。&lt;/p&gt;
+&lt;h2 id="bash-和-wsl-支持让体验更可信"&gt;Bash 和 WSL 支持让体验更可信&lt;/h2&gt;
+&lt;p&gt;扩展到 PowerShell 之外是必要的。&lt;/p&gt;
+&lt;p&gt;如果这种终端智能要对更多开发者有价值，它就必须在开发者真正花时间的地方工作。Bash 和 WSL 支持正是其中很重要的一部分。&lt;/p&gt;
+&lt;h2 id="我的看法"&gt;我的看法&lt;/h2&gt;
+&lt;p&gt;这仍然是早期工具，但方向是对的。&lt;/p&gt;
+&lt;p&gt;终端是 AI 辅助排障、命令修复以及感知环境的引导最自然的场景之一。像这样的更新，让人更容易想象那个未来。&lt;/p&gt;
+&lt;p&gt;原文： &lt;a href="https://thedotnetblog.com/zh/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/"&gt;Intelligent Terminal 0.1.1 Is Starting to Show What an AI-Native Shell Experience Could Look Like&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

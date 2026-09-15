@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Engineering-Management | The .NET Blog</title><link>https://thedotnetblog.com/ko/tags/engineering-management/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ko</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 10 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ko/tags/engineering-management/index.xml" rel="self" type="application/rss+xml"/><item><title>에이전트 신뢰 지수(Agent Confidence Index)가 다음에 자동화할 항목을 바꿔야 하는 이유</title><link>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/agent-confidence-index-automation-boundaries/</link><pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ko/news/emiliano-montesdeoca/agent-confidence-index-automation-boundaries/</guid><description>데이터에 따르면 팀은 높은 위험을 수반하는 판단보다 반복적인 기술 작업에서 에이전트를 가장 신뢰합니다.</description><content:encoded>&lt;p&gt;원문: &lt;a href="https://www.microsoft.com/en-us/microsoft-cloud/blog/2026/06/29/the-2026-agent-confidence-index-where-300-builders-see-real-momentum/"&gt;The 2026 Agent Confidence Index: Where 300 builders see real momentum&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;이 보고서는 막연한 낙관론을 워크로드 수준의 신뢰도 신호로 대체한다는 점에서 가치가 있습니다. 메시지는 분명합니다: 팀은 작업이 예측 가능하고, 반복적이며, 되돌릴 수 있을 때 에이전트를 가장 신뢰한다는 것입니다.&lt;/p&gt;
+&lt;p&gt;바로 리더들이 &lt;strong&gt;먼저 투자해야&lt;/strong&gt; 할 부분입니다.&lt;/p&gt;
+&lt;p&gt;자동화된 보고서 생성, 보일러플레이트 코드 스캐폴딩, 운영 모니터링, 릴리스 노트 합성은 화려하지 않지만 &lt;strong&gt;이상적인 위임 영역&lt;/strong&gt;입니다. 이러한 작업은 인지 부하가 높고 검토 루프로 제약할 경우 비교적 위험 부담이 적습니다.&lt;/p&gt;
+&lt;p&gt;마찬가지로 주목할 점은 신뢰도가 &lt;strong&gt;낮은&lt;/strong&gt; 영역입니다: 시스템 간 결합도가 높고 복구 불가능한 파급 효과가 있는 작업들입니다. 서비스 메시 튜닝, 스키마 마이그레이션 전략, 심층 메모리 진단은 여전히 숙련된 인간의 감독이 필요합니다. 보고서가 거기서 마비 상태를 제안하는 것은 아니지만, 경계 인식 협업을 제안하고 있습니다.&lt;/p&gt;
+&lt;h3 id="내-생각"&gt;내 생각&lt;/h3&gt;
+&lt;p&gt;내 독단적인 생각은 대부분의 조직이 여전히 이 문제를 거꾸로 접근하고 있다는 것입니다. 그들은 &amp;ldquo;에이전트가 복잡한 작업을 아직 할 수 있나요?&amp;ldquo;라고 묻습니다. 더 나은 질문은 &amp;ldquo;현재 우리 작업 중 어떤 부분을 인간이 더 이상 수동으로 하지 말아야 하나요?&amp;ldquo;입니다.&lt;/p&gt;
+&lt;h3 id="소프트웨어-팀을-위한-실용적인-도입-패턴"&gt;소프트웨어 팀을 위한 실용적인 도입 패턴&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;즉시 자동화&lt;/strong&gt;하세요: 볼륨은 높고 후회는 적은 작업부터.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;계측&lt;/strong&gt;하세요: 모든 자동화 경로에 품질 신호와 롤백 훅을.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;명시적인 인간 승인을 유지&lt;/strong&gt;하세요: 평가 데이터가 그 반대를 증명할 때까지 고위험 결정에는.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;인간-인-더-루프(human-in-the-loop)를 최우선 순위로 강조한 보고서의 입장은 보수적이지 않습니다. 이는 성숙한 것입니다. 책임감 있게 확장하는 팀은 감독을 아키텍처로, 즉 의례가 아닌 필수 요소로 대우합니다. 그들은 가드레일을 구축하고, 수명 주기 평가를 실행하며, 드리프트를 감사합니다.&lt;/p&gt;
+&lt;p&gt;여기엔 주목할 만한 경력적 함의도 있습니다. 에이전트가 반복 작업을 흡수함에 따라 엔지니어링 가치는 시스템 판단으로 더욱 이동합니다: 경계 설정, 평가 기준 정의, 탄력적인 워크플로 설계. 이러한 시스템을 설계할 수 있는 시니어 엔지니어는 엄청난 레버리지를 갖게 될 것입니다. 에이전트 출력을 감독하고 검증하는 법을 일찍 배우는 주니어 엔지니어는 구문만 암기하는 동료보다 더 빠르게 성장할 것입니다.&lt;/p&gt;
+&lt;p&gt;.NET 팀에게 이것은 &lt;strong&gt;자동화 포트폴리오 맵을 작성&lt;/strong&gt;할 순간입니다: 내부 워크플로를 되돌리기 가능성, 비즈니스 영향, 관찰 가능성 기준으로 분류하세요. 그 순서대로 자동화하세요. 참신함이 우선순위를 결정하게 두지 마세요.&lt;/p&gt;
+&lt;p&gt;이 지수의 더 넓은 서사는 희망적이면서도 요구사항이 많습니다. 에이전트 생산성 향상은 실제로 존재하지만, 스스로 실행되지는 않습니다. 통합된 컨텍스트, 거버넌스, 체계적인 평가를 결합한 조직이 앞서 나갈 것입니다. 이러한 기반을 건너뛰는 조직은 규모에 맞춰 소음만 만들어낼 것입니다.&lt;/p&gt;
+&lt;p&gt;신뢰는 작업 하나하나씩 얻어집니다. 그것은 한계가 아닙니다. &lt;strong&gt;바로 로드맵입니다.&lt;/strong&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

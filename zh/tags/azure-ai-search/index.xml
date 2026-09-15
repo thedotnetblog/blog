@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure AI Search | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/azure-ai-search/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 29 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/azure-ai-search/index.xml" rel="self" type="application/rss+xml"/><item><title>2026 年 5 月的 Azure SDK 版本里有几项 .NET 开发者不应忽视的内容</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/azure-sdk-may-2026-agent-server-rust-search/</link><pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/azure-sdk-may-2026-agent-server-rust-search/</guid><description>2026 年 5 月的 Azure SDK 版本覆盖面很广，但有三个主题格外突出：Azure AI Search 知识库、新的 Agent Server 库，以及 Azure SDK 生态系统日益增强的跨语言成熟度。</description><content:encoded>&lt;p&gt;&lt;em&gt;本文已自动翻译。要查看原文，请&lt;a href="https://thedotnetblog.com/zh/news/emiliano-montesdeoca/azure-sdk-may-2026-agent-server-rust-search/"&gt;点击此处&lt;/a&gt;。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;每月的 SDK 综述有时会让人觉得信息量过大。&lt;/p&gt;
+&lt;p&gt;但 &lt;strong&gt;2026 年 5 月的 Azure SDK 版本&lt;/strong&gt; 确实有一些值得单独拎出来看的内容，而不是把它当成一堆普通的包更新。&lt;/p&gt;
+&lt;h2 id="我会关注的部分"&gt;我会关注的部分&lt;/h2&gt;
+&lt;p&gt;有三点让我印象很深：&lt;/p&gt;
+&lt;h3 id="1-azure-ai-search-知识库和代理式检索"&gt;1. Azure AI Search 知识库和代理式检索&lt;/h3&gt;
+&lt;p&gt;这可能是本次版本里战略上最有意思的部分。更新后的知识库和检索能力，进一步强化了搜索基础设施正变得越来越具备代理感知能力这一趋势。&lt;/p&gt;
+&lt;h3 id="2-新的-agent-server-预览库"&gt;2. 新的 Agent Server 预览库&lt;/h3&gt;
+&lt;p&gt;如果你关心运行时结构、健康状态、关闭行为，以及围绕代理端点的更正式托管模型，那么新的代理托管库值得持续关注。&lt;/p&gt;
+&lt;h3 id="3-生态系统整体成熟度"&gt;3. 生态系统整体成熟度&lt;/h3&gt;
+&lt;p&gt;即使是 Rust GA、Batch GA 和 provisioning 库这样的内容，也同样重要，因为它们说明 Azure SDK 的覆盖面正在持续扩展，而且更加成熟。&lt;/p&gt;
+&lt;h2 id="我的看法"&gt;我的看法&lt;/h2&gt;
+&lt;p&gt;你不需要逐行读完每一条 SDK 发布说明。&lt;/p&gt;
+&lt;p&gt;但如果你正在用 .NET 在 Azure 上开发，尤其是 Azure AI Search、托管代理，或者云原生服务集成是你的路线图的一部分，那么这一版值得快速浏览。&lt;/p&gt;
+&lt;p&gt;原始文章：&lt;a href="https://devblogs.microsoft.com/azure-sdk/azure-sdk-release-may-2026/"&gt;Azure SDK Release (May 2026)&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

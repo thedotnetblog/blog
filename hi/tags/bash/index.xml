@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Bash | The .NET Blog</title><link>https://thedotnetblog.com/hi/tags/bash/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>hi</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Mon, 29 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/hi/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Intelligent Terminal 0.1.1 दिखाने लगा है कि एआई-नेटिव शेल अनुभव कैसा हो सकता है</title><link>https://thedotnetblog.com/hi/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</link><pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/hi/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/</guid><description>Intelligent Terminal 0.1.1 में Bash और WSL सपोर्ट, एक मैनुअल /fix फ़्लो, और चलते-चलते मॉडल बदलने की सुविधा जोड़ी गई है। यह अभी भी शुरुआती चरण में है, लेकिन टर्मिनल में काम करने वाले डेवलपर्स के लिए इसकी दिशा अब काफी दिलचस्प लगने लगी है।</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;यह लेख स्वचालित रूप से अनुवादित किया गया है। मूल संस्करण के लिए, &lt;a href="https://thedotnetblog.com/hi/news/emiliano-montesdeoca/intelligent-terminal-011-bash-fix-models/"&gt;यहां क्लिक करें&lt;/a&gt;।&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;मैं अब भी मानता हूं कि टर्मिनल में एआई अभी डेवलपर अनुभव के सबसे आशाजनक क्षेत्रों में से एक है।&lt;/p&gt;
+&lt;p&gt;इसी वजह से &lt;strong&gt;Intelligent Terminal 0.1.1&lt;/strong&gt; ने मुझे एक सामान्य प्वाइंट रिलीज़ से कहीं ज़्यादा प्रभावित किया।&lt;/p&gt;
+&lt;p&gt;इस अपडेट में ये चीज़ें जोड़ी गई हैं:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bash और WSL त्रुटि पहचान&lt;/li&gt;
+&lt;li&gt;एक मैनुअल &lt;code&gt;/fix&lt;/code&gt; फ़्लो&lt;/li&gt;
+&lt;li&gt;चलते-चलते मॉडल बदलने की सुविधा&lt;/li&gt;
+&lt;li&gt;एक अधिक अनुकूलन योग्य एजेंट पेन&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;यह संयोजन उत्पाद को एक प्रयोग जैसा कम और एक विकसित होती शेल अनुभव जैसा ज़्यादा महसूस कराना शुरू करता है।&lt;/p&gt;
+&lt;h2 id="fix-सह-तरह-क-सवध-ह"&gt;&lt;code&gt;/fix&lt;/code&gt; सही तरह की सुविधा है&lt;/h2&gt;
+&lt;p&gt;मुझे सबसे ज़्यादा जो चीज़ पसंद आई, वह शायद &lt;code&gt;/fix&lt;/code&gt; है।&lt;/p&gt;
+&lt;p&gt;क्यों? क्योंकि हर समस्या साफ़ shell failure के रूप में सामने नहीं आती। कभी-कभी कमांड तकनीकी रूप से चल जाता है, फिर भी नतीजा गलत मिलता है। यही वह जगह है जहां &amp;ldquo;इस नतीजे को समझने में मेरी मदद करो&amp;rdquo; वाला मैनुअल फ़्लो उपयोगी होता है।&lt;/p&gt;
+&lt;p&gt;यह एक परफेक्ट ऑटो-डिटेक्शन तंत्र का इंतज़ार करने से कहीं ज़्यादा यथार्थवादी टर्मिनल सहायता मॉडल है।&lt;/p&gt;
+&lt;h2 id="bash-और-wsl-सपरट-अनभव-क-अधक-वशवसनय-बनत-ह"&gt;Bash और WSL सपोर्ट अनुभव को अधिक विश्वसनीय बनाते हैं&lt;/h2&gt;
+&lt;p&gt;PowerShell से आगे बढ़ना ज़रूरी था।&lt;/p&gt;
+&lt;p&gt;अगर इस तरह की टर्मिनल इंटेलिजेंस को और डेवलपर्स के लिए मायने रखना है, तो इसे वहीं काम करना होगा जहां डेवलपर्स वाकई समय बिताते हैं। Bash और WSL सपोर्ट इसका बड़ा हिस्सा है।&lt;/p&gt;
+&lt;h2 id="मर-रय"&gt;मेरी राय&lt;/h2&gt;
+&lt;p&gt;यह अभी भी शुरुआती स्तर का टूलिंग है, लेकिन दिशा अच्छी है।&lt;/p&gt;
+&lt;p&gt;टर्मिनल एआई-सहायित troubleshooting, कमांड repair, और environment-aware guidance के लिए सबसे स्वाभाविक जगहों में से एक है। इस तरह के अपडेट उस भविष्य की कल्पना करना आसान बनाते हैं।&lt;/p&gt;
+&lt;p&gt;मूल लेख: &lt;a href="https://devblogs.microsoft.com/commandline/intelligent-terminal-0-1-1-is-here-bash-support-new-slash-commands-and-customization/"&gt;Intelligent Terminal 0.1.1 Is Starting to Show What an AI-Native Shell Experience Could Look Like&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Approvals | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/approvals/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 11 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/approvals/index.xml" rel="self" type="application/rss+xml"/><item><title>The Real Agent UX Win Is Safe Autonomy, Not Maximum Autonomy</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/agent-harness-safe-data-access-patterns/</link><pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/agent-harness-safe-data-access-patterns/</guid><description>ファイルアクセス、承認、メモリ設計は、本番環境で信頼できるエージェント動作を実現するための実践的三本柱である。</description><content:encoded>&lt;p&gt;オリジナルソース: &lt;a href="https://devblogs.microsoft.com/agent-framework/agent-harness-working-with-your-data-safely/"&gt;Agent Harness: Working with your data, safely&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;これは今年のエンジニアリング記事の中でも特に有用なもののひとつである。なぜなら、デモファーストの自律性という一般的な罠を拒否し、代わりにエージェントが実際のユーザーデータと現実の結果の周りでどのように動作すべきかに焦点を当てているからだ。&lt;/p&gt;
+&lt;p&gt;ここで強調されている3つの構成要素は完全に正しい。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ファイルアクセス&lt;/strong&gt;により、エージェントはユーザー所有のデータに基づいた有用な判断ができるようになる。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;承認ゲーティング&lt;/strong&gt;により、結果を伴うアクションの無言実行を防止する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;永続メモリ&lt;/strong&gt;により、制御を犠牲にすることなく反復的なやり取りを回避する。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;ほとんどのチームはツールの幅に過剰投資し、アクセス許可のセマンティクスに過小投資している。それは逆である。10のツールと弱い承認境界を持つエージェントよりも、3のツールと予測可能な制御ポイントを持つエージェントの方が価値が高い。&lt;/p&gt;
+&lt;p&gt;この記事で最も優れた実践的パターンは&lt;strong&gt;階層型承認戦略&lt;/strong&gt;である:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;常に承認を要求&lt;/strong&gt;: 取引や破壊的操作など、影響の大きいツールに対して。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自動承認&lt;/strong&gt;: リスクの低い読み取りはフローを維持するために自動承認する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;スコープ付きスタンディング承認&lt;/strong&gt;: セッション内で反復される信頼済みアクションに対して使用する。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これにより健全なリスク勾配が生まれる。ユーザーは無害な読み取りのために中断されることはないが、結果が高コストまたは不可逆的になる場合にはループに留まる。&lt;/p&gt;
+&lt;p&gt;また、&lt;strong&gt;ファイルメモリ&lt;/strong&gt;と&lt;strong&gt;Foundry メモリ&lt;/strong&gt;の明確な分割も気に入っている。チームはひとつのメモリモデルですべての問題を解決しようとするのをやめるべきだ。レポートやウォッチリストのようなユーザー可視状態には、粗く明示的なファイルアーティファクトが最適である。事実レベルのメモリ抽出は、好みや会話のコンテキストに適している。両方を混在させることで、どちらか一方だけでは不十分だと見せかけるよりも良い結果が得られる。&lt;/p&gt;
+&lt;p&gt;私の意見を明確に述べると、エージェントの品質は今後、巧妙なプロンプトよりも&lt;strong&gt;安全エルゴノミクス&lt;/strong&gt;によって測定されるようになる。承認プロンプトがノイジーであれば、ユーザーは盲目的にクリックスルーする。メモリ境界が不明確であれば、ユーザーはアシスタントを信頼しなくなる。データアクセスのデフォルトが寛容であれば、セキュリティチームがプロジェクトを停止させる。&lt;/p&gt;
+&lt;p&gt;このパターンを採用する .NET および Python チームにとって重要なのは、&lt;strong&gt;ポリシーコールバックと承認ルールを中核的なビジネスロジックとして扱い&lt;/strong&gt;、他の重要なコードと同様にバージョン管理およびテストすることである。サンプルに埋もれたアドホックなラムダ式のままにしてはいけない。&lt;/p&gt;
+&lt;h2 id="結論"&gt;結論&lt;/h2&gt;
+&lt;p&gt;信頼を勝ち取るエージェントシステムとは、最も多くをこなすものではない。ユーザーが意図したことを、過不足なく、リスクが高まったときには明確な中断ポイントを備えて実行するものである。&lt;/p&gt;
+&lt;p&gt;それが、印象的なデモと、人々が実際の作業を委任したいと思うソフトウェアとの違いである。&lt;/p&gt;</content:encoded></item></channel></rss>

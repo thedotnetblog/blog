@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Automation | The .NET Blog</title><link>https://thedotnetblog.com/tr/tags/automation/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>tr</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/tr/tags/automation/index.xml" rel="self" type="application/rss+xml"/><item><title>Kodlama Aracıları için Misyon Kontrol: VS Code'da Birleşik Bir Deneyim</title><link>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/unified-agent-experience-mission-control/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/unified-agent-experience-mission-control/</guid><description>VS Code, yerel, bulut, CLI ve üçüncü taraf kodlama aracılarını Agent Sessions'a getirerek geliştiricilerin otonom çalışmayı izlemelerine, kesintiye uğratmalarına ve koordine etmelerine olanak tanır.</description><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Not:&lt;/strong&gt; Bu sayfa https://thedotnetblog.com/tr/news/emiliano-montesdeoca/unified-agent-experience-mission-control/ sayfasının otomatik tercümesidir.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id="kodlama-aracıları-için-misyon-kontrol-vs-codeda-birleşik-bir-deneyim"&gt;Kodlama Aracıları için Misyon Kontrol: VS Code&amp;rsquo;da Birleşik Bir Deneyim&lt;/h1&gt;
+&lt;p&gt;Tek bir kodlama asistanı anlamak kolaydır. Farklı yerlerde çalışan birden fazla ajan anlamak değildir.&lt;/p&gt;
+&lt;p&gt;Bir ajan VS Code&amp;rsquo;da yerel olarak çalışır. Başka bir ajan bulut ortamında bir GitHub konusu üzerinde çalışır. Bir CLI ajanı terminalde yaşar. Üçüncü taraf bir kodlama ajanı farklı bir oturum modeline ve farklı sınırlara sahip olabilir. Paylaşılan bir görünüm olmadan, geliştiriciler işi denetlemekten daha fazla zaman harcayarak çalışmayı izlemeye harcıyor.&lt;/p&gt;
+&lt;p&gt;VS Code&amp;rsquo;un birleşik ajan deneyimi, Agent Sessions ile bu koordinasyon sorununu çözer: ajanları başlatmak, durumlarını görmek, konuşmalarını açmak ve plan değiştiğinde müdahale etmek için bir yer.&lt;/p&gt;
+&lt;p&gt;Bu, başka bir ajan eklemekten daha çok, birden fazla ajanı yönetilebilir hale getirme hakkındadır.&lt;/p&gt;
+&lt;h2 id="farklı-iş-türleri-için-bir-görünüm"&gt;Farklı İş Türleri için Bir Görünüm&lt;/h2&gt;
+&lt;p&gt;Kaynak makale dört farklı katılımcıyı açıklar: yerel GitHub Copilot, buluttaki Copilot Kodlama Ajanı, GitHub Copilot CLI ve uygun Copilot abone kullanıcıları için OpenAI Codex.&lt;/p&gt;
+&lt;p&gt;Farklı güçlü yönleri vardır:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Yerel bir ajan mevcut çalışma alanını inceleyebilir ve hızlı değişiklikler yapabilir.&lt;/li&gt;
+&lt;li&gt;Bir bulut kodlama ajanı bir konuda asynchron olarak çalışabilir ve bir pull request açabilir.&lt;/li&gt;
+&lt;li&gt;Bir CLI ajanı, terminalin ağır kullanıldığı iş akışlarına ve operasyonel komutlara uyar.&lt;/li&gt;
+&lt;li&gt;Başka bir sağlayıcı farklı bir model veya akıl yürütme stili sunabilir.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Agent Sessions bu görevlere ortak bir ev verir. Neyin çalıştığını, ne yaptığını ve konuşmayı nerede devam ettirebileceğinizi görebilirsiniz.&lt;/p&gt;
+&lt;p&gt;Bu görünürlük önemlidir çünkü otonom çalışma koordinasyon gerektirmeyi ortadan kaldırmaz. Koordinasyonu birinci sınıf bir mühendislik görevi haline getirir.&lt;/p&gt;
+&lt;h2 id="kesintiler-iş-akışının-bir-parçasıdır"&gt;Kesintiler İş Akışının Bir Parçasıdır&lt;/h2&gt;
+&lt;p&gt;Kaynak basit bir gözlem yapar: &amp;ldquo;Bir istem gönder ve önemli bir şeyi unuttuğunuzu fark etmek yaygındır.&amp;rdquo; Daha önce seçim genellikle bekleme veya iptal etmek idi. Chat editörleriyle, etkin bir oturumu açabilir ve ajan çalışırken bilgi ekleyebilirsiniz.&lt;/p&gt;
+&lt;p&gt;Bu gerçek işbirliğine daha yakındır. Gereksinimler değişir. Bir test bir varsayımı ortaya çıkarır. Bir gözden geçiren bir API&amp;rsquo;nin geriye dönük uyumlu kalması gerektiğini fark eder. Yararlı olan ajan, asla düzeltme gerektirmeyen değildir; tüm görevi kaybetmeden düzeltmeyi içerebilen olandır.&lt;/p&gt;
+&lt;p&gt;.NET çalışması için, bir kesinti basit olabilir:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Keep the existing public route unchanged. Add the new behavior behind the application service,
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;use the existing ProblemDetails convention, and add a test for the old response shape.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Talimat kısadır çünkü depo zaten daha büyük bağlamı taşır. Oturum, yönü düzeltmek için yerdir, tüm sistemi yeniden belirtmek için değildir.&lt;/p&gt;
+&lt;h2 id="özel-ajanlar-takım-alışkanlıklarını-rollere-dönüştürür"&gt;Özel Ajanlar Takım Alışkanlıklarını Rollere Dönüştürür&lt;/h2&gt;
+&lt;p&gt;VS Code ayrıca Plan gibi özel ajanlar tanıtır. Hemen uygulamak yerine, bir planlama ajanı uygulama spesifikasyonu üretmeden önce kapsam, bileşenler, kütüphaneler ve kısıtlamalar hakkında sorular sorar.&lt;/p&gt;
+&lt;p&gt;Bu desen yerleşik bir ajandan ötesinde kullanışlıdır. Bir takım odaklanmış rolleri tanımlayabilir:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Araştırma&lt;/strong&gt; kanıt toplar ve kısa bir karar kaydı yazar.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;İnceleme&lt;/strong&gt; bir değişikliği depo kurallarına karşı kontrol eder.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Test&lt;/strong&gt; eksik durumları tanımlar ve bir test planı önerir.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mimari&lt;/strong&gt; dosyaları değiştirmeden seçenekleri karşılaştırır.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Küçük özel bir ajan tanımı şöyle görünebilir:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;agent&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;plan&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;description&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;Refines vague requests into clear implementation specs&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;prompt&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="sd"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Ask about scope, constraints, existing patterns, and edge cases.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="sd"&gt; Produce a concise specification before any implementation begins.&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Yararlı olan kısım YAML değildir. Sorumlulukların açık ayrımıdır. Bir planlama ajanı sessizce üretim kodunu düzenlememelidir. Bir inceleme ajanı değerlendirdiği tasarımı yeniden yazmamalıdır.&lt;/p&gt;
+&lt;h2 id="alt-ajanlar-bağlam-çarpışmalarını-azaltır"&gt;Alt Ajanlar Bağlam Çarpışmalarını Azaltır&lt;/h2&gt;
+&lt;p&gt;Uzun konuşmalar ilişkisiz bağlamı biriktirir. Alt ajanlar sınırlanmış bir araştırma görevi için izole bir çalışma alanı sağlar, ardından sonucu ana oturuma döndürür.&lt;/p&gt;
+&lt;p&gt;Bu, şu sorular için iyi bir uyumudur:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Analyze the API project and recommend an authentication strategy.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Return trade-offs and a decision record. Do not edit files.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ana ajan uygulama üzerine odaklanmış kalırken araştırma ajanı daha dar bir soruyu işler. Aynı ilke takımlar için de geçerlidir: açık delegasyon, overlapping otoritesiyle birden fazla ajan başlatmaktan daha iyi sonuçlar üretir.&lt;/p&gt;
+&lt;h2 id="uyarı-daha-fazla-ajan-daha-fazla-koordinasyon-anlamına-gelir"&gt;Uyarı: Daha Fazla Ajan Daha Fazla Koordinasyon Anlamına Gelir&lt;/h2&gt;
+&lt;p&gt;Agent Sessions aktiviteyi gösterebilir, ancak çelişkili mülkiyeti çözemez. Aynı alanı düzenleyen iki ajan yine bir merge sorunu oluşturabilir. Bir bulut ajanı ve yerel bir ajan uyumsuz varsayımlar yapabilir. Özel bir ajan başka bir ajanın görmezden geldiği bir tavsiye üretebilir.&lt;/p&gt;
+&lt;p&gt;Sınırlar belirleyin:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Belirli bir dal için bir ajan uygulamaya sahiptir.&lt;/li&gt;
+&lt;li&gt;Araştırma ajanları yapıları döndürür, takip edilmeyen düzenlemeleri değil.&lt;/li&gt;
+&lt;li&gt;Pull istekleri inceleme sınırı kalır.&lt;/li&gt;
+&lt;li&gt;Ajan adları ve istemi ne değiştirebileceklerini belirtir.&lt;/li&gt;
+&lt;li&gt;Oturum çıktısı önemli bir kararı açıkladığında saklanır.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="benim-görüşüm"&gt;Benim Görüşüm&lt;/h2&gt;
+&lt;p&gt;Çoklu ajan geleceği sohbet pencereleri sırası değildir. Bu, rolleri, teslim alma noktaları ve hesap verebilirliği olan küçük bir takımdır.&lt;/p&gt;
+&lt;p&gt;Agent Sessions değerlidir çünkü bu gerçeği kabul eder. Geliştiricilere editör, terminal ve bulut arasında zaten olan işler için bir kontrol yüzeyi verir. Bir sonraki verimlilik kazancı daha fazla ajanın olmasından daha az ve sınırlarını okunaklı hale getirmekten gelecektir.&lt;/p&gt;
+&lt;p&gt;Bir .NET takımı için, bir planlama ajanı ve bir uygulama ajanıyla başlardım. Planlama çıktısını sorun veya pull isteği spesifikasyonu olarak kullan, ardından uygulama ajanının bu sınır içinde çalışmasına izin ver. Daha fazla rol eklemeden önce yeniden çalışmayı ölç.&lt;/p&gt;
+&lt;p&gt;En iyi misyon kontrol, yine de sahipliği açık hale getiren olandır.&lt;/p&gt;</content:encoded></item><item><title>Agent Confidence Index Bir Sonraki Otomasyon Kararınızı Değiştirmeli</title><link>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/agent-confidence-index-automation-boundaries/</link><pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/tr/news/emiliano-montesdeoca/agent-confidence-index-automation-boundaries/</guid><description>Veriler, ekiplerin ajanlara en çok tekrarlayan teknik angaryalarda güvendiğini gösteriyor; yüksek riskli karar süreçlerinde değil.</description><content:encoded>&lt;p&gt;Orijinal kaynak: &lt;a href="https://www.microsoft.com/en-us/microsoft-cloud/blog/2026/06/29/the-2026-agent-confidence-index-where-300-builders-see-real-momentum/"&gt;The 2026 Agent Confidence Index: Where 300 builders see real momentum&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Bu rapor değerli çünkü belirsiz iyimserliği, iş yükü düzeyinde somut güven sinyalleriyle değiştiriyor. Mesaj açık: ekipler, işin öngörülebilir, tekrarlayan ve geri döndürülebilir olduğu yerlerde ajanlara en çok güveniyor.&lt;/p&gt;
+&lt;p&gt;Liderlerin önce yatırım yapması gereken alan tam olarak burası.&lt;/p&gt;
+&lt;p&gt;Otomatik rapor üretimi, standart kod iskeleti oluşturma, operasyonel izleme ve sürüm notu sentezi göz alıcı işler değil, ama ideal devretme alanları. İnceleme döngüleriyle sınırlandırıldıklarında yüksek bilişsel yük taşıyor ve göreceli olarak düşük dezavantaj barındırıyorlar.&lt;/p&gt;
+&lt;p&gt;En az bunun kadar dikkat çeken şey, güvenin hâlâ düşük kaldığı alanlar: ağır sistemik bağımlılık ve geri döndürülemez etki alanına sahip görevler. Servis mesh ayarları, şema göç stratejisi ve derin bellek teşhisi hâlâ deneyimli insan gözetimi gerektiriyor. Rapor burada felç olmayı önermiyor, ama sınır bilinçli iş birliğini öneriyor.&lt;/p&gt;
+&lt;p&gt;Öznel görüşüm şu: çoğu kuruluş bunu hâlâ tersten çerçeveliyor. &amp;ldquo;Ajanlar artık karmaşık işleri yapabiliyor mu?&amp;rdquo; diye soruyorlar. Daha iyi soru şu: &amp;ldquo;Mevcut işimizin hangi kısımlarını insanlar şu anda manuel olarak yapmayı bırakmalı?&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Yazılım ekipleri için pratik bir benimseme deseni:&lt;/p&gt;
+&lt;p&gt;Yüksek hacimli, düşük pişmanlıklı görevleri hemen otomatikleştirin.&lt;/p&gt;
+&lt;p&gt;Otomatikleştirilen her yolu kalite sinyalleri ve geri alma kancalarıyla donatın.&lt;/p&gt;
+&lt;p&gt;Değerlendirme verileriniz aksini kanıtlayana kadar yüksek riskli kararlar için açık insan onayını koruyun.&lt;/p&gt;
+&lt;p&gt;Raporun öncelik olarak insan-döngüde yaklaşımına verdiği vurgu muhafazakârlık değil, olgunluk. Sorumlu şekilde ölçeklenen ekipler, gözetimi bir tören değil mimari olarak ele alır. Koruma bariyerleri kurar, yaşam döngüsü değerlendirmeleri yapar ve sapmayı denetler.&lt;/p&gt;
+&lt;p&gt;Burada dikkate değer bir kariyer sonucu da var. Ajanlar tekrarı üstlendikçe, mühendislik değeri giderek daha fazla sistem muhakemesine kayıyor: sınırları seçmek, değerlendirme kriterlerini tanımlamak ve dayanıklı iş akışları tasarlamak. Bu sistemleri şekillendirebilen kıdemli mühendisler orantısız bir kaldıraç elde edecek. Ajan çıktısını erken denetlemeyi ve doğrulamayı öğrenen junior mühendisler, yalnızca sözdizimini ezberleyenlerden daha hızlı ilerleyecek.&lt;/p&gt;
+&lt;p&gt;.NET ekipleri için şimdi bir otomasyon portföyü haritası oluşturma zamanı: iç iş akışlarını geri döndürülebilirlik, iş etkisi ve gözlemlenebilirliğe göre sınıflandırın. Ardından bu sırayla otomatikleştirin. Yeniliğin önceliği belirlemesine izin vermeyin.&lt;/p&gt;
+&lt;p&gt;Bu endeksteki daha geniş anlatı umut verici ama talepkâr. Ajan üretkenlik kazanımları gerçek, ancak kendiliğinden gerçekleşmiyor. Birleşik bağlam, yönetişim ve disiplinli değerlendirmeyi bir araya getiren kuruluşlar öne çıkacak. Bu temelleri atlayan kuruluşlar ise ölçekte yalnızca gürültü üretecek.&lt;/p&gt;
+&lt;p&gt;Güven görev görev kazanılır. Bu bir sınırlama değil. Bu bir yol haritası.&lt;/p&gt;</content:encoded></item></channel></rss>

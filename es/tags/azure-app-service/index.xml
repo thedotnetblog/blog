@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Azure App Service | The .NET Blog</title><link>https://thedotnetblog.com/es/tags/azure-app-service/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>es</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Tue, 05 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/es/tags/azure-app-service/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL MCP Server en Azure App Service — Sin Contenedores</title><link>https://thedotnetblog.com/es/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</link><pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/es/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/</guid><description>El SQL MCP Server ahora puede ejecutarse en Azure App Service sin Docker ni Kubernetes. Esto es lo que significa para los desarrolladores .NET que construyen agentes de IA que hablan con bases de datos SQL.</description><content:encoded>&lt;p&gt;&lt;em&gt;Esta publicación fue traducida automáticamente. Para la versión original, &lt;a href="https://thedotnetblog.com/es/news/emiliano-montesdeoca/sql-mcp-server-azure-app-service-no-containers/"&gt;haz clic aquí&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Seré honesto contigo: cada vez que veo &amp;ldquo;requiere un contenedor&amp;rdquo; en un tutorial, una pequeña parte de mí suspira. Los contenedores son geniales, hasta que tu equipo no tiene una estrategia de contenedores, y de repente una funcionalidad que parecía simple está bloqueada por una sobrecarga de orquestación que no habías planeado.&lt;/p&gt;
+&lt;p&gt;Por eso esto me llamó la atención. El SQL MCP Server ahora puede ejecutarse en Azure App Service — sin Docker, sin Kubernetes, solo la misma configuración de Data API Builder (DAB) que expone tu base de datos SQL a través de MCP, REST y GraphQL.&lt;/p&gt;
+&lt;h2 id="qué-es-el-sql-mcp-server"&gt;¿Qué es el SQL MCP Server?&lt;/h2&gt;
+&lt;p&gt;Contexto rápido si aún no lo conoces. El SQL MCP Server se sitúa entre tu agente de IA y tu base de datos SQL. En lugar de darle a tu agente acceso directo a la base de datos (lo cual es terrible idea), expone tus tablas y vistas como una capa de abstracción — entidades con permisos definidos.&lt;/p&gt;
+&lt;p&gt;Está construido sobre &lt;a href="https://learn.microsoft.com/es-es/azure/data-api-builder/"&gt;Data API builder&lt;/a&gt;, lo que significa que un único archivo de configuración gestiona MCP &lt;em&gt;y&lt;/em&gt; REST &lt;em&gt;y&lt;/em&gt; GraphQL simultáneamente. Tu agente habla con el endpoint MCP. Tu aplicación tradicional habla con REST o GraphQL. Misma config, mismo runtime, superficies diferentes.&lt;/p&gt;
+&lt;p&gt;Eso es genuinamente útil. No estás manteniendo dos capas de API separadas.&lt;/p&gt;
+&lt;h2 id="el-problema-del-contenedor-y-la-solución"&gt;El Problema del Contenedor (y la Solución)&lt;/h2&gt;
+&lt;p&gt;El modelo de despliegue original del SQL MCP Server era con contenedores. Funciona bien en muchos equipos, pero no en todos. Muchos equipos .NET estandarizan en Azure App Service o VMs. Requerir un runtime de contenedor solo para exponer un endpoint SQL agrega fricción que nadie pidió.&lt;/p&gt;
+&lt;p&gt;El nuevo tutorial muestra cómo saltarte el contenedor por completo. Todo funciona con un comando &lt;code&gt;dab start&lt;/code&gt;, alojado en App Service como un proceso web .NET 8 estándar.&lt;/p&gt;
+&lt;p&gt;Aquí está el flujo de configuración local en pocas palabras:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Instalar Data API builder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dotnet tool install microsoft.dataapibuilder --prerelease -g
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Inicializar la configuración&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab init --database-type mssql --host-mode Development --connection-string &lt;span class="s2"&gt;&amp;#34;@env(&amp;#39;SQL_CONNECTION_STRING&amp;#39;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Agregar una entidad&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab add products --source dbo.products --permissions &lt;span class="s2"&gt;&amp;#34;authenticated:*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Configurar el proveedor de auth de App Service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab configure --runtime.host.authentication.provider AppService
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Iniciar el servidor&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dab start
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;En este punto tienes MCP en &lt;code&gt;/mcp&lt;/code&gt;, REST y GraphQL desde el mismo proceso, y nada corriendo en un contenedor.&lt;/p&gt;
+&lt;h2 id="autenticación-sin-claves-de-api-compartidas"&gt;Autenticación Sin Claves de API Compartidas&lt;/h2&gt;
+&lt;p&gt;Esta es la parte que más aprecio. Cuando despliegas en App Service, configuras Microsoft Entra ID como proveedor de autenticación. Sin secretos compartidos en archivos de configuración, sin claves de API que rotar.&lt;/p&gt;
+&lt;p&gt;La cadena de conexión permanece en una variable de entorno de App Service (no en &lt;code&gt;dab-config.json&lt;/code&gt;), y el endpoint MCP está protegido por autenticación de plataforma. Si ya estás alineado con Entra ID en tus cargas de trabajo de Azure — lo cual probablemente sea el caso si usas agentes de Azure AI Foundry — esto encaja naturalmente.&lt;/p&gt;
+&lt;p&gt;Para el desarrollo local, cambias al modo &lt;code&gt;Simulator&lt;/code&gt; y transporte STDIO. Vuelves al modo &lt;code&gt;AppService&lt;/code&gt; cuando despliegas. Limpio y explícito.&lt;/p&gt;
+&lt;h2 id="despliegue-en-app-service"&gt;Despliegue en App Service&lt;/h2&gt;
+&lt;p&gt;El despliegue real es trabajo estándar con Azure CLI:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Crear el plan de App Service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az appservice plan create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --sku B1 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --is-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Crear la aplicación web (runtime .NET 8)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp create &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --plan &amp;lt;plan-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --runtime &lt;span class="s2"&gt;&amp;#34;DOTNETCORE:8.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Configurar el comando de inicio&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;az webapp config &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --name &amp;lt;app-name&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --resource-group &amp;lt;resource-group&amp;gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --startup-file &lt;span class="s2"&gt;&amp;#34;dab start&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Luego despliega tu proyecto DAB usando el método de despliegue que tu equipo ya usa — VS Code, GitHub Actions, Zip Deploy. El detalle clave: es un despliegue de &lt;strong&gt;código&lt;/strong&gt;, no de contenedor. Sin imagen que construir, publicar ni gestionar.&lt;/p&gt;
+&lt;h2 id="por-qué-importa-para-los-desarrolladores-net"&gt;Por qué Importa para los Desarrolladores .NET&lt;/h2&gt;
+&lt;p&gt;Si estás construyendo agentes de IA en .NET — ya sea con el Microsoft Agent Framework, Semantic Kernel, o agentes hospedados en Azure AI Foundry — eventualmente tu agente necesita hablar con una base de datos. El SQL MCP Server te da una manera estructurada de hacer eso sin exponer cadenas de conexión en bruto ni escribir una capa de API personalizada.&lt;/p&gt;
+&lt;p&gt;Ejecutarlo en App Service cierra la brecha para equipos que no trabajan con contenedores. Es la misma configuración de DAB, la misma auth de Entra, el mismo protocolo MCP — solo en infraestructura que ya conoces.&lt;/p&gt;
+&lt;p&gt;Consulta el tutorial completo en el &lt;a href="https://devblogs.microsoft.com/azure-sql/sql-mcp-server-app-service/"&gt;post original del blog&lt;/a&gt; y el &lt;a href="https://github.com/Azure-Samples/SQL-MCP-NoContainer"&gt;repositorio de muestra en GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="conclusión"&gt;Conclusión&lt;/h2&gt;
+&lt;p&gt;El SQL MCP Server en App Service es una opción pragmática sólida para equipos .NET que quieren dar a sus agentes acceso estructurado a datos SQL sin una estrategia de contenedores. La combinación del modelo de entidades de DAB, la auth integrada de Entra en App Service, y el comando de inicio &lt;code&gt;dab start&lt;/code&gt; resulta en un despliegue simple de explicar y fácil de operar.&lt;/p&gt;
+&lt;p&gt;Pruébalo. Tus agentes apreciarán la superficie de API limpia. Tu equipo de operaciones apreciará no tener que lidiar con registros de contenedores.&lt;/p&gt;</content:encoded></item></channel></rss>

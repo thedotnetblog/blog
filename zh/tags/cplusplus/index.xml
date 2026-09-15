@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Cplusplus | The .NET Blog</title><link>https://thedotnetblog.com/zh/tags/cplusplus/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>zh</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 24 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/zh/tags/cplusplus/index.xml" rel="self" type="application/rss+xml"/><item><title>Visual Studio 六月更新：使用量可见性和 MCP 信任是最重要的功能</title><link>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/visual-studio-june-2026-operational-trust/</link><pubDate>Fri, 24 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/zh/news/emiliano-montesdeoca/visual-studio-june-2026-operational-trust/</guid><description>这次发布中最重要的部分不是外观上的，而是改进了 AI 辅助工作流中的治理和信心。</description><content:encoded>&lt;p&gt;原文来源：&lt;a href="https://devblogs.microsoft.com/visualstudio/visual-studio-june-update-track-your-usage-trust-your-tools/"&gt;Visual Studio June Update – Track Your Usage, Trust Your Tools&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这个 Visual Studio 版本有很多不错的生活质量改进，但对严肃团队来说，有两个更新高于其他所有：Copilot 使用量透明度和 MCP 信任验证。&lt;/p&gt;
+&lt;p&gt;随着 AI 辅助开发转向基于使用量的计费，&lt;strong&gt;可见性不再是一个便利指标&lt;/strong&gt;，而是一个规划需求。实时使用量窗口和阈值告警帮助团队避免意外的成本峰值，并创建更健康的使用规范。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;MCP 信任验证流程&lt;/strong&gt;更具战略重要性。工具生态系统正在变得动态，动态系统需要显式的信任边界。将启动配置和能力指纹与可信基线进行比较，正是正确的默认姿态。&lt;/p&gt;
+&lt;p&gt;我的强烈观点：每个 AI 集成的 IDE 都应该默认这么做。工具服务器中的静默能力漂移对企业环境来说是不可接受的风险。&lt;/p&gt;
+&lt;p&gt;用于 MSVC 升级的 C++ 现代化智能体 GA 是另一个实用的胜利。升级工作通常因为繁琐且有风险而被推迟。在 IDE 内部拥有引导式和自动化的路径，降低了保持最新的门槛，尤其是对于较大的遗留代码库。&lt;/p&gt;
+&lt;p&gt;长距离的下一个编辑建议是一个不错的生产力增强功能，但最好被视为可选的加速。信任和治理功能应该首先启用和理解；便利功能可以随后跟上。&lt;/p&gt;
+&lt;h3 id="面向推广此版本的团队的实用建议"&gt;面向推广此版本的团队的实用建议&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;启用 Copilot 使用量告警&lt;/strong&gt;，阈值与内部预算所有权对齐。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;培训开发者关于 MCP 信任提示&lt;/strong&gt;，使批准是有意的，而非习惯性点击。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;从一个有代表性的 C++ 方案开始试点现代化智能体工作流&lt;/strong&gt;，然后再广泛推广。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;收集扩展范围建议的反馈&lt;/strong&gt;，但将默认启用门的决定建立在可衡量的接受率上。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;色彩 emoji 支持在纸面上很小，但它改善了聊天、markdown 和输出面板等混合文本上下文的可读性。小的 UX 打磨在日常使用时确实会累积。&lt;/p&gt;
+&lt;p&gt;总体而言，这个版本反映了一个成熟的工具理念：AI 辅助不再仅仅是关于生成速度。它关乎控制、问责和对开发环境中运行的代码的信心。&lt;/p&gt;
+&lt;p&gt;如果你的组织正在标准化 AI 增强的 Visual Studio 工作流，&lt;strong&gt;优先考虑运维信任功能&lt;/strong&gt;。它们是让其余生产力栈安全扩展的基础。&lt;/p&gt;</content:encoded></item></channel></rss>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Release Engineering | The .NET Blog</title><link>https://thedotnetblog.com/ja/tags/release-engineering/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>ja</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Fri, 24 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/ja/tags/release-engineering/index.xml" rel="self" type="application/rss+xml"/><item><title>VS Code 1.127 Shows Why Small Releases Build More Trust Than Big Marketing</title><link>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/vscode-1-127-small-release-big-lesson/</link><pubDate>Fri, 24 Jul 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/ja/news/emiliano-montesdeoca/vscode-1-127-small-release-big-lesson/</guid><description>Visual Studio Code 1.127 は極小のアップデートであり、だからこそ価値がある。安定したツールは派手な機能だけでなく、規律あるインクリメンタル修正に依存する。</description><content:encoded>&lt;p&gt;VS Code 1.127 は公開ノートではほとんど滑稽なほど小さい。派手なローンチナラティブも、主要な機能パレードもなく、レガシーフラットプライシングペイロードパスのトークン価格正規化に関する的を絞った修正だけである。多くの読者にとっては特筆すべきことではないように聞こえる。エンジニアリング組織にとっては、まさに望む種類のリリース動作である。&lt;/p&gt;
+&lt;p&gt;オリジナルソース: &lt;a href="https://code.visualstudio.com/updates/v1_127"&gt;https://code.visualstudio.com/updates/v1_127&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;健全なプラットフォームは、時折の巨大なアナウンスメントによって定義されるのではない。メンテナーが実際の使用パスにおける微妙な正確性のギャップをいかに迅速に閉じるかによって定義される。価格正規化の問題は表面的ではない。それらは製品テレメトリ、コスト報告、計画決定への信頼に影響する。特に使用量計測型 AI ワークフローにおいては。&lt;/p&gt;
+&lt;p&gt;私の見解は意見を持っている:&lt;strong&gt;「小さな修正」を影響が少ないとして退けるチームは、運用ソフトウェアエコノミクスを理解していない&lt;/strong&gt;。課金セマンティクスにおける1行の不一致が、数週間のサポートエスカレーション、財務混乱、製品懐疑心を生み出す可能性がある。これを早期にクリーンアップする方が、後で説明するよりも安価である。&lt;/p&gt;
+&lt;p&gt;ここには&lt;strong&gt;リリース管理の教訓&lt;/strong&gt;がツールベンダーと社内プラットフォームチームにもある。正確なスコープのコンパクトなアップデートを公開することで、ユーザーがリスクを予測するのに役立つ。それは成熟のシグナルである: メンテナーはマーケティングがストーリーラインを必要とするからではなく、修正が重要だからリリースを出荷する用意がある。&lt;/p&gt;
+&lt;h3 id="このリリースからコピーすべきこと"&gt;このリリースからコピーすべきこと&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;狭いパッチを頻繁に出荷し&lt;/strong&gt;、チェンジログを極めて明確にする。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;変更が金銭、権限、またはデータ正確性に触れる場合&lt;/strong&gt;、UX への影響が見えなくても優先する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;リリースノートに Issue リンクを添付し&lt;/strong&gt;、エンジニアリングチームと運用チームが迅速に根拠とリグレッション履歴を追跡できるようにする。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;VS Code の消費者にとって、実用的なアクションは、リリースノートが最小限に見えても安定チャンネルを最新に保つことである。小さなアップデートは、特にエンタープライズプロキシ、価格設定、カスタムプロバイダー環境において、まだ遭遇していないがいつか遭遇するであろうエッジ条件に対処することが多い。&lt;/p&gt;
+&lt;h2 id="結論"&gt;結論&lt;/h2&gt;
+&lt;p&gt;AI ノベルティに夢中な市場において、VS Code 1.127 は有用なリマインダーである:&lt;strong&gt;信頼性はプロダクト機能である&lt;/strong&gt;。時には、最もプロフェッショナルなリリースとは、ユーザーが気づくべきではなかった摩擦を静かに除去するものである。&lt;/p&gt;
+&lt;p&gt;チームが内部エディタ拡張やエージェントプラットフォームを実行しているなら、これは良いベンチマークである。自分のリリースサイクルが、可視性を報酬するのと同じくらい強く正確性を報酬しているかどうかを自問せよ。その答えは、通常、どんなキーノートよりも長期的な開発者信頼を予測する。&lt;/p&gt;</content:encoded></item></channel></rss>

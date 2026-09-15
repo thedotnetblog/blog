@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>WebAssembly | The .NET Blog</title><link>https://thedotnetblog.com/id/tags/webassembly/</link><description>Articles, tutorials and insights from the .NET community.</description><generator>Hugo</generator><language>id</language><managingEditor>@thedotnetblog (The .NET Blog)</managingEditor><webMaster>@thedotnetblog</webMaster><lastBuildDate>Sat, 23 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thedotnetblog.com/id/tags/webassembly/index.xml" rel="self" type="application/rss+xml"/><item><title>Bagaimana Copilot Studio Bermigrasi ke .NET 10 WebAssembly dan Menjadi 20% Lebih Cepat</title><link>https://thedotnetblog.com/id/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</link><pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate><author>Emiliano Montesdeoca</author><guid>https://thedotnetblog.com/id/news/emiliano-montesdeoca/copilot-studio-net10-webassembly-migration-performance/</guid><description>Peningkatan .NET 10 WASM bukan hanya untuk proyek baru. Inilah yang diukur Copilot Studio setelah mengupgrade dari .NET 8: fingerprinting otomatis, WasmStripILAfterAOT secara default, dan angka performa eksekusi nyata.</description><content:encoded>&lt;p&gt;Tim Copilot Studio melakukan sesuatu yang membuat semua pengembang Blazor WASM penasaran: mereka benar-benar mengupgrade aplikasi produksi dari .NET 8 ke .NET 10 dan mengukur hasilnya. Postingan ini membagikan angka-angka spesifik, yang jarang terjadi dan benar-benar berguna.&lt;/p&gt;
+&lt;h2 id="upgrade-nya-membosankan-itu-hal-yang-baik"&gt;Upgrade-nya Membosankan (Itu Hal yang Baik)&lt;/h2&gt;
+&lt;p&gt;Update target framework, refresh referensi paket, perbaiki breaking changes. Itu saja. Build .NET 10 sekarang sudah berjalan di produksi. Migrasi itu sendiri bukanlah bagian yang menarik — perubahan di .NET 10 itulah yang menarik.&lt;/p&gt;
+&lt;h2 id="fingerprinting-aset-otomatis"&gt;Fingerprinting Aset Otomatis&lt;/h2&gt;
+&lt;p&gt;Sebelumnya, mendistribusikan aplikasi WASM berarti menulis skrip kustom untuk mengganti nama aset yang diterbitkan dengan hash SHA256 untuk cache-busting. Copilot Studio memiliki skrip PowerShell yang melakukan persis ini — mengganti nama file, menyuntikkan atribut &lt;code&gt;integrity&lt;/code&gt; ke dalam JavaScript loader, mengelola semuanya secara manual.&lt;/p&gt;
+&lt;p&gt;Di .NET 10, semua itu sudah terintegrasi. Aset yang diterbitkan secara otomatis di-fingerprint, diimpor langsung dari &lt;code&gt;dotnet.js&lt;/code&gt;, dan divalidasi integritasnya tanpa intervensi manual. Tim menghapus skrip penggantian nama.&lt;/p&gt;
+&lt;p&gt;Perubahan kecil dalam cakupan, pengurangan kompleksitas yang signifikan.&lt;/p&gt;
+&lt;h2 id="wasmstripilafteraot-kini-aktif-secara-default"&gt;WasmStripILAfterAOT Kini Aktif Secara Default&lt;/h2&gt;
+&lt;p&gt;Di .NET 8, menghapus IL dari assembly yang dikompilasi AOT bersifat opt-in. Di .NET 10 ini adalah default. Setelah kompilasi AOT, bytecode IL asli dihapus dari output — tidak diperlukan saat runtime, dan menyimpannya akan menggembungkan ukuran paket tanpa alasan.&lt;/p&gt;
+&lt;p&gt;Copilot Studio menggunakan optimasi spesifik: ia mendistribusikan baik engine JIT (startup cepat) maupun engine AOT (performa steady-state maksimum), memuat keduanya secara paralel dan melakukan handoff dari JIT ke AOT setelah siap. Ini juga mendeduplikasi file yang identik antara kedua engine.&lt;/p&gt;
+&lt;p&gt;Perilaku stripping IL baru berarti assembly AOT tidak lagi cocok bit-for-bit dengan padanan JIT-nya, sehingga lebih sedikit file yang dideduplikasi:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.NET 8: 59 file bersama&lt;/li&gt;
+&lt;li&gt;.NET 10: 22 file bersama&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Hasil bersih: ukuran paket sekitar 15% lebih besar untuk engine AOT. Download AOT ~6% lebih lambat di LAN cepat, ~17% lebih lambat di 4G. Tapi semuanya terjadi di latar belakang setelah aplikasi sudah interaktif.&lt;/p&gt;
+&lt;h2 id="angka-performa"&gt;Angka Performa&lt;/h2&gt;
+&lt;p&gt;Inilah bagian yang penting:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;~20% lebih cepat&lt;/strong&gt; pada panggilan pertama (cold path)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;~5% lebih cepat&lt;/strong&gt; pada panggilan berikutnya (warm path)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Peningkatan paling terlihat di &amp;ldquo;bot besar&amp;rdquo; — agen besar dan kompleks di mana kode yang dikompilasi AOT mendominasi. Untuk alur kerja yang lebih sederhana, keuntungannya lebih kecil.&lt;/p&gt;
+&lt;h2 id="jika-anda-masih-di-net-8"&gt;Jika Anda Masih di .NET 8&lt;/h2&gt;
+&lt;p&gt;Cerita migrasinya sangat sederhana: update &lt;code&gt;&amp;lt;TargetFramework&amp;gt;&lt;/code&gt;, refresh referensi paket, hapus skrip fingerprinting kustom apa pun, dan Anda akan otomatis mendapat manfaat dari &lt;code&gt;WasmStripILAfterAOT&lt;/code&gt;. Jika Anda mengkompilasi AOT, harapkan keuntungan performa serupa.&lt;/p&gt;
+&lt;p&gt;Catatan dari postingan: jika Anda memuat runtime .NET WASM di dalam &lt;code&gt;WebWorker&lt;/code&gt;, set &lt;code&gt;dotnetSidecar = true&lt;/code&gt; saat menginisialisasi.&lt;/p&gt;
+&lt;p&gt;Post asli: &lt;a href="https://devblogs.microsoft.com/dotnet/copilot-studio-dotnet-10-migration/"&gt;Copilot Studio gets faster with .NET 10 on WebAssembly&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>
